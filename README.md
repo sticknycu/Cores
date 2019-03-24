@@ -1,4 +1,4 @@
-# Cores-PMMP
+# Cores
 
 
 Cores of Server: play.chpe.us
