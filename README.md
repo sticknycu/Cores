@@ -1,2 +1,1 @@
-# Cores-PMMP
-Core PMMP Server.
+# Core-Hub
