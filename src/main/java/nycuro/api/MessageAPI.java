@@ -853,22 +853,22 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n" +
+                player.sendMessage("§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r\n" +
                         "                                                                                                            \n" +
                         "                         Server will restart §cin 10 seconds!§r\n" +
                         "                       Please accord attention to this message!§r\n" +
-                        "                   You can enter again on 10 seconds after restart!§r" +
+                        "                           You can enter again in 10 seconds!§r" +
                         "                                                                                                            \n" +
-                        "§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n");
+                        "§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r\n");
                 break;
             case 1:
-                player.sendMessage("§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n" +
+                player.sendMessage("§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r\n" +
                         "                                                                                                            \n" +
                         "                        Serverul se va restarta §cin 10 secunde!§r\n" +
                         "                            Va rog acordati atentie acestui mesaj!§r\n" +
                         "                      Vei putea intra dupa 10 secunde de la restart!§r\n" +
                         "                                                                                                            \n" +
-                        "§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n");
+                        "§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r\n");
                 break;
         }
     }
@@ -877,10 +877,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §3You have now +1 DropParty Key!§r");
+                player.sendMessage("§e+1 DropParty Key!§r");
                 break;
             case 1:
-                player.sendMessage("§7» §3De acum ai +1 DropParty Key!§r");
+                player.sendMessage("§e+1 DropParty Key!§r");
                 break;
         }
     }
@@ -890,16 +890,16 @@ public class MessageAPI {
         switch (lang) {
             case 0:
                 if (!bool) {
-                    player.sendMessage("§7» §3You set to §4NOT §3show coordonates!§r");
+                    player.sendMessage("§f» §eYou set to not show coordonates!§r");
                 } else {
-                    player.sendMessage("§7» §3You set to show your coordonates!§r");
+                    player.sendMessage("§f» §eYou set to show your coordonates!§r");
                 }
                 break;
             case 1:
                 if (!bool) {
-                    player.sendMessage("§7» §3Ai setat sa ti se §4NU §3vada coordonatele!§r");
+                    player.sendMessage("§f» §eAi setat sa ti se afiseze coordonatele!§r");
                 } else {
-                    player.sendMessage("§7» §3Ai setat sa ti se vada coordonatele!§r");
+                    player.sendMessage("§f» §eAi setat sa ti se afiseaze coordonatele!§r");
                 }
                 break;
         }
@@ -913,10 +913,10 @@ public class MessageAPI {
         }
         switch (lang) {
             case 0:
-                player.sendTitle("§l§8» §r§bNycuRO Factions §l§8«§r", "§l§c» §r§aFactions Classic §l§c«§r", 1, 1, 1);
+                player.sendTitle("§l§f» §r§6CHPE HUB §l§f«§r", "§rThe place where fun begins", 1, 1, 1);
                 break;
             case 1:
-                player.sendTitle("§l§8» §r§bNycuRO Factions §l§8«§r", "§l§c» §r§aFactions Classic §l§c«§r", 1, 1, 1);
+                player.sendTitle("§l§f» §r§6CHPE HUB §l§f«§r", "§rLocul unde distractia incepe", 1, 1, 1);
                 break;
         }
     }
@@ -929,10 +929,10 @@ public class MessageAPI {
         }
         switch (lang) {
             case 0:
-                player.sendTitle("§l§8» §r§bNycuRO Factions §l§8«§r", "§l§c» §r§aUnique Systems §l§c«§r", 1, 1, 1);
+                player.sendTitle("§l§f» §r§6CHPE HUB §l§f«§r", "§rUnique Systems", 1, 1, 1);
                 break;
             case 1:
-                player.sendTitle("§l§8» §r§bNycuRO Factions §l§8«§r", "§l§c» §r§aSisteme Unice §l§c«§r", 1, 1, 1);
+                player.sendTitle("§l§f» §r§6CHPE HUB §l§f«§r", "§rSisteme Unice", 1, 1, 1);
                 break;
         }
     }
@@ -945,10 +945,10 @@ public class MessageAPI {
         }
         switch (lang) {
             case 0:
-                player.sendTitle("§l§8» §r§bNycuRO Factions §l§8«§r", "§l§c» §r§aNo Lag GamePlay §l§c«§r", 1, 1, 1);
+                player.sendTitle("§l§f» §r§6CHPE HUB §l§f«§r", "§r§fWelcome", 1, 1, 1);
                 break;
             case 1:
-                player.sendTitle("§l§8» §r§bNycuRO Factions §l§8«§r", "§l§c» §r§aUn GamePlay Fara Lag §l§c«§r", 1, 1, 1);
+                player.sendTitle("§l§f» §r§6CHPE HUB §l§f«§r", "§r§fBun venit", 1, 1, 1);
                 break;
         }
     }
@@ -961,19 +961,19 @@ public class MessageAPI {
         }
         switch (lang) {
             case 0:
-                player.sendMessage("§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r");
+                player.sendMessage("§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r");
                 player.sendMessage("                                                                                                            ");
-                player.sendMessage("                     Don't forgot vote on §b§lvote.nycuro.us§r");
-                player.sendMessage("              If you want donate, visit §3§lnycuro.buycraft.net§r");
+                player.sendMessage("                      Vote our server daily for awesome rewards §e§lmariusmrn.com/servers§r");
+                player.sendMessage("                            Join with us on discord §e§lmariusmrn.com/discord§r");
                 player.sendMessage("                                                                                                            ");
                 break;
             case 1:
-                player.sendMessage("§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r");
+                player.sendMessage("§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r");
                 player.sendMessage("                                                                                                            ");
-                player.sendMessage("                     Nu uita sa votezi la §b§lvote.nycuro.us§r");
-                player.sendMessage("        Daca doresti sa donezi, viziteaza §3§lnycuro.buycraft.net§r");
+                player.sendMessage("                     Voteaza-ne serverul zilnic pentru beneficii §e§lmariusmrn.com/servers§r");
+                player.sendMessage("                            Intra cu noi pe discord §3§lmariusmrn.com/discord§r");
                 player.sendMessage("                                                                                                            ");
-                player.sendMessage("§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r");
+                player.sendMessage("§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r");
                 break;
         }
     }
