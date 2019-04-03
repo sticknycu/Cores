@@ -47,7 +47,7 @@ public class MechanicHandlers implements Listener {
                 }
                 API.getMainAPI().timers.put(username, playerTime + 1);
             }
-        }, 20, 20 * 3, true);
+        }, 20 * 4, 20 * 3, true);
         if (Loader.startTime.get(player.getUniqueId()) != null) {
             Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
         } else {

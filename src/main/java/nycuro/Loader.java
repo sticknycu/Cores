@@ -16,10 +16,8 @@ import nycuro.api.MechanicAPI;
 import nycuro.api.MessageAPI;
 import nycuro.chat.handlers.ChatHandlers;
 import nycuro.commands.list.CoordsCommand;
-import nycuro.commands.list.ServersCommand;
-import nycuro.commands.list.UtilsCommand;
+import nycuro.commands.list.LangCommand;
 import nycuro.commands.list.mechanic.*;
-import nycuro.commands.list.time.GetTimeCommand;
 import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
@@ -32,7 +30,7 @@ import nycuro.protection.handlers.ProtectionHandlers;
 import nycuro.tasks.BossBarTask;
 import nycuro.tasks.SaveToDatabaseTask;
 import nycuro.tasks.ScoreboardTask;
-import nycuro.utils.MechanicUtils;
+//import nycuro.utils.MechanicUtils;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -54,12 +52,12 @@ public class Loader extends PluginBase {
         API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
     }
 
-    public static void registerTops() {
+    /*public static void registerTops() {
         Database.getTopCoins();
         Database.getTopKills();
         Database.getTopDeaths();
         Database.getTopTime();
-    }
+    }*/
 
     public static String time(long time) {
         int hours = (int) TimeUnit.MILLISECONDS.toHours(time);
@@ -113,15 +111,10 @@ public class Loader extends PluginBase {
     }
 
     private void registerCommands() {
-        this.getServer().getCommandMap().register("onlinetime", new GetTimeCommand());
-        this.getServer().getCommandMap().register("topcoins", new TopCoinsCommand());
-        this.getServer().getCommandMap().register("topkills", new TopKillsCommand());
-        this.getServer().getCommandMap().register("toptime", new TopTimeCommand());
-        this.getServer().getCommandMap().register("topdeaths", new TopDeathsCommand());
+        //this.getServer().getCommandMap().register("onlinetime", new GetTimeCommand());
+        this.getServer().getCommandMap().register("lang", new LangCommand());
         this.getServer().getCommandMap().register("savetodatabase", new SaveToDatabaseCommand());
-        this.getServer().getCommandMap().register("servers", new ServersCommand());
-        this.getServer().getCommandMap().register("utils", new UtilsCommand());
-        this.getServer().getCommandMap().register("coords", new CoordsCommand());// TODO: Save to Database
+        this.getServer().getCommandMap().register("coords", new CoordsCommand());
     }
 
     private void registerEvents() {
@@ -137,27 +130,21 @@ public class Loader extends PluginBase {
     }
 
     private void registerTasks() {
-        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+        /*this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
                 MechanicUtils.getTops();
             }
-        }, 20 * 10, 20 * 60 * 3, true);
+        }, 20 * 10, 20 * 60 * 3, true);*/
         this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
                 API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "savetodatabase");
             }
-        }, 20 * 15, 20 * 60 * 5, true);
-        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
-            @Override
-            public void onRun(int i) {
-                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "mob removeall");
-            }
-        }, 20 * 15, 20 * 60 * 28, true);
+        }, 20 * 15, 20 * 60 * 5);
         this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20 * 5, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 10, true);
-        this.getServer().getScheduler().scheduleDelayedTask(new SaveToDatabaseTask(), 20 * 60 * 60 * 3, true);
+        this.getServer().getScheduler().scheduleDelayedTask(new SaveToDatabaseTask(), 20 * 60 * 60 * 3);
     }
 
     private void registerPlaceHolders() {
@@ -250,6 +237,6 @@ public class Loader extends PluginBase {
         api.staticPlaceholder("top9timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(9, (long) 0)));
         api.staticPlaceholder("top10timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(10, (long) 0)));
 
-        api.visitorSensitivePlaceholder("time_player", (p) -> Database.profile.get(p.getUniqueId()).getTime());
+        //api.visitorSensitivePlaceholder("time_player", (p) -> Database.profile.get(p.getUniqueId()).getTime());
     }
 }

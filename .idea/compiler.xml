@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Cores" />
+        <module name="nycuro" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Cores" target="1.8" />
+      <module name="nycuro" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

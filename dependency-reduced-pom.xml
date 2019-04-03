@@ -36,12 +36,8 @@
   </build>
   <repositories>
     <repository>
-      <id>nukkit-repo</id>
-      <url>https://repo.nukkitx.com/snapshot</url>
-    </repository>
-    <repository>
-      <id>DaPorkchop_</id>
-      <url>https://maven.daporkchop.net/</url>
+      <id>nukkitx</id>
+      <url>https://repo.nukkitx.com/main/</url>
     </repository>
   </repositories>
   <dependencies>
@@ -50,6 +46,13 @@
       <artifactId>nukkit</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.itxtech.synapse</groupId>
+      <artifactId>synapse-api</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>E:\Proiecte\Java\Cores/lib/synapse-api-1.0-SNAPSHOT.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>

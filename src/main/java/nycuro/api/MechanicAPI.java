@@ -35,33 +35,7 @@ public class MechanicAPI {
         double y = entity.getLevel().getSpawnLocation().getY();
         double z = entity.getLevel().getSpawnLocation().getZ();
         Vector3 vector3 = new Vector3(x, y, z);
-        return entity.getLevel().getName().equalsIgnoreCase("world") && entity.getPosition().distance(vector3) <= 300 && !entity.getName().equals("NycuR0");
-    }
-
-    public boolean isOnPvP(Entity entity) {
-        double x = entity.getLevel().getSpawnLocation().getX();
-        double y = entity.getLevel().getSpawnLocation().getY();
-        double z = entity.getLevel().getSpawnLocation().getZ();
-        Vector3 vector3 = new Vector3(x, y, z);
-        return entity.getLevel().getName().equalsIgnoreCase("pvp") && entity.getPosition().distance(vector3) <= 34 && !entity.getName().equals("NycuR0") && entity.getY() >= 75;
-    }
-
-    public boolean isOnBorder(Player player) {
-        double x = player.getX();
-        double z = player.getZ();
-        return (x >= 10000 || x <= -10000) || (z >= 10000 || z <= -10000);
-    }
-
-    public void sendToSpawn(Player player) {
-        double x = 113 + 0.5;
-        double y = 73;
-        double z = 64 + 0.5;
-        Level level = API.getMainAPI().getServer().getDefaultLevel();
-        if (!level.isChunkLoaded(113 >> 4, 64 >> 4)) {
-            level.loadChunk(113 >> 4, 64 >> 4);
-        }
-        player.teleport(new Position(x, y, z, level));
-        player.setImmobile(false);
+        return entity.getPosition().distance(vector3) <= 300 && entity.getY() <= 29;
     }
 
     /*public void spawnFireworks() {
@@ -79,7 +53,7 @@ public class MechanicAPI {
 
     public void createScoreboard(Player player) {
         FakeScoreboard fakeScoreboard = new FakeScoreboard();
-        Objective object = new Objective("§3§lNycuRO §r§7» §bFactions", new ObjectiveCriteria("dummy", true));
+        Objective object = new Objective("§6§l»§r§f-- §6§lchpe.MariusMRN.com§r§f --§6§l«", new ObjectiveCriteria("dummy", true));
         DisplayObjective newObject = new DisplayObjective(
                 object,
                 ObjectiveSortOrder.DESCENDING,
