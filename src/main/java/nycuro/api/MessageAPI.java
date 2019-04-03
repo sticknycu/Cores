@@ -76,13 +76,13 @@ public class MessageAPI {
         switch (lang) {
             case 0:
                 STRING = "                       Hello!\n" +
-                        "              Welcome to Servers!\n" +
-                        "   Select what you want to do from now.";
+                        "              Welcome to CHPE\n" +
+                        "   Select your favourite gamemode:\n";
                 break;
             case 1:
                 STRING = "                       Salut!\n" +
-                        "            Bine ai venit la Servere!\n" +
-                        "       Alege ce doresti sa faci de acum.";
+                        "            Bine ai venit pe CHPE\n" +
+                        "       Selecteaza modul tau preferat de joc:\n";
                 break;
         }
         return STRING;
@@ -93,12 +93,12 @@ public class MessageAPI {
         switch (lang) {
             case 0:
                 STRING = "                       Hello!\n" +
-                        "               Welcome to Ranks!\n" +
+                        "               Here you can see all ranks!\n " +
                         "   Select what you want to do from now.";
                 break;
             case 1:
                 STRING = "                       Salut!\n" +
-                        "             Bine ai venit la Grade!\n" +
+                        "             Aici poti vedea toate rank-urile!\n" +
                         "       Alege ce doresti sa faci de acum.";
                 break;
         }
@@ -125,7 +125,7 @@ public class MessageAPI {
                 STRING = "Ranks";
                 break;
             case 1:
-                STRING = "Grade";
+                STRING = "Ranks";
                 break;
         }
         return STRING;
@@ -153,7 +153,7 @@ public class MessageAPI {
                 STRING = "Ranks";
                 break;
             case 1:
-                STRING = "Grade";
+                STRING = "Ranks";
                 break;
             default:
                 STRING = "Ranks";
@@ -182,60 +182,60 @@ public class MessageAPI {
             case 1:
                 switch (lang) {
                     case 0:
-                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n   §7Facebook on @ §efacebook.nycuro.us";
+                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n   §7Go to our website: mariusmrn.com/servers for more!";
                         break;
                     case 1:
-                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n  §7Facebook la @ §efacebook.nycuro.us";
+                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n  §7Intra pe site-ul: mariusmrn.com/servers pentru a afla mai multe!";
                         break;
                 }
                 break;
             case 2:
                 switch (lang) {
                     case 0:
-                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n         §7Vote on @ §evote.nycuro.us";
+                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n         §7Have fun";
                         break;
                     case 1:
-                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n    §7Voteaza la @ §evote.nycuro.us";
+                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n    §7Distractie plauta!";
                         break;
                 }
                 break;
             case 3:
                 switch (lang) {
                     case 0:
-                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n §7Messenger on @ §emessenger.nycuro.us";
+                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n §7Thanks for playing!";
                         break;
                     case 1:
-                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n §7Messenger la @ §emessenger.nycuro.us";
+                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n §7Multumim pentru activitate!";
                         break;
                 }
                 break;
             case 4:
                 switch (lang) {
                     case 0:
-                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n     §7Discord on @ §ediscord.nycuro.us";
+                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n     §7Discord: mariusmrn.com/discord";
                         break;
                     case 1:
-                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n  §7Discord la @ §ediscord.nycuro.us";
+                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n  §7Discord: mariusmrn.com/discord";
                         break;
                 }
                 break;
             case 5:
                 switch (lang) {
                     case 0:
-                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n     §7Store on @ §enycuro.buycraft.net";
+                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n     §7Go to our website: mariusmrn.com/servers for more!";
                         break;
                     case 1:
-                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n  §7Magazin la @ §enycuro.buycraft.net";
+                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n  §7Intra pe site-ul: mariusmrn.com/servers pentru a afla mai multe!";
                         break;
                 }
                 break;
             case 6:
                 switch (lang) {
                     case 0:
-                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n       §7Have Fun @ §eNycuRO Factions";
+                        STRING = "§6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n       §7Donate for awesome rewards!";
                         break;
                     case 1:
-                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n   §7Distractie placuta @ §eNycuRO Factions";
+                        STRING = "    §6§l»§r-- Bine ai venit pe §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n   §7Doneaza pentru recompense minunate!";
                         break;
                 }
                 break;
@@ -260,7 +260,7 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7(§3!§7) §3Now all the players are invisible!");
+                player.sendMessage("§7(§3!§7) §3Now all players are invisible!");
                 break;
             case 1:
                 player.sendMessage("§7(§3!§7) §3Acum toti jucatorii sunt invizibili!");
@@ -272,7 +272,7 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7(§3!§7) §3Now all the players are visible!");
+                player.sendMessage("§7(§3!§7) §3Now all players are visible!");
                 break;
             case 1:
                 player.sendMessage("§7(§3!§7) §3Acum toti jucatorii sunt vizibili!");
@@ -284,7 +284,7 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7(§3!§7) §4Error: §7This function not work! Use §b/utils §7options.");
+                player.sendMessage("§7(§3!§7) §4Error: §7This function not work yet! Use §b/utils §7options.");
                 break;
             case 1:
                 player.sendMessage("§7(§3!§7) §4Eroare: §7Aceasta functie nu merge inca! Foloseste optiunile de la §b/utils§7.");
@@ -296,7 +296,7 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7(§3!§7) §3Walk with the tricks? That's not good for you..");
+                player.sendMessage("§7(§3!§7) §3That's not good for you..");
                 break;
             case 1:
                 player.sendMessage("§7(§3!§7) §3Umblii cu smecherii? Nu e bine pentru tine..");
@@ -332,7 +332,7 @@ public class MessageAPI {
         int lang = Database.profile.get(damager.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                damager.sendMessage("§7(§3!§7) §4Error: §7You can't PvP here!");
+                damager.sendMessage("§7(§3!§7) §4Error: §7You can't do PvP here!");
                 break;
             case 1:
                 damager.sendMessage("§7(§3!§7) §4Eroare: §7Nu poti face PvP aici!");
@@ -344,7 +344,7 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7(§3!§7) §4Error: §7You are on border. Please go back!");
+                player.sendMessage("§7(§3!§7) §4Error: §7You are at border. Please go back!");
                 break;
             case 1:
                 player.sendMessage("§7(§3!§7) §4Eroare: §7Ai ajuns la Border. Te rugam sa te indepartezi!");
@@ -356,10 +356,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §3You selected English! Now, All Server are in English!");
+                player.sendMessage("§f» §eYou selected english language!");
                 break;
             case 1:
-                player.sendMessage("§7» §3Ai selectat Romana! Acum, Tot Serverul este in Romana!");
+                player.sendMessage("§f» §eAi selectat limba server-ului in romana!");
                 break;
         }
     }
@@ -368,10 +368,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendTitle("§6§k  §r§5Yoahh?! §6§k!", "§dYou got §6" + experience + " §dExperience!");
+                player.sendTitle("§e§k  §r§5Yoahh?! §f§k!", "§dYou got §e" + experience + " §dExperience!");
                 break;
             case 1:
-                player.sendTitle("§6§k  §r§5Yoahh?! §6§k!", "§dAi primit §6" + experience + " §dExperienta!");
+                player.sendTitle("§e§k  §r§5Yoahh?! §f§k!", "§dAi primit §e" + experience + " §dExperienta!");
                 break;
         }
     }
@@ -379,10 +379,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §3From now, you don't have One Job §3!");
+                player.sendMessage("§f» §eFrom now, you don't have One Job §e!");
                 break;
             case 1:
-                player.sendMessage("§7» §3De acum, nu mai ai nici un Job§3!");
+                player.sendMessage("§f» §eDe acum, nu mai ai nici un Job§e!");
                 break;
         }
     }
@@ -391,12 +391,12 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §3Your lucky number it's §b" + number + "§3!");
-                player.sendMessage("§7» §3Congratulations for reward!");
+                player.sendMessage("§f» §eYour lucky number it's §6" + number + "§e!");
+                player.sendMessage("§f» §eCongratulations for reward!");
                 break;
             case 1:
-                player.sendMessage("§7» §3Numarul tau norocos este §b" + number + "§3!");
-                player.sendMessage("§7» §3Felicitari pentru castig!");
+                player.sendMessage("§f» §eNumarul tau norocos este §6" + number + "§e!");
+                player.sendMessage("§f» §eFelicitari pentru castig!");
                 break;
         }
     }
@@ -405,10 +405,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §3Please use only 1 Key!");
+                player.sendMessage("§f» §ePlease use only 1 key!");
                 break;
             case 1:
-                player.sendMessage("§7» §3Te rog foloseste doar 1 Cheie!");
+                player.sendMessage("§f» §eTe rog foloseste doar 1 cheie!");
                 break;
         }
     }
@@ -417,10 +417,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                damager.sendMessage("§7» §b" + player.getName() + " §3is now at §b" + player.getHealth() + "§e/§b" + player.getMaxHealth() + "§3!");
+                damager.sendMessage("§f» §e" + player.getName() + " §eis now at §6" + player.getHealth() + "§6/§e" + player.getMaxHealth() + "§3!");
                 break;
             case 1:
-                damager.sendMessage("§7» §b" + player.getName() + " §3are acum §b" + player.getHealth() + "§e/§b" + player.getMaxHealth() + "§3!");
+                damager.sendMessage("§f» §e" + player.getName() + " §eare acum §6" + player.getHealth() + "§6/§e" + player.getMaxHealth() + "§3!");
                 break;
         }
     }
@@ -430,14 +430,14 @@ public class MessageAPI {
             int lang = Database.profile.get(((Player) commandSender).getUniqueId()).getLanguage();
             switch (lang) {
                 case 0:
-                    commandSender.sendMessage("§7» §b" + getter.getName() + " §3have now §e$" + money + "§3!");
+                    commandSender.sendMessage("§f» §e" + getter.getName() + " §ehave now §6$" + money + "§e!");
                     break;
                 case 1:
-                    commandSender.sendMessage("§7» §b" + getter.getName() + " §3are acum §e$" + money + "§3!");
+                    commandSender.sendMessage("§f» §e" + getter.getName() + " §eare acum §6$" + money + "§e!");
                     break;
             }
         } else {
-            commandSender.sendMessage("§7» §b" + getter.getName() + " §3are acum §e$" + money + "§3!");
+            commandSender.sendMessage("§f» §e" + getter.getName() + " §eare acum §6$" + money + "§e!");
         }
     }
 
@@ -446,17 +446,17 @@ public class MessageAPI {
             int lang = Database.profile.get(((Player) commandSender).getUniqueId()).getLanguage();
             switch (lang) {
                 case 0:
-                    commandSender.sendMessage("§7» §b" + getter.getName() + " §3was active on this session for §e" + Loader.time(time) + " §7!");
-                    commandSender.sendMessage("§7» §b" + getter.getName() + " §3was active on this server for §e" + Loader.time(totalTime) + " §7!");
+                    commandSender.sendMessage("§f» §e" + getter.getName() + " §6was active on this session for §e" + Loader.time(time) + " §e!");
+                    commandSender.sendMessage("§f» §e" + getter.getName() + " §6was active on this server for §e" + Loader.time(totalTime) + " §e!");
                     break;
                 case 1:
-                    commandSender.sendMessage("§7» §b" + getter.getName() + " §3a fost activ pe aceasta sesiune pentru §e" + Loader.time(time) + " §7!");
-                    commandSender.sendMessage("§7» §b" + getter.getName() + " §3a fost activ pe acest server pentru §e" + Loader.time(totalTime) + " §7!");
+                    commandSender.sendMessage("§f» §e" + getter.getName() + " §6a fost activ pe aceasta sesiune pentru §e" + Loader.time(time) + " §e!");
+                    commandSender.sendMessage("§f» §e" + getter.getName() + " §6a fost activ pe acest server pentru §e" + Loader.time(totalTime) + " §e!");
                     break;
             }
         } else {
-            commandSender.sendMessage("§7» §b" + getter.getName() + " §3a fost activ pe aceasta sesiune pentru §e" + Loader.time(time) + " §7!");
-            commandSender.sendMessage("§7» §b" + getter.getName() + " §3a fost activ pe acest server pentru §e" + Loader.time(totalTime) + " §7!");
+            commandSender.sendMessage("§f» §e" + getter.getName() + " §6a fost activ pe aceasta sesiune pentru §e" + Loader.time(time) + " §e!");
+            commandSender.sendMessage("§f» §e" + getter.getName() + " §6a fost activ pe acest server pentru §e" + Loader.time(totalTime) + " §e!");
         }
     }
 
@@ -464,10 +464,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §bNow you have §e$" + money + "§3!");
+                player.sendMessage("§f» §eNow you have §6$" + money + "§e!");
                 break;
             case 1:
-                player.sendMessage("§7» §bAi acum §e$" + money + "§3!");
+                player.sendMessage("§f» §eAi acum §6$" + money + "§e!");
                 break;
         }
     }
@@ -476,10 +476,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §bPlease use §c/lang §aen/ro §r§3!");
+                player.sendMessage("§f» §ePlease use §6/lang §aen/ro §r§e!");
                 break;
             case 1:
-                player.sendMessage("§7» §bTe rog foloseste §c/lang §aen/ro §r§3!");
+                player.sendMessage("§f» §eTe rog foloseste §6/lang §aen/ro §r§e!");
                 break;
         }
     }
@@ -489,12 +489,12 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7(§3!§7) §bYou was active on this session for §e" + Loader.time(time) + " §7!");
-                player.sendMessage("§7(§3!§7) §bYou was active on server for §e" + Loader.time(totalTime) + " §7!");
+                player.sendMessage("§7(§3!§7) §eYou was active on this session for §6" + Loader.time(time) + " §7!");
+                player.sendMessage("§7(§3!§7) §eYou was active on server for §6" + Loader.time(totalTime) + " §7!");
                 break;
             case 1:
-                player.sendMessage("§7(§3!§7) §bAi fost activ pe aceasta sesiune timp de §e" + Loader.time(time) + " §7!");
-                player.sendMessage("§7(§3!§7) §bAi fost activ pe server timp de §e" + Loader.time(totalTime) + " §7!");
+                player.sendMessage("§7(§3!§7) §eAi fost activ pe aceasta sesiune timp de §6" + Loader.time(time) + " §7!");
+                player.sendMessage("§7(§3!§7) §eAi fost activ pe server timp de §6" + Loader.time(totalTime) + " §7!");
                 break;
         }
     }
@@ -505,44 +505,44 @@ public class MessageAPI {
             int lang = Database.profile.get(((Player) commandSender).getUniqueId()).getLanguage();
             switch (lang) {
                 case 0:
-                    commandSender.sendMessage("§7» §bYou added §e$" + count + " §bto " + giver.getName() + "§3!");
-                    commandSender.sendMessage("§7» §b" + giver.getName() + " §3have now §e$" + money + "§3!");
+                    commandSender.sendMessage("§f» §eYou added §6$" + count + " §eto " + giver.getName() + "§3!");
+                    commandSender.sendMessage("§f» §e" + giver.getName() + " §ehave now §6$" + money + "§3!");
                     API.getDatabase().getLanguage(giver, language -> {
                         switch (language) {
                             case 0:
-                                giver.sendMessage("§7» §bYou bought §e$" + count + " §bfrom " + commandSender.getName() + "§3!");
+                                giver.sendMessage("§f» §eYou bought §6$" + count + " §efrom " + commandSender.getName() + "§3!");
                                 break;
                             case 1:
-                                giver.sendMessage("§7» §bAi primit §e$" + count + " §bde la " + commandSender.getName() + "§3!");
+                                giver.sendMessage("§f» §eAi primit §6$" + count + " §ede la " + commandSender.getName() + "§3!");
                                 break;
                         }
                     });
                     break;
                 case 1:
-                    commandSender.sendMessage("§7» §bAi adaugat §e$" + count + " §blui " + giver.getName() + "§3!");
-                    commandSender.sendMessage("§7» §b" + giver.getName() + " §3are acum §e$" + money + "§3!");
+                    commandSender.sendMessage("§f» §eAi adaugat §6$" + count + " §elui " + giver.getName() + "§3!");
+                    commandSender.sendMessage("§f» §e" + giver.getName() + " §eare acum §6$" + money + "§3!");
                     API.getDatabase().getLanguage(giver, language -> {
                         switch (language) {
                             case 0:
-                                giver.sendMessage("§7» §bYou bought §e$" + count + " §bfrom " + commandSender.getName() + "§3!");
+                                giver.sendMessage("§f» §eYou bought §6$" + count + " §efrom " + commandSender.getName() + "§3!");
                                 break;
                             case 1:
-                                giver.sendMessage("§7» §bAi primit §e$" + count + " §bde la " + commandSender.getName() + "§3!");
+                                giver.sendMessage("§f» §eAi primit §6$" + count + " §ede la " + commandSender.getName() + "§3!");
                                 break;
                         }
                     });
                     break;
             }
         } else {
-            commandSender.sendMessage("§7» §bAi adaugat §e$" + count + " §blui " + giver.getName() + "§3!");
-            commandSender.sendMessage("§7» §b" + giver.getName() + " §3are acum §e$" + money + "§3!");
+            commandSender.sendMessage("§f» §eAi adaugat §6$" + count + " §elui " + giver.getName() + "§3!");
+            commandSender.sendMessage("§f» §e" + giver.getName() + " §eare acum §6$" + money + "§3!");
             int language = Database.profile.get(giver.getUniqueId()).getLanguage();
             switch (language) {
                 case 0:
-                    giver.sendMessage("§7» §bYou bought §e$" + count + " §bfrom CONSOLE§3!");
+                    giver.sendMessage("§f» §eYou bought §6$" + count + " §efrom CONSOLE§3!");
                     break;
                 case 1:
-                    giver.sendMessage("§7» §bAi primit §e$" + count + " §bde la CONSOLE§3!");
+                    giver.sendMessage("§f» §eAi primit §6$" + count + " §ede la CONSOLE§3!");
                     break;
             }
         }
@@ -554,40 +554,40 @@ public class MessageAPI {
             int language = Database.profile.get(giver.getUniqueId()).getLanguage();
             switch (lang) {
                 case 0:
-                    commandSender.sendMessage("§7» §bYou setted §e$" + count + " §bto " + giver.getName() + "§3!");
-                    commandSender.sendMessage("§7» §b" + giver.getName() + " §3have now §e$" + count + "§3!");
+                    commandSender.sendMessage("§f» §eYou setted §6$" + count + " §eto " + giver.getName() + "§3!");
+                    commandSender.sendMessage("§f» §e" + giver.getName() + " §ehave now §6$" + count + "§3!");
                     switch (language) {
                         case 0:
-                            giver.sendMessage("§7» §bYour coins setted to §e$" + count + " §bby " + commandSender.getName() + "§3!");
+                            giver.sendMessage("§f» §eYour coins setted to §6$" + count + " §eby " + commandSender.getName() + "§3!");
                             break;
                         case 1:
-                            giver.sendMessage("§7» §bBanutii tai au fost setati la §e$" + count + " §bde " + commandSender.getName() + "§3!");
+                            giver.sendMessage("§f» §eBanii tai au fost setati la §6$" + count + " §ede " + commandSender.getName() + "§3!");
                             break;
                     }
                     break;
                 case 1:
-                    commandSender.sendMessage("§7» §bAi setat §e$" + count + " banuti §blui " + giver.getName() + "§3!");
-                    commandSender.sendMessage("§7» §b" + giver.getName() + " §3are acum §e$" + count + "§3!");
+                    commandSender.sendMessage("§f» §eAi setat §e$" + count + " banii §elui " + giver.getName() + "§3!");
+                    commandSender.sendMessage("§f» §e" + giver.getName() + " §eare acum §6$" + count + "§3!");
                     switch (language) {
                         case 0:
-                            giver.sendMessage("§7» §bYour coins setted to §e$" + count + " §bby " + commandSender.getName() + "§3!");
+                            giver.sendMessage("§f» §eYour coins setted to §e$" + count + " §eby " + commandSender.getName() + "§3!");
                             break;
                         case 1:
-                            giver.sendMessage("§7» §bBanutii tai au fost setati la §e$" + count + " §bde " + commandSender.getName() + "§3!");
+                            giver.sendMessage("§f» §eBanii tai au fost setati la §6$" + count + " §ede " + commandSender.getName() + "§3!");
                             break;
                     }
                     break;
             }
         } else {
-            commandSender.sendMessage("§7» §bAi setat §e$" + count + " banuti §blui " + giver.getName() + "§3!");
-            commandSender.sendMessage("§7» §b" + giver.getName() + " §3are acum §e$" + count + "§3!");
+            commandSender.sendMessage("§f» §eAi setat §6$" + count + " banii §elui " + giver.getName() + "§3!");
+            commandSender.sendMessage("§f» §6" + giver.getName() + " §eare acum §6$" + count + "§3!");
             int language = Database.profile.get(giver.getUniqueId()).getLanguage();
             switch (language) {
                 case 0:
-                    giver.sendMessage("§7» §bYour coins setted to §e$" + count + " §bby CONSOLE§3!");
+                    giver.sendMessage("§f» §eYour coins setted to §6$" + count + " §bby CONSOLE§3!");
                     break;
                 case 1:
-                    giver.sendMessage("§7» §bBanutii tai au fost setati la §e$" + count + " §bde CONSOLE§3!");
+                    giver.sendMessage("§f» §eBanii tai au fost setati la §6$" + count + " §bde CONSOLE§3!");
                     break;
             }
         }
@@ -597,12 +597,12 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §bYou got §e$" + count + " from yourself§3!");
-                player.sendMessage("§7» §bYou have now §e$" + money + "§3!");
+                player.sendMessage("§f» §eYou got §6$" + count + " from yourself§3!");
+                player.sendMessage("§f» §eYou have now §6$" + money + "§3!");
                 break;
             case 1:
-                player.sendMessage("§7» §bAi primit §e$" + count + " de la tine§3!");
-                player.sendMessage("§7» §bAcum ai§e$" + money + "§3!");
+                player.sendMessage("§f» §eAi primit §e$" + count + " de la tine§3!");
+                player.sendMessage("§f» §eAcum ai§e$" + money + "§3!");
                 break;
         }
     }
@@ -611,12 +611,12 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §bYour coins setted to §e$" + count + " by yourself§3!");
-                player.sendMessage("§7» §bYou have now §e$" + count + "§3!");
+                player.sendMessage("§f» §eYour coins setted to §6$" + count + " by yourself§3!");
+                player.sendMessage("§f» §eYou have now §e$" + count + "§3!");
                 break;
             case 1:
-                player.sendMessage("§7» §bTi-ai setat banutii la §e$" + count + "§3!");
-                player.sendMessage("§7» §bAcum ai§e$" + count + "§3!");
+                player.sendMessage("§f» §eTi-ai setat banii la §6$" + count + "§3!");
+                player.sendMessage("§f» §eAcum ai§6$" + count + "§3!");
                 break;
         }
     }
@@ -625,10 +625,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §bYou use too much arguments! Use: §c/addcoins <player> <count>§3!");
+                player.sendMessage("§f» §eYou use too much arguments! Use: §c/addcoins <player> <count>§3!");
                 break;
             case 1:
-                player.sendMessage("§7» §bFolosesti prea multe argumente! Foloseste: §c/addcoins <player> <count>§3!");
+                player.sendMessage("§f» §eFolosesti prea multe argumente! Foloseste: §c/addcoins <player> <count>§3!");
                 break;
         }
     }
@@ -637,10 +637,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §bYou use too much arguments! Use: §c/coins <player>§3!");
+                player.sendMessage("§f» §eYou use too much arguments! Use: §c/coins <player>§3!");
                 break;
             case 1:
-                player.sendMessage("§7» §bFolosesti prea multe argumente! Foloseste: §c/coins <player>§3!");
+                player.sendMessage("§f» §eFolosesti prea multe argumente! Foloseste: §c/coins <player>§3!");
                 break;
         }
     }
@@ -649,10 +649,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §bYou use too much arguments! Use: §c/onlinetime <player> §3!");
+                player.sendMessage("§f» §eYou use too much arguments! Use: §c/onlinetime <player> §3!");
                 break;
             case 1:
-                player.sendMessage("§7» §bFolosesti prea multe argumente! Foloseste: §c/onlinetime <player>§3!");
+                player.sendMessage("§f» §eFolosesti prea multe argumente! Foloseste: §c/onlinetime <player>§3!");
                 break;
         }
     }
@@ -661,10 +661,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §bYou use too much arguments! Use: §c/topcoins §3!");
+                player.sendMessage("§f» §eYou use too much arguments! Use: §c/topcoins §3!");
                 break;
             case 1:
-                player.sendMessage("§7» §bFolosesti prea multe argumente! Foloseste: §c/topcoins §3!");
+                player.sendMessage("§f» §eFolosesti prea multe argumente! Foloseste: §c/topcoins §3!");
                 break;
         }
     }
@@ -673,10 +673,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §bYou use too much arguments! Use: §c/topkills §3!");
+                player.sendMessage("§f» §eYou use too much arguments! Use: §c/topkills §3!");
                 break;
             case 1:
-                player.sendMessage("§7» §bFolosesti prea multe argumente! Foloseste: §c/topkills §3!");
+                player.sendMessage("§f» §eFolosesti prea multe argumente! Foloseste: §c/topkills §3!");
                 break;
         }
     }
@@ -685,10 +685,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §bYou use too much arguments! Use: §c/toptime §3!");
+                player.sendMessage("§f» §eYou use too much arguments! Use: §c/toptime §3!");
                 break;
             case 1:
-                player.sendMessage("§7» §bFolosesti prea multe argumente! Foloseste: §c/toptime §3!");
+                player.sendMessage("§f» §eFolosesti prea multe argumente! Foloseste: §c/toptime §3!");
                 break;
         }
     }
@@ -697,10 +697,10 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §bYou use too much arguments! Use: §c/topdeaths §3!");
+                player.sendMessage("f» §eYou use too much arguments! Use: §c/topdeaths §3!");
                 break;
             case 1:
-                player.sendMessage("§7» §bFolosesti prea multe argumente! Foloseste: §c/topdeaths §3!");
+                player.sendMessage("f» §eFolosesti prea multe argumente! Foloseste: §c/topdeaths §3!");
                 break;
         }
     }
@@ -781,22 +781,22 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n" +
+                player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
-                        "                    The DropParty was released in 1 minute!§r\n" +
+                        "                    The DropParty is starting in 1 minute!§r\n" +
                         "                         Fireworks will appear in Spawn.§r\n" +
                         "             Because you were Online you will get a Special Key!§r" +
                         "                                                                                                            \n" +
-                        "§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n");
+                        "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n");
                 break;
             case 1:
-                player.sendMessage("§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n" +
+                player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
                         "                       DropParty-ul va aparea in 1 de minut!§r\n" +
                         "                          Artificile vor aparea in Spawn.§r\n" +
                         "               Pentru ca ai fost Online, vei primii o Cheie Speciala!§r\n" +
                         "                                                                                                            \n" +
-                        "§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n");
+                        "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n");
                 break;
         }
     }
@@ -805,22 +805,22 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n" +
+                player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
-                        "                          The DropParty was released!§r\n" +
+                        "                          The DropParty started!§r\n" +
                         "                The fireworks and The Boss appeared in Spawn.§r\n" +
                         "                     Everyone received a DropParty Key!§r" +
                         "                                                                                                            \n" +
-                        "§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n");
+                        "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r");
                 break;
             case 1:
-                player.sendMessage("§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n" +
+                player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
                         "                              DropParty-ul a aparut!§r\n" +
                         "                    Artificile si The Boss au aparut in Spawn.§r\n" +
                         "                      Toata lumea a primit DropParty Key!§r\n" +
                         "                                                                                                            \n" +
-                        "§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n");
+                        "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n");
                 break;
         }
     }
@@ -829,22 +829,22 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n" +
+                player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
                         "                           Server will restart soon!§r\n" +
                         "                    Please accord attention to this message!§r\n" +
-                        "                  You can enter again on 10 seconds after restart!§r" +
+                        "                  You can enter again in 10 seconds after restart!§r" +
                         "                                                                                                            \n" +
-                        "§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n");
+                        "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n");
                 break;
             case 1:
-                player.sendMessage("§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n" +
+                player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
                         "                           Serverul se va restarta curand!§r\n" +
                         "                        Va rog acordati atentie acestui mesaj!§r\n" +
                         "                     Vei putea intra dupa 10 secunde de la restart!§r\n" +
                         "                                                                                                            \n" +
-                        "§7»§l§m--------------- §8( §3§lNycuRO §r§l» §bFactions §r§8) §7---------------§7«§r\n");
+                        "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n");
                 break;
         }
     }
@@ -853,22 +853,22 @@ public class MessageAPI {
         int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r\n" +
+                player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
                         "                         Server will restart §cin 10 seconds!§r\n" +
                         "                       Please accord attention to this message!§r\n" +
                         "                           You can enter again in 10 seconds!§r" +
                         "                                                                                                            \n" +
-                        "§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r\n");
+                        "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n");
                 break;
             case 1:
-                player.sendMessage("§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r\n" +
+                player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
                         "                        Serverul se va restarta §cin 10 secunde!§r\n" +
                         "                            Va rog acordati atentie acestui mesaj!§r\n" +
                         "                      Vei putea intra dupa 10 secunde de la restart!§r\n" +
                         "                                                                                                            \n" +
-                        "§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r\n");
+                        "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r\n");
                 break;
         }
     }
@@ -961,19 +961,19 @@ public class MessageAPI {
         }
         switch (lang) {
             case 0:
-                player.sendMessage("§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r");
+                player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r");
                 player.sendMessage("                                                                                                            ");
-                player.sendMessage("                      Vote our server daily for awesome rewards §e§lmariusmrn.com/servers§r");
-                player.sendMessage("                            Join with us on discord §e§lmariusmrn.com/discord§r");
+                player.sendMessage("            Vote our server daily for awesome rewards §e§lmariusmrn.com/servers§r");
+                player.sendMessage("                     Join with us on discord §e§lmariusmrn.com/discord§r");
                 player.sendMessage("                                                                                                            ");
                 break;
             case 1:
-                player.sendMessage("§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r");
+                player.sendMessage("§l§6»§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r");
                 player.sendMessage("                                                                                                            ");
-                player.sendMessage("                     Voteaza-ne serverul zilnic pentru beneficii §e§lmariusmrn.com/servers§r");
-                player.sendMessage("                            Intra cu noi pe discord §3§lmariusmrn.com/discord§r");
+                player.sendMessage("            Voteaza-ne serverul zilnic pentru beneficii §e§lmariusmrn.com/servers§r");
+                player.sendMessage("                  Intra cu noi pe discord §3§lmariusmrn.com/discord§r");
                 player.sendMessage("                                                                                                            ");
-                player.sendMessage("§6»§l§m--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6«§r");
+                player.sendMessage("§l§6»§r--------------- §8( §6§lCHPE §r§l» §eHUB §r§8) §r---------------§6§l«§r");
                 break;
         }
     }
