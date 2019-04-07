@@ -9,6 +9,7 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.Loader;
+import org.itxtech.synapseapi.event.player.SynapsePlayerConnectEvent;
 
 /**
  * author: NycuRO
@@ -36,7 +37,6 @@ public class MechanicHandlers implements Listener {
                         API.getMessageAPI().sendFirstJoinTitle(player);
                         break;
                     case 2:
-                        API.getMechanicAPI().sendModalContents(player);
                         API.getMessageAPI().sendSecondJoinTitle(player);
                         break;
                     case 3:
@@ -47,7 +47,7 @@ public class MechanicHandlers implements Listener {
                 }
                 API.getMainAPI().timers.put(username, playerTime + 1);
             }
-        }, 20 * 4, 20 * 3, true);
+        }, 20 * 7, 20 * 3, true);
         if (Loader.startTime.get(player.getUniqueId()) != null) {
             Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
         } else {

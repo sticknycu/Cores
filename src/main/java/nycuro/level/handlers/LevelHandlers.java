@@ -13,9 +13,10 @@ import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
-import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Location;
 import cn.nukkit.math.Vector3;
+import cn.nukkit.scheduler.AsyncTask;
+import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.gui.list.ResponseFormWindow;
 import org.itxtech.synapseapi.SynapsePlayer;
@@ -35,6 +36,15 @@ public class LevelHandlers implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         startItems(player);
+        API.getMainAPI().getServer().getScheduler().scheduleDelayedTask(new Task() {
+            @Override
+            public void onRun(int i) {
+                for (int k = 0; k <= 5; k++) {
+                    API.getMechanicAPI().spawnFirework(new Vector3(4985, 4, 5026));
+                    API.getMechanicAPI().spawnFirework(new Vector3(5009, 4, 5025));
+                }
+            }
+        }, 20 * 6, true);
         //player.setNameTag("§7[§e" + JobsAPI.jobs.get(job) + "§7] " + "§a[§c" + level + "§a] §7" + player.getName());
     }
 
@@ -157,7 +167,7 @@ public class LevelHandlers implements Listener {
         }));
     }
 
-    private void sendFormRank(Player player) {
+    public static void sendFormRank(Player player) {
         FormWindowSimple utilsMenu = new FormWindowSimple(API.getMessageAPI().getTitleFormRanks(player), API.getMessageAPI().getContentFormRanks(player));
         utilsMenu.addButton(new ElementButton("Grad 1", new ElementButtonImageData("url", "https://i.imgur.com/UdZm6QB.png")));
         utilsMenu.addButton(new ElementButton("Grad 2", new ElementButtonImageData("url", "https://i.imgur.com/GuxFWI6.png")));

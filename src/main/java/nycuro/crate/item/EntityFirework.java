@@ -12,11 +12,11 @@ import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemFirework;
 import cn.nukkit.level.Sound;
 import cn.nukkit.level.format.FullChunk;
+import cn.nukkit.math.Vector3;
 import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.network.protocol.AddEntityPacket;
 import cn.nukkit.network.protocol.EntityEventPacket;
-import cn.nukkit.network.protocol.LevelSoundEventPacket;
 import cn.nukkit.network.protocol.PlaySoundPacket;
 
 import java.util.Random;
@@ -36,7 +36,7 @@ public class EntityFirework extends Entity {
     public EntityFirework(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
         Random rand = new Random();
-        this.lifetime = 1;
+        this.lifetime = 30 + rand.nextInt(6) + rand.nextInt(7);
         this.motionX = rand.nextGaussian() * 0.001D;
         this.motionZ = rand.nextGaussian() * 0.001D;
         this.motionY = 0.05D;
@@ -77,7 +77,7 @@ public class EntityFirework extends Entity {
                     float f = (float) Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
                     this.yaw = (double) ((float) (Math.atan2(this.motionX, this.motionZ) * 57.29577951308232D));
                     this.pitch = (double) ((float) (Math.atan2(this.motionY, (double) f) * 57.29577951308232D));
-                    if (this.fireworkAge == 0) {
+                    if (this.fireworkAge == 70) {
                         PlaySoundPacket pk = new PlaySoundPacket();
                         pk.name = Sound.RANDOM_EXPLODE.toString();
                         //pk.name = new ExplodeSound(new Vector3(0.5, 0.5, 0.5)).toString();
@@ -96,15 +96,8 @@ public class EntityFirework extends Entity {
                         pk.data = 0;
                         pk.event = 25;
                         pk.eid = this.getId();
-                        LevelSoundEventPacket pk2 = new LevelSoundEventPacket();
-                        pk2.sound = 57;
-                        pk2.extraData = -1;
-                        //pk.pitch = -1;
-                        pk2.x = (float) this.getX();
-                        pk2.y = (float) this.getY();
-                        pk2.z = (float) this.getZ();
                         Server.broadcastPacket(this.getViewers().values(), pk);
-                        this.level.addChunkPacket(this.getFloorX() >> 4, this.getFloorZ() >> 4, pk2);
+                        level.addSound(new Vector3(this.getX(), this.getY(), this.getZ()), Sound.FIREWORK_LAUNCH);
                         this.kill();
                         hasUpdate = true;
                     }

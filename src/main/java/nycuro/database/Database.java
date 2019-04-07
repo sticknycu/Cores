@@ -37,7 +37,7 @@ public class Database {
         DATASOURCE_HUB = new HikariDataSource(config);
         DATASOURCE_HUB.setMaximumPoolSize(1);
 
-        String query = "create table if not exists dates (`uuid` varchar, `name` varchar, `language` int)";
+        String query = "create table if not exists dates (`uuid` varchar, `name` varchar, `language` int, `gems` REAL, `time` INTEGER)";
 
         try (Connection connection = DATASOURCE_HUB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -61,7 +61,9 @@ public class Database {
                         while (resultSet.next()) {
                             profile.put(UUID.fromString(resultSet.getString("UUID")), new Profile(
                                     resultSet.getString("name"),
-                                    resultSet.getInt("language")
+                                    resultSet.getInt("language"),
+                                    resultSet.getDouble("gems"),
+                                    resultSet.getLong("time")
                             ));
                         }
                     }
@@ -347,12 +349,16 @@ public class Database {
             public void onRun() {
                 try (Connection connection = DATASOURCE_HUB.getConnection();
                      PreparedStatement preparedStatement =
-                             connection.prepareStatement("INSERT INTO `dates` (`uuid`, `name`, `language`) VALUES (?, ?, ?)")) {
+                             connection.prepareStatement("INSERT INTO `dates` (`uuid`, `name`, `language`, `gems`, `time`) VALUES (?, ?, ?, ?, ?)")) {
                     preparedStatement.setString(1, uuid);
                     preparedStatement.setString(2, name);
                     preparedStatement.setInt(3, 0);
+                    preparedStatement.setDouble(4, 0);
+                    preparedStatement.setLong(5, 0);
                     profile.put(player.getUniqueId(), new Profile(
                             player.getName(),
+                            0,
+                            0,
                             0
                     ));
                     preparedStatement.executeUpdate();
@@ -369,13 +375,14 @@ public class Database {
             public void onRun() {
                 try (Connection connection = DATASOURCE_HUB.getConnection();
                      PreparedStatement preparedStatement =
-                             connection.prepareStatement("UPDATE `dates` SET `language` = ?")) {
+                             connection.prepareStatement("UPDATE `dates` SET `language` = ?, `gems` = ?, `time` = ? WHERE `uuid` = ?")) {
                     preparedStatement.setInt(1, profile.getLanguage());
+                    preparedStatement.setDouble(2, profile.getGems());
+                    preparedStatement.setLong(3, profile.getTime());
+                    preparedStatement.setString(4, uuid.toString());
                     preparedStatement.executeUpdate();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
-                } finally {
-                    Loader.log("Saving Dates of Player was a succesful!");
                 }
             }
         });

@@ -17,6 +17,8 @@ import nycuro.api.MessageAPI;
 import nycuro.chat.handlers.ChatHandlers;
 import nycuro.commands.list.CoordsCommand;
 import nycuro.commands.list.LangCommand;
+import nycuro.commands.list.donate.gems.GemsCommand;
+import nycuro.commands.list.donate.ranks.RankCommand;
 import nycuro.commands.list.mechanic.*;
 import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
@@ -30,7 +32,6 @@ import nycuro.protection.handlers.ProtectionHandlers;
 import nycuro.tasks.BossBarTask;
 import nycuro.tasks.SaveToDatabaseTask;
 import nycuro.tasks.ScoreboardTask;
-//import nycuro.utils.MechanicUtils;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -115,6 +116,9 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("lang", new LangCommand());
         this.getServer().getCommandMap().register("savetodatabase", new SaveToDatabaseCommand());
         this.getServer().getCommandMap().register("coords", new CoordsCommand());
+        this.getServer().getCommandMap().register("gems", new GemsCommand());
+        this.getServer().getCommandMap().register("sf", new SpawnFireworkCommand());
+        this.getServer().getCommandMap().register("ranks", new RankCommand());
     }
 
     private void registerEvents() {
@@ -141,8 +145,8 @@ public class Loader extends PluginBase {
             public void onRun(int i) {
                 API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "savetodatabase");
             }
-        }, 20 * 15, 20 * 60 * 5);
-        this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20 * 5, true);
+        }, 20 * 15, 20 * 5);
+        this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20 * 3, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 10, true);
         this.getServer().getScheduler().scheduleDelayedTask(new SaveToDatabaseTask(), 20 * 60 * 60 * 3);
     }

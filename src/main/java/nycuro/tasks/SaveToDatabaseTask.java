@@ -11,6 +11,11 @@ import nycuro.database.objects.Profile;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * author: NycuRO
+ * HubCore Project
+ * API 1.0.0
+ */
 public class SaveToDatabaseTask extends Task {
 
     @Override

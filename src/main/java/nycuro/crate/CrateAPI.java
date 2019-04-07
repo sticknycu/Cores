@@ -98,29 +98,4 @@ public class CrateAPI {
         }
         playerInventory.addItem(items);
     }
-
-    public void addExplosion(Block block) {
-        ItemFirework itemFirework = new ItemFirework();
-        ItemFirework.FireworkExplosion fireworkExplosion = new ItemFirework.FireworkExplosion();
-        fireworkExplosion.type(ItemFirework.FireworkExplosion.ExplosionType.LARGE_BALL);
-        fireworkExplosion.addColor(DyeColor.LIGHT_BLUE);
-        fireworkExplosion.addFade(DyeColor.YELLOW);
-        itemFirework.clearExplosions();
-        itemFirework.addExplosion(fireworkExplosion);
-        CompoundTag nbt = new CompoundTag()
-                .putList(new ListTag<DoubleTag>("Pos")
-                        .add(new DoubleTag("", block.getX() + 0.5))
-                        .add(new DoubleTag("", block.getY()))
-                        .add(new DoubleTag("", block.getZ() + 0.5)))
-                .putList(new ListTag<DoubleTag>("Motion")
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation")
-                        .add(new FloatTag("", 0))
-                        .add(new FloatTag("", 0)))
-                .putCompound("FireworkItem", NBTIO.putItemHelper(itemFirework));
-        EntityFirework entityFirework = new EntityFirework(API.getMainAPI().getServer().getDefaultLevel().getChunk((int) block.x, (int) block.z), nbt);
-        entityFirework.spawnToAll();
-    }
 }
