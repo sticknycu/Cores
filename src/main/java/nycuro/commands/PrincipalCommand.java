@@ -4,7 +4,7 @@ import cn.nukkit.command.Command;
 
 /**
  * author: NycuRO
- * HubCore Project
+ * FactionsCore Project
  * API 1.0.0
  */
 public abstract class PrincipalCommand extends Command {

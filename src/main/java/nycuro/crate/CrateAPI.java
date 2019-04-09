@@ -14,10 +14,13 @@ import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.utils.DyeColor;
 import nycuro.API;
 import nycuro.crate.item.EntityFirework;
+import nycuro.kits.EnchantedStarterKit;
+import nycuro.kits.GuardianKit;
+import nycuro.kits.SparrowKit;
 
 /**
  * author: NycuRO
- * HubCore Project
+ * FactionsCore Project
  * API 1.0.0
  */
 public class CrateAPI {
@@ -95,7 +98,50 @@ public class CrateAPI {
                     items = new Item[0];
                 }
             }
+            if (number > 80) {
+                if (number <= 90) {
+                    items = new Item[0];
+                    new EnchantedStarterKit(player);
+                }
+            }
+            if (number > 90) {
+                if (number <= 95) {
+                    items = new Item[0];
+                    new GuardianKit(player);
+                }
+            }
+            if (number > 96) {
+                if (number <= 100) {
+                    items = new Item[0];
+                    new SparrowKit(player);
+                }
+            }
         }
         playerInventory.addItem(items);
+    }
+
+    public void addExplosion(Block block) {
+        ItemFirework itemFirework = new ItemFirework();
+        ItemFirework.FireworkExplosion fireworkExplosion = new ItemFirework.FireworkExplosion();
+        fireworkExplosion.type(ItemFirework.FireworkExplosion.ExplosionType.LARGE_BALL);
+        fireworkExplosion.addColor(DyeColor.LIGHT_BLUE);
+        fireworkExplosion.addFade(DyeColor.YELLOW);
+        itemFirework.clearExplosions();
+        itemFirework.addExplosion(fireworkExplosion);
+        CompoundTag nbt = new CompoundTag()
+                .putList(new ListTag<DoubleTag>("Pos")
+                        .add(new DoubleTag("", block.getX() + 0.5))
+                        .add(new DoubleTag("", block.getY()))
+                        .add(new DoubleTag("", block.getZ() + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", 0))
+                        .add(new FloatTag("", 0)))
+                .putCompound("FireworkItem", NBTIO.putItemHelper(itemFirework));
+        EntityFirework entityFirework = new EntityFirework(API.getMainAPI().getServer().getDefaultLevel().getChunk((int) block.x, (int) block.z), nbt);
+        entityFirework.spawnToAll();
     }
 }

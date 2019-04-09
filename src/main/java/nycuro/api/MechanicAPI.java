@@ -2,30 +2,33 @@ package nycuro.api;
 
 import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
+import cn.nukkit.form.element.ElementButton;
+import cn.nukkit.form.element.ElementButtonImageData;
+import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
-import cn.nukkit.item.ItemFirework;
+import cn.nukkit.form.window.FormWindowSimple;
+import cn.nukkit.item.Item;
+import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
+import cn.nukkit.level.Position;
 import cn.nukkit.math.Vector3;
-import cn.nukkit.nbt.NBTIO;
-import cn.nukkit.nbt.tag.CompoundTag;
-import cn.nukkit.nbt.tag.DoubleTag;
-import cn.nukkit.nbt.tag.FloatTag;
-import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.utils.BlockColor;
 import cn.nukkit.utils.DummyBossBar;
-import cn.nukkit.utils.DyeColor;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nycuro.API;
-import nycuro.crate.item.EntityFirework;
+import nycuro.ai.entity.BossEntity;
 import nycuro.database.Database;
 import nycuro.database.objects.Profile;
+import nycuro.gui.list.ResponseFormWindow;
 
-import java.util.Random;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Consumer;
 
 /**
  * author: NycuRO
- * HubCore Project
+ * FactionsCore Project
  * API 1.0.0
  */
 public class MechanicAPI {
@@ -35,12 +38,71 @@ public class MechanicAPI {
         double y = entity.getLevel().getSpawnLocation().getY();
         double z = entity.getLevel().getSpawnLocation().getZ();
         Vector3 vector3 = new Vector3(x, y, z);
-        return entity.getPosition().distance(vector3) <= 300 && entity.getY() <= 29;
+        return entity.getLevel().getName().equalsIgnoreCase("world") && entity.getPosition().distance(vector3) <= 300 && !entity.getName().equals("NycuR0");
+    }
+
+    public boolean isOnPvP(Entity entity) {
+        double x = entity.getLevel().getSpawnLocation().getX();
+        double y = entity.getLevel().getSpawnLocation().getY();
+        double z = entity.getLevel().getSpawnLocation().getZ();
+        Vector3 vector3 = new Vector3(x, y, z);
+        return entity.getLevel().getName().equalsIgnoreCase("pvp") && entity.getPosition().distance(vector3) <= 34 && !entity.getName().equals("NycuR0") && entity.getY() >= 75;
+    }
+
+    public boolean isOnBorder(Player player) {
+        double x = player.getX();
+        double z = player.getZ();
+        return (x >= 10000 || x <= -10000) || (z >= 10000 || z <= -10000);
+    }
+
+    public void sendToSpawn(Player player) {
+        double x = 113 + 0.5;
+        double y = 73;
+        double z = 64 + 0.5;
+        Level level = API.getMainAPI().getServer().getDefaultLevel();
+        if (!level.isChunkLoaded(113 >> 4, 64 >> 4)) {
+            level.loadChunk(113 >> 4, 64 >> 4);
+        }
+        player.teleport(new Position(x, y, z, level));
+        player.setImmobile(false);
     }
 
     /*public void spawnFireworks() {
         entities.forEach(Entity::spawnToAll);
     }*/
+
+    public void spawnBoss() {
+        for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+            addDropPartyKey(player);
+            new BossEntity();
+            API.getMessageAPI().sendDropPartySpawnedMessage(player);
+        }
+    }
+
+    public void spawnEntities() {
+        Entity entities1 = Entity.createEntity(10, API.getMainAPI().getServer().getDefaultLevel().getChunk(129 >> 4, 48 >> 4), API.getAiAPI().getChickenNBT());
+        Entity entities2 = Entity.createEntity(11, API.getMainAPI().getServer().getDefaultLevel().getChunk(129 >> 4, 57 >> 4), API.getAiAPI().getCowNBT());
+        Entity entities3 = Entity.createEntity(12, API.getMainAPI().getServer().getDefaultLevel().getChunk(129 >> 4, 48 >> 4), API.getAiAPI().getPigNBT());
+        Entity entities4 = Entity.createEntity(13, API.getMainAPI().getServer().getDefaultLevel().getChunk(120 >> 4, 48 >> 4), API.getAiAPI().getSheepNBT());
+        entities1.spawnToAll();
+        entities2.spawnToAll();
+        entities3.spawnToAll();
+        entities4.spawnToAll();
+    }
+
+    public void sendDropPartyMessageBroadcast(Player player) {
+        API.getMessageAPI().sendDropPartyEventMessage(player);
+    }
+
+    private void addDropPartyKey(Player player) {
+        Item dropPartyKey = Item.get(Item.TRIPWIRE_HOOK, 1, 1);
+        Enchantment enchantment = Enchantment.get(Enchantment.ID_PROTECTION_ALL);
+        enchantment.setLevel(1);
+        dropPartyKey.setCustomName("DropParty Key");
+        dropPartyKey.addEnchantment(enchantment);
+        player.getInventory().addItem(dropPartyKey);
+        API.getMessageAPI().sendDropPartyReceiveKeyMessage(player);
+    }
 
     public void createBossBar(Player player) {
         API.getMainAPI().bossbar.put(player.getName(), new DummyBossBar.Builder(player)
@@ -53,7 +115,7 @@ public class MechanicAPI {
 
     public void createScoreboard(Player player) {
         FakeScoreboard fakeScoreboard = new FakeScoreboard();
-        Objective object = new Objective("§f§l•§e•§6• HUB §6•§e•§f•", new ObjectiveCriteria("dummy", true));
+        Objective object = new Objective("§3§lNycuRO §r§7» §bFactions", new ObjectiveCriteria("dummy", true));
         DisplayObjective newObject = new DisplayObjective(
                 object,
                 ObjectiveSortOrder.DESCENDING,
@@ -63,6 +125,55 @@ public class MechanicAPI {
         fakeScoreboard.objective = newObject;
         fakeScoreboard.addPlayer(player);
         API.getMainAPI().scoreboard.put(player.getName(), fakeScoreboard);
+    }
+
+    public void sendServersModal(Player player) {
+        Profile profile = Database.profile.get(player.getUniqueId());
+        int lang = profile.getLanguage();
+        switch (lang) {
+            case 0:
+                FormWindowSimple serversMenu = new FormWindowSimple("Servers", "                       Hello!\n" +
+                        "             Welcome to Servers!\n" +
+                        "  Select what you want to do from now.");
+                serversMenu.addButton(new ElementButton("How to be Partner?", new ElementButtonImageData("url", "https://i.imgur.com/nujWKR3.png")));
+                serversMenu.addButton(new ElementButton("Close"));
+                player.showFormWindow(new ResponseFormWindow(serversMenu, new Consumer<Map<Integer, Object>>() {
+                    @Override
+                    public void accept(Map<Integer, Object> response) {
+                        if (!response.isEmpty()) {
+                            switch (response.entrySet().iterator().next().getKey()) {
+                                case 0:
+                                    sendInfoServers(player);
+                                    return;
+                                case 1:
+                                    break;
+                            }
+                        }
+                    }
+                }));
+                break;
+            case 1:
+                serversMenu = new FormWindowSimple("Servers", "                      Salut!\n" +
+                        "          Bine ai venit la Servere!\n" +
+                        "     Alege ce doresti sa faci de acum.");
+                serversMenu.addButton(new ElementButton("How to be Partner?", new ElementButtonImageData("url", "https://i.imgur.com/nujWKR3.png")));
+                serversMenu.addButton(new ElementButton("Close"));
+                player.showFormWindow(new ResponseFormWindow(serversMenu, new Consumer<Map<Integer, Object>>() {
+                    @Override
+                    public void accept(Map<Integer, Object> response) {
+                        if (!response.isEmpty()) {
+                            switch (response.entrySet().iterator().next().getKey()) {
+                                case 0:
+                                    sendInfoServers(player);
+                                    return;
+                                case 1:
+                                    break;
+                            }
+                        }
+                    }
+                }));
+                break;
+        }
     }
 
     private void sendInfoServers(Player player) {
@@ -104,35 +215,36 @@ public class MechanicAPI {
         player.showFormWindow(infoMenu);
     }
 
-
-    public void spawnFirework(Vector3 pos) {
-        Level level = API.getMainAPI().getServer().getDefaultLevel();
-        ItemFirework item = new ItemFirework();
-        CompoundTag tag = new CompoundTag();
-        CompoundTag ex = new CompoundTag()
-                .putByteArray("FireworkColor", new byte[]{(byte) DyeColor.ORANGE.getDyeData()})
-                .putByteArray("FireworkFade", new byte[]{(byte) DyeColor.YELLOW.getDyeData()})
-                .putBoolean("FireworkFlicker", true)
-                .putBoolean("FireworkTrail", true)
-                .putByte("FireworkType", 1);
-        tag.putCompound("Fireworks", new CompoundTag("Fireworks")
-                .putList(new ListTag<CompoundTag>("Explosions").add(ex))
-                .putByte("Flight", 1));
-        item.setNamedTag(tag);
-        CompoundTag nbt = new CompoundTag()
-                .putList(new ListTag<DoubleTag>("Pos")
-                        .add(new DoubleTag("", pos.x + 0.5))
-                        .add(new DoubleTag("", pos.y + 0.5))
-                        .add(new DoubleTag("", pos.z + 0.5)))
-                .putList(new ListTag<DoubleTag>("Motion")
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation")
-                        .add(new FloatTag("", 0))
-                        .add(new FloatTag("", 0)))
-                .putCompound("FireworkItem", NBTIO.putItemHelper(item));
-        EntityFirework entity = new EntityFirework(level.getChunk((int) pos.x >> 4, (int) pos.z >> 4), nbt);
-        entity.spawnToAll();
+    public void sendModalContents(Player player) {
+        FormWindowCustom serverMenu = new FormWindowCustom("Server Settings");
+        serverMenu.setIcon("https://i.imgur.com/BXo8Cjp.png");
+        int lang = 0;
+        Profile profile = Database.profile.get(player.getUniqueId());
+        if (profile != null) {
+            lang = profile.getLanguage();
+        }
+        switch (lang) {
+            case 0:
+                serverMenu.addElement(new ElementLabel("§eHello!"));
+                serverMenu.addElement(new ElementLabel("§eWelcome to Server Settings!"));
+                serverMenu.addElement(new ElementLabel("                                                                                    "));
+                serverMenu.addElement(new ElementLabel("                                                                                    "));
+                serverMenu.addElement(new ElementDropdown("§c» §aLanguage:",
+                        Arrays.asList("English", "Romana"), 0));
+                serverMenu.addElement(new ElementLabel("                                                                                    "));
+                serverMenu.addElement(new ElementLabel("                                                                                    "));
+                break;
+            case 1:
+                serverMenu.addElement(new ElementLabel("§eSalut!"));
+                serverMenu.addElement(new ElementLabel("§eBine ai venit la Server Settings!"));
+                serverMenu.addElement(new ElementLabel("                                                                                    "));
+                serverMenu.addElement(new ElementLabel("                                                                                    "));
+                serverMenu.addElement(new ElementDropdown("§c» §aLanguage:",
+                        Arrays.asList("English", "Romana"), 0));
+                serverMenu.addElement(new ElementLabel("                                                                                    "));
+                serverMenu.addElement(new ElementLabel("                                                                                    "));
+                break;
+        }
+        player.addServerSettings(serverMenu);
     }
 }

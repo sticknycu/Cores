@@ -11,20 +11,36 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: cn.nukkit:nukkit:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:3.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.25.2" level="project" />
     <orderEntry type="module-library">
-      <library name="Maven: org.itxtech.synapse:synapse-api:1.0-SNAPSHOT">
+      <library name="Maven: combat:Combat:1.0.0">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/synapse-api-1.0-SNAPSHOT.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/Combat-1.0.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.2.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.4" level="project" />
-    <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:3.1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
-    <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.25.2" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: com.massivecraft:factions:1.0-SNAPSHOT">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/Factions.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: de.kniffo80.mobplugin:MobPlugin:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/MobPlugin-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="module-library">
       <library name="Maven: gt.creeperface.nukkit.scoreboardapi:ScoreboardAPI:1.0">
         <CLASSES>
@@ -34,6 +50,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.2.2" level="project" />
     <orderEntry type="module-library">
       <library name="Maven: ru.nukkit.multipass:Multipass:1.0-SNAPSHOT">
         <CLASSES>
@@ -47,6 +64,15 @@
       <library name="Maven: gt.creeperface.holograms:Holograms:1.0">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/Holograms.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: gt.creeperface.kotlinlib.KotlinLib:KotlinLib:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/KotlinLib.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -1,44 +1,62 @@
 package nycuro;
 
+import cn.nukkit.Player;
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
+import gt.creeperface.nukkit.scoreboardapi.scoreboard.DisplayObjective;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import me.lucko.luckperms.LuckPerms;
+import me.lucko.luckperms.api.LuckPermsApi;
+import me.lucko.luckperms.api.Node;
+import me.lucko.luckperms.api.NodeFactory;
 import nycuro.abuse.handlers.AbuseHandlers;
-import nycuro.api.MechanicAPI;
-import nycuro.api.MessageAPI;
+import nycuro.ai.AiAPI;
+import nycuro.api.*;
 import nycuro.chat.handlers.ChatHandlers;
-import nycuro.commands.list.CoordsCommand;
-import nycuro.commands.list.LangCommand;
-import nycuro.commands.list.donate.gems.GemsCommand;
-import nycuro.commands.list.donate.ranks.RankCommand;
+import nycuro.commands.list.*;
+import nycuro.commands.list.economy.AddCoinsCommand;
+import nycuro.commands.list.economy.GetCoinsCommand;
+import nycuro.commands.list.economy.SetCoinsCommand;
 import nycuro.commands.list.mechanic.*;
+import nycuro.commands.list.time.GetTimeCommand;
 import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
+import nycuro.dropparty.DropPartyAPI;
 import nycuro.gui.handlers.GUIHandlers;
+import nycuro.jobs.handlers.JobsHandlers;
+import nycuro.kits.handlers.KitHandlers;
 import nycuro.language.handlers.LanguageHandlers;
 import nycuro.level.handlers.LevelHandlers;
 import nycuro.mechanic.handlers.MechanicHandlers;
 import nycuro.messages.handlers.MessageHandlers;
 import nycuro.protection.handlers.ProtectionHandlers;
+import nycuro.shop.BuyUtils;
+import nycuro.shop.EnchantUtils;
+import nycuro.shop.MoneyUtils;
+import nycuro.shop.SellUtils;
 import nycuro.tasks.BossBarTask;
+import nycuro.tasks.CheckLevelTask;
 import nycuro.tasks.SaveToDatabaseTask;
 import nycuro.tasks.ScoreboardTask;
+import nycuro.utils.MechanicUtils;
+import nycuro.utils.RandomTPUtils;
+import nycuro.utils.WarpUtils;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
  * author: NycuRO
- * HubCore Project
+ * FactionsCore Project
  * API 1.0.0
  */
 public class Loader extends PluginBase {
@@ -53,12 +71,12 @@ public class Loader extends PluginBase {
         API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
     }
 
-    /*public static void registerTops() {
+    public static void registerTops() {
         Database.getTopCoins();
         Database.getTopKills();
         Database.getTopDeaths();
         Database.getTopTime();
-    }*/
+    }
 
     public static String time(long time) {
         int hours = (int) TimeUnit.MILLISECONDS.toHours(time);
@@ -106,49 +124,121 @@ public class Loader extends PluginBase {
     private void registerAPI() {
         API.mainAPI = this;
         API.mechanicAPI = new MechanicAPI();
+        API.utilsAPI = new UtilsAPI();
+        UtilsAPI.randomTPUtils = new RandomTPUtils();
+        UtilsAPI.warpUtils = new WarpUtils();
+        UtilsAPI.mechanicUtils = new MechanicUtils();
+        API.kitsAPI = new KitsAPI();
         API.messageAPI = new MessageAPI();
+        API.shopAPI = new ShopAPI();
+        API.jobsAPI = new JobsAPI();
+        ShopAPI.buyUtils = new BuyUtils();
+        ShopAPI.sellUtils = new SellUtils();
+        ShopAPI.moneyUtils = new MoneyUtils();
+        API.aiAPI = new AiAPI();
         API.crateAPI = new CrateAPI();
+        API.dropPartyAPI = new DropPartyAPI();
+        ShopAPI.enchantUtils = new EnchantUtils();
         API.database = new Database();
+        API.slotsAPI = new SlotsAPI();
     }
 
     private void registerCommands() {
-        //this.getServer().getCommandMap().register("onlinetime", new GetTimeCommand());
-        this.getServer().getCommandMap().register("lang", new LangCommand());
+        this.getServer().getCommandMap().register("setcoins", new SetCoinsCommand());
+        this.getServer().getCommandMap().register("addcoins", new AddCoinsCommand());
+        this.getServer().getCommandMap().register("onlinetime", new GetTimeCommand());
+        this.getServer().getCommandMap().register("coins", new GetCoinsCommand());
+        this.getServer().getCommandMap().register("topcoins", new TopCoinsCommand());
+        this.getServer().getCommandMap().register("topkills", new TopKillsCommand());
+        this.getServer().getCommandMap().register("toptime", new TopTimeCommand());
+        this.getServer().getCommandMap().register("topdeaths", new TopDeathsCommand());
         this.getServer().getCommandMap().register("savetodatabase", new SaveToDatabaseCommand());
-        this.getServer().getCommandMap().register("coords", new CoordsCommand());
-        this.getServer().getCommandMap().register("gems", new GemsCommand());
-        this.getServer().getCommandMap().register("sf", new SpawnFireworkCommand());
-        this.getServer().getCommandMap().register("ranks", new RankCommand());
+        this.getServer().getCommandMap().register("spawnentities", new SpawnEntitiesCommand());
+        this.getServer().getCommandMap().register("servers", new ServersCommand());
+        this.getServer().getCommandMap().register("droppartymessage", new DropPartyMessageCommand());
+        this.getServer().getCommandMap().register("spawnboss", new SpawnBossCommand());
+        this.getServer().getCommandMap().register("kit", new KitCommand());
+        this.getServer().getCommandMap().register("kits", new KitsCommand());
+        this.getServer().getCommandMap().register("shop", new ShopCommand());
+        this.getServer().getCommandMap().register("spawn", new SpawnCommand());
+        this.getServer().getCommandMap().register("utils", new UtilsCommand());
+        this.getServer().getCommandMap().register("coords", new CoordsCommand());// TODO: Save to Database
     }
 
     private void registerEvents() {
         this.getServer().getPluginManager().registerEvents(new AbuseHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new GUIHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new KitHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new LanguageHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new LevelHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new MechanicHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new MessageHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new ProtectionHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new JobsHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new CrateHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new ChatHandlers(), this);
     }
 
     private void registerTasks() {
-        /*this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
                 MechanicUtils.getTops();
             }
-        }, 20 * 10, 20 * 60 * 3, true);*/
+        }, 20 * 10, 20 * 60 * 3, true);
         this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
                 API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "savetodatabase");
+                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "spawnentities");
+                for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+                    LuckPermsApi api = LuckPerms.getApi();
+                    NodeFactory NODE_BUILDER = api.getNodeFactory();
+                    if (player.getName().equals(Database.scoreboardtimeName.getOrDefault(1, " "))) {
+                        api.getUser(player.getUniqueId()).setPrimaryGroup("HELPERJR");
+                        System.out.println("Am gasit TOP1 TIME: " + player.getName());
+                    } else {
+                        if (!player.getName().equals("NycuR0")) {
+                            api.getUser(player.getUniqueId()).setPrimaryGroup("DEFAULT");
+                        }
+                    }
+                    if (player.getName().equals(Database.scoreboardkillsName.getOrDefault(1, " "))) {
+                        api.getUser(player.getUniqueId()).setPermission(NODE_BUILDER.newBuilder("core.7").build());
+                        System.out.println("Am gasit TOP1 kills: " + player.getName());
+                    } else if (player.getName().equals(Database.scoreboardkillsName.getOrDefault(2, " "))) {
+                        api.getUser(player.getUniqueId()).setPermission(NODE_BUILDER.newBuilder("core.3").build());
+                        System.out.println("Am gasit TOP2 kills: " + player.getName());
+                    } else if (player.getName().equals(Database.scoreboardkillsName.getOrDefault(3, " "))) {
+                        api.getUser(player.getUniqueId()).setPermission(NODE_BUILDER.newBuilder("core.2").build());
+                        System.out.println("Am gasit TOP3 kills: " + player.getName());
+                    } else {
+                        if (!player.getName().equals("NycuR0")) {
+                            for (Node permissions : api.getUser(player.getUniqueId()).getPermissions()) {
+                                if (permissions.equals(NODE_BUILDER.newBuilder("core.2").build())) {
+                                    api.getUser(player.getUniqueId()).unsetPermission(NODE_BUILDER.newBuilder("core.2").build());
+                                }
+                                if (permissions.equals(NODE_BUILDER.newBuilder("core.3").build())) {
+                                    api.getUser(player.getUniqueId()).unsetPermission(NODE_BUILDER.newBuilder("core.3").build());
+                                }
+                                if (permissions.equals(NODE_BUILDER.newBuilder("core.7").build())) {
+                                    api.getUser(player.getUniqueId()).unsetPermission(NODE_BUILDER.newBuilder("core.7").build());
+                                }
+                            }
+                        }
+                    }
+                }
             }
-        }, 20 * 15, 20 * 5);
-        this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20 * 3, true);
+        }, 20 * 15, 20 * 60 * 5, true);
+        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+            @Override
+            public void onRun(int i) {
+                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "mob removeall");
+            }
+        }, 20 * 15, 20 * 60 * 28, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20 * 5, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 10, true);
-        this.getServer().getScheduler().scheduleDelayedTask(new SaveToDatabaseTask(), 20 * 60 * 60 * 3);
+        this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20 * 20, true);
+        this.getServer().getScheduler().scheduleDelayedTask(new SaveToDatabaseTask(), 20 * 60 * 60 * 3, true);
     }
 
     private void registerPlaceHolders() {
@@ -241,6 +331,6 @@ public class Loader extends PluginBase {
         api.staticPlaceholder("top9timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(9, (long) 0)));
         api.staticPlaceholder("top10timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(10, (long) 0)));
 
-        //api.visitorSensitivePlaceholder("time_player", (p) -> Database.profile.get(p.getUniqueId()).getTime());
+        api.visitorSensitivePlaceholder("time_player", (p) -> Database.profile.get(p.getUniqueId()).getTime());
     }
 }

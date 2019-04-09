@@ -8,10 +8,11 @@ import cn.nukkit.form.response.FormResponseCustom;
 import gt.creeperface.holograms.Holograms;
 import nycuro.API;
 import nycuro.database.Database;
+import nycuro.mechanic.handlers.MechanicHandlers;
 
 /**
  * author: NycuRO
- * HubCore Project
+ * FactionsCore Project
  * API 1.0.0
  */
 public class LanguageHandlers implements Listener {

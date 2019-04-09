@@ -7,14 +7,13 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
-import cn.nukkit.math.Vector3;
 import nycuro.API;
 
 import java.util.Random;
 
 /**
  * author: NycuRO
- * HubCore Project
+ * FactionsCore Project
  * API 1.0.0
  */
 public class CrateHandlers implements Listener {
@@ -39,7 +38,7 @@ public class CrateHandlers implements Listener {
                         Random random = new Random();
                         int number = random.nextInt(100) + 1;
                         API.getCrateAPI().getChange(player, playerInventory, number);
-                        API.getMechanicAPI().spawnFirework(new Vector3(block.x, block.y, block.z));
+                        API.getCrateAPI().addExplosion(block);
                         player.addExperience(10);
                         API.getMessageAPI().sendReceiveItemMessage(player, 10);
                         API.getMessageAPI().sendCrateMessage(player, number);

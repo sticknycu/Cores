@@ -1,18 +1,18 @@
-/*package nycuro.commands.list.time;
+package nycuro.commands.list.time;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.API;
-import nycuro.Loader;
+import nycuro.Core;
 import nycuro.commands.PrincipalCommand;
 import nycuro.database.Database;
 import nycuro.database.objects.Profile;
 
 /**
  * author: NycuRO
- * HubCore Project
+ * FactionsCore Project
  * API 1.0.0
- *
+ */
 public class GetTimeCommand extends PrincipalCommand {
 
     public GetTimeCommand() {
@@ -24,14 +24,14 @@ public class GetTimeCommand extends PrincipalCommand {
         Player player = (Player) commandSender;
         if (strings.length == 0) {
             Profile senderProfile = Database.profile.get(player.getUniqueId());
-            long session = System.currentTimeMillis() - Loader.startTime.get(player.getUniqueId());
-            //long time = senderProfile.getTime();
+            long session = System.currentTimeMillis() - Core.startTime.get(player.getUniqueId());
+            long time = senderProfile.getTime();
             API.getMessageAPI().getSelfTimeMessage(player, session, time);
         } else if (strings.length == 1) {
             Player playerCommand = API.getMainAPI().getServer().getPlayerExact(strings[0]);
             Profile profile = Database.profile.get(playerCommand.getUniqueId());
-            long sessionCommand = System.currentTimeMillis() - Loader.startTime.get(playerCommand.getUniqueId());
-            //long time = profile.getTime();
+            long sessionCommand = System.currentTimeMillis() - Core.startTime.get(playerCommand.getUniqueId());
+            long time = profile.getTime();
             API.getMessageAPI().getPlayerTimeMessage(player, playerCommand, sessionCommand, time);
         } else {
             API.getMessageAPI().getTimeExceptionMessage(player);
@@ -39,4 +39,4 @@ public class GetTimeCommand extends PrincipalCommand {
         }
         return true;
     }
-}*/
+}

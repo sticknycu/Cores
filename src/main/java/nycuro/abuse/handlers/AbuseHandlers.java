@@ -17,7 +17,7 @@ import nycuro.API;
 
 /**
  * author: NycuRO
- * HubCore Project
+ * FactionsCore Project
  * API 1.0.0
  */
 public class AbuseHandlers implements Listener {

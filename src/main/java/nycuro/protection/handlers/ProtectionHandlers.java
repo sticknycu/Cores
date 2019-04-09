@@ -18,7 +18,7 @@ import nycuro.API;
 
 /**
  * author: NycuRO
- * HubCore Project
+ * FactionsCore Project
  * API 1.0.0
  */
 public class ProtectionHandlers implements Listener {
@@ -30,12 +30,19 @@ public class ProtectionHandlers implements Listener {
             event.setCancelled(true);
             API.getMessageAPI().sendBreakMessage(player);
         }
+        if (player.getLevel().getName().equalsIgnoreCase("pvp")) {
+            event.setCancelled(true);
+            API.getMessageAPI().sendBreakMessage(player);
+        }
     }
 
     @EventHandler
     public void onExplode(ExplosionPrimeEvent event) {
         Entity entity = event.getEntity();
         if (API.getMechanicAPI().isOnSpawn(entity)) {
+            event.setCancelled(true);
+        }
+        if (entity.getLevel().getName().equalsIgnoreCase("pvp")) {
             event.setCancelled(true);
         }
     }
@@ -57,12 +64,16 @@ public class ProtectionHandlers implements Listener {
                 event.setCancelled(true);
                 API.getMessageAPI().sendPvPOffMessage(damager);
             }
+            if (API.getMechanicAPI().isOnPvP(player)) {
+                event.setCancelled(true);
+                API.getMessageAPI().sendPvPOffMessage(damager);
+            }
         }
         EntityDamageEvent.DamageCause cause = event.getCause();
         if (cause == EntityDamageEvent.DamageCause.FALL ||
                 cause == EntityDamageEvent.DamageCause.ENTITY_ATTACK ||
-                cause == EntityDamageEvent.DamageCause.FIRE ||
                 cause == EntityDamageEvent.DamageCause.PROJECTILE ||
+                cause == EntityDamageEvent.DamageCause.FIRE ||
                 cause == EntityDamageEvent.DamageCause.FIRE_TICK ||
                 cause == EntityDamageEvent.DamageCause.LAVA ||
                 cause == EntityDamageEvent.DamageCause.DROWNING ||
@@ -72,6 +83,9 @@ public class ProtectionHandlers implements Listener {
                 cause == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION ||
                 cause == EntityDamageEvent.DamageCause.CONTACT) {
             if (API.getMechanicAPI().isOnSpawn(player)) {
+                event.setCancelled(true);
+            }
+            if (API.getMechanicAPI().isOnPvP(player)) {
                 event.setCancelled(true);
             }
         }
@@ -87,6 +101,10 @@ public class ProtectionHandlers implements Listener {
             inventory.removeItem(inHand);
             API.getMessageAPI().sendSmecherieMessage(player);
         }
+        if (player.getLevel().getName().equalsIgnoreCase("pvp")) {
+            event.setCancelled(true);
+            API.getMessageAPI().sendSmecherieMessage(player);
+        }
     }
 
     @EventHandler
@@ -97,6 +115,10 @@ public class ProtectionHandlers implements Listener {
         if (API.getMechanicAPI().isOnSpawn(player)) {
             event.setCancelled(true);
             inventory.removeItem(inHand);
+            API.getMessageAPI().sendSmecherieMessage(player);
+        }
+        if (player.getLevel().getName().equalsIgnoreCase("pvp")) {
+            event.setCancelled(true);
             API.getMessageAPI().sendSmecherieMessage(player);
         }
     }
@@ -123,6 +145,11 @@ public class ProtectionHandlers implements Listener {
                     if (API.getMechanicAPI().isOnSpawn(player)) {
                         API.getMessageAPI().sendAbuseMessage(player);
                         event.setCancelled(true);
+                        return;
+                    }
+                    if (player.getLevel().getName().equalsIgnoreCase("pvp")) {
+                        event.setCancelled(true);
+                        API.getMessageAPI().sendAbuseMessage(player);
                         return;
                     }
                 default:
@@ -153,7 +180,7 @@ public class ProtectionHandlers implements Listener {
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        if (!API.getMechanicAPI().isOnSpawn(player)) {
+        if (API.getMechanicAPI().isOnBorder(player)) {
             event.setCancelled(true);
             API.getMessageAPI().sendBorderMessage(player);
         }

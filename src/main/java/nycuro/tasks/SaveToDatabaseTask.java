@@ -4,18 +4,13 @@ import cn.nukkit.Player;
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
-import nycuro.Loader;
+import nycuro.Core;
 import nycuro.database.Database;
 import nycuro.database.objects.Profile;
 
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * author: NycuRO
- * HubCore Project
- * API 1.0.0
- */
 public class SaveToDatabaseTask extends Task {
 
     @Override
@@ -35,7 +30,7 @@ public class SaveToDatabaseTask extends Task {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            Loader.log("All data saved!");
+            Core.log("All data saved!");
             API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "stop");
         }
     }

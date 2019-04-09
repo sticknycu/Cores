@@ -1,19 +1,24 @@
-/*package nycuro.utils;
+package nycuro.utils;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import nycuro.database.Database;
 import nycuro.database.objects.Profile;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.UUID;
 
 public class MechanicUtils {
 
 
     public static void getTops() {
 
-        Map<String, Double> coinsMap = new HashMap<>();
-        Map<String, Integer> killsMap = new HashMap<>();
-        Map<String, Integer> deathsMap = new HashMap<>();
-        Map<String, Long> timeMap = new HashMap<>();
+        Object2ObjectMap<String, Double> coinsMap = new Object2ObjectOpenHashMap<>();
+        Object2ObjectMap<String, Integer> killsMap = new Object2ObjectOpenHashMap<>();
+        Object2ObjectMap<String, Integer> deathsMap = new Object2ObjectOpenHashMap<>();
+        Object2ObjectMap<String, Long> timeMap = new Object2ObjectOpenHashMap<>();
 
         ValueDoubleComparator bvcoins = new ValueDoubleComparator(coinsMap);
         TreeMap<String, Double> sorted_map_coins = new TreeMap<String, Double>(bvcoins);
@@ -125,4 +130,3 @@ class ValueLongComparator implements Comparator<String> {
         } // returning 0 would merge keys
     }
 }
-*/
