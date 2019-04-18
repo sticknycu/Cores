@@ -1,10 +1,11 @@
 package nycuro.api;
 
+import cn.nukkit.IPlayer;
 import cn.nukkit.Player;
+import cn.nukkit.command.CommandSender;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
-import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
@@ -17,12 +18,10 @@ import cn.nukkit.utils.BlockColor;
 import cn.nukkit.utils.DummyBossBar;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nycuro.API;
-import nycuro.ai.entity.BossEntity;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileHub;
 import nycuro.gui.list.ResponseFormWindow;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -38,7 +37,7 @@ public class MechanicAPI {
         double y = entity.getLevel().getSpawnLocation().getY();
         double z = entity.getLevel().getSpawnLocation().getZ();
         Vector3 vector3 = new Vector3(x, y, z);
-        return entity.getLevel().getName().equalsIgnoreCase("world") && entity.getPosition().distance(vector3) <= 300 && !entity.getName().equals("NycuR0");
+        return entity.getLevel().getName().equalsIgnoreCase("world") && entity.getPosition().distance(vector3) <= 300 && !((Player) entity).isOp();
     }
 
     public boolean isOnPvP(Entity entity) {
@@ -46,7 +45,7 @@ public class MechanicAPI {
         double y = entity.getLevel().getSpawnLocation().getY();
         double z = entity.getLevel().getSpawnLocation().getZ();
         Vector3 vector3 = new Vector3(x, y, z);
-        return entity.getLevel().getName().equalsIgnoreCase("pvp") && entity.getPosition().distance(vector3) <= 34 && !entity.getName().equals("NycuR0") && entity.getY() >= 75;
+        return entity.getLevel().getName().equalsIgnoreCase("pvp") && entity.getPosition().distance(vector3) <= 34 && !((Player) entity).isOp() && entity.getY() >= 75;
     }
 
     public boolean isOnBorder(Player player) {
@@ -56,22 +55,28 @@ public class MechanicAPI {
     }
 
     public void sendToSpawn(Player player) {
-        double x = 113 + 0.5;
-        double y = 73;
-        double z = 64 + 0.5;
+        double x = 438 + 0.5;
+        double y = 75;
+        double z = 106 + 0.5;
         Level level = API.getMainAPI().getServer().getDefaultLevel();
-        if (!level.isChunkLoaded(113 >> 4, 64 >> 4)) {
-            level.loadChunk(113 >> 4, 64 >> 4);
+        if (!level.isChunkLoaded(438 >> 4, 106 >> 4)) {
+            level.loadChunk(438 >> 4, 106 >> 4);
         }
         player.teleport(new Position(x, y, z, level));
         player.setImmobile(false);
+    }
+
+    public void sendStats(CommandSender commandSender, IPlayer player) {
+        FormWindowCustom infoMenu = new FormWindowCustom("Stats");
+        infoMenu.addElement(new ElementLabel(API.getMessageAPI().getStatsCommand(commandSender, player)));
+        ((Player) commandSender).showFormWindow(infoMenu);
     }
 
     /*public void spawnFireworks() {
         entities.forEach(Entity::spawnToAll);
     }*/
 
-    public void spawnBoss() {
+    /*public void spawnBoss() {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
             addDropPartyKey(player);
             new BossEntity();
@@ -88,7 +93,7 @@ public class MechanicAPI {
         entities2.spawnToAll();
         entities3.spawnToAll();
         entities4.spawnToAll();
-    }
+    }*/
 
     public void sendDropPartyMessageBroadcast(Player player) {
         API.getMessageAPI().sendDropPartyEventMessage(player);
@@ -115,7 +120,7 @@ public class MechanicAPI {
 
     public void createScoreboard(Player player) {
         FakeScoreboard fakeScoreboard = new FakeScoreboard();
-        Objective object = new Objective("§3§lNycuRO §r§7» §bFactions", new ObjectiveCriteria("dummy", true));
+        Objective object = new Objective("§f§l•§e•§6• FACTIONS §6•§e•§f•", new ObjectiveCriteria("dummy", true));
         DisplayObjective newObject = new DisplayObjective(
                 object,
                 ObjectiveSortOrder.DESCENDING,
@@ -128,7 +133,7 @@ public class MechanicAPI {
     }
 
     public void sendServersModal(Player player) {
-        Profile profile = Database.profile.get(player.getUniqueId());
+        ProfileHub profile = Database.profileHub.get(player.getUniqueId());
         int lang = profile.getLanguage();
         switch (lang) {
             case 0:
@@ -178,7 +183,7 @@ public class MechanicAPI {
 
     private void sendInfoServers(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Info Partner");
-        Profile profile = Database.profile.get(player.getUniqueId());
+        ProfileHub profile = Database.profileHub.get(player.getUniqueId());
         int lang = profile.getLanguage();
         switch (lang) {
             case 0:
@@ -213,38 +218,5 @@ public class MechanicAPI {
                 break;
         }
         player.showFormWindow(infoMenu);
-    }
-
-    public void sendModalContents(Player player) {
-        FormWindowCustom serverMenu = new FormWindowCustom("Server Settings");
-        serverMenu.setIcon("https://i.imgur.com/BXo8Cjp.png");
-        int lang = 0;
-        Profile profile = Database.profile.get(player.getUniqueId());
-        if (profile != null) {
-            lang = profile.getLanguage();
-        }
-        switch (lang) {
-            case 0:
-                serverMenu.addElement(new ElementLabel("§eHello!"));
-                serverMenu.addElement(new ElementLabel("§eWelcome to Server Settings!"));
-                serverMenu.addElement(new ElementLabel("                                                                                    "));
-                serverMenu.addElement(new ElementLabel("                                                                                    "));
-                serverMenu.addElement(new ElementDropdown("§c» §aLanguage:",
-                        Arrays.asList("English", "Romana"), 0));
-                serverMenu.addElement(new ElementLabel("                                                                                    "));
-                serverMenu.addElement(new ElementLabel("                                                                                    "));
-                break;
-            case 1:
-                serverMenu.addElement(new ElementLabel("§eSalut!"));
-                serverMenu.addElement(new ElementLabel("§eBine ai venit la Server Settings!"));
-                serverMenu.addElement(new ElementLabel("                                                                                    "));
-                serverMenu.addElement(new ElementLabel("                                                                                    "));
-                serverMenu.addElement(new ElementDropdown("§c» §aLanguage:",
-                        Arrays.asList("English", "Romana"), 0));
-                serverMenu.addElement(new ElementLabel("                                                                                    "));
-                serverMenu.addElement(new ElementLabel("                                                                                    "));
-                break;
-        }
-        player.addServerSettings(serverMenu);
     }
 }

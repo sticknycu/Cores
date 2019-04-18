@@ -6,7 +6,7 @@ import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
-import nycuro.Core;
+import nycuro.Loader;
 import nycuro.database.Database;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.shop.BuyUtils;
@@ -51,7 +51,7 @@ public class ShopAPI {
     }
 
     public void sendShopContents(Player player) {
-        int lang = Database.profile.get(player.getUniqueId()).getLanguage();
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
                 FormWindowSimple shopMenu = new FormWindowSimple("Shop", "                       Hello!\n" +
@@ -137,7 +137,7 @@ public class ShopAPI {
     }
 
     private void sendBuyContents(Player player) {
-        int lang = Database.profile.get(player.getUniqueId()).getLanguage();
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
                 FormWindowSimple buyMenu = new FormWindowSimple("Buy", "                       Hello!\n" +
@@ -250,7 +250,7 @@ public class ShopAPI {
 
 
     private void sendSellContents(Player player) {
-        int lang = Database.profile.get(player.getUniqueId()).getLanguage();
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
                 FormWindowSimple buyMenu = new FormWindowSimple("Sell", "                       Hello!\n" +
@@ -338,7 +338,7 @@ public class ShopAPI {
     }
 
     private void sendEnchantingContents(Player player) {
-        int lang = Database.profile.get(player.getUniqueId()).getLanguage();
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
                 FormWindowSimple buyMenu = new FormWindowSimple("Enchanting", "                       Hello!\n" +
@@ -394,7 +394,7 @@ public class ShopAPI {
     }
 
     private void sendEnchantingItemsArmorContents(Player player) {
-        int lang = Database.profile.get(player.getUniqueId()).getLanguage();
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
                 FormWindowSimple buyMenu = new FormWindowSimple("Enchanting", "                       Hello!\n" +
@@ -466,7 +466,7 @@ public class ShopAPI {
     }
 
     private void sendEnchantingItemsItemsContents(Player player) {
-        int lang = Database.profile.get(player.getUniqueId()).getLanguage();
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
                 FormWindowSimple buyMenu = new FormWindowSimple("Enchanting", "                       Hello!\n" +
@@ -583,7 +583,7 @@ public class ShopAPI {
         FormWindowCustom enchantMenu = new FormWindowCustom("Buy Enchant");
         enchantMenu.addElement(new ElementDropdown("Available Enchants", list, 0));
         enchantMenu.addElement(new ElementDropdown("Enchant Level", countList, 0));
-        int lang = Database.profile.get(player.getUniqueId()).getLanguage();
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
                 enchantMenu.addElement(new ElementDropdown("Method of Pay\n" +
@@ -608,7 +608,7 @@ public class ShopAPI {
                     Map.Entry pair = (Map.Entry) it.next();
                     it.remove();
                     String firstDropDownType = pair.getValue().toString();
-                    Core.log(firstDropDownType);
+                    Loader.log(firstDropDownType);
                     ShopAPI.getMoneyUtilsAPI().buyAction(response, player, firstDropDownType);
                 }
             }
@@ -646,7 +646,7 @@ public class ShopAPI {
     }
 
     private void sendBuyGlassContents(Player player) {
-        int lang = Database.profile.get(player.getUniqueId()).getLanguage();
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
                 FormWindowSimple buyMenu = new FormWindowSimple("Shop", "                       Hello!\n" +
@@ -702,7 +702,7 @@ public class ShopAPI {
     }
 
     private void sendSellGlassContents(Player player) {
-        int lang = Database.profile.get(player.getUniqueId()).getLanguage();
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
                 FormWindowSimple buyMenu = new FormWindowSimple("Sell", "                       Hello!\n" +

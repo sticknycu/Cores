@@ -14,7 +14,7 @@ import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileFactions;
 
 /**
  * author: NycuRO
@@ -29,15 +29,15 @@ public class JobsHandlers implements Listener {
         Block block = event.getBlock();
         if (API.getMechanicAPI().isOnSpawn(player)) return;
         if (API.getMechanicAPI().isOnPvP(player)) return;
-        Profile profile = Database.profile.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
         int job = profile.getJob();
         switch (job) {
             case 1:
                 switch (block.getId()) {
                     case Block.WOOD:
                     case Block.WOOD2:
-                        profile.addCoins(1.0);
-                        profile.addExperience(1.0);
+                        profile.setDollars(profile.getDollars() + 1.0);
+                        profile.setExperience(profile.getExperience() + 1.0);
                         break;
                 }
                 break;
@@ -51,8 +51,8 @@ public class JobsHandlers implements Listener {
                     case Block.DIAMOND_ORE:
                     case Block.LAPIS_ORE:
                     case Block.REDSTONE_ORE:
-                        profile.addCoins(2.5);
-                        profile.addExperience(2.0);
+                        profile.setDollars(profile.getDollars() + 2.5);
+                        profile.setExperience(profile.getExperience() + 2.0);
                         break;
                 }
                 break;
@@ -66,8 +66,8 @@ public class JobsHandlers implements Listener {
                     case 142:
                         switch (block.getDamage()) {
                             case 7:
-                                profile.addCoins(0.5);
-                                profile.addExperience(1.0);
+                                profile.setDollars(profile.getDollars() + 0.5);
+                                profile.setExperience(profile.getExperience() + 1.0);
                                 break;
                         }
                     case Block.PUMPKIN:
@@ -77,14 +77,14 @@ public class JobsHandlers implements Listener {
                     case 175:
                     case Block.SAPLING:
                     case Block.FLOWER:
-                        profile.addCoins(0.5);
-                        profile.addExperience(1.0);
+                        profile.setDollars(profile.getDollars() + 0.5);
+                        profile.setExperience(profile.getExperience() + 1.0);
                         break;
                     case 127:
                         switch (block.getDamage()) {
                             case 2:
-                                profile.addCoins(0.5);
-                                profile.addExperience(1.0);
+                                profile.setDollars(profile.getDollars() + 0.5);
+                                profile.setExperience(profile.getExperience() + 1.0);
                                 break;
                         }
                 }
@@ -105,19 +105,19 @@ public class JobsHandlers implements Listener {
                     if (!API.getMechanicAPI().isOnSpawn(damager)) {
                         if (!API.getMechanicAPI().isOnSpawn(eventEntity)) {
                             sendToRespawn(eventEntity, damager, event);
-                            Profile profile = Database.profile.get(damager.getUniqueId());
+                            ProfileFactions profile = Database.profileFactions.get(damager.getUniqueId());
                             int job = profile.getJob();
                             switch (job) {
                                 case 4:
                                     if (eventEntity instanceof Player) {
-                                        profile.addCoins(0.4);
-                                        profile.addExperience(2.0);
+                                        profile.setDollars(profile.getDollars() + 0.4);
+                                        profile.setExperience(profile.getExperience() + 2.0);
                                     }
                                     break;
                                 case 5:
                                     if (!(eventEntity instanceof Player)) {
-                                        profile.addCoins(0.4);
-                                        profile.addExperience(1.0);
+                                        profile.setDollars(profile.getDollars() + 0.4);
+                                        profile.setExperience(profile.getExperience() + 1.0);
                                     }
                                     break;
                             }
@@ -129,19 +129,19 @@ public class JobsHandlers implements Listener {
                 if (!API.getMechanicAPI().isOnSpawn(damager)) {
                     if (!API.getMechanicAPI().isOnSpawn(eventEntity)) {
                         sendToRespawn(eventEntity, damager, event);
-                        Profile profile = Database.profile.get(damager.getUniqueId());
+                        ProfileFactions profile = Database.profileFactions.get(damager.getUniqueId());
                         int job = profile.getJob();
                         switch (job) {
                             case 4:
                                 if (eventEntity instanceof Player) {
-                                    profile.addCoins(0.4);
-                                    profile.addExperience(2.0);
+                                    profile.setDollars(profile.getDollars() + 0.4);
+                                    profile.setExperience(profile.getExperience() + 2.0);
                                 }
                                 break;
                             case 5:
                                 if (!(eventEntity instanceof Player)) {
-                                    profile.addCoins(0.4);
-                                    profile.addExperience(1.0);
+                                    profile.setDollars(profile.getDollars() + 0.4);
+                                    profile.setExperience(profile.getExperience() + 1.0);
                                 }
                                 break;
                         }
@@ -158,12 +158,12 @@ public class JobsHandlers implements Listener {
         if ((eventEntity.getLastDamageCause() instanceof EntityDamageByEntityEvent)) {
             if (((EntityDamageByEntityEvent) eventEntity.getLastDamageCause()).getDamager() instanceof Player) {
                 Player killer = (Player) ((EntityDamageByEntityEvent) eventEntity.getLastDamageCause()).getDamager();
-                Profile profile = Database.profile.get(killer.getUniqueId());
+                ProfileFactions profile = Database.profileFactions.get(killer.getUniqueId());
                 int job = profile.getJob();
                 switch (job) {
                     case 5:
-                        profile.addCoins(1.0);
-                        profile.addExperience(5.0);
+                        profile.setDollars(profile.getDollars() + 1.0);
+                        profile.setExperience(profile.getExperience() + 5.0);
                         break;
                 }
             }
@@ -186,10 +186,10 @@ public class JobsHandlers implements Listener {
             player.removeAllEffects();
             player.getInventory().clearAll();
             API.getMessageAPI().sendDeadMessage(player, damager);
-            Profile profilePlayer = Database.profile.get(player.getUniqueId());
-            Profile profileDamager = Database.profile.get(damager.getUniqueId()); // Todo: Zombies, Monsters.
-            profilePlayer.addDeaths(1);
-            profileDamager.addKills(1);
+            ProfileFactions profilePlayer = Database.profileFactions.get(player.getUniqueId());
+            ProfileFactions profileDamager = Database.profileFactions.get(damager.getUniqueId()); // Todo: Zombies, Monsters.
+            profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
+            profileDamager.setKills(profileDamager.getKills() + 1);
 
         }
         if (player.getPosition().getY() < 0) {
@@ -199,8 +199,8 @@ public class JobsHandlers implements Listener {
             player.teleport(player.getServer().getDefaultLevel().getSpawnLocation());
             player.removeAllEffects();
             player.getInventory().clearAll();
-            Profile profilePlayer = Database.profile.get(player.getUniqueId());
-            profilePlayer.addDeaths(1);
+            ProfileFactions profilePlayer = Database.profileFactions.get(player.getUniqueId());
+            profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
         }
     }
 }

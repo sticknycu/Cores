@@ -4,7 +4,7 @@ import cn.nukkit.command.CommandSender;
 import nycuro.API;
 import nycuro.commands.PrincipalCommand;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileFactions;
 
 /**
  * author: NycuRO
@@ -20,9 +20,9 @@ public class GemsCommand extends PrincipalCommand {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         if (!commandSender.isOp()) return false;
-        Profile profile = Database.profile.get(API.getMainAPI().getServer().getPlayer(strings[0]).getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(API.getMainAPI().getServer().getPlayer(strings[0]).getUniqueId());
         double count = Double.valueOf(strings[1]);
-        profile.setGems(profile.getGems() + count);
+        //profile.setGems(profile.getGems() + count);
         return true;
     }
 }

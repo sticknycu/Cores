@@ -8,7 +8,7 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
-import nycuro.Core;
+import nycuro.Loader;
 
 /**
  * author: NycuRO
@@ -21,6 +21,7 @@ public class MechanicHandlers implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         API.getMainAPI().coords.put(player.getName(), false);
+        API.getMainAPI().played.put(player.getName(), System.currentTimeMillis());
         API.getDatabase().playerExist(player, bool -> {
             if (!bool) {
                 API.getDatabase().addNewPlayer(player);
@@ -36,7 +37,6 @@ public class MechanicHandlers implements Listener {
                         API.getMessageAPI().sendFirstJoinTitle(player);
                         break;
                     case 2:
-                        API.getMechanicAPI().sendModalContents(player);
                         API.getMessageAPI().sendSecondJoinTitle(player);
                         break;
                     case 3:
@@ -48,17 +48,18 @@ public class MechanicHandlers implements Listener {
                 API.getMainAPI().timers.put(username, playerTime + 1);
             }
         }, 20, 20 * 3, true);
-        if (Core.startTime.get(player.getUniqueId()) != null) {
-            Core.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
+        if (Loader.startTime.get(player.getUniqueId()) != null) {
+            Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
         } else {
-            Core.startTime.put(player.getUniqueId(), System.currentTimeMillis());
+            Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
         }
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        Core.startTime.remove(player.getUniqueId());
+        Loader.startTime.removeLong(player.getUniqueId());
+        API.getMainAPI().played.removeLong(player.getName());
     }
 
     @EventHandler

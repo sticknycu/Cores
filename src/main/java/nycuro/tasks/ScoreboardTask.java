@@ -2,16 +2,18 @@ package nycuro.tasks;
 
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
-import com.massivecraft.factions.FPlayer;
-import com.massivecraft.factions.FPlayers;
-import com.massivecraft.factions.Faction;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
+import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import nycuro.API;
-import nycuro.Core;
+import nycuro.Loader;
 import nycuro.api.JobsAPI;
+import nycuro.chat.ChatFormat;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileHub;
+
+import java.util.Objects;
 
 /**
  * author: NycuRO
@@ -35,78 +37,33 @@ public class ScoreboardTask extends Task {
 
         Objective scoreboardDisplay = scoreboard.objective.getObjective();
 
-        Profile profile = Database.profile.get(player.getUniqueId());
-        FPlayer fPlayers = FPlayers.i.get(player);
-        Faction faction = fPlayers.getFaction();
-        Object2ObjectMap<String, Boolean> coords = API.getMainAPI().coords;
+        ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
+        ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
+        Object2BooleanMap<String> coords = API.getMainAPI().coords;
 
         DisplayObjective dobj = new DisplayObjective(
                 scoreboardDisplay,
-                ObjectiveSortOrder.DESCENDING,
+                ObjectiveSortOrder.ASCENDING,
                 ObjectiveDisplaySlot.SIDEBAR
         );
 
-        scoreboardDisplay.setScore(12, String.valueOf(""), 12);
-
+        scoreboardDisplay.setScore(0, "  " + "  ", 0);
+        scoreboardDisplay.setScore(1, "  " + "  ", 1);
         try {
-            if (fPlayers.hasFaction()) {
-                scoreboardDisplay.setScore(11, "  §3Factions: §8" + faction.getTag(), 11);
-                scoreboardDisplay.setScore(10, "  §3Kills: §8" + profile.getKills(), 10);
-                scoreboardDisplay.setScore(9, "  §3Deaths: §8" + profile.getDeaths(), 9);
-                scoreboardDisplay.setScore(8,"  §3OnlineTime: §8" + Core.time(profile.getTime()), 8);
-                if (profile.getJob() != 0) {
-                    scoreboardDisplay.setScore(7,"  §3Job: §8" + JobsAPI.jobs.get(profile.getJob()), 7);
-                    scoreboardDisplay.setScore(6,"  §3Coins: §8" + Core.round(profile.getCoins(), 2), 6);
-                    scoreboardDisplay.setScore(5,"  §3Level: §8" + player.getExperienceLevel(), 5);
-                    if ((coords.getOrDefault(player.getName(), null).equals(false)) || (coords.getOrDefault(player.getName(), null) == null)) {
-                        scoreboardDisplay.setScore(4,String.valueOf(""), 4);
-                        scoreboardDisplay.setScore(3,"§7Discord: §3discord.nycuro.us", 3);
-                    } else if (coords.getOrDefault(player.getName(), null).equals(true)) {
-                        scoreboardDisplay.setScore(4,"  §3Coords: §8" + (int) player.getX() + ":" + (int) player.getY() + ":" + (int) player.getZ(), 4);
-                        scoreboardDisplay.setScore(3,String.valueOf(""), 3);
-                        scoreboardDisplay.setScore(2,"§7Discord: §3discord.nycuro.us", 2);
-                    }
-                } else {
-                    scoreboardDisplay.setScore(7,"  §3Coins: §8" + Core.round(profile.getCoins(), 2), 7);
-                    scoreboardDisplay.setScore(6,"  §3Level: §8" + player.getExperienceLevel(), 6);
-                    if ((coords.getOrDefault(player.getName(), null).equals(false)) || (coords.getOrDefault(player.getName(), null) == null)) {
-                        scoreboardDisplay.setScore(5,String.valueOf(""), 5);
-                        scoreboardDisplay.setScore(4,"§7Discord: §3discord.nycuro.us", 4);
-                    } else if (coords.getOrDefault(player.getName(), null).equals(true)) {
-                        scoreboardDisplay.setScore(5,"  §3Coords: §8" + (int) player.getX() + ":" + (int) player.getY() + ":" + (int) player.getZ(), 5);
-                        scoreboardDisplay.setScore(4,String.valueOf(""), 4);
-                        scoreboardDisplay.setScore(3,"§7Discord: §3discord.nycuro.us", 3);
-                    }
-                }
-            } else {
-                scoreboardDisplay.setScore(11,"  §3Kills: §8" + profile.getKills(), 11);
-                scoreboardDisplay.setScore(10,"  §3Deaths: §8" + profile.getDeaths(), 10);
-                scoreboardDisplay.setScore(9,"  §3OnlineTime: §8" + Core.time(profile.getTime()), 9);
-                if (profile.getJob() != 0) {
-                    scoreboardDisplay.setScore(8,"  §3Job: §8" + JobsAPI.jobs.get(profile.getJob()), 8);
-                    scoreboardDisplay.setScore(7,"  §3Coins: §8" + Core.round(profile.getCoins(), 2), 7);
-                    scoreboardDisplay.setScore(6,"  §3Level: §8" + player.getExperienceLevel(), 6);
-                    if ((coords.getOrDefault(player.getName(), null).equals(false)) || (coords.getOrDefault(player.getName(), null) == null)) {
-                        scoreboardDisplay.setScore(5,String.valueOf(""), 5);
-                        scoreboardDisplay.setScore(4,"§7Discord: §3discord.nycuro.us", 4);
-                    } else if (coords.getOrDefault(player.getName(), null).equals(true)) {
-                        scoreboardDisplay.setScore(5,"  §3Coords: §8" + (int) player.getX() + ":" + (int) player.getY() + ":" + (int) player.getZ(), 5);
-                        scoreboardDisplay.setScore(4,String.valueOf(""), 4);
-                        scoreboardDisplay.setScore(3,"§7Discord: §3discord.nycuro.us", 3);
-                    }
-                } else {
-                    scoreboardDisplay.setScore(8,"  §3Coins: §8" + Core.round(profile.getCoins(), 2), 8);
-                    scoreboardDisplay.setScore(7,"  §3Level: §8" + player.getExperienceLevel(), 7);
-                    if ((coords.getOrDefault(player.getName(), null).equals(false)) || (coords.getOrDefault(player.getName(), null) == null)) {
-                        scoreboardDisplay.setScore(6,String.valueOf(""), 6);
-                        scoreboardDisplay.setScore(5,"§7Discord: §3discord.nycuro.us", 5);
-                    } else if (coords.getOrDefault(player.getName(), null).equals(true)) {
-                        scoreboardDisplay.setScore(6,"  §3Coords: §8" + (int) player.getX() + ":" + (int) player.getY() + ":" + (int) player.getZ(), 6);
-                        scoreboardDisplay.setScore(5,String.valueOf(""), 5);
-                        scoreboardDisplay.setScore(4,"§7Discord: §3discord.nycuro.us", 4);
-                    }
-                }
+            scoreboardDisplay.setScore(2, API.getMessageAPI().getInfoScoreboard(player), 2);
+            scoreboardDisplay.setScore(3, API.getMessageAPI().getNameScoreboard(player), 3);
+            scoreboardDisplay.setScore(4, API.getMessageAPI().getRankScoreboard(player), 4);
+            scoreboardDisplay.setScore(5, "§7| §fCoins: §6" +  profileFactions.getDollars(), 5);
+            scoreboardDisplay.setScore(6, "§7| §fGems: §6" + profileHub.getGems() + "  ", 6);
+            scoreboardDisplay.setScore(7, "§7| §fOnline Time: §6" + Loader.time(profileFactions.getTime()) + "  ", 7);
+            scoreboardDisplay.setScore(8, "§7| §fJob: §6" + JobsAPI.jobs.get(profileFactions.getJob()) + "   ", 8);
+            if (coords.getOrDefault(player.getName(), false)) {
+                scoreboardDisplay.setScore(9, "§7| §fX: §6" + (int) player.getX() + " §fY: §6" + (int) player.getY() + " §fZ: §6" + (int) player.getZ() + "   ", 9);
             }
+            scoreboardDisplay.setScore(10, "§7 " + String.valueOf("") + "    ", 10);
+            scoreboardDisplay.setScore(11, "§7--- §e§lServer: " + "  ", 11);
+            scoreboardDisplay.setScore(12, API.getMessageAPI().getOnlineScoreboard(player), 12);
+            scoreboardDisplay.setScore(13, "§7| §fDropParty: §6" + " ", 13);
         } catch (Exception e) {
             // ignore
         }

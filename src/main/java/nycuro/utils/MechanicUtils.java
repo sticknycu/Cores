@@ -3,7 +3,7 @@ package nycuro.utils;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileFactions;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -32,8 +32,8 @@ public class MechanicUtils {
         ValueLongComparator bvtime = new ValueLongComparator(timeMap);
         TreeMap<String, Long> sorted_map_time = new TreeMap<String, Long>(bvtime);
 
-        for (Map.Entry<UUID, Profile> map : Database.profile.entrySet()) {
-            coinsMap.put(map.getValue().getName(), map.getValue().getCoins());
+        for (Map.Entry<UUID, ProfileFactions> map : Database.profileFactions.entrySet()) {
+            coinsMap.put(map.getValue().getName(), map.getValue().getDollars());
             killsMap.put(map.getValue().getName(), map.getValue().getKills());
             deathsMap.put(map.getValue().getName(), map.getValue().getDeaths());
             timeMap.put(map.getValue().getName(), map.getValue().getTime());

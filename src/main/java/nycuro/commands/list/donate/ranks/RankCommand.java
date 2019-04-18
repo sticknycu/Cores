@@ -1,9 +1,7 @@
 package nycuro.commands.list.donate.ranks;
 
-import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.commands.PrincipalCommand;
-import nycuro.level.handlers.LevelHandlers;
 
 /**
  * author: NycuRO
@@ -18,7 +16,7 @@ public class RankCommand extends PrincipalCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        LevelHandlers.sendFormRank((Player) commandSender);
+        //LevelHandlers.sendForm((Player) commandSender);
         return true;
     }
 }

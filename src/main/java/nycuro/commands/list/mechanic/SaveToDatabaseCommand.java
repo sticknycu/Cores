@@ -1,12 +1,11 @@
 package nycuro.commands.list.mechanic;
 
-import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.API;
-import nycuro.Core;
 import nycuro.commands.PrincipalCommand;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileHub;
 
 import java.util.Map;
 import java.util.UUID;
@@ -19,14 +18,17 @@ import java.util.UUID;
 public class SaveToDatabaseCommand extends PrincipalCommand {
 
     public SaveToDatabaseCommand() {
-        super("savetodatabase", "DropParty Message Command!");
+        super("savetodatabase", "Save to database Command!");
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         if (!commandSender.isOp()) return false;
-        for (Map.Entry<UUID, Profile> map : Database.profile.entrySet()) {
-            API.getDatabase().saveDatesPlayer(map.getKey(), map.getValue());
+        for (Map.Entry<UUID, ProfileHub> map : Database.profileHub.entrySet()) {
+            API.getDatabase().saveDatesPlayerHub(map.getKey(), map.getValue());
+        }
+        for (Map.Entry<UUID, ProfileFactions> map : Database.profileFactions.entrySet()) {
+            API.getDatabase().saveDatesPlayerFactions(map.getKey(), map.getValue());
         }
         return false;
     }

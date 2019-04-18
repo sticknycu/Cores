@@ -9,7 +9,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileFactions;
 
 import java.util.Map;
 
@@ -392,8 +392,8 @@ public class MoneyUtils {
     }
 
     public void buyAction(Map<Integer, Object> response, Player player, String firstDropDownType) {
-        Profile profile = Database.profile.get(player.getUniqueId());
-        double moneyCount = profile.getCoins();
+        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+        double moneyCount = profile.getDollars();
         if (response.get(1) == null) return;
         int itemId = id.getInt(firstDropDownType);
         int itemMeta = meta.getInt(firstDropDownType);
@@ -403,7 +403,7 @@ public class MoneyUtils {
         double needed = priceFinal - moneyCount;
         if (!response.isEmpty()) {
             if (moneyCount >= priceFinal) {
-                profile.reduceCoins(priceFinal);
+                profile.setDollars(profile.getDollars() - priceFinal);
                 player.getInventory().addItem(item);
                 API.getMessageAPI().sendBuyItemMessage(player, item, priceFinal);
             } else if (moneyCount < priceFinal) {
@@ -413,7 +413,7 @@ public class MoneyUtils {
     }
 
     public void sellAction(Map<Integer, Object> response, Player player, String firstDropDownType) {
-        Profile profile = Database.profile.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
         if (response.get(1) == null) return;
         int itemId = id.getInt(firstDropDownType);
         int itemMeta = meta.getInt(firstDropDownType);
@@ -428,7 +428,7 @@ public class MoneyUtils {
             if (player.getInventory().contains(item)) {
                 if (item.getDamage() == itemMeta) {
                     if (item.getCount() == count) {
-                        profile.addCoins(priceFinal);
+                        profile.setDollars(profile.getDollars() + priceFinal);
                         player.getInventory().removeItem(item);
                         API.getMessageAPI().sendSellItemMessage(player, item, priceFinal);
                     } else if (item.getCount() != count) {
@@ -444,10 +444,10 @@ public class MoneyUtils {
     }
 
     public void enchantBuyAction(Map<Integer, Object> response, Player player, String firstDropDownType) {
-        Profile profile = Database.profile.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
         if (response.get(1) == null) return;
         if (response.get(2) == null) return;
-        double moneyCount = profile.getCoins();
+        double moneyCount = profile.getDollars();
         int experiencePlayer = player.getExperienceLevel();
         int enchantId = enchant.getInt(firstDropDownType);
         if (enchantId == -1) {
@@ -479,7 +479,7 @@ public class MoneyUtils {
             if (typePay == 1) {
                 if (enchantLevel <= enchantment.getMaxLevel()) {
                     if (moneyCount >= priceFinalMoney) {
-                        profile.reduceCoins(priceFinalMoney);
+                        profile.setDollars(profile.getDollars() - priceFinalMoney);
                         if (item.hasEnchantments()) {
                             Enchantment[] enchantments = item.getEnchantments();
                             item.addEnchantment(enchantments);

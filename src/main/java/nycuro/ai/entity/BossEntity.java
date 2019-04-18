@@ -1,4 +1,4 @@
-package nycuro.ai.entity;
+/*package nycuro.ai.entity;
 
 import cn.nukkit.item.Item;
 import de.kniffo80.mobplugin.entities.monster.walking.Zombie;
@@ -8,7 +8,7 @@ import nycuro.API;
  * author: NycuRO
  * FactionsCore Project
  * API 1.0.0
- */
+ *
 public class BossEntity extends Zombie {
 
     public BossEntity() {
@@ -42,4 +42,4 @@ public class BossEntity extends Zombie {
     public int getKillExperience() {
         return 10;
     }
-}
+}*/

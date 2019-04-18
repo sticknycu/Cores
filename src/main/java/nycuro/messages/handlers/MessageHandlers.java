@@ -18,7 +18,7 @@ public class MessageHandlers implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        event.setJoinMessage("§7[§a+§7] " + player.getName());
+        event.setJoinMessage("");
         API.getMessageAPI().sendJoinMessages(player);
         API.getMechanicAPI().createBossBar(player);
         API.getMechanicAPI().createScoreboard(player);
@@ -27,7 +27,7 @@ public class MessageHandlers implements Listener {
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        event.setQuitMessage("§7[§c-§7] " + player.getName());
+        event.setQuitMessage("");
     }
 
     @EventHandler

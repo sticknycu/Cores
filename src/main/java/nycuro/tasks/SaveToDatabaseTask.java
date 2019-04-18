@@ -4,9 +4,9 @@ import cn.nukkit.Player;
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
-import nycuro.Core;
+import nycuro.Loader;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileFactions;
 
 import java.util.Map;
 import java.util.UUID;
@@ -24,13 +24,13 @@ public class SaveToDatabaseTask extends Task {
                 API.getMessageAPI().sendShutDownInTenSecondsMessage(player);
             }
             Thread.sleep(10000);
-            for (Map.Entry<UUID, Profile> map : Database.profile.entrySet()) {
-                API.getDatabase().saveDatesPlayer(map.getKey(), map.getValue());
+            for (Map.Entry<UUID, ProfileFactions> map : Database.profileFactions.entrySet()) {
+                API.getDatabase().saveDatesPlayerFactions(map.getKey(), map.getValue());
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            Core.log("All data saved!");
+            Loader.log("All data saved!");
             API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "stop");
         }
     }

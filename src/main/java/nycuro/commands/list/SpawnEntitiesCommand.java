@@ -19,7 +19,7 @@ public class SpawnEntitiesCommand extends PrincipalCommand {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         if (commandSender instanceof Player) return false;
-        API.getMechanicAPI().spawnEntities();
+        //API.getMechanicAPI().spawnEntities();
         return true;
     }
 }

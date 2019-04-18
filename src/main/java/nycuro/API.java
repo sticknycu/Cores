@@ -34,6 +34,8 @@ public class API {
 
     public static DropPartyAPI dropPartyAPI;
 
+    public static CombatAPI combatAPI;
+
     public static Database database;
 
     public static SlotsAPI slotsAPI;
@@ -77,6 +79,8 @@ public class API {
     public static DropPartyAPI getDropPartyAPI() {
         return dropPartyAPI;
     }
+
+    public static CombatAPI getCombatAPI() { return combatAPI; }
 
     public static Database getDatabase() {
         return database;

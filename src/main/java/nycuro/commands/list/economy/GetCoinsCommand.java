@@ -20,11 +20,11 @@ public class GetCoinsCommand extends PrincipalCommand {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         if (strings.length == 0) {
-            double money = Database.profile.get(((Player) commandSender).getUniqueId()).getCoins();
+            double money = Database.profileFactions.get(((Player) commandSender).getUniqueId()).getDollars();
             API.getMessageAPI().getSelfMoneyMessage((Player) commandSender, money);
         } else if (strings.length == 1) {
             Player player = API.getMainAPI().getServer().getPlayerExact(strings[0]);
-            double money = Database.profile.get(player.getUniqueId()).getCoins();
+            double money = Database.profileFactions.get(player.getUniqueId()).getDollars();
             API.getMessageAPI().getPlayerMoneyMessage((Player) commandSender, player, money);
         } else {
             API.getMessageAPI().getMoneyExceptionMessage((Player) commandSender);

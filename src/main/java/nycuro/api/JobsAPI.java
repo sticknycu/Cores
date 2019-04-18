@@ -14,7 +14,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileFactions;
 import nycuro.gui.list.ResponseFormWindow;
 
 import java.util.Map;
@@ -49,7 +49,7 @@ public class JobsAPI {
         Faction faction = fPlayers.getFaction();
         Conf.prefixAdmin = "**";
         Conf.prefixMod = "*";
-        Profile profile = Database.profile.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
         int level = profile.getLevel();
         FormWindowSimple jobsMenu = new FormWindowSimple("Jobs", API.getMessageAPI().sendJobPrincipalModal(player));
         jobsMenu.addButton(new ElementButton("LumberJack", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));

@@ -6,6 +6,7 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.enchantment.Enchantment;
 
 /**
  * author: NycuRO
@@ -19,18 +20,30 @@ public class KitHandlers implements Listener {
         Player player = event.getPlayer();
         PlayerInventory inventory = player.getInventory();
         if (!player.hasPlayedBefore()) {
-            Item casca = Item.get(298, 0, 1);
-            Item armura = Item.get(299, 0, 1);
-            Item pantaloni = Item.get(300, 0, 1);
-            Item papuci = Item.get(301, 0, 1);
-            Item sabie = Item.get(272, 0, 1);
-            Item mancare = Item.get(297, 0, 16);
+            Item casca = Item.get(Item.CHAIN_HELMET);
+            casca.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
+            Item armura = Item.get(Item.CHAIN_CHESTPLATE);
+            armura.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
+            Item pantaloni = Item.get(Item.CHAIN_LEGGINGS);
+            pantaloni.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
+            Item papuci = Item.get(Item.CHAIN_BOOTS);
+            papuci.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
+            Item sabie = Item.get(Item.STONE_SWORD);
+            Item pick = Item.get(Item.STONE_PICKAXE);
+            Item axe = Item.get(Item.STONE_AXE);
+            Item shovel = Item.get(Item.STONE_SHOVEL);
+            Item hoe = Item.get(Item.STONE_HOE);
+            Item bread = Item.get(Item.BREAD, 0, 16);
             inventory.setHelmet(casca);
             inventory.setChestplate(armura);
             inventory.setLeggings(pantaloni);
             inventory.setBoots(papuci);
             inventory.addItem(sabie);
-            inventory.addItem(mancare);
+            inventory.addItem(pick);
+            inventory.addItem(axe);
+            inventory.addItem(shovel);
+            inventory.addItem(hoe);
+            inventory.addItem(bread);
         }
     }
 }

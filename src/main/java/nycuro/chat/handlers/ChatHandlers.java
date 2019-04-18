@@ -11,7 +11,8 @@ import nycuro.API;
 import nycuro.api.JobsAPI;
 import nycuro.chat.ChatFormat;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileHub;
 
 import java.util.Objects;
 
@@ -22,7 +23,8 @@ import java.util.Objects;
  */
 public class ChatHandlers implements Listener {
 
-    private LuckPermsApi api;
+    public static LuckPermsApi api;
+    private int count = 0;
 
     public ChatHandlers() {
         RegisteredServiceProvider<LuckPermsApi> provider = API.getMainAPI().getServer().getServiceManager().getProvider(LuckPermsApi.class);
@@ -34,17 +36,25 @@ public class ChatHandlers implements Listener {
     @EventHandler
     public void onChat(PlayerChatEvent event) {
         Player player = event.getPlayer();
+        ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
+        ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
+        count++;
         String group = Objects.requireNonNull(api.getUser(player.getUniqueId())).getPrimaryGroup().toUpperCase();
         String s = ChatFormat.valueOf(group).toString();
         s = s.replace("%name", player.getName());
         s = s.replace("%msg", event.getMessage());
+        if (count % 2 == 0)
+            s = s.replace("%slash", "\\");
+        else
+            s = s.replace("%slash", "/");
         int job = 0;
-        Profile profile = Database.profile.get(player.getUniqueId());
-        if (profile != null) {
-            job = Database.profile.get(player.getUniqueId()).getJob();
+        String lvl = "";
+        if (profileFactions != null) {
+            job = profileFactions.getJob();
+            lvl = String.valueOf(profileFactions.getLevel());
         }
         s = s.replace("%job", JobsAPI.jobs.get(job));
-        s = s.replace("%lvl", String.valueOf(player.getExperienceLevel()));
+        s = s.replace("%lvl", lvl);
         s = TextFormat.colorize(s);
         event.setFormat(s);
     }

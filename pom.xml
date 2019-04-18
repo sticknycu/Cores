@@ -6,8 +6,8 @@
     <groupId>nycuro</groupId>
     <artifactId>nycuro</artifactId>
     <version>1.0</version>
-    <name>NycuRO-Core</name>
-    <description>NycuRO-Core</description>
+    <name>FactionsCore</name>
+    <description>FactionsCore</description>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -32,6 +32,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.itxtech.synapse</groupId>
+            <artifactId>synapse-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/synapse-api-1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <version>3.1.0</version>
@@ -44,11 +51,10 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>combat</groupId>
-            <artifactId>Combat</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/Combat-1.0.0.jar</systemPath>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.4</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
@@ -56,13 +62,6 @@
             <version>1.0-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Factions.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>de.kniffo80.mobplugin</groupId>
-            <artifactId>MobPlugin</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/MobPlugin-1.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>gt.creeperface.nukkit.scoreboardapi</groupId>

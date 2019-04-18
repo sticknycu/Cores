@@ -1,9 +1,9 @@
-name: NycuRO-Core
-main: nycuro.Core
+name: FactionsCore
+main: nycuro.Loader
 version: "1.0"
 api: ["1.0.0"]
 author: NycuRO
-description: NycuRO-Core
+description: FactionsCore
 
 commands:
   spawn:

@@ -27,15 +27,15 @@ public class AddCoinsCommand extends PrincipalCommand {
         if (strings.length == 0) {
             API.getMessageAPI().addMoneyExceptionMessage((Player) commandSender);
         } else if (strings.length == 1) {
-            double money = Database.profile.get(((Player) commandSender).getUniqueId()).getCoins();
+            double money = Database.profileFactions.get(((Player) commandSender).getUniqueId()).getDollars();
             double count = Double.valueOf(strings[0]);
-            Database.profile.get(((Player) commandSender).getUniqueId()).addCoins(count);
+            Database.profileFactions.get(((Player) commandSender).getUniqueId()).setDollars(Database.profileFactions.get( ((Player) commandSender).getUniqueId()).getDollars() + count);
             API.getMessageAPI().addSelfMoneyMessage((Player) commandSender, money, count);
         } else if (strings.length == 2) {
             Player player = API.getMainAPI().getServer().getPlayerExact(strings[0]);
-            double money = Database.profile.get(((Player) commandSender).getUniqueId()).getCoins();
+            double money = Database.profileFactions.get(((Player) commandSender).getUniqueId()).getDollars();
             double count = Double.valueOf(strings[1]);
-            Database.profile.get(player.getUniqueId()).addCoins(count);
+            Database.profileFactions.get(player.getUniqueId()).setDollars(Database.profileFactions.get( ((Player) commandSender).getUniqueId()).getDollars() + count);
             API.getMessageAPI().addSelfMoneyMessage((Player) commandSender, money, count);
 
         } else {

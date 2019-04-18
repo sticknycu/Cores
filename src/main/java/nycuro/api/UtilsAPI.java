@@ -8,7 +8,8 @@ import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileHub;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.utils.MechanicUtils;
 import nycuro.utils.RandomTPUtils;
@@ -42,12 +43,12 @@ public class UtilsAPI {
     }
 
     private void teleportRandomPlayer(Player player) {
-        Profile profile = Database.profile.get(player.getUniqueId());
-        double moneyPlayer = profile.getCoins();
+        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+        double moneyPlayer = profile.getDollars();
         cost = 500;
         double insuficient = cost - moneyPlayer;
         if (moneyPlayer >= cost) {
-            Database.profile.get(player.getUniqueId()).reduceCoins(cost);
+            Database.profileFactions.get(player.getUniqueId()).setDollars(Database.profileFactions.get(player.getUniqueId()).getDollars() - cost);
             getRandomTPUtilsAPI().getSafeLocationSpawn(player, 5000);
         } else if (moneyPlayer < cost) {
             API.getMessageAPI().sendUnsuficientMoneyMessage(player, insuficient);
@@ -55,14 +56,14 @@ public class UtilsAPI {
     }
 
     private void repairItemHand(Player player) {
-        Profile profile = Database.profile.get(player.getUniqueId());
-        double moneyPlayer = profile.getCoins();
+        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+        double moneyPlayer = profile.getDollars();
         cost = 500;
         double insufficient = cost - moneyPlayer;
         PlayerInventory playerInventory = player.getInventory();
         Item item = playerInventory.getItemInHand();
         if (moneyPlayer >= cost) {
-            Database.profile.get(player.getUniqueId()).reduceCoins(cost);
+            Database.profileFactions.get(player.getUniqueId()).setDollars(Database.profileFactions.get(player.getUniqueId()).getDollars() - cost);
             playerInventory.remove(item);
             item.setDamage(0);
             playerInventory.addItem(item);
@@ -73,7 +74,7 @@ public class UtilsAPI {
     }
 
     public void sendUtilsContents(Player player) {
-        Profile profile = Database.profile.get(player.getUniqueId());
+        ProfileHub profile = Database.profileHub.get(player.getUniqueId());
         int lang = profile.getLanguage();
         switch (lang) {
             case 0:

@@ -5,7 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileFactions;
 import nycuro.kits.*;
 
 /**
@@ -41,7 +41,7 @@ public class KitsAPI {
         //double price = cost.get(1);
         //double insuficient = price - moneyPlayer;
         long time = System.currentTimeMillis();
-        Profile profile = Database.profile.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
         long cooldown = profile.getCooldown();
         long timeGone = time - cooldown;
         if (timeGone >= 24 * 60 * 60 * 1000 || timeGone == 0) {

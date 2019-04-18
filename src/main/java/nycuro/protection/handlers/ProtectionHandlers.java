@@ -63,30 +63,19 @@ public class ProtectionHandlers implements Listener {
             if (API.getMechanicAPI().isOnSpawn(player)) {
                 event.setCancelled(true);
                 API.getMessageAPI().sendPvPOffMessage(damager);
+                return;
             }
             if (API.getMechanicAPI().isOnPvP(player)) {
                 event.setCancelled(true);
                 API.getMessageAPI().sendPvPOffMessage(damager);
+                return;
             }
-        }
-        EntityDamageEvent.DamageCause cause = event.getCause();
-        if (cause == EntityDamageEvent.DamageCause.FALL ||
-                cause == EntityDamageEvent.DamageCause.ENTITY_ATTACK ||
-                cause == EntityDamageEvent.DamageCause.PROJECTILE ||
-                cause == EntityDamageEvent.DamageCause.FIRE ||
-                cause == EntityDamageEvent.DamageCause.FIRE_TICK ||
-                cause == EntityDamageEvent.DamageCause.LAVA ||
-                cause == EntityDamageEvent.DamageCause.DROWNING ||
-                cause == EntityDamageEvent.DamageCause.SUICIDE ||
-                cause == EntityDamageEvent.DamageCause.MAGIC ||
-                cause == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION ||
-                cause == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION ||
-                cause == EntityDamageEvent.DamageCause.CONTACT) {
-            if (API.getMechanicAPI().isOnSpawn(player)) {
-                event.setCancelled(true);
-            }
-            if (API.getMechanicAPI().isOnPvP(player)) {
-                event.setCancelled(true);
+            for (Player pl : new Player[]{player, damager}) {
+                if (!API.getCombatAPI().inCombat(pl)) {
+                    API.getMainAPI().bossbar.get(pl.getName()).setText("§7-§8=§7- §7CombatLogger: §6§l13 §7-§8=§7-");
+                    API.getMainAPI().bossbar.get(pl.getName()).setLength(100F);
+                    API.getCombatAPI().setCombat(pl);
+                }
             }
         }
     }

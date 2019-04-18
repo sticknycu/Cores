@@ -7,16 +7,8 @@ import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
-import gt.creeperface.nukkit.scoreboardapi.scoreboard.DisplayObjective;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import me.lucko.luckperms.LuckPerms;
-import me.lucko.luckperms.api.LuckPermsApi;
-import me.lucko.luckperms.api.Node;
-import me.lucko.luckperms.api.NodeFactory;
+import it.unimi.dsi.fastutil.objects.*;
 import nycuro.abuse.handlers.AbuseHandlers;
 import nycuro.ai.AiAPI;
 import nycuro.api.*;
@@ -26,10 +18,13 @@ import nycuro.commands.list.economy.AddCoinsCommand;
 import nycuro.commands.list.economy.GetCoinsCommand;
 import nycuro.commands.list.economy.SetCoinsCommand;
 import nycuro.commands.list.mechanic.*;
+import nycuro.commands.list.stats.StatsCommand;
 import nycuro.commands.list.time.GetTimeCommand;
 import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
+import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileHub;
 import nycuro.dropparty.DropPartyAPI;
 import nycuro.gui.handlers.GUIHandlers;
 import nycuro.jobs.handlers.JobsHandlers;
@@ -43,15 +38,12 @@ import nycuro.shop.BuyUtils;
 import nycuro.shop.EnchantUtils;
 import nycuro.shop.MoneyUtils;
 import nycuro.shop.SellUtils;
-import nycuro.tasks.BossBarTask;
-import nycuro.tasks.CheckLevelTask;
-import nycuro.tasks.SaveToDatabaseTask;
-import nycuro.tasks.ScoreboardTask;
+import nycuro.tasks.*;
 import nycuro.utils.MechanicUtils;
 import nycuro.utils.RandomTPUtils;
 import nycuro.utils.WarpUtils;
 
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -61,18 +53,19 @@ import java.util.concurrent.TimeUnit;
  */
 public class Loader extends PluginBase {
 
-    public static Object2ObjectMap<UUID, Long> startTime = new Object2ObjectOpenHashMap<>();
+    public static Object2LongMap<UUID> startTime = new Object2LongOpenHashMap<>();
     public Object2ObjectMap<String, DummyBossBar> bossbar = new Object2ObjectOpenHashMap<>();
     public Object2ObjectMap<String, FakeScoreboard> scoreboard = new Object2ObjectOpenHashMap<>();
     public Object2IntMap<String> timers = new Object2IntOpenHashMap<>();
-    public Object2ObjectMap<String, Boolean> coords = new Object2ObjectOpenHashMap<>();
+    public Object2BooleanMap<String> coords = new Object2BooleanOpenHashMap<>();
+    public Object2LongMap<String> played = new Object2LongOpenHashMap<>();
 
     public static void log(String s) {
         API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
     }
 
     public static void registerTops() {
-        Database.getTopCoins();
+        Database.getTopDollars();
         Database.getTopKills();
         Database.getTopDeaths();
         Database.getTopTime();
@@ -112,13 +105,13 @@ public class Loader extends PluginBase {
 
     @Override
     public void onDisable() {
-        this.getServer().getScheduler().cancelAllTasks();
-        log("Cancelled All Tasks.");
+        saveOnDisable();
     }
 
     private void initDatabase() {
         log("Init SQLite Database...");
-        Database.connectToDatabase();
+        Database.connectToDatabaseHub();
+        Database.connectToDatabaseFactions();
     }
 
     private void registerAPI() {
@@ -138,6 +131,7 @@ public class Loader extends PluginBase {
         API.aiAPI = new AiAPI();
         API.crateAPI = new CrateAPI();
         API.dropPartyAPI = new DropPartyAPI();
+        API.combatAPI = new CombatAPI();
         ShopAPI.enchantUtils = new EnchantUtils();
         API.database = new Database();
         API.slotsAPI = new SlotsAPI();
@@ -153,7 +147,7 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("toptime", new TopTimeCommand());
         this.getServer().getCommandMap().register("topdeaths", new TopDeathsCommand());
         this.getServer().getCommandMap().register("savetodatabase", new SaveToDatabaseCommand());
-        this.getServer().getCommandMap().register("spawnentities", new SpawnEntitiesCommand());
+        //this.getServer().getCommandMap().register("spawnentities", new SpawnEntitiesCommand());
         this.getServer().getCommandMap().register("servers", new ServersCommand());
         this.getServer().getCommandMap().register("droppartymessage", new DropPartyMessageCommand());
         this.getServer().getCommandMap().register("spawnboss", new SpawnBossCommand());
@@ -162,6 +156,8 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("shop", new ShopCommand());
         this.getServer().getCommandMap().register("spawn", new SpawnCommand());
         this.getServer().getCommandMap().register("utils", new UtilsCommand());
+        this.getServer().getCommandMap().register("lang", new LangCommand());
+        this.getServer().getCommandMap().register("stats", new StatsCommand());
         this.getServer().getCommandMap().register("coords", new CoordsCommand());// TODO: Save to Database
     }
 
@@ -179,6 +175,27 @@ public class Loader extends PluginBase {
         this.getServer().getPluginManager().registerEvents(new ChatHandlers(), this);
     }
 
+    private void saveOnDisable() {
+        try {
+            saveAllToDatabases();
+        } finally {
+            try {
+                this.getServer().getScheduler().cancelAllTasks();
+            } finally {
+                log("Cancelled All Tasks.");
+            }
+        }
+    }
+
+    private void saveAllToDatabases() {
+        for (Map.Entry<UUID, ProfileHub> map : Database.profileHub.entrySet()) {
+            API.getDatabase().saveDatesOnShutdownPlayerHub(map.getKey(), map.getValue());
+        }
+        for (Map.Entry<UUID, ProfileFactions> map : Database.profileFactions.entrySet()) {
+            API.getDatabase().saveDatesOnShutdownPlayerFactions(map.getKey(), map.getValue());
+        }
+    }
+
     private void registerTasks() {
         this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
@@ -190,7 +207,7 @@ public class Loader extends PluginBase {
             @Override
             public void onRun(int i) {
                 API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "savetodatabase");
-                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "spawnentities");
+                /*API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "spawnentities");
                 for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
                     LuckPermsApi api = LuckPerms.getApi();
                     NodeFactory NODE_BUILDER = api.getNodeFactory();
@@ -226,19 +243,29 @@ public class Loader extends PluginBase {
                             }
                         }
                     }
-                }
+                }*/
             }
-        }, 20 * 15, 20 * 60 * 5, true);
+        }, 20 * 15, 20 * 60 * 5);
         this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
                 API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "mob removeall");
             }
-        }, 20 * 15, 20 * 60 * 28, true);
-        this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20 * 5, true);
-        this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 10, true);
-        this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20 * 20, true);
+        }, 20 * 15, 20 * 60 * 28);
+        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+            @Override
+            public void onRun(int i) {
+                for (Map.Entry<UUID, ProfileHub> map : Database.profileHub.entrySet()) {
+                    API.getDatabase().saveDatesPlayerHub(map.getKey(), map.getValue());
+                }
+            }
+        }, 20 * 15, 20 * 10, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 20, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20, true);
         this.getServer().getScheduler().scheduleDelayedTask(new SaveToDatabaseTask(), 20 * 60 * 60 * 3, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new CombatLoggerTask(), 20, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new ScoreTagTask(), 20, true);
     }
 
     private void registerPlaceHolders() {
@@ -331,6 +358,6 @@ public class Loader extends PluginBase {
         api.staticPlaceholder("top9timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(9, (long) 0)));
         api.staticPlaceholder("top10timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(10, (long) 0)));
 
-        api.visitorSensitivePlaceholder("time_player", (p) -> Database.profile.get(p.getUniqueId()).getTime());
+        api.visitorSensitivePlaceholder("time_player", (p) -> Database.profileFactions.get(p.getUniqueId()).getTime());
     }
 }

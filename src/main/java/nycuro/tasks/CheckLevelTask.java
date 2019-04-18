@@ -4,8 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
-import nycuro.utils.MechanicUtils;
+import nycuro.database.objects.ProfileFactions;
 
 /**
  * author: NycuRO
@@ -19,25 +18,17 @@ public class CheckLevelTask extends Task {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
             double experience = 0;
             int level = 0;
-            double necesary = 0;
-            Profile profile = Database.profile.get(player.getUniqueId());
+            double necesary = 250;
+            ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
             if (profile != null) {
                 experience = profile.getExperience();
                 level = profile.getLevel();
                 necesary = profile.getNecesary();
             }
-            if (level == 0) {
-                if (experience >= 250) {
-                    profile.addLevel(1);
-                    profile.setExperience(0.0);
-                    profile.setNecesary(250.0);
-                }
-            } else if (level > 0) {
-                if (experience >= necesary) {
-                    profile.addLevel(1);
-                    profile.setExperience(0.0);
-                    profile.setNecesary(profile.getNecesary() + 250.0);
-                }
+            if (experience >= necesary) {
+                profile.setLevel(profile.getLevel() + 1);
+                profile.setExperience(0.0);
+                profile.setNecesary(profile.getNecesary() + 250.0);
             }
         }
     }
