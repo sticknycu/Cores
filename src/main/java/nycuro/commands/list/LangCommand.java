@@ -26,8 +26,10 @@ public class LangCommand extends PrincipalCommand {
             String message = strings[0];
             if (message.equals("en")) {
                 profile.setLanguage(0);
+                API.getDatabase().setLanguage((Player) commandSender, 0);
             } else {
                 profile.setLanguage(1);
+                API.getDatabase().setLanguage((Player) commandSender, 1);
             }
             API.getMessageAPI().sendLangMessage((Player) commandSender);
         } else {

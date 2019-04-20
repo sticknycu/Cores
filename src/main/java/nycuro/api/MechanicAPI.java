@@ -51,18 +51,15 @@ public class MechanicAPI {
     public boolean isOnBorder(Player player) {
         double x = player.getX();
         double z = player.getZ();
-        return (x >= 10000 || x <= -10000) || (z >= 10000 || z <= -10000);
+        return (x >= 7500 || x <= -7500) || (z >= 7500 || z <= -7500);
     }
 
     public void sendToSpawn(Player player) {
-        double x = 438 + 0.5;
-        double y = 75;
-        double z = 106 + 0.5;
         Level level = API.getMainAPI().getServer().getDefaultLevel();
-        if (!level.isChunkLoaded(438 >> 4, 106 >> 4)) {
-            level.loadChunk(438 >> 4, 106 >> 4);
+        if (!level.isChunkLoaded(level.getSpawnLocation().getChunkX(), level.getSpawnLocation().getChunkZ())) {
+            level.loadChunk(level.getSpawnLocation().getChunkX(), level.getSpawnLocation().getChunkZ());
         }
-        player.teleport(new Position(x, y, z, level));
+        player.teleport(level.getSpawnLocation());
         player.setImmobile(false);
     }
 

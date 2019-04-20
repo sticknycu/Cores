@@ -9,6 +9,7 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.Loader;
+import nycuro.database.Database;
 
 /**
  * author: NycuRO
@@ -20,13 +21,21 @@ public class MechanicHandlers implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        // Nu merge PreLoginEvent si nici Async.
         API.getMainAPI().coords.put(player.getName(), false);
         API.getMainAPI().played.put(player.getName(), System.currentTimeMillis());
-        API.getDatabase().playerExist(player, bool -> {
-            if (!bool) {
-                API.getDatabase().addNewPlayer(player);
-            }
-        });
+        if (!player.hasPlayedBefore()) {
+            API.getDatabase().addNewPlayer(player);
+        } else {
+            Database.addDatesPlayerHub(player);
+            Database.addDatesPlayerFactions(player);
+        }
+        if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
+            Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
+        } else {
+            Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
+        }
+
         API.getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
@@ -48,16 +57,13 @@ public class MechanicHandlers implements Listener {
                 API.getMainAPI().timers.put(username, playerTime + 1);
             }
         }, 20, 20 * 3, true);
-        if (Loader.startTime.get(player.getUniqueId()) != null) {
-            Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
-        } else {
-            Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
-        }
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
+        Database.saveDatesPlayerFromHub(player);
+        Database.saveDatesPlayerFromFactions(player);
         Loader.startTime.removeLong(player.getUniqueId());
         API.getMainAPI().played.removeLong(player.getName());
     }

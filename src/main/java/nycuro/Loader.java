@@ -23,8 +23,6 @@ import nycuro.commands.list.time.GetTimeCommand;
 import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
-import nycuro.database.objects.ProfileHub;
 import nycuro.dropparty.DropPartyAPI;
 import nycuro.gui.handlers.GUIHandlers;
 import nycuro.jobs.handlers.JobsHandlers;
@@ -105,7 +103,22 @@ public class Loader extends PluginBase {
 
     @Override
     public void onDisable() {
-        saveOnDisable();
+        saveToDatabase();
+        removeAllFromMaps();
+    }
+
+    private void saveToDatabase() {
+        for (Player player: this.getServer().getOnlinePlayers().values()) {
+            Database.saveUnAsyncDatesPlayerFromHub(player);
+            Database.saveUnAsyncDatesPlayerFromFactions(player);
+        }
+    }
+
+    private void removeAllFromMaps() {
+        for (Player player : this.getServer().getOnlinePlayers().values()) {
+            Loader.startTime.removeLong(player.getUniqueId());
+            API.getMainAPI().played.removeLong(player.getName());
+        }
     }
 
     private void initDatabase() {
@@ -146,7 +159,6 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("topkills", new TopKillsCommand());
         this.getServer().getCommandMap().register("toptime", new TopTimeCommand());
         this.getServer().getCommandMap().register("topdeaths", new TopDeathsCommand());
-        this.getServer().getCommandMap().register("savetodatabase", new SaveToDatabaseCommand());
         //this.getServer().getCommandMap().register("spawnentities", new SpawnEntitiesCommand());
         this.getServer().getCommandMap().register("servers", new ServersCommand());
         this.getServer().getCommandMap().register("droppartymessage", new DropPartyMessageCommand());
@@ -175,27 +187,6 @@ public class Loader extends PluginBase {
         this.getServer().getPluginManager().registerEvents(new ChatHandlers(), this);
     }
 
-    private void saveOnDisable() {
-        try {
-            saveAllToDatabases();
-        } finally {
-            try {
-                this.getServer().getScheduler().cancelAllTasks();
-            } finally {
-                log("Cancelled All Tasks.");
-            }
-        }
-    }
-
-    private void saveAllToDatabases() {
-        for (Map.Entry<UUID, ProfileHub> map : Database.profileHub.entrySet()) {
-            API.getDatabase().saveDatesOnShutdownPlayerHub(map.getKey(), map.getValue());
-        }
-        for (Map.Entry<UUID, ProfileFactions> map : Database.profileFactions.entrySet()) {
-            API.getDatabase().saveDatesOnShutdownPlayerFactions(map.getKey(), map.getValue());
-        }
-    }
-
     private void registerTasks() {
         this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
@@ -206,7 +197,6 @@ public class Loader extends PluginBase {
         this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
-                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "savetodatabase");
                 /*API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "spawnentities");
                 for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
                     LuckPermsApi api = LuckPerms.getApi();
@@ -252,18 +242,9 @@ public class Loader extends PluginBase {
                 API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "mob removeall");
             }
         }, 20 * 15, 20 * 60 * 28);
-        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
-            @Override
-            public void onRun(int i) {
-                for (Map.Entry<UUID, ProfileHub> map : Database.profileHub.entrySet()) {
-                    API.getDatabase().saveDatesPlayerHub(map.getKey(), map.getValue());
-                }
-            }
-        }, 20 * 15, 20 * 10, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20, true);
-        this.getServer().getScheduler().scheduleDelayedTask(new SaveToDatabaseTask(), 20 * 60 * 60 * 3, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CombatLoggerTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreTagTask(), 20, true);
     }
