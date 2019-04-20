@@ -75,46 +75,23 @@ public class Database {
     }
 
     public static void saveDatesPlayerFromHub(Player player) {
-        ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
-                     PreparedStatement preparedStatement =
-                             connection.prepareStatement("UPDATE `dates` SET `job` = ?, `kills` = ?, `deaths` = ?, `cooldown` = ?, `experience` = ?, `level` = ?, `necesary` = ?, `time` = ?, `dollars` = ? WHERE `uuid` = ?")) {
-                    preparedStatement.setInt(1, profileFactions.getJob());
-                    preparedStatement.setInt(2, profileFactions.getKills());
-                    preparedStatement.setInt(3, profileFactions.getDeaths());
-                    preparedStatement.setLong(4, profileFactions.getCooldown());
-                    preparedStatement.setDouble(5, profileFactions.getExperience());
-                    preparedStatement.setInt(6, profileFactions.getLevel());
-                    preparedStatement.setDouble(7, profileFactions.getNecesary());
-                    preparedStatement.setLong(8, profileFactions.getTime());
-                    preparedStatement.setDouble(9, profileFactions.getDollars());
-                    preparedStatement.setString(10, player.getUniqueId().toString());
-                    preparedStatement.executeUpdate();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                saveUnAsyncDatesPlayerFromHub(player);
             }
         });
     }
 
     public static void saveUnAsyncDatesPlayerFromHub(Player player) {
-        ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
-        try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+        ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
+        try (Connection connection = DATASOURCE_HUB.getConnection();
              PreparedStatement preparedStatement =
-                     connection.prepareStatement("UPDATE `dates` SET `job` = ?, `kills` = ?, `deaths` = ?, `cooldown` = ?, `experience` = ?, `level` = ?, `necesary` = ?, `time` = ?, `dollars` = ? WHERE `uuid` = ?")) {
-            preparedStatement.setInt(1, profileFactions.getJob());
-            preparedStatement.setInt(2, profileFactions.getKills());
-            preparedStatement.setInt(3, profileFactions.getDeaths());
-            preparedStatement.setLong(4, profileFactions.getCooldown());
-            preparedStatement.setDouble(5, profileFactions.getExperience());
-            preparedStatement.setInt(6, profileFactions.getLevel());
-            preparedStatement.setDouble(7, profileFactions.getNecesary());
-            preparedStatement.setLong(8, profileFactions.getTime());
-            preparedStatement.setDouble(9, profileFactions.getDollars());
-            preparedStatement.setString(10, player.getUniqueId().toString());
+                     connection.prepareStatement("UPDATE `dates` SET `language` = ?, `gems` = ?, `time` = ? WHERE `uuid` = ?")) {
+            preparedStatement.setInt(1, profileHub.getLanguage());
+            preparedStatement.setDouble(2, profileHub.getGems());
+            preparedStatement.setLong(3, profileHub.getTime());
+            preparedStatement.setString(4, player.getUniqueId().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -460,27 +437,10 @@ public class Database {
     }
 
     public static void saveDatesPlayerFromFactions(Player player) {
-        ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
-                     PreparedStatement preparedStatement =
-                             connection.prepareStatement("UPDATE `dates` SET `job` = ?, `kills` = ?, `deaths` = ?, `cooldown` = ?, `experience` = ?, `level` = ?, `necesary` = ?, `time` = ?, `dollars` = ? WHERE `uuid` = ?")) {
-                    preparedStatement.setInt(1, profileFactions.getJob());
-                    preparedStatement.setInt(2, profileFactions.getKills());
-                    preparedStatement.setInt(3, profileFactions.getDeaths());
-                    preparedStatement.setLong(4, profileFactions.getCooldown());
-                    preparedStatement.setDouble(5, profileFactions.getExperience());
-                    preparedStatement.setInt(6, profileFactions.getLevel());
-                    preparedStatement.setDouble(7, profileFactions.getNecesary());
-                    preparedStatement.setLong(8, profileFactions.getTime());
-                    preparedStatement.setDouble(9, profileFactions.getDollars());
-                    preparedStatement.setString(10, player.getUniqueId().toString());
-                    preparedStatement.executeUpdate();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                saveUnAsyncDatesPlayerFromFactions(player);
             }
         });
     }
