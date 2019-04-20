@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.projectile.EntityArrow;
 import cn.nukkit.event.EventHandler;
+import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.entity.ProjectileHitEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
@@ -15,7 +16,6 @@ import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import cn.nukkit.math.Vector3;
-import cn.nukkit.scheduler.AsyncTask;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.gui.list.ResponseFormWindow;
@@ -32,7 +32,7 @@ import java.util.function.Consumer;
  */
 public class LevelHandlers implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         startItems(player);

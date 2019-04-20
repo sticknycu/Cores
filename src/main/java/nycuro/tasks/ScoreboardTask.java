@@ -6,7 +6,7 @@ import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileHub;
 import org.itxtech.synapseapi.SynapseAPI;
 import org.itxtech.synapseapi.SynapseEntry;
 import org.itxtech.synapseapi.utils.ClientData;
@@ -33,7 +33,7 @@ public class ScoreboardTask extends Task {
 
         Objective scoreboardDisplay = scoreboard.objective.getObjective();
 
-        Profile profile = Database.profile.get(player.getUniqueId());
+        ProfileHub profile = Database.profileHub.get(player.getUniqueId());
 
         DisplayObjective dobj = new DisplayObjective(
                 scoreboardDisplay,
@@ -65,17 +65,20 @@ public class ScoreboardTask extends Task {
     }
 
     private int getCount(int type) {
+        int count = 0;
         for (SynapseEntry synapseEntry : SynapseAPI.getInstance().getSynapseEntries().values()) {
             ClientData clientData = synapseEntry.getClientData();
             for (ClientData.Entry entries : clientData.clientList.values()) {
                 switch (type) {
                     case 0:
-                        return entries.getPlayerCount();
+                        count = count + entries.getPlayerCount();
+                        break;
                     case 1:
-                        return entries.getMaxPlayers();
+                        count = count + entries.getMaxPlayers();
+                        break;
                 }
             }
         }
-        return 0;
+        return count;
     }
 }

@@ -2,6 +2,7 @@ package nycuro.messages.handlers;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
+import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerDeathEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
@@ -15,7 +16,7 @@ import nycuro.API;
  */
 public class MessageHandlers implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         event.setJoinMessage("");

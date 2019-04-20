@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
+import nycuro.database.objects.ProfileHub;
 
 /**
  * author: GiantQuartz
@@ -20,7 +20,7 @@ public class BossBarTask extends Task {
     @Override
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-            Profile profile = Database.profile.get(player.getUniqueId());
+            ProfileHub profile = Database.profileHub.get(player.getUniqueId());
 
             if (API.getMainAPI().bossbar.get(player.getName()) != null) {
                 String username = player.getName();

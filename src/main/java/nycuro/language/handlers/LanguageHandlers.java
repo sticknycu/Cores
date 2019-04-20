@@ -24,13 +24,13 @@ public class LanguageHandlers implements Listener {
         //int lang = Database.profile.get(player.getUniqueId()).getLanguage();
         switch (form) {
             case 0:
-                Database.profile.get(player.getUniqueId()).setLanguage(0);
+                Database.profileHub.get(player.getUniqueId()).setLanguage(0);
                 API.getMessageAPI().sendLangMessage(player);
                 //holograms.setLanguageSelector(p -> lang);
                 ///holograms.onLanguageChanged(player);
                 break;
             case 1:
-                Database.profile.get(player.getUniqueId()).setLanguage(1);
+                Database.profileHub.get(player.getUniqueId()).setLanguage(1);
                 API.getMessageAPI().sendLangMessage(player);
                 //holograms.setLanguageSelector(p -> lang);
                 //holograms.onLanguageChanged(player);

@@ -1,5 +1,6 @@
 package nycuro;
 
+import cn.nukkit.Player;
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.scheduler.Task;
@@ -30,7 +31,6 @@ import nycuro.mechanic.handlers.MechanicHandlers;
 import nycuro.messages.handlers.MessageHandlers;
 import nycuro.protection.handlers.ProtectionHandlers;
 import nycuro.tasks.BossBarTask;
-import nycuro.tasks.SaveToDatabaseTask;
 import nycuro.tasks.ScoreboardTask;
 
 import java.util.UUID;
@@ -94,13 +94,19 @@ public class Loader extends PluginBase {
 
     @Override
     public void onDisable() {
-        this.getServer().getScheduler().cancelAllTasks();
-        log("Cancelled All Tasks.");
+        removeAllFromMaps();
+    }
+
+    private void removeAllFromMaps() {
+        for (Player player : this.getServer().getOnlinePlayers().values()) {
+            Loader.startTime.remove(player.getUniqueId());
+        }
     }
 
     private void initDatabase() {
         log("Init SQLite Database...");
-        Database.connectToDatabase();
+        Database.connectToDatabaseHub();
+        Database.connectToDatabaseFactions();
     }
 
     private void registerAPI() {
@@ -114,7 +120,6 @@ public class Loader extends PluginBase {
     private void registerCommands() {
         //this.getServer().getCommandMap().register("onlinetime", new GetTimeCommand());
         this.getServer().getCommandMap().register("lang", new LangCommand());
-        this.getServer().getCommandMap().register("savetodatabase", new SaveToDatabaseCommand());
         this.getServer().getCommandMap().register("coords", new CoordsCommand());
         this.getServer().getCommandMap().register("gems", new GemsCommand());
         this.getServer().getCommandMap().register("sf", new SpawnFireworkCommand());
@@ -140,15 +145,8 @@ public class Loader extends PluginBase {
                 MechanicUtils.getTops();
             }
         }, 20 * 10, 20 * 60 * 3, true);*/
-        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
-            @Override
-            public void onRun(int i) {
-                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "savetodatabase");
-            }
-        }, 20 * 15, 20 * 5);
         this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20 * 3, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 10, true);
-        this.getServer().getScheduler().scheduleDelayedTask(new SaveToDatabaseTask(), 20 * 60 * 60 * 3);
     }
 
     private void registerPlaceHolders() {

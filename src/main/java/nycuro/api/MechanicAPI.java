@@ -19,9 +19,7 @@ import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nycuro.API;
 import nycuro.crate.item.EntityFirework;
 import nycuro.database.Database;
-import nycuro.database.objects.Profile;
-
-import java.util.Random;
+import nycuro.database.objects.ProfileHub;
 
 /**
  * author: NycuRO
@@ -67,7 +65,7 @@ public class MechanicAPI {
 
     private void sendInfoServers(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Info Partner");
-        Profile profile = Database.profile.get(player.getUniqueId());
+        ProfileHub profile = Database.profileHub.get(player.getUniqueId());
         int lang = profile.getLanguage();
         switch (lang) {
             case 0:
@@ -114,7 +112,7 @@ public class MechanicAPI {
                 .putByteArray("FireworkFade", new byte[]{(byte) DyeColor.YELLOW.getDyeData()})
                 .putBoolean("FireworkFlicker", true)
                 .putBoolean("FireworkTrail", true)
-                .putByte("FireworkType", 1);
+                .putByte("FireworkType", 4);
         tag.putCompound("Fireworks", new CompoundTag("Fireworks")
                 .putList(new ListTag<CompoundTag>("Explosions").add(ex))
                 .putByte("Flight", 1));
