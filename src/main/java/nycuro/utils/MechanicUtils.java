@@ -2,19 +2,21 @@ package nycuro.utils;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import nycuro.Loader;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 
-import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.UUID;
+import nycuro.utils.ValueDoubleComparator;
+import com.massivecraft.factions.Faction;
+import com.massivecraft.factions.Factions;
+
+import java.util.*;
 
 public class MechanicUtils {
 
-
     public static void getTops() {
 
+        Object2ObjectMap<String, Double> powerMap = new Object2ObjectOpenHashMap<>();
         Object2ObjectMap<String, Double> coinsMap = new Object2ObjectOpenHashMap<>();
         Object2ObjectMap<String, Integer> killsMap = new Object2ObjectOpenHashMap<>();
         Object2ObjectMap<String, Integer> deathsMap = new Object2ObjectOpenHashMap<>();
@@ -32,6 +34,9 @@ public class MechanicUtils {
         ValueLongComparator bvtime = new ValueLongComparator(timeMap);
         TreeMap<String, Long> sorted_map_time = new TreeMap<String, Long>(bvtime);
 
+        ValueDoubleComparator bvpower = new ValueDoubleComparator(powerMap);
+        TreeMap<String, Double> sorted_map_power = new TreeMap<String, Double>(bvpower);
+
         for (Map.Entry<UUID, ProfileFactions> map : Database.profileFactions.entrySet()) {
             coinsMap.put(map.getValue().getName(), map.getValue().getDollars());
             killsMap.put(map.getValue().getName(), map.getValue().getKills());
@@ -39,10 +44,15 @@ public class MechanicUtils {
             timeMap.put(map.getValue().getName(), map.getValue().getTime());
         }
 
+        for (final Faction map : Factions.i.get()) {
+            powerMap.put(map.getTag(), map.getPower());
+        }
+
         sorted_map_coins.putAll(coinsMap);
         sorted_map_kills.putAll(killsMap);
         sorted_map_deaths.putAll(deathsMap);
         sorted_map_time.putAll(timeMap);
+        sorted_map_power.putAll(powerMap);
 
 
         Database.scoreboardcoinsName.clear();
@@ -53,6 +63,8 @@ public class MechanicUtils {
         Database.scoreboarddeathsValue.clear();
         Database.scoreboardtimeName.clear();
         Database.scoreboardtimeValue.clear();
+        Loader.scoreboardPowerName.clear();
+        Loader.scoreboardPowerValue.clear();
 
         for (int i = 0; i < sorted_map_coins.keySet().toArray().length; i++) {
             if (i == 10) break;
@@ -74,6 +86,11 @@ public class MechanicUtils {
             Database.scoreboardtimeName.put(i + 1, sorted_map_time.keySet().toArray()[i].toString());
             Database.scoreboardtimeValue.put(i + 1, Long.valueOf(sorted_map_time.values().toArray()[i].toString()));
         }
+        for (int i = 0; i < sorted_map_power.keySet().toArray().length && i != 10; ++i) {
+            Loader.scoreboardPowerName.put(i + 1, sorted_map_power.keySet().toArray()[i].toString());
+            Loader.scoreboardPowerValue.put(i + 1, Double.valueOf(sorted_map_power.values().toArray()[i].toString()));
+        }
+
     }
 }
 

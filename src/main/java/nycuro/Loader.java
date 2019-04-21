@@ -44,6 +44,7 @@ import nycuro.utils.WarpUtils;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+
 /**
  * author: NycuRO
  * FactionsCore Project
@@ -57,6 +58,9 @@ public class Loader extends PluginBase {
     public Object2IntMap<String> timers = new Object2IntOpenHashMap<>();
     public Object2BooleanMap<String> coords = new Object2BooleanOpenHashMap<>();
     public Object2LongMap<String> played = new Object2LongOpenHashMap<>();
+
+    public static Object2ObjectMap<Integer, String> scoreboardPowerName = new Object2ObjectOpenHashMap<>();
+    public static Object2ObjectMap<Integer, Double> scoreboardPowerValue = new Object2ObjectOpenHashMap<>();
 
     public static void log(String s) {
         API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
@@ -236,12 +240,12 @@ public class Loader extends PluginBase {
                 }*/
             }
         }, 20 * 15, 20 * 60 * 5);
-        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+        /*this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
                 API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "mob removeall");
             }
-        }, 20 * 15, 20 * 60 * 28);
+        });*/
         this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20, true);
@@ -251,93 +255,23 @@ public class Loader extends PluginBase {
 
     private void registerPlaceHolders() {
         PlaceholderAPI api = PlaceholderAPI.Companion.getInstance();
-        api.staticPlaceholder("top1killsname", () -> Database.scoreboardkillsName.getOrDefault(1, " "));
-        api.staticPlaceholder("top2killsname", () -> Database.scoreboardkillsName.getOrDefault(2, " "));
-        api.staticPlaceholder("top3killsname", () -> Database.scoreboardkillsName.getOrDefault(3, " "));
-        api.staticPlaceholder("top4killsname", () -> Database.scoreboardkillsName.getOrDefault(4, " "));
-        api.staticPlaceholder("top5killsname", () -> Database.scoreboardkillsName.getOrDefault(5, " "));
-        api.staticPlaceholder("top6killsname", () -> Database.scoreboardkillsName.getOrDefault(6, " "));
-        api.staticPlaceholder("top7killsname", () -> Database.scoreboardkillsName.getOrDefault(7, " "));
-        api.staticPlaceholder("top8killsname", () -> Database.scoreboardkillsName.getOrDefault(8, " "));
-        api.staticPlaceholder("top9killsname", () -> Database.scoreboardkillsName.getOrDefault(9, " "));
-        api.staticPlaceholder("top10killsname", () -> Database.scoreboardkillsName.getOrDefault(10, " "));
+        for (int i = 1; i <= 10; i++) {
+            final int value = i;
+            api.staticPlaceholder("top" + value + "killsname", () -> Database.scoreboardkillsName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "killscount", () -> Database.scoreboardkillsValue.getOrDefault(value, 0).toString());
 
-        api.staticPlaceholder("top1killscount", () -> Database.scoreboardkillsValue.getOrDefault(1, 0).toString());
-        api.staticPlaceholder("top2killscount", () -> Database.scoreboardkillsValue.getOrDefault(2, 0).toString());
-        api.staticPlaceholder("top3killscount", () -> Database.scoreboardkillsValue.getOrDefault(3, 0).toString());
-        api.staticPlaceholder("top4killscount", () -> Database.scoreboardkillsValue.getOrDefault(4, 0).toString());
-        api.staticPlaceholder("top5killscount", () -> Database.scoreboardkillsValue.getOrDefault(5, 0).toString());
-        api.staticPlaceholder("top6killscount", () -> Database.scoreboardkillsValue.getOrDefault(6, 0).toString());
-        api.staticPlaceholder("top7killscount", () -> Database.scoreboardkillsValue.getOrDefault(7, 0).toString());
-        api.staticPlaceholder("top8killscount", () -> Database.scoreboardkillsValue.getOrDefault(8, 0).toString());
-        api.staticPlaceholder("top9killscount", () -> Database.scoreboardkillsValue.getOrDefault(9, 0).toString());
-        api.staticPlaceholder("top10killscount", () -> Database.scoreboardkillsValue.getOrDefault(10, 0).toString());
+            api.staticPlaceholder("top" + value + "deathsname", () -> Database.scoreboarddeathsName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(value, 0).toString());
 
-        api.staticPlaceholder("top1deathsname", () -> Database.scoreboarddeathsName.getOrDefault(1, " "));
-        api.staticPlaceholder("top2deathsname", () -> Database.scoreboarddeathsName.getOrDefault(2, " "));
-        api.staticPlaceholder("top3deathsname", () -> Database.scoreboarddeathsName.getOrDefault(3, " "));
-        api.staticPlaceholder("top4deathsname", () -> Database.scoreboarddeathsName.getOrDefault(4, " "));
-        api.staticPlaceholder("top5deathsname", () -> Database.scoreboarddeathsName.getOrDefault(5, " "));
-        api.staticPlaceholder("top6deathsname", () -> Database.scoreboarddeathsName.getOrDefault(6, " "));
-        api.staticPlaceholder("top7deathsname", () -> Database.scoreboarddeathsName.getOrDefault(7, " "));
-        api.staticPlaceholder("top8deathsname", () -> Database.scoreboarddeathsName.getOrDefault(8, " "));
-        api.staticPlaceholder("top9deathsname", () -> Database.scoreboarddeathsName.getOrDefault(9, " "));
-        api.staticPlaceholder("top10deathsname", () -> Database.scoreboarddeathsName.getOrDefault(10, " "));
+            api.staticPlaceholder("top" + value + "coinsname", () -> Database.scoreboardcoinsName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(value, 0.0).toString());
 
-        api.staticPlaceholder("top1deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(1, 0).toString());
-        api.staticPlaceholder("top2deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(2, 0).toString());
-        api.staticPlaceholder("top3deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(3, 0).toString());
-        api.staticPlaceholder("top4deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(4, 0).toString());
-        api.staticPlaceholder("top5deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(5, 0).toString());
-        api.staticPlaceholder("top6deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(6, 0).toString());
-        api.staticPlaceholder("top7deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(7, 0).toString());
-        api.staticPlaceholder("top8deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(8, 0).toString());
-        api.staticPlaceholder("top9deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(9, 0).toString());
-        api.staticPlaceholder("top10deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(10, 0).toString());
+            api.staticPlaceholder("top" + value + "timename", () -> Database.scoreboardtimeName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(value, 0L)));
 
-        api.staticPlaceholder("top1coinsname", () -> Database.scoreboardcoinsName.getOrDefault(1, " "));
-        api.staticPlaceholder("top2coinsname", () -> Database.scoreboardcoinsName.getOrDefault(2, " "));
-        api.staticPlaceholder("top3coinsname", () -> Database.scoreboardcoinsName.getOrDefault(3, " "));
-        api.staticPlaceholder("top4coinsname", () -> Database.scoreboardcoinsName.getOrDefault(4, " "));
-        api.staticPlaceholder("top5coinsname", () -> Database.scoreboardcoinsName.getOrDefault(5, " "));
-        api.staticPlaceholder("top6coinsname", () -> Database.scoreboardcoinsName.getOrDefault(6, " "));
-        api.staticPlaceholder("top7coinsname", () -> Database.scoreboardcoinsName.getOrDefault(7, " "));
-        api.staticPlaceholder("top8coinsname", () -> Database.scoreboardcoinsName.getOrDefault(8, " "));
-        api.staticPlaceholder("top9coinsname", () -> Database.scoreboardcoinsName.getOrDefault(9, " "));
-        api.staticPlaceholder("top10coinsname", () -> Database.scoreboardcoinsName.getOrDefault(10, " "));
-
-        api.staticPlaceholder("top1coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(1, 0.0).toString());
-        api.staticPlaceholder("top2coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(2, 0.0).toString());
-        api.staticPlaceholder("top3coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(3, 0.0).toString());
-        api.staticPlaceholder("top4coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(4, 0.0).toString());
-        api.staticPlaceholder("top5coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(5, 0.0).toString());
-        api.staticPlaceholder("top6coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(6, 0.0).toString());
-        api.staticPlaceholder("top7coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(7, 0.0).toString());
-        api.staticPlaceholder("top8coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(8, 0.0).toString());
-        api.staticPlaceholder("top9coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(9, 0.0).toString());
-        api.staticPlaceholder("top10coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(10, 0.0).toString());
-
-        api.staticPlaceholder("top1timename", () -> Database.scoreboardtimeName.getOrDefault(1, " "));
-        api.staticPlaceholder("top2timename", () -> Database.scoreboardtimeName.getOrDefault(2, " "));
-        api.staticPlaceholder("top3timename", () -> Database.scoreboardtimeName.getOrDefault(3, " "));
-        api.staticPlaceholder("top4timename", () -> Database.scoreboardtimeName.getOrDefault(4, " "));
-        api.staticPlaceholder("top5timename", () -> Database.scoreboardtimeName.getOrDefault(5, " "));
-        api.staticPlaceholder("top6timename", () -> Database.scoreboardtimeName.getOrDefault(6, " "));
-        api.staticPlaceholder("top7timename", () -> Database.scoreboardtimeName.getOrDefault(7, " "));
-        api.staticPlaceholder("top8timename", () -> Database.scoreboardtimeName.getOrDefault(8, " "));
-        api.staticPlaceholder("top9timename", () -> Database.scoreboardtimeName.getOrDefault(9, " "));
-        api.staticPlaceholder("top10timename", () -> Database.scoreboardtimeName.getOrDefault(10, " "));
-
-        api.staticPlaceholder("top1timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(1, (long) 0)));
-        api.staticPlaceholder("top2timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(2, (long) 0)));
-        api.staticPlaceholder("top3timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(3, (long) 0)));
-        api.staticPlaceholder("top4timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(4, (long) 0)));
-        api.staticPlaceholder("top5timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(5, (long) 0)));
-        api.staticPlaceholder("top6timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(6, (long) 0)));
-        api.staticPlaceholder("top7timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(7, (long) 0)));
-        api.staticPlaceholder("top8timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(8, (long) 0)));
-        api.staticPlaceholder("top9timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(9, (long) 0)));
-        api.staticPlaceholder("top10timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(10, (long) 0)));
+            api.staticPlaceholder("top" + value + "powername", () -> Loader.scoreboardPowerName.getOrDefault(1, " "), new String[0]);
+            api.staticPlaceholder("top" + value + "powercount", () -> String.valueOf(round(Loader.scoreboardPowerValue.getOrDefault(1, 0.0), 2)), new String[0]);
+        }
 
         api.visitorSensitivePlaceholder("time_player", (p) -> Database.profileFactions.get(p.getUniqueId()).getTime());
     }
