@@ -24,12 +24,15 @@ public class MechanicHandlers implements Listener {
         // Nu merge PreLoginEvent si nici Async.
         API.getMainAPI().coords.put(player.getName(), false);
         API.getMainAPI().played.put(player.getName(), System.currentTimeMillis());
-        if (!player.hasPlayedBefore()) {
-            API.getDatabase().addNewPlayer(player);
-        } else {
-            Database.addDatesPlayerHub(player);
-            Database.addDatesPlayerFactions(player);
-        }
+        API.getDatabase().playerExist(player, bool -> {
+            if (!bool) {
+                API.getDatabase().addNewPlayer(player);
+                Database.addDatesPlayerHub(player);
+            } else {
+                Database.addDatesPlayerHub(player);
+                Database.addDatesPlayerFactions(player);
+            }
+        });
         if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
             Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
         } else {

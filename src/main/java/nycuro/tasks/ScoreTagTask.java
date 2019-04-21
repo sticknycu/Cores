@@ -43,7 +43,11 @@ public class ScoreTagTask extends Task {
                 if (pm.getName().equals(player.getName())) rank = "*";
             }
             if (profileHub != null) {
-                level = String.valueOf(profileFactions.getLevel());
+                try {
+                    level = String.valueOf(profileFactions.getLevel());
+                } catch (Exception e) {
+                    //
+                }
             }
             String type = "&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:&7,:";
             String[] split = type.split(",");

@@ -2,6 +2,10 @@ package nycuro;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.ConsoleCommandSender;
+import cn.nukkit.entity.Entity;
+import cn.nukkit.entity.passive.EntityAnimal;
+import cn.nukkit.entity.passive.EntityChicken;
+import cn.nukkit.level.Level;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.DummyBossBar;
@@ -9,6 +13,7 @@ import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
 import it.unimi.dsi.fastutil.objects.*;
+import javafx.animation.Animation;
 import nycuro.abuse.handlers.AbuseHandlers;
 import nycuro.ai.AiAPI;
 import nycuro.api.*;
@@ -198,10 +203,10 @@ public class Loader extends PluginBase {
                 MechanicUtils.getTops();
             }
         }, 20 * 10, 20 * 60 * 3, true);
-        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+        /*this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
-                /*API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "spawnentities");
+                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "spawnentities");
                 for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
                     LuckPermsApi api = LuckPerms.getApi();
                     NodeFactory NODE_BUILDER = api.getNodeFactory();
@@ -237,15 +242,27 @@ public class Loader extends PluginBase {
                             }
                         }
                     }
-                }*/
+                }
             }
-        }, 20 * 15, 20 * 60 * 5);
-        /*this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+        }, 20 * 15, 20 * 60 * 5);*/
+        this.getServer().getScheduler().scheduleRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
-                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "mob removeall");
+                for (Level level : API.getMainAPI().getServer().getLevels().values()) {
+                    for (Entity entity : level.getEntities()) {
+                        switch (entity.getNetworkId()) {
+                            case 10:
+                            case 11:
+                            case 12:
+                            case 13:
+                                entity.close();
+                                break;
+                        }
+                    }
+                    API.getMechanicAPI().spawnEntities();
+                }
             }
-        });*/
+        }, 20 * 60 * 3, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20, true);

@@ -70,6 +70,7 @@ public class ScoreboardTask extends Task {
 
         scoreboard.objective = dobj;
 
+        scoreboard.despawnFrom(player);
         scoreboard.update();
         scoreboard.addPlayer(player);
     }

@@ -1,7 +1,6 @@
 /*package nycuro.ai.entity;
 
 import cn.nukkit.item.Item;
-import de.kniffo80.mobplugin.entities.monster.walking.Zombie;
 import nycuro.API;
 
 /**

@@ -23,9 +23,7 @@ import nycuro.database.Database;
 import nycuro.database.objects.ProfileHub;
 import nycuro.gui.list.ResponseFormWindow;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.function.Consumer;
 
 /**
@@ -40,7 +38,11 @@ public class MechanicAPI {
         double y = entity.getLevel().getSpawnLocation().getY();
         double z = entity.getLevel().getSpawnLocation().getZ();
         Vector3 vector3 = new Vector3(x, y, z);
-        return entity.getLevel().getName().equalsIgnoreCase("world") && entity.getPosition().distance(vector3) <= 300 && !((Player) entity).isOp();
+        if (entity instanceof Player) {
+            return entity.getLevel().getName().equalsIgnoreCase("world") && entity.getPosition().distance(vector3) <= 300 && !((Player) entity).isOp();
+        } else {
+            return entity.getLevel().getName().equalsIgnoreCase("world") && entity.getPosition().distance(vector3) <= 300;
+        }
     }
 
     public boolean isOnPvP(Entity entity) {
@@ -48,7 +50,11 @@ public class MechanicAPI {
         double y = entity.getLevel().getSpawnLocation().getY();
         double z = entity.getLevel().getSpawnLocation().getZ();
         Vector3 vector3 = new Vector3(x, y, z);
-        return entity.getLevel().getName().equalsIgnoreCase("pvp") && entity.getPosition().distance(vector3) <= 34 && !((Player) entity).isOp() && entity.getY() >= 75;
+        if (entity instanceof Player) {
+            return entity.getLevel().getName().equalsIgnoreCase("pvp") && entity.getPosition().distance(vector3) <= 34 && !((Player) entity).isOp() && entity.getY() >= 75;
+        } else {
+            return entity.getLevel().getName().equalsIgnoreCase("pvp") && entity.getPosition().distance(vector3) <= 34 && entity.getY() >= 75;
+        }
     }
 
     public boolean isOnBorder(Player player) {
@@ -82,18 +88,20 @@ public class MechanicAPI {
             new BossEntity();
             API.getMessageAPI().sendDropPartySpawnedMessage(player);
         }
-    }
+    }*/
 
     public void spawnEntities() {
-        Entity entities1 = Entity.createEntity(10, API.getMainAPI().getServer().getDefaultLevel().getChunk(129 >> 4, 48 >> 4), API.getAiAPI().getChickenNBT());
-        Entity entities2 = Entity.createEntity(11, API.getMainAPI().getServer().getDefaultLevel().getChunk(129 >> 4, 57 >> 4), API.getAiAPI().getCowNBT());
-        Entity entities3 = Entity.createEntity(12, API.getMainAPI().getServer().getDefaultLevel().getChunk(129 >> 4, 48 >> 4), API.getAiAPI().getPigNBT());
-        Entity entities4 = Entity.createEntity(13, API.getMainAPI().getServer().getDefaultLevel().getChunk(120 >> 4, 48 >> 4), API.getAiAPI().getSheepNBT());
-        entities1.spawnToAll();
-        entities2.spawnToAll();
-        entities3.spawnToAll();
-        entities4.spawnToAll();
-    }*/
+        for (int i = 0; i <= 5; i++) {
+            Entity entities1 = Entity.createEntity(10, API.getMainAPI().getServer().getDefaultLevel().getChunk(1050 >> 4, 1199 >> 4), API.getAiAPI().getChickenNBT());
+            Entity entities2 = Entity.createEntity(11, API.getMainAPI().getServer().getDefaultLevel().getChunk(1054 >> 4, 1233 >> 4), API.getAiAPI().getCowNBT());
+            Entity entities3 = Entity.createEntity(12, API.getMainAPI().getServer().getDefaultLevel().getChunk(1050 >> 4, 1283 >> 4), API.getAiAPI().getPigNBT());
+            Entity entities4 = Entity.createEntity(13, API.getMainAPI().getServer().getDefaultLevel().getChunk(1036 >> 4, 1265 >> 4), API.getAiAPI().getSheepNBT());
+            entities1.spawnToAll();
+            entities2.spawnToAll();
+            entities3.spawnToAll();
+            entities4.spawnToAll();
+        }
+    }
 
     public void sendDropPartyMessageBroadcast(Player player) {
         API.getMessageAPI().sendDropPartyEventMessage(player);

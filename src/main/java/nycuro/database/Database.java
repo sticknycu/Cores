@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class Database {
 
@@ -441,6 +442,25 @@ public class Database {
             @Override
             public void onRun() {
                 saveUnAsyncDatesPlayerFromFactions(player);
+            }
+        });
+    }
+
+    public void playerExist(Player player, Consumer<Boolean> consumer) {
+        String uuid = player.getUniqueId().toString();
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("SELECT * from `dates` WHERE `uuid` =?")) {
+                    preparedStatement.setString(1, uuid);
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        consumer.accept(resultSet.next());
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }

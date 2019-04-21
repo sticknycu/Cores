@@ -64,6 +64,13 @@
             <systemPath>${basedir}/lib/Factions.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>me.onebone</groupId>
+            <artifactId>actaeon</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/actaeon-1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>gt.creeperface.nukkit.scoreboardapi</groupId>
             <artifactId>ScoreboardAPI</artifactId>
             <version>1.0</version>
