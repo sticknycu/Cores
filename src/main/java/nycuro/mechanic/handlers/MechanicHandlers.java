@@ -22,8 +22,8 @@ import nycuro.database.Database;
  */
 public class MechanicHandlers implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onJoin(PlayerJoinEvent event) {
+    @EventHandler
+    public void onRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
         // Nu merge PreLoginEvent si nici Async.
         API.getMainAPI().coords.put(player.getName(), false);
@@ -71,11 +71,6 @@ public class MechanicHandlers implements Listener {
         }, 20 * 7, 20 * 3, true);
     }
 
-    @EventHandler
-    public void onRespawn(PlayerRespawnEvent event) {
-        Player player = event.getPlayer();
-        startItems(player);
-    }
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
