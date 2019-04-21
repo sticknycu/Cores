@@ -1,27 +1,17 @@
 package nycuro;
 
 import cn.nukkit.Player;
-import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.entity.Entity;
-import cn.nukkit.entity.EntityCreature;
-import cn.nukkit.entity.EntityHuman;
-import cn.nukkit.entity.data.Skin;
 import cn.nukkit.entity.mob.EntityCreeper;
-import cn.nukkit.entity.passive.EntityAnimal;
-import cn.nukkit.entity.passive.EntityChicken;
-import cn.nukkit.item.Item;
 import cn.nukkit.level.Level;
-import cn.nukkit.level.Position;
 import cn.nukkit.nbt.tag.*;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
-import cn.nukkit.utils.Utils;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
 import it.unimi.dsi.fastutil.objects.*;
-import javafx.animation.Animation;
 import nycuro.abuse.handlers.AbuseHandlers;
 import nycuro.ai.AiAPI;
 import nycuro.api.*;
@@ -141,20 +131,6 @@ public class Loader extends PluginBase {
         initDatabase();
         registerTasks();
         addEntities();
-
-        /*for (Level level : API.getMainAPI().getServer().getLevels().values()) {
-            for (Entity entity : level.getEntities()) {
-                switch (entity.getNetworkId()) {
-                    case -1:
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                        entity.close();
-                        break;
-                }
-            }
-        }*/
     }
 
     @Override
@@ -298,7 +274,6 @@ public class Loader extends PluginBase {
                 for (Level level : API.getMainAPI().getServer().getLevels().values()) {
                     for (Entity entity : level.getEntities()) {
                         switch (entity.getNetworkId()) {
-                            case -1:
                             case 10:
                             case 11:
                             case 12:
