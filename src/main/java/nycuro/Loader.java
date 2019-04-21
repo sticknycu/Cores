@@ -3,13 +3,21 @@ package nycuro;
 import cn.nukkit.Player;
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.entity.Entity;
+import cn.nukkit.entity.EntityCreature;
+import cn.nukkit.entity.EntityHuman;
+import cn.nukkit.entity.data.Skin;
+import cn.nukkit.entity.mob.EntityCreeper;
 import cn.nukkit.entity.passive.EntityAnimal;
 import cn.nukkit.entity.passive.EntityChicken;
+import cn.nukkit.item.Item;
 import cn.nukkit.level.Level;
+import cn.nukkit.level.Position;
+import cn.nukkit.nbt.tag.*;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
+import cn.nukkit.utils.Utils;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
 import it.unimi.dsi.fastutil.objects.*;
@@ -46,6 +54,7 @@ import nycuro.utils.MechanicUtils;
 import nycuro.utils.RandomTPUtils;
 import nycuro.utils.WarpUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -78,6 +87,29 @@ public class Loader extends PluginBase {
         Database.getTopTime();
     }
 
+    private void addEntities() {
+        CompoundTag nbt = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1131 + 0.5))
+                        .add(new DoubleTag("", 69))
+                        .add(new DoubleTag("", 1270 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "Happy NPC")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("npc", true)
+                .putFloat("scale", 1);
+        Entity entity = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1131 >> 4, 1270 >> 4), nbt);
+        entity.spawnToAll();
+    }
+
     public static String time(long time) {
         int hours = (int) TimeUnit.MILLISECONDS.toHours(time);
         int minutes = (int) (TimeUnit.MILLISECONDS.toMinutes(time) - hours * 60);
@@ -108,6 +140,21 @@ public class Loader extends PluginBase {
         registerEvents();
         initDatabase();
         registerTasks();
+        addEntities();
+
+        /*for (Level level : API.getMainAPI().getServer().getLevels().values()) {
+            for (Entity entity : level.getEntities()) {
+                switch (entity.getNetworkId()) {
+                    case -1:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                        entity.close();
+                        break;
+                }
+            }
+        }*/
     }
 
     @Override
@@ -251,6 +298,7 @@ public class Loader extends PluginBase {
                 for (Level level : API.getMainAPI().getServer().getLevels().values()) {
                     for (Entity entity : level.getEntities()) {
                         switch (entity.getNetworkId()) {
+                            case -1:
                             case 10:
                             case 11:
                             case 12:

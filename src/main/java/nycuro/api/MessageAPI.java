@@ -59,6 +59,19 @@ public class MessageAPI {
         return STRING;
     }
 
+    public String sendMobFarmMessage(Player player) {
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§e» §6You have been teleported to MobFarm!";
+                break;
+            case 1:
+                STRING = "§e» §6Ai fost teleportat la MobFarm!";
+                break;
+        }
+        return STRING;
+    }
+
     private String getRank(IPlayer player) {
         String rank = "";
         String group = Objects.requireNonNull(ChatHandlers.api.getUser(player.getUniqueId())).getPrimaryGroup().toUpperCase();
