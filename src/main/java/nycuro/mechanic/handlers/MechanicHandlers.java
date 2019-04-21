@@ -7,6 +7,9 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerChatEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
+import cn.nukkit.event.player.PlayerRespawnEvent;
+import cn.nukkit.inventory.PlayerInventory;
+import cn.nukkit.item.Item;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.Loader;
@@ -32,7 +35,7 @@ public class MechanicHandlers implements Listener {
                 Database.addDatesPlayerFactions(player);
             }
         });
-        if (Loader.startTime.get(player.getUniqueId()) > 0) {
+        if (Loader.startTime.get(player.getUniqueId()) != null) {
             Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
         } else {
             Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
@@ -51,6 +54,7 @@ public class MechanicHandlers implements Listener {
                 Integer playerTime = API.getMainAPI().timers.getOrDefault(username, 1);
                 switch (playerTime) {
                     case 1:
+                        startItems(player);
                         API.getMessageAPI().sendFirstJoinTitle(player);
                         break;
                     case 2:
@@ -68,6 +72,11 @@ public class MechanicHandlers implements Listener {
     }
 
     @EventHandler
+    public void onRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        startItems(player);
+    }
+    @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         Loader.startTime.remove(player.getUniqueId());
@@ -81,4 +90,26 @@ public class MechanicHandlers implements Listener {
             event.setCancelled(true);
         }
     }
+
+    private void startItems(Player player) {
+        Item COMPASS = Item.get(Item.COMPASS);
+        COMPASS.setCustomName(API.getMessageAPI().getCompassMessage(player));
+        Item DYE = Item.get(Item.DYE, 8, 1);
+        DYE.setCustomName(API.getMessageAPI().getDyeStageOneMessage(player));
+        Item FEATHER = Item.get(Item.FEATHER);
+        FEATHER.setCustomName(API.getMessageAPI().getFeatherMessage(player));
+        Item NETHER_STAR = Item.get(Item.NETHER_STAR);
+        NETHER_STAR.setCustomName(API.getMessageAPI().getNetherStarMessage(player));
+        Item BOW = Item.get(Item.BOW);
+        BOW.setCustomName(API.getMessageAPI().getBowMessage(player));
+        Item ARROW = Item.get(Item.ARROW, 0 , 64);
+        PlayerInventory playerInventory = player.getInventory();
+        playerInventory.setItem(0, DYE);
+        playerInventory.setItem(2, FEATHER);
+        playerInventory.setItem(4, COMPASS);
+        playerInventory.setItem(6, BOW);
+        playerInventory.setItem(8, NETHER_STAR);
+        playerInventory.setItem(9, ARROW);
+    }
+
 }
