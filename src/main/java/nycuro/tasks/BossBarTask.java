@@ -29,8 +29,12 @@ public class BossBarTask extends Task {
                     count = profile.getExperience();
                     profile.setTime(profile.getTime() + 1000);
                 }
-                String message = API.getMessageAPI().getMessageBossBar(player, level, necessary, count);
-                API.getMainAPI().bossbar.get(player.getName()).setText(message);
+                try {
+                    String message = API.getMessageAPI().getMessageBossBar(player, level, necessary, count);
+                    API.getMainAPI().bossbar.get(player.getName()).setText(message);
+                } catch (Exception e) {
+                    //
+                }
             }
         }
     }

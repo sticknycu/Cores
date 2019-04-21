@@ -44,7 +44,6 @@ import nycuro.utils.MechanicUtils;
 import nycuro.utils.RandomTPUtils;
 import nycuro.utils.WarpUtils;
 
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -137,6 +136,7 @@ public class Loader extends PluginBase {
     public void onDisable() {
         saveToDatabase();
         removeAllFromMaps();
+        removeNPC();
     }
 
     private void saveToDatabase() {
@@ -291,6 +291,16 @@ public class Loader extends PluginBase {
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CombatLoggerTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreTagTask(), 20, true);
+    }
+
+    private void removeNPC() {
+        for (Level level : API.getMainAPI().getServer().getLevels().values()) {
+            for (Entity entity : level.getEntities()) {
+                if (entity.namedTag.getBoolean("npc")) {
+                    entity.close();
+                }
+            }
+        }
     }
 
     private void registerPlaceHolders() {
