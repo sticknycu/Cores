@@ -2,12 +2,8 @@ package nycuro.mechanic.handlers;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
-import cn.nukkit.event.player.PlayerChatEvent;
-import cn.nukkit.event.player.PlayerJoinEvent;
-import cn.nukkit.event.player.PlayerQuitEvent;
-import cn.nukkit.event.player.PlayerRespawnEvent;
+import cn.nukkit.event.player.*;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.scheduler.Task;
@@ -23,8 +19,32 @@ import nycuro.database.Database;
 public class MechanicHandlers implements Listener {
 
     @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        enterThings(player);
+    }
+    @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
+        enterThings(player);
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        Loader.startTime.remove(player.getUniqueId());
+    }
+
+    @EventHandler
+    public void onChat(PlayerChatEvent event) {
+        String message = event.getMessage();
+        if (message.equalsIgnoreCase("జ్ఞ\u200Cా")) {
+            API.getMessageAPI().sendAbuseMessage(event.getPlayer());
+            event.setCancelled(true);
+        }
+    }
+
+    private void enterThings(Player player) {
         // Nu merge PreLoginEvent si nici Async.
         API.getMainAPI().coords.put(player.getName(), false);
         API.getDatabase().playerExist(player, bool -> {
@@ -69,21 +89,6 @@ public class MechanicHandlers implements Listener {
                 API.getMainAPI().timers.put(username, playerTime + 1);
             }
         }, 20 * 7, 20 * 3, true);
-    }
-
-    @EventHandler
-    public void onQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        Loader.startTime.remove(player.getUniqueId());
-    }
-
-    @EventHandler
-    public void onChat(PlayerChatEvent event) {
-        String message = event.getMessage();
-        if (message.equalsIgnoreCase("జ్ఞ\u200Cా")) {
-            API.getMessageAPI().sendAbuseMessage(event.getPlayer());
-            event.setCancelled(true);
-        }
     }
 
     private void startItems(Player player) {
