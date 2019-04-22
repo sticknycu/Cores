@@ -10,6 +10,8 @@ import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.Database;
+import org.itxtech.synapseapi.event.player.SynapsePlayerConnectEvent;
+import org.itxtech.synapseapi.SynapsePlayer;
 
 /**
  * author: NycuRO
@@ -23,10 +25,20 @@ public class MechanicHandlers implements Listener {
         Player player = event.getPlayer();
         enterThings(player);
     }
+
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
         enterThings(player);
+    }
+
+    @EventHandler
+    public void onSynapse(SynapsePlayerConnectEvent event) {
+        SynapsePlayer player = event.getPlayer();
+        if (player instanceof Player) {
+            Player p = (Player) player;
+            enterThings(p);
+        }
     }
 
     @EventHandler
@@ -74,7 +86,6 @@ public class MechanicHandlers implements Listener {
                 Integer playerTime = API.getMainAPI().timers.getOrDefault(username, 1);
                 switch (playerTime) {
                     case 1:
-                        startItems(player);
                         API.getMessageAPI().sendFirstJoinTitle(player);
                         break;
                     case 2:
@@ -82,6 +93,7 @@ public class MechanicHandlers implements Listener {
                         break;
                     case 3:
                         API.getMessageAPI().sendThreeJoinTitle(player);
+                        startItems(player);
                         break;
                     default:
                         API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
