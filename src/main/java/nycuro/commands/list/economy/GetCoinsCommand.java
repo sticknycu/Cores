@@ -25,7 +25,7 @@ public class GetCoinsCommand extends PrincipalCommand {
         } else if (strings.length == 1) {
             Player player = API.getMainAPI().getServer().getPlayerExact(strings[0]);
             double money = Database.profileFactions.get(player.getUniqueId()).getDollars();
-            API.getMessageAPI().getPlayerMoneyMessage((Player) commandSender, player, money);
+            API.getMessageAPI().getPlayerMoneyMessage(commandSender, player, money);
         } else {
             API.getMessageAPI().getMoneyExceptionMessage((Player) commandSender);
             return true;

@@ -172,8 +172,8 @@ public class MessageAPI {
                         "§eDeaths: §6" + profileFactions.getDeaths() + "\n" +
                         "§eVotes: §6" + /* votes */ "\n" +
                         "§eFaction: §6" + (FPlayers.i.get((Player) player).hasFaction() ? FPlayers.i.get((Player) player).getFaction().getTag() : "NONE") + "\n" +
-                        (player.isOnline() ? ((((Player) commandSender).isOp() ? ("§eIP: §6" + ((Player) player).getAddress()) : ("")) + "\n") : ("")) +
-                        (player.isOnline() ? ((((Player) commandSender).isOp() ? ("§eDevice Model: §6" + ((Player) player).getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
+                        (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + ((Player) player).getAddress()) : ("")) + "\n") : ("")) +
+                        (player.isOnline() ? ((commandSender.isOp() ? ("§eDevice Model: §6" + ((Player) player).getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
                         (player.isOnline() ? ("§eOS: §6" + getOS((Player) player) + "\n") : "");
                 break;
             case 1:
@@ -192,8 +192,8 @@ public class MessageAPI {
                         "§eDeaths: §6" + profileFactions.getDeaths() + "\n" +
                         "§eVoturi: §6" + /* votes */ "\n" +
                         "§eFactiune: §6" + (FPlayers.i.get((Player) player).hasFaction() ? FPlayers.i.get((Player) player).getFaction().getTag() : "NONE") + "\n" +
-                        (player.isOnline() ? ((((Player) commandSender).isOp() ? ("§eIP: §6" + ((Player) player).getAddress()) : ("")) + "\n") : ("")) +
-                        (player.isOnline() ? ((((Player) commandSender).isOp() ? ("§eDevice Model: §6" + ((Player) player).getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
+                        (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + ((Player) player).getAddress()) : ("")) + "\n") : ("")) +
+                        (player.isOnline() ? ((commandSender.isOp() ? ("§eDevice Model: §6" + ((Player) player).getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
                         (player.isOnline() ? ("§eOS: §6" + getOS((Player) player) + "\n") : "");
                 break;
         }

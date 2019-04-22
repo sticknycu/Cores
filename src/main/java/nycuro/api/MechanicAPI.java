@@ -91,16 +91,14 @@ public class MechanicAPI {
     }*/
 
     public void spawnEntities() {
-        for (int i = 0; i <= 5; i++) {
-            Entity entities1 = Entity.createEntity(10, API.getMainAPI().getServer().getDefaultLevel().getChunk(1050 >> 4, 1199 >> 4), API.getAiAPI().getChickenNBT());
-            Entity entities2 = Entity.createEntity(11, API.getMainAPI().getServer().getDefaultLevel().getChunk(1054 >> 4, 1233 >> 4), API.getAiAPI().getCowNBT());
-            Entity entities3 = Entity.createEntity(12, API.getMainAPI().getServer().getDefaultLevel().getChunk(1050 >> 4, 1283 >> 4), API.getAiAPI().getPigNBT());
-            Entity entities4 = Entity.createEntity(13, API.getMainAPI().getServer().getDefaultLevel().getChunk(1036 >> 4, 1265 >> 4), API.getAiAPI().getSheepNBT());
-            entities1.spawnToAll();
-            entities2.spawnToAll();
-            entities3.spawnToAll();
-            entities4.spawnToAll();
-        }
+        Entity entities1 = Entity.createEntity(10, API.getMainAPI().getServer().getDefaultLevel().getChunk(1050 >> 4, 1199 >> 4), API.getAiAPI().getChickenNBT());
+        Entity entities2 = Entity.createEntity(11, API.getMainAPI().getServer().getDefaultLevel().getChunk(1054 >> 4, 1233 >> 4), API.getAiAPI().getCowNBT());
+        Entity entities3 = Entity.createEntity(12, API.getMainAPI().getServer().getDefaultLevel().getChunk(1050 >> 4, 1283 >> 4), API.getAiAPI().getPigNBT());
+        Entity entities4 = Entity.createEntity(13, API.getMainAPI().getServer().getDefaultLevel().getChunk(1036 >> 4, 1265 >> 4), API.getAiAPI().getSheepNBT());
+        entities1.spawnToAll();
+        entities2.spawnToAll();
+        entities3.spawnToAll();
+        entities4.spawnToAll();
     }
 
     public void sendDropPartyMessageBroadcast(Player player) {

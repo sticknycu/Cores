@@ -1,8 +1,10 @@
 package nycuro.tasks;
 
+import cn.nukkit.Player;
+import cn.nukkit.potion.Effect;
 import cn.nukkit.scheduler.Task;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import it.unimi.dsi.fastutil.booleans.BooleanCollection;
+import it.unimi.dsi.fastutil.objects.*;
 import nycuro.API;
 import nycuro.database.Database;
 
@@ -17,6 +19,16 @@ public class CombatLoggerTask extends Task {
 
     @Override
     public void onRun(int i) {
+        for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+            if (API.getMechanicAPI().isOnSpawn(player)) {
+                if (!API.getMainAPI().isOnMobFarm.getBoolean(player)) {
+                    Effect effect = Effect.getEffect(Effect.SPEED);
+                    effect.setAmplifier(1);
+                    effect.setDuration(20 * 3);
+                    player.addEffect(effect);
+                }
+            }
+        }
         API.getCombatAPI().inCombat.forEach((player, time) -> {
             if (k.getOrDefault(player.getName(), -1) == -1) k.put(player.getName(), 13);
             long count = k.getInt(player.getName());

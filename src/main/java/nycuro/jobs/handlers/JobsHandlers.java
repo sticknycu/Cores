@@ -104,7 +104,9 @@ public class JobsHandlers implements Listener {
                     Player damager = (Player) evc.getDamager();
                     if (!API.getMechanicAPI().isOnSpawn(damager)) {
                         if (!API.getMechanicAPI().isOnSpawn(eventEntity)) {
-                            sendToRespawn(eventEntity, damager, event);
+                            if (!(eventEntity instanceof Player)) {
+                                sendToRespawn(eventEntity, damager, event);
+                            }
                             ProfileFactions profile = Database.profileFactions.get(damager.getUniqueId());
                             int job = profile.getJob();
                             switch (job) {
@@ -128,7 +130,9 @@ public class JobsHandlers implements Listener {
                 Player damager = (Player) ev.getDamager();
                 if (!API.getMechanicAPI().isOnSpawn(damager)) {
                     if (!API.getMechanicAPI().isOnSpawn(eventEntity)) {
-                        sendToRespawn(eventEntity, damager, event);
+                        if (eventEntity instanceof Player) {
+                            sendToRespawn(eventEntity, damager, event);
+                        }
                         ProfileFactions profile = Database.profileFactions.get(damager.getUniqueId());
                         int job = profile.getJob();
                         switch (job) {

@@ -2,6 +2,7 @@ package nycuro;
 
 import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
+import cn.nukkit.entity.item.EntityItem;
 import cn.nukkit.entity.mob.EntityCreeper;
 import cn.nukkit.level.Level;
 import cn.nukkit.nbt.tag.*;
@@ -20,7 +21,10 @@ import nycuro.commands.list.*;
 import nycuro.commands.list.economy.AddCoinsCommand;
 import nycuro.commands.list.economy.GetCoinsCommand;
 import nycuro.commands.list.economy.SetCoinsCommand;
-import nycuro.commands.list.mechanic.*;
+import nycuro.commands.list.mechanic.TopCoinsCommand;
+import nycuro.commands.list.mechanic.TopDeathsCommand;
+import nycuro.commands.list.mechanic.TopKillsCommand;
+import nycuro.commands.list.mechanic.TopTimeCommand;
 import nycuro.commands.list.stats.StatsCommand;
 import nycuro.commands.list.time.GetTimeCommand;
 import nycuro.crate.CrateAPI;
@@ -44,7 +48,7 @@ import nycuro.utils.MechanicUtils;
 import nycuro.utils.RandomTPUtils;
 import nycuro.utils.WarpUtils;
 
-import java.util.*;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 
@@ -61,6 +65,7 @@ public class Loader extends PluginBase {
     public Object2IntMap<String> timers = new Object2IntOpenHashMap<>();
     public Object2BooleanMap<String> coords = new Object2BooleanOpenHashMap<>();
     public Object2LongMap<String> played = new Object2LongOpenHashMap<>();
+    public Object2BooleanMap<Player> isOnMobFarm = new Object2BooleanOpenHashMap<>();
 
     public static Object2ObjectMap<Integer, String> scoreboardPowerName = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectMap<Integer, Double> scoreboardPowerValue = new Object2ObjectOpenHashMap<>();
@@ -104,7 +109,7 @@ public class Loader extends PluginBase {
         int minutes = (int) (TimeUnit.MILLISECONDS.toMinutes(time) - hours * 60);
         int MINS = (int) TimeUnit.MILLISECONDS.toMinutes(time);
         int seconds = (int) (TimeUnit.MILLISECONDS.toSeconds(time) - MINS * 60);
-        return String.valueOf(hours + ":" + minutes + ":" + seconds);
+        return hours + ":" + minutes + ":" + seconds;
     }
 
     public static double round(double value, int places) {
@@ -140,7 +145,7 @@ public class Loader extends PluginBase {
     }
 
     private void saveToDatabase() {
-        for (Player player: this.getServer().getOnlinePlayers().values()) {
+        for (Player player : this.getServer().getOnlinePlayers().values()) {
             Database.saveUnAsyncDatesPlayerFromHub(player);
             Database.saveUnAsyncDatesPlayerFromFactions(player);
         }
@@ -278,9 +283,11 @@ public class Loader extends PluginBase {
                             case 11:
                             case 12:
                             case 13:
+                            case 69:
                                 entity.close();
                                 break;
                         }
+                        if (entity instanceof EntityItem) entity.close();
                     }
                     API.getMechanicAPI().spawnEntities();
                 }
@@ -314,13 +321,13 @@ public class Loader extends PluginBase {
             api.staticPlaceholder("top" + value + "deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(value, 0).toString());
 
             api.staticPlaceholder("top" + value + "coinsname", () -> Database.scoreboardcoinsName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "coinscount", () -> Database.scoreboardcoinsValue.getOrDefault(value, 0.0).toString());
+            api.staticPlaceholder("top" + value + "coinscount", () -> String.valueOf(round(Database.scoreboardcoinsValue.getOrDefault(value, 0.0), 2)));
 
             api.staticPlaceholder("top" + value + "timename", () -> Database.scoreboardtimeName.getOrDefault(value, " "));
             api.staticPlaceholder("top" + value + "timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(value, 0L)));
 
-            api.staticPlaceholder("top" + value + "powername", () -> Loader.scoreboardPowerName.getOrDefault(1, " "), new String[0]);
-            api.staticPlaceholder("top" + value + "powercount", () -> String.valueOf(round(Loader.scoreboardPowerValue.getOrDefault(1, 0.0), 2)), new String[0]);
+            api.staticPlaceholder("top" + value + "powername", () -> Loader.scoreboardPowerName.getOrDefault(1, " "));
+            api.staticPlaceholder("top" + value + "powercount", () -> String.valueOf(round(Loader.scoreboardPowerValue.getOrDefault(1, 0.0), 2)));
         }
 
         api.visitorSensitivePlaceholder("time_player", (p) -> Database.profileFactions.get(p.getUniqueId()).getTime());

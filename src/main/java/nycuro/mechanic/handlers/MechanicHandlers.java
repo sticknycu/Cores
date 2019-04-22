@@ -38,6 +38,7 @@ public class MechanicHandlers implements Listener {
         } else {
             Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
         }
+        API.getMainAPI().isOnMobFarm.putIfAbsent(player, false);
 
         API.getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
             @Override
