@@ -10,8 +10,6 @@ import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.Database;
-import org.itxtech.synapseapi.event.player.SynapsePlayerConnectEvent;
-import org.itxtech.synapseapi.SynapsePlayer;
 
 /**
  * author: NycuRO
@@ -21,24 +19,8 @@ import org.itxtech.synapseapi.SynapsePlayer;
 public class MechanicHandlers implements Listener {
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        enterThings(player);
-    }
-
-    @EventHandler
-    public void onRespawn(PlayerRespawnEvent event) {
-        Player player = event.getPlayer();
-        enterThings(player);
-    }
-
-    @EventHandler
-    public void onSynapse(SynapsePlayerConnectEvent event) {
-        SynapsePlayer player = event.getPlayer();
-        if (player instanceof Player) {
-            Player p = (Player) player;
-            enterThings(p);
-        }
+    public void onLogin(PlayerJoinEvent event) {
+        enterThings(event.getPlayer());
     }
 
     @EventHandler
@@ -60,47 +42,55 @@ public class MechanicHandlers implements Listener {
         // Nu merge PreLoginEvent si nici Async.
         API.getMainAPI().coords.put(player.getName(), false);
         API.getDatabase().playerExist(player, bool -> {
-            if (!bool) {
-                API.getDatabase().addNewPlayer(player);
-            } else {
-                Database.addDatesPlayerHub(player);
-                Database.addDatesPlayerFactions(player);
+            try {
+                if (!bool) {
+                    API.getDatabase().addNewPlayer(player);
+                } else {
+                    Database.addDatesPlayerHub(player);
+                    Database.addDatesPlayerFactions(player);
+                }
+            } finally {
+                API.getMainAPI().getServer().getScheduler().scheduleDelayedTask(new Task() {
+                    @Override
+                    public void onRun(int i) {
+                        startItems(player);
+                    }
+                }, 20 * 10, true);
+                if (Loader.startTime.get(player.getUniqueId()) != null) {
+                    Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
+                } else {
+                    Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
+                }
+
+                if (Loader.startTime.get(player.getUniqueId()) != null) {
+                    Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
+                } else {
+                    Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
+                }
+
+                API.getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+                    @Override
+                    public void onRun(int i) {
+                        String username = player.getName();
+                        Integer playerTime = API.getMainAPI().timers.getOrDefault(username, 1);
+                        switch (playerTime) {
+                            case 1:
+                                API.getMessageAPI().sendFirstJoinTitle(player);
+                                break;
+                            case 2:
+                                API.getMessageAPI().sendSecondJoinTitle(player);
+                                break;
+                            case 3:
+                                API.getMessageAPI().sendThreeJoinTitle(player);
+                                break;
+                            default:
+                                API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
+                        }
+                        API.getMainAPI().timers.put(username, playerTime + 1);
+                    }
+                }, 20 * 7, 20 * 3, true);
             }
         });
-        if (Loader.startTime.get(player.getUniqueId()) != null) {
-            Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
-        } else {
-            Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
-        }
-
-        if (Loader.startTime.get(player.getUniqueId()) != null) {
-            Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
-        } else {
-            Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
-        }
-
-        API.getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
-            @Override
-            public void onRun(int i) {
-                String username = player.getName();
-                Integer playerTime = API.getMainAPI().timers.getOrDefault(username, 1);
-                switch (playerTime) {
-                    case 1:
-                        API.getMessageAPI().sendFirstJoinTitle(player);
-                        break;
-                    case 2:
-                        API.getMessageAPI().sendSecondJoinTitle(player);
-                        break;
-                    case 3:
-                        API.getMessageAPI().sendThreeJoinTitle(player);
-                        startItems(player);
-                        break;
-                    default:
-                        API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
-                }
-                API.getMainAPI().timers.put(username, playerTime + 1);
-            }
-        }, 20 * 7, 20 * 3, true);
     }
 
     private void startItems(Player player) {
