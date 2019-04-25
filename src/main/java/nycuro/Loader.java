@@ -145,7 +145,7 @@ public class Loader extends PluginBase {
             }
         }, 20 * 10, 20 * 60 * 3, true);*/
         this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20 * 3, true);
-        this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 10, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 20, true);
     }
 
     private void registerPlaceHolders() {

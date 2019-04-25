@@ -7,8 +7,6 @@ import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileHub;
-import nycuro.utils.query.MCQuery;
-import nycuro.utils.query.QueryResponse;
 
 /**
  * author: NycuRO
