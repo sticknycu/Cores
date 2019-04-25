@@ -13,8 +13,6 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.level.Location;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.tasks.CombatLoggerTask;
-import org.itxtech.synapseapi.event.client.SynapseDataPacketSendEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
