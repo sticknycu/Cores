@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Cores.iml" filepath="$PROJECT_DIR$/.idea/Cores.iml" />
-      <module fileurl="file://$PROJECT_DIR$/nycuro.iml" filepath="$PROJECT_DIR$/nycuro.iml" />
     </modules>
   </component>
 </project>

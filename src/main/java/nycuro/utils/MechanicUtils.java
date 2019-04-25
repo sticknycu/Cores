@@ -1,21 +1,21 @@
 package nycuro.utils;
 
+import com.massivecraft.factions.Faction;
+import com.massivecraft.factions.Factions;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import nycuro.Loader;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 
-import nycuro.utils.ValueDoubleComparator;
-import com.massivecraft.factions.Faction;
-import com.massivecraft.factions.Factions;
-
-import java.util.*;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.UUID;
 
 public class MechanicUtils {
 
     public static void getTops() {
-
         Object2ObjectMap<String, Double> powerMap = new Object2ObjectOpenHashMap<>();
         Object2ObjectMap<String, Double> coinsMap = new Object2ObjectOpenHashMap<>();
         Object2ObjectMap<String, Integer> killsMap = new Object2ObjectOpenHashMap<>();
@@ -90,7 +90,6 @@ public class MechanicUtils {
             Loader.scoreboardPowerName.put(i + 1, sorted_map_power.keySet().toArray()[i].toString());
             Loader.scoreboardPowerValue.put(i + 1, Double.valueOf(sorted_map_power.values().toArray()[i].toString()));
         }
-
     }
 }
 

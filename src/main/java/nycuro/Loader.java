@@ -79,6 +79,7 @@ public class Loader extends PluginBase {
         Database.getTopKills();
         Database.getTopDeaths();
         Database.getTopTime();
+        Database.getTopVotes();
     }
 
     private void addEntities() {
@@ -328,6 +329,9 @@ public class Loader extends PluginBase {
 
             api.staticPlaceholder("top" + value + "powername", () -> Loader.scoreboardPowerName.getOrDefault(1, " "));
             api.staticPlaceholder("top" + value + "powercount", () -> String.valueOf(round(Loader.scoreboardPowerValue.getOrDefault(1, 0.0), 2)));
+
+            api.staticPlaceholder("top" + value + "votesname", () -> Database.scoreboardvotesName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "votescount", () -> Database.scoreboardvotesValue.getOrDefault(value, 0).toString());
         }
 
         api.visitorSensitivePlaceholder("time_player", (p) -> Database.profileFactions.get(p.getUniqueId()).getTime());

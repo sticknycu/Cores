@@ -71,6 +71,13 @@
             <systemPath>${basedir}/lib/actaeon-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>io.pocketvote</groupId>
+            <artifactId>PocketVote</artifactId>
+            <version>2.0.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/PocketVote.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>gt.creeperface.nukkit.scoreboardapi</groupId>
             <artifactId>ScoreboardAPI</artifactId>
             <version>1.0</version>

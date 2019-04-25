@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="cn.nukkit:nukkit:1.0-SNAPSHOT" type="repository">
+    <properties maven-id="cn.nukkit:nukkit:1.0-SNAPSHOT" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/nukkit-1.0-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

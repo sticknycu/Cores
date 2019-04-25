@@ -28,6 +28,8 @@ public class Database {
     public static Object2ObjectMap<Integer, Integer> scoreboarddeathsValue = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectMap<Integer, String> scoreboardtimeName = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectMap<Integer, Long> scoreboardtimeValue = new Object2ObjectOpenHashMap<>();
+    public static Object2ObjectMap<Integer, String> scoreboardvotesName = new Object2ObjectOpenHashMap<>();
+    public static Object2ObjectMap<Integer, Integer> scoreboardvotesValue = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectMap<UUID, ProfileHub> profileHub = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectMap<UUID, ProfileFactions> profileFactions = new Object2ObjectOpenHashMap<>();
     private static HikariDataSource DATASOURCE_HUB;
@@ -40,7 +42,7 @@ public class Database {
         DATASOURCE_HUB = new HikariDataSource(config);
         DATASOURCE_HUB.setMaximumPoolSize(1);
 
-        String query = "create table if not exists dates (`uuid` varchar, `name` varchar, `language` int, `gems` REAL, `time` INTEGER, `dollars` REAL)";
+        String query = "create table if not exists dates (`uuid` varchar, `name` varchar, `language` int, `gems` REAL, `time` INTEGER, `votes`  INTEGER)";
 
         try (Connection connection = DATASOURCE_HUB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -64,7 +66,8 @@ public class Database {
                                     resultSet.getString("name"),
                                     resultSet.getInt("language"),
                                     resultSet.getDouble("gems"),
-                                    resultSet.getLong("time")
+                                    resultSet.getLong("time"),
+                                    resultSet.getInt("votes")
                             ));
                         }
                     }
@@ -88,11 +91,12 @@ public class Database {
         ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
         try (Connection connection = DATASOURCE_HUB.getConnection();
              PreparedStatement preparedStatement =
-                     connection.prepareStatement("UPDATE `dates` SET `language` = ?, `gems` = ?, `time` = ? WHERE `uuid` = ?")) {
+                     connection.prepareStatement("UPDATE `dates` SET `language` = ?, `gems` = ?, `time` = ?, `votes` = ? WHERE `uuid` = ?")) {
             preparedStatement.setInt(1, profileHub.getLanguage());
             preparedStatement.setDouble(2, profileHub.getGems());
             preparedStatement.setLong(3, profileHub.getTime());
-            preparedStatement.setString(4, player.getUniqueId().toString());
+            preparedStatement.setInt(4, profileHub.getVotes());
+            preparedStatement.setString(5, player.getUniqueId().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -386,6 +390,68 @@ public class Database {
                                 case 10:
                                     scoreboardtimeName.put(10, resultSet.getString("name"));
                                     scoreboardtimeValue.put(10, resultSet.getLong("time"));
+                                    break;
+                            }
+                        }
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    public static void getTopVotes() {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_HUB.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("SELECT `name`, `votes` from `dates` ORDER BY `kills` DESC LIMIT 10")) {
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        while (resultSet.next()) {
+                            if (!scoreboardvotesValue.isEmpty()) scoreboardvotesValue.clear();
+                            if (!scoreboardvotesName.isEmpty()) scoreboardvotesName.clear();
+                            switch (resultSet.getRow()) {
+                                case 1:
+                                    scoreboardvotesName.put(1, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(1, resultSet.getInt("votes"));
+                                    break;
+                                case 2:
+                                    scoreboardvotesName.put(2, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(2, resultSet.getInt("votes"));
+                                    break;
+                                case 3:
+                                    scoreboardvotesName.put(3, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(3, resultSet.getInt("votes"));
+                                    break;
+                                case 4:
+                                    scoreboardvotesName.put(4, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(4, resultSet.getInt("votes"));
+                                    break;
+                                case 5:
+                                    scoreboardvotesName.put(5, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(5, resultSet.getInt("votes"));
+                                    break;
+                                case 6:
+                                    scoreboardvotesName.put(6, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(6, resultSet.getInt("votes"));
+                                    break;
+                                case 7:
+                                    scoreboardvotesName.put(7, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(7, resultSet.getInt("votes"));
+                                    break;
+                                case 8:
+                                    scoreboardvotesName.put(8, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(8, resultSet.getInt("votes"));
+                                    break;
+                                case 9:
+                                    scoreboardvotesName.put(9, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(9, resultSet.getInt("votes"));
+                                    break;
+                                case 10:
+                                    scoreboardvotesName.put(10, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(10, resultSet.getInt("votes"));
                                     break;
                             }
                         }
