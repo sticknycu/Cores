@@ -11,17 +11,17 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: cn.nukkit:nukkit:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.2.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.4" level="project" />
     <orderEntry type="module-library">
-      <library name="Maven: org.itxtech.synapse:synapse-api:1.0-SNAPSHOT">
+      <library name="Maven: io.pocketvote:PocketVote:2.0.1">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/synapse-api-1.0-SNAPSHOT.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/PocketVote.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.2.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.4" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.25.2" level="project" />

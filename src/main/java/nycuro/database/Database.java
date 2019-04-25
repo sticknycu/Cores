@@ -1,5 +1,6 @@
 package nycuro.database;
 
+import cn.nukkit.IPlayer;
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.AsyncTask;
 import com.zaxxer.hikari.HikariConfig;
@@ -27,6 +28,8 @@ public class Database {
     public static Object2ObjectMap<Integer, Integer> scoreboarddeathsValue = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectMap<Integer, String> scoreboardtimeName = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectMap<Integer, Long> scoreboardtimeValue = new Object2ObjectOpenHashMap<>();
+    public static Object2ObjectMap<Integer, String> scoreboardvotesName = new Object2ObjectOpenHashMap<>();
+    public static Object2ObjectMap<Integer, Integer> scoreboardvotesValue = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectMap<UUID, ProfileHub> profileHub = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectMap<UUID, ProfileFactions> profileFactions = new Object2ObjectOpenHashMap<>();
     private static HikariDataSource DATASOURCE_HUB;
@@ -39,7 +42,7 @@ public class Database {
         DATASOURCE_HUB = new HikariDataSource(config);
         DATASOURCE_HUB.setMaximumPoolSize(1);
 
-        String query = "create table if not exists dates (`uuid` varchar, `name` varchar, `language` int, `gems` REAL, `time` INTEGER, `dollars` REAL)";
+        String query = "create table if not exists dates (`uuid` varchar, `name` varchar, `language` int, `gems` REAL, `time` INTEGER, `votes` INTEGER)";
 
         try (Connection connection = DATASOURCE_HUB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -63,7 +66,8 @@ public class Database {
                                     resultSet.getString("name"),
                                     resultSet.getInt("language"),
                                     resultSet.getDouble("gems"),
-                                    resultSet.getLong("time")
+                                    resultSet.getLong("time"),
+                                    resultSet.getInt("votes")
                             ));
                         }
                     }
@@ -333,7 +337,7 @@ public class Database {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+                try (Connection connection = DATASOURCE_HUB.getConnection();
                      PreparedStatement preparedStatement =
                              connection.prepareStatement("SELECT `name`, `time` from `dates` ORDER BY `time` DESC LIMIT 10")) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -391,6 +395,68 @@ public class Database {
         });
     }
 
+    public static void getTopVotes() {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_HUB.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("SELECT `name`, `votes` from `dates` ORDER BY `time` DESC LIMIT 10")) {
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        while (resultSet.next()) {
+                            if (!scoreboardvotesValue.isEmpty()) scoreboardvotesValue.clear();
+                            if (!scoreboardvotesName.isEmpty()) scoreboardvotesName.clear();
+                            switch (resultSet.getRow()) {
+                                case 1:
+                                    scoreboardvotesName.put(1, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(1, resultSet.getInt("votes"));
+                                    break;
+                                case 2:
+                                    scoreboardvotesName.put(2, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(2, resultSet.getInt("votes"));
+                                    break;
+                                case 3:
+                                    scoreboardvotesName.put(3, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(3, resultSet.getInt("votes"));
+                                    break;
+                                case 4:
+                                    scoreboardvotesName.put(4, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(4, resultSet.getInt("votes"));
+                                    break;
+                                case 5:
+                                    scoreboardvotesName.put(5, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(5, resultSet.getInt("votes"));
+                                    break;
+                                case 6:
+                                    scoreboardvotesName.put(6, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(6, resultSet.getInt("votes"));
+                                    break;
+                                case 7:
+                                    scoreboardvotesName.put(7, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(7, resultSet.getInt("votes"));
+                                    break;
+                                case 8:
+                                    scoreboardvotesName.put(8, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(8, resultSet.getInt("votes"));
+                                    break;
+                                case 9:
+                                    scoreboardvotesName.put(9, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(9, resultSet.getInt("votes"));
+                                    break;
+                                case 10:
+                                    scoreboardvotesName.put(10, resultSet.getString("name"));
+                                    scoreboardvotesValue.put(10, resultSet.getInt("votes"));
+                                    break;
+                            }
+                        }
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
     public void addNewPlayer(Player player) {
         String uuid = player.getUniqueId().toString();
         String name = player.getName();
@@ -399,14 +465,16 @@ public class Database {
             public void onRun() {
                 try (Connection connection = DATASOURCE_HUB.getConnection();
                      PreparedStatement preparedStatement =
-                             connection.prepareStatement("INSERT INTO `dates` (`uuid`, `name`, `language`, `gems`, `time`) VALUES (?, ?, ?, ?, ?)")) {
+                             connection.prepareStatement("INSERT INTO `dates` (`uuid`, `name`, `language`, `gems`, `time`, `votes`) VALUES (?, ?, ?, ?, ?, ?)")) {
                     preparedStatement.setString(1, uuid);
                     preparedStatement.setString(2, name);
                     preparedStatement.setInt(3, 0);
                     preparedStatement.setDouble(4, 0);
                     preparedStatement.setLong(5, 0);
+                    preparedStatement.setInt(6, 0);
                     profileHub.put(player.getUniqueId(), new ProfileHub(
                             player.getName(),
+                            0,
                             0,
                             0,
                             0
@@ -446,6 +514,24 @@ public class Database {
                      PreparedStatement preparedStatement =
                              connection.prepareStatement("UPDATE `dates` SET `gems` =? WHERE `uuid` =?")) {
                     preparedStatement.setDouble(1, gems);
+                    preparedStatement.setString(2, uuid);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    public void setVotes(IPlayer player, int votes) {
+        String uuid = player.getUniqueId().toString();
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_HUB.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("UPDATE `dates` SET `votes` =? WHERE `uuid` =?")) {
+                    preparedStatement.setDouble(1, votes);
                     preparedStatement.setString(2, uuid);
                     preparedStatement.executeUpdate();
                 } catch (SQLException e) {

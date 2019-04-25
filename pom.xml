@@ -32,13 +32,6 @@
             <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.itxtech.synapse</groupId>
-            <artifactId>synapse-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/synapse-api-1.0-SNAPSHOT.jar</systemPath>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/it.unimi.dsi/fastutil -->
         <dependency>
             <groupId>it.unimi.dsi</groupId>
@@ -50,6 +43,13 @@
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.pocketvote</groupId>
+            <artifactId>PocketVote</artifactId>
+            <version>2.0.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/PocketVote.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>

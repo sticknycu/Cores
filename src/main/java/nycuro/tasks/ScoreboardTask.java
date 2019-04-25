@@ -7,9 +7,8 @@ import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileHub;
-import org.itxtech.synapseapi.SynapseAPI;
-import org.itxtech.synapseapi.SynapseEntry;
-import org.itxtech.synapseapi.utils.ClientData;
+import nycuro.utils.query.MCQuery;
+import nycuro.utils.query.QueryResponse;
 
 /**
  * author: NycuRO
@@ -50,10 +49,10 @@ public class ScoreboardTask extends Task {
             scoreboardDisplay.setScore(5, "§7| §fPing: §6" + player.getPing() + "   ", 5);
             scoreboardDisplay.setScore(6, "§7 " + String.valueOf("") + "    ", 6);
             scoreboardDisplay.setScore(7, "§7--- §e§lServer: " + "  ", 7);
-            scoreboardDisplay.setScore(8, "§7| §fOnline Global: §6" + getCount(0) + "    ", 8);
-            scoreboardDisplay.setScore(9, "§7| §fFactions: §6" + "  ", 9);
-            scoreboardDisplay.setScore(10, "§7| §fSkyBlock: §6" + " ", 10);
-            scoreboardDisplay.setScore(11, "§7| §fSkyPvP: §6" + "   ", 11);
+            scoreboardDisplay.setScore(8, "§7| §fOnline Global: §6" + Loader.getCountOnline(0) + "    ", 8);
+            scoreboardDisplay.setScore(9, "§7| §fFactions: §6" + Loader.getCountOnline(2) + "  ", 9);
+            scoreboardDisplay.setScore(10, "§7| §fSkyBlock: §6" + Loader.getCountOnline(3) + "  ", 10);
+            scoreboardDisplay.setScore(11, "§7| §fSkyPvP: §6" + Loader.getCountOnline(4) + "   ", 11);
         } catch (Exception e) {
             // ignore
         }
@@ -62,23 +61,5 @@ public class ScoreboardTask extends Task {
 
         scoreboard.update();
         scoreboard.addPlayer(player);
-    }
-
-    private int getCount(int type) {
-        int count = 0;
-        for (SynapseEntry synapseEntry : SynapseAPI.getInstance().getSynapseEntries().values()) {
-            ClientData clientData = synapseEntry.getClientData();
-            for (ClientData.Entry entries : clientData.clientList.values()) {
-                switch (type) {
-                    case 0:
-                        count = count + entries.getPlayerCount();
-                        break;
-                    case 1:
-                        count = count + entries.getMaxPlayers();
-                        break;
-                }
-            }
-        }
-        return count;
     }
 }

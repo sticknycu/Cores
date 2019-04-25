@@ -1,15 +1,20 @@
 package nycuro.mechanic.handlers;
 
+import cn.nukkit.IPlayer;
 import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.*;
+import cn.nukkit.event.server.QueryRegenerateEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.scheduler.Task;
+import io.pocketvote.event.VoteDispatchEvent;
+import io.pocketvote.event.VoteEvent;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.Database;
+import nycuro.database.objects.ProfileHub;
 
 /**
  * author: NycuRO
@@ -91,6 +96,20 @@ public class MechanicHandlers implements Listener {
                 }, 20 * 7, 20 * 3, true);
             }
         });
+    }
+
+    @EventHandler
+    public void onVoteReceive(VoteEvent event) {
+        System.out.println("Yey!");
+        try {
+            IPlayer player = API.getMainAPI().getServer().getOfflinePlayer(event.getPlayer());
+            ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
+            int votes = profileHub.getVotes();
+            profileHub.setVotes(votes + 1);
+            API.getDatabase().setVotes(player, votes + 1);
+        } catch (Exception e) {
+            //
+        }
     }
 
     private void startItems(Player player) {

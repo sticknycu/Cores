@@ -18,7 +18,6 @@ import cn.nukkit.math.Vector3;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.gui.list.ResponseFormWindow;
-import org.itxtech.synapseapi.SynapsePlayer;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -123,21 +122,18 @@ public class LevelHandlers implements Listener {
             @Override
             public void accept(Map<Integer, Object> response) {
                 if (!response.isEmpty()) {
-                    if (player instanceof SynapsePlayer) {
-                        SynapsePlayer p = (SynapsePlayer) player;
-                        switch (response.entrySet().iterator().next().getKey()) {
-                            case 0:
-                                p.transferByDescription("skypvp");
-                                return;
-                            case 1:
-                                p.transferByDescription("factions");
-                                return;
-                            case 3:
-                                p.transferByDescription("skyblock");
-                                return;
-                            case 4:
-                                break;
-                        }
+                    switch (response.entrySet().iterator().next().getKey()) {
+                        case 0:
+                            API.getMainAPI().getServer().dispatchCommand(player, "server skypvp");
+                            return;
+                        case 1:
+                            API.getMainAPI().getServer().dispatchCommand(player, "server factions");
+                            return;
+                        case 3:
+                            API.getMainAPI().getServer().dispatchCommand(player, "server skyblock");
+                            return;
+                        case 4:
+                            break;
                     }
                 }
             }
