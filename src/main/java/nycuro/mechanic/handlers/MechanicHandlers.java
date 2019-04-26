@@ -58,6 +58,8 @@ public class MechanicHandlers implements Listener {
                 API.getMainAPI().getServer().getScheduler().scheduleDelayedTask(new Task() {
                     @Override
                     public void onRun(int i) {
+                        API.getMechanicAPI().createBossBar(player);
+                        API.getMechanicAPI().createScoreboard(player);
                         startItems(player);
                     }
                 }, 20 * 10, true);

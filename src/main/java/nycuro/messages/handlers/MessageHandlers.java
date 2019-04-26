@@ -21,8 +21,6 @@ public class MessageHandlers implements Listener {
         Player player = event.getPlayer();
         event.setJoinMessage("");
         API.getMessageAPI().sendJoinMessages(player);
-        API.getMechanicAPI().createBossBar(player);
-        API.getMechanicAPI().createScoreboard(player);
     }
 
     @EventHandler
