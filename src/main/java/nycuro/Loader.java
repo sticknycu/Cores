@@ -8,7 +8,6 @@ import cn.nukkit.level.Level;
 import cn.nukkit.nbt.tag.*;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.scheduler.Task;
-import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
@@ -60,7 +59,7 @@ import java.util.concurrent.TimeUnit;
 public class Loader extends PluginBase {
 
     public static Object2LongMap<UUID> startTime = new Object2LongOpenHashMap<>();
-    public Object2ObjectMap<String, DummyBossBar> bossbar = new Object2ObjectOpenHashMap<>();
+    public Object2ObjectMap<UUID, Long> bossbar = new Object2ObjectOpenHashMap<>();
     public Object2ObjectMap<String, FakeScoreboard> scoreboard = new Object2ObjectOpenHashMap<>();
     public Object2IntMap<String> timers = new Object2IntOpenHashMap<>();
     public Object2BooleanMap<String> coords = new Object2BooleanOpenHashMap<>();
@@ -213,11 +212,11 @@ public class Loader extends PluginBase {
     private void registerEvents() {
         this.getServer().getPluginManager().registerEvents(new AbuseHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new GUIHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new MessageHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new KitHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new LanguageHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new LevelHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new MechanicHandlers(), this);
-        this.getServer().getPluginManager().registerEvents(new MessageHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new ProtectionHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new JobsHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new CrateHandlers(), this);

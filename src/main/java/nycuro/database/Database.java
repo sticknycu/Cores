@@ -48,6 +48,63 @@ public class Database {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        addDatesPlayersHub();
+    }
+
+    public static void addDatesPlayersHub() {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_HUB.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("SELECT * from `dates`")) {
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        while (resultSet.next()) {
+                            profileHub.put(UUID.fromString(resultSet.getString("UUID")), new ProfileHub(
+                                    resultSet.getString("name"),
+                                    resultSet.getInt("language"),
+                                    resultSet.getDouble("gems"),
+                                    resultSet.getLong("time"),
+                                    resultSet.getInt("votes")
+                            ));
+                        }
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    public static void addDatesPlayersFactions() {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("SELECT * from `dates`")) {
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        while (resultSet.next()) {
+                            profileFactions.put(UUID.fromString(resultSet.getString("UUID")), new ProfileFactions(
+                                    resultSet.getString("name"),
+                                    resultSet.getInt("job"),
+                                    resultSet.getInt("kills"),
+                                    resultSet.getInt("deaths"),
+                                    resultSet.getLong("cooldown"),
+                                    resultSet.getDouble("experience"),
+                                    resultSet.getInt("level"),
+                                    resultSet.getDouble("necesary"),
+                                    resultSet.getLong("time"),
+                                    resultSet.getDouble("dollars")
+                            ));
+                        }
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     public static void addDatesPlayerHub(Player player) {
@@ -60,7 +117,7 @@ public class Database {
                     preparedStatement.setString(1, player.getUniqueId().toString());
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         while (resultSet.next()) {
-                            profileHub.put(player.getUniqueId(), new ProfileHub(
+                            profileHub.putIfAbsent(player.getUniqueId(), new ProfileHub(
                                     resultSet.getString("name"),
                                     resultSet.getInt("language"),
                                     resultSet.getDouble("gems"),
@@ -118,6 +175,7 @@ public class Database {
         }
 
         Loader.registerTops();
+        addDatesPlayersFactions();
     }
 
     public static void addDatesPlayerFactions(Player player) {
@@ -130,7 +188,7 @@ public class Database {
                     preparedStatement.setString(1, player.getUniqueId().toString());
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         while (resultSet.next()) {
-                            profileFactions.put(player.getUniqueId(), new ProfileFactions(
+                            profileFactions.putIfAbsent(player.getUniqueId(), new ProfileFactions(
                                     resultSet.getString("name"),
                                     resultSet.getInt("job"),
                                     resultSet.getInt("kills"),

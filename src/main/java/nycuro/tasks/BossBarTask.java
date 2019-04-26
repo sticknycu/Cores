@@ -2,9 +2,12 @@ package nycuro.tasks;
 
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
+import cn.nukkit.utils.DummyBossBar;
 import nycuro.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
+
+import java.util.Map;
 
 /**
  * author: GiantQuartz
@@ -18,7 +21,7 @@ public class BossBarTask extends Task {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
             ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
 
-            if (API.getMainAPI().bossbar.get(player.getName()) != null) {
+            if (API.getMainAPI().bossbar.get(player.getUniqueId()) != null) {
                 if (API.getCombatAPI().inCombat(player)) return;
                 int level = 0;
                 double necessary = 0;
@@ -31,7 +34,10 @@ public class BossBarTask extends Task {
                 }
                 try {
                     String message = API.getMessageAPI().getMessageBossBar(player, level, necessary, count);
-                    API.getMainAPI().bossbar.get(player.getName()).setText(message);
+                    Map<Long, DummyBossBar> dummyBossBars = player.getDummyBossBars();
+                    dummyBossBars.forEach(
+                            (ld, db) -> db.setText(message)
+                    );
                 } catch (Exception e) {
                     //
                 }

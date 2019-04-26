@@ -2,15 +2,11 @@ package nycuro.api;
 
 import cn.nukkit.IPlayer;
 import cn.nukkit.Player;
-import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.item.Item;
 import cn.nukkit.utils.TextFormat;
-import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
-import com.massivecraft.factions.Faction;
-import com.massivecraft.factions.Factions;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.chat.handlers.ChatHandlers;
@@ -1268,19 +1264,7 @@ public class MessageAPI {
     }
 
     public void sendThreeJoinTitle(Player player) {
-        int lang = 0;
-        ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
-        if (profileHub != null) {
-            lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
-        }
-        switch (lang) {
-            case 0:
-                player.sendTitle("§l§f» §r§6CHPE Factions §l§f«§r", "§r§fmariusmrn.com/discord", 20, 20, 20);
-                break;
-            case 1:
-                player.sendTitle("§l§f» §r§6CHPE Factions §l§f«§r", "§r§fmariusmrn.com/discord", 20, 20, 20);
-                break;
-        }
+        player.sendTitle("§l§f» §r§6CHPE Factions §l§f«§r", "§r§fmariusmrn.com/discord", 20, 20, 20);
     }
 
     public void sendJoinMessages(Player player) {

@@ -12,13 +12,9 @@ import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
-import cn.nukkit.level.Position;
 import cn.nukkit.math.Vector3;
-import cn.nukkit.utils.BlockColor;
-import cn.nukkit.utils.DummyBossBar;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nycuro.API;
-import nycuro.Loader;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileHub;
 import nycuro.gui.list.ResponseFormWindow;
@@ -116,12 +112,12 @@ public class MechanicAPI {
     }
 
     public void createBossBar(Player player) {
-        API.getMainAPI().bossbar.put(player.getName(), new DummyBossBar.Builder(player)
-                .text("bossbar")
-                .length(100)
-                .color(BlockColor.GREEN_BLOCK_COLOR)
-                .build());
-        player.createBossBar(API.getMainAPI().bossbar.get(player.getName()));
+        try {
+            long bossbar = player.createBossBar("bossbar", 50);
+            API.getMainAPI().bossbar.put(player.getUniqueId(), bossbar);
+        } finally {
+            System.out.println("BULLSHIT!");
+        }
     }
 
     public void createScoreboard(Player player) {

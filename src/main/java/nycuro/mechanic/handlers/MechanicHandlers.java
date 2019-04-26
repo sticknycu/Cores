@@ -21,6 +21,8 @@ public class MechanicHandlers implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        event.setJoinMessage("");
+        API.getMessageAPI().sendJoinMessages(player);
         // Nu merge PreLoginEvent si nici Async.
         API.getMainAPI().coords.put(player.getName(), false);
         API.getMainAPI().played.put(player.getName(), System.currentTimeMillis());
