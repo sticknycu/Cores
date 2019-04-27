@@ -7,6 +7,8 @@ import cn.nukkit.entity.Entity;
 import cn.nukkit.item.Item;
 import cn.nukkit.utils.TextFormat;
 import com.massivecraft.factions.FPlayers;
+import me.lucko.luckperms.api.User;
+import me.lucko.luckperms.api.manager.UserManager;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.chat.handlers.ChatHandlers;
@@ -17,7 +19,8 @@ import nycuro.database.objects.ProfileHub;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * author: NycuRO
@@ -68,9 +71,16 @@ public class MessageAPI {
         return STRING;
     }
 
+    private User giveMeADamnUser(UUID uuid) {
+        UserManager userManager = ChatHandlers.api.getUserManager();
+        CompletableFuture<User> userFuture = userManager.loadUser(uuid);
+
+        return userFuture.join(); // ouch!
+    }
+
     private String getRank(IPlayer player) {
         String rank = "";
-        String group = Objects.requireNonNull(ChatHandlers.api.getUser(player.getUniqueId())).getPrimaryGroup().toUpperCase();
+        String group = giveMeADamnUser(player.getUniqueId()).getPrimaryGroup().toUpperCase();
         String sGroup = group.toLowerCase();
         switch (sGroup) {
             case "default":
@@ -99,17 +109,8 @@ public class MessageAPI {
     }
 
     public String getRankScoreboard(Player player) {
-        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
         String rank = getRank(player);
-        switch (lang) {
-            case 0:
-                STRING = "§7| §fRank: §6" + rank + "  ";
-                break;
-            case 1:
-                STRING = "§7| §fRank: §6" + rank + "  ";
-                break;
-        }
-        return STRING;
+        return "§7| §fRank: §6" + rank + "  ";
     }
 
     private String getOS(Player player) {
@@ -146,8 +147,9 @@ public class MessageAPI {
     }
 
     public String getStatsCommand(CommandSender commandSender, IPlayer player) {
-        ProfileHub profileHub = Database.profileHub.get(((Player) commandSender).getUniqueId());
-        ProfileFactions profileFactions = Database.profileFactions.get(((Player) commandSender).getUniqueId());
+        ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
+        ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
+        String faction = FPlayers.i.get(player.getName()).getFaction().getTag();
         DateFormat simple = new SimpleDateFormat("dd MMM yyyy HH:mm:ss:SSS Z");
         Date firstPlay = new Date(player.getFirstPlayed());
         Date lastPlay = new Date(player.getLastPlayed());
@@ -160,17 +162,17 @@ public class MessageAPI {
                         "§eExperienta: §6" + profileFactions.getExperience() + "/" + profileFactions.getNecesary() + "\n" +
                         "§eFirst Join: §6" + simple.format(firstPlay) + "\n" +
                         "§eOnline: §6" + (player.isOnline() ? "§3YES§6" : simple.format(lastPlay))  + "\n" +
-                        "§eOnline on this session: §6" + Loader.time(System.currentTimeMillis() - API.getMainAPI().played.getLong(player.getName()))  + "\n" +
+                        (player.isOnline() ? ("§eOnline on this session: §6" + Loader.time(System.currentTimeMillis() - API.getMainAPI().played.getLong(player.getName()))) + "\n" : "") +
                         "§eOnline Time: §6" + Loader.time(profileFactions.getTime()) + "\n" +
                         "§eCoins: §6" + profileFactions.getDollars() + "\n" +
                         "§eGems: §6" + profileHub.getGems() + "\n" +
                         "§eKills: §6" + profileFactions.getKills() + "\n" +
                         "§eDeaths: §6" + profileFactions.getDeaths() + "\n" +
-                        "§eVotes: §6" + /* votes */ "\n" +
-                        "§eFaction: §6" + (FPlayers.i.get((Player) player).hasFaction() ? FPlayers.i.get((Player) player).getFaction().getTag() : "NONE") + "\n" +
-                        (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + ((Player) player).getAddress()) : ("")) + "\n") : ("")) +
-                        (player.isOnline() ? ((commandSender.isOp() ? ("§eDevice Model: §6" + ((Player) player).getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
-                        (player.isOnline() ? ("§eOS: §6" + getOS((Player) player) + "\n") : "");
+                        "§eVotes: §6" + profileHub.getVotes() + "\n" +
+                        "§eFaction: §6" + faction + "\n" +
+                        (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + player.getPlayer().getAddress()) : ("")) + "\n") : ("")) +
+                        (player.isOnline() ? ((commandSender.isOp() ? ("§eDevice Model: §6" + player.getPlayer().getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
+                        (player.isOnline() ? ("§eOS: §6" + getOS(player.getPlayer()) + "\n") : "");
                 break;
             case 1:
                 STRING = "         Profile Info:\n\n" +
@@ -180,17 +182,17 @@ public class MessageAPI {
                         "§eExperienta: §6" + profileFactions.getExperience() + "/" + profileFactions.getNecesary() + "\n" +
                         "§ePrima data cand ai intrat pe Sectiune: §6" + simple.format(firstPlay) + "\n" +
                         "§eOnline: §6" + (player.isOnline() ? "§3DA§6" : simple.format(lastPlay))  + "\n" +
-                        "§eOnline pe aceasta sesiune: §6" + Loader.time(System.currentTimeMillis() - API.getMainAPI().played.getLong(player.getName()))  + "\n" +
+                        (player.isOnline() ? ("§eOnline pe aceasta sesiune: §6" + Loader.time(System.currentTimeMillis() - API.getMainAPI().played.getLong(player.getName()))) + "\n" : "") +
                         "§eTimp Online: §6" + Loader.time(profileFactions.getTime()) + "\n" +
                         "§eCoins: §6" + profileFactions.getDollars() + "\n" +
                         "§eGems: §6" + profileHub.getGems() + "\n" +
                         "§eKills: §6" + profileFactions.getKills() + "\n" +
                         "§eDeaths: §6" + profileFactions.getDeaths() + "\n" +
-                        "§eVoturi: §6" + /* votes */ "\n" +
-                        "§eFactiune: §6" + (FPlayers.i.get((Player) player).hasFaction() ? FPlayers.i.get((Player) player).getFaction().getTag() : "NONE") + "\n" +
-                        (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + ((Player) player).getAddress()) : ("")) + "\n") : ("")) +
-                        (player.isOnline() ? ((commandSender.isOp() ? ("§eDevice Model: §6" + ((Player) player).getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
-                        (player.isOnline() ? ("§eOS: §6" + getOS((Player) player) + "\n") : "");
+                        "§eVoturi: §6" + profileHub.getVotes() + "\n" +
+                        "§eFactiune: §6" + faction + "\n" +
+                        (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + player.getPlayer().getAddress()) : ("")) + "\n") : ("")) +
+                        (player.isOnline() ? ((commandSender.isOp() ? ("§eDevice Model: §6" + player.getPlayer().getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
+                        (player.isOnline() ? ("§eOS: §6" + getOS(player.getPlayer()) + "\n") : "");
                 break;
         }
         return STRING;

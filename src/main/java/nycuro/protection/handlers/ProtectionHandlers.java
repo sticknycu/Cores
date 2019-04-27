@@ -14,10 +14,7 @@ import cn.nukkit.event.entity.ExplosionPrimeEvent;
 import cn.nukkit.event.player.*;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
-import cn.nukkit.utils.DummyBossBar;
 import nycuro.API;
-
-import java.util.Map;
 
 /**
  * author: NycuRO
@@ -75,14 +72,8 @@ public class ProtectionHandlers implements Listener {
             }
             for (Player pl : new Player[]{player, damager}) {
                 if (!API.getCombatAPI().inCombat(pl)) {
-                    Map<Long, DummyBossBar> dummyBossBar = player.getDummyBossBars();
-                    dummyBossBar.forEach(
-                            (lb, db) -> {
-                                db.setText("§7-§8=§7- §7CombatLogger: §6§l13 §7-§8=§7-");
-                                db.setLength(100F);
-                            }
-                    );
-                    API.getCombatAPI().setCombat(pl);
+                    API.getMainAPI().bossbar.get(pl.getName()).setText("§7-§8=§7- §7CombatLogger: §6§l13 §7-§8=§7-");
+                    API.getMainAPI().bossbar.get(pl.getName()).setLength(100F);
                 }
             }
         }

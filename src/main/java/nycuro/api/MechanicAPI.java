@@ -13,6 +13,7 @@ import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
+import cn.nukkit.utils.DummyBossBar;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nycuro.API;
 import nycuro.database.Database;
@@ -112,12 +113,12 @@ public class MechanicAPI {
     }
 
     public void createBossBar(Player player) {
-        try {
-            long bossbar = player.createBossBar("bossbar", 50);
-            API.getMainAPI().bossbar.put(player.getUniqueId(), bossbar);
-        } finally {
-            System.out.println("BULLSHIT!");
-        }
+        DummyBossBar bossbar = new DummyBossBar.Builder(player)
+                .text("bossbar")
+                .length(100F)
+                .build();
+        API.getMainAPI().bossbar.put(player.getName(), bossbar);
+        player.createBossBar(bossbar);
     }
 
     public void createScoreboard(Player player) {
