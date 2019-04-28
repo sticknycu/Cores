@@ -6,8 +6,10 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.event.EventHandler;
 import nycuro.commands.list.donate.gems.GemsCommand;
 import nycuro.database.Database;
+import nycuro.database.objects.ProfileProxy;
 import nycuro.messages.handlers.MessageHandlers;
 import nycuro.tasks.TimerTask;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -44,9 +46,8 @@ public class Loader extends Plugin {
     }
 
     private void saveDates() {
-        if (this.getProxy().getOnlineCount() == 0) return;
-        for (ProxiedPlayer player : API.getMainAPI().getProxy().getPlayers()) {
-            Database.saveUnAsyncDatesPlayerFromHub(player);
+        for (ProfileProxy profile : Database.profileProxy.values()) {
+            Database.saveUnAsyncDatesPlayerFromHub(profile.getName());
         }
     }
 
@@ -74,7 +75,7 @@ public class Loader extends Plugin {
             @Override
             public void run() {
                 for (ProxiedPlayer player : API.getMainAPI().getProxy().getPlayers()) {
-                    Database.saveDatesPlayerFromHub(player);
+                    Database.saveDatesPlayerFromHub(player.getName());
                 }
             }
         }, 1, 5, TimeUnit.MINUTES);

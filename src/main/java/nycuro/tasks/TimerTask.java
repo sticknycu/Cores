@@ -11,7 +11,7 @@ public class TimerTask implements Runnable {
     public void run() {
         for (ProxiedPlayer player : ProxyServer.getInstance().getPlayers()) {
             try {
-                ProfileProxy profileProxy = Database.profileProxy.get(player.getUniqueId());
+                ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
                 if (profileProxy != null) {
                     profileProxy.setTime(1000 + profileProxy.getTime());
                 }

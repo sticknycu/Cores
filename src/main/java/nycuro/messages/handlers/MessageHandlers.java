@@ -18,11 +18,11 @@ public class MessageHandlers implements Listener {
     @EventHandler
     public void onLogin(PostLoginEvent event) {
         ProxiedPlayer player = event.getPlayer();
-        API.getDatabase().playerExist(player, bool -> {
+        API.getDatabase().playerExist(player.getName(), bool -> {
             if (!bool) {
-                API.getDatabase().addNewPlayer(player);
+                API.getDatabase().addNewPlayer(player.getName());
             } else {
-                Database.addDatesPlayerProxy(player);
+                Database.addDatesPlayerProxy(player.getName());
             }
         });
     }
@@ -30,6 +30,6 @@ public class MessageHandlers implements Listener {
     @EventHandler
     public void onQuit(PlayerDisconnectEvent event) {
         ProxiedPlayer player = event.getPlayer();
-        Database.saveUnAsyncDatesPlayerFromHub(player);
+        Database.saveUnAsyncDatesPlayerFromHub(player.getName());
     }
 }
