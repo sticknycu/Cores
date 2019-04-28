@@ -25,6 +25,7 @@ import nycuro.commands.list.mechanic.TopCoinsCommand;
 import nycuro.commands.list.mechanic.TopDeathsCommand;
 import nycuro.commands.list.mechanic.TopKillsCommand;
 import nycuro.commands.list.mechanic.TopTimeCommand;
+import nycuro.commands.list.spawning.WitherCommand;
 import nycuro.commands.list.stats.StatsCommand;
 import nycuro.commands.list.time.GetTimeCommand;
 import nycuro.crate.CrateAPI;
@@ -196,8 +197,7 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("topkills", new TopKillsCommand());
         this.getServer().getCommandMap().register("toptime", new TopTimeCommand());
         this.getServer().getCommandMap().register("topdeaths", new TopDeathsCommand());
-        //this.getServer().getCommandMap().register("spawnentities", new SpawnEntitiesCommand());
-        this.getServer().getCommandMap().register("servers", new ServersCommand());
+        this.getServer().getCommandMap().register("wither", new WitherCommand());
         this.getServer().getCommandMap().register("droppartymessage", new DropPartyMessageCommand());
         this.getServer().getCommandMap().register("spawnboss", new SpawnBossCommand());
         this.getServer().getCommandMap().register("kit", new KitCommand());
@@ -276,23 +276,39 @@ public class Loader extends PluginBase {
         this.getServer().getScheduler().scheduleRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
-                for (Level level : API.getMainAPI().getServer().getLevels().values()) {
-                    for (Entity entity : level.getEntities()) {
-                        switch (entity.getNetworkId()) {
-                            case 10:
-                            case 11:
-                            case 12:
-                            case 13:
-                            case 69:
-                                entity.close();
-                                break;
+                String message = "";
+                try {
+                    for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+                        message = API.getMessageAPI().sendMobDespawnMessage(player);
+                        player.sendMessage(message);
+                        try {
+                            Thread.sleep(1000 * 30);
+                        } finally {
+                            for (Level level : API.getMainAPI().getServer().getLevels().values()) {
+                                for (Entity entity : level.getEntities()) {
+                                    switch (entity.getNetworkId()) {
+                                        case 10:
+                                        case 11:
+                                        case 12:
+                                        case 13:
+                                        case 52:
+                                        case 69:
+                                        case 89:
+                                            entity.close();
+                                            break;
+                                    }
+                                    if (entity instanceof EntityItem) entity.close();
+                                }
+                            }
+                            message = API.getMessageAPI().sendMobDespawnFinishMessage(player);
+                            player.sendMessage(message);
                         }
-                        if (entity instanceof EntityItem) entity.close();
                     }
-                    API.getMechanicAPI().spawnEntities();
+                } catch (Exception e) {
+                    //
                 }
             }
-        }, 20 * 60 * 3, true);
+        }, 20 * 60 * 5, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20, true);

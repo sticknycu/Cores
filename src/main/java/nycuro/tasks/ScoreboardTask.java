@@ -4,16 +4,12 @@ import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.api.JobsAPI;
-import nycuro.chat.ChatFormat;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 import nycuro.database.objects.ProfileHub;
-
-import java.util.Objects;
 
 /**
  * author: NycuRO

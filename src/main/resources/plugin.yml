@@ -14,7 +14,6 @@ commands:
     description: Shop, Sell, Trade in one command
     usage: "/shop"
     permission: core.shop
-    permission: core.warps
   kit:
     description: Choise Kit
     usage: "/kit"

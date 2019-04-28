@@ -71,6 +71,58 @@ public class MessageAPI {
         return STRING;
     }
 
+    public String sendWitherSpawnMessage(Player player) {
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§7(§e!§7) §4Error: §7You can't spawn Wither on spawn!";
+                break;
+            case 1:
+                STRING = "§7(§e!§7) §4Error: §7Nu poti spawna Wither-ul in spawn!";
+                break;
+        }
+        return STRING;
+    }
+
+    public String sendMobDespawnMessage(Player player) {
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§6§lTIP §r§e» §7Everyone, please pay attention! In §630 seconds §7all entities will be killed!";
+                break;
+            case 1:
+                STRING = "§6§lTIP §r§e» §7Toata lumea, atentie! In §630 de secunde §7toate entitatile vor fi omorate!";
+                break;
+        }
+        return STRING;
+    }
+
+    public String sendMobDespawnFinishMessage(Player player) {
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§6§lTIP §r§e» §7Everyone, please pay attention! All entities was killed! Next killing will be in §65 minutes§7!";
+                break;
+            case 1:
+                STRING = "§6§lTIP §r§e» §7Toata lumea, atentie! Toate entitatile au fost omorate! Urmatoarea omorare va fi in §65 minute§7!";
+                break;
+        }
+        return STRING;
+    }
+
+    public String sendTooMuchWithers(Player player) {
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§7(§e!§7) §4Error: §7There are 10 withers! Try later!";
+                break;
+            case 1:
+                STRING = "§7(§e!§7) §4Eroare: §7Sunt deja 10 witheri pe server! Incearca mai tarziu!";
+                break;
+        }
+        return STRING;
+    }
+
     private User giveMeADamnUser(UUID uuid) {
         UserManager userManager = ChatHandlers.api.getUserManager();
         CompletableFuture<User> userFuture = userManager.loadUser(uuid);
@@ -159,12 +211,12 @@ public class MessageAPI {
                         "§c» §aName: §e" + player.getName() + "\n" +
                         "§eRank: §6" + getRank(player) + "\n" +
                         "§eLevel: §6" + profileFactions.getLevel() + "\n" +
-                        "§eExperienta: §6" + profileFactions.getExperience() + "/" + profileFactions.getNecesary() + "\n" +
+                        "§eExperience: §6" + profileFactions.getExperience() + "/" + profileFactions.getNecesary() + "\n" +
                         "§eFirst Join: §6" + simple.format(firstPlay) + "\n" +
                         "§eOnline: §6" + (player.isOnline() ? "§3YES§6" : simple.format(lastPlay))  + "\n" +
                         (player.isOnline() ? ("§eOnline on this session: §6" + Loader.time(System.currentTimeMillis() - API.getMainAPI().played.getLong(player.getName()))) + "\n" : "") +
                         "§eOnline Time: §6" + Loader.time(profileFactions.getTime()) + "\n" +
-                        "§eCoins: §6" + profileFactions.getDollars() + "\n" +
+                        "§eDollars: §6" + profileFactions.getDollars() + "\n" +
                         "§eGems: §6" + profileHub.getGems() + "\n" +
                         "§eKills: §6" + profileFactions.getKills() + "\n" +
                         "§eDeaths: §6" + profileFactions.getDeaths() + "\n" +
@@ -184,7 +236,7 @@ public class MessageAPI {
                         "§eOnline: §6" + (player.isOnline() ? "§3DA§6" : simple.format(lastPlay))  + "\n" +
                         (player.isOnline() ? ("§eOnline pe aceasta sesiune: §6" + Loader.time(System.currentTimeMillis() - API.getMainAPI().played.getLong(player.getName()))) + "\n" : "") +
                         "§eTimp Online: §6" + Loader.time(profileFactions.getTime()) + "\n" +
-                        "§eCoins: §6" + profileFactions.getDollars() + "\n" +
+                        "§eDolari: §6" + profileFactions.getDollars() + "\n" +
                         "§eGems: §6" + profileHub.getGems() + "\n" +
                         "§eKills: §6" + profileFactions.getKills() + "\n" +
                         "§eDeaths: §6" + profileFactions.getDeaths() + "\n" +
@@ -500,6 +552,18 @@ public class MessageAPI {
         }
     }
 
+    public void sendSuccesSpawnWither(Player player) {
+        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
+        switch (lang) {
+            case 0:
+                player.sendMessage("§7» §aYou spawned succesfuly wither!");
+                break;
+            case 1:
+                player.sendMessage("§7» §aAi spawnat wither-ul cu succes!");
+                break;
+        }
+    }
+
     public void sendUnsuficientExperienceMessage(Player player, int needed) {
         int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
         switch (lang) {
@@ -731,14 +795,14 @@ public class MessageAPI {
         }
     }
 
-    public void sendHitBowMessage(Player player, Player damager) {
+    public void sendHitBowMessage(Entity entity, Player damager) {
         int lang = Database.profileHub.get(damager.getUniqueId()).getLanguage();
         switch (lang) {
             case 0:
-                damager.sendMessage("§f» §6" + player.getName() + " §eis now at §6" + player.getHealth() + "§e/§6" + player.getMaxHealth() + "§e!");
+                damager.sendMessage("§f» §6" + entity.getName() + " §eis now at §6" + entity.getHealth() + "§e/§6" + entity.getMaxHealth() + "§e!");
                 break;
             case 1:
-                damager.sendMessage("§f» §6" + player.getName() + " §eare acum §6" + player.getHealth() + "§e/§6" + player.getMaxHealth() + "§e!");
+                damager.sendMessage("§f» §6" + entity.getName() + " §eare acum §6" + entity.getHealth() + "§e/§6" + entity.getMaxHealth() + "§e!");
                 break;
         }
     }

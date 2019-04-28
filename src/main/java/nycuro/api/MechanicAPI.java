@@ -3,20 +3,20 @@ package nycuro.api;
 import cn.nukkit.IPlayer;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.entity.Entity;
-import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
-import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.DummyBossBar;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
+import nukkitcoders.mobplugin.entities.monster.flying.Wither;
 import nycuro.API;
 import nycuro.database.Database;
+import nycuro.database.objects.ProfileFactions;
 import nycuro.database.objects.ProfileHub;
 import nycuro.gui.list.ResponseFormWindow;
 
@@ -87,17 +87,6 @@ public class MechanicAPI {
         }
     }*/
 
-    public void spawnEntities() {
-        Entity entities1 = Entity.createEntity(10, API.getMainAPI().getServer().getDefaultLevel().getChunk(1050 >> 4, 1199 >> 4), API.getAiAPI().getChickenNBT());
-        Entity entities2 = Entity.createEntity(11, API.getMainAPI().getServer().getDefaultLevel().getChunk(1054 >> 4, 1233 >> 4), API.getAiAPI().getCowNBT());
-        Entity entities3 = Entity.createEntity(12, API.getMainAPI().getServer().getDefaultLevel().getChunk(1050 >> 4, 1283 >> 4), API.getAiAPI().getPigNBT());
-        Entity entities4 = Entity.createEntity(13, API.getMainAPI().getServer().getDefaultLevel().getChunk(1036 >> 4, 1265 >> 4), API.getAiAPI().getSheepNBT());
-        entities1.spawnToAll();
-        entities2.spawnToAll();
-        entities3.spawnToAll();
-        entities4.spawnToAll();
-    }
-
     public void sendDropPartyMessageBroadcast(Player player) {
         API.getMessageAPI().sendDropPartyEventMessage(player);
     }
@@ -135,91 +124,69 @@ public class MechanicAPI {
         API.getMainAPI().scoreboard.put(player.getName(), fakeScoreboard);
     }
 
-    public void sendServersModal(Player player) {
-        ProfileHub profile = Database.profileHub.get(player.getUniqueId());
-        int lang = profile.getLanguage();
-        switch (lang) {
-            case 0:
-                FormWindowSimple serversMenu = new FormWindowSimple("Servers", "                       Hello!\n" +
-                        "             Welcome to Servers!\n" +
-                        "  Select what you want to do from now.");
-                serversMenu.addButton(new ElementButton("How to be Partner?", new ElementButtonImageData("url", "https://i.imgur.com/nujWKR3.png")));
-                serversMenu.addButton(new ElementButton("Close"));
-                player.showFormWindow(new ResponseFormWindow(serversMenu, new Consumer<Map<Integer, Object>>() {
-                    @Override
-                    public void accept(Map<Integer, Object> response) {
-                        if (!response.isEmpty()) {
-                            switch (response.entrySet().iterator().next().getKey()) {
-                                case 0:
-                                    sendInfoServers(player);
-                                    return;
-                                case 1:
-                                    break;
-                            }
-                        }
-                    }
-                }));
-                break;
-            case 1:
-                serversMenu = new FormWindowSimple("Servers", "                      Salut!\n" +
-                        "          Bine ai venit la Servere!\n" +
-                        "     Alege ce doresti sa faci de acum.");
-                serversMenu.addButton(new ElementButton("How to be Partner?", new ElementButtonImageData("url", "https://i.imgur.com/nujWKR3.png")));
-                serversMenu.addButton(new ElementButton("Close"));
-                player.showFormWindow(new ResponseFormWindow(serversMenu, new Consumer<Map<Integer, Object>>() {
-                    @Override
-                    public void accept(Map<Integer, Object> response) {
-                        if (!response.isEmpty()) {
-                            switch (response.entrySet().iterator().next().getKey()) {
-                                case 0:
-                                    sendInfoServers(player);
-                                    return;
-                                case 1:
-                                    break;
-                            }
-                        }
-                    }
-                }));
-                break;
-        }
-    }
-
-    private void sendInfoServers(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Info Partner");
+    public void spawnWither(Player player) {
+        FormWindowCustom infoMenu = new FormWindowCustom("Spawn Wither");
         ProfileHub profile = Database.profileHub.get(player.getUniqueId());
         int lang = profile.getLanguage();
         switch (lang) {
             case 0:
                 infoMenu.addElement(new ElementLabel("                      Hello!\n" +
-                        "         Welcome to Partner Info!\n\n" +
-                        "§c» §aHow can i be Partner?:\n" +
-                        "§eFor be a Partner, you need just ask. Contact me on Discord.\n" +
-                        "§eDiscord: §7NycuRO#6842\n\n" +
-                        "§c» §aWhat benefits i have?: \n" +
-                        "§eYour Server appereal here.\n" +
-                        "§eYou can get a custom dns for your server.\n" +
-                        "§eYour DNS need to be like that: §7{name}.nycuro.us\n\n" +
-                        "§c» §aThanks: \n" +
-                        "§eThanks so much for all persons who tried to be Partners and who wants.\n" +
-                        "§eWe waiting with a message on Discord :).\n" +
+                        "         Welcome to Spawn Wither!\n\n" +
+                        "§c» §aHow can i spawn a Wither?\n" +
+                        "§eFor spawning a Wither is enough to press the button.\n" +
+                        "§eYou can cancel that pushing X button from up, right side." +
+                        "§c» §aWhat can i do with Wither: \n" +
+                        "§eWith Wither you can raid bases and get more experience.\n" +
+                        "§c» §aPrice: §610k$ \n" +
+                        "§eA little information: Maximum of Withers on Server is 10, so if there exists 10 Withers spawned you need to wait to minimum 1 to be despawned!\n" +
+                        "§eAnd about despawning of entities, entities are despawned every 5 minutes, so be careful!\n" +
+                        "§eThank you for purchase!\n" +
                         "§eHave a nice day!"));
                 break;
             case 1:
                 infoMenu.addElement(new ElementLabel("                      Salut!\n" +
-                        "      Bine ai venit la Info Partener!\n\n" +
-                        "§c» §aCum pot deveni Partener?:\n" +
-                        "§ePentru a deveni partener, trebuie doar sa ceri acest lucru. Contacteaza-ma pe Discord.\n" +
-                        "§eDiscord: §7NycuRO#6842\n\n" +
-                        "§c» §aCe beneficii am?:\n" +
-                        "§eServerul tau va aparea aici.\n" +
-                        "§eVei primi un DNS Custom pentru Serverul tau.\n" +
-                        "§eAcesta va fi de forma: §7{name}.nycuro.us\n\n" +
-                        "§c» §aMultumiri:\n" +
-                        "§eVreau sa le multumesc tuturor persoanelor care au incercat sa fie Parteneri si care vor.\n" +
-                        "§eVa asteptam cu un mesaj pe Discord :).\n" +
-                        "§eO zi placuta!"));
+                        "      Bine ai venit la Wither Spawn!\n\n" +
+                        "§c» §aCum pot spawna un Wither:\n" +
+                        "§ePentru a spawna un wither este de ajuns pentru a apasa pe buton.\n" +
+                        "§ePoti anula acest lucru apasand pe butonul din dreapta sus, X." +
+                        "§c» §aCe pot face cu Wither?: \n" +
+                        "§eEi bine, cu Wither poti da raid bazelor si poti castiga mult exp.\n" +
+                        "§c» §aPretul: §610k$ \n" +
+                        "§eO mica informatie: Maximul de Witheri pe server este de 10, deci daca exista deja 10 Witheri spawnati pe server, trebuie sa astepti ca cel putin 1 sa fie despawnat!\n" +
+                        "§eSi despre spawnarea entitatilor, entitatile se despawneaza odata la 5 minute, deci fi atent!\n" +
+                        "§eMultumim pentru achizitie si te mai asteptam!\n" +
+                        "§eSa ai o zi buna!"));
                 break;
         }
-        player.showFormWindow(infoMenu);
+        player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
+            @Override
+            public void accept(Map<Integer, Object> response) {
+                if (!response.isEmpty()) {
+                    switch (response.entrySet().iterator().next().getKey()) {
+                        case 0:
+                            if (API.getMechanicAPI().isOnSpawn(player)) {
+                                player.sendMessage(API.getMessageAPI().sendWitherSpawnMessage(player));
+                                return;
+                            }
+                            if (Wither.count > 10) {
+                                API.getMessageAPI().sendTooMuchWithers(player);
+                                return;
+                            } else {
+                                ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
+                                double dolllars = profileFactions.getDollars();
+                                if (dolllars < 10000) {
+                                    API.getMessageAPI().sendUnsuficientMoneyMessage(player, 10000 - profileFactions.getDollars());
+                                    return;
+                                } else {
+                                    API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "mob spawn 52 " + player.getName());
+                                    profileFactions.setDollars(profileFactions.getDollars() - 10000);
+                                    API.getMessageAPI().sendSuccesSpawnWither(player);
+                                    return;
+                                }
+                            }
+                    }
+                }
+            }
+        }));
     }
 }

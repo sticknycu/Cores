@@ -102,6 +102,7 @@ public class JobsHandlers implements Listener {
                 EntityDamageByChildEntityEvent evc = (EntityDamageByChildEntityEvent) ev;
                 if (evc.getDamager() instanceof Player) {
                     Player damager = (Player) evc.getDamager();
+                    API.getMessageAPI().sendHitBowMessage(eventEntity, damager);
                     if (!API.getMechanicAPI().isOnSpawn(damager)) {
                         if (!API.getMechanicAPI().isOnSpawn(eventEntity)) {
                             if (eventEntity instanceof Player) {
@@ -128,6 +129,7 @@ public class JobsHandlers implements Listener {
                 }
             } else if (ev.getDamager() instanceof Player) {
                 Player damager = (Player) ev.getDamager();
+                API.getMessageAPI().sendHitBowMessage(eventEntity, damager);
                 if (!API.getMechanicAPI().isOnSpawn(damager)) {
                     if (!API.getMechanicAPI().isOnSpawn(eventEntity)) {
                         if (eventEntity instanceof Player) {
@@ -178,7 +180,6 @@ public class JobsHandlers implements Listener {
     /** FIX: When adding mobs */
     private void sendToRespawn(Entity entity, Player damager, EntityDamageEvent event) {
         Player player = (Player) entity;
-        API.getMessageAPI().sendHitBowMessage(player, damager);
         if (event.getDamage() > player.getHealth()) {
             for (Item item : player.getInventory().getContents().values()) {
                 player.getLevel().dropItem(new Vector3(player.getX(), player.getY() + 1, player.getZ()), item);
