@@ -5,16 +5,14 @@ import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.*;
-import cn.nukkit.event.server.QueryRegenerateEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.scheduler.Task;
-import io.pocketvote.event.VoteDispatchEvent;
 import io.pocketvote.event.VoteEvent;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileHub;
+import nycuro.database.objects.ProfileProxy;
 
 /**
  * author: NycuRO
@@ -31,7 +29,7 @@ public class MechanicHandlers implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        Loader.startTime.remove(player.getUniqueId());
+        Loader.startTime.removeLong(player.getUniqueId());
     }
 
     @EventHandler
@@ -45,14 +43,15 @@ public class MechanicHandlers implements Listener {
 
     private void enterThings(Player player) {
         // Nu merge PreLoginEvent si nici Async.
+        player.getInventory().clearAll();
         API.getMainAPI().coords.put(player.getName(), false);
-        API.getDatabase().playerExist(player, bool -> {
+        API.getDatabase().playerExist(player.getName(), bool -> {
             try {
                 if (!bool) {
-                    API.getDatabase().addNewPlayer(player);
+                    API.getDatabase().addNewPlayer(player.getName());
                 } else {
-                    Database.addDatesPlayerHub(player);
-                    Database.addDatesPlayerFactions(player);
+                    Database.addDatesPlayerHub(player.getName());
+                    Database.addDatesPlayerFactions(player.getName());
                 }
             } finally {
                 API.getMainAPI().getServer().getScheduler().scheduleDelayedTask(new Task() {
@@ -63,13 +62,13 @@ public class MechanicHandlers implements Listener {
                         startItems(player);
                     }
                 }, 20 * 10, true);
-                if (Loader.startTime.get(player.getUniqueId()) != null) {
+                if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
                     Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
                 } else {
                     Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
                 }
 
-                if (Loader.startTime.get(player.getUniqueId()) != null) {
+                if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
                     Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
                 } else {
                     Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
@@ -102,13 +101,12 @@ public class MechanicHandlers implements Listener {
 
     @EventHandler
     public void onVoteReceive(VoteEvent event) {
-        System.out.println("Yey!");
         try {
             IPlayer player = API.getMainAPI().getServer().getOfflinePlayer(event.getPlayer());
-            ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
-            int votes = profileHub.getVotes();
-            profileHub.setVotes(votes + 1);
-            API.getDatabase().setVotes(player, votes + 1);
+            ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
+            int votes = profileProxy.getVotes();
+            profileProxy.setVotes(votes + 1);
+            API.getDatabase().setVotes(player.getName(), votes + 1);
         } catch (Exception e) {
             //
         }

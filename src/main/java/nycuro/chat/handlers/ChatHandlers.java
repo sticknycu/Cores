@@ -33,7 +33,7 @@ public class ChatHandlers implements Listener {
     public void onChat(PlayerChatEvent event) {
         Player player = event.getPlayer();
         count++;
-        String group = Objects.requireNonNull(api.getUser(player.getUniqueId())).getPrimaryGroup().toUpperCase();
+        String group = Objects.requireNonNull(api.getUser(player.getName())).getPrimaryGroup().toUpperCase();
         String s = ChatFormat.valueOf(group).toString();
         s = s.replace("%name", player.getName());
         s = s.replace("%msg", event.getMessage());

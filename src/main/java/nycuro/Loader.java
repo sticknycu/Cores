@@ -1,15 +1,11 @@
 package nycuro;
 
-import cn.nukkit.Player;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.*;
 import nycuro.abuse.handlers.AbuseHandlers;
 import nycuro.api.MechanicAPI;
 import nycuro.api.MessageAPI;
@@ -22,6 +18,7 @@ import nycuro.commands.list.mechanic.*;
 import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
+import nycuro.database.objects.ProfileProxy;
 import nycuro.gui.handlers.GUIHandlers;
 import nycuro.language.handlers.LanguageHandlers;
 import nycuro.level.handlers.LevelHandlers;
@@ -33,6 +30,7 @@ import nycuro.tasks.ScoreboardTask;
 import nycuro.utils.query.MCQuery;
 import nycuro.utils.query.QueryResponse;
 
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -43,11 +41,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class Loader extends PluginBase {
 
-    public static Object2ObjectMap<UUID, Long> startTime = new Object2ObjectOpenHashMap<>();
-    public Object2ObjectMap<String, DummyBossBar> bossbar = new Object2ObjectOpenHashMap<>();
-    public Object2ObjectMap<String, FakeScoreboard> scoreboard = new Object2ObjectOpenHashMap<>();
+    public static Object2LongMap<UUID> startTime = new Object2LongOpenHashMap<>();
+    public Map<String, DummyBossBar> bossbar = new Object2ObjectOpenHashMap<>();
+    public Map<String, FakeScoreboard> scoreboard = new Object2ObjectOpenHashMap<>();
     public Object2IntMap<String> timers = new Object2IntOpenHashMap<>();
-    public Object2ObjectMap<String, Boolean> coords = new Object2ObjectOpenHashMap<>();
+    public Object2BooleanMap<String> coords = new Object2BooleanOpenHashMap<>();
 
     public static void log(String s) {
         API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
@@ -63,7 +61,7 @@ public class Loader extends PluginBase {
         int minutes = (int) (TimeUnit.MILLISECONDS.toMinutes(time) - hours * 60);
         int MINS = (int) TimeUnit.MILLISECONDS.toMinutes(time);
         int seconds = (int) (TimeUnit.MILLISECONDS.toSeconds(time) - MINS * 60);
-        return String.valueOf(hours + ":" + minutes + ":" + seconds);
+        return hours + ":" + minutes + ":" + seconds;
     }
 
     public static double round(double value, int places) {
@@ -83,7 +81,6 @@ public class Loader extends PluginBase {
 
     @Override
     public void onEnable() {
-        this.getLogger().info(String.valueOf(this.getDataFolder().mkdirs()));
         registerPlaceHolders();
         registerEvents();
         initDatabase();
@@ -93,12 +90,19 @@ public class Loader extends PluginBase {
 
     @Override
     public void onDisable() {
+        saveToDatabase();
         removeAllFromMaps();
     }
 
     private void removeAllFromMaps() {
-        for (Player player : this.getServer().getOnlinePlayers().values()) {
-            Loader.startTime.remove(player.getUniqueId());
+        for (Long player : startTime.values()) {
+            startTime.removeLong(player);
+        }
+    }
+
+    private void saveToDatabase() {
+        for (ProfileProxy profileProxy : Database.profileProxy.values()) {
+            Database.saveUnAsyncDatesPlayerFromProxy(profileProxy.getName());
         }
     }
 
@@ -144,7 +148,7 @@ public class Loader extends PluginBase {
                 MechanicUtils.getTops();
             }
         }, 20 * 10, 20 * 60 * 3, true);*/
-        this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20 * 3, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 20, true);
     }
 
@@ -153,10 +157,10 @@ public class Loader extends PluginBase {
         for (int i = 1; i <= 10; i++) {
             final int value = i;
             api.staticPlaceholder("top" + value + "killsname", () -> Database.scoreboardkillsName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "killscount", () -> Database.scoreboardkillsValue.getOrDefault(value, 0).toString());
+            api.staticPlaceholder("top" + value + "killscount", () -> String.valueOf(Database.scoreboardkillsValue.getOrDefault(value, 0)));
 
             api.staticPlaceholder("top" + value + "deathsname", () -> Database.scoreboarddeathsName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(value, 0).toString());
+            api.staticPlaceholder("top" + value + "deathscount", () -> String.valueOf(Database.scoreboarddeathsValue.getOrDefault(value, 0)));
 
             api.staticPlaceholder("top" + value + "coinsname", () -> Database.scoreboardcoinsName.getOrDefault(value, " "));
             api.staticPlaceholder("top" + value + "coinscount", () -> String.valueOf(round(Database.scoreboardcoinsValue.getOrDefault(value, 0.0), 2)));
@@ -165,34 +169,29 @@ public class Loader extends PluginBase {
             api.staticPlaceholder("top" + value + "timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(value, 0L)));
 
             api.staticPlaceholder("top" + value + "votesname", () -> Database.scoreboardvotesName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "votescount", () -> Database.scoreboardvotesValue.getOrDefault(value, 0).toString());
+            api.staticPlaceholder("top" + value + "votescount", () -> String.valueOf(Database.scoreboardvotesValue.getOrDefault(value, 0)));
         }
     }
 
-    public static int getCountOnline(int type) {
-        int count = 0;
+    public static String getCountOnline(int type) {
+        String count = "0";
         MCQuery main;
         QueryResponse response;
         switch (type) {
             case 0: // bungee
                 main = new MCQuery("localhost", 19132);
-                count = main.basicStat().getOnlinePlayers();
+                count = String.valueOf(main.basicStat().getOnlinePlayers());
                 break;
             case 1: // hub
                 main = new MCQuery("localhost", 19133);
-                count = main.basicStat().getOnlinePlayers();
+                count = String.valueOf(main.basicStat().getOnlinePlayers());
                 break;
             case 2: // factions
                 main = new MCQuery("localhost", 19134);
-                count = main.basicStat().getOnlinePlayers();
+                count = String.valueOf(main.basicStat().getOnlinePlayers());
                 break;
-            case 3: // skyblock
-                main = new MCQuery("localhost", 19135);
-                count = main.basicStat().getOnlinePlayers();
-                break;
-            case 4: // skypvp
-                main = new MCQuery("localhost", 19136);
-                count = main.basicStat().getOnlinePlayers();
+            default:
+                count = TextFormat.RED + "OFFLINE";
                 break;
         }
         return count;

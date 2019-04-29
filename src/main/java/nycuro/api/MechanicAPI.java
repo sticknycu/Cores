@@ -19,7 +19,7 @@ import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nycuro.API;
 import nycuro.crate.item.EntityFirework;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileHub;
+import nycuro.database.objects.ProfileProxy;
 
 /**
  * author: NycuRO
@@ -65,7 +65,7 @@ public class MechanicAPI {
 
     private void sendInfoServers(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Info Partner");
-        ProfileHub profile = Database.profileHub.get(player.getUniqueId());
+        ProfileProxy profile = Database.profileProxy.get(player.getName());
         int lang = profile.getLanguage();
         switch (lang) {
             case 0:

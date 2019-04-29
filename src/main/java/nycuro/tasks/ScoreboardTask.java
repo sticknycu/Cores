@@ -6,7 +6,7 @@ import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileHub;
+import nycuro.database.objects.ProfileProxy;
 
 /**
  * author: NycuRO
@@ -30,7 +30,7 @@ public class ScoreboardTask extends Task {
 
         Objective scoreboardDisplay = scoreboard.objective.getObjective();
 
-        ProfileHub profile = Database.profileHub.get(player.getUniqueId());
+        ProfileProxy profile = Database.profileProxy.get(player.getName());
 
         DisplayObjective dobj = new DisplayObjective(
                 scoreboardDisplay,

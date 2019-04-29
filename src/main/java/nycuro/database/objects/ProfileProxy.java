@@ -3,7 +3,7 @@ package nycuro.database.objects;
 import lombok.Data;
 
 @Data
-public class ProfileHub {
+public class ProfileProxy {
 
     public String name;
     public int language;
@@ -11,7 +11,7 @@ public class ProfileHub {
     public long time;
     public int votes;
 
-    public ProfileHub(String name, int language, double gems, long time, int votes) {
+    public ProfileProxy(String name, int language, double gems, long time, int votes) {
         this.name = name;
         this.language = language;
         this.gems = gems;

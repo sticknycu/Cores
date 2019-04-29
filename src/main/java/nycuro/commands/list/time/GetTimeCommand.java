@@ -23,8 +23,8 @@ public class GetTimeCommand extends PrincipalCommand {
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         Player player = (Player) commandSender;
         if (strings.length == 0) {
-            Profile senderProfile = Database.profile.get(player.getUniqueId());
-            long session = System.currentTimeMillis() - Loader.startTime.get(player.getUniqueId());
+            Profile senderProfile = Database.profile.get(player.getName());
+            long session = System.currentTimeMillis() - Loader.startTime.get(player.getName());
             //long time = senderProfile.getTime();
             API.getMessageAPI().getSelfTimeMessage(player, session, time);
         } else if (strings.length == 1) {
