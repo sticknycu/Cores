@@ -75,7 +75,7 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                STRING = "§7(§e!§7) §4Error: §7You can't spawn Wither on spawn!";
+                STRING = "§7(§e!§7) §4Error: §7You can't spawn Wither in spawn!";
                 break;
             case 1:
                 STRING = "§7(§e!§7) §4Error: §7Nu poti spawna Wither-ul in spawn!";
@@ -88,7 +88,7 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                STRING = "§7(§e!§7) §4Error: §7You played before! For teleport you need have §c1000 dollars§7!";
+                STRING = "§7(§e!§7) §4Error: §7You played before! For teleport you need to have §c1000 dollars§7!";
                 break;
             case 1:
                 STRING = "§7(§e!§7) §4Error: §7Ai mai jucat pana acum! Pentru a te teleporta ai nevoie de §c1000 dollars§7!";
@@ -101,10 +101,10 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                STRING = "§6§lTIP §r§e» §7Everyone, please pay attention! In §630 seconds §7all entities will be killed!";
+                STRING = "§6§lTIP §r§e» §7Everyone, please pay attention! In §630 seconds §7all entities will be removed!";
                 break;
             case 1:
-                STRING = "§6§lTIP §r§e» §7Toata lumea, atentie! In §630 de secunde §7toate entitatile vor fi omorate!";
+                STRING = "§6§lTIP §r§e» §7Toata lumea, atentie! In §630 de secunde §7toate entitatile vor fi sterse!";
                 break;
         }
         return STRING;
@@ -114,10 +114,10 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                STRING = "§6§lTIP §r§e» §7Everyone, please pay attention! All entities was killed! Next killing will be in §65 minutes§7!";
+                STRING = "§6§lTIP §r§e» §7All entities was removed! Next entities will be removed in §65 minutes§7!";
                 break;
             case 1:
-                STRING = "§6§lTIP §r§e» §7Toata lumea, atentie! Toate entitatile au fost omorate! Urmatoarea omorare va fi in §65 minute§7!";
+                STRING = "§6§lTIP §r§e» §7Toate entitatile au fost sterse! Urmatoarele entitati vor fi sterse in §65 minute§7!";
                 break;
         }
         return STRING;
@@ -127,10 +127,10 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                STRING = "§7(§e!§7) §4Error: §7There are 10 withers! Try later!";
+                STRING = "§7(§e!§7) §4Error: §7There are 10 withers spawned (§cMAXIMUM§7)! Try again later!";
                 break;
             case 1:
-                STRING = "§7(§e!§7) §4Eroare: §7Sunt deja 10 witheri pe server! Incearca mai tarziu!";
+                STRING = "§7(§e!§7) §4Eroare: §7Sunt deja 10 witheri pe server (§cMAXIMUL§7)! Incearca mai tarziu!";
                 break;
         }
         return STRING;
@@ -388,7 +388,7 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7(§e!§7) §eInfo: §6Your inventory it's full to do this!");
+                player.sendMessage("§7(§e!§7) §eInfo: §6Your inventory it's full, so you can't do this!");
                 break;
             case 1:
                 player.sendMessage("§7(§e!§7) §eInfo: §6Ai inventarul plin pentru a face aceasta actiune!");
@@ -400,7 +400,7 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7(§e!§7) §eInfo: §6You was teleported to Spawn!");
+                player.sendMessage("§7(§e!§7) §eInfo: §6You have been teleported in Spawn!");
                 break;
             case 1:
                 player.sendMessage("§7(§e!§7) §eInfo: §6Te-ai teleportat cu succes la Spawn!");
@@ -424,10 +424,10 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §eYou selected English!");
+                player.sendMessage("§7» §eYou selected english language!");
                 break;
             case 1:
-                player.sendMessage("§7» §eAi selectat Romana!");
+                player.sendMessage("§7» §eAi selectat limba romana!");
                 break;
         }
     }
@@ -499,7 +499,7 @@ public class MessageAPI {
                 player.sendMessage("§7» §eSorry! This enchant is not available on Server.");
                 break;
             case 1:
-                player.sendMessage("§7» §eScuze! Acest Enchant nu este disponibil pe Server.");
+                player.sendMessage("§7» §eScuze! Acest enchant nu este disponibil pe Server.");
                 break;
         }
     }
@@ -544,7 +544,7 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7» §eSorry! To Buy Enchantments with Experience, you need have at least level 15.");
+                player.sendMessage("§7» §eSorry! To Buy Enchantments with Experience, you need to have at least level 15.");
                 break;
             case 1:
                 player.sendMessage("§7» §eScuze! Pentru a Cumpara Enchant-uri cu Experienta, trebuie sa ai cel putin level 15.");
