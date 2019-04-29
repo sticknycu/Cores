@@ -185,7 +185,7 @@ public class MessageAPI {
     public String getMessageBossBar(Player player, int playerTime) {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (playerTime) {
-            case 1:
+            case 3:
                 switch (lang) {
                     case 0:
                         STRING_BOSSBAR = "    §6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n                      §7Have fun";
@@ -195,7 +195,7 @@ public class MessageAPI {
                         break;
                 }
                 break;
-            case 2:
+            case 6:
                 switch (lang) {
                     case 0:
                         STRING_BOSSBAR = "      §6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n                  §7Thanks for playing!";
@@ -205,7 +205,7 @@ public class MessageAPI {
                         break;
                 }
                 break;
-            case 3:
+            case 9:
                 switch (lang) {
                     case 0:
                         STRING_BOSSBAR = "     §6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n            §7Discord: mariusmrn.com/discord";
@@ -215,7 +215,7 @@ public class MessageAPI {
                         break;
                 }
                 break;
-            case 4:
+            case 12:
                 switch (lang) {
                     case 0:
                         STRING_BOSSBAR = "          §6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n      §7Go to our website: mariusmrn.com/servers for more!";
@@ -225,7 +225,7 @@ public class MessageAPI {
                         break;
                 }
                 break;
-            case 5:
+            case 15:
                 switch (lang) {
                     case 0:
                         STRING_BOSSBAR = "  §6§l»§r-- Welcome to §6§lchpe.MariusMRN.com§r --§6§l« §r\n\n          §7Donate for awesome rewards!";

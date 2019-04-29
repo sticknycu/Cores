@@ -47,7 +47,7 @@ public class Database {
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -71,7 +71,7 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -89,7 +89,7 @@ public class Database {
                         consumer.accept(resultSet.next());
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -108,7 +108,7 @@ public class Database {
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         //Loader.registerTops();
@@ -139,7 +139,7 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -201,7 +201,7 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -263,7 +263,7 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -325,7 +325,7 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -387,7 +387,7 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -449,7 +449,7 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -476,7 +476,7 @@ public class Database {
             preparedStatement.setString(5, name);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -501,7 +501,7 @@ public class Database {
                     ));
                     preparedStatement.executeUpdate();
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -518,7 +518,7 @@ public class Database {
                     preparedStatement.setString(2, name);
                     preparedStatement.executeUpdate();
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -535,7 +535,7 @@ public class Database {
                     preparedStatement.setString(2, name);
                     preparedStatement.executeUpdate();
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -552,7 +552,7 @@ public class Database {
                     preparedStatement.setString(2, name);
                     preparedStatement.executeUpdate();
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
