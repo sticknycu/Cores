@@ -114,7 +114,7 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                STRING = "§6§lTIP §r§e» §7All entities was removed! Next entities will be removed in §65 minutes§7!";
+                STRING = "§6§lTIP §r§e» §7All entities has been removed! Next entities will be removed in §65 minutes§7!";
                 break;
             case 1:
                 STRING = "§6§lTIP §r§e» §7Toate entitatile au fost sterse! Urmatoarele entitati vor fi sterse in §65 minute§7!";
