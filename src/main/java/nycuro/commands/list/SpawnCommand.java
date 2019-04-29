@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
+import nycuro.api.UtilsAPI;
 import nycuro.commands.PrincipalCommand;
 
 /**
@@ -22,16 +23,15 @@ public class SpawnCommand extends PrincipalCommand {
         Player player = (Player) commandSender;
         API.getMessageAPI().sendCommandCooldownSpawnMessage(player);
         player.setImmobile(true);
-        if (API.getMainAPI().isOnMobFarm.getBoolean(player)) {
-            API.getMainAPI().isOnMobFarm.put(player, false);
-        }
+        if (API.getMainAPI().isOnMobFarm.getBoolean(player)) API.getMainAPI().isOnMobFarm.put(player, false);
+        if (UtilsAPI.teleported) UtilsAPI.teleported = false;
         player.getServer().getScheduler().scheduleDelayedTask(new Task() {
             @Override
             public void onRun(int i) {
                 API.getMechanicAPI().sendToSpawn(player);
                 API.getMessageAPI().sendCommandSpawnMessage(player);
             }
-        }, 3 * 20);
+        }, 7 * 20);
         return true;
     }
 }

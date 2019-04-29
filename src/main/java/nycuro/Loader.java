@@ -31,6 +31,7 @@ import nycuro.commands.list.time.GetTimeCommand;
 import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
+import nycuro.database.objects.ProfileFactions;
 import nycuro.dropparty.DropPartyAPI;
 import nycuro.gui.handlers.GUIHandlers;
 import nycuro.jobs.handlers.JobsHandlers;
@@ -76,10 +77,14 @@ public class Loader extends PluginBase {
     }
 
     public static void registerTops() {
-        Database.getTopDollars();
-        Database.getTopKills();
-        Database.getTopDeaths();
-        Database.getTopTime();
+        try {
+            API.getMainAPI().saveToDatabase();
+        } finally {
+            Database.getTopDollars();
+            Database.getTopKills();
+            Database.getTopDeaths();
+            Database.getTopTime();
+        }
     }
 
     private void addEntities() {
@@ -130,7 +135,6 @@ public class Loader extends PluginBase {
 
     @Override
     public void onEnable() {
-        this.getLogger().info(String.valueOf(this.getDataFolder().mkdirs()));
         registerPlaceHolders();
         registerEvents();
         initDatabase();
@@ -141,22 +145,19 @@ public class Loader extends PluginBase {
     @Override
     public void onDisable() {
         saveToDatabase();
-        removeAllFromMaps();
         removeNPC();
+        removeAllFromMaps();
     }
 
     private void saveToDatabase() {
-        for (Player player : this.getServer().getOnlinePlayers().values()) {
-            Database.saveUnAsyncDatesPlayerFromHub(player);
-            Database.saveUnAsyncDatesPlayerFromFactions(player);
+        for (ProfileFactions profileFactions : Database.profileFactions.values()) {
+            Database.saveUnAsyncDatesPlayerFromFactions(profileFactions.getName());
         }
     }
 
     private void removeAllFromMaps() {
-        for (Player player : this.getServer().getOnlinePlayers().values()) {
-            Loader.startTime.removeLong(player.getUniqueId());
-            API.getMainAPI().played.removeLong(player.getName());
-        }
+        startTime.clear();
+        played.clear();
     }
 
     private void initDatabase() {
@@ -229,50 +230,9 @@ public class Loader extends PluginBase {
             @Override
             public void onRun(int i) {
                 MechanicUtils.getTops();
+                registerTops();
             }
         }, 20 * 10, 20 * 60 * 3, true);
-        /*this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
-            @Override
-            public void onRun(int i) {
-                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "spawnentities");
-                for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-                    LuckPermsApi api = LuckPerms.getApi();
-                    NodeFactory NODE_BUILDER = api.getNodeFactory();
-                    if (player.getName().equals(Database.scoreboardtimeName.getOrDefault(1, " "))) {
-                        api.getUser(player.getUniqueId()).setPrimaryGroup("HELPERJR");
-                        System.out.println("Am gasit TOP1 TIME: " + player.getName());
-                    } else {
-                        if (!player.getName().equals("NycuR0")) {
-                            api.getUser(player.getUniqueId()).setPrimaryGroup("DEFAULT");
-                        }
-                    }
-                    if (player.getName().equals(Database.scoreboardkillsName.getOrDefault(1, " "))) {
-                        api.getUser(player.getUniqueId()).setPermission(NODE_BUILDER.newBuilder("core.7").build());
-                        System.out.println("Am gasit TOP1 kills: " + player.getName());
-                    } else if (player.getName().equals(Database.scoreboardkillsName.getOrDefault(2, " "))) {
-                        api.getUser(player.getUniqueId()).setPermission(NODE_BUILDER.newBuilder("core.3").build());
-                        System.out.println("Am gasit TOP2 kills: " + player.getName());
-                    } else if (player.getName().equals(Database.scoreboardkillsName.getOrDefault(3, " "))) {
-                        api.getUser(player.getUniqueId()).setPermission(NODE_BUILDER.newBuilder("core.2").build());
-                        System.out.println("Am gasit TOP3 kills: " + player.getName());
-                    } else {
-                        if (!player.getName().equals("NycuR0")) {
-                            for (Node permissions : api.getUser(player.getUniqueId()).getPermissions()) {
-                                if (permissions.equals(NODE_BUILDER.newBuilder("core.2").build())) {
-                                    api.getUser(player.getUniqueId()).unsetPermission(NODE_BUILDER.newBuilder("core.2").build());
-                                }
-                                if (permissions.equals(NODE_BUILDER.newBuilder("core.3").build())) {
-                                    api.getUser(player.getUniqueId()).unsetPermission(NODE_BUILDER.newBuilder("core.3").build());
-                                }
-                                if (permissions.equals(NODE_BUILDER.newBuilder("core.7").build())) {
-                                    api.getUser(player.getUniqueId()).unsetPermission(NODE_BUILDER.newBuilder("core.7").build());
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }, 20 * 15, 20 * 60 * 5);*/
         this.getServer().getScheduler().scheduleRepeatingTask(new Task() {
             @Override
             public void onRun(int i) {
@@ -331,10 +291,10 @@ public class Loader extends PluginBase {
         for (int i = 1; i <= 10; i++) {
             final int value = i;
             api.staticPlaceholder("top" + value + "killsname", () -> Database.scoreboardkillsName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "killscount", () -> Database.scoreboardkillsValue.getOrDefault(value, 0).toString());
+            api.staticPlaceholder("top" + value + "killscount", () -> String.valueOf(Database.scoreboardkillsValue.getOrDefault(value, 0)));
 
             api.staticPlaceholder("top" + value + "deathsname", () -> Database.scoreboarddeathsName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "deathscount", () -> Database.scoreboarddeathsValue.getOrDefault(value, 0).toString());
+            api.staticPlaceholder("top" + value + "deathscount", () -> String.valueOf(Database.scoreboarddeathsValue.getOrDefault(value, 0)));
 
             api.staticPlaceholder("top" + value + "coinsname", () -> Database.scoreboardcoinsName.getOrDefault(value, " "));
             api.staticPlaceholder("top" + value + "coinscount", () -> String.valueOf(round(Database.scoreboardcoinsValue.getOrDefault(value, 0.0), 2)));

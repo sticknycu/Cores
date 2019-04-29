@@ -39,7 +39,7 @@ public class CombatLoggerTask extends Task {
             if (k.getInt(player.getName()) == 0) {
                 if (player.isOnline()) {
                     String message = "";
-                    int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
+                    int lang = Database.profileProxy.get(player.getName()).getLanguage();
                     switch (lang) {
                         case 0:
                             message = "§aYou are no longer in combat, you may now logout and run commands.";

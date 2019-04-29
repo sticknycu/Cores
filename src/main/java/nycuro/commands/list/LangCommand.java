@@ -5,8 +5,7 @@ import cn.nukkit.command.CommandSender;
 import nycuro.API;
 import nycuro.commands.PrincipalCommand;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
-import nycuro.database.objects.ProfileHub;
+import nycuro.database.objects.ProfileProxy;
 
 /**
  * author: NycuRO
@@ -21,15 +20,15 @@ public class LangCommand extends PrincipalCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        ProfileHub profile = Database.profileHub.get(((Player) commandSender).getUniqueId());
+        ProfileProxy profile = Database.profileProxy.get(((Player) commandSender).getUniqueId());
         if (strings.length == 1) {
             String message = strings[0];
             if (message.equals("en")) {
                 profile.setLanguage(0);
-                API.getDatabase().setLanguage((Player) commandSender, 0);
+                API.getDatabase().setLanguage(commandSender.getName(), 0);
             } else {
                 profile.setLanguage(1);
-                API.getDatabase().setLanguage((Player) commandSender, 1);
+                API.getDatabase().setLanguage(commandSender.getName(), 1);
             }
             API.getMessageAPI().sendLangMessage((Player) commandSender);
         } else {

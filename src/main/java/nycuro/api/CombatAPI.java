@@ -25,7 +25,7 @@ public class CombatAPI {
 
     public void setCombat(Player player) {
         String messageCombat = "";
-        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
         if (!inCombat(player)) {
             if (lang == 0) {
                 messageCombat = "§eYou have entered combat, logging out now will cause your death. Please wait §613 §eseconds.";

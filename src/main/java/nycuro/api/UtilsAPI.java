@@ -1,6 +1,8 @@
 package nycuro.api;
 
 import cn.nukkit.Player;
+import cn.nukkit.block.Block;
+import cn.nukkit.block.BlockID;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindowSimple;
@@ -9,7 +11,7 @@ import cn.nukkit.item.Item;
 import nycuro.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
-import nycuro.database.objects.ProfileHub;
+import nycuro.database.objects.ProfileProxy;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.utils.MechanicUtils;
 import nycuro.utils.RandomTPUtils;
@@ -29,6 +31,7 @@ public class UtilsAPI {
     public static WarpUtils warpUtils;
     public static MechanicUtils mechanicUtils;
     private double cost = 0;
+    public static boolean teleported = false;
 
     public static RandomTPUtils getRandomTPUtilsAPI() {
         return randomTPUtils;
@@ -42,28 +45,36 @@ public class UtilsAPI {
         return mechanicUtils;
     }
 
-    private void teleportRandomPlayer(Player player) {
-        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
-        double moneyPlayer = profile.getDollars();
-        cost = 500;
-        double insuficient = cost - moneyPlayer;
-        if (moneyPlayer >= cost) {
-            Database.profileFactions.get(player.getUniqueId()).setDollars(Database.profileFactions.get(player.getUniqueId()).getDollars() - cost);
-            getRandomTPUtilsAPI().getSafeLocationSpawn(player, 5000);
-        } else if (moneyPlayer < cost) {
-            API.getMessageAPI().sendUnsuficientMoneyMessage(player, insuficient);
+    public void handleRandomTeleport(Player player) {
+        if (!player.hasPlayedBefore()) {
+            for (Block block : player.getCollisionBlocks()) {
+                if (block.getId() == BlockID.NETHER_PORTAL) {
+                    getRandomTPUtilsAPI().getSafeLocationSpawn(player, 5000);
+                    teleported = true;
+                }
+            }
+        } else {
+            ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
+            if (profileFactions.getDollars() < 1000) {
+                String message = API.getMessageAPI().sendRandomTPNotFirstTimeMessage(player);
+                player.sendMessage(message);
+            } else {
+                getRandomTPUtilsAPI().getSafeLocationSpawn(player, 5000);
+                teleported = true;
+                profileFactions.setDollars(profileFactions.getDollars() - 1000);
+            }
         }
     }
 
     private void repairItemHand(Player player) {
-        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getName());
         double moneyPlayer = profile.getDollars();
         cost = 500;
         double insufficient = cost - moneyPlayer;
         PlayerInventory playerInventory = player.getInventory();
         Item item = playerInventory.getItemInHand();
         if (moneyPlayer >= cost) {
-            Database.profileFactions.get(player.getUniqueId()).setDollars(Database.profileFactions.get(player.getUniqueId()).getDollars() - cost);
+            Database.profileFactions.get(player.getName()).setDollars(Database.profileFactions.get(player.getName()).getDollars() - cost);
             playerInventory.remove(item);
             item.setDamage(0);
             playerInventory.addItem(item);
@@ -74,7 +85,7 @@ public class UtilsAPI {
     }
 
     public void sendUtilsContents(Player player) {
-        ProfileHub profile = Database.profileHub.get(player.getUniqueId());
+        ProfileProxy profile = Database.profileProxy.get(player.getName());
         int lang = profile.getLanguage();
         switch (lang) {
             case 0:
@@ -93,7 +104,7 @@ public class UtilsAPI {
                         if (!response.isEmpty()) {
                             switch (response.entrySet().iterator().next().getKey()) {
                                 case 0:
-                                    teleportRandomPlayer(player);
+                                    handleRandomTeleport(player);
                                     return;
                                 case 1:
                                     getWarpUtilsAPI().sendWarptOptionOfUtils(player);
@@ -127,7 +138,7 @@ public class UtilsAPI {
                         if (!response.isEmpty()) {
                             switch (response.entrySet().iterator().next().getKey()) {
                                 case 0:
-                                    teleportRandomPlayer(player);
+                                    handleRandomTeleport(player);
                                     return;
                                 case 1:
                                     getWarpUtilsAPI().sendWarptOptionOfUtils(player);

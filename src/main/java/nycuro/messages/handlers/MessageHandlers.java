@@ -23,6 +23,7 @@ public class MessageHandlers implements Listener {
         API.getMechanicAPI().createBossBar(player);
         API.getMechanicAPI().createScoreboard(player);
     }
+
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
         Player player = event.getPlayer();

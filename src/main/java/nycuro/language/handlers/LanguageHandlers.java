@@ -8,7 +8,6 @@ import cn.nukkit.form.response.FormResponseCustom;
 import gt.creeperface.holograms.Holograms;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.mechanic.handlers.MechanicHandlers;
 
 /**
  * author: NycuRO
@@ -22,16 +21,16 @@ public class LanguageHandlers implements Listener {
         Player player = event.getPlayer();
         Holograms holograms = new Holograms();
         int form = ((FormResponseCustom) event.getResponse()).getDropdownResponse(4).getElementID();
-        //int lang = Database.profile.get(player.getUniqueId()).getLanguage();
+        //int lang = Database.profile.get(Database.profileProxy.get(player.getName());).getLanguage();
         switch (form) {
             case 0:
-                Database.profileHub.get(player.getUniqueId()).setLanguage(0);
+                Database.profileProxy.get(player.getName()).setLanguage(0);
                 API.getMessageAPI().sendLangMessage(player);
                 //holograms.setLanguageSelector(p -> lang);
                 ///holograms.onLanguageChanged(player);
                 break;
             case 1:
-                Database.profileHub.get(player.getUniqueId()).setLanguage(1);
+                Database.profileProxy.get(player.getName()).setLanguage(1);
                 API.getMessageAPI().sendLangMessage(player);
                 //holograms.setLanguageSelector(p -> lang);
                 //holograms.onLanguageChanged(player);

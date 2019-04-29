@@ -29,7 +29,7 @@ public class JobsHandlers implements Listener {
         Block block = event.getBlock();
         if (API.getMechanicAPI().isOnSpawn(player)) return;
         if (API.getMechanicAPI().isOnPvP(player)) return;
-        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getName());
         int job = profile.getJob();
         switch (job) {
             case 1:
@@ -191,7 +191,7 @@ public class JobsHandlers implements Listener {
             player.removeAllEffects();
             player.getInventory().clearAll();
             API.getMessageAPI().sendDeadMessage(player, damager);
-            ProfileFactions profilePlayer = Database.profileFactions.get(player.getUniqueId());
+            ProfileFactions profilePlayer = Database.profileFactions.get(player.getName());
             ProfileFactions profileDamager = Database.profileFactions.get(damager.getUniqueId()); // Todo: Zombies, Monsters.
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
             profileDamager.setKills(profileDamager.getKills() + 1);
@@ -204,7 +204,7 @@ public class JobsHandlers implements Listener {
             player.teleport(player.getServer().getDefaultLevel().getSpawnLocation());
             player.removeAllEffects();
             player.getInventory().clearAll();
-            ProfileFactions profilePlayer = Database.profileFactions.get(player.getUniqueId());
+            ProfileFactions profilePlayer = Database.profileFactions.get(player.getName());
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
         }
     }

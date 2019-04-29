@@ -41,7 +41,7 @@ public class KitsAPI {
         //double price = cost.get(1);
         //double insuficient = price - moneyPlayer;
         long time = System.currentTimeMillis();
-        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getName());
         long cooldown = profile.getCooldown();
         long timeGone = time - cooldown;
         if (timeGone >= 24 * 60 * 60 * 1000 || timeGone == 0) {

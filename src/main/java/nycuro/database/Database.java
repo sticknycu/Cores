@@ -1,67 +1,65 @@
 package nycuro.database;
 
-import cn.nukkit.Player;
 import cn.nukkit.scheduler.AsyncTask;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.ints.*;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.objects.ProfileFactions;
-import nycuro.database.objects.ProfileHub;
+import nycuro.database.objects.ProfileProxy;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class Database {
 
-    public static Object2ObjectMap<Integer, String> scoreboardcoinsName = new Object2ObjectOpenHashMap<>();
-    public static Object2ObjectMap<Integer, Double> scoreboardcoinsValue = new Object2ObjectOpenHashMap<>();
-    public static Object2ObjectMap<Integer, String> scoreboardkillsName = new Object2ObjectOpenHashMap<>();
-    public static Object2ObjectMap<Integer, Integer> scoreboardkillsValue = new Object2ObjectOpenHashMap<>();
-    public static Object2ObjectMap<Integer, String> scoreboarddeathsName = new Object2ObjectOpenHashMap<>();
-    public static Object2ObjectMap<Integer, Integer> scoreboarddeathsValue = new Object2ObjectOpenHashMap<>();
-    public static Object2ObjectMap<Integer, String> scoreboardtimeName = new Object2ObjectOpenHashMap<>();
-    public static Object2ObjectMap<Integer, Long> scoreboardtimeValue = new Object2ObjectOpenHashMap<>();
-    public static Object2ObjectMap<UUID, ProfileHub> profileHub = new Object2ObjectOpenHashMap<>();
-    public static Object2ObjectMap<UUID, ProfileFactions> profileFactions = new Object2ObjectOpenHashMap<>();
-    private static HikariDataSource DATASOURCE_HUB;
+    public static Int2ObjectMap<String> scoreboardcoinsName = new Int2ObjectOpenHashMap<>();
+    public static Int2DoubleMap scoreboardcoinsValue = new Int2DoubleOpenHashMap();
+    public static Int2ObjectMap<String> scoreboardkillsName = new Int2ObjectOpenHashMap<>();
+    public static Int2IntMap scoreboardkillsValue = new Int2IntOpenHashMap();
+    public static Int2ObjectMap<String> scoreboarddeathsName = new Int2ObjectOpenHashMap<>();
+    public static Int2IntMap scoreboarddeathsValue = new Int2IntOpenHashMap();
+    public static Int2ObjectMap<String> scoreboardtimeName = new Int2ObjectOpenHashMap<>();
+    public static Int2LongMap scoreboardtimeValue = new Int2LongOpenHashMap();
+    public static Map<String, ProfileProxy> profileProxy = new HashMap<>();
+    public static Map<String, ProfileFactions> profileFactions = new HashMap<>();
+    private static HikariDataSource DATASOURCE_PROXY;
     private static HikariDataSource DATASOURCE_FACTIONS;
 
     public static void connectToDatabaseHub() {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName("org.sqlite.JDBC");
-        config.setJdbcUrl("jdbc:sqlite:/root/mcpe/databases/data_hub.db");
-        DATASOURCE_HUB = new HikariDataSource(config);
-        DATASOURCE_HUB.setMaximumPoolSize(1);
+        config.setJdbcUrl("jdbc:sqlite:/root/mcpe/databases/data_proxy.db");
+        DATASOURCE_PROXY = new HikariDataSource(config);
+        DATASOURCE_PROXY.setMaximumPoolSize(1);
 
-        String query = "create table if not exists dates (`uuid` varchar, `name` varchar, `language` int, `gems` REAL, `time` INTEGER, `votes`  INTEGER)";
+        String query = "create table if not exists dates (`name` varchar, `language` int, `gems` REAL, `time` INTEGER, `votes` INTEGER)";
 
-        try (Connection connection = DATASOURCE_HUB.getConnection();
+        try (Connection connection = DATASOURCE_PROXY.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-
-        addDatesPlayersHub();
     }
-
-    public static void addDatesPlayersHub() {
+    
+    public static void addDatesPlayerHub(String name) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_HUB.getConnection();
+                try (Connection connection = DATASOURCE_PROXY.getConnection();
                      PreparedStatement preparedStatement =
-                             connection.prepareStatement("SELECT * from `dates`")) {
+                             connection.prepareStatement("SELECT * from `dates` WHERE `name` =?")) {
+                    preparedStatement.setString(1, name);
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         while (resultSet.next()) {
-                            profileHub.put(UUID.fromString(resultSet.getString("UUID")), new ProfileHub(
+                            profileProxy.putIfAbsent(name, new ProfileProxy(
                                     resultSet.getString("name"),
                                     resultSet.getInt("language"),
                                     resultSet.getDouble("gems"),
@@ -71,90 +69,34 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
     }
 
-    public static void addDatesPlayersFactions() {
+    public static void saveDatesPlayerFromHub(String name) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
-                     PreparedStatement preparedStatement =
-                             connection.prepareStatement("SELECT * from `dates`")) {
-                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                        while (resultSet.next()) {
-                            profileFactions.put(UUID.fromString(resultSet.getString("UUID")), new ProfileFactions(
-                                    resultSet.getString("name"),
-                                    resultSet.getInt("job"),
-                                    resultSet.getInt("kills"),
-                                    resultSet.getInt("deaths"),
-                                    resultSet.getLong("cooldown"),
-                                    resultSet.getDouble("experience"),
-                                    resultSet.getInt("level"),
-                                    resultSet.getDouble("necesary"),
-                                    resultSet.getLong("time"),
-                                    resultSet.getDouble("dollars")
-                            ));
-                        }
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                saveUnAsyncDatesPlayerFromHub(name);
             }
         });
     }
 
-    public static void addDatesPlayerHub(Player player) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
-            @Override
-            public void onRun() {
-                try (Connection connection = DATASOURCE_HUB.getConnection();
-                     PreparedStatement preparedStatement =
-                             connection.prepareStatement("SELECT * from `dates` WHERE `uuid` =?")) {
-                    preparedStatement.setString(1, player.getUniqueId().toString());
-                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                        while (resultSet.next()) {
-                            profileHub.putIfAbsent(player.getUniqueId(), new ProfileHub(
-                                    resultSet.getString("name"),
-                                    resultSet.getInt("language"),
-                                    resultSet.getDouble("gems"),
-                                    resultSet.getLong("time"),
-                                    resultSet.getInt("votes")
-                            ));
-                        }
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-    }
-
-    public static void saveDatesPlayerFromHub(Player player) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
-            @Override
-            public void onRun() {
-                saveUnAsyncDatesPlayerFromHub(player);
-            }
-        });
-    }
-
-    public static void saveUnAsyncDatesPlayerFromHub(Player player) {
-        ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
-        try (Connection connection = DATASOURCE_HUB.getConnection();
+    public static void saveUnAsyncDatesPlayerFromHub(String name) {
+        ProfileProxy profileProxy = Database.profileProxy.get(name);
+        try (Connection connection = DATASOURCE_PROXY.getConnection();
              PreparedStatement preparedStatement =
-                     connection.prepareStatement("UPDATE `dates` SET `language` = ?, `gems` = ?, `time` = ?, `votes` = ? WHERE `uuid` = ?")) {
-            preparedStatement.setInt(1, profileHub.getLanguage());
-            preparedStatement.setDouble(2, profileHub.getGems());
-            preparedStatement.setLong(3, profileHub.getTime());
-            preparedStatement.setInt(4, profileHub.getVotes());
-            preparedStatement.setString(5, player.getUniqueId().toString());
+                     connection.prepareStatement("UPDATE `dates` SET `language` = ?, `gems` = ?, `time` = ?, `votes` = ? WHERE `name` = ?")) {
+            preparedStatement.setInt(1, profileProxy.getLanguage());
+            preparedStatement.setDouble(2, profileProxy.getGems());
+            preparedStatement.setLong(3, profileProxy.getTime());
+            preparedStatement.setInt(4, profileProxy.getVotes());
+            preparedStatement.setString(5, name);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -165,30 +107,29 @@ public class Database {
         DATASOURCE_FACTIONS = new HikariDataSource(config);
         DATASOURCE_FACTIONS.setMaximumPoolSize(1);
 
-        String query = "create table if not exists dates (`uuid` varchar, `name` varchar, `job` int, `kills` int, `deaths` int, `cooldown` INTEGER, `experience` INTEGER, `level` int, `necesary` INTEGER, `time` INTEGER, `dollars` REAL)";
+        String query = "create table if not exists dates (`name` varchar, `job` int, `kills` int, `deaths` int, `cooldown` INTEGER, `experience` INTEGER, `level` int, `necesary` INTEGER, `time` INTEGER, `dollars` REAL)";
 
         try (Connection connection = DATASOURCE_FACTIONS.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         Loader.registerTops();
-        addDatesPlayersFactions();
     }
 
-    public static void addDatesPlayerFactions(Player player) {
+    public static void addDatesPlayerFactions(String name) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_FACTIONS.getConnection();
                      PreparedStatement preparedStatement =
-                             connection.prepareStatement("SELECT * from `dates` WHERE `uuid` =?")) {
-                    preparedStatement.setString(1, player.getUniqueId().toString());
+                             connection.prepareStatement("SELECT * from `dates` WHERE `name` =?")) {
+                    preparedStatement.setString(1, name);
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         while (resultSet.next()) {
-                            profileFactions.putIfAbsent(player.getUniqueId(), new ProfileFactions(
+                            profileFactions.putIfAbsent(name, new ProfileFactions(
                                     resultSet.getString("name"),
                                     resultSet.getInt("job"),
                                     resultSet.getInt("kills"),
@@ -203,7 +144,7 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -265,7 +206,7 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -327,7 +268,7 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -389,7 +330,7 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
@@ -451,34 +392,31 @@ public class Database {
                         }
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
     }
 
-    public void addNewPlayer(Player player) {
-        String uuid = player.getUniqueId().toString();
-        String name = player.getName();
+    public void addNewPlayer(String name) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_FACTIONS.getConnection();
                      PreparedStatement preparedStatement =
-                             connection.prepareStatement("INSERT INTO `dates` (`uuid`, `name`, `job`, `kills`, `deaths`, `cooldown`, `experience`, `level`, `necesary`, `time`, `dollars`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-                    preparedStatement.setString(1, uuid);
-                    preparedStatement.setString(2, name);
+                             connection.prepareStatement("INSERT INTO `dates` (`name`, `job`, `kills`, `deaths`, `cooldown`, `experience`, `level`, `necesary`, `time`, `dollars`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                    preparedStatement.setString(1, name);
+                    preparedStatement.setInt(2, 0);
                     preparedStatement.setInt(3, 0);
                     preparedStatement.setInt(4, 0);
-                    preparedStatement.setInt(5, 0);
-                    preparedStatement.setLong(6, 0);
-                    preparedStatement.setDouble(7, 0);
-                    preparedStatement.setInt(8, 0);
-                    preparedStatement.setDouble(9, 250);
-                    preparedStatement.setLong(10, 0);
-                    preparedStatement.setDouble(11, 0);
-                    profileFactions.put(player.getUniqueId(), new ProfileFactions(
-                            player.getName(),
+                    preparedStatement.setLong(5, 0);
+                    preparedStatement.setDouble(6, 0);
+                    preparedStatement.setInt(7, 0);
+                    preparedStatement.setDouble(8, 250);
+                    preparedStatement.setLong(9, 0);
+                    preparedStatement.setDouble(10, 0);
+                    profileFactions.put(name, new ProfileFactions(
+                            name,
                             0,
                             0,
                             0,
@@ -491,45 +429,44 @@ public class Database {
                     ));
                     preparedStatement.executeUpdate();
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
     }
 
-    public static void saveDatesPlayerFromFactions(Player player) {
+    public static void saveDatesPlayerFromFactions(String name) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                saveUnAsyncDatesPlayerFromFactions(player);
+                saveUnAsyncDatesPlayerFromFactions(name);
             }
         });
     }
 
-    public void playerExist(Player player, Consumer<Boolean> consumer) {
-        String uuid = player.getUniqueId().toString();
+    public void playerExist(String name, Consumer<Boolean> consumer) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_FACTIONS.getConnection();
                      PreparedStatement preparedStatement =
-                             connection.prepareStatement("SELECT * from `dates` WHERE `uuid` =?")) {
-                    preparedStatement.setString(1, uuid);
+                             connection.prepareStatement("SELECT * from `dates` WHERE `name` =?")) {
+                    preparedStatement.setString(1, name);
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         consumer.accept(resultSet.next());
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
     }
 
-    public static void saveUnAsyncDatesPlayerFromFactions(Player player) {
-        ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
+    public static void saveUnAsyncDatesPlayerFromFactions(String name) {
+        ProfileFactions profileFactions = Database.profileFactions.get(name);
         try (Connection connection = DATASOURCE_FACTIONS.getConnection();
              PreparedStatement preparedStatement =
-                     connection.prepareStatement("UPDATE `dates` SET `job` = ?, `kills` = ?, `deaths` = ?, `cooldown` = ?, `experience` = ?, `level` = ?, `necesary` = ?, `time` = ?, `dollars` = ? WHERE `uuid` = ?")) {
+                     connection.prepareStatement("UPDATE `dates` SET `job` = ?, `kills` = ?, `deaths` = ?, `cooldown` = ?, `experience` = ?, `level` = ?, `necesary` = ?, `time` = ?, `dollars` = ? WHERE `name` = ?")) {
             preparedStatement.setInt(1, profileFactions.getJob());
             preparedStatement.setInt(2, profileFactions.getKills());
             preparedStatement.setInt(3, profileFactions.getDeaths());
@@ -539,44 +476,25 @@ public class Database {
             preparedStatement.setDouble(7, profileFactions.getNecesary());
             preparedStatement.setLong(8, profileFactions.getTime());
             preparedStatement.setDouble(9, profileFactions.getDollars());
-            preparedStatement.setString(10, player.getUniqueId().toString());
+            preparedStatement.setString(10, name);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
-    public void setLanguage(Player player, int language) {
-        String uuid = player.getUniqueId().toString();
+    public void setLanguage(String name, int language) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_HUB.getConnection();
+                try (Connection connection = DATASOURCE_PROXY.getConnection();
                      PreparedStatement preparedStatement =
-                             connection.prepareStatement("UPDATE `dates` SET `language` =? WHERE `uuid` =?")) {
+                             connection.prepareStatement("UPDATE `dates` SET `language` =? WHERE `name` =?")) {
                     preparedStatement.setInt(1, language);
-                    preparedStatement.setString(2, uuid);
+                    preparedStatement.setString(2, name);
                     preparedStatement.executeUpdate();
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-    }
-
-    public void setGems(Player player, double gems) {
-        String uuid = player.getUniqueId().toString();
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
-            @Override
-            public void onRun() {
-                try (Connection connection = DATASOURCE_HUB.getConnection();
-                     PreparedStatement preparedStatement =
-                             connection.prepareStatement("UPDATE `dates` SET `gems` =? WHERE `uuid` =?")) {
-                    preparedStatement.setDouble(1, gems);
-                    preparedStatement.setString(2, uuid);
-                    preparedStatement.executeUpdate();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });

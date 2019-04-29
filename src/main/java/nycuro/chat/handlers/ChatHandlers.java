@@ -12,7 +12,7 @@ import nycuro.api.JobsAPI;
 import nycuro.chat.ChatFormat;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
-import nycuro.database.objects.ProfileHub;
+import nycuro.database.objects.ProfileProxy;
 
 import java.util.Objects;
 
@@ -36,8 +36,8 @@ public class ChatHandlers implements Listener {
     @EventHandler
     public void onChat(PlayerChatEvent event) {
         Player player = event.getPlayer();
-        ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
-        ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
+        ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
+        ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
         count++;
         String group = Objects.requireNonNull(api.getUser(player.getUniqueId())).getPrimaryGroup().toUpperCase();
         String s = ChatFormat.valueOf(group).toString();

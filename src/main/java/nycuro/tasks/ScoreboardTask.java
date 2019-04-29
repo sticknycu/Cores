@@ -9,7 +9,7 @@ import nycuro.Loader;
 import nycuro.api.JobsAPI;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
-import nycuro.database.objects.ProfileHub;
+import nycuro.database.objects.ProfileProxy;
 
 /**
  * author: NycuRO
@@ -33,8 +33,8 @@ public class ScoreboardTask extends Task {
 
         Objective scoreboardDisplay = scoreboard.objective.getObjective();
 
-        ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
-        ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
+        ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
+        ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
         Object2BooleanMap<String> coords = API.getMainAPI().coords;
 
         DisplayObjective dobj = new DisplayObjective(
@@ -50,7 +50,7 @@ public class ScoreboardTask extends Task {
             scoreboardDisplay.setScore(3, API.getMessageAPI().getNameScoreboard(player), 3);
             scoreboardDisplay.setScore(4, API.getMessageAPI().getRankScoreboard(player), 4);
             scoreboardDisplay.setScore(5, "§7| §fCoins: §6" +  Loader.round(profileFactions.getDollars(), 2), 5);
-            scoreboardDisplay.setScore(6, "§7| §fGems: §6" + profileHub.getGems() + "  ", 6);
+            scoreboardDisplay.setScore(6, "§7| §fGems: §6" + profileProxy.getGems() + "  ", 6);
             scoreboardDisplay.setScore(7, "§7| §fOnline Time: §6" + Loader.time(profileFactions.getTime()) + "  ", 7);
             scoreboardDisplay.setScore(8, "§7| §fJob: §6" + JobsAPI.jobs.get(profileFactions.getJob()) + "   ", 8);
             if (coords.getOrDefault(player.getName(), false)) {

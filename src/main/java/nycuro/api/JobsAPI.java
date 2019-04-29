@@ -49,7 +49,7 @@ public class JobsAPI {
         Faction faction = fPlayers.getFaction();
         Conf.prefixAdmin = "**";
         Conf.prefixMod = "*";
-        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getName());
         int level = profile.getLevel();
         FormWindowSimple jobsMenu = new FormWindowSimple("Jobs", API.getMessageAPI().sendJobPrincipalModal(player));
         jobsMenu.addButton(new ElementButton("LumberJack", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));

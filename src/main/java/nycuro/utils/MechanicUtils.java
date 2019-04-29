@@ -5,87 +5,27 @@ import com.massivecraft.factions.Factions;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import nycuro.Loader;
-import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
 
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.UUID;
 
 public class MechanicUtils {
 
     public static void getTops() {
         Object2ObjectMap<String, Double> powerMap = new Object2ObjectOpenHashMap<>();
-        Object2ObjectMap<String, Double> coinsMap = new Object2ObjectOpenHashMap<>();
-        Object2ObjectMap<String, Integer> killsMap = new Object2ObjectOpenHashMap<>();
-        Object2ObjectMap<String, Integer> deathsMap = new Object2ObjectOpenHashMap<>();
-        Object2ObjectMap<String, Long> timeMap = new Object2ObjectOpenHashMap<>();
-
-        ValueDoubleComparator bvcoins = new ValueDoubleComparator(coinsMap);
-        TreeMap<String, Double> sorted_map_coins = new TreeMap<String, Double>(bvcoins);
-
-        ValueIntegerComparator bvkills = new ValueIntegerComparator(killsMap);
-        TreeMap<String, Integer> sorted_map_kills = new TreeMap<String, Integer>(bvkills);
-
-        ValueIntegerComparator bvdeaths = new ValueIntegerComparator(deathsMap);
-        TreeMap<String, Integer> sorted_map_deaths = new TreeMap<String, Integer>(bvdeaths);
-
-        ValueLongComparator bvtime = new ValueLongComparator(timeMap);
-        TreeMap<String, Long> sorted_map_time = new TreeMap<String, Long>(bvtime);
 
         ValueDoubleComparator bvpower = new ValueDoubleComparator(powerMap);
         TreeMap<String, Double> sorted_map_power = new TreeMap<String, Double>(bvpower);
-
-        for (Map.Entry<UUID, ProfileFactions> map : Database.profileFactions.entrySet()) {
-            coinsMap.put(map.getValue().getName(), map.getValue().getDollars());
-            killsMap.put(map.getValue().getName(), map.getValue().getKills());
-            deathsMap.put(map.getValue().getName(), map.getValue().getDeaths());
-            timeMap.put(map.getValue().getName(), map.getValue().getTime());
-        }
 
         for (final Faction map : Factions.i.get()) {
             powerMap.put(map.getTag(), map.getPower());
         }
 
-        sorted_map_coins.putAll(coinsMap);
-        sorted_map_kills.putAll(killsMap);
-        sorted_map_deaths.putAll(deathsMap);
-        sorted_map_time.putAll(timeMap);
         sorted_map_power.putAll(powerMap);
 
-
-        Database.scoreboardcoinsName.clear();
-        Database.scoreboardcoinsValue.clear();
-        Database.scoreboardkillsName.clear();
-        Database.scoreboardkillsValue.clear();
-        Database.scoreboarddeathsName.clear();
-        Database.scoreboarddeathsValue.clear();
-        Database.scoreboardtimeName.clear();
-        Database.scoreboardtimeValue.clear();
         Loader.scoreboardPowerName.clear();
         Loader.scoreboardPowerValue.clear();
-
-        for (int i = 0; i < sorted_map_coins.keySet().toArray().length; i++) {
-            if (i == 10) break;
-            Database.scoreboardcoinsName.put(i + 1, sorted_map_coins.keySet().toArray()[i].toString());
-            Database.scoreboardcoinsValue.put(i + 1, Double.valueOf(sorted_map_coins.values().toArray()[i].toString()));
-        }
-        for (int i = 0; i < sorted_map_kills.keySet().toArray().length; i++) {
-            if (i == 10) break;
-            Database.scoreboardkillsName.put(i + 1, sorted_map_kills.keySet().toArray()[i].toString());
-            Database.scoreboardkillsValue.put(i + 1, Integer.valueOf(sorted_map_kills.values().toArray()[i].toString()));
-        }
-        for (int i = 0; i < sorted_map_deaths.keySet().toArray().length; i++) {
-            if (i == 10) break;
-            Database.scoreboarddeathsName.put(i + 1, sorted_map_deaths.keySet().toArray()[i].toString());
-            Database.scoreboarddeathsValue.put(i + 1, Integer.valueOf(sorted_map_deaths.values().toArray()[i].toString()));
-        }
-        for (int i = 0; i < sorted_map_time.keySet().toArray().length; i++) {
-            if (i == 10) break;
-            Database.scoreboardtimeName.put(i + 1, sorted_map_time.keySet().toArray()[i].toString());
-            Database.scoreboardtimeValue.put(i + 1, Long.valueOf(sorted_map_time.values().toArray()[i].toString()));
-        }
         for (int i = 0; i < sorted_map_power.keySet().toArray().length && i != 10; ++i) {
             Loader.scoreboardPowerName.put(i + 1, sorted_map_power.keySet().toArray()[i].toString());
             Loader.scoreboardPowerValue.put(i + 1, Double.valueOf(sorted_map_power.values().toArray()[i].toString()));

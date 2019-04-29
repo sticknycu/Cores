@@ -9,7 +9,7 @@ import com.massivecraft.factions.struct.Role;
 import nycuro.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
-import nycuro.database.objects.ProfileHub;
+import nycuro.database.objects.ProfileProxy;
 
 /**
  * author: NycuRO
@@ -22,8 +22,8 @@ public class ScoreTagTask extends Task {
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
             FPlayer fPlayer = FPlayers.i.get(player);
-            ProfileHub profileHub = Database.profileHub.get(player.getUniqueId());
-            ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
+            ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
+            ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
             String level = "";
             String rank = "";
             String hp = String.valueOf(player.getHealth());
@@ -42,7 +42,7 @@ public class ScoreTagTask extends Task {
             for (FPlayer pm : fPlayer.getFaction().getFPlayersWhereRole(Role.MODERATOR)) {
                 if (pm.getName().equals(player.getName())) rank = "*";
             }
-            if (profileHub != null) {
+            if (profileProxy != null) {
                 try {
                     level = String.valueOf(profileFactions.getLevel());
                 } catch (Exception e) {

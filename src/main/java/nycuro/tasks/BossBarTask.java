@@ -16,7 +16,7 @@ public class BossBarTask extends Task {
     @Override
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-            ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+            ProfileFactions profile = Database.profileFactions.get(player.getName());
 
             if (API.getMainAPI().bossbar.get(player.getName()) != null) {
                 if (API.getCombatAPI().inCombat(player)) return;

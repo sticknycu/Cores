@@ -17,7 +17,7 @@ import nukkitcoders.mobplugin.entities.monster.flying.Wither;
 import nycuro.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
-import nycuro.database.objects.ProfileHub;
+import nycuro.database.objects.ProfileProxy;
 import nycuro.gui.list.ResponseFormWindow;
 
 import java.util.Map;
@@ -126,7 +126,7 @@ public class MechanicAPI {
 
     public void spawnWither(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Spawn Wither");
-        ProfileHub profile = Database.profileHub.get(player.getUniqueId());
+        ProfileProxy profile = Database.profileProxy.get(player.getName());
         int lang = profile.getLanguage();
         switch (lang) {
             case 0:
@@ -172,7 +172,7 @@ public class MechanicAPI {
                                 API.getMessageAPI().sendTooMuchWithers(player);
                                 return;
                             } else {
-                                ProfileFactions profileFactions = Database.profileFactions.get(player.getUniqueId());
+                                ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
                                 double dolllars = profileFactions.getDollars();
                                 if (dolllars < 10000) {
                                     API.getMessageAPI().sendUnsuficientMoneyMessage(player, 10000 - profileFactions.getDollars());

@@ -392,7 +392,7 @@ public class MoneyUtils {
     }
 
     public void buyAction(Map<Integer, Object> response, Player player, String firstDropDownType) {
-        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getName());
         double moneyCount = profile.getDollars();
         if (response.get(1) == null) return;
         int itemId = id.getInt(firstDropDownType);
@@ -413,7 +413,7 @@ public class MoneyUtils {
     }
 
     public void sellAction(Map<Integer, Object> response, Player player, String firstDropDownType) {
-        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getName());
         if (response.get(1) == null) return;
         int itemId = id.getInt(firstDropDownType);
         int itemMeta = meta.getInt(firstDropDownType);
@@ -444,7 +444,7 @@ public class MoneyUtils {
     }
 
     public void enchantBuyAction(Map<Integer, Object> response, Player player, String firstDropDownType) {
-        ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+        ProfileFactions profile = Database.profileFactions.get(player.getName());
         if (response.get(1) == null) return;
         if (response.get(2) == null) return;
         double moneyCount = profile.getDollars();

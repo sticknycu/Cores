@@ -17,12 +17,10 @@ public class CheckLevelTask extends Task {
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
             double experience = 0;
-            int level = 0;
             double necesary = 250;
-            ProfileFactions profile = Database.profileFactions.get(player.getUniqueId());
+            ProfileFactions profile = Database.profileFactions.get(player.getName());
             if (profile != null) {
                 experience = profile.getExperience();
-                level = profile.getLevel();
                 necesary = profile.getNecesary();
             }
             if (experience >= necesary) {

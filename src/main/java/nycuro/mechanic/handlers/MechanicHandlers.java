@@ -1,14 +1,18 @@
 package nycuro.mechanic.handlers;
 
 import cn.nukkit.Player;
+import cn.nukkit.block.BlockID;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerChatEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
+import cn.nukkit.event.player.PlayerMoveEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
+import cn.nukkit.level.Location;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.Loader;
+import nycuro.api.UtilsAPI;
 import nycuro.database.Database;
 
 /**
@@ -24,13 +28,13 @@ public class MechanicHandlers implements Listener {
         // Nu merge PreLoginEvent si nici Async.
         API.getMainAPI().coords.put(player.getName(), false);
         API.getMainAPI().played.put(player.getName(), System.currentTimeMillis());
-        API.getDatabase().playerExist(player, bool -> {
+        API.getDatabase().playerExist(player.getName(), bool -> {
             if (!bool) {
-                API.getDatabase().addNewPlayer(player);
-                Database.addDatesPlayerHub(player);
+                API.getDatabase().addNewPlayer(player.getName());
+                Database.addDatesPlayerHub(player.getName());
             } else {
-                Database.addDatesPlayerHub(player);
-                Database.addDatesPlayerFactions(player);
+                Database.addDatesPlayerHub(player.getName());
+                Database.addDatesPlayerFactions(player.getName());
             }
         });
         if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
@@ -64,10 +68,22 @@ public class MechanicHandlers implements Listener {
     }
 
     @EventHandler
+    public void onMove(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        if (API.getMechanicAPI().isOnSpawn(player)) {
+            Location location = player.getLocation();
+            if (location.getLevelBlock().getId() == BlockID.NETHER_PORTAL) {
+                if (UtilsAPI.teleported) return;
+                API.getUtilsAPI().handleRandomTeleport(player);
+            }
+        }
+    }
+
+    @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        Database.saveDatesPlayerFromHub(player);
-        Database.saveDatesPlayerFromFactions(player);
+        Database.saveDatesPlayerFromHub(player.getName());
+        Database.saveDatesPlayerFromFactions(player.getName());
         Loader.startTime.removeLong(player.getUniqueId());
         API.getMainAPI().played.removeLong(player.getName());
     }

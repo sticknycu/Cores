@@ -46,7 +46,7 @@ public class LevelHandlers implements Listener {
         Player player = event.getPlayer();
         String command = event.getMessage().split(" ")[0].toLowerCase();
         String message = "";
-        int lang = Database.profileHub.get(player.getUniqueId()).getLanguage();
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
         if (lang == 0) {
             message = "§cYou cannot use this command during combat";
         } else if (lang == 1) {
