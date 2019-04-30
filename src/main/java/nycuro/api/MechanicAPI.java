@@ -15,6 +15,7 @@ import cn.nukkit.utils.DummyBossBar;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nukkitcoders.mobplugin.entities.monster.flying.Wither;
 import nycuro.API;
+import nycuro.Loader;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 import nycuro.database.objects.ProfileProxy;
@@ -30,16 +31,8 @@ import java.util.function.Consumer;
  */
 public class MechanicAPI {
 
-    public boolean isOnSpawn(Entity entity) {
-        double x = entity.getLevel().getSpawnLocation().getX();
-        double y = entity.getLevel().getSpawnLocation().getY();
-        double z = entity.getLevel().getSpawnLocation().getZ();
-        Vector3 vector3 = new Vector3(x, y, z);
-        if (entity instanceof Player) {
-            return entity.getLevel().getName().equalsIgnoreCase("world") && entity.getPosition().distance(vector3) <= 300 && !((Player) entity).isOp();
-        } else {
-            return entity.getLevel().getName().equalsIgnoreCase("world") && entity.getPosition().distance(vector3) <= 300;
-        }
+    public boolean isOnSpawn(Player player) {
+        return Loader.isOnSpawn.getBoolean(player.getName());
     }
 
     public boolean isOnPvP(Entity entity) {

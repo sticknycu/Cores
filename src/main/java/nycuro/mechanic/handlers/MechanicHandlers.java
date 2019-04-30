@@ -1,18 +1,14 @@
 package nycuro.mechanic.handlers;
 
 import cn.nukkit.Player;
-import cn.nukkit.block.BlockID;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerChatEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
-import cn.nukkit.event.player.PlayerMoveEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
-import cn.nukkit.level.Location;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.Loader;
-import nycuro.api.UtilsAPI;
 import nycuro.database.Database;
 
 /**
@@ -27,6 +23,8 @@ public class MechanicHandlers implements Listener {
         Player player = event.getPlayer();
         // Nu merge PreLoginEvent si nici Async.
         API.getMainAPI().coords.put(player.getName(), false);
+        Loader.isOnSpawn.put(player.getName(), true);
+        Loader.isOnBorder.put(player.getName(), true);
         API.getMainAPI().played.put(player.getName(), System.currentTimeMillis());
         API.getDatabase().playerExist(player.getName(), bool -> {
             if (!bool) {
@@ -68,24 +66,14 @@ public class MechanicHandlers implements Listener {
     }
 
     @EventHandler
-    public void onMove(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        if (API.getMechanicAPI().isOnSpawn(player)) {
-            Location location = player.getLocation();
-            if (location.getLevelBlock().getId() == BlockID.NETHER_PORTAL) {
-                if (UtilsAPI.teleported) return;
-                API.getUtilsAPI().handleRandomTeleport(player);
-            }
-        }
-    }
-
-    @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         Database.saveDatesPlayerFromHub(player.getName());
         Database.saveDatesPlayerFromFactions(player.getName());
         Loader.startTime.removeLong(player.getUniqueId());
         API.getMainAPI().played.removeLong(player.getName());
+        Loader.isOnSpawn.removeBoolean(player.getName());
+        Loader.isOnBorder.removeBoolean(player.getName());
     }
 
     @EventHandler

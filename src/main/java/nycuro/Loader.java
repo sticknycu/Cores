@@ -1,6 +1,7 @@
 package nycuro;
 
 import cn.nukkit.Player;
+import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.item.EntityItem;
 import cn.nukkit.entity.mob.EntityCreeper;
@@ -71,6 +72,9 @@ public class Loader extends PluginBase {
 
     public static Object2ObjectMap<Integer, String> scoreboardPowerName = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectMap<Integer, Double> scoreboardPowerValue = new Object2ObjectOpenHashMap<>();
+
+    public static Object2BooleanMap<String> isOnSpawn = new Object2BooleanOpenHashMap<>();
+    public static Object2BooleanMap<String> isOnBorder = new Object2BooleanOpenHashMap<>();
 
     public static void log(String s) {
         API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
@@ -274,6 +278,13 @@ public class Loader extends PluginBase {
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CombatLoggerTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreTagTask(), 20, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new CheckerTask(), 10, true);
+        this.getServer().getScheduler().scheduleDelayedTask(new Task() {
+            @Override
+            public void onRun(int i) {
+                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "stop");
+            }
+        }, 20 * 60 * 60 * 3, true);
     }
 
     private void removeNPC() {
