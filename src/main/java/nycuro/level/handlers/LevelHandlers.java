@@ -16,6 +16,7 @@ import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.scheduler.Task;
+import cn.nukkit.utils.TextFormat;
 import nycuro.API;
 import nycuro.gui.list.ResponseFormWindow;
 
@@ -124,13 +125,13 @@ public class LevelHandlers implements Listener {
                 if (!response.isEmpty()) {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            API.getMainAPI().getServer().dispatchCommand(player, "server skypvp");
+                            //API.getMainAPI().getServer().dispatchCommand(player, "server skypvp");
                             return;
                         case 1:
-                            API.getMainAPI().getServer().dispatchCommand(player, "server factions");
+                            player.sendMessage(TextFormat.GREEN + "Momentan foloseste /factions");
                             return;
                         case 3:
-                            API.getMainAPI().getServer().dispatchCommand(player, "server skyblock");
+                            //API.getMainAPI().getServer().dispatchCommand(player, "server skyblock");
                             return;
                         case 4:
                             break;

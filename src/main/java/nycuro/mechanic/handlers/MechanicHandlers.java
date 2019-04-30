@@ -113,6 +113,7 @@ public class MechanicHandlers implements Listener {
     }
 
     private void startItems(Player player) {
+        if (!player.isOnline()) return;
         Item COMPASS = Item.get(Item.COMPASS);
         COMPASS.setCustomName(API.getMessageAPI().getCompassMessage(player));
         Item DYE = Item.get(Item.DYE, 8, 1);

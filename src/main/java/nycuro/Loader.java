@@ -1,6 +1,8 @@
 package nycuro;
 
+import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
@@ -26,6 +28,7 @@ import nycuro.mechanic.handlers.MechanicHandlers;
 import nycuro.messages.handlers.MessageHandlers;
 import nycuro.protection.handlers.ProtectionHandlers;
 import nycuro.tasks.BossBarTask;
+import nycuro.tasks.CheckerTask;
 import nycuro.tasks.ScoreboardTask;
 import nycuro.utils.query.MCQuery;
 import nycuro.utils.query.QueryResponse;
@@ -46,6 +49,8 @@ public class Loader extends PluginBase {
     public Map<String, FakeScoreboard> scoreboard = new Object2ObjectOpenHashMap<>();
     public Object2IntMap<String> timers = new Object2IntOpenHashMap<>();
     public Object2BooleanMap<String> coords = new Object2BooleanOpenHashMap<>();
+
+    public static Object2BooleanMap<String> isOnSpawn = new Object2BooleanOpenHashMap<>();
 
     public static void log(String s) {
         API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
@@ -142,14 +147,15 @@ public class Loader extends PluginBase {
     }
 
     private void registerTasks() {
-        /*this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+        this.getServer().getScheduler().scheduleDelayedTask(new Task() {
             @Override
             public void onRun(int i) {
-                MechanicUtils.getTops();
+                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "stop");
             }
-        }, 20 * 10, 20 * 60 * 3, true);*/
+        }, 20 * 60 * 60 * 3, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 20, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new CheckerTask(), 10, true);
     }
 
     private void registerPlaceHolders() {

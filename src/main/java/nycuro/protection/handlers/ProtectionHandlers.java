@@ -15,6 +15,7 @@ import cn.nukkit.event.player.*;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import nycuro.API;
+import nycuro.Loader;
 
 /**
  * author: NycuRO
@@ -34,10 +35,12 @@ public class ProtectionHandlers implements Listener {
 
     @EventHandler
     public void onExplode(ExplosionPrimeEvent event) {
-        Entity entity = event.getEntity();
-        if (API.getMechanicAPI().isOnSpawn(entity)) {
+        // todo: creeper (AI GRIJA!)
+        if (!(event.getEntity() instanceof Player)) {
             event.setCancelled(true);
         }
+        Player player = (Player) event.getEntity();
+        if (Loader.isOnSpawn.getBoolean(player.getName())) event.setCancelled(true);
     }
 
     @EventHandler
@@ -147,15 +150,6 @@ public class ProtectionHandlers implements Listener {
         if (player.getLevel().getName().equalsIgnoreCase("pvp")) {
             event.setCancelled(true);
             API.getMessageAPI().sendPlaceMessage(player);
-        }
-    }
-
-    @EventHandler
-    public void onMove(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        if (!API.getMechanicAPI().isOnSpawn(player)) {
-            event.setCancelled(true);
-            API.getMessageAPI().sendBorderMessage(player);
         }
     }
 }
