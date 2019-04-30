@@ -128,7 +128,7 @@ public class LevelHandlers implements Listener {
                             //API.getMainAPI().getServer().dispatchCommand(player, "server skypvp");
                             return;
                         case 1:
-                            player.sendMessage(TextFormat.GREEN + "Momentan foloseste /factions");
+                            player.sendMessage(TextFormat.GREEN + "Momentan foloseste /server factions");
                             return;
                         case 3:
                             //API.getMainAPI().getServer().dispatchCommand(player, "server skyblock");
