@@ -79,5 +79,11 @@ public class Loader extends Plugin {
                 }
             }
         }, 1, 5, TimeUnit.MINUTES);
+        this.getProxy().getScheduler().schedule(this, new Runnable() {
+            @Override
+            public void run() {
+                API.getMainAPI().getProxy().stop();
+            }
+        }, 1, 3, TimeUnit.HOURS);
     }
 }
