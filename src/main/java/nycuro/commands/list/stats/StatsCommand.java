@@ -23,7 +23,7 @@ public class StatsCommand extends PrincipalCommand {
             API.getMechanicAPI().sendStats(commandSender, (Player) commandSender);
         } else {
             System.out.println(strings[0]);
-            IPlayer player = API.getMainAPI().getServer().getOfflinePlayer(API.getMainAPI().getServer().getOfflinePlayer(strings[0]).getUniqueId());
+            IPlayer player = API.getMainAPI().getServer().getOfflinePlayer(strings[0]);
             API.getMechanicAPI().sendStats(commandSender, player);
         }
         return true;

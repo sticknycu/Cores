@@ -19,9 +19,9 @@ public class CheckerTask extends Task {
     @Override
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-            int x = (int) player.getX();
-            int y = (int) player.getY();
-            int z = (int) player.getZ();
+            int x = (int) API.getMainAPI().getServer().getDefaultLevel().getSpawnLocation().getX();
+            int y = (int) API.getMainAPI().getServer().getDefaultLevel().getSpawnLocation().getY();
+            int z = (int) API.getMainAPI().getServer().getDefaultLevel().getSpawnLocation().getZ();
             Vector3 vector3 = new Vector3(x, y, z);
             if (player.getLevel().getName().equalsIgnoreCase("world") && player.getPosition().distance(vector3) <= 300 && !player.isOp()) {
                 Loader.isOnSpawn.put(player.getName(), true);
@@ -30,9 +30,9 @@ public class CheckerTask extends Task {
             }
 
             if ((x >= 7500 || x <= -7500) || (z >= 7500 || z <= -7500)) {
-                Loader.isOnBorder.put(player.getName(), true);
-            } else {
                 Loader.isOnBorder.put(player.getName(), false);
+            } else {
+                Loader.isOnBorder.put(player.getName(), true);
             }
 
             // Border Check

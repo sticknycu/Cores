@@ -33,13 +33,23 @@ public class Database {
     private static HikariDataSource DATASOURCE_FACTIONS;
 
     public static void connectToDatabaseHub() {
-        HikariConfig config = new HikariConfig();
-        config.setDriverClassName("org.sqlite.JDBC");
-        config.setJdbcUrl("jdbc:sqlite:/root/mcpe/databases/data_proxy.db");
-        DATASOURCE_PROXY = new HikariDataSource(config);
-        DATASOURCE_PROXY.setMaximumPoolSize(1);
+        String address = "hosting3.gazduirejocuri.ro";
+        String name = "chzoneeu_proxy";
+        String username = "chzoneeu_nycu";
+        String password = "unprost2019";
 
-        String query = "create table if not exists dates (`name` varchar, `language` int, `gems` REAL, `time` INTEGER, `votes` INTEGER)";
+        HikariConfig config = new HikariConfig();
+        config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
+        config.addDataSourceProperty("serverName", address);
+        config.addDataSourceProperty("port", "3306");
+        config.addDataSourceProperty("databaseName", name);
+        config.addDataSourceProperty("user", username);
+        config.addDataSourceProperty("password", password);
+        DATASOURCE_PROXY = new HikariDataSource(config);
+
+        DATASOURCE_PROXY.setMaximumPoolSize(10);
+
+        String query = "create table if not exists dates (`name` varchar(20), `language` int, `gems` REAL, `time` INTEGER, `votes` INTEGER)";
 
         try (Connection connection = DATASOURCE_PROXY.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -101,13 +111,23 @@ public class Database {
     }
 
     public static void connectToDatabaseFactions() {
-        HikariConfig config = new HikariConfig();
-        config.setDriverClassName("org.sqlite.JDBC");
-        config.setJdbcUrl("jdbc:sqlite:/root/mcpe/databases/data_factions.db");
-        DATASOURCE_FACTIONS = new HikariDataSource(config);
-        DATASOURCE_FACTIONS.setMaximumPoolSize(1);
+        String address = "hosting3.gazduirejocuri.ro";
+        String name = "chzoneeu_factions";
+        String username = "chzoneeu_nycu";
+        String password = "unprost2019";
 
-        String query = "create table if not exists dates (`name` varchar, `job` int, `kills` int, `deaths` int, `cooldown` INTEGER, `experience` INTEGER, `level` int, `necesary` INTEGER, `time` INTEGER, `dollars` REAL)";
+        HikariConfig config = new HikariConfig();
+        config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
+        config.addDataSourceProperty("serverName", address);
+        config.addDataSourceProperty("port", "3306");
+        config.addDataSourceProperty("databaseName", name);
+        config.addDataSourceProperty("user", username);
+        config.addDataSourceProperty("password", password);
+        DATASOURCE_FACTIONS = new HikariDataSource(config);
+
+        DATASOURCE_FACTIONS.setMaximumPoolSize(10);
+
+        String query = "create table if not exists dates (`name` varchar(20), `job` int, `kills` int, `deaths` int, `cooldown` INTEGER, `experience` INTEGER, `level` int, `necesary` INTEGER, `time` INTEGER, `dollars` REAL)";
 
         try (Connection connection = DATASOURCE_FACTIONS.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -404,7 +424,7 @@ public class Database {
             public void onRun() {
                 try (Connection connection = DATASOURCE_FACTIONS.getConnection();
                      PreparedStatement preparedStatement =
-                             connection.prepareStatement("INSERT INTO `dates` (`name`, `job`, `kills`, `deaths`, `cooldown`, `experience`, `level`, `necesary`, `time`, `dollars`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                             connection.prepareStatement("INSERT INTO dates (`name`, `job`, `kills`, `deaths`, `cooldown`, `experience`, `level`, `necesary`, `time`, `dollars`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
                     preparedStatement.setString(1, name);
                     preparedStatement.setInt(2, 0);
                     preparedStatement.setInt(3, 0);

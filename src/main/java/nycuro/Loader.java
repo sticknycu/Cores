@@ -285,6 +285,14 @@ public class Loader extends PluginBase {
                 API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "stop");
             }
         }, 20 * 60 * 60 * 3, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new Task() {
+            @Override
+            public void onRun(int i) {
+                for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+                    player.setHealth(player.getHealth());
+                }
+            }
+        }, 1, true);
     }
 
     private void removeNPC() {

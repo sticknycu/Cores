@@ -337,7 +337,7 @@ public class MessageAPI {
     }
 
     public void sendDeadMessage(Player victim, Entity killer) {
-        int lang = Database.profileProxy.get(victim.getUniqueId()).getLanguage();
+        int lang = Database.profileProxy.get(victim.getName()).getLanguage();
         switch (lang) {
             case 0:
                 victim.sendMessage("§7(§e!§7) §rYou was killed by §6" + killer.getName() + "§r!");
@@ -349,7 +349,7 @@ public class MessageAPI {
     }
 
     public void sendPvPOffMessage(Player damager) {
-        int lang = Database.profileProxy.get(damager.getUniqueId()).getLanguage();
+        int lang = Database.profileProxy.get(damager.getName()).getLanguage();
         switch (lang) {
             case 0:
                 damager.sendMessage("§7(§e!§7) §4Error: §7You can't PvP here!");
@@ -809,7 +809,12 @@ public class MessageAPI {
     }
 
     public void sendHitBowMessage(Entity entity, Player damager) {
-        int lang = Database.profileProxy.get(damager.getUniqueId()).getLanguage();
+        int lang = 0;
+        try {
+            lang = Database.profileProxy.get(damager.getName()).getLanguage();
+        } catch (Exception e) {
+            //
+        }
         switch (lang) {
             case 0:
                 damager.sendMessage("§f» §6" + entity.getName() + " §eis now at §6" + entity.getHealth() + "§e/§6" + entity.getMaxHealth() + "§e!");
@@ -822,7 +827,7 @@ public class MessageAPI {
 
     public void getPlayerMoneyMessage(CommandSender commandSender, Player getter, double money) {
         if (commandSender instanceof Player) {
-            int lang = Database.profileProxy.get(((Player) commandSender).getUniqueId()).getLanguage();
+            int lang = Database.profileProxy.get(commandSender.getName()).getLanguage();
             switch (lang) {
                 case 0:
                     commandSender.sendMessage("§f» §e" + getter.getName() + " §ehave now §6$" + money + "§e!");
@@ -838,7 +843,7 @@ public class MessageAPI {
 
     public void getPlayerTimeMessage(CommandSender commandSender, Player getter, long time, long totalTime) {
         if (commandSender instanceof Player) {
-            int lang = Database.profileProxy.get(((Player) commandSender).getUniqueId()).getLanguage();
+            int lang = Database.profileProxy.get(commandSender.getName()).getLanguage();
             switch (lang) {
                 case 0:
                     commandSender.sendMessage("§f» §e" + getter.getName() + " §6was active on this session for §e" + Loader.time(time) + " §e!");
@@ -856,7 +861,12 @@ public class MessageAPI {
     }
 
     public String getMessageBossBar(Player player, int level, double necesarry, double count) {
-        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        int lang = 0;
+        try {
+            lang = Database.profileProxy.get(player.getName()).getLanguage();
+        } catch (Exception e) {
+            //
+        }
         switch (lang) {
             case 0:
                 STRING_BOSSBAR = "       §6§l»§r-- Level §6§l" + level + "§r --§6§l« §r\n\n  §rNecesarry XP: §6" + Loader.round(count, 2) + "§7/§6" + necesarry;
@@ -910,8 +920,8 @@ public class MessageAPI {
 
     public void addPlayerMoneyMessage(CommandSender commandSender, Player giver, double money, double count) {
         if (commandSender instanceof Player) {
-            int langSender = Database.profileProxy.get(((Player) commandSender).getUniqueId()).getLanguage();
-            int langGiver = Database.profileProxy.get(giver.getUniqueId()).getLanguage();
+            int langSender = Database.profileProxy.get(commandSender.getName()).getLanguage();
+            int langGiver = Database.profileProxy.get(giver.getName()).getLanguage();
             switch (langSender) {
                 case 0:
                     commandSender.sendMessage("§f» §eYou added §6$" + count + " §eto " + giver.getName() + "§e!");
@@ -941,7 +951,7 @@ public class MessageAPI {
         } else {
             commandSender.sendMessage("§f» §eAi adaugat §6$" + count + " §elui " + giver.getName() + "§e!");
             commandSender.sendMessage("§f» §e" + giver.getName() + " §eare acum §6$" + money + "§e!");
-            int language = Database.profileProxy.get(giver.getUniqueId()).getLanguage();
+            int language = Database.profileProxy.get(giver.getName()).getLanguage();
             switch (language) {
                 case 0:
                     giver.sendMessage("§f» §eYou bought §6$" + count + " §efrom CONSOLE§e!");
@@ -955,8 +965,8 @@ public class MessageAPI {
 
     public void setPlayerMoneyMessage(CommandSender commandSender, Player giver, double count) {
         if (commandSender instanceof Player) {
-            int lang = Database.profileProxy.get(((Player) commandSender).getUniqueId()).getLanguage();
-            int language = Database.profileProxy.get(giver.getUniqueId()).getLanguage();
+            int lang = Database.profileProxy.get(commandSender.getName()).getLanguage();
+            int language = Database.profileProxy.get(giver.getName()).getLanguage();
             switch (lang) {
                 case 0:
                     commandSender.sendMessage("§f» §eYou setted §6$" + count + " §eto " + giver.getName() + "§e!");
@@ -986,7 +996,7 @@ public class MessageAPI {
         } else {
             commandSender.sendMessage("§f» §eAi setat §6$" + count + " banii §elui " + giver.getName() + "§e!");
             commandSender.sendMessage("§f» §6" + giver.getName() + " §eare acum §6$" + count + "§e!");
-            int language = Database.profileProxy.get(giver.getUniqueId()).getLanguage();
+            int language = Database.profileProxy.get(giver.getName()).getLanguage();
             switch (language) {
                 case 0:
                     giver.sendMessage("§f» §eYour coins setted to §6$" + count + " §6by CONSOLE§e!");
