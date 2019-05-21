@@ -20,13 +20,23 @@ public class Database {
     private static HikariDataSource DATASOURCE_PROXY;
 
     public static void connectToDatabaseHub() {
-        HikariConfig config = new HikariConfig();
-        config.setDriverClassName("org.sqlite.JDBC");
-        config.setJdbcUrl("jdbc:sqlite:/root/mcpe/databases/data_proxy.db");
-        DATASOURCE_PROXY = new HikariDataSource(config);
-        DATASOURCE_PROXY.setMaximumPoolSize(1);
+        String address = "hosting3.gazduirejocuri.ro";
+        String name = "chzoneeu_proxy";
+        String username = "chzoneeu_nycu";
+        String password = "unprost2019";
 
-        String query = "create table if not exists dates (`name` varchar, `language` int, `gems` REAL, `time` INTEGER, `votes` INTEGER)";
+        HikariConfig config = new HikariConfig();
+        config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
+        config.addDataSourceProperty("serverName", address);
+        config.addDataSourceProperty("port", "3306");
+        config.addDataSourceProperty("databaseName", name);
+        config.addDataSourceProperty("user", username);
+        config.addDataSourceProperty("password", password);
+        DATASOURCE_PROXY = new HikariDataSource(config);
+
+        DATASOURCE_PROXY.setMaximumPoolSize(10);
+
+        String query = "create table if not exists dates (`name` varchar(20), `language` int, `gems` REAL, `time` INTEGER, `votes` INTEGER)";
 
         try (Connection connection = DATASOURCE_PROXY.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
