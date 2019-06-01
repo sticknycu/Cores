@@ -11,7 +11,6 @@ import cn.nukkit.item.Item;
 import nycuro.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
-import nycuro.database.objects.ProfileProxy;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.utils.MechanicUtils;
 import nycuro.utils.RandomTPUtils;
@@ -85,77 +84,34 @@ public class UtilsAPI {
     }
 
     public void sendUtilsContents(Player player) {
-        ProfileProxy profile = Database.profileProxy.get(player.getName());
-        int lang = profile.getLanguage();
-        switch (lang) {
-            case 0:
-                FormWindowSimple utilsMenu = new FormWindowSimple("Utils", "                       Hello!\n" +
-                        "               Welcome to Utilities!\n" +
-                        "   Select what you want to do from now.");
-                utilsMenu.addButton(new ElementButton("RandomTP System", new ElementButtonImageData("url", "https://i.imgur.com/UdZm6QB.png")));
-                utilsMenu.addButton(new ElementButton("Warps System", new ElementButtonImageData("url", "https://i.imgur.com/GuxFWI6.png")));
-                utilsMenu.addButton(new ElementButton("Repair System", new ElementButtonImageData("url", "https://i.imgur.com/1yfKKEm.png")));
-                utilsMenu.addButton(new ElementButton("Jobs System", new ElementButtonImageData("url", "https://i.imgur.com/3dNFsme.png")));
-                utilsMenu.addButton(new ElementButton("Close"));
-                //utilsMenu.addButton(new ElementButton("Events System", new ElementButtonImageData("url", "https://i.imgur.com/1yfKKEm.png")));
-                player.showFormWindow(new ResponseFormWindow(utilsMenu, new Consumer<Map<Integer, Object>>() {
-                    @Override
-                    public void accept(Map<Integer, Object> response) {
-                        if (!response.isEmpty()) {
-                            switch (response.entrySet().iterator().next().getKey()) {
-                                case 0:
-                                    handleRandomTeleport(player);
-                                    return;
-                                case 1:
-                                    getWarpUtilsAPI().sendWarptOptionOfUtils(player);
-                                    return;
-                                case 2:
-                                    repairItemHand(player);
-                                    return;
-                                case 3:
-                                    API.getJobsAPI().getJob(player);
-                                    break;
-                                case 4:
-                                    break;
-                            }
-                        }
+        FormWindowSimple utilsMenu = new FormWindowSimple("Utils", "                       Hello!\n" +
+                "               Welcome to Utilities!\n" +
+                "   Select what you want to do from now.");
+        utilsMenu.addButton(new ElementButton("RandomTP System", new ElementButtonImageData("url", "https://i.imgur.com/UdZm6QB.png")));
+        utilsMenu.addButton(new ElementButton("Warps System", new ElementButtonImageData("url", "https://i.imgur.com/GuxFWI6.png")));
+        utilsMenu.addButton(new ElementButton("Repair System", new ElementButtonImageData("url", "https://i.imgur.com/1yfKKEm.png")));
+        //utilsMenu.addButton(new ElementButton("Jobs System", new ElementButtonImageData("url", "https://i.imgur.com/3dNFsme.png")));
+        utilsMenu.addButton(new ElementButton("Close"));
+        //utilsMenu.addButton(new ElementButton("Events System", new ElementButtonImageData("url", "https://i.imgur.com/1yfKKEm.png")));
+        player.showFormWindow(new ResponseFormWindow(utilsMenu, new Consumer<Map<Integer, Object>>() {
+            @Override
+            public void accept(Map<Integer, Object> response) {
+                if (!response.isEmpty()) {
+                    switch (response.entrySet().iterator().next().getKey()) {
+                        case 0:
+                            handleRandomTeleport(player);
+                            return;
+                        case 1:
+                            getWarpUtilsAPI().sendWarptOptionOfUtils(player);
+                            return;
+                        case 2:
+                            repairItemHand(player);
+                            return;
+                        case 3:
+                            break;
                     }
-                }));
-                break;
-            case 1:
-                utilsMenu = new FormWindowSimple("Utils", "                       Salut!\n" +
-                        "             Bine ai venit la Utilitati!\n" +
-                        "       Alege ce doresti sa faci de acum.");
-                utilsMenu.addButton(new ElementButton("RandomTP System", new ElementButtonImageData("url", "https://i.imgur.com/UdZm6QB.png")));
-                utilsMenu.addButton(new ElementButton("Warps System", new ElementButtonImageData("url", "https://i.imgur.com/GuxFWI6.png")));
-                utilsMenu.addButton(new ElementButton("Repair System", new ElementButtonImageData("url", "https://i.imgur.com/1yfKKEm.png")));
-                utilsMenu.addButton(new ElementButton("Jobs System", new ElementButtonImageData("url", "https://i.imgur.com/3dNFsme.png")));
-                utilsMenu.addButton(new ElementButton("Close"));
-                //utilsMenu.addButton(new ElementButton("Events System", new ElementButtonImageData("url", "https://i.imgur.com/1yfKKEm.png")));
-                player.showFormWindow(new ResponseFormWindow(utilsMenu, new Consumer<Map<Integer, Object>>() {
-                    @Override
-                    public void accept(Map<Integer, Object> response) {
-                        if (!response.isEmpty()) {
-                            switch (response.entrySet().iterator().next().getKey()) {
-                                case 0:
-                                    handleRandomTeleport(player);
-                                    return;
-                                case 1:
-                                    getWarpUtilsAPI().sendWarptOptionOfUtils(player);
-                                    return;
-                                case 2:
-                                    repairItemHand(player);
-                                    return;
-                                case 3:
-                                    API.getJobsAPI().getJob(player);
-                                    break;
-                                case 4:
-                                    break;
-                            }
-                        }
-                    }
-                }));
-                break;
-        }
+                }
+            }
+        }));
     }
 }

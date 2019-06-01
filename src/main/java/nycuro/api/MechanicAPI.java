@@ -16,6 +16,7 @@ import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nukkitcoders.mobplugin.entities.monster.flying.Wither;
 import nycuro.API;
 import nycuro.Loader;
+import nycuro.ai.entity.BossEntity;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 import nycuro.database.objects.ProfileProxy;
@@ -55,9 +56,7 @@ public class MechanicAPI {
 
     public void sendToSpawn(Player player) {
         Level level = API.getMainAPI().getServer().getDefaultLevel();
-        if (!level.isChunkLoaded(level.getSpawnLocation().getChunkX(), level.getSpawnLocation().getChunkZ())) {
-            level.loadChunk(level.getSpawnLocation().getChunkX(), level.getSpawnLocation().getChunkZ());
-        }
+        level.loadChunk(level.getSpawnLocation().getChunkX(), level.getSpawnLocation().getChunkZ());
         player.teleport(level.getSpawnLocation());
         player.setImmobile(false);
     }
@@ -72,13 +71,13 @@ public class MechanicAPI {
         entities.forEach(Entity::spawnToAll);
     }*/
 
-    /*public void spawnBoss() {
+    public void spawnDropParty() {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
             addDropPartyKey(player);
             new BossEntity();
             API.getMessageAPI().sendDropPartySpawnedMessage(player);
         }
-    }*/
+    }
 
     public void sendDropPartyMessageBroadcast(Player player) {
         API.getMessageAPI().sendDropPartyEventMessage(player);
@@ -176,6 +175,58 @@ public class MechanicAPI {
                                     API.getMessageAPI().sendSuccesSpawnWither(player);
                                     return;
                                 }
+                            }
+                    }
+                }
+            }
+        }));
+    }
+
+    public void teleportArena(Player player) {
+        FormWindowCustom infoMenu = new FormWindowCustom("Teleport Arena");
+        ProfileProxy profile = Database.profileProxy.get(player.getName());
+        int lang = profile.getLanguage();
+        switch (lang) {
+            case 0:
+                infoMenu.addElement(new ElementLabel("                      Hello!\n" +
+                        "         Welcome to Teleport Arena!\n\n" +
+                        "§c» §aWhat is 'Teleport Arena'?\n" +
+                        "§eTeleport Arena is an option for teleporting to Arena where Boss is spawning.\n" +
+                        "§eYou can do that only if you have level 10+\n" +
+                        "§eYou will cannot use /tp and other commands for teleporting here. Just /spawn.\n" +
+                        "§eBoss is spawning every day at 21:00, 9 PM, GT+2\n" +
+                        "§eBe careful, PVP is on!\n" +
+                        "§eIf you don't want to be teleported, tap on X!\n" +
+                        "§eHave a nice day!"));
+                break;
+            case 1:
+                infoMenu.addElement(new ElementLabel("                      Salut!\n" +
+                        "      Bine ai venit la Teleport Arena!\n\n" +
+                        "§c» §aCe inseamna de fapt 'Teleport Arena'?:\n" +
+                        "§eTeleport Arena este o optiune pentru a te teleporta la Arena unde se spawneaza Boss-ul.\n" +
+                        "§ePoti face asta doar daca ai nivel 10+\n" +
+                        "§eNu o sa poti folosi nici un fel de comanda de teleport, precum /tp. Doar /spawn.\n" +
+                        "§eBoss-ul se spawneaza in fiecare seara la ora 9.\n" +
+                        "§eAi grija, PVP-ul este ON!\n" +
+                        "§eDaca nu vrei sa te teleportezi, apasa sus in dreapta pe X!\n" +
+                        "§eSa ai o zi buna!"));
+                break;
+        }
+        player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
+            @Override
+            public void accept(Map<Integer, Object> response) {
+                if (!response.isEmpty()) {
+                    switch (response.entrySet().iterator().next().getKey()) {
+                        case 0:
+                            ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
+                            int level = profileFactions.getLevel();
+                            if (level < 10) {
+                                API.getMessageAPI().sendArenaException(player);
+                                return;
+                            } else {
+                                // Teleport to arena
+                                API.getMessageAPI().sendTeleportArena(player);
+                                return;
                             }
                     }
                 }

@@ -45,6 +45,19 @@ public class MessageAPI {
         return STRING;
     }
 
+    public String getNextScoreboard(Player player, long time) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§7Next drop party in: §6" + Loader.time(time);
+                break;
+            case 1:
+                STRING = "§7Urmatorul DropParty va fi in: §6" + Loader.time(time);
+                break;
+        }
+        return STRING;
+    }
+
     public String getNameScoreboard(Player player) {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
@@ -66,6 +79,32 @@ public class MessageAPI {
                 break;
             case 1:
                 STRING = "§e» §6Ai fost teleportat la MobFarm!";
+                break;
+        }
+        return STRING;
+    }
+
+    public String sendArenaException(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§e» §6You need have level 10+ to teleport to Arena!";
+                break;
+            case 1:
+                STRING = "§e» §6Ai nevoie de nivelul 10+ pentru a te teleporta la Arena!";
+                break;
+        }
+        return STRING;
+    }
+
+    public String sendTeleportArena(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§e» §6You need been teleported to Arena!";
+                break;
+            case 1:
+                STRING = "§e» §6Ai fost teleportat la Arena!";
                 break;
         }
         return STRING;
@@ -1199,7 +1238,7 @@ public class MessageAPI {
                 player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
                         "                    The DropParty will start in 1 minute!§r\n" +
-                        "                         Fireworks will appear in Spawn.§r\n" +
+                        "                         Fireworks will appear in Arena.§r\n" +
                         "             Because you are Online you will get a Special Key!§r" +
                         "                                                                                                            \n" +
                         "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n");
@@ -1208,7 +1247,7 @@ public class MessageAPI {
                 player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
                         "                       DropParty-ul va incepe in 1 minut!§r\n" +
-                        "                          Artificile vor aparea in Spawn.§r\n" +
+                        "                          Artificile vor aparea in Arena.§r\n" +
                         "               Pentru ca ai fost Online, vei primii o Cheie Speciala!§r\n" +
                         "                                                                                                            \n" +
                         "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n");
@@ -1223,7 +1262,7 @@ public class MessageAPI {
                 player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
                         "                          The DropParty started!§r\n" +
-                        "                The fireworks and The Boss appeared in Spawn.§r\n" +
+                        "                The fireworks and The Boss appeared in Arena.§r\n" +
                         "                     Everyone received a DropParty Key!§r" +
                         "                                                                                                            \n" +
                         "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n");
@@ -1232,7 +1271,7 @@ public class MessageAPI {
                 player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n" +
                         "                                                                                                            \n" +
                         "                              DropParty-ul a inceput!§r\n" +
-                        "                    Artificile si The Boss au aparut in Spawn.§r\n" +
+                        "                    Artificile si The Boss au aparut in Arena.§r\n" +
                         "                      Toata lumea a primit DropParty Key!§r\n" +
                         "                                                                                                            \n" +
                         "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n");

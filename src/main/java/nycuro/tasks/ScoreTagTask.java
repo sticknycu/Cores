@@ -70,9 +70,9 @@ public class ScoreTagTask extends Task {
             scoretag = scoretag.replace("%type", finals);
             nametag = TextFormat.colorize(nametag);
             scoretag = TextFormat.colorize(scoretag);
-            player.setNameTagVisible();
             player.setScoreTag(scoretag);
             player.setNameTag(nametag);
+            player.setNameTagVisible();
         }
     }
 }

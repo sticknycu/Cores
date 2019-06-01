@@ -59,7 +59,8 @@ public class ScoreboardTask extends Task {
             scoreboardDisplay.setScore(10, "§7 " + "" + "    ", 10);
             scoreboardDisplay.setScore(11, "§7--- §e§lServer: " + "  ", 11);
             scoreboardDisplay.setScore(12, API.getMessageAPI().getOnlineScoreboard(player), 12);
-            scoreboardDisplay.setScore(13, "§7| §fDropParty: §6" + " ", 13);
+            scoreboardDisplay.setScore(13, "§7| §fDropParty: §6" + Loader.dropPartyVotes + "§7/§650", 13);
+            scoreboardDisplay.setScore(14, API.getMessageAPI().getNextScoreboard(player, (1000 * 60 * 60 * 24 - (System.currentTimeMillis() - Loader.dropPartyTime))), 14);
         } catch (Exception e) {
             // ignore
         }

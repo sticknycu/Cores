@@ -20,7 +20,7 @@ public class LangCommand extends PrincipalCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        ProfileProxy profile = Database.profileProxy.get(((Player) commandSender).getUniqueId());
+        ProfileProxy profile = Database.profileProxy.get(commandSender.getName());
         if (strings.length == 1) {
             String message = strings[0];
             if (message.equals("en")) {

@@ -171,6 +171,8 @@ public class Database {
     }
 
     public static void getTopDollars() {
+        if (!scoreboardcoinsValue.isEmpty()) scoreboardcoinsValue.clear();
+        if (!scoreboardcoinsName.isEmpty()) scoreboardcoinsName.clear();
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
@@ -179,8 +181,6 @@ public class Database {
                              connection.prepareStatement("SELECT `name`, `dollars` from `dates` ORDER BY `dollars` DESC LIMIT 10")) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         while (resultSet.next()) {
-                            if (!scoreboardcoinsValue.isEmpty()) scoreboardcoinsValue.clear();
-                            if (!scoreboardcoinsName.isEmpty()) scoreboardcoinsName.clear();
                             switch (resultSet.getRow()) {
                                 case 1:
                                     scoreboardcoinsName.put(1, resultSet.getString("name"));
@@ -233,6 +233,8 @@ public class Database {
     }
 
     public static void getTopKills() {
+        if (!scoreboardkillsValue.isEmpty()) scoreboardkillsValue.clear();
+        if (!scoreboardkillsName.isEmpty()) scoreboardkillsName.clear();
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
@@ -241,8 +243,6 @@ public class Database {
                              connection.prepareStatement("SELECT `name`, `kills` from `dates` ORDER BY `kills` DESC LIMIT 10")) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         while (resultSet.next()) {
-                            if (!scoreboardkillsValue.isEmpty()) scoreboardkillsValue.clear();
-                            if (!scoreboardkillsName.isEmpty()) scoreboardkillsName.clear();
                             switch (resultSet.getRow()) {
                                 case 1:
                                     scoreboardkillsName.put(1, resultSet.getString("name"));
@@ -295,6 +295,8 @@ public class Database {
     }
 
     public static void getTopDeaths() {
+        if (!scoreboarddeathsValue.isEmpty()) scoreboarddeathsValue.clear();
+        if (!scoreboarddeathsName.isEmpty()) scoreboarddeathsName.clear();
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
@@ -303,8 +305,6 @@ public class Database {
                              connection.prepareStatement("SELECT `name`, `deaths` from `dates` ORDER BY `deaths` DESC LIMIT 10")) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         while (resultSet.next()) {
-                            if (!scoreboarddeathsValue.isEmpty()) scoreboarddeathsValue.clear();
-                            if (!scoreboarddeathsName.isEmpty()) scoreboarddeathsName.clear();
                             switch (resultSet.getRow()) {
                                 case 1:
                                     scoreboarddeathsName.put(1, resultSet.getString("name"));
@@ -357,6 +357,8 @@ public class Database {
     }
 
     public static void getTopTime() {
+        if (!scoreboardtimeValue.isEmpty()) scoreboardtimeValue.clear();
+        if (!scoreboardtimeName.isEmpty()) scoreboardtimeName.clear();
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
@@ -365,8 +367,6 @@ public class Database {
                              connection.prepareStatement("SELECT `name`, `time` from `dates` ORDER BY `time` DESC LIMIT 10")) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         while (resultSet.next()) {
-                            if (!scoreboardtimeValue.isEmpty()) scoreboardtimeValue.clear();
-                            if (!scoreboardtimeName.isEmpty()) scoreboardtimeName.clear();
                             switch (resultSet.getRow()) {
                                 case 1:
                                     scoreboardtimeName.put(1, resultSet.getString("name"));

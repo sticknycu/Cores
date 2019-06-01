@@ -1,15 +1,29 @@
 package nycuro.mechanic.handlers;
 
+import cn.nukkit.IPlayer;
 import cn.nukkit.Player;
+import cn.nukkit.block.Block;
+import cn.nukkit.block.BlockTNT;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerChatEvent;
+import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
+import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemFlintSteel;
+import cn.nukkit.level.Level;
+import cn.nukkit.math.BlockFace;
 import cn.nukkit.scheduler.Task;
+import io.pocketvote.event.VoteEvent;
+import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.Database;
+import nycuro.database.objects.ProfileFactions;
+
+import java.util.Random;
 
 /**
  * author: NycuRO
@@ -66,6 +80,18 @@ public class MechanicHandlers implements Listener {
     }
 
     @EventHandler
+    public void onVoteReceive(VoteEvent event) {
+        Loader.dropPartyVotes++;
+        IPlayer offlinePlayer = API.getMainAPI().getServer().getOfflinePlayer(event.getPlayer());
+        Random r = new Random();
+        int low = 200;
+        int high = 250;
+        int result = r.nextInt(high-low) + low;
+        ProfileFactions profileFactions = Database.profileFactions.get(offlinePlayer.getName());
+        profileFactions.setExperience(profileFactions.getExperience() + result);
+    }
+
+    @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         Database.saveDatesPlayerFromHub(player.getName());
@@ -82,6 +108,35 @@ public class MechanicHandlers implements Listener {
         if (message.equalsIgnoreCase("జ్ఞ\u200Cా")) {
             API.getMessageAPI().sendAbuseMessage(event.getPlayer());
             event.setCancelled(true);
+        }
+    }
+
+    /* optimise tnt */
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        Block block = event.getBlock();
+        Item item = event.getItem();
+        if (block instanceof BlockTNT && event.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK && item instanceof ItemFlintSteel) {
+            long key = Level.blockHash((int) block.getX(), (int) block.getY(), (int) block.getZ());
+            Long2ObjectMap<Block> map = new Long2ObjectOpenHashMap<>();
+            map.put(key, block);
+            searchForTNT(map, (BlockTNT) block);
+            for (Long2ObjectMap.Entry<Block> it : map.long2ObjectEntrySet()) {
+                ((BlockTNT) it.getValue()).prime();
+            }
+            event.setCancelled();
+        }
+    }
+
+
+    private void searchForTNT(Long2ObjectMap<Block> tnt, BlockTNT current) {
+        for (BlockFace blockFace : BlockFace.values()) {
+            Block side = current.getSide(blockFace);
+            long hash = Level.blockHash((int) side.getX(), (int) side.getY(), (int) side.getZ());
+            if (side instanceof BlockTNT && !tnt.containsKey(hash)) {
+                tnt.put(hash, side);
+                searchForTNT(tnt, (BlockTNT) side);
+            }
         }
     }
 }

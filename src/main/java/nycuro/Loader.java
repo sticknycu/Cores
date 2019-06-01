@@ -22,10 +22,12 @@ import nycuro.commands.list.*;
 import nycuro.commands.list.economy.AddCoinsCommand;
 import nycuro.commands.list.economy.GetCoinsCommand;
 import nycuro.commands.list.economy.SetCoinsCommand;
+import nycuro.commands.list.jobs.JobCommand;
 import nycuro.commands.list.mechanic.TopCoinsCommand;
 import nycuro.commands.list.mechanic.TopDeathsCommand;
 import nycuro.commands.list.mechanic.TopKillsCommand;
 import nycuro.commands.list.mechanic.TopTimeCommand;
+import nycuro.commands.list.spawning.ArenaCommand;
 import nycuro.commands.list.spawning.WitherCommand;
 import nycuro.commands.list.stats.StatsCommand;
 import nycuro.commands.list.time.GetTimeCommand;
@@ -50,6 +52,7 @@ import nycuro.tasks.*;
 import nycuro.utils.MechanicUtils;
 import nycuro.utils.RandomTPUtils;
 import nycuro.utils.WarpUtils;
+import nycuro.utils.vote.VoteSettings;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -69,6 +72,9 @@ public class Loader extends PluginBase {
     public Object2BooleanMap<String> coords = new Object2BooleanOpenHashMap<>();
     public Object2LongMap<String> played = new Object2LongOpenHashMap<>();
     public Object2BooleanMap<Player> isOnMobFarm = new Object2BooleanOpenHashMap<>();
+
+    public static long dropPartyTime;
+    public static int dropPartyVotes;
 
     public static Object2ObjectMap<Integer, String> scoreboardPowerName = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectMap<Integer, Double> scoreboardPowerValue = new Object2ObjectOpenHashMap<>();
@@ -139,11 +145,12 @@ public class Loader extends PluginBase {
 
     @Override
     public void onEnable() {
-        registerPlaceHolders();
-        registerEvents();
+        createConfig();
         initDatabase();
+        registerEvents();
         registerTasks();
         addEntities();
+        registerPlaceHolders();
     }
 
     @Override
@@ -151,6 +158,21 @@ public class Loader extends PluginBase {
         saveToDatabase();
         removeNPC();
         removeAllFromMaps();
+        saveDropParty();
+    }
+
+    private void createConfig() {
+        API.getVoteSettingsAPI().init();
+        if (API.getVoteSettingsAPI().mechanic.getTimeDropParty() == 0) {
+            dropPartyTime = System.currentTimeMillis();
+        } else {
+            dropPartyTime = API.getVoteSettingsAPI().mechanic.getTimeDropParty();
+        }
+        dropPartyVotes = API.getVoteSettingsAPI().mechanic.getDropParty();
+    }
+
+    private void saveDropParty() {
+        API.getVoteSettingsAPI().saveConfig(dropPartyVotes, dropPartyTime);
     }
 
     private void saveToDatabase() {
@@ -190,6 +212,7 @@ public class Loader extends PluginBase {
         API.combatAPI = new CombatAPI();
         ShopAPI.enchantUtils = new EnchantUtils();
         API.database = new Database();
+        API.voteSettingsAPI = new VoteSettings();
         API.slotsAPI = new SlotsAPI();
     }
 
@@ -212,6 +235,8 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("utils", new UtilsCommand());
         this.getServer().getCommandMap().register("lang", new LangCommand());
         this.getServer().getCommandMap().register("stats", new StatsCommand());
+        this.getServer().getCommandMap().register("jobs", new JobCommand());
+        this.getServer().getCommandMap().register("arena", new ArenaCommand());
         this.getServer().getCommandMap().register("coords", new CoordsCommand());// TODO: Save to Database
     }
 
@@ -235,6 +260,7 @@ public class Loader extends PluginBase {
             public void onRun(int i) {
                 MechanicUtils.getTops();
                 registerTops();
+                updatePlaceholders();
             }
         }, 20 * 10, 20 * 60 * 3, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new Task() {
@@ -302,6 +328,26 @@ public class Loader extends PluginBase {
                     entity.close();
                 }
             }
+        }
+    }
+
+    public void updatePlaceholders() {
+        PlaceholderAPI api = PlaceholderAPI.Companion.getInstance();
+        for (int i = 1; i <= 10; i++) {
+            api.updatePlaceholder("top" + i + "killsname");
+            api.updatePlaceholder("top" + i + "killscount");
+
+            api.updatePlaceholder("top" + i + "deathsname");
+            api.updatePlaceholder("top" + i + "deathscount");
+
+            api.updatePlaceholder("top" + i + "coinsname");
+            api.updatePlaceholder("top" + i + "coinscount");
+
+            api.updatePlaceholder("top" + i + "timename");
+            api.updatePlaceholder("top" + i + "timecount");
+
+            api.updatePlaceholder("top" + i + "powername");
+            api.updatePlaceholder("top" + i + "powercount");
         }
     }
 

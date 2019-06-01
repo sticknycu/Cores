@@ -5,7 +5,7 @@ import nycuro.api.*;
 import nycuro.crate.CrateAPI;
 import nycuro.database.Database;
 import nycuro.dropparty.DropPartyAPI;
-import nycuro.mechanic.handlers.MechanicHandlers;
+import nycuro.utils.vote.VoteSettings;
 
 /**
  * author: NycuRO
@@ -37,6 +37,8 @@ public class API {
     public static CombatAPI combatAPI;
 
     public static Database database;
+
+    public static VoteSettings voteSettingsAPI;
 
     public static SlotsAPI slotsAPI;
 
@@ -85,6 +87,8 @@ public class API {
     public static Database getDatabase() {
         return database;
     }
+
+    public static VoteSettings getVoteSettingsAPI() { return voteSettingsAPI; }
 
     public static SlotsAPI getSlotsAPI() {
         return slotsAPI;

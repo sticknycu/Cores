@@ -19,7 +19,9 @@ public class MechanicUtils {
         TreeMap<String, Double> sorted_map_power = new TreeMap<String, Double>(bvpower);
 
         for (final Faction map : Factions.i.get()) {
-            powerMap.put(map.getTag(), map.getPower());
+            if (!Factions.i.get().isEmpty()) {
+                powerMap.put(map.getTag(), map.getPower());
+            }
         }
 
         sorted_map_power.putAll(powerMap);
