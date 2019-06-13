@@ -56,7 +56,6 @@ public class MechanicAPI {
 
     public void sendToSpawn(Player player) {
         Level level = API.getMainAPI().getServer().getDefaultLevel();
-        level.loadChunk(level.getSpawnLocation().getChunkX(), level.getSpawnLocation().getChunkZ());
         player.teleport(level.getSpawnLocation());
         player.setImmobile(false);
     }

@@ -111,6 +111,7 @@ public class MechanicHandlers implements Listener {
         }
     }
 
+    private static int i = 80;
     /* optimise tnt */
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
@@ -122,7 +123,8 @@ public class MechanicHandlers implements Listener {
             map.put(key, block);
             searchForTNT(map, (BlockTNT) block);
             for (Long2ObjectMap.Entry<Block> it : map.long2ObjectEntrySet()) {
-                ((BlockTNT) it.getValue()).prime();
+                ((BlockTNT) it.getValue()).prime(i);
+                i = i + 5;
             }
             event.setCancelled();
         }
@@ -136,6 +138,8 @@ public class MechanicHandlers implements Listener {
             if (side instanceof BlockTNT && !tnt.containsKey(hash)) {
                 tnt.put(hash, side);
                 searchForTNT(tnt, (BlockTNT) side);
+            } else {
+                i = 80;
             }
         }
     }

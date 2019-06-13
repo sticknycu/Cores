@@ -31,6 +31,8 @@ public class JobsAPI {
         jobs.put(0, "");
         jobs.put(1, "Miner");
         jobs.put(2, "Butcher");
+        jobs.put(3, "Farmer");
+        jobs.put(4, "Fisherman");
     }
 
     private void sendInfoMessageJobs(Player player) {
@@ -49,8 +51,8 @@ public class JobsAPI {
         FormWindowSimple jobsMenu = new FormWindowSimple("Jobs", API.getMessageAPI().sendJobPrincipalModal(player));
         jobsMenu.addButton(new ElementButton("Miner", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         jobsMenu.addButton(new ElementButton("Butcher", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
-        //jobsMenu.addButton(new ElementButton("Farmer", new ElementButtonImageData("url", "https://i.imgur.com/otMDlEU.png")));
-        //jobsMenu.addButton(new ElementButton("Killer", new ElementButtonImageData("url", "https://i.imgur.com/YHkAa4q.png")));
+        jobsMenu.addButton(new ElementButton("Farmer", new ElementButtonImageData("url", "https://i.imgur.com/otMDlEU.png")));
+        jobsMenu.addButton(new ElementButton("Fisherman", new ElementButtonImageData("url", "https://i.imgur.com/YHkAa4q.png")));
         //jobsMenu.addButton(new ElementButton("Hunter", new ElementButtonImageData("url", "https://i.imgur.com/HpwAZvq.png")));
         jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/nujWKR3.png")));
         jobsMenu.addButton(new ElementButton("Without Job", new ElementButtonImageData("url", "https://i.imgur.com/YXBNPBc.png")));
@@ -75,16 +77,23 @@ public class JobsAPI {
                             API.getMessageAPI().sendReceiveJobMessage(player);
                             return;
                         case 2:
+                            profile.setJob(3);
+                            API.getMessageAPI().sendReceiveJobMessage(player);
+                            return;
+                        case 4:
+                            profile.setJob(4);
+                            API.getMessageAPI().sendReceiveJobMessage(player);
+                        case 5:
                             sendInfoMessageJobs(player);
                             return;
-                        case 3:
+                        case 6:
                             profile.setJob(0);
                             /*?if (fPlayers.hasFaction()) {
                                 player.setNameTag("§a[§c" + level + "§a] §7" + fPlayers.getRole().getPrefix() + faction.getTag() + " §3" + fPlayers.getName());
                             }*/
                             API.getMessageAPI().sendWithoutJobMessage(player);
                             return;
-                        case 4:
+                        case 7:
                             break;
                     }
                 }

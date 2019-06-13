@@ -764,10 +764,10 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§f» §eYou have successfully teleported to coordonates: §6" + "X: " + x + ", Z:" + z + "§e!");
+                player.sendMessage("§f» §eYou have successfully teleported to coordonates: §6" + "X: " + x + ", Z: " + z + "§e!");
                 break;
             case 1:
-                player.sendMessage("§f» §eAi fost teleportat cu succes la coordonatele: §6" + "X: " + x + ", Z:" + z + "§e!");
+                player.sendMessage("§f» §eAi fost teleportat cu succes la coordonatele: §6" + "X: " + x + ", Z: " + z + "§e!");
                 break;
         }
     }
@@ -1184,48 +1184,36 @@ public class MessageAPI {
             case 0:
                 string = "                      Hello!\n" +
                         "            Welcome to Info Jobs!\n\n" +
-                        "§c» §aLumberJack:\n" +
-                        "§eWith that Job you can get money if you cut wood, any type of wood.\n" +
-                        "§eThe sum received per block: §72.5$\n\n" +
-                        "§c» §aMiner: \n" +
-                        "§eYou can make money if you are going to work with this job.\n" +
-                        "§eEncount money only if you are mining CobbleStone and Precious Ores.\n" +
-                        "§eThe sum received per block: §72.5$\n\n" +
+                        "§c» §aMiner:\n" +
+                        "§eWith that Job you can get money with ores.\n" +
+                        "§eGet needed materials and you can get up: §750$\n\n" +
+                        "§c» §aButcher: \n" +
+                        "§eYou can make money with food and obiects from animals\n" +
+                        "§eGet needed materials and you can get up: §775$\n\n" +
                         "§c» §aFarmer: \n" +
                         "§eYou can make money with this job if you plant.\n" +
-                        "§eAnd You only accept money if you Plant or Cultivate Seeds, any kind of Seeds, Saplings and Flowers.\n" +
-                        "§eThe sum received per block: §71$\n\n" +
-                        "§c» §aKiller:\n" +
-                        "§eWith this Job you can make money if you kill or hit non-spawn players.\n" +
-                        "§eThe sum received per hit: §70.4$\n" +
-                        "§eSum received per kill: §73$\n\n" +
-                        "§c» §aHunter:\n" +
-                        "§eWith this Job you can make money if you kill or hit animals.\n" +
-                        "§eThe sum received per hit: §70.4$\n" +
-                        "§eSum received per kill: §71.4$";
+                        "§eYou can get money too from Plants or Cultivate Seeds, any kind of Seeds, Saplings and Flowers.\n" +
+                        "§eGet needed materials and you can get up: §730$\n\n" +
+                        "§c» §aFisherman:\n" +
+                        "§eWith this Job you can make money if you get fish!\n" +
+                        "§eGet needed materials and you can get up: §745$";
                 break;
             case 1:
                 string = "                      Salut!\n" +
                         "          Bine ai venit la Info Jobs!\n\n" +
-                        "§c» §aLumberJack:\n" +
-                        "§eCu acest Job poti face bani daca tai lemn, orice tip de lemn.\n" +
-                        "§eSuma primita per block: §72.5$\n\n" +
                         "§c» §aMiner:\n" +
-                        "§eCu acest Job poti face bani daca minezi.\n" +
-                        "§ePrimesti bani doar daca minezi CobbleStone si Minereuri Pretioase.\n" +
-                        "§eSuma primita per block: §72.5$\n\n" +
-                        "§c» §aFarmer:\n" +
-                        "§eCu acest Job poti face bani daca plantezi.\n" +
-                        "§ePrimesti bani doar daca Plantezi sau Cultivezi Seminte, orice tip de Seminte, Sapling-uri si Flori.\n" +
-                        "§eSuma primita per block: §71$\n\n" +
-                        "§c» §aKiller:\n" +
-                        "§eCu acest Job poti face bani daca omori sau lovesti jucatori din afara spawn-ului.\n" +
-                        "§eSuma primita per hit: §70.4$\n" +
-                        "§eSuma primita per kill: §73$\n\n" +
-                        "§c» §aHunter:\n" +
-                        "§eCu acest Job poti face bani daca omori sau lovesti animale.\n" +
-                        "§eSuma primita per hit: §70.4$\n" +
-                        "§eSuma primita per kill: §71$";
+                        "§eCu acest loc de munca poti face rost de bani folosind minerale\n" +
+                        "§eAduna tot ce ai nevoie si poti castiga pana la: §750$\n\n" +
+                        "§c» §aButcher: \n" +
+                        "§ePoti face bani cu acest job facand rost de mancare si obiecte de la animale\n" +
+                        "§eStrange materialele necesare si poti castiga pana la: §775$\n\n" +
+                        "§c» §aFarmer: \n" +
+                        "§ePoti castiga bani plantand.\n" +
+                        "§ePe langa acest lucru, poti sa castigi bani strangand seminte, orice tip de seminte, sapling-uri si flori\n" +
+                        "§eStrange materialele necesare si poti castiga pana la: §730$\n\n" +
+                        "§c» §aFisherman:\n" +
+                        "§eCu acest job faci bani cu ajutorul pestilor!\n" +
+                        "§eStrange materialele necesare si poti castiga pana la: §745$";
                 break;
         }
         return string;

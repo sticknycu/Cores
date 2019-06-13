@@ -37,19 +37,19 @@ public class CheckerTask extends Task {
                 Loader.isOnSpawn.put(player.getName(), false);
             }
 
-            if ((x >= 7500 || x <= -7500) || (z >= 7500 || z <= -7500)) {
-                Loader.isOnBorder.put(player.getName(), false);
-            } else {
+            Vector3 vec = new Vector3(0, 0, 0);
+            Location loc = player.getLocation();
+            if (loc.distance(vec) <= 7500) { /// NOT REALLY 7500, just ~5300 idk why
                 Loader.isOnBorder.put(player.getName(), true);
+            } else {
+                Loader.isOnBorder.put(player.getName(), false);
             }
 
             // Border Check
             if (!Loader.isOnBorder.getBoolean(player.getName())) {
                 API.getMessageAPI().sendBorderMessage(player);
-                double yaw = player.getYaw();
-                double xx = Math.cos(yaw);
-                double zz = Math.sin(yaw);
-                player.setMotion(new Vector3(-xx, 0, -zz));
+                Vector3 directionVector = player.getLocation().getDirectionVector().normalize();
+                player.setMotion(player.getMotion().add(directionVector.multiply(-0.2)));
             }
 
             // RandomTP
@@ -72,8 +72,6 @@ public class CheckerTask extends Task {
                     @Override
                     public void onRun(int i) {
                         API.getMechanicAPI().spawnDropParty();
-                        randomBool.compareAndSet(true, false);
-                        randomBool.compareAndSet(false, true);
                         Random r = new Random();
                         int low = 200;
                         int high = 250;
@@ -96,6 +94,11 @@ public class CheckerTask extends Task {
                         } else {
                             player.sendPopup("§3+" + resultGem + " GEMS" + "\n" +
                                     "+15min");
+                        }
+                        if (randomBool.get()) {
+                            randomBool.set(false);
+                        } else if (!randomBool.get()) {
+                            randomBool.set(true);
                         }
                     }
                 }, 20 * 60, true);

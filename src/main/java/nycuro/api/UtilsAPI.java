@@ -48,7 +48,7 @@ public class UtilsAPI {
         if (!player.hasPlayedBefore()) {
             for (Block block : player.getCollisionBlocks()) {
                 if (block.getId() == BlockID.NETHER_PORTAL) {
-                    getRandomTPUtilsAPI().getSafeLocationSpawn(player, 5000);
+                    getRandomTPUtilsAPI().getSafeLocationSpawn(player, 4500);
                     teleported = true;
                 }
             }
@@ -58,7 +58,7 @@ public class UtilsAPI {
                 String message = API.getMessageAPI().sendRandomTPNotFirstTimeMessage(player);
                 player.sendMessage(message);
             } else {
-                getRandomTPUtilsAPI().getSafeLocationSpawn(player, 5000);
+                getRandomTPUtilsAPI().getSafeLocationSpawn(player, 4500);
                 teleported = true;
                 profileFactions.setDollars(profileFactions.getDollars() - 1000);
             }
