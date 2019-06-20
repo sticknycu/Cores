@@ -3,7 +3,7 @@ package nycuro.api;
 import cn.nukkit.Player;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
-import nycuro.database.Database;
+import nycuro.API;
 
 import java.util.Iterator;
 
@@ -24,15 +24,8 @@ public class CombatAPI {
     }
 
     public void setCombat(Player player) {
-        String messageCombat = "";
-        int lang = Database.profileProxy.get(player.getName()).getLanguage();
         if (!inCombat(player)) {
-            if (lang == 0) {
-                messageCombat = "§eYou have entered combat, logging out now will cause your death. Please wait §613 §eseconds.";
-            } else if (lang == 1) {
-                messageCombat = "§eTocmai ai intrat in lupta. Daca te vei deloga, vei muri. Te rog asteapta §613 §esecunde.";
-            }
-            player.sendMessage(messageCombat);
+            player.sendMessage(API.getMessageAPI().setCombatMessage(player));
             inCombat.put(player, System.currentTimeMillis());
         }
     }

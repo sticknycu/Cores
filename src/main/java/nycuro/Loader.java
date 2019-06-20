@@ -1,14 +1,11 @@
 package nycuro;
 
 import cn.nukkit.Player;
-import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.entity.Entity;
-import cn.nukkit.entity.item.EntityItem;
 import cn.nukkit.entity.mob.EntityCreeper;
 import cn.nukkit.level.Level;
 import cn.nukkit.nbt.tag.*;
 import cn.nukkit.plugin.PluginBase;
-import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
@@ -255,70 +252,16 @@ public class Loader extends PluginBase {
     }
 
     private void registerTasks() {
-        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
-            @Override
-            public void onRun(int i) {
-                MechanicUtils.getTops();
-                registerTops();
-                updatePlaceholders();
-            }
-        }, 20 * 10, 20 * 60 * 3, true);
-        this.getServer().getScheduler().scheduleRepeatingTask(new Task() {
-            @Override
-            public void onRun(int i) {
-                String message = "";
-                try {
-                    for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-                        message = API.getMessageAPI().sendMobDespawnMessage(player);
-                        player.sendMessage(message);
-                        try {
-                            Thread.sleep(1000 * 30);
-                        } finally {
-                            for (Level level : API.getMainAPI().getServer().getLevels().values()) {
-                                for (Entity entity : level.getEntities()) {
-                                    switch (entity.getNetworkId()) {
-                                        case 10:
-                                        case 11:
-                                        case 12:
-                                        case 13:
-                                        case 52:
-                                        case 69:
-                                        case 89:
-                                            entity.close();
-                                            break;
-                                    }
-                                    if (entity instanceof EntityItem) entity.close();
-                                }
-                            }
-                            message = API.getMessageAPI().sendMobDespawnFinishMessage(player);
-                            player.sendMessage(message);
-                        }
-                    }
-                } catch (Exception e) {
-                    //
-                }
-            }
-        }, 20 * 60 * 5, true);
+        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new RegisterTopsTask(), 20 * 10, 20 * 60 * 3, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new ClearLagTask(), 20 * 60 * 5, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CombatLoggerTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreTagTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckerTask(), 10, true);
-        this.getServer().getScheduler().scheduleDelayedTask(new Task() {
-            @Override
-            public void onRun(int i) {
-                API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "stop");
-            }
-        }, 20 * 60 * 60 * 3, true);
-        this.getServer().getScheduler().scheduleRepeatingTask(new Task() {
-            @Override
-            public void onRun(int i) {
-                for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-                    player.setHealth(player.getHealth());
-                }
-            }
-        }, 1, true);
+        this.getServer().getScheduler().scheduleDelayedTask(new RestartTask(), 20 * 60 * 60 * 3);
+        this.getServer().getScheduler().scheduleRepeatingTask(new FixBugHealthTask(), 1, true); // Todo: Bullshit incompetent Nukkit Codders -- Using resources useless.
     }
 
     private void removeNPC() {
@@ -328,26 +271,6 @@ public class Loader extends PluginBase {
                     entity.close();
                 }
             }
-        }
-    }
-
-    public void updatePlaceholders() {
-        PlaceholderAPI api = PlaceholderAPI.Companion.getInstance();
-        for (int i = 1; i <= 10; i++) {
-            api.updatePlaceholder("top" + i + "killsname");
-            api.updatePlaceholder("top" + i + "killscount");
-
-            api.updatePlaceholder("top" + i + "deathsname");
-            api.updatePlaceholder("top" + i + "deathscount");
-
-            api.updatePlaceholder("top" + i + "coinsname");
-            api.updatePlaceholder("top" + i + "coinscount");
-
-            api.updatePlaceholder("top" + i + "timename");
-            api.updatePlaceholder("top" + i + "timecount");
-
-            api.updatePlaceholder("top" + i + "powername");
-            api.updatePlaceholder("top" + i + "powercount");
         }
     }
 

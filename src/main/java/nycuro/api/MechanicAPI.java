@@ -19,7 +19,6 @@ import nycuro.Loader;
 import nycuro.ai.entity.BossEntity;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
-import nycuro.database.objects.ProfileProxy;
 import nycuro.gui.list.ResponseFormWindow;
 
 import java.util.Map;
@@ -117,38 +116,7 @@ public class MechanicAPI {
 
     public void spawnWither(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Spawn Wither");
-        ProfileProxy profile = Database.profileProxy.get(player.getName());
-        int lang = profile.getLanguage();
-        switch (lang) {
-            case 0:
-                infoMenu.addElement(new ElementLabel("                      Hello!\n" +
-                        "         Welcome to Spawn Wither!\n\n" +
-                        "§c» §aHow can i spawn a Wither?\n" +
-                        "§eFor spawning a Wither is enough to press the button.\n" +
-                        "§eYou can cancel that pushing X button from up, right side." +
-                        "§c» §aWhat can i do with Wither: \n" +
-                        "§eWith Wither you can raid bases and get more experience.\n" +
-                        "§c» §aPrice: §610k$ \n" +
-                        "§eA little information: Maximum of Withers on Server is 10, so if there exists 10 Withers spawned you need to wait to minimum 1 to be despawned!\n" +
-                        "§eAnd about despawning of entities, entities are despawned every 5 minutes, so be careful!\n" +
-                        "§eThank you for purchase!\n" +
-                        "§eHave a nice day!"));
-                break;
-            case 1:
-                infoMenu.addElement(new ElementLabel("                      Salut!\n" +
-                        "      Bine ai venit la Wither Spawn!\n\n" +
-                        "§c» §aCum pot spawna un Wither:\n" +
-                        "§ePentru a spawna un wither este de ajuns pentru a apasa pe buton.\n" +
-                        "§ePoti anula acest lucru apasand pe butonul din dreapta sus, X." +
-                        "§c» §aCe pot face cu Wither?: \n" +
-                        "§eEi bine, cu Wither poti da raid bazelor si poti castiga mult exp.\n" +
-                        "§c» §aPretul: §610k$ \n" +
-                        "§eO mica informatie: Maximul de Witheri pe server este de 10, deci daca exista deja 10 Witheri spawnati pe server, trebuie sa astepti ca cel putin 1 sa fie despawnat!\n" +
-                        "§eSi despre spawnarea entitatilor, entitatile se despawneaza odata la 5 minute, deci fi atent!\n" +
-                        "§eMultumim pentru achizitie si te mai asteptam!\n" +
-                        "§eSa ai o zi buna!"));
-                break;
-        }
+        infoMenu.addElement(new ElementLabel(API.getMessageAPI().spawnWitherMessages(player)));
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
             public void accept(Map<Integer, Object> response) {
@@ -183,34 +151,7 @@ public class MechanicAPI {
 
     public void teleportArena(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Teleport Arena");
-        ProfileProxy profile = Database.profileProxy.get(player.getName());
-        int lang = profile.getLanguage();
-        switch (lang) {
-            case 0:
-                infoMenu.addElement(new ElementLabel("                      Hello!\n" +
-                        "         Welcome to Teleport Arena!\n\n" +
-                        "§c» §aWhat is 'Teleport Arena'?\n" +
-                        "§eTeleport Arena is an option for teleporting to Arena where Boss is spawning.\n" +
-                        "§eYou can do that only if you have level 10+\n" +
-                        "§eYou will cannot use /tp and other commands for teleporting here. Just /spawn.\n" +
-                        "§eBoss is spawning every day at 21:00, 9 PM, GT+2\n" +
-                        "§eBe careful, PVP is on!\n" +
-                        "§eIf you don't want to be teleported, tap on X!\n" +
-                        "§eHave a nice day!"));
-                break;
-            case 1:
-                infoMenu.addElement(new ElementLabel("                      Salut!\n" +
-                        "      Bine ai venit la Teleport Arena!\n\n" +
-                        "§c» §aCe inseamna de fapt 'Teleport Arena'?:\n" +
-                        "§eTeleport Arena este o optiune pentru a te teleporta la Arena unde se spawneaza Boss-ul.\n" +
-                        "§ePoti face asta doar daca ai nivel 10+\n" +
-                        "§eNu o sa poti folosi nici un fel de comanda de teleport, precum /tp. Doar /spawn.\n" +
-                        "§eBoss-ul se spawneaza in fiecare seara la ora 9.\n" +
-                        "§eAi grija, PVP-ul este ON!\n" +
-                        "§eDaca nu vrei sa te teleportezi, apasa sus in dreapta pe X!\n" +
-                        "§eSa ai o zi buna!"));
-                break;
-        }
+        infoMenu.addElement(new ElementLabel(API.getMessageAPI().teleportArenaMessages(player)));
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
             public void accept(Map<Integer, Object> response) {

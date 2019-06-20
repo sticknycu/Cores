@@ -12,7 +12,6 @@ import cn.nukkit.event.player.PlayerDeathEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.level.Location;
 import nycuro.API;
-import nycuro.database.Database;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,17 +44,10 @@ public class LevelHandlers implements Listener {
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         String command = event.getMessage().split(" ")[0].toLowerCase();
-        String message = "";
-        int lang = Database.profileProxy.get(player.getName()).getLanguage();
-        if (lang == 0) {
-            message = "§cYou cannot use this command during combat";
-        } else if (lang == 1) {
-            message = "§cNu poti folosi aceasta comanda cand esti in lupta.";
-        }
         if (API.getCombatAPI().inCombat(player)) {
             if (blocked.contains(command)) {
                 event.setCancelled();
-                player.sendMessage(message);
+                player.sendMessage(API.getMessageAPI().getMessageDuringCombat(player));
             }
         }
     }

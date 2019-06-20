@@ -6,7 +6,6 @@ import cn.nukkit.scheduler.Task;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import nycuro.API;
-import nycuro.database.Database;
 
 /**
  * author: NycuRO
@@ -38,17 +37,7 @@ public class CombatLoggerTask extends Task {
             else API.getMainAPI().bossbar.get(player.getName()).setLength(procent);
             if (k.getInt(player.getName()) == 0) {
                 if (player.isOnline()) {
-                    String message = "";
-                    int lang = Database.profileProxy.get(player.getName()).getLanguage();
-                    switch (lang) {
-                        case 0:
-                            message = "§aYou are no longer in combat, you may now logout and run commands.";
-                            break;
-                        case 1:
-                            message = "§aDe acum nu mai esti in lupta. Acum poti sa te deloghezi si sa folosesti comenzile.";
-                            break;
-                    }
-                    player.sendMessage(message);
+                    player.sendMessage(API.getMessageAPI().getMessageCombatLogger(player));
                     API.getCombatAPI().removeCombat(player);
                     k.removeInt(player.getName());
                     API.getMainAPI().bossbar.get(player.getName()).setLength(100F);

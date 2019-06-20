@@ -80,20 +80,20 @@ public class JobsAPI {
                             profile.setJob(3);
                             API.getMessageAPI().sendReceiveJobMessage(player);
                             return;
-                        case 4:
+                        case 3:
                             profile.setJob(4);
                             API.getMessageAPI().sendReceiveJobMessage(player);
-                        case 5:
+                        case 4:
                             sendInfoMessageJobs(player);
                             return;
-                        case 6:
+                        case 5:
                             profile.setJob(0);
                             /*?if (fPlayers.hasFaction()) {
                                 player.setNameTag("§a[§c" + level + "§a] §7" + fPlayers.getRole().getPrefix() + faction.getTag() + " §3" + fPlayers.getName());
                             }*/
                             API.getMessageAPI().sendWithoutJobMessage(player);
                             return;
-                        case 7:
+                        case 6:
                             break;
                     }
                 }

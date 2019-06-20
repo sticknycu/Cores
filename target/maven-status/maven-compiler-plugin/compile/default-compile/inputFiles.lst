@@ -2,6 +2,7 @@ E:\Proiecte\Java\Cores\src\main\java\nycuro\messages\handlers\MessageHandlers.ja
 E:\Proiecte\Java\Cores\src\main\java\nycuro\shop\SellUtils.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\kits\KnightKit.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\kits\MVPKit.java
+E:\Proiecte\Java\Cores\src\main\java\nycuro\tasks\RegisterTopsTask.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\kits\PaladinKit.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\API.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\utils\MechanicUtils.java
@@ -41,13 +42,13 @@ E:\Proiecte\Java\Cores\src\main\java\nycuro\api\MechanicAPI.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\commands\list\CoordsCommand.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\commands\PrincipalCommand.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\commands\list\donate\ranks\RankCommand.java
-E:\Proiecte\Java\Cores\src\main\java\nycuro\generator\CustomGenerator.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\language\handlers\LanguageHandlers.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\crate\handlers\CrateHandlers.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\database\objects\ProfileFactions.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\ai\AiAPI.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\api\SlotsAPI.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\commands\list\spawning\ArenaCommand.java
+E:\Proiecte\Java\Cores\src\main\java\nycuro\tasks\FixBugHealthTask.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\api\MessageAPI.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\tasks\CheckerTask.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\protection\handlers\ProtectionHandlers.java
@@ -60,6 +61,7 @@ E:\Proiecte\Java\Cores\src\main\java\nycuro\commands\list\mechanic\TopDeathsComm
 E:\Proiecte\Java\Cores\src\main\java\nycuro\utils\vote\VoteSettings.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\utils\vote\objects\JsonObject.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\commands\list\mechanic\TopTimeCommand.java
+E:\Proiecte\Java\Cores\src\main\java\nycuro\tasks\ClearLagTask.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\jobs\handlers\JobsHandlers.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\shop\EnchantUtils.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\gui\list\DelegateFormWindow.java
@@ -69,6 +71,7 @@ E:\Proiecte\Java\Cores\src\main\java\nycuro\commands\list\mechanic\SpawnFirework
 E:\Proiecte\Java\Cores\src\main\java\nycuro\commands\list\KitsCommand.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\kits\handlers\KitHandlers.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\kits\MVPPlusKit.java
+E:\Proiecte\Java\Cores\src\main\java\nycuro\tasks\RestartTask.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\tasks\ScoreTagTask.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\tasks\CheckLevelTask.java
 E:\Proiecte\Java\Cores\src\main\java\nycuro\commands\list\economy\SetCoinsCommand.java

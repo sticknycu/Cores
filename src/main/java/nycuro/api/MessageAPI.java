@@ -136,6 +136,32 @@ public class MessageAPI {
         return STRING;
     }
 
+    public String getMessageCombatLogger(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§aYou are no longer in combat, you may now logout and run commands.";
+                break;
+            case 1:
+                STRING = "§aDe acum nu mai esti in lupta. Acum poti sa te deloghezi si sa folosesti comenzile.";
+                break;
+        }
+        return STRING;
+    }
+
+    public String getMessageDuringCombat(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§cYou cannot use this command during combat!";
+                break;
+            case 1:
+                STRING = "§cNu poti folosi aceasta comanda cand esti in lupta!";
+                break;
+        }
+        return STRING;
+    }
+
     public String sendMobDespawnMessage(Player player) {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
@@ -157,6 +183,238 @@ public class MessageAPI {
                 break;
             case 1:
                 STRING = "§6§lTIP §r§e» §7Toate entitatile au fost sterse! Urmatoarele entitati vor fi sterse in §65 minute§7!";
+                break;
+        }
+        return STRING;
+    }
+
+    public String setCombatMessage(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§eYou have entered combat, logging out now will cause your death. Please wait §613 §eseconds.";
+                break;
+            case 1:
+                STRING = "§eTocmai ai intrat in lupta. Daca te vei deloga, vei muri. Te rog asteapta §613 §esecunde.";
+                break;
+        }
+        return STRING;
+    }
+
+    public String getMethodPayMessage(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "Method of Pay\n" +
+                        "1 - Money\n" +
+                        "2 - Experience Level";
+                break;
+            case 1:
+                STRING = "Metoda de Plata\n" +
+                        "1 - Bani\n" +
+                        "2 - Nivel de Experienta";
+                break;
+        }
+        return STRING;
+    }
+
+    public String getShopContestsMessages(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "                       Hello!\n" +
+                        "                Welcome to Shop!\n" +
+                        "  Select what you want to do from now.";
+                break;
+            case 1:
+                STRING = "                      Salut!\n" +
+                        "             Bine ai venit la Shop!\n" +
+                        "     Alege ce doresti sa faci de acum.";
+                break;
+        }
+        return STRING;
+    }
+
+    public String getBuyContestsMessages(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "                       Hello!\n" +
+                        "           Welcome to Buy Category!\n" +
+                        "    Select what you want to do from now.";
+                break;
+            case 1:
+                STRING = "                      Salut!\n" +
+                        "        Bine ai venit la categoria Buy!\n" +
+                        "      Alege ce doresti sa faci de acum.";
+                break;
+        }
+        return STRING;
+    }
+
+    public String getSellContestsMessages(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "                       Hello!\n" +
+                        "          Welcome to Sell Category!\n" +
+                        "    Select what you want to do from now.";
+                break;
+            case 1:
+                STRING = "                      Salut!\n" +
+                        "       Bine ai venit la categoria Sell!\n" +
+                        "      Alege ce doresti sa faci de acum.";
+                break;
+        }
+        return STRING;
+    }
+
+    public String getEnchantingContestsMessages(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "                       Hello!\n" +
+                        "       Welcome to Enchating Category!\n" +
+                        "     Select what type of Item you have.";
+                break;
+            case 1:
+                STRING = "                      Salut!\n" +
+                        "   Bine ai venit la categoria Enchanting!\n" +
+                        "            Alege ce tip de Item ai.";
+                break;
+        }
+        return STRING;
+    }
+
+    public String getEnchantingArmorContestsMessages(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "                       Hello!\n" +
+                        "       Welcome to Enchating Category!\n" +
+                        "  Select what type of Enchant you want.";
+                break;
+            case 1:
+                STRING = "                      Salut!\n" +
+                        "   Bine ai venit la categoria Enchanting!\n" +
+                        "       Alege ce tip de Enchant vrei.";
+                break;
+        }
+        return STRING;
+    }
+
+    public String getEnchantingItemsContestsMessages(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "                       Hello!\n" +
+                        "       Welcome to Enchating Category!\n" +
+                        "  Select what type of Enchant you want.";
+                break;
+            case 1:
+                STRING = "                      Salut!\n" +
+                        "   Bine ai venit la categoria Enchanting!\n" +
+                        "       Alege ce tip de Enchant vrei.";
+                break;
+        }
+        return STRING;
+    }
+
+    public String getBuyGlassContestsMessages(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "                       Hello!\n" +
+                        "           Welcome to Buy Category!\n" +
+                        "    Select what you want to do from now.";
+                break;
+            case 1:
+                STRING = "                      Salut!\n" +
+                        "        Bine ai venit la categoria Buy!\n" +
+                        "      Alege ce doresti sa faci de acum.";
+                break;
+        }
+        return STRING;
+    }
+
+    public String getSellGlassContestsMessages(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "                       Hello!\n" +
+                        "          Welcome to Sell Category!\n" +
+                        "    Select what you want to do from now.";
+                break;
+            case 1:
+                STRING = "                      Salut!\n" +
+                        "       Bine ai venit la categoria Sell!\n" +
+                        "      Alege ce doresti sa faci de acum.";
+                break;
+        }
+        return STRING;
+    }
+
+    public String spawnWitherMessages(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "                      Hello!\n" +
+                        "         Welcome to Spawn Wither!\n\n" +
+                        "§c» §aHow can i spawn a Wither?\n" +
+                        "§eFor spawning a Wither is enough to press the button.\n" +
+                        "§eYou can cancel that pushing X button from up, right side." +
+                        "§c» §aWhat can i do with Wither: \n" +
+                        "§eWith Wither you can raid bases and get more experience.\n" +
+                        "§c» §aPrice: §610k$ \n" +
+                        "§eA little information: Maximum of Withers on Server is 10, so if there exists 10 Withers spawned you need to wait to minimum 1 to be despawned!\n" +
+                        "§eAnd about despawning of entities, entities are despawned every 5 minutes, so be careful!\n" +
+                        "§eThank you for purchase!\n" +
+                        "§eHave a nice day!";
+                break;
+            case 1:
+                STRING = "                      Salut!\n" +
+                        "      Bine ai venit la Wither Spawn!\n\n" +
+                        "§c» §aCum pot spawna un Wither:\n" +
+                        "§ePentru a spawna un wither este de ajuns pentru a apasa pe buton.\n" +
+                        "§ePoti anula acest lucru apasand pe butonul din dreapta sus, X." +
+                        "§c» §aCe pot face cu Wither?: \n" +
+                        "§eEi bine, cu Wither poti da raid bazelor si poti castiga mult exp.\n" +
+                        "§c» §aPretul: §610k$ \n" +
+                        "§eO mica informatie: Maximul de Witheri pe server este de 10, deci daca exista deja 10 Witheri spawnati pe server, trebuie sa astepti ca cel putin 1 sa fie despawnat!\n" +
+                        "§eSi despre spawnarea entitatilor, entitatile se despawneaza odata la 5 minute, deci fi atent!\n" +
+                        "§eMultumim pentru achizitie si te mai asteptam!\n" +
+                        "§eSa ai o zi buna!";
+                break;
+        }
+        return STRING;
+    }
+
+    public String teleportArenaMessages(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "                      Hello!\n" +
+                        "         Welcome to Teleport Arena!\n\n" +
+                        "§c» §aWhat is 'Teleport Arena'?\n" +
+                        "§eTeleport Arena is an option for teleporting to Arena where Boss is spawning.\n" +
+                        "§eYou can do that only if you have level 10+\n" +
+                        "§eYou will cannot use /tp and other commands for teleporting here. Just /spawn.\n" +
+                        "§eBoss is spawning every day at 21:00, 9 PM, GT+2\n" +
+                        "§eBe careful, PVP is on!\n" +
+                        "§eIf you don't want to be teleported, tap on X!\n" +
+                        "§eHave a nice day!";
+                break;
+            case 1:
+                STRING = "                      Salut!\n" +
+                        "      Bine ai venit la Teleport Arena!\n\n" +
+                        "§c» §aCe inseamna de fapt 'Teleport Arena'?:\n" +
+                        "§eTeleport Arena este o optiune pentru a te teleporta la Arena unde se spawneaza Boss-ul.\n" +
+                        "§ePoti face asta doar daca ai nivel 10+\n" +
+                        "§eNu o sa poti folosi nici un fel de comanda de teleport, precum /tp. Doar /spawn.\n" +
+                        "§eBoss-ul se spawneaza in fiecare seara la ora 9.\n" +
+                        "§eAi grija, PVP-ul este ON!\n" +
+                        "§eDaca nu vrei sa te teleportezi, apasa sus in dreapta pe X!\n" +
+                        "§eSa ai o zi buna!";
                 break;
         }
         return STRING;

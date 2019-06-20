@@ -10,10 +10,13 @@ import cn.nukkit.event.player.PlayerChatEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
+import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemFlintSteel;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.BlockFace;
+import cn.nukkit.network.protocol.DataPacket;
+import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
 import cn.nukkit.scheduler.Task;
 import io.pocketvote.event.VoteEvent;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
@@ -31,6 +34,35 @@ import java.util.Random;
  * API 1.0.0
  */
 public class MechanicHandlers implements Listener {
+
+    @EventHandler
+    public void onInitialized(DataPacketReceiveEvent event) {
+        DataPacket dataPacket = event.getPacket();
+        if (dataPacket instanceof SetLocalPlayerAsInitializedPacket) {
+            Player player = event.getPlayer();
+            API.getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+                @Override
+                public void onRun(int i) {
+                    String username = player.getName();
+                    int playerTime = API.getMainAPI().timers.getOrDefault(username, 1);
+                    switch (playerTime) {
+                        case 1:
+                            API.getMessageAPI().sendFirstJoinTitle(player);
+                            break;
+                        case 2:
+                            API.getMessageAPI().sendSecondJoinTitle(player);
+                            break;
+                        case 3:
+                            API.getMessageAPI().sendThreeJoinTitle(player);
+                            break;
+                        default:
+                            API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
+                    }
+                    API.getMainAPI().timers.put(username, playerTime + 1);
+                }
+            }, 20, 20 * 3, true);
+        }
+    }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
@@ -55,28 +87,6 @@ public class MechanicHandlers implements Listener {
             Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
         }
         API.getMainAPI().isOnMobFarm.putIfAbsent(player, false);
-
-        API.getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
-            @Override
-            public void onRun(int i) {
-                String username = player.getName();
-                Integer playerTime = API.getMainAPI().timers.getOrDefault(username, 1);
-                switch (playerTime) {
-                    case 1:
-                        API.getMessageAPI().sendFirstJoinTitle(player);
-                        break;
-                    case 2:
-                        API.getMessageAPI().sendSecondJoinTitle(player);
-                        break;
-                    case 3:
-                        API.getMessageAPI().sendThreeJoinTitle(player);
-                        break;
-                    default:
-                        API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
-                }
-                API.getMainAPI().timers.put(username, playerTime + 1);
-            }
-        }, 20, 20 * 3, true);
     }
 
     @EventHandler
