@@ -12,7 +12,6 @@ import nycuro.api.JobsAPI;
 import nycuro.chat.ChatFormat;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
-import nycuro.database.objects.ProfileProxy;
 
 import java.util.Objects;
 
@@ -36,13 +35,16 @@ public class ChatHandlers implements Listener {
     @EventHandler
     public void onChat(PlayerChatEvent event) {
         Player player = event.getPlayer();
-        ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
         ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
         count++;
         String group = Objects.requireNonNull(api.getUser(player.getUniqueId())).getPrimaryGroup().toUpperCase();
         String s = ChatFormat.valueOf(group).toString();
+        String message = event.getMessage();
+        if (!player.hasPermission("core.colorchat")) {
+            message = TextFormat.clean(message);
+        }
         s = s.replace("%name", player.getName());
-        s = s.replace("%msg", event.getMessage());
+        s = s.replace("%msg", message);
         if (count % 2 == 0)
             s = s.replace("%slash", "\\");
         else
@@ -56,6 +58,7 @@ public class ChatHandlers implements Listener {
         s = s.replace("%job", JobsAPI.jobs.get(job));
         s = s.replace("%lvl", lvl);
         s = TextFormat.colorize(s);
+
         event.setFormat(s);
     }
 }

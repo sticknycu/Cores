@@ -140,7 +140,6 @@ public class MechanicHandlers implements Listener {
         }
     }
 
-
     private void searchForTNT(Long2ObjectMap<Block> tnt, BlockTNT current) {
         for (BlockFace blockFace : BlockFace.values()) {
             Block side = current.getSide(blockFace);

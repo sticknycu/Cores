@@ -1,6 +1,8 @@
 package nycuro.tasks;
 
+import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.scheduler.Task;
+import nycuro.API;
 import nycuro.Loader;
 import nycuro.utils.MechanicUtils;
 
@@ -15,5 +17,6 @@ public class RegisterTopsTask extends Task {
     public void onRun(int i) {
         MechanicUtils.getTops();
         Loader.registerTops();
+        API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "gc");
     }
 }

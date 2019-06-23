@@ -1435,6 +1435,40 @@ public class MessageAPI {
         return string;
     }
 
+    public String sendReportPrincipalModal(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                       Hello!\n" +
+                        "               Welcome to Report Category!\n" +
+                        "           Choose what you want to do";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "     Bine ai venit la categoria Reports!\n" +
+                        "    Alege ce doresti sa faci de acum";
+                break;
+        }
+        return string;
+    }
+
+    public String sendReportList(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                       Hello!\n" +
+                        "               Welcome to Report List!";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "     Bine ai venit la categoria Report List";
+                break;
+        }
+        return string;
+    }
+
     public String sendInfoMessageJobs(Player player) {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         String string = "";
@@ -1472,6 +1506,126 @@ public class MessageAPI {
                         "§c» §aFisherman:\n" +
                         "§eCu acest job faci bani cu ajutorul pestilor!\n" +
                         "§eStrange materialele necesare si poti castiga pana la: §745$";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInputNameReport(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "Please put here name of Player who want to report";
+                break;
+            case 1:
+                string = "Te rog introdu aici numele Jucatorului pe care doresit sa il raportezi";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInputReasonReport(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "Please put here reason why you report player with specifications what them do";
+                break;
+            case 1:
+                string = "Te rog introdu aici motivul pentru care reportezi jucatorul cu specificarea de a spune ce a facut";
+                break;
+        }
+        return string;
+    }
+
+    public String sendPlayerSuccesReport(Player player, String name) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "§f» §aYou report player " + name + " succesfully!";
+                break;
+            case 1:
+                string = "§f» §aAi raportat pe " + name + " cu succes!";
+                break;
+        }
+        return string;
+    }
+
+    public String sendDeleteReportMessage(Player player, String name) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "§f» §aYou succesfully deleted " + name + " report!";
+                break;
+            case 1:
+                string = "§f» §aAi sters cu succes reportul lui " + name + "!";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInputContactReport(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "If we can contact you, give us a discord name with tag, or other";
+                break;
+            case 1:
+                string = "Daca te putem contacta, te rog da-ne numele de pe discord si tag-ul sau altceva";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInfoMessageReport(Player player, String name, String reason, String contact) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "§eName: §6" + name + "\n\n" +
+                        "§eReason: §6\n\n\n" + reason + "\n\n\n" +
+                        "§eContact: §6\n\n\n" + contact + "\n\n\n";
+                break;
+            case 1:
+                string = "§eNume: §6" + name + "\n\n" +
+                        "§eMotiv: §6\n\n\n" + reason + "\n\n\n" +
+                        "§eContact: §6\n\n\n" + contact + "\n\n\n";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInfoMessageReports(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                      Hello!\n" +
+                        "          Welcome to Reports Mechanic!\n\n" +
+                        "§c» §aHow to report a Player?\n" +
+                        "§eTo report a player just tab on 'Report'.\n" +
+                        "§eYou need to complete all available fields.\n\n" +
+                        "§cATENTION! \n" +
+                        "§eIf you have a proof, we're waiting you on Discord\n" +
+                        "§eYou can report a player on game, but on Discord too!\n\n" +
+                        "§c» §aHow to report on Discord? \n" +
+                        "§eEnter on Discord and use #reports-en #reports";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "          Bine ai venit la Reports Mechanic!\n\n" +
+                        "§c» §aCum raportez un Jucator?\n" +
+                        "§ePentru a raporta trebuie sa apesi pe fereastra 'Report'.\n" +
+                        "§eCompleteaza toate campurile disponibile.\n\n" +
+                        "§cATENTIE! \n" +
+                        "§eDaca ai o dovada te asteptam pe grupul de discord sa ne-o trimiti\n" +
+                        "§eRaportul se poate face si pe Discord, dar si pe server!\n\n" +
+                        "§c» §aCum raportez pe Discord? \n" +
+                        "§eIntri pe grupul de discord si ai canalul #reports-ro";
                 break;
         }
         return string;

@@ -30,7 +30,7 @@ public class GUIHandlers implements Listener {
             if (response instanceof FormResponseSimple) {
                 FormResponseSimple simple = (FormResponseSimple) response;
                 int index = simple.getClickedButtonId();
-                responseWindow.respond(Collections.singletonMap(index, "true"));
+                responseWindow.respond(Collections.singletonMap(index, ((FormResponseSimple) response).getClickedButton().getText()));
             } else if (response instanceof FormResponseCustom) {
                 FormResponseCustom custom = (FormResponseCustom) response;
                 HashMap<Integer, Object> responses = custom.getResponses();

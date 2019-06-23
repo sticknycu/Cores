@@ -24,6 +24,7 @@ import nycuro.commands.list.mechanic.TopCoinsCommand;
 import nycuro.commands.list.mechanic.TopDeathsCommand;
 import nycuro.commands.list.mechanic.TopKillsCommand;
 import nycuro.commands.list.mechanic.TopTimeCommand;
+import nycuro.commands.list.report.ReportCommand;
 import nycuro.commands.list.spawning.ArenaCommand;
 import nycuro.commands.list.spawning.WitherCommand;
 import nycuro.commands.list.stats.StatsCommand;
@@ -187,6 +188,7 @@ public class Loader extends PluginBase {
         log("Init SQLite Database...");
         Database.connectToDatabaseHub();
         Database.connectToDatabaseFactions();
+        Database.connectToDatabaseReports();
     }
 
     private void registerAPI() {
@@ -210,6 +212,7 @@ public class Loader extends PluginBase {
         ShopAPI.enchantUtils = new EnchantUtils();
         API.database = new Database();
         API.voteSettingsAPI = new VoteSettings();
+        API.reportAPI = new ReportAPI();
         API.slotsAPI = new SlotsAPI();
     }
 
@@ -234,6 +237,7 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("stats", new StatsCommand());
         this.getServer().getCommandMap().register("jobs", new JobCommand());
         this.getServer().getCommandMap().register("arena", new ArenaCommand());
+        this.getServer().getCommandMap().register("report", new ReportCommand());
         this.getServer().getCommandMap().register("coords", new CoordsCommand());// TODO: Save to Database
     }
 

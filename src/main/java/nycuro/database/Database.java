@@ -13,7 +13,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -31,6 +33,34 @@ public class Database {
     public static Map<String, ProfileFactions> profileFactions = new HashMap<>();
     private static HikariDataSource DATASOURCE_PROXY;
     private static HikariDataSource DATASOURCE_FACTIONS;
+    private static HikariDataSource DATASOURCE_REPORTS;
+
+    public static void connectToDatabaseReports() {
+        String address = "hosting3.gazduirejocuri.ro";
+        String name = "chzoneeu_factionsreports";
+        String username = "chzoneeu_nycu";
+        String password = "unprost2019";
+
+        HikariConfig config = new HikariConfig();
+        config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
+        config.addDataSourceProperty("serverName", address);
+        config.addDataSourceProperty("port", "3306");
+        config.addDataSourceProperty("databaseName", name);
+        config.addDataSourceProperty("user", username);
+        config.addDataSourceProperty("password", password);
+        DATASOURCE_REPORTS = new HikariDataSource(config);
+
+        DATASOURCE_REPORTS.setMaximumPoolSize(10);
+
+        String query = "create table if not exists reports (`name` varchar(20), `reason` text, `contact` text, `reporter` varchar(20))";
+
+        try (Connection connection = DATASOURCE_REPORTS.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void connectToDatabaseHub() {
         String address = "hosting3.gazduirejocuri.ro";
@@ -58,7 +88,7 @@ public class Database {
             e.printStackTrace();
         }
     }
-    
+
     public static void addDatesPlayerHub(String name) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
@@ -109,6 +139,9 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+
+
 
     public static void connectToDatabaseFactions() {
         String address = "hosting3.gazduirejocuri.ro";
@@ -418,6 +451,25 @@ public class Database {
         });
     }
 
+    public void addNewReport(String name, String reason, String contact, String reporter) {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_REPORTS.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("INSERT INTO reports (`name`, `reason`, `contact`, `reporter`) VALUES (?, ?, ?, ?)")) {
+                    preparedStatement.setString(1, name);
+                    preparedStatement.setString(2, reason);
+                    preparedStatement.setString(3, contact);
+                    preparedStatement.setString(4, reporter);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     public void addNewPlayer(String name) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
@@ -519,4 +571,121 @@ public class Database {
             }
         });
     }
+
+    public Collection<String> names = new HashSet<>();
+
+    public int getCountPlayerValueSetCount(String name) {
+        try (Connection connection = DATASOURCE_REPORTS.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT count(name) from `reports` WHERE `name` =?")) {
+            preparedStatement.setString(1, name);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public Collection<String> getReasonsPlayerReport(String name) {
+        Collection<String> strings = new HashSet<>();
+        try (Connection connection = DATASOURCE_REPORTS.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT reason as res from `reports` WHERE `name` =?")) {
+            preparedStatement.setString(1, name);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    strings.add("§6" + getReporterPlayerReportReason(resultSet.getString("res")) + ":§r" + "\n" + resultSet.getString("res"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return strings;
+    }
+
+    public Collection<String> getReporterPlayerReportReason(String reason) {
+        Collection<String> strings = new HashSet<>();
+        try (Connection connection = DATASOURCE_REPORTS.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT reporter as rep from `reports` WHERE `reason` =?")) {
+            preparedStatement.setString(1, reason);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    strings.add(resultSet.getString("rep"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return strings;
+    }
+
+    public Collection<String> getReporterPlayerReportContact(String contact) {
+        Collection<String> strings = new HashSet<>();
+        try (Connection connection = DATASOURCE_REPORTS.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT reporter as rep from `reports` WHERE `contact` =?")) {
+            preparedStatement.setString(1, contact);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    strings.add(resultSet.getString("rep"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return strings;
+    }
+
+    public Collection<String> getContactPlayerReport(String name) {
+        Collection<String> strings = new HashSet<>();
+        try (Connection connection = DATASOURCE_REPORTS.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT contact as con from `reports` WHERE `name` =?")) {
+            preparedStatement.setString(1, name);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    strings.add("§6" + getReporterPlayerReportContact(resultSet.getString("con")) + ":§r" + "\n" + resultSet.getString("con"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return strings;
+    }
+
+    public void deleteReport(String name) {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_REPORTS.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("DELETE FROM `reports` WHERE `name` =?")) {
+                    preparedStatement.setString(1, name);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void getPlayerMap() {
+        try (Connection connection = DATASOURCE_REPORTS.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT name as size from `reports`")) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    names.add(resultSet.getString("size"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

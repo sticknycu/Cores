@@ -19,6 +19,7 @@ public class ShopCommand extends PrincipalCommand {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         Player player = (Player) commandSender;
+
         switch (strings.length) {
             case 0:
                 API.getShopAPI().sendShopContents(player);
