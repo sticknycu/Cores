@@ -19,6 +19,7 @@ import nycuro.commands.list.*;
 import nycuro.commands.list.economy.AddCoinsCommand;
 import nycuro.commands.list.economy.GetCoinsCommand;
 import nycuro.commands.list.economy.SetCoinsCommand;
+import nycuro.commands.list.home.HomeCommand;
 import nycuro.commands.list.jobs.JobCommand;
 import nycuro.commands.list.mechanic.TopCoinsCommand;
 import nycuro.commands.list.mechanic.TopDeathsCommand;
@@ -37,7 +38,6 @@ import nycuro.dropparty.DropPartyAPI;
 import nycuro.gui.handlers.GUIHandlers;
 import nycuro.jobs.handlers.JobsHandlers;
 import nycuro.kits.handlers.KitHandlers;
-import nycuro.language.handlers.LanguageHandlers;
 import nycuro.level.handlers.LevelHandlers;
 import nycuro.mechanic.handlers.MechanicHandlers;
 import nycuro.messages.handlers.MessageHandlers;
@@ -96,7 +96,7 @@ public class Loader extends PluginBase {
     }
 
     private void addEntities() {
-        CompoundTag nbt = new CompoundTag()
+        CompoundTag nbtMobFarm = new CompoundTag()
                 .putList(new ListTag<>("Pos")
                         .add(new DoubleTag("", 1131 + 0.5))
                         .add(new DoubleTag("", 69))
@@ -109,13 +109,74 @@ public class Loader extends PluginBase {
                         .add(new FloatTag("", (float) 0))
                         .add(new FloatTag("", (float) 0)))
                 .putBoolean("Invulnerable", true)
-                .putString("NameTag", "Happy NPC")
+                .putString("NameTag", "coreNBT")
                 .putList(new ListTag<StringTag>("Commands"))
                 .putList(new ListTag<StringTag>("PlayerCommands"))
-                .putBoolean("npc", true)
+                .putBoolean("coreFarm", true)
                 .putFloat("scale", 1);
-        Entity entity = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1131 >> 4, 1270 >> 4), nbt);
-        entity.spawnToAll();
+        CompoundTag nbtMiner = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1121 + 0.5))
+                        .add(new DoubleTag("", 76))
+                        .add(new DoubleTag("", 1441 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "minerNPC")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("coreNPC", true)
+                .putFloat("scale", 1);
+        CompoundTag nbtInfo = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1061 + 0.5))
+                        .add(new DoubleTag("", 69))
+                        .add(new DoubleTag("", 1456 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "infoNPC")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("coreNPC", true)
+                .putFloat("scale", 1);
+        CompoundTag nbtFarmer = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1013 + 0.5))
+                        .add(new DoubleTag("", 69))
+                        .add(new DoubleTag("", 1462 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "farmerNBT")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("coreNPC", true)
+                .putBoolean("ishuman", true)
+                .putFloat("scale", 1);
+        Entity npcMobfarm = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1131 >> 4, 1270 >> 4), nbtMobFarm);
+        Entity npcMiner = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1121 >> 4, 1441 >> 4), nbtMiner);
+        Entity npcInfo = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1061 >> 4, 1456 >> 4), nbtInfo);
+        Entity npcFarmer = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1013 >> 4, 1462 >> 4), nbtFarmer);
+        npcMobfarm.spawnToAll();
+        npcMiner.spawnToAll();
+        npcInfo.spawnToAll();
+        npcFarmer.spawnToAll();
     }
 
     public static String time(long time) {
@@ -189,6 +250,7 @@ public class Loader extends PluginBase {
         Database.connectToDatabaseHub();
         Database.connectToDatabaseFactions();
         Database.connectToDatabaseReports();
+        Database.connectToDatabaseHomesF();
     }
 
     private void registerAPI() {
@@ -213,6 +275,7 @@ public class Loader extends PluginBase {
         API.database = new Database();
         API.voteSettingsAPI = new VoteSettings();
         API.reportAPI = new ReportAPI();
+        API.homeAPI = new HomeAPI();
         API.slotsAPI = new SlotsAPI();
     }
 
@@ -230,6 +293,7 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("spawnboss", new SpawnBossCommand());
         this.getServer().getCommandMap().register("kit", new KitCommand());
         this.getServer().getCommandMap().register("kits", new KitsCommand());
+        this.getServer().getCommandMap().register("home", new HomeCommand());
         this.getServer().getCommandMap().register("shop", new ShopCommand());
         this.getServer().getCommandMap().register("spawn", new SpawnCommand());
         this.getServer().getCommandMap().register("utils", new UtilsCommand());
@@ -246,7 +310,6 @@ public class Loader extends PluginBase {
         this.getServer().getPluginManager().registerEvents(new GUIHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new MessageHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new KitHandlers(), this);
-        this.getServer().getPluginManager().registerEvents(new LanguageHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new LevelHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new MechanicHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new ProtectionHandlers(), this);
@@ -271,9 +334,10 @@ public class Loader extends PluginBase {
     private void removeNPC() {
         for (Level level : API.getMainAPI().getServer().getLevels().values()) {
             for (Entity entity : level.getEntities()) {
-                if (entity.namedTag.getBoolean("npc")) {
-                    entity.close();
-                }
+                if (entity.namedTag.getBoolean("coreNBT")) entity.close();
+                if (entity.namedTag.getBoolean("farmerNBT")) entity.close();
+                if (entity.namedTag.getBoolean("infoNPC")) entity.close();
+                if (entity.namedTag.getBoolean("minerNPC")) entity.close();
             }
         }
     }

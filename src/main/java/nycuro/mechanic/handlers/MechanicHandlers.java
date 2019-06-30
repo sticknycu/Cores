@@ -55,6 +55,11 @@ public class MechanicHandlers implements Listener {
                         case 3:
                             API.getMessageAPI().sendThreeJoinTitle(player);
                             break;
+                        case 4:
+                            if (player.hasPermission("core.reports")) {
+                                API.getMessageAPI().sendReportsTitle(player, API.getDatabase().getCountOfAllPlayersReport());
+                            }
+                            break;
                         default:
                             API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
                     }

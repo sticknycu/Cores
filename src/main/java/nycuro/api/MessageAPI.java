@@ -49,10 +49,10 @@ public class MessageAPI {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         switch (lang) {
             case 0:
-                STRING = "§7Next drop party in: §6" + Loader.time(time);
+                STRING = "§7Next DropParty: §6" + Loader.time(time);
                 break;
             case 1:
-                STRING = "§7Urmatorul DropParty va fi in: §6" + Loader.time(time);
+                STRING = "§7Urmatorul DropParty: §6" + Loader.time(time);
                 break;
         }
         return STRING;
@@ -1453,6 +1453,24 @@ public class MessageAPI {
         return string;
     }
 
+    public String sendHomesPrincipalModal(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                       Hello!\n" +
+                        "               Welcome to Home Category!\n" +
+                        "           Choose what you want to do";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "     Bine ai venit la categoria Home!\n" +
+                        "    Alege ce doresti sa faci de acum";
+                break;
+        }
+        return string;
+    }
+
     public String sendReportList(Player player) {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         String string = "";
@@ -1464,6 +1482,22 @@ public class MessageAPI {
             case 1:
                 string = "                      Salut!\n" +
                         "     Bine ai venit la categoria Report List";
+                break;
+        }
+        return string;
+    }
+
+    public String sendHomeList(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                       Hello!\n" +
+                        "               Welcome to Home List!";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "     Bine ai venit la categoria Home List";
                 break;
         }
         return string;
@@ -1525,6 +1559,34 @@ public class MessageAPI {
         return string;
     }
 
+    public String sendInputNameHome(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "Please put here name of Home you want to create";
+                break;
+            case 1:
+                string = "Te rog introdu aici numele Home-ului pe care vrei sa il creezi";
+                break;
+        }
+        return string;
+    }
+
+    public String sendHomeExistsMessage(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "§f» §cThis home already exists!";
+                break;
+            case 1:
+                string = "§f» §cAcest Home exista deja!";
+                break;
+        }
+        return string;
+    }
+
     public String sendInputReasonReport(Player player) {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         String string = "";
@@ -1553,6 +1615,34 @@ public class MessageAPI {
         return string;
     }
 
+    public String sendCreatedHomeSuccesfully(Player player, int x, int y, int z) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "§f» §aYou succesfully created Home at: §eX:" + x + " Y: " + y + " Z: " + z + "§a!";
+                break;
+            case 1:
+                string = "§f» §aAi creat cu succes un Home la: §eX:" + x + " Y: " + y + " Z: " + z + "§a!";
+                break;
+        }
+        return string;
+    }
+
+    public String sendTeleportedHomeSuccesfully(Player player, int x, int y, int z) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "§f» §aYou succesfully teleported to: §eX:" + x + " Y: " + y + " Z: " + z + "§a!";
+                break;
+            case 1:
+                string = "§f» §aAi fost teleportat cu succes la: §eX:" + x + " Y: " + y + " Z: " + z + "§a!";
+                break;
+        }
+        return string;
+    }
+
     public String sendDeleteReportMessage(Player player, String name) {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         String string = "";
@@ -1562,6 +1652,34 @@ public class MessageAPI {
                 break;
             case 1:
                 string = "§f» §aAi sters cu succes reportul lui " + name + "!";
+                break;
+        }
+        return string;
+    }
+
+    public String sendTooMuchHomesMessage(Player player, int count) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "§f» §eYou have too much homes! Count: §a" + count + "§e! Please open /shop and buy more from Premium Shop!";
+                break;
+            case 1:
+                string = "§f» §eAi prea multe home-uri! Cantitate: §a" + count + "§e! Te rog deschide /shop si cumpara mai multe din Premium Shop!";
+                break;
+        }
+        return string;
+    }
+
+    public String sendRemoveHomeSuccesfully(Player player, String homeName) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "§f» §aYou have succesfully deleted home: §e" + homeName;
+                break;
+            case 1:
+                string = "§f» §aAi sters cu succes Home-ul: §e" + homeName;
                 break;
         }
         return string;
@@ -1599,6 +1717,26 @@ public class MessageAPI {
         return string;
     }
 
+    public String sendInfoMessageHome(Player player, String home) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                      Hello!\n" +
+                        "          Welcome to Home " + home + "!\n\n" +
+                        "§eTo teleport to home just use §a'Teleport'.\n" +
+                        "§eTo delete a home just use §a'Delete Home'.\n";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "          Bine ai venit la Home" + home + "!\n\n" +
+                        "§ePentru a te teleporta la home foloseste §a'Teleport'.\n" +
+                        "§ePentru a sterge Home-ul foloseste §a'Delete Home'.\n";
+                break;
+        }
+        return string;
+    }
+
     public String sendInfoMessageReports(Player player) {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
         String string = "";
@@ -1626,6 +1764,34 @@ public class MessageAPI {
                         "§eRaportul se poate face si pe Discord, dar si pe server!\n\n" +
                         "§c» §aCum raportez pe Discord? \n" +
                         "§eIntri pe grupul de discord si ai canalul #reports-ro";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInfoMessageHomes(Player player) {
+        int lang = Database.profileProxy.get(player.getName()).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                      Hello!\n" +
+                        "          Welcome to Home Mechanic!\n\n" +
+                        "§c» §aHow to make a Home?\n" +
+                        "§eTo make a Home just tab on 'Create a Home'.\n" +
+                        "§cATENTION! \n" +
+                        "§eYou can have only 2 Home. For more, you need use Premium Shop from /shop\n" +
+                        "§c» §aHow to remove a Home? \n" +
+                        "§eTo remove a Home just tab on 'Manage Homes', select Home and then tab on 'Delete Home'";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "          Bine ai venit la Home Mechanic!\n\n" +
+                        "§c» §aCum creez un Home?\n" +
+                        "§eDoar apasa pe 'Create a Home'.\n" +
+                        "§cATENTIE! \n" +
+                        "§ePoti crea doar 2 Home-uri. Pentru mai multe trebuie sa accesezi Home Premium de la /shop\n" +
+                        "§c» §aCum sterg un Home? \n" +
+                        "§ePentru a sterge un Home foloseste 'Manage Homes', selecteaza Home-ul si dupa apasa pe 'Sterge Home'";
                 break;
         }
         return string;
@@ -1787,6 +1953,22 @@ public class MessageAPI {
                 break;
             case 1:
                 player.sendTitle("§l§f» §r§6CHPE Factions §l§f«§r", "§r§fVoteaza pentru beneficii", 20, 20, 20);
+                break;
+        }
+    }
+
+    public void sendReportsTitle(Player player, int count) {
+        int lang = 0;
+        ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
+        if (profileProxy != null) {
+            lang = Database.profileProxy.get(player.getName()).getLanguage();
+        }
+        switch (lang) {
+            case 0:
+                player.sendTitle("§l§f» §r§6Reports Mechanic §l§f«§r", "§r§fThere are §c" + count + "§f reports not solved!", 20, 20, 20);
+                break;
+            case 1:
+                player.sendTitle("§l§f» §r§6Reports Mechanic §l§f«§r", "§r§fExista §c" + count + "§f raporturi nerezolvate!", 20, 20, 20);
                 break;
         }
     }

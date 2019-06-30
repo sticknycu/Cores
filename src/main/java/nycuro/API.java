@@ -42,6 +42,8 @@ public class API {
 
     public static ReportAPI reportAPI;
 
+    public static HomeAPI homeAPI;
+
     public static SlotsAPI slotsAPI;
 
     public static Loader getMainAPI() {
@@ -93,6 +95,8 @@ public class API {
     public static VoteSettings getVoteSettingsAPI() { return voteSettingsAPI; }
 
     public static ReportAPI getReportAPI() { return reportAPI; }
+
+    public static HomeAPI getHomeAPI() { return homeAPI; }
 
     public static SlotsAPI getSlotsAPI() {
         return slotsAPI;

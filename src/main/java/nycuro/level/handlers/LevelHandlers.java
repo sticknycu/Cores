@@ -64,12 +64,13 @@ public class LevelHandlers implements Listener {
                 if (evc.getDamager() instanceof Player) damager = (Player) evc.getDamager();
             } else if (ev.getDamager() instanceof Player) damager = (Player) ev.getDamager();
             if (damager == null) return;
-            if (entity.namedTag.getBoolean("npc")) {
+            if (entity.namedTag.getBoolean("coreFarm")) {
                 if (!API.getMainAPI().isOnMobFarm.getBoolean(damager)) {
                     API.getMainAPI().isOnMobFarm.put(damager, true);
                 }
                 damager.teleport(new Location(1053, 69, 1237));
                 damager.sendMessage(API.getMessageAPI().sendMobFarmMessage(damager));
+                event.setCancelled();
             }
         }
     }

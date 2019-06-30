@@ -6,6 +6,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import it.unimi.dsi.fastutil.ints.*;
 import nycuro.API;
 import nycuro.Loader;
+import nycuro.database.objects.HomeObject;
 import nycuro.database.objects.ProfileFactions;
 import nycuro.database.objects.ProfileProxy;
 
@@ -13,10 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class Database {
@@ -34,6 +32,34 @@ public class Database {
     private static HikariDataSource DATASOURCE_PROXY;
     private static HikariDataSource DATASOURCE_FACTIONS;
     private static HikariDataSource DATASOURCE_REPORTS;
+    private static HikariDataSource DATASOURCE_HOMESF;
+
+    public static void connectToDatabaseHomesF() {
+        String address = "hosting3.gazduirejocuri.ro";
+        String name = "chzoneeu_homefactions";
+        String username = "chzoneeu_nycu";
+        String password = "unprost2019";
+
+        HikariConfig config = new HikariConfig();
+        config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
+        config.addDataSourceProperty("serverName", address);
+        config.addDataSourceProperty("port", "3306");
+        config.addDataSourceProperty("databaseName", name);
+        config.addDataSourceProperty("user", username);
+        config.addDataSourceProperty("password", password);
+        DATASOURCE_HOMESF = new HikariDataSource(config);
+
+        DATASOURCE_HOMESF.setMaximumPoolSize(10);
+
+        String query = "create table if not exists homes (`name` varchar(20), `x` int, `y` int, `z` int, `worldname` varchar(20), `homename` varchar(20))";
+
+        try (Connection connection = DATASOURCE_HOMESF.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void connectToDatabaseReports() {
         String address = "hosting3.gazduirejocuri.ro";
@@ -140,9 +166,6 @@ public class Database {
         }
     }
 
-
-
-
     public static void connectToDatabaseFactions() {
         String address = "hosting3.gazduirejocuri.ro";
         String name = "chzoneeu_factions";
@@ -201,6 +224,28 @@ public class Database {
                 }
             }
         });
+    }
+
+    public HomeObject getDatesHomePlayer(String name) {
+        HomeObject homeObject = new HomeObject("", 0, 0 ,0, "", "");
+        try (Connection connection = DATASOURCE_HOMESF.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT * from `homes` WHERE `name` =?")) {
+            preparedStatement.setString(1, name);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    homeObject.setName(resultSet.getString("name"));
+                    homeObject.setX(resultSet.getInt("x"));
+                    homeObject.setY(resultSet.getInt("y"));
+                    homeObject.setZ(resultSet.getInt("z"));
+                    homeObject.setWorldName(resultSet.getString("worldname"));
+                    homeObject.setHomeName(resultSet.getString("homename"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return homeObject;
     }
 
     public static void getTopDollars() {
@@ -470,6 +515,27 @@ public class Database {
         });
     }
 
+    public void addNewHome(String name, int x, int y, int z, String worldName, String homename) {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_HOMESF.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("INSERT INTO homes (`name`, `x`, `y`, `z`, `worldname`, `homename`) VALUES (?, ?, ?, ?, ?, ?)")) {
+                    preparedStatement.setString(1, name);
+                    preparedStatement.setInt(2, x);
+                    preparedStatement.setInt(3, y);
+                    preparedStatement.setInt(4, z);
+                    preparedStatement.setString(5, worldName);
+                    preparedStatement.setString(6, homename);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     public void addNewPlayer(String name) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
@@ -534,6 +600,25 @@ public class Database {
         });
     }
 
+    public void homeExist(String name, Consumer<Boolean> consumer) {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_HOMESF.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("SELECT * from `homes` WHERE `homename` =?")) {
+                    preparedStatement.setString(1, name);
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        consumer.accept(resultSet.next());
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
     public static void saveUnAsyncDatesPlayerFromFactions(String name) {
         ProfileFactions profileFactions = Database.profileFactions.get(name);
         try (Connection connection = DATASOURCE_FACTIONS.getConnection();
@@ -572,8 +657,6 @@ public class Database {
         });
     }
 
-    public Collection<String> names = new HashSet<>();
-
     public int getCountPlayerValueSetCount(String name) {
         try (Connection connection = DATASOURCE_REPORTS.getConnection();
              PreparedStatement preparedStatement =
@@ -582,6 +665,37 @@ public class Database {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getCountPlayerHomes(String name) {
+        try (Connection connection = DATASOURCE_HOMESF.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT count(name) from `homes` WHERE `name` =?")) {
+            preparedStatement.setString(1, name);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getCountOfAllPlayersReport() {
+        try (Connection connection = DATASOURCE_REPORTS.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT count(name) as cnt from `reports`")) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("cnt");
                 }
             }
         } catch (SQLException e) {
@@ -674,7 +788,24 @@ public class Database {
         });
     }
 
-    public void getPlayerMap() {
+    public void deleteHome(String homeName) {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_HOMESF.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("DELETE FROM `homes` WHERE `name` =?")) {
+                    preparedStatement.setString(1, homeName);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public List<String> getPlayerMap() {
+        List<String> names = new ArrayList<>();
         try (Connection connection = DATASOURCE_REPORTS.getConnection();
              PreparedStatement preparedStatement =
                      connection.prepareStatement("SELECT name as size from `reports`")) {
@@ -686,6 +817,24 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return names;
+    }
+
+    public List<String> getHomesPlayer(String name) {
+        List<String> strs = new ArrayList<>();
+        try (Connection connection = DATASOURCE_HOMESF.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT homename as size from `homes` WHERE `name` =?")) {
+            preparedStatement.setString(1, name);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    strs.add(resultSet.getString("size"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return strs;
     }
 
 }

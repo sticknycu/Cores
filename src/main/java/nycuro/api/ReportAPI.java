@@ -12,6 +12,7 @@ import nycuro.API;
 import nycuro.gui.list.ResponseFormWindow;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -79,8 +80,8 @@ public class ReportAPI {
             public void onRun() {
                 try {
                     FormWindowSimple jobsMenu = new FormWindowSimple("Report List", API.getMessageAPI().sendReportList(player));
-                    API.getDatabase().getPlayerMap();
-                    for (String name : API.getDatabase().names) {
+                    List<String> names = API.getDatabase().getPlayerMap();
+                    for (String name : names) {
                         int count = API.getDatabase().getCountPlayerValueSetCount(name);
                         jobsMenu.addButton(new ElementButton(name + " §7[§6" + count + "§7]"));
                     }
