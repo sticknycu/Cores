@@ -1,0 +1,365 @@
+package nycuro;
+
+import cn.nukkit.Player;
+import cn.nukkit.entity.Entity;
+import cn.nukkit.entity.mob.EntityCreeper;
+import cn.nukkit.level.Level;
+import cn.nukkit.nbt.tag.*;
+import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.utils.DummyBossBar;
+import cn.nukkit.utils.TextFormat;
+import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
+import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
+import it.unimi.dsi.fastutil.objects.*;
+import nycuro.abuse.handlers.AbuseHandlers;
+import nycuro.ai.AiAPI;
+import nycuro.api.*;
+import nycuro.chat.handlers.ChatHandlers;
+import nycuro.commands.list.*;
+import nycuro.commands.list.economy.AddCoinsCommand;
+import nycuro.commands.list.economy.GetCoinsCommand;
+import nycuro.commands.list.economy.SetCoinsCommand;
+import nycuro.commands.list.home.HomeCommand;
+import nycuro.commands.list.jobs.JobCommand;
+import nycuro.commands.list.mechanic.TopCoinsCommand;
+import nycuro.commands.list.mechanic.TopDeathsCommand;
+import nycuro.commands.list.mechanic.TopKillsCommand;
+import nycuro.commands.list.mechanic.TopTimeCommand;
+import nycuro.commands.list.report.ReportCommand;
+import nycuro.commands.list.spawning.ArenaCommand;
+import nycuro.commands.list.spawning.WitherCommand;
+import nycuro.commands.list.stats.StatsCommand;
+import nycuro.commands.list.time.GetTimeCommand;
+import nycuro.crate.CrateAPI;
+import nycuro.crate.handlers.CrateHandlers;
+import nycuro.database.Database;
+import nycuro.database.objects.ProfileFactions;
+import nycuro.dropparty.DropPartyAPI;
+import nycuro.gui.handlers.GUIHandlers;
+import nycuro.jobs.handlers.JobsHandlers;
+import nycuro.kits.handlers.KitHandlers;
+import nycuro.level.handlers.LevelHandlers;
+import nycuro.mechanic.handlers.MechanicHandlers;
+import nycuro.messages.handlers.MessageHandlers;
+import nycuro.protection.handlers.ProtectionHandlers;
+import nycuro.shop.BuyUtils;
+import nycuro.shop.EnchantUtils;
+import nycuro.shop.MoneyUtils;
+import nycuro.shop.SellUtils;
+import nycuro.tasks.*;
+import nycuro.utils.MechanicUtils;
+import nycuro.utils.RandomTPUtils;
+import nycuro.utils.WarpUtils;
+import nycuro.utils.vote.VoteSettings;
+
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+
+/**
+ * author: NycuRO
+ * FactionsCore Project
+ * API 1.0.0
+ */
+public class Loader extends PluginBase {
+
+    public static Object2LongMap<UUID> startTime = new Object2LongOpenHashMap<>();
+    public Object2ObjectMap<String, DummyBossBar> bossbar = new Object2ObjectOpenHashMap<>();
+    public Object2ObjectMap<String, FakeScoreboard> scoreboard = new Object2ObjectOpenHashMap<>();
+    public Object2IntMap<String> timers = new Object2IntOpenHashMap<>();
+    public Object2BooleanMap<String> coords = new Object2BooleanOpenHashMap<>();
+    public Object2LongMap<String> played = new Object2LongOpenHashMap<>();
+    public Object2BooleanMap<Player> isOnMobFarm = new Object2BooleanOpenHashMap<>();
+
+    public static long dropPartyTime;
+    public static int dropPartyVotes;
+
+    public static Object2ObjectMap<Integer, String> scoreboardPowerName = new Object2ObjectOpenHashMap<>();
+    public static Object2ObjectMap<Integer, Double> scoreboardPowerValue = new Object2ObjectOpenHashMap<>();
+
+    public static Object2BooleanMap<String> isOnSpawn = new Object2BooleanOpenHashMap<>();
+    public static Object2BooleanMap<String> isOnBorder = new Object2BooleanOpenHashMap<>();
+
+    public static void log(String s) {
+        API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
+    }
+
+    public static void registerTops() {
+        try {
+            API.getMainAPI().saveToDatabase();
+        } finally {
+            Database.getTopDollars();
+            Database.getTopKills();
+            Database.getTopDeaths();
+            Database.getTopTime();
+        }
+    }
+
+    private void addEntities() {
+        CompoundTag nbtMobFarm = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1131 + 0.5))
+                        .add(new DoubleTag("", 69))
+                        .add(new DoubleTag("", 1270 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "coreNBT")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("coreFarm", true)
+                .putFloat("scale", 1);
+        CompoundTag nbtMiner = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1121 + 0.5))
+                        .add(new DoubleTag("", 76))
+                        .add(new DoubleTag("", 1441 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "minerNPC")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("coreNPC", true)
+                .putFloat("scale", 1);
+        CompoundTag nbtInfo = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1061 + 0.5))
+                        .add(new DoubleTag("", 69))
+                        .add(new DoubleTag("", 1456 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "infoNPC")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("coreNPC", true)
+                .putFloat("scale", 1);
+        CompoundTag nbtFarmer = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1013 + 0.5))
+                        .add(new DoubleTag("", 69))
+                        .add(new DoubleTag("", 1462 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "farmerNBT")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("coreNPC", true)
+                .putBoolean("ishuman", true)
+                .putFloat("scale", 1);
+        Entity npcMobfarm = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1131 >> 4, 1270 >> 4), nbtMobFarm);
+        Entity npcMiner = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1121 >> 4, 1441 >> 4), nbtMiner);
+        Entity npcInfo = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1061 >> 4, 1456 >> 4), nbtInfo);
+        Entity npcFarmer = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1013 >> 4, 1462 >> 4), nbtFarmer);
+        npcMobfarm.spawnToAll();
+        npcMiner.spawnToAll();
+        npcInfo.spawnToAll();
+        npcFarmer.spawnToAll();
+    }
+
+    public static String time(long time) {
+        int hours = (int) TimeUnit.MILLISECONDS.toHours(time);
+        int minutes = (int) (TimeUnit.MILLISECONDS.toMinutes(time) - hours * 60);
+        int MINS = (int) TimeUnit.MILLISECONDS.toMinutes(time);
+        int seconds = (int) (TimeUnit.MILLISECONDS.toSeconds(time) - MINS * 60);
+        return hours + ":" + minutes + ":" + seconds;
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
+
+    @Override
+    public void onLoad() {
+        registerAPI();
+        registerCommands();
+    }
+
+    @Override
+    public void onEnable() {
+        createConfig();
+        initDatabase();
+        registerEvents();
+        registerTasks();
+        addEntities();
+        registerPlaceHolders();
+    }
+
+    @Override
+    public void onDisable() {
+        saveToDatabase();
+        removeNPC();
+        removeAllFromMaps();
+        saveDropParty();
+    }
+
+    private void createConfig() {
+        API.getVoteSettingsAPI().init();
+        if (API.getVoteSettingsAPI().mechanic.getTimeDropParty() == 0) {
+            dropPartyTime = System.currentTimeMillis();
+        } else {
+            dropPartyTime = API.getVoteSettingsAPI().mechanic.getTimeDropParty();
+        }
+        dropPartyVotes = API.getVoteSettingsAPI().mechanic.getDropParty();
+    }
+
+    private void saveDropParty() {
+        API.getVoteSettingsAPI().saveConfig(dropPartyVotes, dropPartyTime);
+    }
+
+    private void saveToDatabase() {
+        for (ProfileFactions profileFactions : Database.profileFactions.values()) {
+            Database.saveUnAsyncDatesPlayerFromFactions(profileFactions.getName());
+        }
+    }
+
+    private void removeAllFromMaps() {
+        startTime.clear();
+        played.clear();
+    }
+
+    private void initDatabase() {
+        log("Init SQLite Database...");
+        Database.connectToDatabaseHub();
+        Database.connectToDatabaseFactions();
+        Database.connectToDatabaseReports();
+        Database.connectToDatabaseHomesF();
+    }
+
+    private void registerAPI() {
+        API.mainAPI = this;
+        API.mechanicAPI = new MechanicAPI();
+        API.utilsAPI = new UtilsAPI();
+        UtilsAPI.randomTPUtils = new RandomTPUtils();
+        UtilsAPI.warpUtils = new WarpUtils();
+        UtilsAPI.mechanicUtils = new MechanicUtils();
+        API.kitsAPI = new KitsAPI();
+        API.messageAPI = new MessageAPI();
+        API.shopAPI = new ShopAPI();
+        API.jobsAPI = new JobsAPI();
+        ShopAPI.buyUtils = new BuyUtils();
+        ShopAPI.sellUtils = new SellUtils();
+        ShopAPI.moneyUtils = new MoneyUtils();
+        API.aiAPI = new AiAPI();
+        API.crateAPI = new CrateAPI();
+        API.dropPartyAPI = new DropPartyAPI();
+        API.combatAPI = new CombatAPI();
+        ShopAPI.enchantUtils = new EnchantUtils();
+        API.database = new Database();
+        API.voteSettingsAPI = new VoteSettings();
+        API.reportAPI = new ReportAPI();
+        API.homeAPI = new HomeAPI();
+        API.slotsAPI = new SlotsAPI();
+    }
+
+    private void registerCommands() {
+        this.getServer().getCommandMap().register("setcoins", new SetCoinsCommand());
+        this.getServer().getCommandMap().register("addcoins", new AddCoinsCommand());
+        this.getServer().getCommandMap().register("onlinetime", new GetTimeCommand());
+        this.getServer().getCommandMap().register("coins", new GetCoinsCommand());
+        this.getServer().getCommandMap().register("topcoins", new TopCoinsCommand());
+        this.getServer().getCommandMap().register("topkills", new TopKillsCommand());
+        this.getServer().getCommandMap().register("toptime", new TopTimeCommand());
+        this.getServer().getCommandMap().register("topdeaths", new TopDeathsCommand());
+        this.getServer().getCommandMap().register("wither", new WitherCommand());
+        this.getServer().getCommandMap().register("droppartymessage", new DropPartyMessageCommand());
+        this.getServer().getCommandMap().register("spawnboss", new SpawnBossCommand());
+        this.getServer().getCommandMap().register("kit", new KitCommand());
+        this.getServer().getCommandMap().register("kits", new KitsCommand());
+        this.getServer().getCommandMap().register("home", new HomeCommand());
+        this.getServer().getCommandMap().register("shop", new ShopCommand());
+        this.getServer().getCommandMap().register("spawn", new SpawnCommand());
+        this.getServer().getCommandMap().register("utils", new UtilsCommand());
+        this.getServer().getCommandMap().register("lang", new LangCommand());
+        this.getServer().getCommandMap().register("stats", new StatsCommand());
+        this.getServer().getCommandMap().register("jobs", new JobCommand());
+        this.getServer().getCommandMap().register("arena", new ArenaCommand());
+        this.getServer().getCommandMap().register("report", new ReportCommand());
+        this.getServer().getCommandMap().register("coords", new CoordsCommand());// TODO: Save to Database
+    }
+
+    private void registerEvents() {
+        this.getServer().getPluginManager().registerEvents(new AbuseHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new GUIHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new MessageHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new KitHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new LevelHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new MechanicHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new ProtectionHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new JobsHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new CrateHandlers(), this);
+        this.getServer().getPluginManager().registerEvents(new ChatHandlers(), this);
+    }
+
+    private void registerTasks() {
+        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new RegisterTopsTask(), 20 * 10, 20 * 60 * 3, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new ClearLagTask(), 20 * 60 * 5, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 20, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new CombatLoggerTask(), 20, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new ScoreTagTask(), 20, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new CheckerTask(), 10, true);
+        this.getServer().getScheduler().scheduleDelayedTask(new RestartTask(), 20 * 60 * 60 * 3);
+        this.getServer().getScheduler().scheduleRepeatingTask(new FixBugHealthTask(), 1, true); // Todo: Bullshit incompetent Nukkit Codders -- Using resources useless.
+    }
+
+    private void removeNPC() {
+        for (Level level : API.getMainAPI().getServer().getLevels().values()) {
+            for (Entity entity : level.getEntities()) {
+                if (entity.namedTag.getBoolean("coreNBT")) entity.close();
+                if (entity.namedTag.getBoolean("farmerNBT")) entity.close();
+                if (entity.namedTag.getBoolean("infoNPC")) entity.close();
+                if (entity.namedTag.getBoolean("minerNPC")) entity.close();
+            }
+        }
+    }
+
+    private void registerPlaceHolders() {
+        PlaceholderAPI api = PlaceholderAPI.Companion.getInstance();
+        for (int i = 1; i <= 10; i++) {
+            final int value = i;
+            api.staticPlaceholder("top" + value + "killsname", () -> Database.scoreboardkillsName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "killscount", () -> String.valueOf(Database.scoreboardkillsValue.getOrDefault(value, 0)));
+
+            api.staticPlaceholder("top" + value + "deathsname", () -> Database.scoreboarddeathsName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "deathscount", () -> String.valueOf(Database.scoreboarddeathsValue.getOrDefault(value, 0)));
+
+            api.staticPlaceholder("top" + value + "coinsname", () -> Database.scoreboardcoinsName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "coinscount", () -> String.valueOf(round(Database.scoreboardcoinsValue.getOrDefault(value, 0.0), 2)));
+
+            api.staticPlaceholder("top" + value + "timename", () -> Database.scoreboardtimeName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(value, 0L)));
+
+            api.staticPlaceholder("top" + value + "powername", () -> Loader.scoreboardPowerName.getOrDefault(1, " "));
+            api.staticPlaceholder("top" + value + "powercount", () -> String.valueOf(round(Loader.scoreboardPowerValue.getOrDefault(1, 0.0), 2)));
+        }
+    }
+}

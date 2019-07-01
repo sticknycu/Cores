@@ -1,9 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
-    <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Maven: gt.creeperface.nukkit.scoreboardapi:ScoreboardAPI:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/ScoreboardAPI.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: ru.nukkit.multipass:Multipass:1.0-SNAPSHOT">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/LuckPerms-Nukkit-4.2.51.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: gt.creeperface.holograms:Holograms:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/Holograms.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: com.creeperface.nukkit.placeholderapi.PlaceholderPlugin:PlaceholderAPI:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/PlaceholderAPI.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="org.projectlombok:lombok:1.18.4" level="project" />
+    <orderEntry type="library" name="cn.nukkit:nukkit:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="it.unimi.dsi:Fastutil:8.2.2" level="project" />
   </component>
 </module>
