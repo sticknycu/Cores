@@ -24,7 +24,7 @@ public class BossBarTask extends Task {
 
             if (API.getMainAPI().bossbar.get(player.getName()) != null) {
                 String username = player.getName();
-                Integer playerTime = timers.getOrDefault(username, 1);
+                int playerTime = timers.getOrDefault(username, 1);
                 if (profile != null) {
                     profile.setTime(1000 + profile.getTime());
                 }

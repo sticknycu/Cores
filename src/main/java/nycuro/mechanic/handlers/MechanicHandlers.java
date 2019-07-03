@@ -3,10 +3,17 @@ package nycuro.mechanic.handlers;
 import cn.nukkit.IPlayer;
 import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
+import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
+import cn.nukkit.event.inventory.InventoryTransactionEvent;
 import cn.nukkit.event.player.*;
+import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.inventory.PlayerInventory;
+import cn.nukkit.inventory.transaction.action.InventoryAction;
+import cn.nukkit.inventory.transaction.action.SlotChangeAction;
 import cn.nukkit.item.Item;
+import cn.nukkit.network.protocol.DataPacket;
+import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
 import cn.nukkit.scheduler.Task;
 import io.pocketvote.event.VoteEvent;
 import nycuro.API;
@@ -22,8 +29,89 @@ import nycuro.database.objects.ProfileProxy;
 public class MechanicHandlers implements Listener {
 
     @EventHandler
-    public void onLogin(PlayerJoinEvent event) {
-        enterThings(event.getPlayer());
+    public void onInitialized(DataPacketReceiveEvent event) {
+        DataPacket dataPacket = event.getPacket();
+        if (dataPacket instanceof SetLocalPlayerAsInitializedPacket) {
+            Player player = event.getPlayer();
+            API.getMechanicAPI().createBossBar(player);
+            API.getMechanicAPI().createScoreboard(player);
+            player.getInventory().clearAll();
+            startItems(player);
+            API.getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+                @Override
+                public void onRun(int i) {
+                    String username = player.getName();
+                    int playerTime = API.getMainAPI().timers.getOrDefault(username, 1);
+                    switch (playerTime) {
+                        case 1:
+                            API.getMessageAPI().sendFirstJoinTitle(player);
+                            break;
+                        case 2:
+                            API.getMessageAPI().sendSecondJoinTitle(player);
+                            break;
+                        case 3:
+                            API.getMessageAPI().sendThreeJoinTitle(player);
+                            break;
+                        case 4:
+                            API.getMessageAPI().sendLanguageMessage(player);
+                            break;
+                        default:
+                            API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
+                    }
+                    API.getMainAPI().timers.put(username, playerTime + 1);
+                }
+            }, 20, 20 * 3, true);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onLogin(PlayerPreLoginEvent event) {
+        event.getPlayer().setCheckMovement(false);
+    }
+
+    @EventHandler
+    public void onChangeItemInventory(InventoryTransactionEvent event) {
+        for (InventoryAction action : event.getTransaction().getActions()) {
+            if (action instanceof SlotChangeAction) {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onDropItem(PlayerDropItemEvent event) {
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent event) {
+        event.setKeepInventory(true);
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        player.getInventory().clearAll();
+        API.getMainAPI().coords.put(player.getName(), false);
+        API.getDatabase().playerExist(player.getName(), bool -> {
+            if (!bool) {
+                API.getDatabase().addNewPlayer(player.getName());
+            } else {
+                Database.addDatesPlayerHub(player.getName());
+                Database.addDatesPlayerFactions(player.getName());
+            }
+        });
+        if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
+            Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
+        } else {
+            Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
+        }
+
+        if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
+            Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
+        } else {
+            Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
+        }
     }
 
     @EventHandler
@@ -41,64 +129,6 @@ public class MechanicHandlers implements Listener {
         }
     }
 
-    private void enterThings(Player player) {
-        // Nu merge PreLoginEvent si nici Async.
-        player.getInventory().clearAll();
-        API.getMainAPI().coords.put(player.getName(), false);
-        API.getDatabase().playerExist(player.getName(), bool -> {
-            try {
-                if (!bool) {
-                    API.getDatabase().addNewPlayer(player.getName());
-                } else {
-                    Database.addDatesPlayerHub(player.getName());
-                    Database.addDatesPlayerFactions(player.getName());
-                }
-            } finally {
-                API.getMainAPI().getServer().getScheduler().scheduleDelayedTask(new Task() {
-                    @Override
-                    public void onRun(int i) {
-                        API.getMechanicAPI().createBossBar(player);
-                        API.getMechanicAPI().createScoreboard(player);
-                        startItems(player);
-                    }
-                }, 20 * 10, true);
-                if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
-                    Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
-                } else {
-                    Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
-                }
-
-                if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
-                    Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
-                } else {
-                    Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
-                }
-
-                API.getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
-                    @Override
-                    public void onRun(int i) {
-                        String username = player.getName();
-                        Integer playerTime = API.getMainAPI().timers.getOrDefault(username, 1);
-                        switch (playerTime) {
-                            case 1:
-                                API.getMessageAPI().sendFirstJoinTitle(player);
-                                break;
-                            case 2:
-                                API.getMessageAPI().sendSecondJoinTitle(player);
-                                break;
-                            case 3:
-                                API.getMessageAPI().sendThreeJoinTitle(player);
-                                break;
-                            default:
-                                API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
-                        }
-                        API.getMainAPI().timers.put(username, playerTime + 1);
-                    }
-                }, 20 * 7, 20 * 3, true);
-            }
-        });
-    }
-
     @EventHandler
     public void onVoteReceive(VoteEvent event) {
         try {
@@ -113,7 +143,6 @@ public class MechanicHandlers implements Listener {
     }
 
     private void startItems(Player player) {
-        if (!player.isOnline()) return;
         Item COMPASS = Item.get(Item.COMPASS);
         COMPASS.setCustomName(API.getMessageAPI().getCompassMessage(player));
         Item DYE = Item.get(Item.DYE, 8, 1);

@@ -7,7 +7,7 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.entity.ProjectileHitEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
-import cn.nukkit.event.player.PlayerJoinEvent;
+import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindowSimple;
@@ -15,7 +15,8 @@ import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import cn.nukkit.math.Vector3;
-import cn.nukkit.scheduler.Task;
+import cn.nukkit.network.protocol.DataPacket;
+import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
 import cn.nukkit.utils.TextFormat;
 import nycuro.API;
 import nycuro.gui.list.ResponseFormWindow;
@@ -32,18 +33,20 @@ import java.util.function.Consumer;
 public class LevelHandlers implements Listener {
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        API.getMainAPI().getServer().getScheduler().scheduleDelayedTask(new Task() {
-            @Override
-            public void onRun(int i) {
-                for (int k = 0; k <= 5; k++) {
-                    API.getMechanicAPI().spawnFirework(new Vector3(4985, 4, 5026));
-                    API.getMechanicAPI().spawnFirework(new Vector3(5009, 4, 5025));
-                }
+    public void onInitialized(DataPacketReceiveEvent event) {
+        DataPacket dataPacket = event.getPacket();
+        if (dataPacket instanceof SetLocalPlayerAsInitializedPacket) {
+            Player player = event.getPlayer();
+            for (int k = 0; k <= 5; k++) {
+                API.getMechanicAPI().spawnFirework(new Vector3(4985, 4, 5026));
+                API.getMechanicAPI().spawnFirework(new Vector3(5009, 4, 5025));
             }
-        }, 20 * 6, true);
-        //player.setNameTag("§7[§e" + JobsAPI.jobs.get(job) + "§7] " + "§a[§c" + level + "§a] §7" + player.getName());
+            if (player.isOp()) {
+                player.setNameTag("§c*§4" + player.getName());
+            } else {
+                player.setNameTag("§e*§7" + player.getName());
+            }
+        }
     }
 
     @EventHandler
@@ -128,6 +131,7 @@ public class LevelHandlers implements Listener {
                             //API.getMainAPI().getServer().dispatchCommand(player, "server skypvp");
                             return;
                         case 1:
+                            //API.getMainAPI().transfer(player, "factions");
                             player.sendMessage(TextFormat.GREEN + "Momentan foloseste /server factions");
                             return;
                         case 3:

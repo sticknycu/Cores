@@ -36,8 +36,8 @@
   </build>
   <repositories>
     <repository>
-      <id>nukkitx</id>
-      <url>https://repo.nukkitx.com/main/</url>
+      <id>nukkit-repo</id>
+      <url>https://repo.nukkitx.com/maven-snapshots</url>
     </repository>
   </repositories>
   <dependencies>

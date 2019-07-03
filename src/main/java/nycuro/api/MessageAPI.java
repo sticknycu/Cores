@@ -2,6 +2,7 @@ package nycuro.api;
 
 import cn.nukkit.Player;
 import nycuro.database.Database;
+import nycuro.database.objects.ProfileProxy;
 
 /**
  * author: NycuRO
@@ -181,6 +182,21 @@ public class MessageAPI {
         }
         return STRING;
     }
+
+    public String getVoteLangScoreboard(Player player) {
+        ProfileProxy profile = Database.profileProxy.get(player.getName());
+        int lang = profile.getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§7| §fVotes: §6" + profile.getVotes() + "   ";
+                break;
+            case 1:
+                STRING = "§7| §fVoturi: §6" + profile.getVotes() + "   ";
+                break;
+        }
+        return STRING;
+    }
+
 
     public String getMessageBossBar(Player player, int playerTime) {
         int lang = Database.profileProxy.get(player.getName()).getLanguage();
@@ -528,6 +544,17 @@ public class MessageAPI {
                 break;
         }
     }
+
+    public void sendLanguageMessage(Player player) {
+        int lang = 0;
+        try {
+            lang = Database.profileProxy.get(player.getName()).getLanguage();
+        } catch (NullPointerException e) {
+            //
+        }
+        player.sendTitle("§l§f» §r§6INFO §l§f«§r", "§r§f/lang <en/ro>", 20, 20, 20);
+    }
+
 
     public void sendJoinMessages(Player player) {
         int lang = 0;

@@ -45,12 +45,13 @@ public class ScoreboardTask extends Task {
             scoreboardDisplay.setScore(3, "§7| §fGems: §6" + profile.getGems() + "  ", 3);
             scoreboardDisplay.setScore(4, "§7| §fOnline Time: §6" + Loader.time(profile.getTime()) + "  ", 4);
             scoreboardDisplay.setScore(5, "§7| §fPing: §6" + player.getPing() + "   ", 5);
-            scoreboardDisplay.setScore(6, "§7 " + String.valueOf("") + "    ", 6);
-            scoreboardDisplay.setScore(7, "§7--- §e§lServer: " + "  ", 7);
-            scoreboardDisplay.setScore(8, "§7| §fOnline Global: §6" + Loader.getCountOnline(0) + "    ", 8);
-            scoreboardDisplay.setScore(9, "§7| §fFactions: §6" + Loader.getCountOnline(2) + "  ", 9);
-            scoreboardDisplay.setScore(10, "§7| §fSkyBlock: §6" + Loader.getCountOnline(3) + "  ", 10);
-            scoreboardDisplay.setScore(11, "§7| §fSkyPvP: §6" + Loader.getCountOnline(4) + "   ", 11);
+            scoreboardDisplay.setScore(6, API.getMessageAPI().getVoteLangScoreboard(player), 6);
+            scoreboardDisplay.setScore(7, "§7 " + String.valueOf("") + "    ", 7);
+            scoreboardDisplay.setScore(8, "§7--- §e§lServer: " + "  ", 8);
+            scoreboardDisplay.setScore(9, "§7| §fOnline Global: §6" + Loader.getCountOnline(0) + "    ", 9);
+            scoreboardDisplay.setScore(10, "§7| §fFactions: §6" + Loader.getCountOnline(2) + "  ", 10);
+            scoreboardDisplay.setScore(11, "§7| §fSkyBlock: §6" + Loader.getCountOnline(3) + "  ", 11);
+            scoreboardDisplay.setScore(12, "§7| §fSkyPvP: §6" + Loader.getCountOnline(4) + "   ", 12);
         } catch (Exception e) {
             // ignore
         }

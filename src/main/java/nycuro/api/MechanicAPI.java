@@ -1,7 +1,6 @@
 package nycuro.api;
 
 import cn.nukkit.Player;
-import cn.nukkit.entity.Entity;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.item.ItemFirework;
@@ -60,7 +59,7 @@ public class MechanicAPI {
         API.getMainAPI().scoreboard.put(player.getName(), fakeScoreboard);
     }
 
-    private void sendInfoServers(Player player) {
+    /*private void sendInfoServers(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Info Partner");
         ProfileProxy profile = Database.profileProxy.get(player.getName());
         int lang = profile.getLanguage();
@@ -97,7 +96,7 @@ public class MechanicAPI {
                 break;
         }
         player.showFormWindow(infoMenu);
-    }
+    }*/
 
 
     public void spawnFirework(Vector3 pos) {

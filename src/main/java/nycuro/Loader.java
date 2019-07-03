@@ -1,11 +1,15 @@
 package nycuro;
 
+import cn.nukkit.Player;
 import cn.nukkit.command.ConsoleCommandSender;
+import cn.nukkit.network.protocol.ScriptCustomEventPacket;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.scheduler.Task;
+import cn.nukkit.utils.Binary;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
+import com.google.common.primitives.Bytes;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
 import it.unimi.dsi.fastutil.objects.*;
 import nycuro.abuse.handlers.AbuseHandlers;
@@ -22,7 +26,6 @@ import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.gui.handlers.GUIHandlers;
-import nycuro.language.handlers.LanguageHandlers;
 import nycuro.level.handlers.LevelHandlers;
 import nycuro.mechanic.handlers.MechanicHandlers;
 import nycuro.messages.handlers.MessageHandlers;
@@ -137,7 +140,6 @@ public class Loader extends PluginBase {
     private void registerEvents() {
         this.getServer().getPluginManager().registerEvents(new AbuseHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new GUIHandlers(), this);
-        this.getServer().getPluginManager().registerEvents(new LanguageHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new LevelHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new MechanicHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new MessageHandlers(), this);
@@ -178,6 +180,27 @@ public class Loader extends PluginBase {
             api.staticPlaceholder("top" + value + "votescount", () -> String.valueOf(Database.scoreboardvotesValue.getOrDefault(value, 0)));
         }
     }
+
+    /*public void transfer(Player p, String server) {
+        ScriptCustomEventPacket pk = new ScriptCustomEventPacket();
+        pk.eventName = "bungeecord:main";
+        // Binary::writeShort(strlen("Connect")) . "Connect" . Binary::writeShort(strlen($server)) . $server;
+        //pk.eventData = (Binary.writeShort( ("Connect").length() ) + "Connect" + Binary.writeShort( server.toString().length() )).getBytes();
+        pk.eventData = connect(server);
+        p.dataPacket(pk);
+    }
+
+    private byte[] connect(String server) {
+        ByteArrayOutputStream b = new ByteArrayOutputStream(); DataOutputStream out = new DataOutputStream(b);
+
+        try {
+            out.writeUTF("Connect");
+            out.writeUTF(server);
+        } catch (IOException ex) {
+        }
+
+        return b.toByteArray();
+    }*/
 
     public static String getCountOnline(int type) {
         String count = "0";

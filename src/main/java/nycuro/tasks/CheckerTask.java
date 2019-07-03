@@ -29,10 +29,7 @@ public class CheckerTask extends Task {
             // Border Check
             if (!Loader.isOnSpawn.getBoolean(player.getName())) {
                 API.getMessageAPI().sendBorderMessage(player);
-                double yaw = player.getYaw();
-                double xx = Math.cos(yaw);
-                double zz = Math.sin(yaw);
-                player.setMotion(new Vector3(-xx, 0, -zz));
+                player.teleport(player.getLevel().getSpawnLocation());
             }
         }
     }
