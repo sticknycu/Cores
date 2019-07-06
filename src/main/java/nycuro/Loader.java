@@ -1,20 +1,22 @@
 package nycuro;
 
-import cn.nukkit.Player;
 import cn.nukkit.command.ConsoleCommandSender;
-import cn.nukkit.network.protocol.ScriptCustomEventPacket;
+import cn.nukkit.level.Level;
+import cn.nukkit.level.Location;
+import cn.nukkit.level.particle.GenericParticle;
+import cn.nukkit.level.particle.Particle;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.scheduler.Task;
-import cn.nukkit.utils.Binary;
+import cn.nukkit.scheduler.TaskHandler;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
-import com.google.common.primitives.Bytes;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
 import it.unimi.dsi.fastutil.objects.*;
 import nycuro.abuse.handlers.AbuseHandlers;
 import nycuro.api.MechanicAPI;
 import nycuro.api.MessageAPI;
+import nycuro.api.ParticlesAPI;
 import nycuro.chat.handlers.ChatHandlers;
 import nycuro.commands.list.CoordsCommand;
 import nycuro.commands.list.LangCommand;
@@ -36,8 +38,7 @@ import nycuro.tasks.ScoreboardTask;
 import nycuro.utils.query.MCQuery;
 import nycuro.utils.query.QueryResponse;
 
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -94,6 +95,7 @@ public class Loader extends PluginBase {
         initDatabase();
         registerTasks();
         registerTops();
+        startParticles();
     }
 
     @Override
@@ -120,10 +122,16 @@ public class Loader extends PluginBase {
         Database.connectToDatabaseFactions();
     }
 
+    private void startParticles() {
+        API.getParticlesAPI().playWitchTornado(new Location(5009, 9, 4991, this.getServer().getDefaultLevel()));
+        API.getParticlesAPI().playWitchTornado(new Location(4984, 9, 4991, this.getServer().getDefaultLevel()));
+    }
+
     private void registerAPI() {
         API.mainAPI = this;
         API.mechanicAPI = new MechanicAPI();
         API.messageAPI = new MessageAPI();
+        API.particlesAPI = new ParticlesAPI();
         API.crateAPI = new CrateAPI();
         API.database = new Database();
     }

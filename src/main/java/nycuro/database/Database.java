@@ -165,193 +165,9 @@ public class Database {
         });
     }
 
-    public static void getTopDollars() {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
-            @Override
-            public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
-                     PreparedStatement preparedStatement =
-                             connection.prepareStatement("SELECT `name`, `dollars` from `dates` ORDER BY `dollars` DESC LIMIT 10")) {
-                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                        while (resultSet.next()) {
-                            if (!scoreboardcoinsValue.isEmpty()) scoreboardcoinsValue.clear();
-                            if (!scoreboardcoinsName.isEmpty()) scoreboardcoinsName.clear();
-                            switch (resultSet.getRow()) {
-                                case 1:
-                                    scoreboardcoinsName.put(1, resultSet.getString("name"));
-                                    scoreboardcoinsValue.put(1, resultSet.getDouble("dollars"));
-                                    break;
-                                case 2:
-                                    scoreboardcoinsName.put(2, resultSet.getString("name"));
-                                    scoreboardcoinsValue.put(2, resultSet.getDouble("dollars"));
-                                    break;
-                                case 3:
-                                    scoreboardcoinsName.put(3, resultSet.getString("name"));
-                                    scoreboardcoinsValue.put(3, resultSet.getDouble("dollars"));
-                                    break;
-                                case 4:
-                                    scoreboardcoinsName.put(4, resultSet.getString("name"));
-                                    scoreboardcoinsValue.put(4, resultSet.getDouble("dollars"));
-                                    break;
-                                case 5:
-                                    scoreboardcoinsName.put(5, resultSet.getString("name"));
-                                    scoreboardcoinsValue.put(5, resultSet.getDouble("dollars"));
-                                    break;
-                                case 6:
-                                    scoreboardcoinsName.put(6, resultSet.getString("name"));
-                                    scoreboardcoinsValue.put(6, resultSet.getDouble("dollars"));
-                                    break;
-                                case 7:
-                                    scoreboardcoinsName.put(7, resultSet.getString("name"));
-                                    scoreboardcoinsValue.put(7, resultSet.getDouble("dollars"));
-                                    break;
-                                case 8:
-                                    scoreboardcoinsName.put(8, resultSet.getString("name"));
-                                    scoreboardcoinsValue.put(8, resultSet.getDouble("dollars"));
-                                    break;
-                                case 9:
-                                    scoreboardcoinsName.put(9, resultSet.getString("name"));
-                                    scoreboardcoinsValue.put(9, resultSet.getDouble("dollars"));
-                                    break;
-                                case 10:
-                                    scoreboardcoinsName.put(10, resultSet.getString("name"));
-                                    scoreboardcoinsValue.put(10, resultSet.getDouble("dollars"));
-                                    break;
-                            }
-                        }
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public static void getTopKills() {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
-            @Override
-            public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
-                     PreparedStatement preparedStatement =
-                             connection.prepareStatement("SELECT `name`, `kills` from `dates` ORDER BY `kills` DESC LIMIT 10")) {
-                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                        while (resultSet.next()) {
-                            if (!scoreboardkillsValue.isEmpty()) scoreboardkillsValue.clear();
-                            if (!scoreboardkillsName.isEmpty()) scoreboardkillsName.clear();
-                            switch (resultSet.getRow()) {
-                                case 1:
-                                    scoreboardkillsName.put(1, resultSet.getString("name"));
-                                    scoreboardkillsValue.put(1, resultSet.getInt("kills"));
-                                    break;
-                                case 2:
-                                    scoreboardkillsName.put(2, resultSet.getString("name"));
-                                    scoreboardkillsValue.put(2, resultSet.getInt("kills"));
-                                    break;
-                                case 3:
-                                    scoreboardkillsName.put(3, resultSet.getString("name"));
-                                    scoreboardkillsValue.put(3, resultSet.getInt("kills"));
-                                    break;
-                                case 4:
-                                    scoreboardkillsName.put(4, resultSet.getString("name"));
-                                    scoreboardkillsValue.put(4, resultSet.getInt("kills"));
-                                    break;
-                                case 5:
-                                    scoreboardkillsName.put(5, resultSet.getString("name"));
-                                    scoreboardkillsValue.put(5, resultSet.getInt("kills"));
-                                    break;
-                                case 6:
-                                    scoreboardkillsName.put(6, resultSet.getString("name"));
-                                    scoreboardkillsValue.put(6, resultSet.getInt("kills"));
-                                    break;
-                                case 7:
-                                    scoreboardkillsName.put(7, resultSet.getString("name"));
-                                    scoreboardkillsValue.put(7, resultSet.getInt("kills"));
-                                    break;
-                                case 8:
-                                    scoreboardkillsName.put(8, resultSet.getString("name"));
-                                    scoreboardkillsValue.put(8, resultSet.getInt("kills"));
-                                    break;
-                                case 9:
-                                    scoreboardkillsName.put(9, resultSet.getString("name"));
-                                    scoreboardkillsValue.put(9, resultSet.getInt("kills"));
-                                    break;
-                                case 10:
-                                    scoreboardkillsName.put(10, resultSet.getString("name"));
-                                    scoreboardkillsValue.put(10, resultSet.getInt("kills"));
-                                    break;
-                            }
-                        }
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public static void getTopDeaths() {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
-            @Override
-            public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
-                     PreparedStatement preparedStatement =
-                             connection.prepareStatement("SELECT `name`, `deaths` from `dates` ORDER BY `deaths` DESC LIMIT 10")) {
-                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                        while (resultSet.next()) {
-                            if (!scoreboarddeathsValue.isEmpty()) scoreboarddeathsValue.clear();
-                            if (!scoreboarddeathsName.isEmpty()) scoreboarddeathsName.clear();
-                            switch (resultSet.getRow()) {
-                                case 1:
-                                    scoreboarddeathsName.put(1, resultSet.getString("name"));
-                                    scoreboarddeathsValue.put(1, resultSet.getInt("deaths"));
-                                    break;
-                                case 2:
-                                    scoreboarddeathsName.put(2, resultSet.getString("name"));
-                                    scoreboarddeathsValue.put(2, resultSet.getInt("deaths"));
-                                    break;
-                                case 3:
-                                    scoreboarddeathsName.put(3, resultSet.getString("name"));
-                                    scoreboarddeathsValue.put(3, resultSet.getInt("deaths"));
-                                    break;
-                                case 4:
-                                    scoreboarddeathsName.put(4, resultSet.getString("name"));
-                                    scoreboarddeathsValue.put(4, resultSet.getInt("deaths"));
-                                    break;
-                                case 5:
-                                    scoreboarddeathsName.put(5, resultSet.getString("name"));
-                                    scoreboarddeathsValue.put(5, resultSet.getInt("deaths"));
-                                    break;
-                                case 6:
-                                    scoreboarddeathsName.put(6, resultSet.getString("name"));
-                                    scoreboarddeathsValue.put(6, resultSet.getInt("deaths"));
-                                    break;
-                                case 7:
-                                    scoreboarddeathsName.put(7, resultSet.getString("name"));
-                                    scoreboarddeathsValue.put(7, resultSet.getInt("deaths"));
-                                    break;
-                                case 8:
-                                    scoreboarddeathsName.put(8, resultSet.getString("name"));
-                                    scoreboarddeathsValue.put(8, resultSet.getInt("deaths"));
-                                    break;
-                                case 9:
-                                    scoreboarddeathsName.put(9, resultSet.getString("name"));
-                                    scoreboarddeathsValue.put(9, resultSet.getInt("deaths"));
-                                    break;
-                                case 10:
-                                    scoreboarddeathsName.put(10, resultSet.getString("name"));
-                                    scoreboarddeathsValue.put(10, resultSet.getInt("deaths"));
-                                    break;
-                            }
-                        }
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
     public static void getTopTime() {
+        if (!scoreboardtimeValue.isEmpty()) scoreboardtimeValue.clear();
+        if (!scoreboardtimeName.isEmpty()) scoreboardtimeName.clear();
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
@@ -360,8 +176,6 @@ public class Database {
                              connection.prepareStatement("SELECT `name`, `time` from `dates` ORDER BY `time` DESC LIMIT 10")) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         while (resultSet.next()) {
-                            if (!scoreboardtimeValue.isEmpty()) scoreboardtimeValue.clear();
-                            if (!scoreboardtimeName.isEmpty()) scoreboardtimeName.clear();
                             switch (resultSet.getRow()) {
                                 case 1:
                                     scoreboardtimeName.put(1, resultSet.getString("name"));
@@ -414,6 +228,8 @@ public class Database {
     }
 
     public static void getTopVotes() {
+        if (!scoreboardvotesValue.isEmpty()) scoreboardvotesValue.clear();
+        if (!scoreboardvotesName.isEmpty()) scoreboardvotesName.clear();
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
@@ -422,8 +238,6 @@ public class Database {
                              connection.prepareStatement("SELECT `name`, `votes` from `dates` ORDER BY `time` DESC LIMIT 10")) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         while (resultSet.next()) {
-                            if (!scoreboardvotesValue.isEmpty()) scoreboardvotesValue.clear();
-                            if (!scoreboardvotesName.isEmpty()) scoreboardvotesName.clear();
                             switch (resultSet.getRow()) {
                                 case 1:
                                     scoreboardvotesName.put(1, resultSet.getString("name"));

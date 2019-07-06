@@ -15,6 +15,7 @@ import cn.nukkit.item.Item;
 import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
 import cn.nukkit.scheduler.Task;
+import gt.creeperface.holograms.Holograms;
 import io.pocketvote.event.VoteEvent;
 import nycuro.API;
 import nycuro.Loader;
@@ -61,6 +62,19 @@ public class MechanicHandlers implements Listener {
                     API.getMainAPI().timers.put(username, playerTime + 1);
                 }
             }, 20, 20 * 3, true);
+
+            /* test reason why nullpointer lang */
+            int lang = Database.profileProxy.get(player.getName()).getLanguage();
+            Holograms holograms = new Holograms();
+            switch (lang) {
+                case 0:
+                    Holograms.setLanguageHandler( (p) -> 0);
+                    break;
+                case 1:
+                    Holograms.setLanguageHandler( (p) -> 1);
+                    break;
+            }
+            holograms.onLanguageChanged(player);
         }
     }
 

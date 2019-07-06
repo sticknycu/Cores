@@ -2,6 +2,7 @@ package nycuro;
 
 import nycuro.api.MechanicAPI;
 import nycuro.api.MessageAPI;
+import nycuro.api.ParticlesAPI;
 import nycuro.crate.CrateAPI;
 import nycuro.database.Database;
 
@@ -15,6 +16,7 @@ public class API {
     public static Loader mainAPI;
     public static MechanicAPI mechanicAPI;
     public static MessageAPI messageAPI;
+    public static ParticlesAPI particlesAPI;
     public static CrateAPI crateAPI;
     public static Database database;
 
@@ -29,6 +31,8 @@ public class API {
     public static MessageAPI getMessageAPI() {
         return messageAPI;
     }
+
+    public static ParticlesAPI getParticlesAPI() { return particlesAPI; }
 
     public static CrateAPI getCrateAPI() {
         return crateAPI;
