@@ -1,13 +1,9 @@
 package nycuro;
 
 import cn.nukkit.command.ConsoleCommandSender;
-import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
-import cn.nukkit.level.particle.GenericParticle;
-import cn.nukkit.level.particle.Particle;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.scheduler.Task;
-import cn.nukkit.scheduler.TaskHandler;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
@@ -188,27 +184,6 @@ public class Loader extends PluginBase {
             api.staticPlaceholder("top" + value + "votescount", () -> String.valueOf(Database.scoreboardvotesValue.getOrDefault(value, 0)));
         }
     }
-
-    /*public void transfer(Player p, String server) {
-        ScriptCustomEventPacket pk = new ScriptCustomEventPacket();
-        pk.eventName = "bungeecord:main";
-        // Binary::writeShort(strlen("Connect")) . "Connect" . Binary::writeShort(strlen($server)) . $server;
-        //pk.eventData = (Binary.writeShort( ("Connect").length() ) + "Connect" + Binary.writeShort( server.toString().length() )).getBytes();
-        pk.eventData = connect(server);
-        p.dataPacket(pk);
-    }
-
-    private byte[] connect(String server) {
-        ByteArrayOutputStream b = new ByteArrayOutputStream(); DataOutputStream out = new DataOutputStream(b);
-
-        try {
-            out.writeUTF("Connect");
-            out.writeUTF(server);
-        } catch (IOException ex) {
-        }
-
-        return b.toByteArray();
-    }*/
 
     public static String getCountOnline(int type) {
         String count = "0";

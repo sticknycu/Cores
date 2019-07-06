@@ -1,8 +1,7 @@
 package nycuro.api;
 
 import cn.nukkit.Player;
-import cn.nukkit.form.element.ElementLabel;
-import cn.nukkit.form.window.FormWindowCustom;
+import cn.nukkit.Server;
 import cn.nukkit.item.ItemFirework;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
@@ -11,15 +10,20 @@ import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.DoubleTag;
 import cn.nukkit.nbt.tag.FloatTag;
 import cn.nukkit.nbt.tag.ListTag;
+import cn.nukkit.network.protocol.ScriptCustomEventPacket;
 import cn.nukkit.utils.BlockColor;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.DyeColor;
+import cn.nukkit.utils.LogLevel;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
+import it.unimi.dsi.fastutil.ints.Int2IntMap;
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.crate.item.EntityFirework;
-import nycuro.database.Database;
-import nycuro.database.objects.ProfileProxy;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 
 /**
  * author: NycuRO
@@ -27,6 +31,15 @@ import nycuro.database.objects.ProfileProxy;
  * API 1.0.0
  */
 public class MechanicAPI {
+
+    public static Int2IntMap counts = new Int2IntOpenHashMap();
+
+    static {
+        counts.put(0, 0); // Skyblock
+        counts.put(1, 0); // Factions
+        counts.put(2, 0); // SkyPvP
+        counts.put(3, 0); // ALl
+    }
 
     public boolean isOnSpawn(Player player) {
         return Loader.isOnSpawn.getBoolean(player.getName());
@@ -97,6 +110,38 @@ public class MechanicAPI {
         }
         player.showFormWindow(infoMenu);
     }*/
+
+    public void transferPlayer(Player p, String destination) {
+        ScriptCustomEventPacket pk = new ScriptCustomEventPacket();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        DataOutputStream a = new DataOutputStream(out);
+        try {
+            a.writeUTF("Connect");
+            a.writeUTF(destination);
+            pk.eventName = "bungeecord:main";
+            pk.eventData = out.toByteArray();
+            p.dataPacket(pk);
+        } catch (Exception e) {
+            API.getMainAPI().getLogger().log(LogLevel.ALERT,"Error while transferring ( PLAYER: " + p.getName() + " | DEST: " + destination + " )");
+            e.printStackTrace();
+        }
+    }
+
+    public void requestPlayerCount(String server) {
+        ScriptCustomEventPacket pk = new ScriptCustomEventPacket();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        DataOutputStream a = new DataOutputStream(out);
+        try {
+            a.writeUTF("PlayerCount");
+            a.writeUTF(server);
+            pk.eventName = "bungeecord:main";
+            pk.eventData = out.toByteArray();
+            Player player = API.getMainAPI().getServer().getOnlinePlayers().values().iterator().next();
+            player.dataPacket(pk);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public void spawnFirework(Vector3 pos) {

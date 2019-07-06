@@ -37,7 +37,6 @@ public class MechanicHandlers implements Listener {
             API.getMechanicAPI().createBossBar(player);
             API.getMechanicAPI().createScoreboard(player);
             player.getInventory().clearAll();
-            startItems(player);
             API.getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
                 @Override
                 public void onRun(int i) {
@@ -46,6 +45,7 @@ public class MechanicHandlers implements Listener {
                     switch (playerTime) {
                         case 1:
                             API.getMessageAPI().sendFirstJoinTitle(player);
+                            startItems(player);
                             break;
                         case 2:
                             API.getMessageAPI().sendSecondJoinTitle(player);
@@ -64,7 +64,7 @@ public class MechanicHandlers implements Listener {
             }, 20, 20 * 3, true);
 
             /* test reason why nullpointer lang */
-            int lang = Database.profileProxy.get(player.getName()).getLanguage();
+            int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
             Holograms holograms = new Holograms();
             switch (lang) {
                 case 0:
