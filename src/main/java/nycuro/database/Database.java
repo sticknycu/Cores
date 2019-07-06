@@ -195,33 +195,37 @@ public class Database {
         Loader.registerTops();
     }
 
+    public static void addUnAsyncDatesPlayerFactions(String name) {
+        try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT * from `dates` WHERE `name` =?")) {
+            preparedStatement.setString(1, name);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    profileFactions.putIfAbsent(name, new ProfileFactions(
+                            resultSet.getString("name"),
+                            resultSet.getInt("job"),
+                            resultSet.getInt("kills"),
+                            resultSet.getInt("deaths"),
+                            resultSet.getLong("cooldown"),
+                            resultSet.getDouble("experience"),
+                            resultSet.getInt("level"),
+                            resultSet.getDouble("necesary"),
+                            resultSet.getLong("time"),
+                            resultSet.getDouble("dollars")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void addDatesPlayerFactions(String name) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
-                     PreparedStatement preparedStatement =
-                             connection.prepareStatement("SELECT * from `dates` WHERE `name` =?")) {
-                    preparedStatement.setString(1, name);
-                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                        while (resultSet.next()) {
-                            profileFactions.putIfAbsent(name, new ProfileFactions(
-                                    resultSet.getString("name"),
-                                    resultSet.getInt("job"),
-                                    resultSet.getInt("kills"),
-                                    resultSet.getInt("deaths"),
-                                    resultSet.getLong("cooldown"),
-                                    resultSet.getDouble("experience"),
-                                    resultSet.getInt("level"),
-                                    resultSet.getDouble("necesary"),
-                                    resultSet.getLong("time"),
-                                    resultSet.getDouble("dollars")
-                            ));
-                        }
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                addUnAsyncDatesPlayerFactions(name);
             }
         });
     }
@@ -794,7 +798,7 @@ public class Database {
             public void onRun() {
                 try (Connection connection = DATASOURCE_HOMESF.getConnection();
                      PreparedStatement preparedStatement =
-                             connection.prepareStatement("DELETE FROM `homes` WHERE `name` =?")) {
+                             connection.prepareStatement("DELETE FROM `homes` WHERE `homename` =?")) {
                     preparedStatement.setString(1, homeName);
                     preparedStatement.executeUpdate();
                 } catch (SQLException e) {

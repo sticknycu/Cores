@@ -6,6 +6,7 @@ import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockTNT;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
+import cn.nukkit.event.block.LeavesDecayEvent;
 import cn.nukkit.event.player.PlayerChatEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
@@ -67,6 +68,11 @@ public class MechanicHandlers implements Listener {
                 }
             }, 20, 20 * 3, true);
         }
+    }
+
+    @EventHandler
+    public void onDecay(LeavesDecayEvent event) {
+        event.setCancelled(true);
     }
 
     @EventHandler

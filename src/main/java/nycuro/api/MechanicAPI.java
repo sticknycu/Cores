@@ -128,7 +128,7 @@ public class MechanicAPI {
                                 return;
                             }
                             if (Wither.count > 10) {
-                                API.getMessageAPI().sendTooMuchWithers(player);
+                                player.sendMessage(API.getMessageAPI().sendTooMuchWithers(player));
                                 return;
                             } else {
                                 ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
@@ -161,11 +161,11 @@ public class MechanicAPI {
                             ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
                             int level = profileFactions.getLevel();
                             if (level < 10) {
-                                API.getMessageAPI().sendArenaException(player);
+                                player.sendMessage(API.getMessageAPI().sendArenaException(player));
                                 return;
                             } else {
                                 // Teleport to arena
-                                API.getMessageAPI().sendTeleportArena(player);
+                                player.sendMessage(API.getMessageAPI().sendTeleportArena(player));
                                 return;
                             }
                     }

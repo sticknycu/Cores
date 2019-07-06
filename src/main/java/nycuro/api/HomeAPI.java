@@ -117,7 +117,7 @@ public class HomeAPI {
                             case 0:
                                 HomeObject homeObject = API.getDatabase().getDatesHomePlayer(player.getName());
                                 player.teleport(new Location(homeObject.getX(), homeObject.getY(), homeObject.getZ(), API.getMainAPI().getServer().getLevelByName(homeObject.getWorldName())));
-                                API.getMessageAPI().sendTeleportedHomeSuccesfully(player, homeObject.getX(), homeObject.getY(), homeObject.getZ());
+                                player.sendMessage(API.getMessageAPI().sendTeleportedHomeSuccesfully(player, homeObject.getX(), homeObject.getY(), homeObject.getZ()));
                                 return;
                             case 1:
                                 API.getDatabase().deleteHome(homename);

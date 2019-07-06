@@ -13,6 +13,7 @@ import cn.nukkit.event.entity.EntityDeathEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
 import nycuro.API;
+import nycuro.api.UtilsAPI;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 
@@ -96,6 +97,7 @@ public class JobsHandlers implements Listener {
     public void onHurt(EntityDamageEvent event) {
         Entity eventEntity = event.getEntity();
         if (eventEntity == null) return;
+        sendToRespawn(eventEntity, null, event);
         if (event instanceof EntityDamageByEntityEvent) {
             EntityDamageByEntityEvent ev = (EntityDamageByEntityEvent) event;
             if (ev instanceof EntityDamageByChildEntityEvent) {
@@ -104,9 +106,6 @@ public class JobsHandlers implements Listener {
                     Player damager = (Player) evc.getDamager();
                     API.getMessageAPI().sendHitBowMessage(eventEntity, damager);
                     if (!API.getMechanicAPI().isOnSpawn(damager)) {
-                        if (eventEntity instanceof Player) {
-                            sendToRespawn(eventEntity, damager, event);
-                        }
                         ProfileFactions profile = Database.profileFactions.get(damager.getName());
                         int job = profile.getJob();
                         switch (job) {
@@ -176,7 +175,7 @@ public class JobsHandlers implements Listener {
     /** FIX: When adding mobs */
     private void sendToRespawn(Entity entity, Player damager, EntityDamageEvent event) {
         Player player = (Player) entity;
-        if (event.getDamage() > player.getHealth()) {
+        if (event.getDamage() > player.getHealth() && (damager != null)) {
             for (Item item : player.getInventory().getContents().values()) {
                 player.getLevel().dropItem(new Vector3(player.getX(), player.getY() + 1, player.getZ()), item);
             }
@@ -191,6 +190,7 @@ public class JobsHandlers implements Listener {
             ProfileFactions profileDamager = Database.profileFactions.get(damager.getName()); // Todo: Zombies, Monsters.
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
             profileDamager.setKills(profileDamager.getKills() + 1);
+            UtilsAPI.teleported = false;
 
         }
         if (player.getPosition().getY() < 0) {
@@ -202,6 +202,7 @@ public class JobsHandlers implements Listener {
             player.getInventory().clearAll();
             ProfileFactions profilePlayer = Database.profileFactions.get(player.getName());
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
+            UtilsAPI.teleported = false;
         }
     }
 }
