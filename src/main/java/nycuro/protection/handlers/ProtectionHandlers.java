@@ -10,11 +10,13 @@ import cn.nukkit.event.entity.EntityDamageByChildEntityEvent;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.entity.ExplosionPrimeEvent;
-import cn.nukkit.event.player.*;
+import cn.nukkit.event.player.PlayerBucketEmptyEvent;
+import cn.nukkit.event.player.PlayerBucketFillEvent;
+import cn.nukkit.event.player.PlayerGameModeChangeEvent;
+import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import nycuro.API;
-import nycuro.Loader;
 
 /**
  * author: NycuRO
@@ -26,11 +28,7 @@ public class ProtectionHandlers implements Listener {
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        if (API.getMechanicAPI().isOnSpawn(player)) {
-            event.setCancelled(true);
-            API.getMessageAPI().sendBreakMessage(player);
-        }
-        if (player.getLevel().getName().equalsIgnoreCase("pvp")) {
+        if (API.getMechanicAPI().isOnArena(player) || API.getMechanicAPI().isOnPvP(player) || API.getMechanicAPI().isOnSpawn(player)) {
             event.setCancelled(true);
             API.getMessageAPI().sendBreakMessage(player);
         }
@@ -43,7 +41,9 @@ public class ProtectionHandlers implements Listener {
             event.setCancelled(true);
         }
         Player player = (Player) event.getEntity();
-        if (Loader.isOnSpawn.getBoolean(player.getName())) event.setCancelled(true);
+        if (API.getMechanicAPI().isOnArena(player) || API.getMechanicAPI().isOnPvP(player) || API.getMechanicAPI().isOnSpawn(player)) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler
@@ -62,13 +62,11 @@ public class ProtectionHandlers implements Listener {
             if (API.getMechanicAPI().isOnSpawn(player)) {
                 event.setCancelled(true);
                 API.getMessageAPI().sendPvPOffMessage(damager);
-                return;
             }
-            /*if (API.getMechanicAPI().isOnPvP(player)) {
+            EntityDamageEvent.DamageCause cause = event.getCause();
+            if (cause == EntityDamageEvent.DamageCause.FALL) {
                 event.setCancelled(true);
-                API.getMessageAPI().sendPvPOffMessage(damager);
-                return;
-            }*/
+            }
             for (Player pl : new Player[]{player, damager}) {
                 if (!API.getCombatAPI().inCombat(pl)) {
                     API.getMainAPI().bossbar.get(pl.getName()).setText("§7-§8=§7- §7CombatLogger: §6§l13 §7-§8=§7-");
@@ -83,13 +81,9 @@ public class ProtectionHandlers implements Listener {
         Player player = event.getPlayer();
         PlayerInventory inventory = player.getInventory();
         Item inHand = inventory.getItemInHand();
-        if (API.getMechanicAPI().isOnSpawn(player)) {
+        if (API.getMechanicAPI().isOnSpawn(player) || API.getMechanicAPI().isOnPvP(player) || API.getMechanicAPI().isOnArena(player)) {
             event.setCancelled(true);
             inventory.removeItem(inHand);
-            API.getMessageAPI().sendSmecherieMessage(player);
-        }
-        if (player.getLevel().getName().equalsIgnoreCase("pvp")) {
-            event.setCancelled(true);
             API.getMessageAPI().sendSmecherieMessage(player);
         }
     }
@@ -99,13 +93,9 @@ public class ProtectionHandlers implements Listener {
         Player player = event.getPlayer();
         PlayerInventory inventory = player.getInventory();
         Item inHand = inventory.getItemInHand();
-        if (API.getMechanicAPI().isOnSpawn(player)) {
+        if (API.getMechanicAPI().isOnSpawn(player) || API.getMechanicAPI().isOnPvP(player) || API.getMechanicAPI().isOnArena(player)) {
             event.setCancelled(true);
             inventory.removeItem(inHand);
-            API.getMessageAPI().sendSmecherieMessage(player);
-        }
-        if (player.getLevel().getName().equalsIgnoreCase("pvp")) {
-            event.setCancelled(true);
             API.getMessageAPI().sendSmecherieMessage(player);
         }
     }
@@ -129,14 +119,9 @@ public class ProtectionHandlers implements Listener {
                 case Item.STONE_HOE:
                 case Item.WOODEN_HOE:
                 case Item.FLINT_AND_STEEL:
-                    if (API.getMechanicAPI().isOnSpawn(player)) {
+                    if (API.getMechanicAPI().isOnSpawn(player) || API.getMechanicAPI().isOnPvP(player) || API.getMechanicAPI().isOnArena(player)) {
                         API.getMessageAPI().sendAbuseMessage(player);
                         event.setCancelled(true);
-                        return;
-                    }
-                    if (player.getLevel().getName().equalsIgnoreCase("pvp")) {
-                        event.setCancelled(true);
-                        API.getMessageAPI().sendAbuseMessage(player);
                         return;
                     }
                 default:
@@ -154,11 +139,7 @@ public class ProtectionHandlers implements Listener {
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
-        if (API.getMechanicAPI().isOnSpawn(player)) {
-            event.setCancelled(true);
-            API.getMessageAPI().sendPlaceMessage(player);
-        }
-        if (player.getLevel().getName().equalsIgnoreCase("pvp")) {
+        if (API.getMechanicAPI().isOnSpawn(player) || API.getMechanicAPI().isOnPvP(player) || API.getMechanicAPI().isOnArena(player)) {
             event.setCancelled(true);
             API.getMessageAPI().sendPlaceMessage(player);
         }

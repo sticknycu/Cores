@@ -84,14 +84,14 @@ public class MessageAPI {
         return STRING;
     }
 
-    public String sendArenaException(Player player) {
+    public String sendArenaException(Player player, int level) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
-                STRING = "§e» §6You need have level 10+ to teleport to Arena!";
+                STRING = "§e» §6You need have level " + level + "+ to teleport to Arena!";
                 break;
             case 1:
-                STRING = "§e» §6Ai nevoie de nivelul 10+ pentru a te teleporta la Arena!";
+                STRING = "§e» §6Ai nevoie de nivelul " + level + "+ pentru a te teleporta la Arena!";
                 break;
         }
         return STRING;
@@ -389,7 +389,7 @@ public class MessageAPI {
         return STRING;
     }
 
-    public String teleportArenaMessages(Player player) {
+    public String teleportBossArenaMessages(Player player) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
@@ -412,6 +412,35 @@ public class MessageAPI {
                         "§ePoti face asta doar daca ai nivel 10+\n" +
                         "§eNu o sa poti folosi nici un fel de comanda de teleport, precum /tp. Doar /spawn.\n" +
                         "§eBoss-ul se spawneaza in fiecare seara la ora 9.\n" +
+                        "§eAi grija, PVP-ul este ON!\n" +
+                        "§eDaca nu vrei sa te teleportezi, apasa sus in dreapta pe X!\n" +
+                        "§eSa ai o zi buna!";
+                break;
+        }
+        return STRING;
+    }
+
+    public String teleportPvPArenaMessages(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "                      Hello!\n" +
+                        "         Welcome to Teleport Arena!\n\n" +
+                        "§c» §aWhat is 'Teleport Arena'?\n" +
+                        "§eTeleport Arena is an option for teleporting to PvP Arena.\n" +
+                        "§eYou can do that only if you have level 5+\n" +
+                        "§eYou will cannot use /tp and other commands for teleporting here. Just /spawn.\n" +
+                        "§eBe careful, PVP is on!\n" +
+                        "§eIf you don't want to be teleported, tap on X!\n" +
+                        "§eHave a nice day!";
+                break;
+            case 1:
+                STRING = "                      Salut!\n" +
+                        "      Bine ai venit la Teleport Arena!\n\n" +
+                        "§c» §aCe inseamna de fapt 'Teleport Arena'?:\n" +
+                        "§eTeleport Arena este o optiune pentru a te teleporta la PvP Arena.\n" +
+                        "§ePoti face asta doar daca ai nivel 5+\n" +
+                        "§eNu o sa poti folosi nici un fel de comanda de teleport, precum /tp. Doar /spawn.\n" +
                         "§eAi grija, PVP-ul este ON!\n" +
                         "§eDaca nu vrei sa te teleportezi, apasa sus in dreapta pe X!\n" +
                         "§eSa ai o zi buna!";
@@ -1459,6 +1488,24 @@ public class MessageAPI {
         return string;
     }
 
+    public String sendArenaPrincipalModal(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                       Hello!\n" +
+                        "               Welcome to Arena Category!\n" +
+                        "           Choose what you want to do";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "     Bine ai venit la categoria Arena!\n" +
+                        "    Alege ce doresti sa faci de acum";
+                break;
+        }
+        return string;
+    }
+
     public String sendHomesPrincipalModal(Player player) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
@@ -1752,6 +1799,30 @@ public class MessageAPI {
                         "          Bine ai venit la Home" + home + "!\n\n" +
                         "§ePentru a te teleporta la home foloseste §a'Teleport'.\n" +
                         "§ePentru a sterge Home-ul foloseste §a'Delete Home'.\n";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInfoMessageArena(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                      Hello!\n" +
+                        "          Welcome to Arena Mechanic!\n\n" +
+                        "§c» §aHow to Teleport to Boss?\n" +
+                        "§eFor teleporting to boss just tab on 'Boss Arena'.\n" +
+                        "§c» §aHow to Teleport to PvP?\n" +
+                        "§eFor teleporting to PvP just tab on 'PvP Arena'";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "          Bine ai venit la Arena Mechanic!\n\n" +
+                        "§c» §aCum te teleportezi la Boss?\n" +
+                        "§ePentru a te teleporta la boss trebuie sa apesi pe fereastra 'PvP Arena'.\n" +
+                        "§c» §aCum te teleportezi la PvP?\n" +
+                        "§ePentru a te teleporta la PvP trebuie sa apesi pe fereastra 'PvP Arena'";
                 break;
         }
         return string;

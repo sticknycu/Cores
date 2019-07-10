@@ -5,8 +5,11 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.entity.Entity;
+import cn.nukkit.form.element.ElementButton;
+import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
+import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
@@ -178,8 +181,39 @@ public class MechanicAPI {
     }
 
     public void teleportArena(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Teleport Arena");
-        infoMenu.addElement(new ElementLabel(API.getMessageAPI().teleportArenaMessages(player)));
+        FormWindowSimple jobsMenu = new FormWindowSimple("Arena Category", API.getMessageAPI().sendArenaPrincipalModal(player));
+        jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+        jobsMenu.addButton(new ElementButton("Boss Arena", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
+        jobsMenu.addButton(new ElementButton("PvP Arena", new ElementButtonImageData("url", "https://i.imgur.com/otMDlEU.png")));
+        player.showFormWindow(new ResponseFormWindow(jobsMenu, new Consumer<Map<Integer, Object>>() {
+            @Override
+            public void accept(Map<Integer, Object> response) {
+                if (!response.isEmpty()) {
+                    switch (response.entrySet().iterator().next().getKey()) {
+                        case 0:
+                            sendInfoMessageArena(player);
+                            return;
+                        case 1:
+                            teleportArenaBoss(player);
+                            return;
+                        case 2:
+                            teleportArenaPvP(player);
+                            break;
+                    }
+                }
+            }
+        }));
+    }
+
+    private void sendInfoMessageArena(Player player) {
+        FormWindowCustom infoMenu = new FormWindowCustom("Arena Info");
+        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageArena(player)));
+        player.showFormWindow(infoMenu);
+    }
+
+    private void teleportArenaBoss(Player player) {
+        FormWindowCustom infoMenu = new FormWindowCustom("Teleport Boss Arena");
+        infoMenu.addElement(new ElementLabel(API.getMessageAPI().teleportBossArenaMessages(player)));
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
             public void accept(Map<Integer, Object> response) {
@@ -189,10 +223,35 @@ public class MechanicAPI {
                             ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
                             int level = profileFactions.getLevel();
                             if (level < 10) {
-                                player.sendMessage(API.getMessageAPI().sendArenaException(player));
+                                player.sendMessage(API.getMessageAPI().sendArenaException(player, 10));
                                 return;
                             } else {
                                 player.teleport(new Location(1092, 70, 1324, API.getMainAPI().getServer().getDefaultLevel()));
+                                player.sendMessage(API.getMessageAPI().sendTeleportArena(player));
+                                return;
+                            }
+                    }
+                }
+            }
+        }));
+    }
+
+    private void teleportArenaPvP(Player player) {
+        FormWindowCustom infoMenu = new FormWindowCustom("Teleport PvP Arena");
+        infoMenu.addElement(new ElementLabel(API.getMessageAPI().teleportPvPArenaMessages(player)));
+        player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
+            @Override
+            public void accept(Map<Integer, Object> response) {
+                if (!response.isEmpty()) {
+                    switch (response.entrySet().iterator().next().getKey()) {
+                        case 0:
+                            ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
+                            int level = profileFactions.getLevel();
+                            if (level < 5) {
+                                player.sendMessage(API.getMessageAPI().sendArenaException(player, 5));
+                                return;
+                            } else {
+                                player.teleport(new Location(1106, 70, 1311, API.getMainAPI().getServer().getDefaultLevel()));
                                 player.sendMessage(API.getMessageAPI().sendTeleportArena(player));
                                 return;
                             }

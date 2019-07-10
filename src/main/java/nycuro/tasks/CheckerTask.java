@@ -37,9 +37,11 @@ public class CheckerTask extends Task {
             int z = (int) API.getMainAPI().getServer().getDefaultLevel().getSpawnLocation().getZ();
             Vector3 vector3 = new Vector3(x, y, z);
             if (player.getLevel().equals(API.getMainAPI().getServer().getDefaultLevel()) && player.getPosition().distance(vector3) <= 300 && !player.isOp()) {
-                if (API.getMechanicAPI().isOnArena(player)) {
+                if (API.getMechanicAPI().isOnArena(player) || API.getMechanicAPI().isOnPvP(player)) {
+                    API.getMainAPI().isOnPvP.replace(player, true);
                     Loader.isOnSpawn.replace(player.getName(), false);
                 } else {
+                    API.getMainAPI().isOnPvP.replace(player, false);
                     Loader.isOnSpawn.replace(player.getName(), true);
                 }
             } else {
@@ -65,6 +67,15 @@ public class CheckerTask extends Task {
             if (loc.getLevelBlock().getId() == BlockID.NETHER_PORTAL) {
                 if (UtilsAPI.teleported) return;
                 API.getUtilsAPI().handleRandomTeleport(player);
+            }
+
+            // PvP Check
+            Vector3 vectorRP = new Vector3(1153, 31, 1187);
+            Vector3 vectorLP = new Vector3(1059, 0, 1280);
+            if (API.getMechanicAPI().isPlayerInsideOfArea(player, vectorRP, vectorLP)) {
+                API.getMainAPI().isOnPvP.replace(player, true);
+            } else {
+                API.getMainAPI().isOnPvP.replace(player, false);
             }
 
             // Arena Check
