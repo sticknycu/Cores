@@ -58,7 +58,7 @@ public class HomeAPI {
                     API.getDatabase().homeExist(response.values().toArray()[0].toString(), bool -> {
                         if (!bool) {
                             API.getDatabase().addNewHome(player.getName(), (int) player.getX(), (int) player.getY(), (int) player.getZ(), player.getLevel().getFolderName(), response.values().toArray()[0].toString());
-                            API.getMessageAPI().sendCreatedHomeSuccesfully(player, (int) player.getX(), (int) player.getY(), (int) player.getZ());
+                            player.sendMessage(API.getMessageAPI().sendCreatedHomeSuccesfully(player, (int) player.getX(), (int) player.getY(), (int) player.getZ()));
                         } else {
                             player.sendMessage(API.getMessageAPI().sendHomeExistsMessage(player));
                         }

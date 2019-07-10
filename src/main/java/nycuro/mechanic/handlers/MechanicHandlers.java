@@ -82,6 +82,8 @@ public class MechanicHandlers implements Listener {
         API.getMainAPI().coords.put(player.getName(), false);
         Loader.isOnSpawn.put(player.getName(), true);
         Loader.isOnBorder.put(player.getName(), true);
+        API.getMainAPI().isOnArena.put(player, false);
+        API.getMainAPI().isOnPvP.put(player, false);
         API.getMainAPI().played.put(player.getName(), System.currentTimeMillis());
         API.getDatabase().playerExist(player.getName(), bool -> {
             if (!bool) {
@@ -121,6 +123,8 @@ public class MechanicHandlers implements Listener {
         API.getMainAPI().played.removeLong(player.getName());
         Loader.isOnSpawn.removeBoolean(player.getName());
         Loader.isOnBorder.removeBoolean(player.getName());
+        API.getMainAPI().isOnArena.removeBoolean(player);
+        API.getMainAPI().isOnPvP.removeBoolean(player);
     }
 
     @EventHandler

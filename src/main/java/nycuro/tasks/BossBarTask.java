@@ -3,6 +3,7 @@ package nycuro.tasks;
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
+import nycuro.Loader;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 
@@ -29,7 +30,15 @@ public class BossBarTask extends Task {
                     count = profile.getExperience();
                     profile.setTime(profile.getTime() + 1000);
                 }
-                String message = API.getMessageAPI().getMessageBossBar(player, level, necessary, count);
+                String message = "";
+                float health = 100F;
+                if (API.getMechanicAPI().isOnArena(player) && API.getMechanicAPI().getBossHealth() != 0) {
+                    health = API.getMechanicAPI().getBossHealth();
+                    message = API.getMessageAPI().getMessageInArenaBossBar(player, Loader.round((double) API.getMechanicAPI().getBossHealth(), 2));
+                } else {
+                    message = API.getMessageAPI().getMessageBossBar(player, level, necessary, count);
+                }
+                API.getMainAPI().bossbar.get(player.getName()).setLength(health);
                 API.getMainAPI().bossbar.get(player.getName()).setText(message);
             }
         }

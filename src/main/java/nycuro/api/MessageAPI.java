@@ -1168,6 +1168,19 @@ public class MessageAPI {
         return STRING_BOSSBAR;
     }
 
+    public String getMessageInArenaBossBar(Player player, double bosshp) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING_BOSSBAR = "    §6§l»§r-- Boss §6§l§r --§6§l« §r\n\n      §rHP: §6" + bosshp + "§7/" + "§6100";
+                break;
+            case 1:
+                STRING_BOSSBAR = "   §6§l»§r-- Boss §6§l§r --§6§l« §r\n\n  §rViata: §6" + bosshp + "§7/" + "§6100";
+                break;
+        }
+        return STRING_BOSSBAR;
+    }
+
     public void getSelfMoneyMessage(Player player, double money) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
@@ -1650,6 +1663,20 @@ public class MessageAPI {
         return string;
     }
 
+    public String sendArenaWarningMessage(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "§f» §cYou need have level 10+ to enter here!";
+                break;
+            case 1:
+                string = "§f» §cAi nevoie de cel putin nivelul 10 pentru a intra aici!";
+                break;
+        }
+        return string;
+    }
+
     public String sendTooMuchHomesMessage(Player player, int count) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
@@ -1832,6 +1859,30 @@ public class MessageAPI {
                         "                              DropParty-ul a inceput!§r\n" +
                         "                    Artificile si The Boss au aparut in Arena.§r\n" +
                         "                      Toata lumea a primit DropParty Key!§r\n" +
+                        "                                                                                                            \n" +
+                        "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n");
+                break;
+        }
+    }
+
+    public void sendBossSpawnedMessage(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        switch (lang) {
+            case 0:
+                player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n" +
+                        "                                                                                                            \n" +
+                        "                             Is 21:00 at Romania!§r\n" +
+                        "                           The Boss appeared in Arena.§r\n" +
+                        "                           Everyone let's go to /arena!§r" +
+                        "                                                                                                            \n" +
+                        "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n");
+                break;
+            case 1:
+                player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n" +
+                        "                                                                                                            \n" +
+                        "                              Este 21:00 in Romania!§r\n" +
+                        "                           The Boss au aparut in Arena.§r\n" +
+                        "                         Toata lumea sa mearga la /arena!§r\n" +
                         "                                                                                                            \n" +
                         "§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n");
                 break;

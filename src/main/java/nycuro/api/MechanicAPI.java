@@ -10,6 +10,7 @@ import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
+import cn.nukkit.level.Location;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.DummyBossBar;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
@@ -21,6 +22,7 @@ import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 import nycuro.gui.list.ResponseFormWindow;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -35,22 +37,48 @@ public class MechanicAPI {
         return Loader.isOnSpawn.getBoolean(player.getName());
     }
 
-    public boolean isOnPvP(Entity entity) {
-        double x = entity.getLevel().getSpawnLocation().getX();
-        double y = entity.getLevel().getSpawnLocation().getY();
-        double z = entity.getLevel().getSpawnLocation().getZ();
-        Vector3 vector3 = new Vector3(x, y, z);
-        if (entity instanceof Player) {
-            return entity.getLevel().getName().equalsIgnoreCase("pvp") && entity.getPosition().distance(vector3) <= 34 && !((Player) entity).isOp() && entity.getY() >= 75;
-        } else {
-            return entity.getLevel().getName().equalsIgnoreCase("pvp") && entity.getPosition().distance(vector3) <= 34 && entity.getY() >= 75;
-        }
+    public boolean isOnArena(Player player) {
+        return API.getMainAPI().isOnArena.getBoolean(player);
     }
 
-    public boolean isOnBorder(Player player) {
-        double x = player.getX();
-        double z = player.getZ();
-        return (x >= 7500 || x <= -7500) || (z >= 7500 || z <= -7500);
+    public float getBossHealth() {
+        for (Entity entity : API.getMainAPI().getServer().getDefaultLevel().getEntities()) {
+            if (entity.namedTag.getBoolean("coreBOSS")) {
+                return entity.getHealth();
+            }
+        }
+        return 0;
+    }
+
+    public boolean isPlayerInsideOfArea(Player player, Vector3 vecFrom, Vector3 vecTo) {
+        double[] dim = new double[2];
+
+        dim[0] = vecFrom.getX();
+        dim[1] = vecTo.getX();
+        Arrays.sort(dim);
+        if (player.getLocation().getX() > dim[1] || player.getLocation().getX() < dim[0]) {
+            return false;
+        }
+
+        dim[0] = vecFrom.getZ();
+        dim[1] = vecTo.getZ();
+        Arrays.sort(dim);
+        if (player.getLocation().getZ() > dim[1] || player.getLocation().getZ() < dim[0]) {
+            return false;
+        }
+
+        dim[0] = vecFrom.getY();
+        dim[1] = vecTo.getY();
+        Arrays.sort(dim);
+        if (player.getLocation().getY() > dim[1] || player.getLocation().getY() < dim[0]) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean isOnPvP(Player player) {
+        return API.getMainAPI().isOnPvP.getBoolean(player);
     }
 
     public void sendToSpawn(Player player) {
@@ -164,7 +192,7 @@ public class MechanicAPI {
                                 player.sendMessage(API.getMessageAPI().sendArenaException(player));
                                 return;
                             } else {
-                                // Teleport to arena
+                                player.teleport(new Location(1092, 70, 1324, API.getMainAPI().getServer().getDefaultLevel()));
                                 player.sendMessage(API.getMessageAPI().sendTeleportArena(player));
                                 return;
                             }

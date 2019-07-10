@@ -1,6 +1,7 @@
 package nycuro.ai.entity;
 
 import cn.nukkit.item.Item;
+import cn.nukkit.item.enchantment.Enchantment;
 import me.onebone.actaeon.entity.monster.Zombie;
 import nycuro.API;
 
@@ -12,17 +13,18 @@ import nycuro.API;
 public class BossEntity extends Zombie {
 
     public BossEntity() {
-        super(API.getMainAPI().getServer().getDefaultLevel().getChunk(127 >> 4, 50 >> 4), API.getAiAPI().getBossNBT());
+        super(API.getMainAPI().getServer().getDefaultLevel().getChunk(1139 >> 4, 1133 >> 4), API.getAiAPI().getBossNBT());
         this.setNameTag("§a» §cThe Boss §a«§r");
         this.setMaxHealth(100);
         this.setHealth(100F);
         this.setScale(2F);
+        this.namedTag.putBoolean("coreBOSS", true);
         this.spawnToAll();
     }
 
     @Override
     public String getName() {
-        return "BossEntity";
+        return "The Boss";
     }
 
     @Override
@@ -32,11 +34,16 @@ public class BossEntity extends Zombie {
 
     @Override
     public Item[] getDrops() {
-        return new Item[]{
-                Item.get(Item.GOLDEN_APPLE, 0, 3),
-                Item.get(Item.GOLDEN_APPLE_ENCHANTED, 0, 1),
-                Item.get(Item.OBSIDIAN, 0, 16),
-                Item.get(Item.TNT, 0, 8)
+        Item sword = new Item(Item.DIAMOND_SWORD);
+        sword.setCustomName("Boss Sword");
+        sword.addEnchantment(Enchantment.get(Enchantment.ID_DAMAGE_ALL).setLevel(2));
+        sword.addEnchantment(Enchantment.get(Enchantment.ID_KNOCKBACK).setLevel(2));
+        return new Item[] {
+                Item.get(Item.GOLDEN_APPLE, 0, 5),
+                Item.get(Item.OBSIDIAN, 0, 64),
+                Item.get(Item.TNT, 0, 12),
+                Item.get(Item.DIAMOND_BLOCK, 0, 3),
+                sword
         };
     }
 }

@@ -30,9 +30,15 @@ public class RandomTPUtils {
         taskHandler = player.getServer().getScheduler().scheduleDelayedTask(new Task() {
             @Override
             public void onRun(int i) {
+                player.setImmobile(true);
                 player.teleport(new Vector3(x, 255, z), PlayerTeleportEvent.TeleportCause.COMMAND);
                 player.teleport(highestBlockPosition(level, x, z), PlayerTeleportEvent.TeleportCause.COMMAND);
-                API.getMessageAPI().sendRandomTPMessage(player, x, z);
+                if (player.getY() < 50) {
+                    getSafeLocationSpawn(player, radius);
+                } else {
+                    API.getMessageAPI().sendRandomTPMessage(player, x, z);
+                    player.setImmobile(false);
+                }
                 taskHandler.cancel();
             }
         }, 10);

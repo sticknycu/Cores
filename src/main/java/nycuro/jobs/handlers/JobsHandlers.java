@@ -174,6 +174,7 @@ public class JobsHandlers implements Listener {
     /** Credits: @Nora. Thanks! */
     /** FIX: When adding mobs */
     private void sendToRespawn(Entity entity, Player damager, EntityDamageEvent event) {
+        if (!(entity instanceof Player)) return;
         Player player = (Player) entity;
         if (event.getDamage() > player.getHealth() && (damager != null)) {
             for (Item item : player.getInventory().getContents().values()) {
@@ -193,7 +194,7 @@ public class JobsHandlers implements Listener {
             UtilsAPI.teleported = false;
 
         }
-        if (player.getPosition().getY() < 0) {
+        if (player.getPosition().getY() < -3) {
             event.setCancelled();
             player.setHealth(20);
             player.getFoodData().setLevel(20);

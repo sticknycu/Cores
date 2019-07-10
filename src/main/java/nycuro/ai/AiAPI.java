@@ -15,9 +15,9 @@ public class AiAPI {
     public CompoundTag getBossNBT() {
         return new CompoundTag()
                 .putList(new ListTag<>("Pos")
-                        .add(new DoubleTag("", 127))
-                        .add(new DoubleTag("", 71))
-                        .add(new DoubleTag("", 50)))
+                        .add(new DoubleTag("", 1139))
+                        .add(new DoubleTag("", 7))
+                        .add(new DoubleTag("", 1133)))
                 .putList(new ListTag<DoubleTag>("Motion")
                         .add(new DoubleTag("", 0))
                         .add(new DoubleTag("", 0))

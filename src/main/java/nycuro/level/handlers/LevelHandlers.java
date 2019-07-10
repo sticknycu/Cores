@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class LevelHandlers implements Listener {
 
-    private List<String> blocked = new ArrayList<>(Arrays.asList("/spawn", "/tp", "/tpa", "/warp"));
+    private List<String> blocked = new ArrayList<>(Arrays.asList("/tp", "/tpa", "/warp"));
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
@@ -45,6 +45,12 @@ public class LevelHandlers implements Listener {
         Player player = event.getPlayer();
         String command = event.getMessage().split(" ")[0].toLowerCase();
         if (API.getCombatAPI().inCombat(player)) {
+            if (blocked.contains(command) || command.equals("/spawn")) {
+                event.setCancelled();
+                player.sendMessage(API.getMessageAPI().getMessageDuringCombat(player));
+            }
+        }
+        if (API.getMechanicAPI().isOnArena(player)) {
             if (blocked.contains(command)) {
                 event.setCancelled();
                 player.sendMessage(API.getMessageAPI().getMessageDuringCombat(player));
@@ -71,6 +77,12 @@ public class LevelHandlers implements Listener {
                 damager.teleport(new Location(1053, 69, 1237));
                 damager.sendMessage(API.getMessageAPI().sendMobFarmMessage(damager));
                 event.setCancelled();
+            }
+
+            if (entity instanceof Player) {
+                for (Player pl : new Player[] { (Player) entity, damager }) {
+                    API.getCombatAPI().setCombat(pl);
+                }
             }
         }
     }

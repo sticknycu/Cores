@@ -3,7 +3,6 @@ package nycuro;
 import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.mob.EntityCreeper;
-import cn.nukkit.level.Level;
 import cn.nukkit.nbt.tag.*;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.DummyBossBar;
@@ -34,7 +33,7 @@ import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
-import nycuro.dropparty.DropPartyAPI;
+import nycuro.api.DropPartyAPI;
 import nycuro.gui.handlers.GUIHandlers;
 import nycuro.jobs.handlers.JobsHandlers;
 import nycuro.kits.handlers.KitHandlers;
@@ -70,6 +69,8 @@ public class Loader extends PluginBase {
     public Object2BooleanMap<String> coords = new Object2BooleanOpenHashMap<>();
     public Object2LongMap<String> played = new Object2LongOpenHashMap<>();
     public Object2BooleanMap<Player> isOnMobFarm = new Object2BooleanOpenHashMap<>();
+    public Object2BooleanMap<Player> isOnArena = new Object2BooleanOpenHashMap<>();
+    public Object2BooleanMap<Player> isOnPvP = new Object2BooleanOpenHashMap<>();
 
     public static long dropPartyTime;
     public static int dropPartyVotes;
@@ -326,19 +327,18 @@ public class Loader extends PluginBase {
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckLevelTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CombatLoggerTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreTagTask(), 20, true);
-        this.getServer().getScheduler().scheduleRepeatingTask(new CheckerTask(), 10, true);
+        this.getServer().getScheduler().scheduleRepeatingTask(new CheckerTask(), 20, true);
         this.getServer().getScheduler().scheduleDelayedTask(new RestartTask(), 20 * 60 * 60 * 3);
         this.getServer().getScheduler().scheduleRepeatingTask(new FixBugHealthTask(), 1, true); // Todo: Bullshit incompetent Nukkit Codders -- Using resources useless.
     }
 
     private void removeNPC() {
-        for (Level level : API.getMainAPI().getServer().getLevels().values()) {
-            for (Entity entity : level.getEntities()) {
-                if (entity.namedTag.getBoolean("coreNBT")) entity.close();
-                if (entity.namedTag.getBoolean("farmerNBT")) entity.close();
-                if (entity.namedTag.getBoolean("infoNPC")) entity.close();
-                if (entity.namedTag.getBoolean("minerNPC")) entity.close();
-            }
+        for (Entity entity : API.getMainAPI().getServer().getDefaultLevel().getEntities()) {
+            if (entity.namedTag.getBoolean("coreNBT")) entity.close();
+            if (entity.namedTag.getBoolean("farmerNBT")) entity.close();
+            if (entity.namedTag.getBoolean("infoNPC")) entity.close();
+            if (entity.namedTag.getBoolean("minerNPC")) entity.close();
+            if (entity.namedTag.getBoolean("coreBOSS")) entity.close();
         }
     }
 

@@ -4,7 +4,7 @@ import nycuro.ai.AiAPI;
 import nycuro.api.*;
 import nycuro.crate.CrateAPI;
 import nycuro.database.Database;
-import nycuro.dropparty.DropPartyAPI;
+import nycuro.api.DropPartyAPI;
 import nycuro.utils.vote.VoteSettings;
 
 /**
