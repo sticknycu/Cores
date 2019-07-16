@@ -63,16 +63,17 @@ public class ProtectionHandlers implements Listener {
                 event.setCancelled(true);
                 API.getMessageAPI().sendPvPOffMessage(damager);
             }
-            EntityDamageEvent.DamageCause cause = event.getCause();
-            if (cause == EntityDamageEvent.DamageCause.FALL) {
-                event.setCancelled(true);
-            }
             for (Player pl : new Player[]{player, damager}) {
+                if (API.getMechanicAPI().isOnSpawn(pl)) break;
                 if (!API.getCombatAPI().inCombat(pl)) {
                     API.getMainAPI().bossbar.get(pl.getName()).setText("§7-§8=§7- §7CombatLogger: §6§l13 §7-§8=§7-");
                     API.getMainAPI().bossbar.get(pl.getName()).setLength(100F);
                 }
             }
+        }
+        EntityDamageEvent.DamageCause cause = event.getCause();
+        if (cause == EntityDamageEvent.DamageCause.FALL) {
+            event.setCancelled(true);
         }
     }
 

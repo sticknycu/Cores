@@ -16,6 +16,7 @@ import nycuro.database.objects.ProfileProxy;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -36,6 +37,10 @@ public class CheckerTask extends Task {
             int y = (int) API.getMainAPI().getServer().getDefaultLevel().getSpawnLocation().getY();
             int z = (int) API.getMainAPI().getServer().getDefaultLevel().getSpawnLocation().getZ();
             Vector3 vector3 = new Vector3(x, y, z);
+            double[] d1 = new double[2];
+            double[] d2 = new double[2];
+            double[] d3 = new double[2];
+
             if (player.getLevel().equals(API.getMainAPI().getServer().getDefaultLevel()) && player.getPosition().distance(vector3) <= 300 && !player.isOp()) {
                 if (API.getMechanicAPI().isOnArena(player) || API.getMechanicAPI().isOnPvP(player)) {
                     API.getMainAPI().isOnPvP.replace(player, true);
@@ -70,18 +75,36 @@ public class CheckerTask extends Task {
             }
 
             // PvP Check
-            Vector3 vectorRP = new Vector3(1153, 31, 1187);
-            Vector3 vectorLP = new Vector3(1059, 0, 1280);
-            if (API.getMechanicAPI().isPlayerInsideOfArea(player, vectorRP, vectorLP)) {
+            // Vector3 from = new Vector3(1153, 31, 1187);
+            // Vector3 to = new Vector3(1059, 0, 1280);
+            d1[0] = 1131; // x from
+            d1[1] = 1059; // x to
+            d2[0] = 31; // y from
+            d2[1] = 0; // y to
+            d3[0] = 1187; // z from
+            d3[1] = 1280; // z to
+            Arrays.sort(d1);
+            Arrays.sort(d2);
+            Arrays.sort(d3);
+            if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
                 API.getMainAPI().isOnPvP.replace(player, true);
             } else {
                 API.getMainAPI().isOnPvP.replace(player, false);
             }
 
             // Arena Check
-            Vector3 vectorRA = new Vector3(1057, 5, 1175);
-            Vector3 vectorLA = new Vector3(1154, 29,1120);
-            if (API.getMechanicAPI().isPlayerInsideOfArea(player, vectorRA, vectorLA)) {
+            //Vector3 vectorRA = new Vector3(1057, 5, 1175);
+            //Vector3 vectorLA = new Vector3(1154, 29, 1120);
+            d1[0] = 1057; // x from
+            d1[1] = 1154; // x to
+            d2[0] = 5; // y from
+            d2[1] = 29; // y to
+            d3[0] = 1175; // z from
+            d3[1] = 1120; // z to
+            Arrays.sort(d1);
+            Arrays.sort(d2);
+            Arrays.sort(d3);
+            if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
                 API.getMainAPI().isOnArena.replace(player, true);
             } else {
                 API.getMainAPI().isOnArena.replace(player, false);

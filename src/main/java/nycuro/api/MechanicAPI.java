@@ -14,7 +14,6 @@ import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
-import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.DummyBossBar;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nukkitcoders.mobplugin.entities.monster.flying.Wither;
@@ -25,7 +24,6 @@ import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 import nycuro.gui.list.ResponseFormWindow;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -53,27 +51,15 @@ public class MechanicAPI {
         return 0;
     }
 
-    public boolean isPlayerInsideOfArea(Player player, Vector3 vecFrom, Vector3 vecTo) {
-        double[] dim = new double[2];
-
-        dim[0] = vecFrom.getX();
-        dim[1] = vecTo.getX();
-        Arrays.sort(dim);
-        if (player.getLocation().getX() > dim[1] || player.getLocation().getX() < dim[0]) {
+    public boolean isPlayerInsideOfArea(Player player, double[] d1, double[] d2, double[] d3) {
+        if (player.getLocation().getX() > d1[0] && player.getLocation().getX() < d1[1]) {
+            return false;
+        }
+        if (player.getLocation().getZ() > d2[0] && player.getLocation().getZ() < d2[1]) {
             return false;
         }
 
-        dim[0] = vecFrom.getZ();
-        dim[1] = vecTo.getZ();
-        Arrays.sort(dim);
-        if (player.getLocation().getZ() > dim[1] || player.getLocation().getZ() < dim[0]) {
-            return false;
-        }
-
-        dim[0] = vecFrom.getY();
-        dim[1] = vecTo.getY();
-        Arrays.sort(dim);
-        if (player.getLocation().getY() > dim[1] || player.getLocation().getY() < dim[0]) {
+        if (player.getLocation().getY() > d3[0] && player.getLocation().getY() < d3[1]) {
             return false;
         }
 

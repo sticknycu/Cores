@@ -81,6 +81,7 @@ public class LevelHandlers implements Listener {
 
             if (entity instanceof Player) {
                 for (Player pl : new Player[] { (Player) entity, damager }) {
+                    if (API.getMechanicAPI().isOnSpawn(pl)) break;
                     API.getCombatAPI().setCombat(pl);
                 }
             }
