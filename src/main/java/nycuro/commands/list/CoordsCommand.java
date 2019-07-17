@@ -3,14 +3,14 @@ package nycuro.commands.list;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.API;
-import nycuro.commands.PrincipalCommand;
+import nycuro.commands.ParentCommand;
 
 /**
  * author: NycuRO
  * FactionsCore Project
  * API 1.0.0
  */
-public class CoordsCommand extends PrincipalCommand {
+public class CoordsCommand extends ParentCommand {
 
     public CoordsCommand() {
         super("coords", "Arata coordonatele la Scoreboard");

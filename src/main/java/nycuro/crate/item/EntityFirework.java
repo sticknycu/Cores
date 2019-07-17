@@ -5,7 +5,7 @@ import cn.nukkit.Server;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.data.ByteEntityData;
 import cn.nukkit.entity.data.IntEntityData;
-import cn.nukkit.entity.data.SlotEntityData;
+import cn.nukkit.entity.data.NBTEntityData;
 import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.entity.EntityDamageEvent.DamageCause;
 import cn.nukkit.item.Item;
@@ -46,7 +46,7 @@ public class EntityFirework extends Entity {
             this.firework = new ItemFirework();
         }
 
-        this.setDataProperty(new SlotEntityData(16, this.firework));
+        this.setDataProperty(new NBTEntityData(16, this.firework.getNamedTag()));
         this.setDataProperty(new IntEntityData(17, 1));
         this.setDataProperty(new ByteEntityData(18, 1));
     }
@@ -123,7 +123,6 @@ public class EntityFirework extends Entity {
 
     public void setFirework(Item item) {
         this.firework = item;
-        this.setDataProperty(new SlotEntityData(16, item));
     }
 
     @Override

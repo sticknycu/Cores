@@ -3,14 +3,14 @@ package nycuro.commands.list;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.API;
-import nycuro.commands.PrincipalCommand;
+import nycuro.commands.ParentCommand;
 
 /**
  * author: NycuRO
  * FactionsCore Project
  * API 1.0.0
  */
-public class ShopCommand extends PrincipalCommand {
+public class ShopCommand extends ParentCommand {
 
     public ShopCommand() {
         super("shop", "Buy, Sell, Trade with one command!");

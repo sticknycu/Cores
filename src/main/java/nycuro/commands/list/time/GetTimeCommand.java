@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.API;
 import nycuro.Loader;
-import nycuro.commands.PrincipalCommand;
+import nycuro.commands.ParentCommand;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 
@@ -13,7 +13,7 @@ import nycuro.database.objects.ProfileFactions;
  * FactionsCore Project
  * API 1.0.0
  */
-public class GetTimeCommand extends PrincipalCommand {
+public class GetTimeCommand extends ParentCommand {
 
     public GetTimeCommand() {
         super("onlinetime", "Get Time of Player!");

@@ -36,6 +36,7 @@ import nycuro.database.objects.ProfileFactions;
 import nycuro.api.DropPartyAPI;
 import nycuro.gui.handlers.GUIHandlers;
 import nycuro.jobs.handlers.JobsHandlers;
+import nycuro.jobs.handlers.MinerJob;
 import nycuro.kits.handlers.KitHandlers;
 import nycuro.level.handlers.LevelHandlers;
 import nycuro.mechanic.handlers.MechanicHandlers;
@@ -307,6 +308,8 @@ public class Loader extends PluginBase {
     }
 
     private void registerEvents() {
+        this.getServer().getPluginManager().registerEvents(new JobsHandlers(), this);
+
         this.getServer().getPluginManager().registerEvents(new AbuseHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new GUIHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new MessageHandlers(), this);
@@ -314,7 +317,6 @@ public class Loader extends PluginBase {
         this.getServer().getPluginManager().registerEvents(new LevelHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new MechanicHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new ProtectionHandlers(), this);
-        this.getServer().getPluginManager().registerEvents(new JobsHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new CrateHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new ChatHandlers(), this);
     }

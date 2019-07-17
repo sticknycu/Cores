@@ -1,16 +1,14 @@
 package nycuro.commands.list.mechanic;
 
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.math.Vector3;
-import nycuro.API;
-import nycuro.commands.PrincipalCommand;
+import nycuro.commands.ParentCommand;
 
 /**
  * author: NycuRO
  * HubCore Project
  * API 1.0.0
  */
-public class SpawnFireworkCommand extends PrincipalCommand {
+public class SpawnFireworkCommand extends ParentCommand {
 
     public SpawnFireworkCommand() {
         super("sf", "SpawnFireworks");

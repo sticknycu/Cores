@@ -5,14 +5,14 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.api.UtilsAPI;
-import nycuro.commands.PrincipalCommand;
+import nycuro.commands.ParentCommand;
 
 /**
  * author: NycuRO
  * FactionsCore Project
  * API 1.0.0
  */
-public class SpawnCommand extends PrincipalCommand {
+public class SpawnCommand extends ParentCommand {
 
     public SpawnCommand() {
         super("spawn", "Teleport Spawn");

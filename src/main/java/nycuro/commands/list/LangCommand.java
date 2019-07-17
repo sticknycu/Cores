@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import gt.creeperface.holograms.Holograms;
 import nycuro.API;
-import nycuro.commands.PrincipalCommand;
+import nycuro.commands.ParentCommand;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 
@@ -13,7 +13,7 @@ import nycuro.database.objects.ProfileProxy;
  * HubCore Project
  * API 1.0.0
  */
-public class LangCommand extends PrincipalCommand {
+public class LangCommand extends ParentCommand {
 
     public LangCommand() {
         super("lang", "Seteaza limba");

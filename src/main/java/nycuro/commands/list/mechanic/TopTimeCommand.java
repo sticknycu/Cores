@@ -3,7 +3,7 @@ package nycuro.commands.list.mechanic;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.API;
-import nycuro.commands.PrincipalCommand;
+import nycuro.commands.ParentCommand;
 import nycuro.database.Database;
 
 /**
@@ -11,7 +11,7 @@ import nycuro.database.Database;
  * FactionsCore Project
  * API 1.0.0
  */
-public class TopTimeCommand extends PrincipalCommand {
+public class TopTimeCommand extends ParentCommand {
 
     public TopTimeCommand() {
         super("toptime", "Get TopTime!");

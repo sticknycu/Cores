@@ -1086,15 +1086,14 @@ public class MessageAPI {
         }
     }
 
-    public void sendReceiveJobMessage(Player player) {
+    public void sendReceiveJobMessage(Player player, String job) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
-        int job = Database.profileFactions.get(player.getName()).getJob();
         switch (lang) {
             case 0:
-                player.sendMessage("§f» §eYou have successfully selected Job: §6" + JobsAPI.jobs.get(job) + "§e!");
+                player.sendMessage("§f» §eYou have successfully selected Job: §6" + job + "§e!");
                 break;
             case 1:
-                player.sendMessage("§f» §eAi selectat cu succes Job-ul: §6" + JobsAPI.jobs.get(job) + "§e!");
+                player.sendMessage("§f» §eAi selectat cu succes Job-ul: §6" + job + "§e!");
                 break;
         }
     }
@@ -2082,5 +2081,15 @@ public class MessageAPI {
 
     public void sendJoinMessages(Player player) {
         for (int i = 0; i <= 30; i++) player.sendMessage("                                                              ");
+    }
+
+    public void sendMinerJobInfo(Player p) {
+        int lang = Database.profileProxy.getOrDefault(p.getName(), new ProfileProxy(p.getName(), 0,0,0,0)).getLanguage();
+        switch(lang) {
+            case 0: {
+
+            }
+        }
+
     }
 }

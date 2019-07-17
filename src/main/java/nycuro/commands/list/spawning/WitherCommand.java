@@ -3,14 +3,14 @@ package nycuro.commands.list.spawning;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.API;
-import nycuro.commands.PrincipalCommand;
+import nycuro.commands.ParentCommand;
 
 /**
  * author: NycuRO
  * FactionsCore Project
  * API 1.0.0
  */
-public class WitherCommand extends PrincipalCommand {
+public class WitherCommand extends ParentCommand {
 
     public WitherCommand() {
         super("wither", "Spawneaza Wither!");

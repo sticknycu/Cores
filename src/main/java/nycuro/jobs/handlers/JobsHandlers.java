@@ -171,8 +171,8 @@ public class JobsHandlers implements Listener {
         }
     }
 
-    /** Credits: @Nora. Thanks! */
-    /** FIX: When adding mobs */
+    /* Credits: @Nora. Thanks!
+       FIX: When adding mobs */
     private void sendToRespawn(Entity entity, Player damager, EntityDamageEvent event) {
         if (!(entity instanceof Player)) return;
         Player player = (Player) entity;

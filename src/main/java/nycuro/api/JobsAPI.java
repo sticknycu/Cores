@@ -1,13 +1,16 @@
 package nycuro.api;
 
 import cn.nukkit.Player;
+import cn.nukkit.block.Block;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
+import cn.nukkit.item.Item;
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
+import it.unimi.dsi.fastutil.Hash;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import nycuro.API;
@@ -15,7 +18,9 @@ import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 import nycuro.gui.list.ResponseFormWindow;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.function.Consumer;
 
 /**
@@ -24,9 +29,9 @@ import java.util.function.Consumer;
  * API 1.0.0
  */
 public class JobsAPI {
-
     public static Object2ObjectMap<Integer, String> jobs = new Object2ObjectArrayMap<>();
-
+    private static HashMap<Player, HashMap<Integer, Integer>> minerObjects = new HashMap<>();
+    private static Random randomGenerator = new Random();
     static {
         jobs.put(0, "");
         jobs.put(1, "Miner");
@@ -42,18 +47,12 @@ public class JobsAPI {
     }
 
     public void getJob(Player player) {
-        FPlayer fPlayers = FPlayers.i.get(player);
-        //Faction faction = fPlayers.getFaction();
-        //Conf.prefixAdmin = "**";
-        //Conf.prefixMod = "*";
         ProfileFactions profile = Database.profileFactions.get(player.getName());
-        //int level = profile.getLevel();
         FormWindowSimple jobsMenu = new FormWindowSimple("Jobs", API.getMessageAPI().sendJobPrincipalModal(player));
         jobsMenu.addButton(new ElementButton("Miner", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         jobsMenu.addButton(new ElementButton("Butcher", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
         jobsMenu.addButton(new ElementButton("Farmer", new ElementButtonImageData("url", "https://i.imgur.com/otMDlEU.png")));
         jobsMenu.addButton(new ElementButton("Fisherman", new ElementButtonImageData("url", "https://i.imgur.com/YHkAa4q.png")));
-        //jobsMenu.addButton(new ElementButton("Hunter", new ElementButtonImageData("url", "https://i.imgur.com/HpwAZvq.png")));
         jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/nujWKR3.png")));
         jobsMenu.addButton(new ElementButton("Without Job", new ElementButtonImageData("url", "https://i.imgur.com/YXBNPBc.png")));
         jobsMenu.addButton(new ElementButton("Close"));
@@ -64,33 +63,24 @@ public class JobsAPI {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
                             profile.setJob(1);
-                            /*if (fPlayers.hasFaction()) {
-                                player.setNameTag("§7[§eMiner§7] " + "§a[§c" + level + "§a] §7" + fPlayers.getRole().getPrefix() + faction.getTag() + " §3" + fPlayers.getName());
-                            }*/
-                            API.getMessageAPI().sendReceiveJobMessage(player);
+                            API.getMessageAPI().sendReceiveJobMessage(player, "Miner");
                             return;
                         case 1:
                             profile.setJob(2);
-                            /*if (fPlayers.hasFaction()) {
-                                player.setNameTag("§7[§eButcher§7] " + "§a[§c" + level + "§a] §7" + fPlayers.getRole().getPrefix() + faction.getTag() + " §3" + fPlayers.getName());
-                            }*/
-                            API.getMessageAPI().sendReceiveJobMessage(player);
+                            API.getMessageAPI().sendReceiveJobMessage(player, "Butcher");
                             return;
                         case 2:
                             profile.setJob(3);
-                            API.getMessageAPI().sendReceiveJobMessage(player);
+                            API.getMessageAPI().sendReceiveJobMessage(player, "Farmer");
                             return;
                         case 3:
                             profile.setJob(4);
-                            API.getMessageAPI().sendReceiveJobMessage(player);
+                            API.getMessageAPI().sendReceiveJobMessage(player, "Fisherman");
                         case 4:
                             sendInfoMessageJobs(player);
                             return;
                         case 5:
                             profile.setJob(0);
-                            /*?if (fPlayers.hasFaction()) {
-                                player.setNameTag("§a[§c" + level + "§a] §7" + fPlayers.getRole().getPrefix() + faction.getTag() + " §3" + fPlayers.getName());
-                            }*/
                             API.getMessageAPI().sendWithoutJobMessage(player);
                             return;
                         case 6:
@@ -99,5 +89,22 @@ public class JobsAPI {
                 }
             }
         }));
+    }
+
+    public int getOreType() {
+        return randomGenerator.nextInt(4);
+    }
+
+    public HashMap<Player, HashMap<Integer, Integer>> getMinerObjects(Player player) {
+        HashMap<Integer, Integer> requiredOres = new HashMap<>();
+
+        for (int i = 0; i < 3; i++) {
+
+        }
+
+
+
+        minerObjects.put(player, requiredOres);
+        return minerObjects;
     }
 }
