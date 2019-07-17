@@ -18,24 +18,4 @@ public class ProfileProxy {
         this.time = time;
         this.votes = votes;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getLanguage() {
-        return language;
-    }
-
-    public double getGems() {
-        return gems;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public int getVotes() {
-        return votes;
-    }
 }
