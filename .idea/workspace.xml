@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eabc0826-24f1-4581-a1ab-4d1dbc256648" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/database/objects/HomeObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/database/objects/HomeObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileFactions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileFactions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileReports.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileReports.java" afterDir="false" />
-    </list>
+    <list default="true" id="eabc0826-24f1-4581-a1ab-4d1dbc256648" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,18 +16,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/handlers/MinerJob.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="17" column="50" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileFactions.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="652">
@@ -43,11 +24,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/objects/HomeObject.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="483">
               <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/utils/vote/objects/Mechanic.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -146,7 +136,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/nycuro/database/Database.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/utils/vote/objects/Mechanic.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/utils/vote/objects/JsonObject.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/crate/item/EntityFirework.java" />
@@ -163,6 +152,7 @@
         <option value="$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileProxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileFactions.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/database/objects/HomeObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nycuro/utils/vote/objects/Mechanic.java" />
       </list>
     </option>
   </component>
@@ -600,12 +590,12 @@
       <option name="presentableId" value="Default" />
       <updated>1563352265830</updated>
       <workItem from="1563352278219" duration="7931000" />
-      <workItem from="1563389104148" duration="199000" />
+      <workItem from="1563389104148" duration="257000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22027000" />
+    <option name="totallyTimeSpent" value="22085000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -792,22 +782,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-12518">
           <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/utils/vote/objects/Mechanic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-          <folding>
-            <element signature="e#207#208#0" expanded="true" />
-            <element signature="e#254#255#0" expanded="true" />
-            <element signature="e#296#297#0" expanded="true" />
-            <element signature="e#334#335#0" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#426#427#0" expanded="true" />
-            <element signature="e#476#477#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1057,6 +1031,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
           <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/utils/vote/objects/Mechanic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
         </state>
       </provider>
     </entry>
