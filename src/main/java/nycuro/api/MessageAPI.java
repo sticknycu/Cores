@@ -1561,7 +1561,7 @@ public class MessageAPI {
         switch (lang) {
             case 0:
                 string = "                      Hello!\n" +
-                        "            Welcome to Info Jobs!\n\n" +
+                        "            Welcome to Info Job!\n\n" +
                         "§c» §aMiner:\n" +
                         "§eWith that Job you can get money with ores.\n" +
                         "§eGet needed materials and you can get up: §750$\n\n" +
@@ -1578,7 +1578,7 @@ public class MessageAPI {
                 break;
             case 1:
                 string = "                      Salut!\n" +
-                        "          Bine ai venit la Info Jobs!\n\n" +
+                        "          Bine ai venit la Info Job!\n\n" +
                         "§c» §aMiner:\n" +
                         "§eCu acest loc de munca poti face rost de bani folosind minerale\n" +
                         "§eAduna tot ce ai nevoie si poti castiga pana la: §750$\n\n" +

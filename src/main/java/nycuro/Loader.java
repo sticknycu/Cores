@@ -2,8 +2,6 @@ package nycuro;
 
 import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
-import cn.nukkit.entity.mob.EntityCreeper;
-import cn.nukkit.nbt.tag.*;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
@@ -33,10 +31,12 @@ import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
-import nycuro.api.DropPartyAPI;
 import nycuro.gui.handlers.GUIHandlers;
+import nycuro.jobs.Job;
+import nycuro.jobs.JobType;
 import nycuro.jobs.handlers.JobsHandlers;
-import nycuro.jobs.handlers.MinerJob;
+import nycuro.jobs.jobs.MinerJob;
+import nycuro.jobs.objects.JobObject;
 import nycuro.kits.handlers.KitHandlers;
 import nycuro.level.handlers.LevelHandlers;
 import nycuro.mechanic.handlers.MechanicHandlers;
@@ -47,11 +47,13 @@ import nycuro.shop.EnchantUtils;
 import nycuro.shop.MoneyUtils;
 import nycuro.shop.SellUtils;
 import nycuro.tasks.*;
+import nycuro.utils.ConfigManager;
 import nycuro.utils.MechanicUtils;
 import nycuro.utils.RandomTPUtils;
 import nycuro.utils.WarpUtils;
 import nycuro.utils.vote.VoteSettings;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -82,6 +84,8 @@ public class Loader extends PluginBase {
     public static Object2BooleanMap<String> isOnSpawn = new Object2BooleanOpenHashMap<>();
     public static Object2BooleanMap<String> isOnBorder = new Object2BooleanOpenHashMap<>();
 
+    private static ArrayList<Job> jobs = new ArrayList<>();
+
     public static void log(String s) {
         API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
     }
@@ -95,90 +99,6 @@ public class Loader extends PluginBase {
             Database.getTopDeaths();
             Database.getTopTime();
         }
-    }
-
-    private void addEntities() {
-        CompoundTag nbtMobFarm = new CompoundTag()
-                .putList(new ListTag<>("Pos")
-                        .add(new DoubleTag("", 1131 + 0.5))
-                        .add(new DoubleTag("", 69))
-                        .add(new DoubleTag("", 1270 + 0.5)))
-                .putList(new ListTag<DoubleTag>("Motion")
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation")
-                        .add(new FloatTag("", (float) 0))
-                        .add(new FloatTag("", (float) 0)))
-                .putBoolean("Invulnerable", true)
-                .putString("NameTag", "coreNBT")
-                .putList(new ListTag<StringTag>("Commands"))
-                .putList(new ListTag<StringTag>("PlayerCommands"))
-                .putBoolean("coreFarm", true)
-                .putFloat("scale", 1);
-        CompoundTag nbtMiner = new CompoundTag()
-                .putList(new ListTag<>("Pos")
-                        .add(new DoubleTag("", 1121 + 0.5))
-                        .add(new DoubleTag("", 76))
-                        .add(new DoubleTag("", 1441 + 0.5)))
-                .putList(new ListTag<DoubleTag>("Motion")
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation")
-                        .add(new FloatTag("", (float) 0))
-                        .add(new FloatTag("", (float) 0)))
-                .putBoolean("Invulnerable", true)
-                .putString("NameTag", "minerNPC")
-                .putList(new ListTag<StringTag>("Commands"))
-                .putList(new ListTag<StringTag>("PlayerCommands"))
-                .putBoolean("coreNPC", true)
-                .putFloat("scale", 1);
-        CompoundTag nbtInfo = new CompoundTag()
-                .putList(new ListTag<>("Pos")
-                        .add(new DoubleTag("", 1061 + 0.5))
-                        .add(new DoubleTag("", 69))
-                        .add(new DoubleTag("", 1456 + 0.5)))
-                .putList(new ListTag<DoubleTag>("Motion")
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation")
-                        .add(new FloatTag("", (float) 0))
-                        .add(new FloatTag("", (float) 0)))
-                .putBoolean("Invulnerable", true)
-                .putString("NameTag", "infoNPC")
-                .putList(new ListTag<StringTag>("Commands"))
-                .putList(new ListTag<StringTag>("PlayerCommands"))
-                .putBoolean("coreNPC", true)
-                .putFloat("scale", 1);
-        CompoundTag nbtFarmer = new CompoundTag()
-                .putList(new ListTag<>("Pos")
-                        .add(new DoubleTag("", 1013 + 0.5))
-                        .add(new DoubleTag("", 69))
-                        .add(new DoubleTag("", 1462 + 0.5)))
-                .putList(new ListTag<DoubleTag>("Motion")
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation")
-                        .add(new FloatTag("", (float) 0))
-                        .add(new FloatTag("", (float) 0)))
-                .putBoolean("Invulnerable", true)
-                .putString("NameTag", "farmerNBT")
-                .putList(new ListTag<StringTag>("Commands"))
-                .putList(new ListTag<StringTag>("PlayerCommands"))
-                .putBoolean("coreNPC", true)
-                .putBoolean("ishuman", true)
-                .putFloat("scale", 1);
-        Entity npcMobfarm = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1131 >> 4, 1270 >> 4), nbtMobFarm);
-        Entity npcMiner = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1121 >> 4, 1441 >> 4), nbtMiner);
-        Entity npcInfo = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1061 >> 4, 1456 >> 4), nbtInfo);
-        Entity npcFarmer = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1013 >> 4, 1462 >> 4), nbtFarmer);
-        npcMobfarm.spawnToAll();
-        npcMiner.spawnToAll();
-        npcInfo.spawnToAll();
-        npcFarmer.spawnToAll();
     }
 
     public static String time(long time) {
@@ -210,8 +130,9 @@ public class Loader extends PluginBase {
         initDatabase();
         registerEvents();
         registerTasks();
-        addEntities();
+        registerNPCMechanics();
         registerPlaceHolders();
+        loadJobsFromConfig();
     }
 
     @Override
@@ -220,6 +141,14 @@ public class Loader extends PluginBase {
         removeNPC();
         removeAllFromMaps();
         saveDropParty();
+    }
+
+    private void registerNPCMechanics() {
+        API.getMechanicAPI().createEntitesNBT();
+        API.getMechanicAPI().spawnMinerNPC();
+        API.getMechanicAPI().spawnFarmerNPC();
+        API.getMechanicAPI().spawnInfoNPC();
+        API.getMechanicAPI().spawnMobfarmNPC();
     }
 
     private void createConfig() {
@@ -332,6 +261,12 @@ public class Loader extends PluginBase {
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckerTask(), 20, true);
         this.getServer().getScheduler().scheduleDelayedTask(new RestartTask(), 20 * 60 * 60 * 3);
         this.getServer().getScheduler().scheduleRepeatingTask(new FixBugHealthTask(), 1, true); // Todo: Bullshit incompetent Nukkit Codders -- Using resources useless.
+    }
+
+    private void loadJobsFromConfig() {
+        ConfigManager configManager = new ConfigManager();
+        JobObject minerConfig = configManager.getJob(JobType.MINER);
+        jobs.add(new MinerJob(minerConfig));
     }
 
     private void removeNPC() {

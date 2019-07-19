@@ -1,16 +1,11 @@
 package nycuro.api;
 
 import cn.nukkit.Player;
-import cn.nukkit.block.Block;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
-import cn.nukkit.item.Item;
-import com.massivecraft.factions.FPlayer;
-import com.massivecraft.factions.FPlayers;
-import it.unimi.dsi.fastutil.Hash;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import nycuro.API;
@@ -41,14 +36,14 @@ public class JobsAPI {
     }
 
     private void sendInfoMessageJobs(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Info Jobs");
+        FormWindowCustom infoMenu = new FormWindowCustom("Info Job");
         infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageJobs(player)));
         player.showFormWindow(infoMenu);
     }
 
     public void getJob(Player player) {
         ProfileFactions profile = Database.profileFactions.get(player.getName());
-        FormWindowSimple jobsMenu = new FormWindowSimple("Jobs", API.getMessageAPI().sendJobPrincipalModal(player));
+        FormWindowSimple jobsMenu = new FormWindowSimple("Job", API.getMessageAPI().sendJobPrincipalModal(player));
         jobsMenu.addButton(new ElementButton("Miner", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         jobsMenu.addButton(new ElementButton("Butcher", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
         jobsMenu.addButton(new ElementButton("Farmer", new ElementButtonImageData("url", "https://i.imgur.com/otMDlEU.png")));
@@ -101,8 +96,6 @@ public class JobsAPI {
         for (int i = 0; i < 3; i++) {
 
         }
-
-
 
         minerObjects.put(player, requiredOres);
         return minerObjects;

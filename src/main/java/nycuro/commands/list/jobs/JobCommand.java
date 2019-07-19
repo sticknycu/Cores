@@ -15,7 +15,7 @@ import nycuro.database.objects.ProfileFactions;
 public class JobCommand extends ParentCommand {
 
     public JobCommand() {
-        super("jobs", "Jobs!");
+        super("jobs", "Job!");
     }
 
     @Override

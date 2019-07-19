@@ -5,6 +5,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.entity.Entity;
+import cn.nukkit.entity.mob.EntityCreeper;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.element.ElementLabel;
@@ -14,6 +15,8 @@ import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
+import cn.nukkit.level.Position;
+import cn.nukkit.nbt.tag.*;
 import cn.nukkit.utils.DummyBossBar;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nukkitcoders.mobplugin.entities.monster.flying.Wither;
@@ -23,6 +26,9 @@ import nycuro.ai.entity.BossEntity;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileFactions;
 import nycuro.gui.list.ResponseFormWindow;
+import nycuro.jobs.JobType;
+import nycuro.jobs.objects.JobObject;
+import nycuro.utils.ConfigManager;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -33,6 +39,10 @@ import java.util.function.Consumer;
  * API 1.0.0
  */
 public class MechanicAPI {
+    private CompoundTag minerNPCCompoundTag;
+    private CompoundTag mobFarmNPCCompoundTag;
+    private CompoundTag infoNPCCompoundTag;
+    private CompoundTag farmerNPCCompoundTag;
 
     public boolean isOnSpawn(Player player) {
         return Loader.isOnSpawn.getBoolean(player.getName());
@@ -245,5 +255,104 @@ public class MechanicAPI {
                 }
             }
         }));
+    }
+
+    public void createEntitesNBT() {
+        this.mobFarmNPCCompoundTag = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1131 + 0.5))
+                        .add(new DoubleTag("", 69))
+                        .add(new DoubleTag("", 1270 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "coreNBT")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("coreFarm", true)
+                .putFloat("scale", 1);
+        this.minerNPCCompoundTag = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1121 + 0.5))
+                        .add(new DoubleTag("", 76))
+                        .add(new DoubleTag("", 1441 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "minerNPC")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("coreNPC", true)
+                .putFloat("scale", 1);
+        this.infoNPCCompoundTag = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1061 + 0.5))
+                        .add(new DoubleTag("", 69))
+                        .add(new DoubleTag("", 1456 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "infoNPC")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("coreNPC", true)
+                .putFloat("scale", 1);
+        this.farmerNPCCompoundTag = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", 1013 + 0.5))
+                        .add(new DoubleTag("", 69))
+                        .add(new DoubleTag("", 1462 + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "farmerNBT")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean("coreNPC", true)
+                .putBoolean("ishuman", true)
+                .putFloat("scale", 1);
+    }
+
+    public void spawnMinerNPC() {
+        ConfigManager cfgManager = new ConfigManager();
+        JobObject minerConfig = cfgManager.getJob(JobType.MINER);
+        Position position = new Position(minerConfig.getNPC().get("x"), minerConfig.getNPC().get("y"), minerConfig.getNPC().get("z"));
+        Entity minerNPC = Entity.createEntity(EntityCreeper.NETWORK_ID, position, this.minerNPCCompoundTag);
+        minerNPC.spawnToAll();
+    }
+
+    public void spawnInfoNPC() {
+        Entity infoNPC = Entity.createEntity(EntityCreeper.NETWORK_ID, API.getMainAPI().getServer().getDefaultLevel().getChunk(1061 >> 4, 1456 >> 4), this.infoNPCCompoundTag);
+        infoNPC.spawnToAll();
+    }
+
+    public void spawnMobfarmNPC() {
+        Entity mobFarmNPC = Entity.createEntity(EntityCreeper.NETWORK_ID, API.getMainAPI().getServer().getDefaultLevel().getChunk(1131 >> 4, 1270 >> 4), this.mobFarmNPCCompoundTag);
+        mobFarmNPC.spawnToAll();
+    }
+
+    public void spawnFarmerNPC() {
+        Entity npcFarmer = Entity.createEntity(EntityCreeper.NETWORK_ID, API.getMainAPI().getServer().getDefaultLevel().getChunk(1013 >> 4, 1462 >> 4), this.farmerNPCCompoundTag);
+        npcFarmer.spawnToAll();
     }
 }
