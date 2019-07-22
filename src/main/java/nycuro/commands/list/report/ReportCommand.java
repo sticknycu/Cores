@@ -7,7 +7,7 @@ import nycuro.commands.PrincipalCommand;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class ReportCommand extends PrincipalCommand {

@@ -3,7 +3,6 @@ package nycuro;
 import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.mob.EntityCreeper;
-import cn.nukkit.nbt.tag.*;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
@@ -32,8 +31,7 @@ import nycuro.commands.list.time.GetTimeCommand;
 import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
-import nycuro.api.DropPartyAPI;
+import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.handlers.GUIHandlers;
 import nycuro.jobs.handlers.JobsHandlers;
 import nycuro.kits.handlers.KitHandlers;
@@ -46,7 +44,6 @@ import nycuro.shop.EnchantUtils;
 import nycuro.shop.MoneyUtils;
 import nycuro.shop.SellUtils;
 import nycuro.tasks.*;
-import nycuro.utils.MechanicUtils;
 import nycuro.utils.RandomTPUtils;
 import nycuro.utils.WarpUtils;
 import nycuro.utils.vote.VoteSettings;
@@ -57,7 +54,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class Loader extends PluginBase {
@@ -71,15 +68,10 @@ public class Loader extends PluginBase {
     public Object2BooleanMap<Player> isOnMobFarm = new Object2BooleanOpenHashMap<>();
     public Object2BooleanMap<Player> isOnArena = new Object2BooleanOpenHashMap<>();
     public Object2BooleanMap<Player> isOnPvP = new Object2BooleanOpenHashMap<>();
+    public Object2BooleanMap<Player> isOnSpawn = new Object2BooleanOpenHashMap<>();
 
     public static long dropPartyTime;
     public static int dropPartyVotes;
-
-    public static Object2ObjectMap<Integer, String> scoreboardPowerName = new Object2ObjectOpenHashMap<>();
-    public static Object2ObjectMap<Integer, Double> scoreboardPowerValue = new Object2ObjectOpenHashMap<>();
-
-    public static Object2BooleanMap<String> isOnSpawn = new Object2BooleanOpenHashMap<>();
-    public static Object2BooleanMap<String> isOnBorder = new Object2BooleanOpenHashMap<>();
 
     public static void log(String s) {
         API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
@@ -97,87 +89,11 @@ public class Loader extends PluginBase {
     }
 
     private void addEntities() {
-        CompoundTag nbtMobFarm = new CompoundTag()
-                .putList(new ListTag<>("Pos")
-                        .add(new DoubleTag("", 1131 + 0.5))
-                        .add(new DoubleTag("", 69))
-                        .add(new DoubleTag("", 1270 + 0.5)))
-                .putList(new ListTag<DoubleTag>("Motion")
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation")
-                        .add(new FloatTag("", (float) 0))
-                        .add(new FloatTag("", (float) 0)))
-                .putBoolean("Invulnerable", true)
-                .putString("NameTag", "coreNBT")
-                .putList(new ListTag<StringTag>("Commands"))
-                .putList(new ListTag<StringTag>("PlayerCommands"))
-                .putBoolean("coreFarm", true)
-                .putFloat("scale", 1);
-        CompoundTag nbtMiner = new CompoundTag()
-                .putList(new ListTag<>("Pos")
-                        .add(new DoubleTag("", 1121 + 0.5))
-                        .add(new DoubleTag("", 76))
-                        .add(new DoubleTag("", 1441 + 0.5)))
-                .putList(new ListTag<DoubleTag>("Motion")
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation")
-                        .add(new FloatTag("", (float) 0))
-                        .add(new FloatTag("", (float) 0)))
-                .putBoolean("Invulnerable", true)
-                .putString("NameTag", "minerNPC")
-                .putList(new ListTag<StringTag>("Commands"))
-                .putList(new ListTag<StringTag>("PlayerCommands"))
-                .putBoolean("coreNPC", true)
-                .putFloat("scale", 1);
-        CompoundTag nbtInfo = new CompoundTag()
-                .putList(new ListTag<>("Pos")
-                        .add(new DoubleTag("", 1061 + 0.5))
-                        .add(new DoubleTag("", 69))
-                        .add(new DoubleTag("", 1456 + 0.5)))
-                .putList(new ListTag<DoubleTag>("Motion")
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation")
-                        .add(new FloatTag("", (float) 0))
-                        .add(new FloatTag("", (float) 0)))
-                .putBoolean("Invulnerable", true)
-                .putString("NameTag", "infoNPC")
-                .putList(new ListTag<StringTag>("Commands"))
-                .putList(new ListTag<StringTag>("PlayerCommands"))
-                .putBoolean("coreNPC", true)
-                .putFloat("scale", 1);
-        CompoundTag nbtFarmer = new CompoundTag()
-                .putList(new ListTag<>("Pos")
-                        .add(new DoubleTag("", 1013 + 0.5))
-                        .add(new DoubleTag("", 69))
-                        .add(new DoubleTag("", 1462 + 0.5)))
-                .putList(new ListTag<DoubleTag>("Motion")
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation")
-                        .add(new FloatTag("", (float) 0))
-                        .add(new FloatTag("", (float) 0)))
-                .putBoolean("Invulnerable", true)
-                .putString("NameTag", "farmerNBT")
-                .putList(new ListTag<StringTag>("Commands"))
-                .putList(new ListTag<StringTag>("PlayerCommands"))
-                .putBoolean("coreNPC", true)
-                .putBoolean("ishuman", true)
-                .putFloat("scale", 1);
-        Entity npcMobfarm = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1131 >> 4, 1270 >> 4), nbtMobFarm);
-        Entity npcMiner = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1121 >> 4, 1441 >> 4), nbtMiner);
-        Entity npcInfo = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1061 >> 4, 1456 >> 4), nbtInfo);
-        Entity npcFarmer = Entity.createEntity(EntityCreeper.NETWORK_ID, this.getServer().getDefaultLevel().getChunk(1013 >> 4, 1462 >> 4), nbtFarmer);
-        npcMobfarm.spawnToAll();
-        npcMiner.spawnToAll();
-        npcInfo.spawnToAll();
-        npcFarmer.spawnToAll();
+        API.getMechanicAPI().spawnNPC("mobfarmerNPC", EntityCreeper.NETWORK_ID, 14, 172, -11);
+        API.getMechanicAPI().spawnNPC("minerNPC", EntityCreeper.NETWORK_ID, 51, 168, -10);
+        API.getMechanicAPI().spawnNPC("butcherNPC", EntityCreeper.NETWORK_ID, 51, 168, 10);
+        API.getMechanicAPI().spawnNPC("farmerNPC", EntityCreeper.NETWORK_ID, 42, 168, 15);
+        API.getMechanicAPI().spawnNPC("fishermanNPC", EntityCreeper.NETWORK_ID, 42, 168, -12);
     }
 
     public static String time(long time) {
@@ -236,8 +152,8 @@ public class Loader extends PluginBase {
     }
 
     private void saveToDatabase() {
-        for (ProfileFactions profileFactions : Database.profileFactions.values()) {
-            Database.saveUnAsyncDatesPlayerFromFactions(profileFactions.getName());
+        for (ProfileSkyblock profileSkyblock : Database.profileSkyblock.values()) {
+            Database.saveUnAsyncDatesPlayerFromFactions(profileSkyblock.getName());
         }
     }
 
@@ -260,7 +176,6 @@ public class Loader extends PluginBase {
         API.utilsAPI = new UtilsAPI();
         UtilsAPI.randomTPUtils = new RandomTPUtils();
         UtilsAPI.warpUtils = new WarpUtils();
-        UtilsAPI.mechanicUtils = new MechanicUtils();
         API.kitsAPI = new KitsAPI();
         API.messageAPI = new MessageAPI();
         API.shopAPI = new ShopAPI();
@@ -320,7 +235,7 @@ public class Loader extends PluginBase {
     }
 
     private void registerTasks() {
-        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new RegisterTopsTask(), 20 * 10, 20 * 60 * 3, true);
+        this.getServer().getScheduler().scheduleDelayedRepeatingTask(new RegisterTopsTask(), 20 * 10, 20 * 60 * 3); // ASYNC: FUCKING EVITATE GC SPAMMING CONSOLE
         this.getServer().getScheduler().scheduleRepeatingTask(new ClearLagTask(), 20 * 60 * 5, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new BossBarTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreboardTask(), 20, true);
@@ -334,11 +249,11 @@ public class Loader extends PluginBase {
 
     private void removeNPC() {
         for (Entity entity : API.getMainAPI().getServer().getDefaultLevel().getEntities()) {
-            if (entity.namedTag.getBoolean("coreNBT")) entity.close();
-            if (entity.namedTag.getBoolean("farmerNBT")) entity.close();
-            if (entity.namedTag.getBoolean("infoNPC")) entity.close();
+            if (entity.namedTag.getBoolean("mobfarmerNPC")) entity.close();
             if (entity.namedTag.getBoolean("minerNPC")) entity.close();
-            if (entity.namedTag.getBoolean("coreBOSS")) entity.close();
+            if (entity.namedTag.getBoolean("butcherNPC")) entity.close();
+            if (entity.namedTag.getBoolean("farmerNPC")) entity.close();
+            if (entity.namedTag.getBoolean("fishermanNPC")) entity.close();
         }
     }
 
@@ -357,9 +272,6 @@ public class Loader extends PluginBase {
 
             api.staticPlaceholder("top" + value + "timename", () -> Database.scoreboardtimeName.getOrDefault(value, " "));
             api.staticPlaceholder("top" + value + "timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(value, 0L)));
-
-            api.staticPlaceholder("top" + value + "powername", () -> Loader.scoreboardPowerName.getOrDefault(1, " "));
-            api.staticPlaceholder("top" + value + "powercount", () -> String.valueOf(round(Loader.scoreboardPowerValue.getOrDefault(1, 0.0), 2)));
         }
     }
 }

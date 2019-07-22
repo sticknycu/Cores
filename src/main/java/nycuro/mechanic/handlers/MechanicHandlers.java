@@ -25,13 +25,13 @@ import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileSkyblock;
 
 import java.util.Random;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class MechanicHandlers implements Listener {
@@ -80,8 +80,7 @@ public class MechanicHandlers implements Listener {
         Player player = event.getPlayer();
         // Nu merge PreLoginEvent si nici Async.
         API.getMainAPI().coords.put(player.getName(), false);
-        Loader.isOnSpawn.put(player.getName(), true);
-        Loader.isOnBorder.put(player.getName(), true);
+        API.getMainAPI().isOnSpawn.put(player, true);
         API.getMainAPI().isOnArena.put(player, false);
         API.getMainAPI().isOnPvP.put(player, false);
         API.getMainAPI().played.put(player.getName(), System.currentTimeMillis());
@@ -110,8 +109,8 @@ public class MechanicHandlers implements Listener {
         int low = 200;
         int high = 250;
         int result = r.nextInt(high-low) + low;
-        ProfileFactions profileFactions = Database.profileFactions.get(offlinePlayer.getName());
-        profileFactions.setExperience(profileFactions.getExperience() + result);
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(offlinePlayer.getName());
+        profileSkyblock.setExperience(profileSkyblock.getExperience() + result);
     }
 
     @EventHandler
@@ -121,8 +120,7 @@ public class MechanicHandlers implements Listener {
         Database.saveDatesPlayerFromFactions(player.getName());
         Loader.startTime.removeLong(player.getUniqueId());
         API.getMainAPI().played.removeLong(player.getName());
-        Loader.isOnSpawn.removeBoolean(player.getName());
-        Loader.isOnBorder.removeBoolean(player.getName());
+        API.getMainAPI().isOnSpawn.removeBoolean(player);
         API.getMainAPI().isOnArena.removeBoolean(player);
         API.getMainAPI().isOnPvP.removeBoolean(player);
     }

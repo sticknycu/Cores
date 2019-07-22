@@ -5,12 +5,12 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.*;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class KitsAPI {
@@ -41,7 +41,7 @@ public class KitsAPI {
         //double price = cost.get(1);
         //double insuficient = price - moneyPlayer;
         long time = System.currentTimeMillis();
-        ProfileFactions profile = Database.profileFactions.get(player.getName());
+        ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
         long cooldown = profile.getCooldown();
         long timeGone = time - cooldown;
         if (timeGone >= 24 * 60 * 60 * 1000 || timeGone == 0) {

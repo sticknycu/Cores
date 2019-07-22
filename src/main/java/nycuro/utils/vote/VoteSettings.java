@@ -10,7 +10,7 @@ import java.io.*;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class VoteSettings {

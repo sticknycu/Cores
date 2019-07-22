@@ -10,7 +10,7 @@ import cn.nukkit.item.enchantment.Enchantment;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class KitHandlers implements Listener {

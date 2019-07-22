@@ -8,12 +8,12 @@ import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.struct.Role;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
 import nycuro.database.objects.ProfileProxy;
+import nycuro.database.objects.ProfileSkyblock;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class ScoreTagTask extends Task {
@@ -23,7 +23,7 @@ public class ScoreTagTask extends Task {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
             FPlayer fPlayer = FPlayers.i.get(player);
             ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
-            ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
+            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
             String level = "";
             String rank = "";
             String hp = String.valueOf(player.getHealth());
@@ -44,7 +44,7 @@ public class ScoreTagTask extends Task {
             }
             if (profileProxy != null) {
                 try {
-                    level = String.valueOf(profileFactions.getLevel());
+                    level = String.valueOf(profileSkyblock.getLevel());
                 } catch (Exception e) {
                     //
                 }

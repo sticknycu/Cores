@@ -7,7 +7,7 @@ import it.unimi.dsi.fastutil.ints.*;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.objects.HomeObject;
-import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileSkyblock;
 import nycuro.database.objects.ProfileProxy;
 
 import java.sql.Connection;
@@ -28,9 +28,9 @@ public class Database {
     public static Int2ObjectMap<String> scoreboardtimeName = new Int2ObjectOpenHashMap<>();
     public static Int2LongMap scoreboardtimeValue = new Int2LongOpenHashMap();
     public static Map<String, ProfileProxy> profileProxy = new HashMap<>();
-    public static Map<String, ProfileFactions> profileFactions = new HashMap<>();
+    public static Map<String, ProfileSkyblock> profileSkyblock = new HashMap<>();
     private static HikariDataSource DATASOURCE_PROXY;
-    private static HikariDataSource DATASOURCE_FACTIONS;
+    private static HikariDataSource DATASOURCE_SKYBLOCK;
     private static HikariDataSource DATASOURCE_REPORTS;
     private static HikariDataSource DATASOURCE_HOMESF;
 
@@ -78,7 +78,7 @@ public class Database {
 
         DATASOURCE_REPORTS.setMaximumPoolSize(10);
 
-        String query = "create table if not exists reports (`name` varchar(20), `reason` text, `contact` text, `reporter` varchar(20))";
+        String query = "create table if not exists reports (`name` varchar(20), `reason` text, `contact` text, `reporter` varchar(20), `createTime` INTEGER)";
 
         try (Connection connection = DATASOURCE_REPORTS.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -179,13 +179,13 @@ public class Database {
         config.addDataSourceProperty("databaseName", name);
         config.addDataSourceProperty("user", username);
         config.addDataSourceProperty("password", password);
-        DATASOURCE_FACTIONS = new HikariDataSource(config);
+        DATASOURCE_SKYBLOCK = new HikariDataSource(config);
 
-        DATASOURCE_FACTIONS.setMaximumPoolSize(10);
+        DATASOURCE_SKYBLOCK.setMaximumPoolSize(10);
 
         String query = "create table if not exists dates (`name` varchar(20), `job` int, `kills` int, `deaths` int, `cooldown` INTEGER, `experience` INTEGER, `level` int, `necesary` INTEGER, `time` INTEGER, `dollars` REAL)";
 
-        try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+        try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -196,13 +196,13 @@ public class Database {
     }
 
     public static void addUnAsyncDatesPlayerFactions(String name) {
-        try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+        try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
              PreparedStatement preparedStatement =
                      connection.prepareStatement("SELECT * from `dates` WHERE `name` =?")) {
             preparedStatement.setString(1, name);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    profileFactions.putIfAbsent(name, new ProfileFactions(
+                    profileSkyblock.putIfAbsent(name, new ProfileSkyblock(
                             resultSet.getString("name"),
                             resultSet.getInt("job"),
                             resultSet.getInt("kills"),
@@ -258,7 +258,7 @@ public class Database {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+                try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
                      PreparedStatement preparedStatement =
                              connection.prepareStatement("SELECT `name`, `dollars` from `dates` ORDER BY `dollars` DESC LIMIT 10")) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -320,7 +320,7 @@ public class Database {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+                try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
                      PreparedStatement preparedStatement =
                              connection.prepareStatement("SELECT `name`, `kills` from `dates` ORDER BY `kills` DESC LIMIT 10")) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -382,7 +382,7 @@ public class Database {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+                try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
                      PreparedStatement preparedStatement =
                              connection.prepareStatement("SELECT `name`, `deaths` from `dates` ORDER BY `deaths` DESC LIMIT 10")) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -444,7 +444,7 @@ public class Database {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+                try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
                      PreparedStatement preparedStatement =
                              connection.prepareStatement("SELECT `name`, `time` from `dates` ORDER BY `time` DESC LIMIT 10")) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -506,11 +506,12 @@ public class Database {
             public void onRun() {
                 try (Connection connection = DATASOURCE_REPORTS.getConnection();
                      PreparedStatement preparedStatement =
-                             connection.prepareStatement("INSERT INTO reports (`name`, `reason`, `contact`, `reporter`) VALUES (?, ?, ?, ?)")) {
+                             connection.prepareStatement("INSERT INTO reports (`name`, `reason`, `contact`, `reporter`, `createTime`) VALUES (?, ?, ?, ?, ?)")) {
                     preparedStatement.setString(1, name);
                     preparedStatement.setString(2, reason);
                     preparedStatement.setString(3, contact);
                     preparedStatement.setString(4, reporter);
+                    preparedStatement.setLong(5, System.currentTimeMillis());
                     preparedStatement.executeUpdate();
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -544,7 +545,7 @@ public class Database {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+                try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
                      PreparedStatement preparedStatement =
                              connection.prepareStatement("INSERT INTO dates (`name`, `job`, `kills`, `deaths`, `cooldown`, `experience`, `level`, `necesary`, `time`, `dollars`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
                     preparedStatement.setString(1, name);
@@ -557,7 +558,7 @@ public class Database {
                     preparedStatement.setDouble(8, 250);
                     preparedStatement.setLong(9, 0);
                     preparedStatement.setDouble(10, 0);
-                    profileFactions.put(name, new ProfileFactions(
+                    profileSkyblock.put(name, new ProfileSkyblock(
                             name,
                             0,
                             0,
@@ -590,7 +591,7 @@ public class Database {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
             public void onRun() {
-                try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+                try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
                      PreparedStatement preparedStatement =
                              connection.prepareStatement("SELECT * from `dates` WHERE `name` =?")) {
                     preparedStatement.setString(1, name);
@@ -624,19 +625,19 @@ public class Database {
 
 
     public static void saveUnAsyncDatesPlayerFromFactions(String name) {
-        ProfileFactions profileFactions = Database.profileFactions.get(name);
-        try (Connection connection = DATASOURCE_FACTIONS.getConnection();
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(name);
+        try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
              PreparedStatement preparedStatement =
                      connection.prepareStatement("UPDATE `dates` SET `job` = ?, `kills` = ?, `deaths` = ?, `cooldown` = ?, `experience` = ?, `level` = ?, `necesary` = ?, `time` = ?, `dollars` = ? WHERE `name` = ?")) {
-            preparedStatement.setInt(1, profileFactions.getJob());
-            preparedStatement.setInt(2, profileFactions.getKills());
-            preparedStatement.setInt(3, profileFactions.getDeaths());
-            preparedStatement.setLong(4, profileFactions.getCooldown());
-            preparedStatement.setDouble(5, profileFactions.getExperience());
-            preparedStatement.setInt(6, profileFactions.getLevel());
-            preparedStatement.setDouble(7, profileFactions.getNecesary());
-            preparedStatement.setLong(8, profileFactions.getTime());
-            preparedStatement.setDouble(9, profileFactions.getDollars());
+            preparedStatement.setInt(1, profileSkyblock.getJob());
+            preparedStatement.setInt(2, profileSkyblock.getKills());
+            preparedStatement.setInt(3, profileSkyblock.getDeaths());
+            preparedStatement.setLong(4, profileSkyblock.getCooldown());
+            preparedStatement.setDouble(5, profileSkyblock.getExperience());
+            preparedStatement.setInt(6, profileSkyblock.getLevel());
+            preparedStatement.setDouble(7, profileSkyblock.getNecesary());
+            preparedStatement.setLong(8, profileSkyblock.getTime());
+            preparedStatement.setDouble(9, profileSkyblock.getDollars());
             preparedStatement.setString(10, name);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -723,6 +724,23 @@ public class Database {
             e.printStackTrace();
         }
         return strings;
+    }
+
+    public Collection<Long> getTimersPlayerReport(String name) {
+        Collection<Long> timers = new HashSet<>();
+        try (Connection connection = DATASOURCE_REPORTS.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT createTime as ct from `reports` WHERE `name` =?")) {
+            preparedStatement.setString(1, name);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    timers.add(resultSet.getLong("ct"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return timers;
     }
 
     public Collection<String> getReporterPlayerReportReason(String reason) {

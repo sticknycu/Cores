@@ -11,13 +11,13 @@ import nycuro.API;
 import nycuro.api.JobsAPI;
 import nycuro.chat.ChatFormat;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileSkyblock;
 
 import java.util.Objects;
 
 /**
  * author: uselesswaifu
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class ChatHandlers implements Listener {
@@ -35,7 +35,7 @@ public class ChatHandlers implements Listener {
     @EventHandler
     public void onChat(PlayerChatEvent event) {
         Player player = event.getPlayer();
-        ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         count++;
         String group = Objects.requireNonNull(api.getUser(player.getUniqueId())).getPrimaryGroup().toUpperCase();
         String s = ChatFormat.valueOf(group).toString();
@@ -51,9 +51,9 @@ public class ChatHandlers implements Listener {
             s = s.replace("%slash", "/");
         int job = 0;
         String lvl = "";
-        if (profileFactions != null) {
-            job = profileFactions.getJob();
-            lvl = String.valueOf(profileFactions.getLevel());
+        if (profileSkyblock != null) {
+            job = profileSkyblock.getJob();
+            lvl = String.valueOf(profileSkyblock.getLevel());
         }
         s = s.replace("%job", JobsAPI.jobs.get(job));
         s = s.replace("%lvl", lvl);

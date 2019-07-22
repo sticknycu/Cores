@@ -13,8 +13,8 @@ import nycuro.API;
 import nycuro.Loader;
 import nycuro.chat.handlers.ChatHandlers;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
 import nycuro.database.objects.ProfileProxy;
+import nycuro.database.objects.ProfileSkyblock;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class MessageAPI {
@@ -542,7 +542,7 @@ public class MessageAPI {
     public String getStatsCommand(CommandSender commandSender, IPlayer player) {
         ProfileProxy profileProxy = Database.profileProxy.get(commandSender.getName());
         Database.addUnAsyncDatesPlayerFactions(player.getName());
-        ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         String faction = FPlayers.i.get(player.getName()).getFaction().getTag();
         DateFormat simple = new SimpleDateFormat("dd MMM yyyy HH:mm:ss:SSS Z");
         Date firstPlay = new Date(player.getFirstPlayed());
@@ -552,16 +552,16 @@ public class MessageAPI {
                 STRING = "         Profile Info:\n\n" +
                         "§c» §aName: §e" + player.getName() + "\n" +
                         "§eRank: §6" + getRank(player) + "\n" +
-                        "§eLevel: §6" + profileFactions.getLevel() + "\n" +
-                        "§eExperience: §6" + profileFactions.getExperience() + "/" + profileFactions.getNecesary() + "\n" +
+                        "§eLevel: §6" + profileSkyblock.getLevel() + "\n" +
+                        "§eExperience: §6" + profileSkyblock.getExperience() + "/" + profileSkyblock.getNecesary() + "\n" +
                         "§eFirst Join: §6" + simple.format(firstPlay) + "\n" +
                         "§eOnline: §6" + (player.isOnline() ? "§3YES§6" : simple.format(lastPlay))  + "\n" +
                         (player.isOnline() ? ("§eOnline on this session: §6" + Loader.time(System.currentTimeMillis() - API.getMainAPI().played.getLong(player.getName()))) + "\n" : "") +
-                        "§eOnline Time: §6" + Loader.time(profileFactions.getTime()) + "\n" +
-                        "§eDollars: §6" + profileFactions.getDollars() + "\n" +
+                        "§eOnline Time: §6" + Loader.time(profileSkyblock.getTime()) + "\n" +
+                        "§eDollars: §6" + profileSkyblock.getDollars() + "\n" +
                         "§eGems: §6" + profileProxy.getGems() + "\n" +
-                        "§eKills: §6" + profileFactions.getKills() + "\n" +
-                        "§eDeaths: §6" + profileFactions.getDeaths() + "\n" +
+                        "§eKills: §6" + profileSkyblock.getKills() + "\n" +
+                        "§eDeaths: §6" + profileSkyblock.getDeaths() + "\n" +
                         "§eVotes: §6" + profileProxy.getVotes() + "\n" +
                         "§eFaction: §6" + faction + "\n" +
                         (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + player.getPlayer().getAddress()) : ("")) + "\n") : ("")) +
@@ -572,16 +572,16 @@ public class MessageAPI {
                 STRING = "         Profile Info:\n\n" +
                         "§c» §aNume: §e" + player.getName() + "\n" +
                         "§eRank: §6" + getRank(player) + "\n" +
-                        "§eNivel: §6" + profileFactions.getLevel() + "\n" +
-                        "§eExperienta: §6" + profileFactions.getExperience() + "/" + profileFactions.getNecesary() + "\n" +
+                        "§eNivel: §6" + profileSkyblock.getLevel() + "\n" +
+                        "§eExperienta: §6" + profileSkyblock.getExperience() + "/" + profileSkyblock.getNecesary() + "\n" +
                         "§ePrima data cand ai intrat pe Sectiune: §6" + simple.format(firstPlay) + "\n" +
                         "§eOnline: §6" + (player.isOnline() ? "§3DA§6" : simple.format(lastPlay))  + "\n" +
                         (player.isOnline() ? ("§eOnline pe aceasta sesiune: §6" + Loader.time(System.currentTimeMillis() - API.getMainAPI().played.getLong(player.getName()))) + "\n" : "") +
-                        "§eTimp Online: §6" + Loader.time(profileFactions.getTime()) + "\n" +
-                        "§eDolari: §6" + profileFactions.getDollars() + "\n" +
+                        "§eTimp Online: §6" + Loader.time(profileSkyblock.getTime()) + "\n" +
+                        "§eDolari: §6" + profileSkyblock.getDollars() + "\n" +
                         "§eGems: §6" + profileProxy.getGems() + "\n" +
-                        "§eKills: §6" + profileFactions.getKills() + "\n" +
-                        "§eDeaths: §6" + profileFactions.getDeaths() + "\n" +
+                        "§eKills: §6" + profileSkyblock.getKills() + "\n" +
+                        "§eDeaths: §6" + profileSkyblock.getDeaths() + "\n" +
                         "§eVoturi: §6" + profileProxy.getVotes() + "\n" +
                         "§eFactiune: §6" + faction + "\n" +
                         (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + player.getPlayer().getAddress()) : ("")) + "\n") : ("")) +
@@ -1088,7 +1088,7 @@ public class MessageAPI {
 
     public void sendReceiveJobMessage(Player player) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
-        int job = Database.profileFactions.get(player.getName()).getJob();
+        int job = Database.profileSkyblock.get(player.getName()).getJob();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou have successfully selected Job: §6" + JobsAPI.jobs.get(job) + "§e!");

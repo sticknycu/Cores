@@ -8,12 +8,12 @@ import nycuro.API;
 import nycuro.Loader;
 import nycuro.api.JobsAPI;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
 import nycuro.database.objects.ProfileProxy;
+import nycuro.database.objects.ProfileSkyblock;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class ScoreboardTask extends Task {
@@ -33,7 +33,7 @@ public class ScoreboardTask extends Task {
 
         Objective scoreboardDisplay = scoreboard.objective.getObjective();
 
-        ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
         Object2BooleanMap<String> coords = API.getMainAPI().coords;
 
@@ -49,10 +49,10 @@ public class ScoreboardTask extends Task {
             scoreboardDisplay.setScore(2, API.getMessageAPI().getInfoScoreboard(player), 2);
             scoreboardDisplay.setScore(3, API.getMessageAPI().getNameScoreboard(player), 3);
             scoreboardDisplay.setScore(4, API.getMessageAPI().getRankScoreboard(player), 4);
-            scoreboardDisplay.setScore(5, "§7| §fCoins: §6" +  Loader.round(profileFactions.getDollars(), 2), 5);
+            scoreboardDisplay.setScore(5, "§7| §fCoins: §6" +  Loader.round(profileSkyblock.getDollars(), 2), 5);
             scoreboardDisplay.setScore(6, "§7| §fGems: §6" + profileProxy.getGems() + "  ", 6);
-            scoreboardDisplay.setScore(7, "§7| §fOnline Time: §6" + Loader.time(profileFactions.getTime()) + "  ", 7);
-            scoreboardDisplay.setScore(8, "§7| §fJob: §6" + JobsAPI.jobs.get(profileFactions.getJob()) + "   ", 8);
+            scoreboardDisplay.setScore(7, "§7| §fOnline Time: §6" + Loader.time(profileSkyblock.getTime()) + "  ", 7);
+            scoreboardDisplay.setScore(8, "§7| §fJob: §6" + JobsAPI.jobs.get(profileSkyblock.getJob()) + "   ", 8);
             if (coords.getOrDefault(player.getName(), false)) {
                 scoreboardDisplay.setScore(9, "§7| §fX: §6" + (int) player.getX() + " §fY: §6" + (int) player.getY() + " §fZ: §6" + (int) player.getZ() + "   ", 9);
             }

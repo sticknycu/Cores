@@ -7,6 +7,9 @@ import cn.nukkit.level.Level;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * author: NycuRO
  * FactionsCore Project
@@ -42,6 +45,25 @@ public class ClearLagTask extends Task {
                     }
                     message = API.getMessageAPI().sendMobDespawnFinishMessage(player);
                     player.sendMessage(message);
+                }
+            }
+            // Clear the damn weather shit
+            for (Level level : API.getMainAPI().getServer().getLevels().values()) {
+                if (level.isThundering()) {
+                    level.setThundering(false);
+                }
+                if (level.isRaining()) {
+                    level.setRaining(false);
+                }
+            }
+            // Check for deletion old reports
+            List<String> names = API.getDatabase().getPlayerMap();
+            for (String name : names) {
+                Collection<Long> timers = API.getDatabase().getTimersPlayerReport(name);
+                for (long time : timers) {
+                    if ((1000 * 60 * 60 * 48 - (System.currentTimeMillis() - time)) <= 0) {
+                        API.getDatabase().deleteReport(name);
+                    }
                 }
             }
         } catch (Exception e) {

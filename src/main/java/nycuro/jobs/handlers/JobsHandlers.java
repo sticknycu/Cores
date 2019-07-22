@@ -15,11 +15,11 @@ import cn.nukkit.math.Vector3;
 import nycuro.API;
 import nycuro.api.UtilsAPI;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileSkyblock;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class JobsHandlers implements Listener {
@@ -30,7 +30,7 @@ public class JobsHandlers implements Listener {
         Block block = event.getBlock();
         if (API.getMechanicAPI().isOnSpawn(player)) return;
         //if (API.getMechanicAPI().isOnPvP(player)) return;
-        ProfileFactions profile = Database.profileFactions.get(player.getName());
+        ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
         int job = profile.getJob();
         switch (job) {
             case 1:
@@ -106,7 +106,7 @@ public class JobsHandlers implements Listener {
                     Player damager = (Player) evc.getDamager();
                     API.getMessageAPI().sendHitBowMessage(eventEntity, damager);
                     if (!API.getMechanicAPI().isOnSpawn(damager)) {
-                        ProfileFactions profile = Database.profileFactions.get(damager.getName());
+                        ProfileSkyblock profile = Database.profileSkyblock.get(damager.getName());
                         int job = profile.getJob();
                         switch (job) {
                             case 4:
@@ -131,7 +131,7 @@ public class JobsHandlers implements Listener {
                     if (eventEntity instanceof Player) {
                         sendToRespawn(eventEntity, damager, event);
                     }
-                    ProfileFactions profile = Database.profileFactions.get(damager.getName());
+                    ProfileSkyblock profile = Database.profileSkyblock.get(damager.getName());
                     int job = profile.getJob();
                     switch (job) {
                         case 4:
@@ -159,7 +159,7 @@ public class JobsHandlers implements Listener {
         if ((eventEntity.getLastDamageCause() instanceof EntityDamageByEntityEvent)) {
             if (((EntityDamageByEntityEvent) eventEntity.getLastDamageCause()).getDamager() instanceof Player) {
                 Player killer = (Player) ((EntityDamageByEntityEvent) eventEntity.getLastDamageCause()).getDamager();
-                ProfileFactions profile = Database.profileFactions.get(killer.getName());
+                ProfileSkyblock profile = Database.profileSkyblock.get(killer.getName());
                 int job = profile.getJob();
                 switch (job) {
                     case 5:
@@ -187,8 +187,8 @@ public class JobsHandlers implements Listener {
             player.removeAllEffects();
             player.getInventory().clearAll();
             API.getMessageAPI().sendDeadMessage(player, damager);
-            ProfileFactions profilePlayer = Database.profileFactions.get(player.getName());
-            ProfileFactions profileDamager = Database.profileFactions.get(damager.getName()); // Todo: Zombies, Monsters.
+            ProfileSkyblock profilePlayer = Database.profileSkyblock.get(player.getName());
+            ProfileSkyblock profileDamager = Database.profileSkyblock.get(damager.getName()); // Todo: Zombies, Monsters.
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
             profileDamager.setKills(profileDamager.getKills() + 1);
             UtilsAPI.teleported = false;
@@ -201,7 +201,7 @@ public class JobsHandlers implements Listener {
             player.teleport(player.getServer().getDefaultLevel().getSpawnLocation());
             player.removeAllEffects();
             player.getInventory().clearAll();
-            ProfileFactions profilePlayer = Database.profileFactions.get(player.getName());
+            ProfileSkyblock profilePlayer = Database.profileSkyblock.get(player.getName());
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
             UtilsAPI.teleported = false;
         }

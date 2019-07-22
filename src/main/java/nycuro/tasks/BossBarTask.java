@@ -5,11 +5,11 @@ import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileSkyblock;
 
 /**
  * author: GiantQuartz
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class BossBarTask extends Task {
@@ -17,7 +17,7 @@ public class BossBarTask extends Task {
     @Override
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-            ProfileFactions profile = Database.profileFactions.get(player.getName());
+            ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
 
             if (API.getMainAPI().bossbar.get(player.getName()) != null) {
                 if (API.getCombatAPI().inCombat(player)) return;

@@ -10,9 +10,8 @@ import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import nycuro.API;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
-import nycuro.utils.MechanicUtils;
 import nycuro.utils.RandomTPUtils;
 import nycuro.utils.WarpUtils;
 
@@ -21,14 +20,13 @@ import java.util.function.Consumer;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class UtilsAPI {
 
     public static RandomTPUtils randomTPUtils;
     public static WarpUtils warpUtils;
-    public static MechanicUtils mechanicUtils;
     private double cost = 0;
     public static boolean teleported = false;
 
@@ -40,10 +38,6 @@ public class UtilsAPI {
         return warpUtils;
     }
 
-    public static MechanicUtils getMechanicUtilsAPI() {
-        return mechanicUtils;
-    }
-
     public void handleRandomTeleport(Player player) {
         if (!player.hasPlayedBefore()) {
             for (Block block : player.getCollisionBlocks()) {
@@ -53,27 +47,27 @@ public class UtilsAPI {
                 }
             }
         } else {
-            ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
-            if (profileFactions.getDollars() < 1000) {
+            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+            if (profileSkyblock.getDollars() < 1000) {
                 String message = API.getMessageAPI().sendRandomTPNotFirstTimeMessage(player);
                 player.sendMessage(message);
             } else {
                 getRandomTPUtilsAPI().getSafeLocationSpawn(player, 4500);
                 teleported = true;
-                profileFactions.setDollars(profileFactions.getDollars() - 1000);
+                profileSkyblock.setDollars(profileSkyblock.getDollars() - 1000);
             }
         }
     }
 
     private void repairItemHand(Player player) {
-        ProfileFactions profile = Database.profileFactions.get(player.getName());
+        ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
         double moneyPlayer = profile.getDollars();
         cost = 500;
         double insufficient = cost - moneyPlayer;
         PlayerInventory playerInventory = player.getInventory();
         Item item = playerInventory.getItemInHand();
         if (moneyPlayer >= cost) {
-            Database.profileFactions.get(player.getName()).setDollars(Database.profileFactions.get(player.getName()).getDollars() - cost);
+            Database.profileSkyblock.get(player.getName()).setDollars(Database.profileSkyblock.get(player.getName()).getDollars() - cost);
             playerInventory.remove(item);
             item.setDamage(0);
             playerInventory.addItem(item);

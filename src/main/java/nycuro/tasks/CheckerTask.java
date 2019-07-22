@@ -3,26 +3,24 @@ package nycuro.tasks;
 import cn.nukkit.Player;
 import cn.nukkit.block.BlockID;
 import cn.nukkit.level.Location;
-import cn.nukkit.math.Vector3;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.ai.entity.BossEntity;
 import nycuro.api.UtilsAPI;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
 import nycuro.database.objects.ProfileProxy;
+import nycuro.database.objects.ProfileSkyblock;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class CheckerTask extends Task {
@@ -32,41 +30,12 @@ public class CheckerTask extends Task {
     @Override
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-            ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
-            int x = (int) API.getMainAPI().getServer().getDefaultLevel().getSpawnLocation().getX();
-            int y = (int) API.getMainAPI().getServer().getDefaultLevel().getSpawnLocation().getY();
-            int z = (int) API.getMainAPI().getServer().getDefaultLevel().getSpawnLocation().getZ();
-            Vector3 vector3 = new Vector3(x, y, z);
+            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
             double[] d1 = new double[2];
             double[] d2 = new double[2];
             double[] d3 = new double[2];
 
-            if (player.getLevel().equals(API.getMainAPI().getServer().getDefaultLevel()) && player.getPosition().distance(vector3) <= 300 && !player.isOp()) {
-                if (API.getMechanicAPI().isOnArena(player) || API.getMechanicAPI().isOnPvP(player)) {
-                    API.getMainAPI().isOnPvP.replace(player, true);
-                    Loader.isOnSpawn.replace(player.getName(), false);
-                } else {
-                    API.getMainAPI().isOnPvP.replace(player, false);
-                    Loader.isOnSpawn.replace(player.getName(), true);
-                }
-            } else {
-                Loader.isOnSpawn.replace(player.getName(), false);
-            }
-
-            Vector3 vec = new Vector3(0, 0, 0);
             Location loc = player.getLocation();
-            if (loc.distance(vec) <= 7500) { /// NOT REALLY 7500, just ~5300 idk why
-                Loader.isOnBorder.replace(player.getName(), true);
-            } else {
-                Loader.isOnBorder.replace(player.getName(), false);
-            }
-
-            // Border Check
-            if (!Loader.isOnBorder.getBoolean(player.getName())) {
-                API.getMessageAPI().sendBorderMessage(player);
-                Vector3 directionVector = player.getLocation().getDirectionVector().normalize();
-                player.setMotion(player.getMotion().add(directionVector.multiply(-0.2)));
-            }
 
             // RandomTP
             if (loc.getLevelBlock().getId() == BlockID.NETHER_PORTAL) {
@@ -74,44 +43,54 @@ public class CheckerTask extends Task {
                 API.getUtilsAPI().handleRandomTeleport(player);
             }
 
-            // PvP Check
-            // Vector3 from = new Vector3(1153, 31, 1187);
-            // Vector3 to = new Vector3(1059, 0, 1280);
-            d1[0] = 1131; // x from
-            d1[1] = 1059; // x to
-            d2[0] = 31; // y from
-            d2[1] = 0; // y to
-            d3[0] = 1187; // z from
-            d3[1] = 1280; // z to
-            Arrays.sort(d1);
-            Arrays.sort(d2);
-            Arrays.sort(d3);
-            if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
-                API.getMainAPI().isOnPvP.replace(player, true);
-            } else {
+            // PVP and Arena and Spawn only if is in default level, not skyblock
+            if (loc.getLevel().equals(API.getMainAPI().getServer().getDefaultLevel())) {
+                API.getMainAPI().isOnSpawn.replace(player, true);
                 API.getMainAPI().isOnPvP.replace(player, false);
-            }
-
-            // Arena Check
-            //Vector3 vectorRA = new Vector3(1057, 5, 1175);
-            //Vector3 vectorLA = new Vector3(1154, 29, 1120);
-            d1[0] = 1057; // x from
-            d1[1] = 1154; // x to
-            d2[0] = 5; // y from
-            d2[1] = 29; // y to
-            d3[0] = 1175; // z from
-            d3[1] = 1120; // z to
-            Arrays.sort(d1);
-            Arrays.sort(d2);
-            Arrays.sort(d3);
-            if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
-                API.getMainAPI().isOnArena.replace(player, true);
-            } else {
                 API.getMainAPI().isOnArena.replace(player, false);
+                // Vector3 from = new Vector3(1153, 31, 1187);
+                // Vector3 to = new Vector3(1059, 0, 1280);
+                /*d1[0] = 89; // x from
+                d1[1] = -75; // x to
+                d2[0] = 81; // y from
+                d2[1] = 256; // y to
+                d3[0] = 76; // z from
+                d3[1] = -77; // z to
+                Arrays.sort(d1);
+                Arrays.sort(d2);
+                Arrays.sort(d3);
+                if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
+                    API.getMainAPI().isOnSpawn.replace(player, true);
+                    API.getMainAPI().isOnPvP.replace(player, false);
+                    API.getMainAPI().isOnArena.replace(player, false);
+                }
+
+                // Arena Check
+                //Vector3 vectorRA = new Vector3(1057, 5, 1175);
+                //Vector3 vectorLA = new Vector3(1154, 29, 1120);
+                d1[0] = 1057; // x from
+                d1[1] = 1154; // x to
+                d2[0] = 5; // y from
+                d2[1] = 29; // y to
+                d3[0] = 1175; // z from
+                d3[1] = 1120; // z to
+                Arrays.sort(d1);
+                Arrays.sort(d2);
+                Arrays.sort(d3);
+                if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
+                    API.getMainAPI().isOnArena.replace(player, true);
+                } else {
+                    API.getMainAPI().isOnArena.replace(player, false);
+                }*/
+            } else {
+                // Skyblock World
+                API.getMainAPI().isOnPvP.replace(player, false);
+                API.getMainAPI().isOnArena.replace(player, false);
+                API.getMainAPI().isOnSpawn.replace(player, false);
             }
 
             if (API.getMechanicAPI().isOnArena(player)) {
-                if (profileFactions.getLevel() < 10) {
+                if (profileSkyblock.getLevel() < 10) {
                     player.sendMessage(API.getMessageAPI().sendArenaWarningMessage(player));
                     player.teleport(API.getMainAPI().getServer().getDefaultLevel().getSpawnLocation());
                     API.getMessageAPI().sendCommandSpawnMessage(player);
@@ -146,7 +125,7 @@ public class CheckerTask extends Task {
                         int low = 200;
                         int high = 250;
                         int result = r.nextInt(high-low) + low;
-                        if (randomBool.get()) profileFactions.setExperience(profileFactions.getExperience() + result);
+                        if (randomBool.get()) profileSkyblock.setExperience(profileSkyblock.getExperience() + result);
                         int lowGem = 1;
                         int maxGem = 3;
                         int resultGem = r.nextInt(maxGem - lowGem) + lowGem;
@@ -155,7 +134,7 @@ public class CheckerTask extends Task {
                         int lowCoins = 100;
                         int maxCoins = 500;
                         int resultCoins = r.nextInt(maxCoins - lowCoins) + lowCoins;
-                        if (randomBool.get()) profileFactions.setDollars(profileFactions.getDollars() + resultCoins);
+                        if (randomBool.get()) profileSkyblock.setDollars(profileSkyblock.getDollars() + resultCoins);
                         if (!randomBool.get()) profileProxy.setTime(profileProxy.getTime() + 1000 * 60 * 15);
                         if (randomBool.get()) {
                             player.sendPopup("§3+" + resultCoins + " DOLLARS" + "\n" +

@@ -6,8 +6,8 @@
     <groupId>nycuro</groupId>
     <artifactId>nycuro</artifactId>
     <version>1.0</version>
-    <name>FactionsCore</name>
-    <description>FactionsCore</description>
+    <name>SkyblockCore</name>
+    <description>SkyblockCore</description>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

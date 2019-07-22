@@ -14,14 +14,14 @@ import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
+import cn.nukkit.nbt.tag.*;
 import cn.nukkit.utils.DummyBossBar;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nukkitcoders.mobplugin.entities.monster.flying.Wither;
 import nycuro.API;
-import nycuro.Loader;
 import nycuro.ai.entity.BossEntity;
 import nycuro.database.Database;
-import nycuro.database.objects.ProfileFactions;
+import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
 
 import java.util.Map;
@@ -29,17 +29,17 @@ import java.util.function.Consumer;
 
 /**
  * author: NycuRO
- * FactionsCore Project
+ * SkyblockCore Project
  * API 1.0.0
  */
 public class MechanicAPI {
 
     public boolean isOnSpawn(Player player) {
-        return Loader.isOnSpawn.getBoolean(player.getName());
+        return API.getMainAPI().isOnSpawn.getBoolean(player) && !player.isOp();
     }
 
     public boolean isOnArena(Player player) {
-        return API.getMainAPI().isOnArena.getBoolean(player);
+        return API.getMainAPI().isOnArena.getBoolean(player) && !player.isOp();
     }
 
     public float getBossHealth() {
@@ -49,6 +49,29 @@ public class MechanicAPI {
             }
         }
         return 0;
+    }
+
+    public void spawnNPC(String boolTag, int id, int x, int y, int z) {
+        CompoundTag tag = new CompoundTag()
+                .putList(new ListTag<>("Pos")
+                        .add(new DoubleTag("", x + 0.5))
+                        .add(new DoubleTag("", y))
+                        .add(new DoubleTag("", z + 0.5)))
+                .putList(new ListTag<DoubleTag>("Motion")
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0))
+                        .add(new DoubleTag("", 0)))
+                .putList(new ListTag<FloatTag>("Rotation")
+                        .add(new FloatTag("", (float) 0))
+                        .add(new FloatTag("", (float) 0)))
+                .putBoolean("Invulnerable", true)
+                .putString("NameTag", "coreNBT")
+                .putList(new ListTag<StringTag>("Commands"))
+                .putList(new ListTag<StringTag>("PlayerCommands"))
+                .putBoolean(boolTag, true)
+                .putFloat("scale", 1);
+        Entity entity = Entity.createEntity(id, API.getMainAPI().getServer().getDefaultLevel().getChunk(x >> 4, z >> 4), tag);
+        entity.spawnToAll();
     }
 
     public boolean isPlayerInsideOfArea(Player player, double[] d1, double[] d2, double[] d3) {
@@ -67,7 +90,7 @@ public class MechanicAPI {
     }
 
     public boolean isOnPvP(Player player) {
-        return API.getMainAPI().isOnPvP.getBoolean(player);
+        return API.getMainAPI().isOnPvP.getBoolean(player) && !player.isOp();
     }
 
     public void sendToSpawn(Player player) {
@@ -119,7 +142,7 @@ public class MechanicAPI {
 
     public void createScoreboard(Player player) {
         FakeScoreboard fakeScoreboard = new FakeScoreboard();
-        Objective object = new Objective("§f§l•§e•§6• FACTIONS §6•§e•§f•", new ObjectiveCriteria("dummy", true));
+        Objective object = new Objective("§f§l•§e•§6• SKYBLOCK §6•§e•§f•", new ObjectiveCriteria("dummy", true));
         DisplayObjective newObject = new DisplayObjective(
                 object,
                 ObjectiveSortOrder.DESCENDING,
@@ -148,14 +171,14 @@ public class MechanicAPI {
                                 player.sendMessage(API.getMessageAPI().sendTooMuchWithers(player));
                                 return;
                             } else {
-                                ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
-                                double dolllars = profileFactions.getDollars();
+                                ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                                double dolllars = profileSkyblock.getDollars();
                                 if (dolllars < 10000) {
-                                    API.getMessageAPI().sendUnsuficientMoneyMessage(player, 10000 - profileFactions.getDollars());
+                                    API.getMessageAPI().sendUnsuficientMoneyMessage(player, 10000 - profileSkyblock.getDollars());
                                     return;
                                 } else {
                                     API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "mob spawn 52 " + player.getName());
-                                    profileFactions.setDollars(profileFactions.getDollars() - 10000);
+                                    profileSkyblock.setDollars(profileSkyblock.getDollars() - 10000);
                                     API.getMessageAPI().sendSuccesSpawnWither(player);
                                     return;
                                 }
@@ -206,8 +229,8 @@ public class MechanicAPI {
                 if (!response.isEmpty()) {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
-                            int level = profileFactions.getLevel();
+                            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                            int level = profileSkyblock.getLevel();
                             if (level < 10) {
                                 player.sendMessage(API.getMessageAPI().sendArenaException(player, 10));
                                 return;
@@ -231,8 +254,8 @@ public class MechanicAPI {
                 if (!response.isEmpty()) {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            ProfileFactions profileFactions = Database.profileFactions.get(player.getName());
-                            int level = profileFactions.getLevel();
+                            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                            int level = profileSkyblock.getLevel();
                             if (level < 5) {
                                 player.sendMessage(API.getMessageAPI().sendArenaException(player, 5));
                                 return;
