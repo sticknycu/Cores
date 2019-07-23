@@ -36,7 +36,7 @@ public class Database {
 
         DATASOURCE_PROXY.setMaximumPoolSize(10);
 
-        String query = "create table if not exists dates (`name` varchar(20), `language` int, `gems` REAL, `time` INTEGER, `votes` INTEGER)";
+        String query = "create table if not exists dates (`name` varchar(20), `language` int, `gems` REAL, `time` REAL, `votes` INTEGER)";
 
         try (Connection connection = DATASOURCE_PROXY.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
