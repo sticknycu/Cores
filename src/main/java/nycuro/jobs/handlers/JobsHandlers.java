@@ -13,7 +13,6 @@ import cn.nukkit.event.entity.EntityDeathEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
 import nycuro.API;
-import nycuro.api.UtilsAPI;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 
@@ -191,7 +190,6 @@ public class JobsHandlers implements Listener {
             ProfileSkyblock profileDamager = Database.profileSkyblock.get(damager.getName()); // Todo: Zombies, Monsters.
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
             profileDamager.setKills(profileDamager.getKills() + 1);
-            UtilsAPI.teleported = false;
 
         }
         if (player.getPosition().getY() < -3) {
@@ -203,7 +201,6 @@ public class JobsHandlers implements Listener {
             player.getInventory().clearAll();
             ProfileSkyblock profilePlayer = Database.profileSkyblock.get(player.getName());
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
-            UtilsAPI.teleported = false;
         }
     }
 }

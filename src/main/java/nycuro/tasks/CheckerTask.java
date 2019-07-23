@@ -1,13 +1,11 @@
 package nycuro.tasks;
 
 import cn.nukkit.Player;
-import cn.nukkit.block.BlockID;
 import cn.nukkit.level.Location;
 import cn.nukkit.scheduler.Task;
 import nycuro.API;
 import nycuro.Loader;
 import nycuro.ai.entity.BossEntity;
-import nycuro.api.UtilsAPI;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
@@ -36,12 +34,6 @@ public class CheckerTask extends Task {
             double[] d3 = new double[2];
 
             Location loc = player.getLocation();
-
-            // RandomTP
-            if (loc.getLevelBlock().getId() == BlockID.NETHER_PORTAL) {
-                if (UtilsAPI.teleported) return;
-                API.getUtilsAPI().handleRandomTeleport(player);
-            }
 
             // PVP and Arena and Spawn only if is in default level, not skyblock
             if (loc.getLevel().equals(API.getMainAPI().getServer().getDefaultLevel())) {

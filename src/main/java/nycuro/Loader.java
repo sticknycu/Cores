@@ -51,7 +51,6 @@ import nycuro.shop.EnchantUtils;
 import nycuro.shop.MoneyUtils;
 import nycuro.shop.SellUtils;
 import nycuro.tasks.*;
-import nycuro.utils.RandomTPUtils;
 import nycuro.utils.WarpUtils;
 import nycuro.utils.vote.VoteSettings;
 
@@ -181,7 +180,6 @@ public class Loader extends PluginBase {
         API.mainAPI = this;
         API.mechanicAPI = new MechanicAPI();
         API.utilsAPI = new UtilsAPI();
-        UtilsAPI.randomTPUtils = new RandomTPUtils();
         UtilsAPI.warpUtils = new WarpUtils();
         API.kitsAPI = new KitsAPI();
         API.messageAPI = new MessageAPI();
@@ -215,7 +213,6 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("droppartymessage", new DropPartyMessageCommand());
         this.getServer().getCommandMap().register("spawnboss", new SpawnBossCommand());
         this.getServer().getCommandMap().register("kit", new KitCommand());
-        this.getServer().getCommandMap().register("kits", new KitsCommand());
         this.getServer().getCommandMap().register("home", new HomeCommand());
         this.getServer().getCommandMap().register("shop", new ShopCommand());
         this.getServer().getCommandMap().register("spawn", new SpawnCommand());
