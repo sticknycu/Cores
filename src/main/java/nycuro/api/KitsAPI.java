@@ -64,6 +64,7 @@ public class KitsAPI {
                             return;
                         case 5:
                             kits.get(TypeKit.SPARROW).sendKit(player);
+                            break;
                     }
                 }
             }

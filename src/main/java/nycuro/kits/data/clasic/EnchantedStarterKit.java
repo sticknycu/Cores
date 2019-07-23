@@ -135,7 +135,7 @@ public class EnchantedStarterKit extends CommonKit {
                 return false;
             }
         }
-        return (getArmorContents().length + getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size() && passTimer(player);
+        return (getArmorContents().length + getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size();
     }
 
     @Override
