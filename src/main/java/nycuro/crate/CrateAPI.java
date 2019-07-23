@@ -14,9 +14,6 @@ import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.utils.DyeColor;
 import nycuro.API;
 import nycuro.crate.item.EntityFirework;
-import nycuro.kits.EnchantedStarterKit;
-import nycuro.kits.GuardianKit;
-import nycuro.kits.SparrowKit;
 
 /**
  * author: NycuRO
@@ -96,24 +93,6 @@ public class CrateAPI {
                     diamondPickaxe.addEnchantment(durability);
                     diamondPickaxe.addEnchantment(efficiency);
                     items = new Item[0];
-                }
-            }
-            if (number > 80) {
-                if (number <= 90) {
-                    items = new Item[0];
-                    new EnchantedStarterKit(player);
-                }
-            }
-            if (number > 90) {
-                if (number <= 95) {
-                    items = new Item[0];
-                    new GuardianKit(player);
-                }
-            }
-            if (number > 96) {
-                if (number <= 100) {
-                    items = new Item[0];
-                    new SparrowKit(player);
                 }
             }
         }

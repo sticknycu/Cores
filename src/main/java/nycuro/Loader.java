@@ -19,6 +19,7 @@ import nycuro.commands.list.economy.GetCoinsCommand;
 import nycuro.commands.list.economy.SetCoinsCommand;
 import nycuro.commands.list.home.HomeCommand;
 import nycuro.commands.list.jobs.JobCommand;
+import nycuro.commands.list.kits.KitCommand;
 import nycuro.commands.list.mechanic.TopCoinsCommand;
 import nycuro.commands.list.mechanic.TopDeathsCommand;
 import nycuro.commands.list.mechanic.TopKillsCommand;

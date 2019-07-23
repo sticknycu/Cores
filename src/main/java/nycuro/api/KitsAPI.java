@@ -1,12 +1,21 @@
 package nycuro.api;
 
 import cn.nukkit.Player;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import cn.nukkit.form.element.ElementButton;
+import cn.nukkit.form.element.ElementButtonImageData;
+import cn.nukkit.form.element.ElementLabel;
+import cn.nukkit.form.window.FormWindowCustom;
+import cn.nukkit.form.window.FormWindowSimple;
 import nycuro.API;
-import nycuro.database.Database;
-import nycuro.database.objects.ProfileSkyblock;
-import nycuro.kits.*;
+import nycuro.gui.list.ResponseFormWindow;
+import nycuro.kits.CommonKit;
+import nycuro.kits.data.EnchantedStarterKit;
+import nycuro.kits.data.GuardianKit;
+import nycuro.kits.type.TypeKit;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
 /**
  * author: NycuRO
@@ -15,80 +24,41 @@ import nycuro.kits.*;
  */
 public class KitsAPI {
 
-    private static final Object2IntMap<String> kits = new Object2IntOpenHashMap<>();
-    //private static final Int2DoubleMap cost = new Int2DoubleOpenHashMap();
+    public static Map<TypeKit, CommonKit> kits = new HashMap<>();
 
     static {
-        kits.put("EnchantedStarter", 1);
-        kits.put("Sparrow", 2);
-        kits.put("Knight", 3);
-        kits.put("VIP", 4);
-        kits.put("VIP+", 5);
-        kits.put("Paladin", 6);
-        kits.put("Guardian", 7);
-        kits.put("MVP", 8);
-        kits.put("MVP+", 9);
-
-        //cost.put(500, kits.getInt(1));
+        kits.put(TypeKit.ENCHANTED_STARTER, new EnchantedStarterKit());
+        kits.put(TypeKit.GUARDIAN, new GuardianKit());
     }
 
-    /*private boolean isKitWithMoney(String[] argument) {
-        return kits.getInt("EnchantedStarter") == 1;
-    }*/
-
-    public void sendKit(Player player, String[] argument) {
-        //double moneyPlayer = EconomyAPI.getInstance().myMoney(player);
-        //double price = cost.get(1);
-        //double insuficient = price - moneyPlayer;
-        long time = System.currentTimeMillis();
-        ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
-        long cooldown = profile.getCooldown();
-        long timeGone = time - cooldown;
-        if (timeGone >= 24 * 60 * 60 * 1000 || timeGone == 0) {
-            if (!player.hasPermission("core." + kits.getInt(argument[0]))) {
-                API.getMessageAPI().sendCustomPermissionMessage(player);
-            } else {
-                switch (kits.getInt(argument[0])) {
-                    case 1:
-                        new EnchantedStarterKit(player);
-                        return;
-                    case 2:
-                        new SparrowKit(player);
-                        profile.setCooldown(time);
-                        break;
-                    case 3:
-                        new KnightKit(player);
-                        profile.setCooldown(time);
-                        break;
-                    case 4:
-                        new VIPKit(player);
-                        profile.setCooldown(time);
-                        break;
-                    case 5:
-                        new VIPPlusKit(player);
-                        profile.setCooldown(time);
-                        break;
-                    case 6:
-                        new PaladinKit(player);
-                        profile.setCooldown(time);
-                        break;
-                    case 7:
-                        new GuardianKit(player);
-                        profile.setCooldown(time);
-                        break;
-                    case 8:
-                        new MVPKit(player);
-                        profile.setCooldown(time);
-                        break;
-                    case 9:
-                        new MVPPlusKit(player);
-                        profile.setCooldown(time);
-                        break;
+    public void sendKit(Player player) {
+        FormWindowSimple kitMenu = new FormWindowSimple("Arena Category", API.getMessageAPI().sendKitPrincipalModal(player));
+        kitMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+        kitMenu.addButton(new ElementButton("Enchanted Starter", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
+        kitMenu.addButton(new ElementButton("Guardian", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
+        player.showFormWindow(new ResponseFormWindow(kitMenu, new Consumer<Map<Integer, Object>>() {
+            @Override
+            public void accept(Map<Integer, Object> response) {
+                if (!response.isEmpty()) {
+                    switch (response.entrySet().iterator().next().getKey()) {
+                        case 0:
+                            sendInfoMessageKits(player);
+                            return;
+                        case 1:
+                            kits.get(TypeKit.ENCHANTED_STARTER).sendKit(player);
+                            return;
+                        case 2:
+                            kits.get(TypeKit.GUARDIAN).sendKit(player);
+                            return;
+                    }
                 }
-                API.getMessageAPI().sendReceiveKitMessage(player, argument[0]);
             }
-        } else {
-            API.getMessageAPI().sendCooldownMessage(player, timeGone);
-        }
+        }));
+    }
+
+    private void sendInfoMessageKits(Player player) {
+        FormWindowCustom infoMenu = new FormWindowCustom("Info Kits");
+        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageKits(player)));
+        player.showFormWindow(infoMenu);
     }
 }

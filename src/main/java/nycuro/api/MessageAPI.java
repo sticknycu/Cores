@@ -15,6 +15,7 @@ import nycuro.chat.handlers.ChatHandlers;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
+import nycuro.kits.type.TypeKit;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -689,26 +690,14 @@ public class MessageAPI {
         }
     }
 
-    public void sendBorderMessage(Player player) {
+    public void sendReceiveKitMessage(Player player, TypeKit typeKit) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7(§e!§7) §4Error: §7You are at border. Please go back!");
+                player.sendMessage("§7» §eWow! You got §6" + typeKit + " §e!");
                 break;
             case 1:
-                player.sendMessage("§7(§e!§7) §4Eroare: §7Ai ajuns la Border. Te rugam sa te indepartezi!");
-                break;
-        }
-    }
-
-    public void sendReceiveKitMessage(Player player, String kit) {
-        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
-        switch (lang) {
-            case 0:
-                player.sendMessage("§7» §eWow! You got §6" + kit + " §e!");
-                break;
-            case 1:
-                player.sendMessage("§7» §eWow! Ai primit §6" + kit + " §e!");
+                player.sendMessage("§7» §eWow! Ai primit §6" + typeKit + " §e!");
                 break;
         }
     }
@@ -717,10 +706,10 @@ public class MessageAPI {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7(§e!§7) §eInfo: §6Your inventory it's full, so you can't do this!");
+                player.sendMessage("§7(§e!§7) §eInfo: §6Your inventory it's full or you have equiped an armor, so you can't do this!");
                 break;
             case 1:
-                player.sendMessage("§7(§e!§7) §eInfo: §6Ai inventarul plin pentru a face aceasta actiune!");
+                player.sendMessage("§7(§e!§7) §eInfo: §6Ai inventarul plin sau porti o armura, deci nu poti face aceasta actiune!");
                 break;
         }
     }
@@ -793,18 +782,6 @@ public class MessageAPI {
                 break;
             case 1:
                 player.sendMessage("§7» §eArgument gresit! Te rog foloseste: §6/kits.");
-                break;
-        }
-    }
-
-    public void sendExceptionKitMessage(Player player) {
-        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
-        switch (lang) {
-            case 0:
-                player.sendMessage("§7» §eWrong arguments! Please use: §6/kit {name}.");
-                break;
-            case 1:
-                player.sendMessage("§7» §eArgument gresit! Te rog foloseste: §6/kit {name}.");
                 break;
         }
     }
@@ -1506,6 +1483,24 @@ public class MessageAPI {
         return string;
     }
 
+    public String sendKitPrincipalModal(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                       Hello!\n" +
+                        "               Welcome to Kit Category!\n" +
+                        "           Choose what you want to do";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "     Bine ai venit la categoria Kituri!\n" +
+                        "    Alege ce doresti sa faci de acum";
+                break;
+        }
+        return string;
+    }
+
     public String sendHomesPrincipalModal(Player player) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
@@ -1593,6 +1588,38 @@ public class MessageAPI {
                         "§c» §aFisherman:\n" +
                         "§eCu acest job faci bani cu ajutorul pestilor!\n" +
                         "§eStrange materialele necesare si poti castiga pana la: §745$";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInfoMessageKits(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                      Hello!\n" +
+                        "            Welcome to Info Kits!\n\n" +
+                        "§c» §aEnchanted Starter:\n" +
+                        "§eCooldown: 24h.\n" +
+                        "§eCost: §71500$\n" +
+                        "§eItems: §7Full Lether Enchanted Armor, Stone Tools, 32 Breads\n\n" +
+                        "§c» §aGuardian:\n" +
+                        "§eCooldown: 24h.\n" +
+                        "§eCost: §71500$\n\n" +
+                        "§eItems: §7Full Gold Enchanted Armor, Iron Tools, 32 Breads, 16 TNT, 64 Obsidian\n\n";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "          Bine ai venit la Info Kits!\n\n" +
+                        "§c» §aEnchanted Starter:\n" +
+                        "§eCooldown: 24h.\n" +
+                        "§eCosta: §71500$\n\n" +
+                        "§eIteme: §7Echipament Lether Enchantat, Unele de Piatra, 32 Paini\n\n" +
+                        "§c» §aGuardian:\n" +
+                        "§eCooldown: 24h.\n" +
+                        "§eCosta: §71500$\n\n" +
+                        "§eIteme: §7Echipament Gold Enchantat, Unelte de Iron, 32 Paini, 16 TNT, 64 Obsidian\n\n";
                 break;
         }
         return string;
