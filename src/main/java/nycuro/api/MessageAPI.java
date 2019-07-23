@@ -1606,8 +1606,20 @@ public class MessageAPI {
                         "§eItems: §7Full Lether Enchanted Armor, Stone Tools, 32 Breads\n\n" +
                         "§c» §aGuardian:\n" +
                         "§eCooldown: 24h.\n" +
-                        "§eCost: §71500$\n\n" +
-                        "§eItems: §7Full Gold Enchanted Armor, Iron Tools, 32 Breads, 16 TNT, 64 Obsidian\n\n";
+                        "§eCost: §73500$\n\n" +
+                        "§eItems: §7Full Gold Enchanted Armor, Iron Tools, 32 Breads, 16 TNT, 3 Golden Apple, 64 Obsidian\n\n" +
+                        "§c» §aKnight:\n" +
+                        "§eCooldown: 24h.\n" +
+                        "§eCost: §75000$\n\n" +
+                        "§eItems: §7Full Diamond Armor, Stone Enchanted Tools, 32 Breads, 16 TNT, 32 Obsidian\n\n" +
+                        "§c» §aPaladin:\n" +
+                        "§eCooldown: 24h.\n" +
+                        "§eCost: §78500$\n\n" +
+                        "§eItems: §7Full Iron Armor, Diamond Enchanted Tools, 32 Breads, 12 TNT, 128 Obsidian\n\n" +
+                        "§c» §aSparrow:\n" +
+                        "§eCooldown: 24h.\n" +
+                        "§eCost: §71000$\n\n" +
+                        "§eItems: §7Full Iron Enchanted Armor, Diamond Enchanted Tools, 32 Breads, 12 TNT, 64 Obsidian\n\n";
                 break;
             case 1:
                 string = "                      Salut!\n" +
@@ -1618,8 +1630,20 @@ public class MessageAPI {
                         "§eIteme: §7Echipament Lether Enchantat, Unele de Piatra, 32 Paini\n\n" +
                         "§c» §aGuardian:\n" +
                         "§eCooldown: 24h.\n" +
-                        "§eCosta: §71500$\n\n" +
-                        "§eIteme: §7Echipament Gold Enchantat, Unelte de Iron, 32 Paini, 16 TNT, 64 Obsidian\n\n";
+                        "§eCosta: §73000$\n\n" +
+                        "§eIteme: §7Echipament Gold Enchantat, Unelte de Iron, 32 Paini, 16 TNT, 3 Golden Apple, 64 Obsidian\n\n" +
+                        "§c» §aKnight:\n" +
+                        "§eCooldown: 24h.\n" +
+                        "§eCosta: §75000$\n\n" +
+                        "§eIteme: §7Echipament Diamond, Unelte Enchantate de Stone, 32 Paini, 16 TNT, 32 Obsidian\n\n" +
+                        "§c» §aPaladin:\n" +
+                        "§eCooldown: 24h.\n" +
+                        "§eCosta: §78500$\n\n" +
+                        "§eIteme: §7Echipament Iron, Unelte Echantate de Diamond, 32 Paini, 12 TNT, 128 Obsidian\n\n" +
+                        "§c» §aSparrow:\n" +
+                        "§eCooldown: 24h.\n" +
+                        "§eCosta: §71000$\n\n" +
+                        "§eIteme: §7Echipament Iron Enchantat, Unelte Echantate de Diamond, 32 Paini, 12 TNT, 64 Obsidian\n\n";
                 break;
         }
         return string;

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public enum TypeKit {
+    STARTER("Starter"),
     ENCHANTED_STARTER("Enchanted Starter"),
     GUARDIAN("Guardian"),
     KNIGHT("Knight"),

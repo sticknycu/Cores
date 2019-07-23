@@ -42,6 +42,9 @@ public abstract class CommonKit {
     public Item[] inventoryContents;
 
     @Getter
+    public double price;
+
+    @Getter
     @Setter
     public TypeKit kit;
 
@@ -54,18 +57,5 @@ public abstract class CommonKit {
 
     public abstract boolean canAddKit(Player player);
 
-    public CommonKit() {
-        this.sword = getSword();
-        this.pickaxe = getPickaxe();
-        this.axe = getAxe();
-        this.shovel = getShovel();
-        this.otherItems = getOtherItems();
-        this.helmet = getHelmet();
-        this.pants = getPants();
-        this.armor = getArmor();
-        this.boots = getBoots();
-        this.armorContents = getArmorContents();
-        this.inventoryContents = getInventoryContents();
-        this.kit = getKit();
-    }
+    public abstract boolean hasEnoughDollars(Player player);
 }

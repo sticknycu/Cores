@@ -1,9 +1,9 @@
-name: FactionsCore
+name: SkyblockCore
 main: nycuro.Loader
 version: "1.0"
 api: ["1.0.0"]
 author: NycuRO
-description: FactionsCore
+description: SkyblockCore
 
 commands:
   spawn:
@@ -18,10 +18,6 @@ commands:
     description: Choise Kit
     usage: "/kit"
     permission: core.kit
-  kits:
-    description: List Kits
-    usage: "/kits"
-    permission: core.kits
   utils:
     description: List of Utils
     usage: "/utils"
@@ -52,9 +48,6 @@ permissions:
     default: true
   core.kit:
     description: "Choise Kit"
-    default: true
-  core.kits:
-    description: "List Kits"
     default: true
   core.utils:
     description: "List of Utils"

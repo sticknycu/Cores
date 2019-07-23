@@ -9,8 +9,7 @@ import cn.nukkit.form.window.FormWindowSimple;
 import nycuro.API;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.kits.CommonKit;
-import nycuro.kits.data.EnchantedStarterKit;
-import nycuro.kits.data.GuardianKit;
+import nycuro.kits.data.clasic.*;
 import nycuro.kits.type.TypeKit;
 
 import java.util.HashMap;
@@ -27,8 +26,12 @@ public class KitsAPI {
     public static Map<TypeKit, CommonKit> kits = new HashMap<>();
 
     static {
+        kits.put(TypeKit.STARTER, new StarterKit());
         kits.put(TypeKit.ENCHANTED_STARTER, new EnchantedStarterKit());
         kits.put(TypeKit.GUARDIAN, new GuardianKit());
+        kits.put(TypeKit.KNIGHT, new KnightKit());
+        kits.put(TypeKit.PALADIN, new PaladinKit());
+        kits.put(TypeKit.SPARROW, new SparrowKit());
     }
 
     public void sendKit(Player player) {
@@ -36,6 +39,9 @@ public class KitsAPI {
         kitMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         kitMenu.addButton(new ElementButton("Enchanted Starter", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
         kitMenu.addButton(new ElementButton("Guardian", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
+        kitMenu.addButton(new ElementButton("Knight", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
+        kitMenu.addButton(new ElementButton("Paladin", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
+        kitMenu.addButton(new ElementButton("Sparrow", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
         player.showFormWindow(new ResponseFormWindow(kitMenu, new Consumer<Map<Integer, Object>>() {
             @Override
             public void accept(Map<Integer, Object> response) {
@@ -50,6 +56,14 @@ public class KitsAPI {
                         case 2:
                             kits.get(TypeKit.GUARDIAN).sendKit(player);
                             return;
+                        case 3:
+                            kits.get(TypeKit.KNIGHT).sendKit(player);
+                            return;
+                        case 4:
+                            kits.get(TypeKit.PALADIN).sendKit(player);
+                            return;
+                        case 5:
+                            kits.get(TypeKit.SPARROW).sendKit(player);
                     }
                 }
             }

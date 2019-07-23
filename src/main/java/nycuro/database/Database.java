@@ -36,7 +36,7 @@ public class Database {
 
     public static void connectToDatabaseHomesF() {
         String address = "hosting3.gazduirejocuri.ro";
-        String name = "chzoneeu_homefactions";
+        String name = "chzoneeu_homeskyblock";
         String username = "chzoneeu_nycu";
         String password = "unprost2019";
 
@@ -63,7 +63,7 @@ public class Database {
 
     public static void connectToDatabaseReports() {
         String address = "hosting3.gazduirejocuri.ro";
-        String name = "chzoneeu_factionsreports";
+        String name = "chzoneeu_skyblockreports";
         String username = "chzoneeu_nycu";
         String password = "unprost2019";
 
@@ -78,7 +78,7 @@ public class Database {
 
         DATASOURCE_REPORTS.setMaximumPoolSize(10);
 
-        String query = "create table if not exists reports (`name` varchar(20), `reason` text, `contact` text, `reporter` varchar(20), `createTime` INTEGER)";
+        String query = "create table if not exists reports (`name` varchar(20), `reason` text, `contact` text, `reporter` varchar(20), `createTime` REAL)";
 
         try (Connection connection = DATASOURCE_REPORTS.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -105,7 +105,7 @@ public class Database {
 
         DATASOURCE_PROXY.setMaximumPoolSize(10);
 
-        String query = "create table if not exists dates (`name` varchar(20), `language` int, `gems` REAL, `time` INTEGER, `votes` INTEGER)";
+        String query = "create table if not exists dates (`name` varchar(20), `language` int, `gems` REAL, `time` REAL, `votes` INTEGER)";
 
         try (Connection connection = DATASOURCE_PROXY.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -168,7 +168,7 @@ public class Database {
 
     public static void connectToDatabaseFactions() {
         String address = "hosting3.gazduirejocuri.ro";
-        String name = "chzoneeu_factions";
+        String name = "chzoneeu_skyblock";
         String username = "chzoneeu_nycu";
         String password = "unprost2019";
 
@@ -183,7 +183,7 @@ public class Database {
 
         DATASOURCE_SKYBLOCK.setMaximumPoolSize(10);
 
-        String query = "create table if not exists dates (`name` varchar(20), `job` int, `kills` int, `deaths` int, `cooldown` INTEGER, `experience` INTEGER, `level` int, `necesary` INTEGER, `time` INTEGER, `dollars` REAL)";
+        String query = "create table if not exists dates (`name` varchar(20), `job` int, `kills` int, `deaths` int, `cooldown` REAL, `experience` INTEGER, `level` int, `necesary` INTEGER, `time` INTEGER, `dollars` REAL)";
 
         try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
