@@ -10,3 +10,5 @@ Branch:
    2) factions - https://github.com/NycuRO/Cores/tree/factions
 
    3) proxy - https://github.com/NycuRO/Cores/tree/proxy
+
+   3) skyblock - https://github.com/NycuRO/Cores/tree/skyblock
