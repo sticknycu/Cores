@@ -78,7 +78,7 @@ public class Database {
 
         DATASOURCE_REPORTS.setMaximumPoolSize(10);
 
-        String query = "create table if not exists reports (`name` varchar(20), `reason` text, `contact` text, `reporter` varchar(20), `createTime` DOUBLE)";
+        String query = "create table if not exists reports (`name` varchar(20), `reason` text, `contact` text, `reporter` varchar(20), `createTime` BIGINT)";
 
         try (Connection connection = DATASOURCE_REPORTS.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -105,7 +105,7 @@ public class Database {
 
         DATASOURCE_PROXY.setMaximumPoolSize(10);
 
-        String query = "create table if not exists dates (`name` varchar(20), `language` int, `gems` DOUBLE, `time` DOUBLE, `votes` INTEGER)";
+        String query = "create table if not exists dates (`name` varchar(20), `language` int, `gems` FLOAT, `time` BIGINT, `votes` INTEGER)";
 
         try (Connection connection = DATASOURCE_PROXY.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -183,7 +183,7 @@ public class Database {
 
         DATASOURCE_SKYBLOCK.setMaximumPoolSize(10);
 
-        String query = "create table if not exists dates (`name` varchar(20), `job` int, `kills` int, `deaths` int, `cooldown` DOUBLE, `experience` INTEGER, `level` int, `necesary` INTEGER, `time` INTEGER, `dollars` DOUBLE)";
+        String query = "create table if not exists dates (`name` varchar(20), `job` int, `kills` int, `deaths` int, `cooldown` BIGINT, `experience` FLOAT, `level` int, `necesary` FLOAT, `time` BIGINT, `dollars` FLOAT)";
 
         try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
