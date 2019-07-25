@@ -955,14 +955,14 @@ public class MessageAPI {
         }
     }
 
-    public void sendCooldownMessage(Player player, long timeGone) {
+    public void sendCooldownMessage(Player player, long timeGone, long needed) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§7(§e!§7) §4Error: §7It hasn't gone 24 hours to use this kit again! Has gone only §6" + Loader.time(timeGone) + " §7!");
+                player.sendMessage("§7(§e!§7) §4Error: §7It hasn't gone " + Loader.time(needed) + " to use this kit again! Has gone only §6" + Loader.time(timeGone) + " §7!");
                 break;
             case 1:
-                player.sendMessage("§7(§e!§7) §4Error: §7Nu au trecut 24 ore pentru a putea folosi kit-ul! S-au dus doar §6" + Loader.time(timeGone) + " §7!");
+                player.sendMessage("§7(§e!§7) §4Error: §7Nu au trecut " + Loader.time(needed) + " ore pentru a putea folosi kit-ul! S-au dus doar §6" + Loader.time(timeGone) + " §7!");
                 break;
         }
     }

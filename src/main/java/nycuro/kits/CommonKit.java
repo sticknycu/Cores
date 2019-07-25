@@ -45,6 +45,9 @@ public abstract class CommonKit {
     public double price;
 
     @Getter
+    public long timer;
+
+    @Getter
     @Setter
     public TypeKit kit;
 

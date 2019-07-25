@@ -106,10 +106,15 @@ public class LackerKit extends CommonKit {
     }
 
     @Override
+    public long getTimer() {
+        return 1000 * 60 * 10;
+    }
+
+    @Override
     public boolean passTimer(Player player) {
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         long time = profileSkyblock.getCooldown();
-        return (1000 * 60 * 10 - (System.currentTimeMillis() - time)) <= 0;
+        return (getTimer() - (System.currentTimeMillis() - time)) <= 0;
     }
 
     @Override
@@ -132,7 +137,7 @@ public class LackerKit extends CommonKit {
             }
         } else {
             long time = profileSkyblock.getCooldown();
-            API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time);
+            API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
         }
     }
 }

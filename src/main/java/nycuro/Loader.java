@@ -19,7 +19,7 @@ import nycuro.commands.list.economy.GetCoinsCommand;
 import nycuro.commands.list.economy.SetCoinsCommand;
 import nycuro.commands.list.home.HomeCommand;
 import nycuro.commands.list.jobs.JobCommand;
-import nycuro.commands.list.kits.KitCommand;
+import nycuro.commands.list.kits.KitsCommand;
 import nycuro.commands.list.mechanic.*;
 import nycuro.commands.list.mechanic.player.CoordsCommand;
 import nycuro.commands.list.mechanic.player.LangCommand;
@@ -212,7 +212,7 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("wither", new WitherCommand());
         this.getServer().getCommandMap().register("droppartymessage", new DropPartyMessageCommand());
         this.getServer().getCommandMap().register("spawnboss", new SpawnBossCommand());
-        this.getServer().getCommandMap().register("kit", new KitCommand());
+        this.getServer().getCommandMap().register("kit", new KitsCommand());
         this.getServer().getCommandMap().register("home", new HomeCommand());
         this.getServer().getCommandMap().register("shop", new ShopCommand());
         this.getServer().getCommandMap().register("spawn", new SpawnCommand());

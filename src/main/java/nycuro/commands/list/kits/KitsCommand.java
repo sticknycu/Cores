@@ -10,10 +10,10 @@ import nycuro.commands.PrincipalCommand;
  * FactionsCore Project
  * API 1.0.0
  */
-public class KitCommand extends PrincipalCommand {
+public class KitsCommand extends PrincipalCommand {
 
-    public KitCommand() {
-        super("kit", "Get Kit");
+    public KitsCommand() {
+        super("kits", "Get Kit");
     }
 
     @Override

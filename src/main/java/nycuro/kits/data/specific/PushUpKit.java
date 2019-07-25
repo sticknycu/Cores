@@ -94,10 +94,15 @@ public class PushUpKit extends CommonKit {
     }
 
     @Override
+    public long getTimer() {
+        return 1000 * 60 * 60;
+    }
+
+    @Override
     public boolean passTimer(Player player) {
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         long time = profileSkyblock.getCooldown();
-        return (1000 * 60 * 60 - (System.currentTimeMillis() - time)) <= 0;
+        return (getTimer() - (System.currentTimeMillis() - time)) <= 0;
     }
 
     @Override
@@ -120,7 +125,7 @@ public class PushUpKit extends CommonKit {
             }
         } else {
             long time = profileSkyblock.getCooldown();
-            API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time);
+            API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
         }
     }
 }

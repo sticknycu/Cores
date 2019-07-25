@@ -14,10 +14,10 @@ commands:
     description: Shop, Sell, Trade in one command
     usage: "/shop"
     permission: core.shop
-  kit:
+  kits:
     description: Choise Kit
-    usage: "/kit"
-    permission: core.kit
+    usage: "/kits"
+    permission: core.kits
   utils:
     description: List of Utils
     usage: "/utils"
@@ -46,7 +46,7 @@ permissions:
   core.shop:
     description: "Shop, Sell, Trade in one command!"
     default: true
-  core.kit:
+  core.kits:
     description: "Choise Kit"
     default: true
   core.utils:

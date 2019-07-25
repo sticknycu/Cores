@@ -75,16 +75,11 @@ public class WoodieKit extends CommonKit {
         }
         Item[] item = new Item[7];
         for (int i = 0; i <= 3; i++) {
-            switch (i) {
-                case 0:
-                    item[i + 4] = itemslog2.get(i);
-                    break;
-                case 1:
-                    item[i + 5] = itemslog2.get(i);
-                    break;
-            }
             item[i] = itemslog1.get(i);
         }
+        item[4] = itemslog2.get(0);
+        item[5] = itemslog2.get(1);
+        item[6] = steak;
         return item;
     }
 
@@ -118,10 +113,15 @@ public class WoodieKit extends CommonKit {
     }
 
     @Override
+    public long getTimer() {
+        return 1000 * 60 * 20;
+    }
+
+    @Override
     public boolean passTimer(Player player) {
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         long time = profileSkyblock.getCooldown();
-        return (1000 * 60 * 20 - (System.currentTimeMillis() - time)) <= 0;
+        return (getTimer() - (System.currentTimeMillis() - time)) <= 0;
     }
 
     @Override
@@ -144,7 +144,7 @@ public class WoodieKit extends CommonKit {
             }
         } else {
             long time = profileSkyblock.getCooldown();
-            API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time);
+            API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
         }
     }
 }
