@@ -10,7 +10,6 @@ import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.player.PlayerCommandPreprocessEvent;
 import cn.nukkit.event.player.PlayerDeathEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
-import cn.nukkit.level.Location;
 import nycuro.api.API;
 
 import java.util.ArrayList;
@@ -70,14 +69,6 @@ public class LevelHandlers implements Listener {
                 if (evc.getDamager() instanceof Player) damager = (Player) evc.getDamager();
             } else if (ev.getDamager() instanceof Player) damager = (Player) ev.getDamager();
             if (damager == null) return;
-            if (entity.namedTag.getBoolean("coreFarm")) {
-                if (!API.getMainAPI().isOnMobFarm.getBoolean(damager)) {
-                    API.getMainAPI().isOnMobFarm.put(damager, true);
-                }
-                damager.teleport(new Location(1053, 69, 1237));
-                damager.sendMessage(API.getMessageAPI().sendMobFarmMessage(damager));
-                event.setCancelled();
-            }
 
             if (entity instanceof Player) {
                 for (Player pl : new Player[] { (Player) entity, damager }) {

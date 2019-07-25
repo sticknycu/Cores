@@ -21,8 +21,6 @@ public class SpawnCommand extends PrincipalCommand {
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         Player player = (Player) commandSender;
         API.getMessageAPI().sendCommandCooldownSpawnMessage(player);
-        player.setImmobile(true);
-        if (API.getMainAPI().isOnMobFarm.getBoolean(player)) API.getMainAPI().isOnMobFarm.put(player, false);
         player.getServer().getScheduler().scheduleDelayedTask(new Task() {
             @Override
             public void onRun(int i) {

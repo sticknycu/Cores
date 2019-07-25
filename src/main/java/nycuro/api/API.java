@@ -53,8 +53,6 @@ public class API {
 
     public static HomeAPI homeAPI;
 
-    public static SlotsAPI slotsAPI;
-
     public static Loader getMainAPI() {
         return mainAPI;
     }
