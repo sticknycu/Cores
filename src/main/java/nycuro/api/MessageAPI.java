@@ -1483,6 +1483,24 @@ public class MessageAPI {
         return string;
     }
 
+    public String sendKitPrincipalClassicModal(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                       Hello!\n" +
+                        "               Welcome to Kit Classic Category!\n" +
+                        "           Choose what you want to do";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "     Bine ai venit la categoria Kituri Clasice!\n" +
+                        "    Alege ce doresti sa faci de acum";
+                break;
+        }
+        return string;
+    }
+
     public String sendKitPrincipalModal(Player player) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
@@ -1495,6 +1513,42 @@ public class MessageAPI {
             case 1:
                 string = "                      Salut!\n" +
                         "     Bine ai venit la categoria Kituri!\n" +
+                        "    Alege ce doresti sa faci de acum";
+                break;
+        }
+        return string;
+    }
+
+    public String sendKitPrincipalPremiumModal(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                       Hello!\n" +
+                        "               Welcome to Kit Premium Category!\n" +
+                        "           Choose what you want to do";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "     Bine ai venit la categoria Kituri Premium!\n" +
+                        "    Alege ce doresti sa faci de acum";
+                break;
+        }
+        return string;
+    }
+
+    public String sendKitPrincipalSpecificModal(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                       Hello!\n" +
+                        "               Welcome to Kit Specific Category!\n" +
+                        "           Choose what you want to do";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "     Bine ai venit la categoria Kituri Specifice!\n" +
                         "    Alege ce doresti sa faci de acum";
                 break;
         }
@@ -1593,13 +1647,49 @@ public class MessageAPI {
         return string;
     }
 
-    public String sendInfoMessageKits(Player player) {
+    public String sendInfoMessageCategoryKits(Player player) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
                 string = "                      Hello!\n" +
-                        "            Welcome to Info Kits!\n\n" +
+                        "            Welcome to Info Category Kits!\n\n" +
+                        "§c» §aClassic Kits:\n" +
+                        "§eThere are Kits who are actually so basic and good to start with them in PVP.\n" +
+                        "§eThese kits can be buyed by every player.\n\n" +
+                        "§c» §aPremium Kits: \n" +
+                        "§eThere are Kits can be unlocked using Premium Shop (/shop).\n" +
+                        "§eWhen you unlocked the kit, then this can be buyed.\n\n" +
+                        "§c» §aSpecific Kits: \n" +
+                        "§eThere are Kits who are specific server.\n" +
+                        "§eBecause we are on Skyblock, you wil find a lot of kits for starting an adventure on island.\n" +
+                        "§eThese kits can be buyed by every player.";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "          Bine ai venit la Info Category Jobs!\n\n" +
+                        "§c» §aClassic Kits:\n" +
+                        "§eAici se afla Kiturile care sunt atat de basic, si pot fi folosite la inceputul unui PVP.\n" +
+                        "§eAceste Kituri se pot cumpara de fiecare jucator de pe server.\n\n" +
+                        "§c» §aPremium Kits: \n" +
+                        "§eAici se afla Kiturile care pot fi deblocate folosind Shop Premium (/shop).\n" +
+                        "§eCand deblochezi un kit, acesta poate fi cumparat dupa.\n\n" +
+                        "§c» §aSpecific Kits: \n" +
+                        "§eAici sunt Kiturile care sunt specifice pentru fiecare server.\n" +
+                        "§ePentru ca suntem pe Skyblock, vei gasi foarte multe kituri care te vor ajuta la inceputul unei aventuri pe insula.\n" +
+                        "§eThese kits can be buyed by every player.";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInfoMessageClassicKits(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                      Hello!\n" +
+                        "            Welcome to Info Classic Kits!\n\n" +
                         "§c» §aEnchanted Starter:\n" +
                         "§eCooldown: 24h.\n" +
                         "§eCost: §71500$\n" +
@@ -1623,7 +1713,7 @@ public class MessageAPI {
                 break;
             case 1:
                 string = "                      Salut!\n" +
-                        "          Bine ai venit la Info Kits!\n\n" +
+                        "          Bine ai venit la Info Classic Kits!\n\n" +
                         "§c» §aEnchanted Starter:\n" +
                         "§eCooldown: 24h.\n" +
                         "§eCosta: §71500$\n\n" +
@@ -1644,6 +1734,70 @@ public class MessageAPI {
                         "§eCooldown: 24h.\n" +
                         "§eCosta: §71000$\n\n" +
                         "§eIteme: §7Echipament Iron Enchantat, Unelte Echantate de Diamond, 32 Paini, 12 TNT, 64 Obsidian\n\n";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInfoMessageSpecificKits(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                      Hello!\n" +
+                        "            Welcome to Info Specific Kits!\n\n" +
+                        "§c» §aPlanter:\n" +
+                        "§eCooldown: 30m.\n" +
+                        "§eCost: §71500$\n" +
+                        "§eItems: §7Full Stone Tools, 12 Saplings from all Types, 32 Grass, 32 Dirt, 64 Cobblestone, 24 Bone Meal\n\n" +
+                        "§c» §aStonner:\n" +
+                        "§eCooldown: 20m.\n" +
+                        "§eCost: §7750$\n\n" +
+                        "§eItems: §7Full Stone Tools, 12 Steak, 32 Grass, 32 Dirt, 128 Cobblestone, 128 Stone\n\n" +
+                        "§c» §aLacker:\n" +
+                        "§eCooldown: 10m.\n" +
+                        "§eCost: §1250$\n\n" +
+                        "§eItems: §7Full Stone Tools, 32 Steak, 2 Ice, 2 Lava Buckets, 10 Empty Buckets\n\n" +
+                        "§c» §aWoodie:\n" +
+                        "§eCooldown: 20m.\n" +
+                        "§eCost: §71000$\n\n" +
+                        "§eItems: §7Full Stone Tools, 32 Steak, 16 Wood from all Types\n\n" +
+                        "§c» §aPushUp:\n" +
+                        "§eCooldown: 1h.\n" +
+                        "§eCost: §7650$\n\n" +
+                        "§eItems: §71 Diamond Axe with Efficiency 2, 8 Wood from all Types\n\n" +
+                        "§c» §aDigger:\n" +
+                        "§eCooldown: 1h.\n" +
+                        "§eCost: §7650$\n\n" +
+                        "§eItems: §71 Diamond Pickaxe with Efficiency 2, 8 Stone, 8 Cobblestone, 8 Dirt, 8 Grass\n\n";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "          Bine ai venit la Info Specific Kits!\n\n" +
+                        "§c» §aPlanter:\n" +
+                        "§eCooldown: 30m.\n" +
+                        "§eCosta: §71500$\n" +
+                        "§eItemE: §7Unelte de Piatra, 12 Sapling-uri de Toate Tipurile, 32 Grass, 32 Dirt, 64 Cobblestone, 24 Bone Meal\n\n" +
+                        "§c» §aStonner:\n" +
+                        "§eCooldown: 20m.\n" +
+                        "§eCosta: §7750$\n\n" +
+                        "§eIteme: §7Unelte de Piatra, 12 Steak, 32 Grass, 32 Dirt, 128 Cobblestone, 128 Stone\n\n" +
+                        "§c» §aLacker:\n" +
+                        "§eCooldown: 10m.\n" +
+                        "§eCosta: §1250$\n\n" +
+                        "§eIteme: §7Unelte de Piatra, 32 Steak, x2 Gheata, 2 Galeti Lava, 10 Galeti Goale\n\n" +
+                        "§c» §aWoodie:\n" +
+                        "§eCooldown: 20m.\n" +
+                        "§eCosta: §71000$\n\n" +
+                        "§eIteme: §7Unelte de Piatra, 32 Steak, x16 Wood din Toate Tipurile\n\n" +
+                        "§c» §aPushUp:\n" +
+                        "§eCooldown: 1h.\n" +
+                        "§eCosta: §7650$\n\n" +
+                        "§eIteme: §71 Diamond Axe cu Efficiency 2, x8 Wood din Toate Tipurile\n\n" +
+                        "§c» §aDigger:\n" +
+                        "§eCooldown: 1h.\n" +
+                        "§eCost: §7650$\n\n" +
+                        "§eItems: §71 Diamond Pickaxe cu Efficiency 2, 8 Stone, 8 Cobblestone, 8 Dirt, 8 Grass\n\n";
                 break;
         }
         return string;
