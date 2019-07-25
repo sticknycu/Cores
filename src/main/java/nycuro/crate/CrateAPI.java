@@ -12,7 +12,7 @@ import cn.nukkit.nbt.tag.DoubleTag;
 import cn.nukkit.nbt.tag.FloatTag;
 import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.utils.DyeColor;
-import nycuro.API;
+import nycuro.api.API;
 import nycuro.crate.item.EntityFirework;
 
 /**

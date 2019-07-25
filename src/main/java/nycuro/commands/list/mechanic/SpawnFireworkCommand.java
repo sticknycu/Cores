@@ -1,8 +1,6 @@
 package nycuro.commands.list.mechanic;
 
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.math.Vector3;
-import nycuro.API;
 import nycuro.commands.PrincipalCommand;
 
 /**

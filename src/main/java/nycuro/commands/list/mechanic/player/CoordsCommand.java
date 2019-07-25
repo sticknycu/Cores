@@ -2,7 +2,7 @@ package nycuro.commands.list.mechanic.player;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.API;
+import nycuro.api.API;
 import nycuro.commands.PrincipalCommand;
 
 /**
@@ -18,13 +18,14 @@ public class CoordsCommand extends PrincipalCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        if ((API.getMainAPI().coords.getOrDefault(commandSender.getName(), null) == null) ||
-                (API.getMainAPI().coords.getOrDefault(commandSender.getName(), null).equals(false)))  {
-            API.getMainAPI().coords.put(commandSender.getName(), true);
-            API.getMessageAPI().sendCoordsSwitchMessage((Player) commandSender, true);
-        } else if (API.getMainAPI().coords.getOrDefault(commandSender.getName(), null).equals(true)) {
-            API.getMainAPI().coords.put(commandSender.getName(), false);
-            API.getMessageAPI().sendCoordsSwitchMessage((Player) commandSender, false);
+        Player player = (Player) commandSender;
+        if ((API.getMainAPI().coords.getOrDefault(player.getUniqueId(), null) == null) ||
+                (API.getMainAPI().coords.getOrDefault(player.getUniqueId(), null).equals(false)))  {
+            API.getMainAPI().coords.put(player.getUniqueId(), true);
+            API.getMessageAPI().sendCoordsSwitchMessage(player, true);
+        } else if (API.getMainAPI().coords.getOrDefault(player.getUniqueId(), null).equals(true)) {
+            API.getMainAPI().coords.put(player.getUniqueId(), false);
+            API.getMessageAPI().sendCoordsSwitchMessage(player, false);
         }
         return true;
     }

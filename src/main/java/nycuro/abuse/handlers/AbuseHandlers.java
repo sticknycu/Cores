@@ -13,7 +13,7 @@ import cn.nukkit.event.player.PlayerItemHeldEvent;
 import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
-import nycuro.API;
+import nycuro.api.API;
 
 /**
  * author: NycuRO

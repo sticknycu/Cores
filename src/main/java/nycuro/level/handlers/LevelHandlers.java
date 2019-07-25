@@ -11,7 +11,7 @@ import cn.nukkit.event.player.PlayerCommandPreprocessEvent;
 import cn.nukkit.event.player.PlayerDeathEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.level.Location;
-import nycuro.API;
+import nycuro.api.API;
 
 import java.util.ArrayList;
 import java.util.Arrays;

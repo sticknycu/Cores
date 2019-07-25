@@ -22,7 +22,7 @@ import cn.nukkit.scheduler.Task;
 import io.pocketvote.event.VoteEvent;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-import nycuro.API;
+import nycuro.api.API;
 import nycuro.Loader;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
@@ -44,8 +44,7 @@ public class MechanicHandlers implements Listener {
             API.getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
                 @Override
                 public void onRun(int i) {
-                    String username = player.getName();
-                    int playerTime = API.getMainAPI().timers.getOrDefault(username, 1);
+                    int playerTime = API.getMainAPI().timers.getOrDefault(player.getUniqueId(), 1);
                     switch (playerTime) {
                         case 1:
                             API.getMessageAPI().sendFirstJoinTitle(player);
@@ -63,8 +62,9 @@ public class MechanicHandlers implements Listener {
                             break;
                         default:
                             API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
+                            API.getMainAPI().timers.removeInt(player.getUniqueId());
                     }
-                    API.getMainAPI().timers.put(username, playerTime + 1);
+                    API.getMainAPI().timers.put(player.getUniqueId(), playerTime + 1);
                 }
             }, 20, 20 * 3, true);
         }
@@ -79,11 +79,10 @@ public class MechanicHandlers implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         // Nu merge PreLoginEvent si nici Async.
-        API.getMainAPI().coords.put(player.getName(), false);
-        API.getMainAPI().isOnSpawn.put(player, true);
-        API.getMainAPI().isOnArena.put(player, false);
-        API.getMainAPI().isOnPvP.put(player, false);
-        API.getMainAPI().played.put(player.getName(), System.currentTimeMillis());
+        API.getMainAPI().coords.put(player.getUniqueId(), false);
+        API.getMainAPI().isOnSpawn.put(player.getUniqueId(), true);
+        API.getMainAPI().isOnArena.put(player.getUniqueId(), false);
+        API.getMainAPI().played.put(player.getUniqueId(), System.currentTimeMillis());
         API.getDatabase().playerExist(player.getName(), bool -> {
             if (!bool) {
                 API.getDatabase().addNewPlayer(player.getName());
@@ -98,7 +97,6 @@ public class MechanicHandlers implements Listener {
         } else {
             Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
         }
-        API.getMainAPI().isOnMobFarm.putIfAbsent(player, false);
     }
 
     @EventHandler
@@ -119,10 +117,9 @@ public class MechanicHandlers implements Listener {
         Database.saveDatesPlayerFromHub(player.getName());
         Database.saveDatesPlayerFromFactions(player.getName());
         Loader.startTime.removeLong(player.getUniqueId());
-        API.getMainAPI().played.removeLong(player.getName());
-        API.getMainAPI().isOnSpawn.removeBoolean(player);
-        API.getMainAPI().isOnArena.removeBoolean(player);
-        API.getMainAPI().isOnPvP.removeBoolean(player);
+        API.getMainAPI().played.removeLong(player.getUniqueId());
+        API.getMainAPI().isOnSpawn.removeBoolean(player.getUniqueId());
+        API.getMainAPI().isOnArena.removeBoolean(player.getUniqueId());
     }
 
     @EventHandler

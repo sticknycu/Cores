@@ -1,4 +1,4 @@
-package nycuro.api;
+package nycuro.reports.api;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
@@ -8,7 +8,7 @@ import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.scheduler.AsyncTask;
-import nycuro.API;
+import nycuro.api.API;
 import nycuro.gui.list.ResponseFormWindow;
 
 import java.util.Collection;

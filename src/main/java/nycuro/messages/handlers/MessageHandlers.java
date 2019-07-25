@@ -9,7 +9,7 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
-import nycuro.API;
+import nycuro.api.API;
 
 /**
  * author: NycuRO

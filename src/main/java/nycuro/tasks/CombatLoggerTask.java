@@ -5,7 +5,9 @@ import cn.nukkit.potion.Effect;
 import cn.nukkit.scheduler.Task;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import nycuro.API;
+import nycuro.api.API;
+
+import java.util.UUID;
 
 /**
  * author: NycuRO
@@ -14,36 +16,34 @@ import nycuro.API;
  */
 public class CombatLoggerTask extends Task {
 
-    private Object2IntMap<String> k = new Object2IntOpenHashMap<>();
+    private Object2IntMap<UUID> k = new Object2IntOpenHashMap<>();
 
     @Override
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
             if (API.getMechanicAPI().isOnSpawn(player)) {
-                if (!API.getMainAPI().isOnMobFarm.getBoolean(player)) {
-                    Effect effect = Effect.getEffect(Effect.SPEED);
-                    effect.setAmplifier(1);
-                    effect.setDuration(20 * 3);
-                    player.addEffect(effect);
-                }
+                Effect effect = Effect.getEffect(Effect.SPEED);
+                effect.setAmplifier(1);
+                effect.setDuration(20 * 3);
+                player.addEffect(effect);
             }
         }
-        API.getCombatAPI().inCombat.forEach((player, time) -> {
-            if (k.getOrDefault(player.getName(), -1) == -1) k.put(player.getName(), 13);
-            long count = k.getInt(player.getName());
+        API.getCombatAPI().inCombat.forEach((uuid, time) -> {
+            if (k.getOrDefault(uuid, -1) == -1) k.put(uuid, 13);
+            long count = k.getInt(uuid);
             float procent = (float) ((int) (count * 100 / 13));
-            API.getMainAPI().bossbar.get(player.getName()).setText("§7-§8=§7- §7CombatLogger: §6§l" + k.getInt(player.getName()) + " §7-§8=§7-");
-            if (k.getInt(player.getName()) <= 1) API.getMainAPI().bossbar.get(player.getName()).setLength(1F);
-            else API.getMainAPI().bossbar.get(player.getName()).setLength(procent);
-            if (k.getInt(player.getName()) == 0) {
-                if (player.isOnline()) {
+            API.getMainAPI().bossbar.get(uuid).setText("§7-§8=§7- §7CombatLogger: §6§l" + k.getInt(uuid) + " §7-§8=§7-");
+            if (k.getInt(uuid) <= 1) API.getMainAPI().bossbar.get(uuid).setLength(1F);
+            else API.getMainAPI().bossbar.get(uuid).setLength(procent);
+            if (k.getInt(uuid) == 0) {
+                API.getMainAPI().getServer().getPlayer(uuid).ifPresent( (player) -> {
                     player.sendMessage(API.getMessageAPI().getMessageCombatLogger(player));
                     API.getCombatAPI().removeCombat(player);
                     k.removeInt(player.getName());
-                    API.getMainAPI().bossbar.get(player.getName()).setLength(100F);
-                }
+                    API.getMainAPI().bossbar.get(player.getUniqueId()).setLength(100F);
+                });
             }
-            k.replace(player.getName(), k.getInt(player.getName()) - 1);
+            k.replace(uuid, k.getInt(uuid) - 1);
         });
     }
 }

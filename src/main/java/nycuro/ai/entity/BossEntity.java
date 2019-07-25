@@ -3,7 +3,7 @@ package nycuro.ai.entity;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import me.onebone.actaeon.entity.monster.Zombie;
-import nycuro.API;
+import nycuro.api.API;
 
 /**
  * author: NycuRO

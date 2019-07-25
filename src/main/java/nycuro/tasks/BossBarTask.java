@@ -2,7 +2,7 @@ package nycuro.tasks;
 
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
-import nycuro.API;
+import nycuro.api.API;
 import nycuro.Loader;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
@@ -19,7 +19,7 @@ public class BossBarTask extends Task {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
             ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
 
-            if (API.getMainAPI().bossbar.get(player.getName()) != null) {
+            if (API.getMainAPI().bossbar.get(player.getUniqueId()) != null) {
                 if (API.getCombatAPI().inCombat(player)) return;
                 int level = 0;
                 double necessary = 0;
@@ -38,8 +38,8 @@ public class BossBarTask extends Task {
                 } else {
                     message = API.getMessageAPI().getMessageBossBar(player, level, necessary, count);
                 }
-                API.getMainAPI().bossbar.get(player.getName()).setLength(health);
-                API.getMainAPI().bossbar.get(player.getName()).setText(message);
+                API.getMainAPI().bossbar.get(player.getUniqueId()).setLength(health);
+                API.getMainAPI().bossbar.get(player.getUniqueId()).setText(message);
             }
         }
     }

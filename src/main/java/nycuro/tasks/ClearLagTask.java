@@ -5,7 +5,7 @@ import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.item.EntityItem;
 import cn.nukkit.level.Level;
 import cn.nukkit.scheduler.Task;
-import nycuro.API;
+import nycuro.api.API;
 
 import java.util.Collection;
 import java.util.List;

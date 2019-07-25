@@ -3,7 +3,7 @@ package nycuro.commands.list.mechanic.player;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import gt.creeperface.holograms.Holograms;
-import nycuro.API;
+import nycuro.api.API;
 import nycuro.commands.PrincipalCommand;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;

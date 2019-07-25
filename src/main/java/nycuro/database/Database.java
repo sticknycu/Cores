@@ -4,7 +4,7 @@ import cn.nukkit.scheduler.AsyncTask;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import it.unimi.dsi.fastutil.ints.*;
-import nycuro.API;
+import nycuro.api.API;
 import nycuro.Loader;
 import nycuro.database.objects.HomeObject;
 import nycuro.database.objects.ProfileSkyblock;

@@ -4,12 +4,14 @@ import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
-import nycuro.API;
+import nycuro.api.API;
 import nycuro.Loader;
-import nycuro.api.JobsAPI;
+import nycuro.jobs.api.JobsAPI;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
+
+import java.util.UUID;
 
 /**
  * author: NycuRO
@@ -21,21 +23,21 @@ public class ScoreboardTask extends Task {
     @Override
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-            if (API.getMainAPI().scoreboard.get(player.getName()) != null) {
-                API.getMainAPI().scoreboard.get(player.getName()).despawnFrom(player);
+            if (API.getMainAPI().scoreboard.get(player.getUniqueId()) != null) {
+                API.getMainAPI().scoreboard.get(player.getUniqueId()).despawnFrom(player);
                 addToScoreboard(player);
             }
         }
     }
 
     private void addToScoreboard(Player player) {
-        FakeScoreboard scoreboard = API.getMainAPI().scoreboard.get(player.getName());
+        FakeScoreboard scoreboard = API.getMainAPI().scoreboard.get(player.getUniqueId());
 
         Objective scoreboardDisplay = scoreboard.objective.getObjective();
 
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
-        Object2BooleanMap<String> coords = API.getMainAPI().coords;
+        Object2BooleanMap<UUID> coords = API.getMainAPI().coords;
 
         DisplayObjective dobj = new DisplayObjective(
                 scoreboardDisplay,

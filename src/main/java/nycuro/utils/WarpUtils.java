@@ -7,7 +7,7 @@ import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.level.Location;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import nycuro.API;
+import nycuro.api.API;
 import nycuro.gui.list.ResponseFormWindow;
 
 import java.util.Arrays;

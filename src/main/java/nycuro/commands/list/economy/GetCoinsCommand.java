@@ -2,7 +2,7 @@ package nycuro.commands.list.economy;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.API;
+import nycuro.api.API;
 import nycuro.commands.PrincipalCommand;
 import nycuro.database.Database;
 

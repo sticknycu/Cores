@@ -1,4 +1,4 @@
-package nycuro.api;
+package nycuro.dropparty.api;
 
 
 import cn.nukkit.item.ItemFirework;

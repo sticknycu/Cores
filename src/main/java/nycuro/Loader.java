@@ -1,6 +1,5 @@
 package nycuro;
 
-import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.mob.EntityCreeper;
 import cn.nukkit.plugin.PluginBase;
@@ -11,8 +10,11 @@ import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
 import it.unimi.dsi.fastutil.objects.*;
 import nycuro.abuse.handlers.AbuseHandlers;
 import nycuro.ai.AiAPI;
-import nycuro.api.*;
+import nycuro.api.API;
+import nycuro.api.data.*;
+import nycuro.chat.api.MessageAPI;
 import nycuro.chat.handlers.ChatHandlers;
+import nycuro.combat.api.CombatAPI;
 import nycuro.commands.list.boss.SpawnBossCommand;
 import nycuro.commands.list.economy.AddCoinsCommand;
 import nycuro.commands.list.economy.GetCoinsCommand;
@@ -20,7 +22,7 @@ import nycuro.commands.list.economy.SetCoinsCommand;
 import nycuro.commands.list.home.HomeCommand;
 import nycuro.commands.list.jobs.JobCommand;
 import nycuro.commands.list.kits.KitsCommand;
-import nycuro.commands.list.mechanic.*;
+import nycuro.commands.list.mechanic.DropPartyMessageCommand;
 import nycuro.commands.list.mechanic.player.CoordsCommand;
 import nycuro.commands.list.mechanic.player.LangCommand;
 import nycuro.commands.list.mechanic.player.SpawnCommand;
@@ -39,19 +41,26 @@ import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
+import nycuro.dropparty.api.DropPartyAPI;
 import nycuro.gui.handlers.GUIHandlers;
+import nycuro.home.api.HomeAPI;
+import nycuro.jobs.api.JobsAPI;
 import nycuro.jobs.handlers.JobsHandlers;
+import nycuro.kits.api.KitsAPI;
 import nycuro.kits.handlers.KitHandlers;
 import nycuro.level.handlers.LevelHandlers;
 import nycuro.mechanic.handlers.MechanicHandlers;
 import nycuro.messages.handlers.MessageHandlers;
 import nycuro.protection.handlers.ProtectionHandlers;
+import nycuro.reports.api.ReportAPI;
 import nycuro.shop.BuyUtils;
 import nycuro.shop.EnchantUtils;
 import nycuro.shop.MoneyUtils;
 import nycuro.shop.SellUtils;
+import nycuro.shop.api.ShopAPI;
 import nycuro.tasks.*;
 import nycuro.utils.WarpUtils;
+import nycuro.utils.api.UtilsAPI;
 import nycuro.utils.vote.VoteSettings;
 
 import java.util.UUID;
@@ -66,15 +75,13 @@ import java.util.concurrent.TimeUnit;
 public class Loader extends PluginBase {
 
     public static Object2LongMap<UUID> startTime = new Object2LongOpenHashMap<>();
-    public Object2ObjectMap<String, DummyBossBar> bossbar = new Object2ObjectOpenHashMap<>();
-    public Object2ObjectMap<String, FakeScoreboard> scoreboard = new Object2ObjectOpenHashMap<>();
-    public Object2IntMap<String> timers = new Object2IntOpenHashMap<>();
-    public Object2BooleanMap<String> coords = new Object2BooleanOpenHashMap<>();
-    public Object2LongMap<String> played = new Object2LongOpenHashMap<>();
-    public Object2BooleanMap<Player> isOnMobFarm = new Object2BooleanOpenHashMap<>();
-    public Object2BooleanMap<Player> isOnArena = new Object2BooleanOpenHashMap<>();
-    public Object2BooleanMap<Player> isOnPvP = new Object2BooleanOpenHashMap<>();
-    public Object2BooleanMap<Player> isOnSpawn = new Object2BooleanOpenHashMap<>();
+    public Object2ObjectMap<UUID, DummyBossBar> bossbar = new Object2ObjectOpenHashMap<>();
+    public Object2ObjectMap<UUID, FakeScoreboard> scoreboard = new Object2ObjectOpenHashMap<>();
+    public Object2IntMap<UUID> timers = new Object2IntOpenHashMap<>();
+    public Object2BooleanMap<UUID> coords = new Object2BooleanOpenHashMap<>();
+    public Object2LongMap<UUID> played = new Object2LongOpenHashMap<>();
+    public Object2BooleanMap<UUID> isOnSpawn = new Object2BooleanOpenHashMap<>();
+    public Object2BooleanMap<UUID> isOnArena = new Object2BooleanOpenHashMap<>();
 
     public static long dropPartyTime;
     public static int dropPartyVotes;
@@ -197,7 +204,6 @@ public class Loader extends PluginBase {
         API.voteSettingsAPI = new VoteSettings();
         API.reportAPI = new ReportAPI();
         API.homeAPI = new HomeAPI();
-        API.slotsAPI = new SlotsAPI();
     }
 
     private void registerCommands() {

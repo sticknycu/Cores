@@ -2,7 +2,7 @@ package nycuro.commands.list.spawning;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.API;
+import nycuro.api.API;
 import nycuro.commands.PrincipalCommand;
 
 /**
