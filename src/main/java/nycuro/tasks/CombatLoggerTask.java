@@ -39,7 +39,7 @@ public class CombatLoggerTask extends Task {
                 API.getMainAPI().getServer().getPlayer(uuid).ifPresent( (player) -> {
                     player.sendMessage(API.getMessageAPI().getMessageCombatLogger(player));
                     API.getCombatAPI().removeCombat(player);
-                    k.removeInt(player.getName());
+                    k.removeInt(player.getUniqueId());
                     API.getMainAPI().bossbar.get(player.getUniqueId()).setLength(100F);
                 });
             }

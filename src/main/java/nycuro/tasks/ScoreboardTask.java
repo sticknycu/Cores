@@ -55,7 +55,7 @@ public class ScoreboardTask extends Task {
             scoreboardDisplay.setScore(6, "§7| §fGems: §6" + profileProxy.getGems() + "  ", 6);
             scoreboardDisplay.setScore(7, "§7| §fOnline Time: §6" + Loader.time(profileSkyblock.getTime()) + "  ", 7);
             scoreboardDisplay.setScore(8, "§7| §fJob: §6" + JobsAPI.jobs.get(profileSkyblock.getJob()) + "   ", 8);
-            if (coords.getOrDefault(player.getName(), false)) {
+            if (coords.getOrDefault(player.getUniqueId(), false)) {
                 scoreboardDisplay.setScore(9, "§7| §fX: §6" + (int) player.getX() + " §fY: §6" + (int) player.getY() + " §fZ: §6" + (int) player.getZ() + "   ", 9);
             }
             scoreboardDisplay.setScore(10, "§7 " + "" + "    ", 10);

@@ -1,6 +1,5 @@
 <component name="libraryTable">
-  <library name="it.unimi.dsi:Fastutil:8.2.2" type="repository">
-    <properties maven-id="it.unimi.dsi:Fastutil:8.2.2" />
+  <library name="it.unimi.dsi:Fastutil:8.2.2">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/Fastutil-8.2.2.jar!/" />
     </CLASSES>
