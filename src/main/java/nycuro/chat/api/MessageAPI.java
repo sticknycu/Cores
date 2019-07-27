@@ -6,7 +6,6 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.item.Item;
 import cn.nukkit.utils.TextFormat;
-import com.massivecraft.factions.FPlayers;
 import me.lucko.luckperms.api.User;
 import me.lucko.luckperms.api.manager.UserManager;
 import nycuro.api.API;
@@ -558,7 +557,6 @@ public class MessageAPI {
         ProfileProxy profileProxy = Database.profileProxy.get(commandSender.getName());
         Database.addUnAsyncDatesPlayerFactions(player.getName());
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-        String faction = FPlayers.i.get(player.getName()).getFaction().getTag();
         DateFormat simple = new SimpleDateFormat("dd MMM yyyy HH:mm:ss:SSS Z");
         Date firstPlay = new Date(player.getFirstPlayed());
         Date lastPlay = new Date(player.getLastPlayed());
@@ -578,7 +576,6 @@ public class MessageAPI {
                         "§eKills: §6" + profileSkyblock.getKills() + "\n" +
                         "§eDeaths: §6" + profileSkyblock.getDeaths() + "\n" +
                         "§eVotes: §6" + profileProxy.getVotes() + "\n" +
-                        "§eFaction: §6" + faction + "\n" +
                         (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + player.getPlayer().getAddress()) : ("")) + "\n") : ("")) +
                         (player.isOnline() ? ((commandSender.isOp() ? ("§eDevice Model: §6" + player.getPlayer().getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
                         (player.isOnline() ? ("§eOS: §6" + getOS(player.getPlayer()) + "\n") : "");
@@ -598,7 +595,6 @@ public class MessageAPI {
                         "§eKills: §6" + profileSkyblock.getKills() + "\n" +
                         "§eDeaths: §6" + profileSkyblock.getDeaths() + "\n" +
                         "§eVoturi: §6" + profileProxy.getVotes() + "\n" +
-                        "§eFactiune: §6" + faction + "\n" +
                         (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + player.getPlayer().getAddress()) : ("")) + "\n") : ("")) +
                         (player.isOnline() ? ((commandSender.isOp() ? ("§eDevice Model: §6" + player.getPlayer().getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
                         (player.isOnline() ? ("§eOS: §6" + getOS(player.getPlayer()) + "\n") : "");
@@ -1179,10 +1175,10 @@ public class MessageAPI {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
-                STRING_BOSSBAR = "       §6§l»§r-- Level §6§l" + level + "§r --§6§l« §r\n\n  §rNecesarry XP: §6" + Loader.round(count, 2) + "§7/§6" + necesarry;
+                STRING_BOSSBAR = "         mcpe.chzone.eu\n\n       §6§l»§r--- Level §6§l" + level + "§r ---§6§l« §r\n  §rNecesarry XP: §6" + Loader.round(count, 2) + "§7/§6" + necesarry;
                 break;
             case 1:
-                STRING_BOSSBAR = "      §6§l»§r-- Nivel §6§l" + level + "§r --§6§l« §r\n\n  §rXP Necesar: §6" + Loader.round(count, 2) + "§7/§6" + necesarry;
+                STRING_BOSSBAR = "     mcpe.chzone.eu\n\n   §6§l»§r--- Nivel §6§l" + level + "§r ---§6§l« §r\n §rXP Necesar: §6" + Loader.round(count, 2) + "§7/§6" + necesarry;
                 break;
         }
         return STRING_BOSSBAR;
@@ -1192,10 +1188,10 @@ public class MessageAPI {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
-                STRING_BOSSBAR = "    §6§l»§r-- Boss §6§l§r --§6§l« §r\n\n      §rHP: §6" + bosshp + "§7/" + "§6100";
+                STRING_BOSSBAR = "         mcpe.chzone.eu\n\n    §6§l»§r-- Boss §6§l§r --§6§l« §r\n      §rHP: §6" + bosshp + "§7/" + "§6100";
                 break;
             case 1:
-                STRING_BOSSBAR = "   §6§l»§r-- Boss §6§l§r --§6§l« §r\n\n  §rViata: §6" + bosshp + "§7/" + "§6100";
+                STRING_BOSSBAR = "         mcpe.chzone.eu\n\n   §6§l»§r-- Boss §6§l§r --§6§l« §r\n  §rViata: §6" + bosshp + "§7/" + "§6100";
                 break;
         }
         return STRING_BOSSBAR;

@@ -685,8 +685,6 @@ public class Database {
                     preparedStatement.executeUpdate();
                 } catch (SQLException e) {
                     e.printStackTrace();
-                } finally {
-                    Loader.log("Succesfully added to database!");
                 }
             }
         });
