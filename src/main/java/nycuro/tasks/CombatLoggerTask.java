@@ -33,7 +33,7 @@ public class CombatLoggerTask extends Task {
             if (k.getOrDefault(uuid, -1) == -1) k.put(uuid, 13);
             long count = k.getInt(uuid);
             float procent = (float) ((int) (count * 100 / 13));
-            API.getMainAPI().bossbar.get(uuid).setText("         mcpe.chzone.eu\n\n      §7-§8=§7- §7CombatLogger: §6§l" + k.getInt(uuid) + " §7-§8=§7-");
+            API.getMainAPI().bossbar.get(uuid).setText("      §7-§8=§7- §7CombatLogger: §6§l" + k.getInt(uuid) + " §7-§8=§7-");
             if (k.getInt(uuid) <= 1) API.getMainAPI().bossbar.get(uuid).setLength(1F);
             else API.getMainAPI().bossbar.get(uuid).setLength(procent);
             if (k.getInt(uuid) == 0) {
