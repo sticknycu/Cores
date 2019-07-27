@@ -1171,27 +1171,27 @@ public class MessageAPI {
         }
     }
 
-    public String getMessageBossBar(Player player, int level, double necesarry, double count) {
+    public String getMessageBossBar(Player player, int level, double necesarry, double count, String title) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
-                STRING_BOSSBAR = "         mcpe.chzone.eu\n\n       §6§l»§r--- Level §6§l" + level + "§r ---§6§l« §r\n  §rNecesarry XP: §6" + Loader.round(count, 2) + "§7/§6" + necesarry;
+                STRING_BOSSBAR = "         " + title + "\n\n      §6§l»§r--- Level §6§l" + level + "§r ---§6§l« §r\n   §rNecesarry XP: §6" + Loader.round(count, 2) + "§7/§6" + necesarry;
                 break;
             case 1:
-                STRING_BOSSBAR = "     mcpe.chzone.eu\n\n   §6§l»§r--- Nivel §6§l" + level + "§r ---§6§l« §r\n §rXP Necesar: §6" + Loader.round(count, 2) + "§7/§6" + necesarry;
+                STRING_BOSSBAR = "     " + title + "\n\n   §6§l»§r--- Nivel §6§l" + level + "§r ---§6§l« §r\n §rXP Necesar: §6" + Loader.round(count, 2) + "§7/§6" + necesarry;
                 break;
         }
         return STRING_BOSSBAR;
     }
 
-    public String getMessageInArenaBossBar(Player player, double bosshp) {
+    public String getMessageInArenaBossBar(Player player, double bosshp, String title) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
-                STRING_BOSSBAR = "         mcpe.chzone.eu\n\n    §6§l»§r-- Boss §6§l§r --§6§l« §r\n      §rHP: §6" + bosshp + "§7/" + "§6100";
+                STRING_BOSSBAR = "         " + title + "\n\n    §6§l»§r-- Boss §6§l§r --§6§l« §r\n      §rHP: §6" + bosshp + "§7/" + "§6100";
                 break;
             case 1:
-                STRING_BOSSBAR = "         mcpe.chzone.eu\n\n   §6§l»§r-- Boss §6§l§r --§6§l« §r\n  §rViata: §6" + bosshp + "§7/" + "§6100";
+                STRING_BOSSBAR = "         " + title + "\n\n   §6§l»§r-- Boss §6§l§r --§6§l« §r\n  §rViata: §6" + bosshp + "§7/" + "§6100";
                 break;
         }
         return STRING_BOSSBAR;
