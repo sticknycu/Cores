@@ -3,9 +3,9 @@ package nycuro.tasks;
 import cn.nukkit.Player;
 import cn.nukkit.level.Location;
 import cn.nukkit.scheduler.Task;
-import nycuro.api.API;
 import nycuro.Loader;
 import nycuro.ai.entity.BossEntity;
+import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
@@ -40,6 +40,7 @@ public class CheckerTask extends Task {
             if (loc.getLevel().equals(API.getMainAPI().getServer().getDefaultLevel())) {
                 // Vector3 from = new Vector3(1153, 31, 1187);
                 // Vector3 to = new Vector3(1059, 0, 1280);
+                // Arena Check
                 d1[0] = 89; // x from
                 d1[1] = -75; // x to
                 d2[0] = 81; // y from
@@ -50,12 +51,12 @@ public class CheckerTask extends Task {
                 Arrays.sort(d2);
                 Arrays.sort(d3);
                 if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
-                    API.getMainAPI().isOnSpawn.replace(player.getUniqueId(), true);
+                    API.getMainAPI().isOnArena.replace(player.getUniqueId(), true);
                 } else {
-                    API.getMainAPI().isOnSpawn.replace(player.getUniqueId(), false);
+                    API.getMainAPI().isOnArena.replace(player.getUniqueId(), false);
                 }
 
-                // Arena Check
+                // Spawn Check
                 //Vector3 vectorRA = new Vector3(1057, 5, 1175);
                 //Vector3 vectorLA = new Vector3(1154, 29, 1120);
                 d1[0] = 107; // x from
@@ -68,9 +69,9 @@ public class CheckerTask extends Task {
                 Arrays.sort(d2);
                 Arrays.sort(d3);
                 if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
-                    API.getMainAPI().isOnArena.replace(player.getUniqueId(), true);
+                    API.getMainAPI().isOnSpawn.replace(player.getUniqueId(), true);
                 } else {
-                    API.getMainAPI().isOnArena.replace(player.getUniqueId(), false);
+                    API.getMainAPI().isOnSpawn.replace(player.getUniqueId(), false);
                 }
             } else {
                 // Skyblock World

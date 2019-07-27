@@ -3,9 +3,7 @@ package nycuro.kits.data.clasic;
 import cn.nukkit.Player;
 import cn.nukkit.item.Item;
 import nycuro.kits.CommonKit;
-import nycuro.kits.type.TypeClothes;
-import nycuro.kits.type.TypeItems;
-import nycuro.kits.type.TypeKit;
+import nycuro.kits.type.*;
 
 /**
  * author: NycuRO
@@ -15,8 +13,18 @@ import nycuro.kits.type.TypeKit;
 public class StarterKit extends CommonKit {
 
     @Override
-    public TypeKit getKit() {
-        return TypeKit.STARTER;
+    public NameKit getKit() {
+        return NameKit.STARTER;
+    }
+
+    @Override
+    public TypeKit getType() {
+        return TypeKit.CLASSIC;
+    }
+
+    @Override
+    public StatusKit getStatus(Player player) {
+        return StatusKit.UNLOCKED;
     }
 
     @Override

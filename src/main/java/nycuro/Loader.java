@@ -40,6 +40,7 @@ import nycuro.commands.list.utils.UtilsCommand;
 import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
 import nycuro.database.Database;
+import nycuro.database.objects.KitsObject;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.dropparty.api.DropPartyAPI;
 import nycuro.gui.handlers.GUIHandlers;
@@ -168,6 +169,9 @@ public class Loader extends PluginBase {
         for (ProfileSkyblock profileSkyblock : Database.profileSkyblock.values()) {
             Database.saveUnAsyncDatesPlayerFromFactions(profileSkyblock.getName());
         }
+        for (KitsObject kitsObject : Database.kitsSkyblock.values()) {
+            Database.saveUnAsyncDatesPlayerFromKits(kitsObject.getName());
+        }
     }
 
     private void removeAllFromMaps() {
@@ -181,6 +185,7 @@ public class Loader extends PluginBase {
         Database.connectToDatabaseFactions();
         Database.connectToDatabaseReports();
         Database.connectToDatabaseHomesF();
+        Database.connectToDatabaseSKits();
     }
 
     private void registerAPI() {

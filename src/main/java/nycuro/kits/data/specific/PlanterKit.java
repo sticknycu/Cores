@@ -7,7 +7,9 @@ import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
+import nycuro.kits.type.StatusKit;
 import nycuro.kits.type.TypeItems;
+import nycuro.kits.type.NameKit;
 import nycuro.kits.type.TypeKit;
 
 import java.util.ArrayList;
@@ -20,13 +22,23 @@ import java.util.ArrayList;
 public class PlanterKit extends CommonKit {
 
     @Override
-    public TypeKit getKit() {
-        return TypeKit.PLANTER;
+    public NameKit getKit() {
+        return NameKit.PLANTER;
+    }
+
+    @Override
+    public TypeKit getType() {
+        return TypeKit.SPECIFIC;
     }
 
     @Override
     public double getPrice() {
         return 1500d;
+    }
+
+    @Override
+    public StatusKit getStatus(Player player) {
+        return StatusKit.UNLOCKED;
     }
 
     @Override

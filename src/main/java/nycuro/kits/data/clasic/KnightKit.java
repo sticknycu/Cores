@@ -8,9 +8,7 @@ import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
-import nycuro.kits.type.TypeClothes;
-import nycuro.kits.type.TypeItems;
-import nycuro.kits.type.TypeKit;
+import nycuro.kits.type.*;
 
 /**
  * author: NycuRO
@@ -20,13 +18,23 @@ import nycuro.kits.type.TypeKit;
 public class KnightKit extends CommonKit {
 
     @Override
-    public TypeKit getKit() {
-        return TypeKit.KNIGHT;
+    public NameKit getKit() {
+        return NameKit.KNIGHT;
+    }
+
+    @Override
+    public TypeKit getType() {
+        return TypeKit.CLASSIC;
     }
 
     @Override
     public double getPrice() {
         return 5000d;
+    }
+
+    @Override
+    public StatusKit getStatus(Player player) {
+        return StatusKit.UNLOCKED;
     }
 
     @Override

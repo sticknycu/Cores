@@ -92,6 +92,13 @@ public class MechanicHandlers implements Listener {
                 Database.addDatesPlayerFactions(player.getName());
             }
         });
+        API.getDatabase().playerKitsExist(player.getName(), bool -> {
+            if (!bool) {
+                API.getDatabase().addNewPlayerToKits(player.getName());
+            } else {
+                Database.addDatesKitsPlayer(player.getName());
+            }
+        });
         if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
             Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
         } else {
@@ -116,6 +123,7 @@ public class MechanicHandlers implements Listener {
         Player player = event.getPlayer();
         Database.saveDatesPlayerFromHub(player.getName());
         Database.saveDatesPlayerFromFactions(player.getName());
+        Database.saveDatesPlayerFromKits(player.getName());
         Loader.startTime.removeLong(player.getUniqueId());
         API.getMainAPI().played.removeLong(player.getUniqueId());
         API.getMainAPI().isOnSpawn.removeBoolean(player.getUniqueId());

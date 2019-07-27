@@ -5,7 +5,7 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import nycuro.kits.api.KitsAPI;
-import nycuro.kits.type.TypeKit;
+import nycuro.kits.type.NameKit;
 
 /**
  * author: NycuRO
@@ -18,7 +18,7 @@ public class KitHandlers implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (!player.hasPlayedBefore()) {
-            KitsAPI.kits.get(TypeKit.STARTER).sendKit(player);
+            KitsAPI.kits.get(NameKit.STARTER).sendKit(player);
         }
     }
 }

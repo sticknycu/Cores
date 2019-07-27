@@ -2,8 +2,11 @@ package nycuro.kits;
 
 import cn.nukkit.Player;
 import cn.nukkit.item.Item;
+import cn.nukkit.utils.TextFormat;
 import lombok.Getter;
 import lombok.Setter;
+import nycuro.kits.type.StatusKit;
+import nycuro.kits.type.NameKit;
 import nycuro.kits.type.TypeKit;
 
 public abstract class CommonKit {
@@ -48,11 +51,14 @@ public abstract class CommonKit {
     public long timer;
 
     @Getter
-    @Setter
-    public TypeKit kit;
+    public TypeKit type;
 
-    protected String symbol = "§6";
-    protected String empty = " ";
+    @Getter
+    @Setter
+    public NameKit kit;
+
+    public String symbol = TextFormat.GOLD.toString();
+    public String empty = " ";
 
     public abstract boolean passTimer(Player player);
 
@@ -61,4 +67,6 @@ public abstract class CommonKit {
     public abstract boolean canAddKit(Player player);
 
     public abstract boolean hasEnoughDollars(Player player);
+
+    public abstract StatusKit getStatus(Player player);
 }

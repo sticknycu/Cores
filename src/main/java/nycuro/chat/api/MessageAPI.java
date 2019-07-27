@@ -16,7 +16,7 @@ import nycuro.chat.handlers.ChatHandlers;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
-import nycuro.kits.type.TypeKit;
+import nycuro.kits.type.NameKit;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -107,6 +107,19 @@ public class MessageAPI {
                 break;
             case 1:
                 STRING = "§e» §6Ai fost teleportat la Arena!";
+                break;
+        }
+        return STRING;
+    }
+
+    public String sendLockedKitStatus(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§e» §6This kit is LOCKED! Please unlock this kit using Premium Shop (/shop)!";
+                break;
+            case 1:
+                STRING = "§e» §6Acest kit este BLOCAT! Te rog deblocheaza acest kit folosind Premium Shop (/shop)!";
                 break;
         }
         return STRING;
@@ -691,7 +704,7 @@ public class MessageAPI {
         }
     }
 
-    public void sendReceiveKitMessage(Player player, TypeKit typeKit) {
+    public void sendReceiveKitMessage(Player player, NameKit typeKit) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
@@ -1735,6 +1748,62 @@ public class MessageAPI {
                         "§eCooldown: 24h.\n" +
                         "§eCosta: §71000$\n\n" +
                         "§eIteme: §7Echipament Iron Enchantat, Unelte Echantate de Diamond, 32 Paini, 12 TNT, 64 Obsidian\n\n";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInfoMessagePremiumKits(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                      Hello!\n" +
+                        "            Welcome to Info Premium Kits!\n\n" +
+                        "§c» §aViper:\n" +
+                        "§eCooldown: 48h.\n" +
+                        "§eCost: §75000$\n" +
+                        "§eItems: §7Full Iron Enchanted Armor, Full Iron Enchanted Tools, 64 Steaks, 10 Potions Regeneration 2, 10 Potions Strenght 1\n\n" +
+                        "§c» §aMaster:\n" +
+                        "§eCooldown: 48h.\n" +
+                        "§eCost: §76000$\n\n" +
+                        "§eItems: §7Full Diamond Enchanted Armor, Full Iron Enchanted Tools, 64 Steaks, 10 Potions Instant Heal 1, 10 Potions Instant Damage 1\n\n" +
+                        "§c» §aKiller:\n" +
+                        "§eCooldown: 48h.\n" +
+                        "§eCost: §77500$\n\n" +
+                        "§eItems: §7Full Iron Enchanted Armor, x1 Super Diamond Enchanted Sword, Full Iron Enchanted Tools, 64 Steaks, 4 Potions Instant Heal 1, 4 Potions Instant Damage 1\n\n" +
+                        "§c» §aDetonator:\n" +
+                        "§eCooldown: 48h.\n" +
+                        "§eCost: §79000$\n\n" +
+                        "§eItems: §7Full Chain Enchanted Armor, Full Diamond Enchanted Tools, 64 Steaks, 10 Potions Speed 2, 10 Splash Potions Poison 2\n\n" +
+                        "§c» §aTurret Monkey:\n" +
+                        "§eCooldown: 48h.\n" +
+                        "§eCost: §712000$\n\n" +
+                        "§eItems: §7Full Diamond Enchanted Armor, Diamond Enchanted Tools, 64 Steaks, 10 Potions Speed 2, 10 Splash Potions Speed 2, 24 Splash Potions Instant Kill, 24 Potions Fire Resistance\n\n";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "          Bine ai venit la Info Classic Kits!\n\n" +
+                        "§c» §aViper:\n" +
+                        "§eCooldown: 48h.\n" +
+                        "§eCost: §75000$\n" +
+                        "§eItems: §7Echipament Iron Enchantat, Unelte Iron Enchantate, 64 Steak, 10 Potiuni Regeneration 2, 10 Potiuni Strenght 1\n\n" +
+                        "§c» §aMaster:\n" +
+                        "§eCooldown: 48h.\n" +
+                        "§eCost: §76000$\n\n" +
+                        "§eItems: §7Echipament Diamond Enchantat, Unelte Iron Enchantate, 64 Steak, 10 Potiuni Instant Heal 1, 10 Potiuni Instant Damage 1\n\n" +
+                        "§c» §aKiller:\n" +
+                        "§eCooldown: 48h.\n" +
+                        "§eCost: §77500$\n\n" +
+                        "§eItems: §7Echipament Iron Enchantat, x1 Sabie Diamond SUPER Enchantata, Unelte Iron Enchantate, 64 Steak, 4 Potiuni Instant Heal 1, 4 Potiuni Instant Damage 1\n\n" +
+                        "§c» §aDetonator:\n" +
+                        "§eCooldown: 48h.\n" +
+                        "§eCost: §79000$\n\n" +
+                        "§eItems: §7Echipament Chain Enchantat, Unelte Diamond Enchantate, 64 Steak, 10 Potiuni Speed 2, 10 Potiuni Splash Poison 2\n\n" +
+                        "§c» §aTurret Monkey:\n" +
+                        "§eCooldown: 48h.\n" +
+                        "§eCost: §712000$\n\n" +
+                        "§eItems: §7Echipament Diamond Enchantat, Unelte Diamond Enchantate, 64 Steak, 10 Potiuni Speed 2, 10 Potiuni Splash Speed 2, 24 Potiuni Splash Instant Kill, 24 Potiuni Fire Resistance\n\n";
                 break;
         }
         return string;

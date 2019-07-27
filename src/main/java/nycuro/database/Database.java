@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.ints.*;
 import nycuro.api.API;
 import nycuro.Loader;
 import nycuro.database.objects.HomeObject;
+import nycuro.database.objects.KitsObject;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.database.objects.ProfileProxy;
 
@@ -29,10 +30,12 @@ public class Database {
     public static Int2LongMap scoreboardtimeValue = new Int2LongOpenHashMap();
     public static Map<String, ProfileProxy> profileProxy = new HashMap<>();
     public static Map<String, ProfileSkyblock> profileSkyblock = new HashMap<>();
+    public static Map<String, KitsObject> kitsSkyblock = new HashMap<>();
     private static HikariDataSource DATASOURCE_PROXY;
     private static HikariDataSource DATASOURCE_SKYBLOCK;
     private static HikariDataSource DATASOURCE_REPORTS;
     private static HikariDataSource DATASOURCE_HOMESF;
+    private static HikariDataSource DATASOURCE_SKITS;
 
     public static void connectToDatabaseHomesF() {
         String address = "hosting3.gazduirejocuri.ro";
@@ -54,6 +57,33 @@ public class Database {
         String query = "create table if not exists homes (`name` varchar(20), `x` int, `y` int, `z` int, `worldname` varchar(20), `homename` varchar(20))";
 
         try (Connection connection = DATASOURCE_HOMESF.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void connectToDatabaseSKits() {
+        String address = "hosting3.gazduirejocuri.ro";
+        String name = "chzoneeu_skyblockkits";
+        String username = "chzoneeu_nycu";
+        String password = "unprost2019";
+
+        HikariConfig config = new HikariConfig();
+        config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
+        config.addDataSourceProperty("serverName", address);
+        config.addDataSourceProperty("port", "3306");
+        config.addDataSourceProperty("databaseName", name);
+        config.addDataSourceProperty("user", username);
+        config.addDataSourceProperty("password", password);
+        DATASOURCE_SKITS = new HikariDataSource(config);
+
+        DATASOURCE_SKITS.setMaximumPoolSize(10);
+
+        String query = "create table if not exists kits (`name` varchar(20), `punu` BIT, `pdoi` BIT, `ptrei` BIT, `ppatru` BIT, `pcinci` BIT)";
+
+        try (Connection connection = DATASOURCE_SKITS.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -109,6 +139,59 @@ public class Database {
 
         try (Connection connection = DATASOURCE_PROXY.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addDatesKitsPlayer(String name) {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_SKITS.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("SELECT * from `kits` WHERE `name` =?")) {
+                    preparedStatement.setString(1, name);
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        while (resultSet.next()) {
+                            kitsSkyblock.putIfAbsent(name, new KitsObject(
+                                    resultSet.getString("name"),
+                                    resultSet.getBoolean("punu"),
+                                    resultSet.getBoolean("pdoi"),
+                                    resultSet.getBoolean("ptrei"),
+                                    resultSet.getBoolean("ppatru"),
+                                    resultSet.getBoolean("pcinci")
+                            ));
+                        }
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public static void saveDatesPlayerFromKits(String name) {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                saveUnAsyncDatesPlayerFromHub(name);
+            }
+        });
+    }
+
+    public static void saveUnAsyncDatesPlayerFromKits(String name) {
+        KitsObject profileKits = Database.kitsSkyblock.get(name);
+        try (Connection connection = DATASOURCE_SKITS.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("UPDATE `kits` SET `punu` = ?, `pdoi` = ?, `ptrei` = ?, `ppatru` = ?, `pcinci` = ? WHERE `name` = ?")) {
+            preparedStatement.setBoolean(1, profileKits.isPremium1());
+            preparedStatement.setBoolean(2, profileKits.isPremium2());
+            preparedStatement.setBoolean(3, profileKits.isPremium3());
+            preparedStatement.setBoolean(4, profileKits.isPremium4());
+            preparedStatement.setBoolean(5, profileKits.isPremium5());
+            preparedStatement.setString(6, name);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -578,6 +661,37 @@ public class Database {
         });
     }
 
+    public void addNewPlayerToKits(String name) {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_SKITS.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("INSERT INTO kits (`name`, `punu`, `pdoi`, `ptrei`, `ppatru`, `pcinci`) VALUES (?, ?, ?, ?, ?, ?)")) {
+                    preparedStatement.setString(1, name);
+                    preparedStatement.setBoolean(2, false);
+                    preparedStatement.setBoolean(3, false);
+                    preparedStatement.setBoolean(4, false);
+                    preparedStatement.setBoolean(5, false);
+                    preparedStatement.setBoolean(6, false);
+                    kitsSkyblock.put(name, new KitsObject(
+                            name,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false
+                    ));
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    Loader.log("Succesfully added to database!");
+                }
+            }
+        });
+    }
+
     public static void saveDatesPlayerFromFactions(String name) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
@@ -594,6 +708,24 @@ public class Database {
                 try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
                      PreparedStatement preparedStatement =
                              connection.prepareStatement("SELECT * from `dates` WHERE `name` =?")) {
+                    preparedStatement.setString(1, name);
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        consumer.accept(resultSet.next());
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void playerKitsExist(String name, Consumer<Boolean> consumer) {
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                try (Connection connection = DATASOURCE_SKITS.getConnection();
+                     PreparedStatement preparedStatement =
+                             connection.prepareStatement("SELECT * from `kits` WHERE `name` =?")) {
                     preparedStatement.setString(1, name);
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         consumer.accept(resultSet.next());
