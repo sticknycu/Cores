@@ -11,7 +11,7 @@ import it.unimi.dsi.fastutil.objects.*;
 import nycuro.abuse.handlers.AbuseHandlers;
 import nycuro.ai.AiAPI;
 import nycuro.api.API;
-import nycuro.api.data.*;
+import nycuro.api.data.MechanicAPI;
 import nycuro.chat.api.MessageAPI;
 import nycuro.chat.handlers.ChatHandlers;
 import nycuro.combat.api.CombatAPI;
@@ -23,9 +23,7 @@ import nycuro.commands.list.home.HomeCommand;
 import nycuro.commands.list.jobs.JobCommand;
 import nycuro.commands.list.kits.KitsCommand;
 import nycuro.commands.list.mechanic.DropPartyMessageCommand;
-import nycuro.commands.list.mechanic.player.CoordsCommand;
-import nycuro.commands.list.mechanic.player.LangCommand;
-import nycuro.commands.list.mechanic.player.SpawnCommand;
+import nycuro.commands.list.mechanic.player.*;
 import nycuro.commands.list.mechanic.tops.TopCoinsCommand;
 import nycuro.commands.list.mechanic.tops.TopDeathsCommand;
 import nycuro.commands.list.mechanic.tops.TopKillsCommand;
@@ -64,6 +62,8 @@ import nycuro.utils.WarpUtils;
 import nycuro.utils.api.UtilsAPI;
 import nycuro.utils.vote.VoteSettings;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -83,6 +83,7 @@ public class Loader extends PluginBase {
     public Object2LongMap<UUID> played = new Object2LongOpenHashMap<>();
     public Object2BooleanMap<UUID> isOnSpawn = new Object2BooleanOpenHashMap<>();
     public Object2BooleanMap<UUID> isOnArena = new Object2BooleanOpenHashMap<>();
+    public Collection<UUID> staffChat = new ArrayList<>();
 
     public static long dropPartyTime;
     public static int dropPartyVotes;
@@ -145,6 +146,7 @@ public class Loader extends PluginBase {
 
     @Override
     public void onDisable() {
+        API.getMechanicAPI().handleTransferHub(this.getServer().getOnlinePlayers().values().iterator().next(), 1);
         saveToDatabase();
         removeNPC();
         removeAllFromMaps();
@@ -234,6 +236,10 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("arena", new ArenaCommand());
         this.getServer().getCommandMap().register("report", new ReportCommand());
         this.getServer().getCommandMap().register("coords", new CoordsCommand());// TODO: Save to Database
+        this.getServer().getCommandMap().register("settings", new SettingsCommand());
+        this.getServer().getCommandMap().register("hub", new HubCommand());
+        this.getServer().getCommandMap().register("staffchat", new StaffChatCommand());
+        this.getServer().getCommandMap().register("helpop", new HelpOpCommand());
     }
 
     private void registerEvents() {

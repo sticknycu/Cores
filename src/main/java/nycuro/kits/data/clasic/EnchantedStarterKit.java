@@ -39,7 +39,7 @@ public class EnchantedStarterKit extends CommonKit {
 
     @Override
     public Item getHelmet() {
-        Item item = Item.get(Item.LEATHER_CAP);
+        Item item = Item.get(Item.CHAIN_HELMET);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(symbol + getKit().getName() + empty + TypeClothes.HELMET.getType());
         return item;
@@ -47,7 +47,7 @@ public class EnchantedStarterKit extends CommonKit {
 
     @Override
     public Item getArmor() {
-        Item item = Item.get(Item.LEATHER_TUNIC);
+        Item item = Item.get(Item.CHAIN_CHESTPLATE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(symbol + getKit().getName() + empty + TypeClothes.ARMOR.getType());
         return item;
@@ -55,7 +55,7 @@ public class EnchantedStarterKit extends CommonKit {
 
     @Override
     public Item getPants() {
-        Item item = Item.get(Item.LEATHER_PANTS);
+        Item item = Item.get(Item.CHAIN_LEGGINGS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(symbol + getKit().getName() + empty + TypeClothes.PANTS.getType());
         return item;
@@ -63,7 +63,7 @@ public class EnchantedStarterKit extends CommonKit {
 
     @Override
     public Item getBoots() {
-        Item item = Item.get(Item.LEATHER_BOOTS);
+        Item item = Item.get(Item.CHAIN_BOOTS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(symbol + getKit().getName() + empty + TypeClothes.BOOTS.getType());
         return item;

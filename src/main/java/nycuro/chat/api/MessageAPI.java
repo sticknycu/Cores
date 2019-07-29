@@ -724,6 +724,18 @@ public class MessageAPI {
         }
     }
 
+    public void sendAbandonedStaffchatMessage(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        switch (lang) {
+            case 0:
+                player.sendMessage("§7(§e!§7) §eInfo: §6You abandonated StaffChat!");
+                break;
+            case 1:
+                player.sendMessage("§7(§e!§7) §eInfo: §6Ai abandonat StaffChat!");
+                break;
+        }
+    }
+
     public void sendCommandSpawnMessage(Player player) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
@@ -893,6 +905,18 @@ public class MessageAPI {
         }
     }
 
+    public void sendSuccesEnterStaffChat(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        switch (lang) {
+            case 0:
+                player.sendMessage("§7» §aYou entered succesfuly on StaffChat!");
+                break;
+            case 1:
+                player.sendMessage("§7» §aAi intrat cu succes pe StaffChat!");
+                break;
+        }
+    }
+
     public void sendUnsuficientExperienceMessage(Player player, int needed) {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
@@ -925,6 +949,18 @@ public class MessageAPI {
                 break;
             case 1:
                 player.sendMessage("§7» §eOpsss!!! Poti vinde iteme doar in Survival Mode!");
+                break;
+        }
+    }
+
+    public void sendNoStaffOnlineMessage(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        switch (lang) {
+            case 0:
+                player.sendMessage("§7» §eOpsss!!! There's no Staff Online....");
+                break;
+            case 1:
+                player.sendMessage("§7» §eOpsss!!! Nu e nici un Staff pe server....");
                 break;
         }
     }
@@ -2094,6 +2130,24 @@ public class MessageAPI {
                         "§ePentru a te teleporta la boss trebuie sa apesi pe fereastra 'PvP Arena'.\n" +
                         "§c» §aCum te teleportezi la PvP?\n" +
                         "§ePentru a te teleporta la PvP trebuie sa apesi pe fereastra 'PvP Arena'";
+                break;
+        }
+        return string;
+    }
+
+    public String sendInfoMessageSettings(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        String string = "";
+        switch (lang) {
+            case 0:
+                string = "                      Hello!\n" +
+                        "          Welcome to Player Settings!\n\n" +
+                        "§eSelect your preference at have fun on Server!";
+                break;
+            case 1:
+                string = "                      Salut!\n" +
+                        "          Bine ai venit la Setarile Jucatorului!\n\n" +
+                        "§eAlege setarile tale preferate si distractie placuta pe Server!";
                 break;
         }
         return string;

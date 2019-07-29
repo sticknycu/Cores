@@ -59,6 +59,19 @@ public class ChatHandlers implements Listener {
         s = s.replace("%lvl", lvl);
         s = TextFormat.colorize(s);
 
-        event.setFormat(s);
+        if (API.getMainAPI().staffChat.contains(player.getUniqueId())) {
+            event.setFormat(API.getMechanicAPI().staffchatTag + s);
+        }  else {
+            event.setFormat(s);
+        }
+
+        // StaffChat
+        if (player.hasPermission("core.staffchat")) {
+            API.getMechanicAPI().handleStaffChat(player, message, 0);
+        }
+
+        if (API.getMainAPI().staffChat.contains(player.getUniqueId())) {
+            API.getMechanicAPI().handleStaffChat(player, message, 1);
+        }
     }
 }

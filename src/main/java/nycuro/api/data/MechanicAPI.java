@@ -5,9 +5,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.entity.Entity;
-import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.element.ElementButtonImageData;
-import cn.nukkit.form.element.ElementLabel;
+import cn.nukkit.form.element.*;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.item.Item;
@@ -16,6 +14,7 @@ import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
 import cn.nukkit.nbt.tag.*;
 import cn.nukkit.utils.DummyBossBar;
+import cn.nukkit.utils.TextFormat;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nukkitcoders.mobplugin.entities.monster.flying.Wither;
 import nycuro.api.API;
@@ -24,6 +23,9 @@ import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
 
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -102,6 +104,61 @@ public class MechanicAPI {
         FormWindowCustom infoMenu = new FormWindowCustom("Stats");
         infoMenu.addElement(new ElementLabel(API.getMessageAPI().getStatsCommand(commandSender, player)));
         ((Player) commandSender).showFormWindow(infoMenu);
+    }
+
+    public void handleTransferHub(Player player, int i) {
+        InetSocketAddress hub = new InetSocketAddress("mcpe.chzone.eu", 19132);
+        switch (i) {
+            case 0: // transfer singur jucator in Hub
+                player.transfer(hub);
+                break;
+            case 1:
+                for (Player player1 : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+                    player1.transfer(hub);
+                }
+                break;
+        }
+    }
+
+    public String helpopTag = TextFormat.GRAY + "[" + TextFormat.YELLOW + "HELPOP" + TextFormat.GRAY + "]" + " ";
+    public String staffchatTag = TextFormat.GRAY + "[" + TextFormat.RED + "STAFFCHAT" + TextFormat.GRAY + "]" + " ";
+
+    public void handleStaffChat(Player player, String message, int type) {
+        switch (type) {
+            case 0:
+                if (message.startsWith("@")) {
+                    String[] msg = message.split("@");
+                    handleHelpop(player, msg[1], staffchatTag);
+                }
+                break;
+            case 1:
+                handleHelpop(player, message, staffchatTag);
+                break;
+        }
+    }
+
+    public void handleHelpop(Player pp, String message, String tag) {
+        if (API.getMainAPI().staffChat.isEmpty()) {
+            for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+                if (player.hasPermission("core.staffchat")) {
+                    player.sendMessage(tag + message);
+                } else {
+                    API.getMessageAPI().sendNoStaffOnlineMessage(player);
+                    return;
+                }
+            }
+        } else {
+            API.getMainAPI().staffChat.forEach(
+                    (p) -> {
+                        API.getMainAPI().getServer().getPlayer(p).ifPresent((pl) -> {
+                            pl.sendMessage(tag + message);
+                        });
+                    }
+            );
+        }
+        if (!pp.hasPermission("core.staffchat")) {
+            pp.sendMessage(tag + message);
+        }
     }
 
     /*public void spawnFireworks() {
@@ -264,6 +321,33 @@ public class MechanicAPI {
                                 return;
                             }
                     }
+                }
+            }
+        }));
+    }
+
+    public void sendSettingsForm(Player player) {
+        FormWindowCustom infoMenu = new FormWindowCustom("Settings Player");
+        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageArena(player)));
+        infoMenu.addElement(new ElementToggle("Show BossBar", true));
+        infoMenu.addElement(new ElementToggle("Show Scoreboard", true));
+        infoMenu.addElement(new ElementToggle("Show Popup", true));
+        List<String> list = new ArrayList<>();
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+        infoMenu.addElement(new ElementStepSlider("Toggle Render Distance", list));
+        player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
+            @Override
+            public void accept(Map<Integer, Object> response) {
+                if (!response.isEmpty()) {
+                    System.out.println(response.entrySet().iterator().next().getKey() + " key");
+                    System.out.println(response.entrySet().iterator().next().getValue() + " Value");
+                    /*switch (response.entrySet().iterator().next().getKey()) {
+                        case 0:
+                            bre
+                    }*/
                 }
             }
         }));

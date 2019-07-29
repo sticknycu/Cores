@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/nycuro/chat/api/MessageAPI.java" description="        int lang = Database.profileProxy.getOrDefa..." line="1478" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/nycuro/chat/api/MessageAPI.java" description="        int lang = Database.profileProxy.getOrDefa..." line="1514" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="236dbe0b-d39a-4bd2-88a6-053714ed28a0" name="Default" comment="">
@@ -78,10 +78,36 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/ClearLagTask.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="42" column="77" selection-start-line="42" selection-start-column="77" selection-end-line="42" selection-end-column="77" />
+            <state relative-caret-position="291">
+              <caret line="125" column="27" selection-start-line="125" selection-start-column="27" selection-end-line="125" selection-end-column="27" />
+              <folding>
+                <element signature="e#6570#6571#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/SettingsCommand.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#326#327#0" expanded="true" />
+                <element signature="e#377#378#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/HubCommand.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -89,65 +115,34 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreTagTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="42" column="13" lean-forward="true" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/RegisterTopsTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/Loader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="261" column="76" selection-start-line="261" selection-start-column="76" selection-end-line="261" selection-end-column="76" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/FixBugHealthTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="31" column="28" lean-forward="true" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/BossBarTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/CombatLoggerTask.java">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="35" column="56" selection-start-line="35" selection-start-column="56" selection-end-line="35" selection-end-column="56" />
+              <caret line="241" column="81" selection-start-line="241" selection-start-column="81" selection-end-line="241" selection-end-column="81" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/Database.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/StaffChatCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="710">
-              <caret line="687" column="17" selection-start-line="687" selection-start-column="17" selection-end-line="687" selection-end-column="17" />
+            <state relative-caret-position="408">
+              <caret line="29" column="68" selection-start-line="29" selection-start-column="68" selection-end-line="29" selection-end-column="68" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#328#329#0" expanded="true" />
+                <element signature="e#384#385#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/chat/handlers/ChatHandlers.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="521">
+              <caret line="73" column="69" selection-start-line="73" selection-start-column="69" selection-end-line="73" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -155,8 +150,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/chat/api/MessageAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="691" column="25" selection-start-line="691" selection-start-column="25" selection-end-line="691" selection-end-column="25" />
+            <state relative-caret-position="11985">
+              <caret line="726" column="29" selection-start-line="726" selection-start-column="29" selection-end-line="726" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -165,10 +160,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreboardTask.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/HelpOpCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="53" column="56" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
+            <state relative-caret-position="306">
+              <caret line="20" column="66" selection-start-line="20" selection-start-column="66" selection-end-line="20" selection-end-column="66" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -184,7 +182,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>damage</find>
       <find>onHurt</find>
       <find>Event event</find>
       <find>AI FOST teleportat cu</find>
@@ -214,6 +211,7 @@
       <find>DATASOURCE_SKYBLOCK</find>
       <find>addnew</find>
       <find>finally</find>
+      <find>info</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -258,11 +256,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/jobs/handlers/JobsHandlers.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/tasks/ClearLagTask.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/api/KitsAPI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/commands/list/kits/KitsCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/api/CombatAPI.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/protection/handlers/ProtectionHandlers.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/CoordsCommand.java" />
@@ -272,12 +265,9 @@
         <option value="$PROJECT_DIR$/src/main/java/nycuro/api/API.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/level/handlers/LevelHandlers.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/SpawnCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/type/StatusKit.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/database/objects/KitsObject.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/Loader.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/type/TypeKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/EnchantedStarterKit.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/GuardianKit.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/KnightKit.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/PaladinKit.java" />
@@ -305,10 +295,18 @@
         <option value="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreTagTask.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/database/Database.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/tasks/CombatLoggerTask.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/chat/api/MessageAPI.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/tasks/BossBarTask.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreboardTask.java" />
         <option value="$PROJECT_DIR$/src/main/java/nycuro/tasks/FixBugHealthTask.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/SettingsCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/HubCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nycuro/Loader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nycuro/chat/api/MessageAPI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/StaffChatCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/EnchantedStarterKit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nycuro/chat/handlers/ChatHandlers.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/HelpOpCommand.java" />
       </list>
     </option>
   </component>
@@ -356,6 +354,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -498,6 +498,72 @@
               <item name="nycuro" type="462c0819:PsiDirectoryNode" />
               <item name="commands" type="462c0819:PsiDirectoryNode" />
               <item name="list" type="462c0819:PsiDirectoryNode" />
+              <item name="boss" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Cores" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="list" type="462c0819:PsiDirectoryNode" />
+              <item name="ranks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Cores" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="list" type="462c0819:PsiDirectoryNode" />
+              <item name="economy" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Cores" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="list" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Cores" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="list" type="462c0819:PsiDirectoryNode" />
+              <item name="jobs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Cores" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="list" type="462c0819:PsiDirectoryNode" />
+              <item name="kits" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Cores" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="list" type="462c0819:PsiDirectoryNode" />
               <item name="mechanic" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -568,6 +634,26 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="nycuro" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Cores" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+              <item name="handlers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Cores" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+              <item name="list" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
@@ -687,15 +773,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
               <item name="shop" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -758,8 +835,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -837,9 +912,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20842217" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1716418" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -867,7 +941,7 @@
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Maven Projects" order="7" visible="true" weight="0.1453125" />
-      <window_info anchor="right" id="Maven" order="8" visible="true" weight="0.15458423" />
+      <window_info active="true" anchor="right" id="Maven" order="8" visible="true" weight="0.110341154" />
       <window_info anchor="right" id="Database" order="9" />
     </layout>
   </component>
@@ -888,55 +962,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/api/API.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="53" column="34" selection-start-line="53" selection-start-column="34" selection-end-line="53" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/level/handlers/LevelHandlers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="73" column="37" selection-start-line="73" selection-start-column="37" selection-end-line="73" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/SpawnCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="26" column="57" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/utils/WarpUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/kits/type/TypeClothes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/kits/type/TypeItems.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/RestartTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/objects/HomeObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -961,17 +986,6 @@
           <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/EnchantedStarterKit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="24" selection-start-line="24" selection-end-line="27" selection-end-column="5" />
-          <folding>
-            <element signature="e#601#602#0" expanded="true" />
-            <element signature="e#639#640#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1024,20 +1038,6 @@
             <element signature="e#620#621#0" expanded="true" />
             <element signature="e#779#780#0" expanded="true" />
             <element signature="e#820#821#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/StarterKit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#387#388#0" expanded="true" />
-            <element signature="e#425#426#0" expanded="true" />
-            <element signature="e#509#510#0" expanded="true" />
-            <element signature="e#550#551#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1104,18 +1104,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="36" column="45" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
-          <folding>
-            <element signature="e#1215#1216#0" expanded="true" />
-            <element signature="e#1431#1432#0" expanded="true" />
-            <element signature="e#1513#1514#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1292,9 +1280,12 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/ClearLagTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
+        <state relative-caret-position="578">
           <caret line="42" column="77" selection-start-line="42" selection-start-column="77" selection-end-line="42" selection-end-column="77" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1302,58 +1293,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="710">
-          <caret line="687" column="17" selection-start-line="687" selection-start-column="17" selection-end-line="687" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/CombatLoggerTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="35" column="56" selection-start-line="35" selection-start-column="56" selection-end-line="35" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/Loader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="261" column="76" selection-start-line="261" selection-start-column="76" selection-end-line="261" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/BossBarTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/chat/api/MessageAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="691" column="25" selection-start-line="691" selection-start-column="25" selection-end-line="691" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreboardTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="53" column="56" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreTagTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="42" column="13" lean-forward="true" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
+        <state relative-caret-position="612">
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1364,10 +1307,151 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/BossBarTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/CombatLoggerTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="35" column="56" selection-start-line="35" selection-start-column="56" selection-end-line="35" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11305">
+          <caret line="687" column="17" selection-start-line="687" selection-start-column="17" selection-end-line="687" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreboardTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="53" column="56" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/tasks/FixBugHealthTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="31" column="28" lean-forward="true" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+        <state relative-caret-position="561">
+          <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/CoordsCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="7" selection-start-line="7" selection-end-line="31" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/nukkit-1.0-SNAPSHOT.jar!/cn/nukkit/form/element/ElementSlider.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="59" column="5" lean-forward="true" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+          <folding>
+            <element signature="e#514#515#0" expanded="true" />
+            <element signature="e#563#564#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/StarterKit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-346">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/EnchantedStarterKit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-544">
+          <caret line="65" column="45" selection-start-line="65" selection-start-column="45" selection-end-line="65" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/SettingsCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#326#327#0" expanded="true" />
+            <element signature="e#377#378#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/HubCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/StaffChatCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="29" column="68" selection-start-line="29" selection-start-column="68" selection-end-line="29" selection-end-column="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#328#329#0" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/chat/api/MessageAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11985">
+          <caret line="726" column="29" selection-start-line="726" selection-start-column="29" selection-end-line="726" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="125" column="27" selection-start-line="125" selection-start-column="27" selection-end-line="125" selection-end-column="27" />
+          <folding>
+            <element signature="e#6570#6571#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/chat/handlers/ChatHandlers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="73" column="69" selection-start-line="73" selection-start-column="69" selection-end-line="73" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/HelpOpCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="20" column="66" selection-start-line="20" selection-start-column="66" selection-end-line="20" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/Loader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="241" column="81" selection-start-line="241" selection-start-column="81" selection-end-line="241" selection-end-column="81" />
         </state>
       </provider>
     </entry>
