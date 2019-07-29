@@ -38,10 +38,10 @@ public class Database {
     private static HikariDataSource DATASOURCE_SKITS;
 
     public static void connectToDatabaseHomesF() {
-        String address = "hosting3.gazduirejocuri.ro";
-        String name = "chzoneeu_homeskyblock";
-        String username = "chzoneeu_nycu";
-        String password = "unprost2019";
+        String address = "localhost";
+        String name = "homeskyblock";
+        String username = "root";
+        String password = "p0rt0c4l3911";
 
         HikariConfig config = new HikariConfig();
         config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
@@ -65,10 +65,10 @@ public class Database {
     }
 
     public static void connectToDatabaseSKits() {
-        String address = "hosting3.gazduirejocuri.ro";
-        String name = "chzoneeu_skyblockkits";
-        String username = "chzoneeu_nycu";
-        String password = "unprost2019";
+        String address = "localhost";
+        String name = "skyblockkits";
+        String username = "root";
+        String password = "p0rt0c4l3911";
 
         HikariConfig config = new HikariConfig();
         config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
@@ -92,10 +92,10 @@ public class Database {
     }
 
     public static void connectToDatabaseReports() {
-        String address = "hosting3.gazduirejocuri.ro";
-        String name = "chzoneeu_skyblockreports";
-        String username = "chzoneeu_nycu";
-        String password = "unprost2019";
+        String address = "localhost";
+        String name = "skyblockreports";
+        String username = "root";
+        String password = "p0rt0c4l3911";
 
         HikariConfig config = new HikariConfig();
         config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
@@ -119,10 +119,10 @@ public class Database {
     }
 
     public static void connectToDatabaseHub() {
-        String address = "hosting3.gazduirejocuri.ro";
-        String name = "chzoneeu_proxy";
-        String username = "chzoneeu_nycu";
-        String password = "unprost2019";
+        String address = "localhost";
+        String name = "proxydb";
+        String username = "root";
+        String password = "p0rt0c4l3911";
 
         HikariConfig config = new HikariConfig();
         config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
@@ -250,10 +250,10 @@ public class Database {
     }
 
     public static void connectToDatabaseFactions() {
-        String address = "hosting3.gazduirejocuri.ro";
-        String name = "chzoneeu_skyblock";
-        String username = "chzoneeu_nycu";
-        String password = "unprost2019";
+        String address = "localhost";
+        String name = "skyblock";
+        String username = "root";
+        String password = "p0rt0c4l3911";
 
         HikariConfig config = new HikariConfig();
         config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
