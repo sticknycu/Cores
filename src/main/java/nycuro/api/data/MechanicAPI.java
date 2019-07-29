@@ -126,9 +126,9 @@ public class MechanicAPI {
     public void handleStaffChat(Player player, String message, int type) {
         switch (type) {
             case 0:
-                if (message.startsWith("@")) {
-                    String[] msg = message.split("@");
-                    handleHelpop(player, msg[1], staffchatTag);
+                if (message.contains("@")) {
+                    String msg = message.substring(0, message.indexOf("@")) + message.substring(message.indexOf("@") + 1); // before and after "@"
+                    handleHelpop(player, msg, staffchatTag);
                 }
                 break;
             case 1:
@@ -139,15 +139,24 @@ public class MechanicAPI {
 
     public void handleHelpop(Player pp, String message, String tag) {
         if (API.getMainAPI().staffChat.isEmpty()) {
+            int i = 0;
             for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-                if (player.hasPermission("core.staffchat")) {
+                if (player.isOp()) {
+                    i++;
                     player.sendMessage(tag + message);
-                } else {
-                    API.getMessageAPI().sendNoStaffOnlineMessage(player);
-                    return;
+                }
+            }
+            if (i == 0) {
+                API.getMessageAPI().sendNoStaffOnlineMessage(pp);
+            } else {
+                if (!pp.hasPermission("core.staffchat")) {
+                    pp.sendMessage(tag + message);
                 }
             }
         } else {
+            if (!pp.hasPermission("core.staffchat")) {
+                pp.sendMessage(tag + message);
+            }
             API.getMainAPI().staffChat.forEach(
                     (p) -> {
                         API.getMainAPI().getServer().getPlayer(p).ifPresent((pl) -> {
@@ -155,9 +164,6 @@ public class MechanicAPI {
                         });
                     }
             );
-        }
-        if (!pp.hasPermission("core.staffchat")) {
-            pp.sendMessage(tag + message);
         }
     }
 

@@ -8,7 +8,6 @@ import cn.nukkit.plugin.service.RegisteredServiceProvider;
 import cn.nukkit.utils.TextFormat;
 import me.lucko.luckperms.api.LuckPermsApi;
 import nycuro.api.API;
-import nycuro.jobs.api.JobsAPI;
 import nycuro.chat.ChatFormat;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
@@ -23,7 +22,7 @@ import java.util.Objects;
 public class ChatHandlers implements Listener {
 
     public static LuckPermsApi api;
-    private int count = 0;
+    public static int count = 0;
 
     public ChatHandlers() {
         RegisteredServiceProvider<LuckPermsApi> provider = API.getMainAPI().getServer().getServiceManager().getProvider(LuckPermsApi.class);
@@ -49,13 +48,10 @@ public class ChatHandlers implements Listener {
             s = s.replace("%slash", "\\");
         else
             s = s.replace("%slash", "/");
-        int job = 0;
         String lvl = "";
         if (profileSkyblock != null) {
-            job = profileSkyblock.getJob();
             lvl = String.valueOf(profileSkyblock.getLevel());
         }
-        s = s.replace("%job", JobsAPI.jobs.get(job));
         s = s.replace("%lvl", lvl);
         s = TextFormat.colorize(s);
 
@@ -66,12 +62,14 @@ public class ChatHandlers implements Listener {
         }
 
         // StaffChat
-        if (player.hasPermission("core.staffchat")) {
-            API.getMechanicAPI().handleStaffChat(player, message, 0);
+        if (player.hasPermission("core.staffchat") && message.indexOf("@") == 0) {
+            API.getMechanicAPI().handleStaffChat(player, s, 0);
+            event.setCancelled();
         }
 
         if (API.getMainAPI().staffChat.contains(player.getUniqueId())) {
-            API.getMechanicAPI().handleStaffChat(player, message, 1);
+            API.getMechanicAPI().handleStaffChat(player, s, 1);
+            event.setCancelled();
         }
     }
 }

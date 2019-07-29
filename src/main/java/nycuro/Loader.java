@@ -182,7 +182,7 @@ public class Loader extends PluginBase {
     }
 
     private void initDatabase() {
-        log("Init SQLite Database...");
+        log("Init MySQL Database...");
         Database.connectToDatabaseHub();
         Database.connectToDatabaseFactions();
         Database.connectToDatabaseReports();
