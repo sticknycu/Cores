@@ -19,7 +19,7 @@ import nycuro.commands.list.boss.SpawnBossCommand;
 import nycuro.commands.list.economy.AddCoinsCommand;
 import nycuro.commands.list.economy.GetCoinsCommand;
 import nycuro.commands.list.economy.SetCoinsCommand;
-import nycuro.commands.list.home.HomeCommand;
+import nycuro.commands.list.homes.HomesCommand;
 import nycuro.commands.list.jobs.JobCommand;
 import nycuro.commands.list.kits.KitsCommand;
 import nycuro.commands.list.mechanic.DropPartyMessageCommand;
@@ -28,7 +28,7 @@ import nycuro.commands.list.mechanic.tops.TopCoinsCommand;
 import nycuro.commands.list.mechanic.tops.TopDeathsCommand;
 import nycuro.commands.list.mechanic.tops.TopKillsCommand;
 import nycuro.commands.list.mechanic.tops.TopTimeCommand;
-import nycuro.commands.list.report.ReportCommand;
+import nycuro.commands.list.reports.ReportsCommand;
 import nycuro.commands.list.shop.ShopCommand;
 import nycuro.commands.list.spawning.ArenaCommand;
 import nycuro.commands.list.spawning.WitherCommand;
@@ -226,7 +226,7 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("droppartymessage", new DropPartyMessageCommand());
         this.getServer().getCommandMap().register("spawnboss", new SpawnBossCommand());
         this.getServer().getCommandMap().register("kit", new KitsCommand());
-        this.getServer().getCommandMap().register("home", new HomeCommand());
+        this.getServer().getCommandMap().register("homes", new HomesCommand());
         this.getServer().getCommandMap().register("shop", new ShopCommand());
         this.getServer().getCommandMap().register("spawn", new SpawnCommand());
         this.getServer().getCommandMap().register("utils", new UtilsCommand());
@@ -234,7 +234,7 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("stats", new StatsCommand());
         this.getServer().getCommandMap().register("jobs", new JobCommand());
         this.getServer().getCommandMap().register("arena", new ArenaCommand());
-        this.getServer().getCommandMap().register("report", new ReportCommand());
+        this.getServer().getCommandMap().register("reports", new ReportsCommand());
         this.getServer().getCommandMap().register("coords", new CoordsCommand());// TODO: Save to Database
         this.getServer().getCommandMap().register("settings", new SettingsCommand());
         this.getServer().getCommandMap().register("hub", new HubCommand());

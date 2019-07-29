@@ -1,4 +1,4 @@
-package nycuro.commands.list.report;
+package nycuro.commands.list.homes;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
@@ -7,18 +7,19 @@ import nycuro.commands.PrincipalCommand;
 
 /**
  * author: NycuRO
- * SkyblockCore Project
+ * FactionsCore Project
  * API 1.0.0
  */
-public class ReportCommand extends PrincipalCommand {
+public class HomesCommand extends PrincipalCommand {
 
-    public ReportCommand() {
-        super("report", "Raporteaza un jucator");
+    public HomesCommand() {
+        super("homes", "Homes!");
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        API.getReportAPI().createWindowReport((Player) commandSender);
+        Player player = (Player) commandSender;
+        API.getHomeAPI().createWindowHome(player);
         return true;
     }
 }

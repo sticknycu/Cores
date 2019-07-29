@@ -1910,7 +1910,7 @@ public class MessageAPI {
         String string = "";
         switch (lang) {
             case 0:
-                string = "Please put here name of Player who want to report";
+                string = "Please put here name of Player who want to reports";
                 break;
             case 1:
                 string = "Te rog introdu aici numele Jucatorului pe care doresit sa il raportezi";
@@ -1938,7 +1938,7 @@ public class MessageAPI {
         String string = "";
         switch (lang) {
             case 0:
-                string = "§f» §cThis home already exists!";
+                string = "§f» §cThis homes already exists!";
                 break;
             case 1:
                 string = "§f» §cAcest Home exista deja!";
@@ -1952,7 +1952,7 @@ public class MessageAPI {
         String string = "";
         switch (lang) {
             case 0:
-                string = "Please put here reason why you report player with specifications what them do";
+                string = "Please put here reason why you reports player with specifications what them do";
                 break;
             case 1:
                 string = "Te rog introdu aici motivul pentru care reportezi jucatorul cu specificarea de a spune ce a facut";
@@ -1966,7 +1966,7 @@ public class MessageAPI {
         String string = "";
         switch (lang) {
             case 0:
-                string = "§f» §aYou report player " + name + " succesfully!";
+                string = "§f» §aYou reports player " + name + " succesfully!";
                 break;
             case 1:
                 string = "§f» §aAi raportat pe " + name + " cu succes!";
@@ -2008,7 +2008,7 @@ public class MessageAPI {
         String string = "";
         switch (lang) {
             case 0:
-                string = "§f» §aYou succesfully deleted " + name + " report!";
+                string = "§f» §aYou succesfully deleted " + name + " reports!";
                 break;
             case 1:
                 string = "§f» §aAi sters cu succes reportul lui " + name + "!";
@@ -2039,7 +2039,7 @@ public class MessageAPI {
                 string = "§f» §eYou have too much homes! Count: §a" + count + "§e! Please open /shop and buy more from Premium Shop!";
                 break;
             case 1:
-                string = "§f» §eAi prea multe home-uri! Cantitate: §a" + count + "§e! Te rog deschide /shop si cumpara mai multe din Premium Shop!";
+                string = "§f» §eAi prea multe homes-uri! Cantitate: §a" + count + "§e! Te rog deschide /shop si cumpara mai multe din Premium Shop!";
                 break;
         }
         return string;
@@ -2050,7 +2050,7 @@ public class MessageAPI {
         String string = "";
         switch (lang) {
             case 0:
-                string = "§f» §aYou have succesfully deleted home: §e" + homeName;
+                string = "§f» §aYou have succesfully deleted homes: §e" + homeName;
                 break;
             case 1:
                 string = "§f» §aAi sters cu succes Home-ul: §e" + homeName;
@@ -2098,13 +2098,13 @@ public class MessageAPI {
             case 0:
                 string = "                      Hello!\n" +
                         "          Welcome to Home " + home + "!\n\n" +
-                        "§eTo teleport to home just use §a'Teleport'.\n" +
-                        "§eTo delete a home just use §a'Delete Home'.\n";
+                        "§eTo teleport to homes just use §a'Teleport'.\n" +
+                        "§eTo delete a homes just use §a'Delete Home'.\n";
                 break;
             case 1:
                 string = "                      Salut!\n" +
                         "          Bine ai venit la Home" + home + "!\n\n" +
-                        "§ePentru a te teleporta la home foloseste §a'Teleport'.\n" +
+                        "§ePentru a te teleporta la homes foloseste §a'Teleport'.\n" +
                         "§ePentru a sterge Home-ul foloseste §a'Delete Home'.\n";
                 break;
         }
@@ -2160,13 +2160,13 @@ public class MessageAPI {
             case 0:
                 string = "                      Hello!\n" +
                         "          Welcome to Reports Mechanic!\n\n" +
-                        "§c» §aHow to report a Player?\n" +
-                        "§eTo report a player just tab on 'Report'.\n" +
+                        "§c» §aHow to reports a Player?\n" +
+                        "§eTo reports a player just tab on 'Report'.\n" +
                         "§eYou need to complete all available fields.\n\n" +
                         "§cATENTION! \n" +
                         "§eIf you have a proof, we're waiting you on Discord\n" +
-                        "§eYou can report a player on game, but on Discord too!\n\n" +
-                        "§c» §aHow to report on Discord? \n" +
+                        "§eYou can reports a player on game, but on Discord too!\n\n" +
+                        "§c» §aHow to reports on Discord? \n" +
                         "§eEnter on Discord and use #reports-en #reports";
                 break;
             case 1:
