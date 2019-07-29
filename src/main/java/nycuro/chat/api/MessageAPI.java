@@ -677,7 +677,7 @@ public class MessageAPI {
     }
 
     public void sendDeadMessage(Player victim, Entity killer) {
-        int lang = Database.profileProxy.get(victim.getName()).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(victim.getName(), new ProfileProxy(victim.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 victim.sendMessage("§7(§e!§7) §rYou was killed by §6" + killer.getName() + "§r!");
@@ -689,7 +689,7 @@ public class MessageAPI {
     }
 
     public void sendPvPOffMessage(Player damager) {
-        int lang = Database.profileProxy.get(damager.getName()).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(damager.getName(), new ProfileProxy(damager.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 damager.sendMessage("§7(§e!§7) §4Error: §7You can't PvP here!");
@@ -2142,7 +2142,7 @@ public class MessageAPI {
             case 0:
                 string = "                      Hello!\n" +
                         "          Welcome to Player Settings!\n\n" +
-                        "§eSelect your preference at have fun on Server!";
+                        "§eSelect your preference and have fun on Server!";
                 break;
             case 1:
                 string = "                      Salut!\n" +

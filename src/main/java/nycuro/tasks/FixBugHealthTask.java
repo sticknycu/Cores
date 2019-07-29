@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.TextFormat;
 import nycuro.api.API;
+import nycuro.mechanic.objects.SettingsObject;
 
 /**
  * author: NycuRO
@@ -21,6 +22,10 @@ public class FixBugHealthTask extends Task {
         if (j % 20 == 0) k++;
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
             player.setHealth(player.getHealth());
+            SettingsObject settings = API.getMainAPI().settings.get(player.getUniqueId());
+            if (settings != null) {
+                if (!settings.isPopupValue()) return;
+            }
             if (j % 20 == 0) {
                 String title = "&m&c&p&e&.&c&h&z&o&n&e&.&e&u";
                 String[] split = title.split("&");

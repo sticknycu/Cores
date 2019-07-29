@@ -49,6 +49,7 @@ import nycuro.kits.api.KitsAPI;
 import nycuro.kits.handlers.KitHandlers;
 import nycuro.level.handlers.LevelHandlers;
 import nycuro.mechanic.handlers.MechanicHandlers;
+import nycuro.mechanic.objects.SettingsObject;
 import nycuro.messages.handlers.MessageHandlers;
 import nycuro.protection.handlers.ProtectionHandlers;
 import nycuro.reports.api.ReportAPI;
@@ -62,9 +63,7 @@ import nycuro.utils.WarpUtils;
 import nycuro.utils.api.UtilsAPI;
 import nycuro.utils.vote.VoteSettings;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -83,6 +82,7 @@ public class Loader extends PluginBase {
     public Object2LongMap<UUID> played = new Object2LongOpenHashMap<>();
     public Object2BooleanMap<UUID> isOnSpawn = new Object2BooleanOpenHashMap<>();
     public Object2BooleanMap<UUID> isOnArena = new Object2BooleanOpenHashMap<>();
+    public Map<UUID, SettingsObject> settings = new HashMap<>();
     public Collection<UUID> staffChat = new ArrayList<>();
 
     public static long dropPartyTime;

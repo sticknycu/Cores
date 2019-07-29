@@ -26,6 +26,7 @@ import nycuro.api.API;
 import nycuro.Loader;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
+import nycuro.mechanic.objects.SettingsObject;
 
 import java.util.Random;
 
@@ -78,6 +79,7 @@ public class MechanicHandlers implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        API.getMainAPI().settings.put(player.getUniqueId(), new SettingsObject(true, true, true, 5));
         // Nu merge PreLoginEvent si nici Async.
         API.getMainAPI().coords.put(player.getUniqueId(), false);
         API.getMainAPI().isOnSpawn.put(player.getUniqueId(), true);
@@ -128,6 +130,7 @@ public class MechanicHandlers implements Listener {
         API.getMainAPI().played.removeLong(player.getUniqueId());
         API.getMainAPI().isOnSpawn.removeBoolean(player.getUniqueId());
         API.getMainAPI().isOnArena.removeBoolean(player.getUniqueId());
+        API.getMainAPI().settings.remove(player.getUniqueId());
     }
 
     @EventHandler

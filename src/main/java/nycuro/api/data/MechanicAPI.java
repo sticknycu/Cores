@@ -22,6 +22,7 @@ import nycuro.ai.entity.BossEntity;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
+import nycuro.mechanic.objects.SettingsObject;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -334,7 +335,7 @@ public class MechanicAPI {
 
     public void sendSettingsForm(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Settings Player");
-        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageArena(player)));
+        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageSettings(player)));
         infoMenu.addElement(new ElementToggle("Show BossBar", true));
         infoMenu.addElement(new ElementToggle("Show Scoreboard", true));
         infoMenu.addElement(new ElementToggle("Show Popup", true));
@@ -348,12 +349,33 @@ public class MechanicAPI {
             @Override
             public void accept(Map<Integer, Object> response) {
                 if (!response.isEmpty()) {
-                    System.out.println(response.entrySet().iterator().next().getKey() + " key");
-                    System.out.println(response.entrySet().iterator().next().getValue() + " Value");
-                    /*switch (response.entrySet().iterator().next().getKey()) {
-                        case 0:
-                            bre
-                    }*/
+                    SettingsObject settings = API.getMainAPI().settings.get(player.getUniqueId());
+                    if (settings != null) {
+                        settings.setBossbarValue(Boolean.valueOf(String.valueOf(response.values().toArray()[1])));
+                        settings.setScoreboardValue(Boolean.valueOf(String.valueOf(response.values().toArray()[2])));
+                        settings.setPopupValue(Boolean.valueOf(String.valueOf(response.values().toArray()[3])));
+                        player.setViewDistance(Integer.valueOf(String.valueOf(response.values().toArray()[4])));
+
+                        DummyBossBar bb = API.getMainAPI().bossbar.get(player.getUniqueId());
+                        if (bb != null) {
+                            bb.destroy();
+                        }
+                        if (Boolean.valueOf(String.valueOf(response.values().toArray()[1]))) {
+                            createBossBar(player);
+                        } else {
+                            API.getMainAPI().bossbar.remove(player.getUniqueId());
+                        }
+
+                        FakeScoreboard fsc = API.getMainAPI().scoreboard.get(player.getUniqueId());
+                        if (fsc != null) {
+                            fsc.removePlayer(player);
+                        }
+                        if (Boolean.valueOf(String.valueOf(response.values().toArray()[2]))) {
+                            createScoreboard(player);
+                        } else {
+                            API.getMainAPI().scoreboard.remove(player.getUniqueId());
+                        }
+                    }
                 }
             }
         }));

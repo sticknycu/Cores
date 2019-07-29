@@ -33,15 +33,19 @@ public class CombatLoggerTask extends Task {
             if (k.getOrDefault(uuid, -1) == -1) k.put(uuid, 13);
             long count = k.getInt(uuid);
             float procent = (float) ((int) (count * 100 / 13));
-            API.getMainAPI().bossbar.get(uuid).setText("      §7-§8=§7- §7CombatLogger: §6§l" + k.getInt(uuid) + " §7-§8=§7-");
-            if (k.getInt(uuid) <= 1) API.getMainAPI().bossbar.get(uuid).setLength(1F);
-            else API.getMainAPI().bossbar.get(uuid).setLength(procent);
+            if (API.getMainAPI().bossbar.get(uuid) != null) {
+                API.getMainAPI().bossbar.get(uuid).setText("      §7-§8=§7- §7CombatLogger: §6§l" + k.getInt(uuid) + " §7-§8=§7-");
+                if (k.getInt(uuid) <= 1) API.getMainAPI().bossbar.get(uuid).setLength(1F);
+                else API.getMainAPI().bossbar.get(uuid).setLength(procent);
+            }
             if (k.getInt(uuid) == 0) {
                 API.getMainAPI().getServer().getPlayer(uuid).ifPresent( (player) -> {
                     player.sendMessage(API.getMessageAPI().getMessageCombatLogger(player));
                     API.getCombatAPI().removeCombat(player);
                     k.removeInt(player.getUniqueId());
-                    API.getMainAPI().bossbar.get(player.getUniqueId()).setLength(100F);
+                    if (API.getMainAPI().bossbar.get(uuid) != null) {
+                        API.getMainAPI().bossbar.get(player.getUniqueId()).setLength(100F);
+                    }
                 });
             }
             k.replace(uuid, k.getInt(uuid) - 1);

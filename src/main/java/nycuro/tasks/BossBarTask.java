@@ -20,6 +20,7 @@ public class BossBarTask extends Task {
             ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
 
             if (API.getMainAPI().bossbar.get(player.getUniqueId()) != null) {
+
                 if (API.getCombatAPI().inCombat(player)) return;
                 int level = 0;
                 double necessary = 0;

@@ -18,8 +18,8 @@ public class CombatAPI {
 
     public void removeCombat(Player player) {
         for(Iterator iterator = inCombat.keySet().iterator(); iterator.hasNext();) {
-            Player next = (Player) iterator.next();
-            if(!next.equals(player)) continue;
+            UUID next = (UUID) iterator.next();
+            if(!next.equals(player.getUniqueId())) continue;
             iterator.remove();
         }
     }

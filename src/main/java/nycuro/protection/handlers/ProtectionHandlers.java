@@ -66,8 +66,10 @@ public class ProtectionHandlers implements Listener {
             for (Player pl : new Player[]{player, damager}) {
                 if (API.getMechanicAPI().isOnSpawn(pl)) break;
                 if (!API.getCombatAPI().inCombat(pl)) {
-                    API.getMainAPI().bossbar.get(pl.getUniqueId()).setText("§7-§8=§7- §7CombatLogger: §6§l13 §7-§8=§7-");
-                    API.getMainAPI().bossbar.get(pl.getUniqueId()).setLength(100F);
+                    if (API.getMainAPI().bossbar.get(pl.getUniqueId()) != null) {
+                        API.getMainAPI().bossbar.get(pl.getUniqueId()).setText("§7-§8=§7- §7CombatLogger: §6§l13 §7-§8=§7-");
+                        API.getMainAPI().bossbar.get(pl.getUniqueId()).setLength(100F);
+                    }
                 }
             }
         }
