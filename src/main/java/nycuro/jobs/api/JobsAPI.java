@@ -113,6 +113,7 @@ public class JobsAPI {
             int i = 0;
             for (Item item : items) {
                 for (Item content : player.getInventory().getContents().values()) {
+                    if (!content.getNamedTag().exist("NPC")) continue;
                     if (content.getId() == item.getId()) {
                         i++;
                     }
@@ -164,7 +165,7 @@ public class JobsAPI {
     private boolean checkItems(Player player, Item[] items) {
         for (Item item : items) {
             for (Item content : player.getInventory().getContents().values()) {
-                if (item.equals(content) && item.getCount() != content.getCount()) {
+                if (item.equals(content) && item.getCount() != content.getCount() && content.getNamedTag().exist("NPC")) {
                     return false;
                 }
             }

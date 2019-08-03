@@ -73,10 +73,29 @@ public class CheckerTask extends Task {
                 } else {
                     API.getMainAPI().isOnSpawn.replace(player.getUniqueId(), false);
                 }
+
+                // Area Check
+                //Vector3 vectorRA = new Vector3(1057, 5, 1175);
+                //Vector3 vectorLA = new Vector3(1154, 29, 1120);
+                d1[0] = 48; // x from
+                d1[1] = -52; // x to
+                d2[0] = 115; // y from
+                d2[1] = 196; // y to
+                d3[0] = -114; // z from
+                d3[1] = -203; // z to
+                Arrays.sort(d1);
+                Arrays.sort(d2);
+                Arrays.sort(d3);
+                if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
+                    API.getMainAPI().isOnArea.replace(player.getUniqueId(), true);
+                } else {
+                    API.getMainAPI().isOnArea.replace(player.getUniqueId(), false);
+                }
             } else {
                 // Skyblock World
                 API.getMainAPI().isOnArena.replace(player.getUniqueId(), false);
                 API.getMainAPI().isOnSpawn.replace(player.getUniqueId(), false);
+                API.getMainAPI().isOnArea.replace(player.getUniqueId(), false);
             }
 
             if (API.getMechanicAPI().isOnArena(player)) {

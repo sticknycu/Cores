@@ -84,6 +84,7 @@ public class Loader extends PluginBase {
     public Object2LongMap<UUID> played = new Object2LongOpenHashMap<>();
     public Object2BooleanMap<UUID> isOnSpawn = new Object2BooleanOpenHashMap<>();
     public Object2BooleanMap<UUID> isOnArena = new Object2BooleanOpenHashMap<>();
+    public Object2BooleanMap<UUID> isOnArea = new Object2BooleanOpenHashMap<>();
     public Map<UUID, SettingsObject> settings = new HashMap<>();
     public Collection<UUID> staffChat = new ArrayList<>();
     public Map<UUID, JobsObject> jobsObject = new HashMap<>();
@@ -272,7 +273,7 @@ public class Loader extends PluginBase {
         this.getServer().getScheduler().scheduleRepeatingTask(new ScoreTagTask(), 20, true);
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckerTask(), 20, true);
         this.getServer().getScheduler().scheduleDelayedTask(new RestartTask(), 20 * 60 * 60 * 3);
-        this.getServer().getScheduler().scheduleRepeatingTask(new FixBugHealthTask(), 1, true); // Todo: Bullshit incompetent Nukkit Codders -- Using resources useless.
+        this.getServer().getScheduler().scheduleRepeatingTask(new FixBugHealthTask(), 1, true); // Todo: Bullshit incompetent Nukkit Coders -- Using resources useless.
     }
 
     private void removeNPC() {

@@ -7,11 +7,13 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.entity.EntityDamageByChildEntityEvent;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
+import cn.nukkit.event.entity.EntityDeathEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
 import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
+import nycuro.jobs.objects.JobsObject;
 
 /**
  * Project: SkyblockCore
@@ -44,6 +46,45 @@ public class JobsHandlers implements Listener {
             } else if (entity.namedTag.getBoolean("mobfarmerNPC")) {
                 // TODO: Mob farm
             }
+        }
+    }
+
+
+    @EventHandler
+    public void onEntityDeath(EntityDeathEvent event) {
+        Entity eventEntity = event.getEntity();
+        if (!(((EntityDamageByEntityEvent) eventEntity.getLastDamageCause()).getDamager() instanceof Player)) event.setCancelled();
+        Player killer = (Player) ((EntityDamageByEntityEvent) eventEntity.getLastDamageCause()).getDamager();
+        if (API.getMechanicAPI().isOnArea(killer)) event.setCancelled();
+        ProfileSkyblock profile = Database.profileSkyblock.get(killer.getName());
+        JobsObject jobsObject = API.getMainAPI().jobsObject.get(killer.getUniqueId());
+        int job = profile.getJob();
+        if (job == 2) {
+            int[] integers = jobsObject.getCountAnimals();
+            switch (eventEntity.getNetworkId()) {
+                case 10: // chicken
+                    if (integers[3] != 0) {
+                        integers[3] = integers[3] - 1;
+                    }
+                    break;
+                case 11: // cow
+                    if (integers[0] != 0) {
+                        integers[0] = integers[0] - 1;
+                    }
+                    break;
+                case 12: // pig
+                    if (integers[1] != 0) {
+                        integers[1] = integers[1] - 1;
+                    }
+                    break;
+                case 13: // sheep
+                    if (integers[2] != 0) {
+                        integers[2] = integers[2] - 1;
+                    }
+                    break;
+
+            }
+            jobsObject.setCountAnimals(integers);
         }
     }
 

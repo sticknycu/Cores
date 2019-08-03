@@ -49,6 +49,11 @@ public class MechanicAPI {
         return API.getMainAPI().isOnArena.getBoolean(player.getUniqueId());
     }
 
+    public boolean isOnArea(Player player) {
+        return API.getMainAPI().isOnArea.getBoolean(player.getUniqueId());
+    }
+
+
     public float getBossHealth() {
         for (Entity entity : API.getMainAPI().getServer().getDefaultLevel().getEntities()) {
             if (entity.namedTag.getBoolean("coreBOSS")) {

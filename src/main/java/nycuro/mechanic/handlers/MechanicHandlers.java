@@ -18,6 +18,7 @@ import cn.nukkit.level.Level;
 import cn.nukkit.math.BlockFace;
 import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
+import cn.nukkit.scheduler.AsyncTask;
 import cn.nukkit.scheduler.Task;
 import io.pocketvote.event.VoteEvent;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
@@ -79,26 +80,33 @@ public class MechanicHandlers implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        API.getMainAPI().settings.put(player.getUniqueId(), new SettingsObject(true, true, true, 5));
+        API.getMainAPI().settings.put(player.getUniqueId(), new SettingsObject(true, true, 5));
         // Nu merge PreLoginEvent si nici Async.
         API.getMainAPI().coords.put(player.getUniqueId(), false);
         API.getMainAPI().isOnSpawn.put(player.getUniqueId(), true);
         API.getMainAPI().isOnArena.put(player.getUniqueId(), false);
+        API.getMainAPI().isOnArea.put(player.getUniqueId(), false);
         API.getMainAPI().played.put(player.getUniqueId(), System.currentTimeMillis());
-        API.getDatabase().playerExist(player.getName(), bool -> {
-            if (!bool) {
-                API.getDatabase().addNewPlayer(player.getName());
-                Database.addDatesPlayerHub(player.getName());
-            } else {
-                Database.addDatesPlayerHub(player.getName());
-                Database.addDatesPlayerFactions(player.getName());
-            }
-        });
-        API.getDatabase().playerKitsExist(player.getName(), bool -> {
-            if (!bool) {
-                API.getDatabase().addNewPlayerToKits(player.getName());
-            } else {
-                Database.addDatesKitsPlayer(player.getName());
+        // Async?!
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                API.getDatabase().playerExist(player.getName(), bool -> {
+                    if (!bool) {
+                        API.getDatabase().addNewPlayer(player.getName());
+                        Database.addDatesPlayerHub(player.getName());
+                    } else {
+                        Database.addDatesPlayerHub(player.getName());
+                        Database.addDatesPlayerFactions(player.getName());
+                    }
+                });
+                API.getDatabase().playerKitsExist(player.getName(), bool -> {
+                    if (!bool) {
+                        API.getDatabase().addNewPlayerToKits(player.getName());
+                    } else {
+                        Database.addDatesKitsPlayer(player.getName());
+                    }
+                });
             }
         });
         if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
@@ -130,6 +138,7 @@ public class MechanicHandlers implements Listener {
         API.getMainAPI().played.removeLong(player.getUniqueId());
         API.getMainAPI().isOnSpawn.removeBoolean(player.getUniqueId());
         API.getMainAPI().isOnArena.removeBoolean(player.getUniqueId());
+        API.getMainAPI().isOnArea.removeBoolean(player.getUniqueId());
         API.getMainAPI().settings.remove(player.getUniqueId());
     }
 

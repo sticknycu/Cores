@@ -1,6 +1,7 @@
 package nycuro.protection.handlers;
 
 import cn.nukkit.Player;
+import cn.nukkit.block.Block;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.block.BlockBreakEvent;
@@ -10,13 +11,17 @@ import cn.nukkit.event.entity.EntityDamageByChildEntityEvent;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.entity.ExplosionPrimeEvent;
+import cn.nukkit.event.inventory.InventoryPickupItemEvent;
 import cn.nukkit.event.player.PlayerBucketEmptyEvent;
 import cn.nukkit.event.player.PlayerBucketFillEvent;
 import cn.nukkit.event.player.PlayerGameModeChangeEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.nbt.tag.CompoundTag;
 import nycuro.api.API;
+import nycuro.database.Database;
+import nycuro.database.objects.ProfileSkyblock;
 
 /**
  * author: NycuRO
@@ -28,9 +33,81 @@ public class ProtectionHandlers implements Listener {
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
             event.setCancelled(true);
+            // Job Miner
+            switch (event.getBlock().getId()) {
+                case Block.COBBLESTONE:
+                case Block.IRON_ORE:
+                case Block.GOLD_ORE:
+                case Block.DIAMOND_ORE:
+                case Block.COAL_ORE:
+                case Block.EMERALD_ORE:
+                case Block.REDSTONE_ORE:
+                    if (profileSkyblock.getJob() == 1) {
+                        event.setDrops(new Item[0]);
+                        Item[] items = event.getDrops();
+                        for (Item item : items) {
+                            CompoundTag tag = item.getNamedTag();
+                            tag.putBoolean("JOB", true);
+                            item.setNamedTag(tag);
+                            PlayerInventory playerInventory = player.getInventory();
+                            if (!playerInventory.canAddItem(item)) {
+                                API.getMessageAPI().sendFullInventoryMessage(player);
+                            } else {
+                                playerInventory.addItem(item);
+                            }
+                        }
+                    }
+                    return;
+                    // Job Farmer
+                case 59: // wheat seeds block
+                case 141: // carrots seeds block
+                case 142: // potatoes seeds block
+                case Block.RED_FLOWER:
+                case Block.DOUBLE_PLANT:
+                case Block.HAY_BALE:
+                    if (profileSkyblock.getJob() == 3) {
+                        event.setDrops(new Item[0]);
+                        Item[] items = event.getDrops();
+                        for (Item item : items) {
+                            CompoundTag tag = item.getNamedTag();
+                            tag.putBoolean("JOB", true);
+                            item.setNamedTag(tag);
+                            PlayerInventory playerInventory = player.getInventory();
+                            if (!playerInventory.canAddItem(item)) {
+                                API.getMessageAPI().sendFullInventoryMessage(player);
+                            } else {
+                                playerInventory.addItem(item);
+                            }
+                        }
+                    }
+                    return;
+            }
             API.getMessageAPI().sendBreakMessage(player);
+        }
+    }
+
+    // Job Fisherman
+    @EventHandler
+    public void onReceiveFish(InventoryPickupItemEvent event) {
+        Item item = event.getItem().getItem();
+        Player player = API.getMainAPI().getServer().getPlayer(event.getItem().getOwner());
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
+            if (profileSkyblock.getJob() == 4) {
+                CompoundTag tag = item.getNamedTag();
+                tag.putBoolean("JOB", true);
+                item.setNamedTag(tag);
+                PlayerInventory playerInventory = player.getInventory();
+                if (!playerInventory.canAddItem(item)) {
+                    API.getMessageAPI().sendFullInventoryMessage(player);
+                } else {
+                    playerInventory.addItem(item);
+                }
+                event.getItem().kill();
+            }
         }
     }
 

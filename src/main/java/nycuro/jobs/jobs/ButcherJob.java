@@ -116,16 +116,16 @@ public class ButcherJob extends CommonJob {
                     collection[3] = j;
                 });
             } else {
-                FastRandom.current().ints(4, 45, 60).findFirst().ifPresent((j) -> {
+                FastRandom.current().ints(1, 45, 60).findFirst().ifPresent((j) -> {
                     collection[0] = j;
                 });
-                FastRandom.current().ints(4, 45, 60).findFirst().ifPresent((j) -> {
+                FastRandom.current().ints(1, 45, 60).findFirst().ifPresent((j) -> {
                     collection[1] = j;
                 });
-                FastRandom.current().ints(4, 45, 60).findFirst().ifPresent((j) -> {
+                FastRandom.current().ints(1, 45, 60).findFirst().ifPresent((j) -> {
                     collection[2] = j;
                 });
-                FastRandom.current().ints(4, 45, 60).findFirst().ifPresent((j) -> {
+                FastRandom.current().ints(1, 45, 60).findFirst().ifPresent((j) -> {
                     collection[3] = j;
                 });
             }
