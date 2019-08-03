@@ -92,7 +92,7 @@ public class KitsAPI {
             if (!(kits.get(kit).getType().equals(TypeKit.CLASSIC)) || kit.equals(NameKit.STARTER)) continue;
             if (kits.get(kit).getStatus(player).equals(StatusKit.LOCKED)) color = TextFormat.RED;
             else color = TextFormat.GREEN;
-            kitMenu.addButton(new ElementButton(kit.getName() + kits.values().iterator().next().empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+            kitMenu.addButton(new ElementButton(kit.getName() + API.getMainAPI().empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         }
         player.showFormWindow(new ResponseFormWindow(kitMenu, new Consumer<Map<Integer, Object>>() {
             @Override
@@ -131,7 +131,7 @@ public class KitsAPI {
             if (!(kits.get(kit).getType().equals(TypeKit.PREMIUM)) || kit.equals(NameKit.STARTER)) continue;
             if (kits.get(kit).getStatus(player).equals(StatusKit.LOCKED)) color = TextFormat.RED;
             else color = TextFormat.GREEN;
-            kitMenu.addButton(new ElementButton(kit.getName() + kits.values().iterator().next().empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+            kitMenu.addButton(new ElementButton(kit.getName() + API.getMainAPI().empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         }
         player.showFormWindow(new ResponseFormWindow(kitMenu, new Consumer<Map<Integer, Object>>() {
             @Override
@@ -170,7 +170,7 @@ public class KitsAPI {
             if (!(kits.get(kit).getType().equals(TypeKit.SPECIFIC)) || kit.equals(NameKit.STARTER)) continue;
             if (kits.get(kit).getStatus(player).equals(StatusKit.LOCKED)) color = TextFormat.RED;
             else color = TextFormat.GREEN;
-            kitMenu.addButton(new ElementButton(kit.getName() + kits.values().iterator().next().empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+            kitMenu.addButton(new ElementButton(kit.getName() + API.getMainAPI().empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         }
         player.showFormWindow(new ResponseFormWindow(kitMenu, new Consumer<Map<Integer, Object>>() {
             @Override

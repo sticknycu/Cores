@@ -5,7 +5,7 @@ import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import nycuro.api.API;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
 import nycuro.kits.type.StatusKit;
@@ -46,7 +46,7 @@ public class PushUpKit extends CommonKit {
     public Item getAxe() {
         Item item = Item.get(Item.DIAMOND_AXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.AXE.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.AXE.getType());
         return item;
     }
 
@@ -55,13 +55,13 @@ public class PushUpKit extends CommonKit {
         ArrayList<Item> itemslog1 = new ArrayList<>();
         for (int i = 0; i <= 3; i++) {
             Item item = Item.get(Item.WOOD, i, 8);
-            item.setCustomName(symbol + getKit().getName() + empty + "Wood Type " + i);
+            item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Wood Type " + i);
             itemslog1.add(item);
         }
         ArrayList<Item> itemslog2 = new ArrayList<>();
         for (int i = 0; i <= 1; i++) {
             Item item = Item.get(Item.WOOD2, i, 8);
-            item.setCustomName(symbol + getKit().getName() + empty + "Wood2 Type " + i);
+            item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Wood2 Type " + i);
             itemslog2.add(item);
         }
         Item[] item = new Item[7];
@@ -89,7 +89,7 @@ public class PushUpKit extends CommonKit {
 
     @Override
     public boolean hasEnoughDollars(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         double dollars = profileSkyblock.getDollars();
         return getPrice() < dollars;
     }
@@ -112,14 +112,14 @@ public class PushUpKit extends CommonKit {
 
     @Override
     public boolean passTimer(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         long time = profileSkyblock.getCooldown();
         return (getTimer() - (System.currentTimeMillis() - time)) <= 0;
     }
 
     @Override
     public void sendKit(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         if (passTimer(player)) {
             if (canAddKit(player)) {
                 if (hasEnoughDollars(player)) {

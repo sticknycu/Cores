@@ -21,6 +21,7 @@ import nycuro.commands.list.economy.GetCoinsCommand;
 import nycuro.commands.list.economy.SetCoinsCommand;
 import nycuro.commands.list.homes.HomesCommand;
 import nycuro.commands.list.jobs.JobCommand;
+import nycuro.commands.list.jobs.WorkCommand;
 import nycuro.commands.list.kits.KitsCommand;
 import nycuro.commands.list.mechanic.DropPartyMessageCommand;
 import nycuro.commands.list.mechanic.player.*;
@@ -37,7 +38,7 @@ import nycuro.commands.list.time.GetTimeCommand;
 import nycuro.commands.list.utils.UtilsCommand;
 import nycuro.crate.CrateAPI;
 import nycuro.crate.handlers.CrateHandlers;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.KitsObject;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.dropparty.api.DropPartyAPI;
@@ -88,6 +89,9 @@ public class Loader extends PluginBase {
     public static long dropPartyTime;
     public static int dropPartyVotes;
 
+    public String symbol = TextFormat.GOLD.toString();
+    public String empty = " ";
+
     public static void log(String s) {
         API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
     }
@@ -96,10 +100,10 @@ public class Loader extends PluginBase {
         try {
             API.getMainAPI().saveToDatabase();
         } finally {
-            Database.getTopDollars();
-            Database.getTopKills();
-            Database.getTopDeaths();
-            Database.getTopTime();
+            DatabaseMySQL.getTopDollars();
+            DatabaseMySQL.getTopKills();
+            DatabaseMySQL.getTopDeaths();
+            DatabaseMySQL.getTopTime();
         }
     }
 
@@ -150,7 +154,7 @@ public class Loader extends PluginBase {
         saveToDatabase();
         removeNPC();
         removeAllFromMaps();
-        saveDropParty();
+        saveConfigs();
     }
 
     private void createConfig() {
@@ -163,16 +167,16 @@ public class Loader extends PluginBase {
         dropPartyVotes = API.getVoteSettingsAPI().mechanic.getDropParty();
     }
 
-    private void saveDropParty() {
+    private void saveConfigs() {
         API.getVoteSettingsAPI().saveConfig(dropPartyVotes, dropPartyTime);
     }
 
     private void saveToDatabase() {
-        for (ProfileSkyblock profileSkyblock : Database.profileSkyblock.values()) {
-            Database.saveUnAsyncDatesPlayerFromFactions(profileSkyblock.getName());
+        for (ProfileSkyblock profileSkyblock : DatabaseMySQL.profileSkyblock.values()) {
+            DatabaseMySQL.saveUnAsyncDatesPlayerFromFactions(profileSkyblock.getName());
         }
-        for (KitsObject kitsObject : Database.kitsSkyblock.values()) {
-            Database.saveUnAsyncDatesPlayerFromKits(kitsObject.getName());
+        for (KitsObject kitsObject : DatabaseMySQL.kitsSkyblock.values()) {
+            DatabaseMySQL.saveUnAsyncDatesPlayerFromKits(kitsObject.getName());
         }
     }
 
@@ -183,11 +187,12 @@ public class Loader extends PluginBase {
 
     private void initDatabase() {
         log("Init MySQL Database...");
-        Database.connectToDatabaseHub();
-        Database.connectToDatabaseFactions();
-        Database.connectToDatabaseReports();
-        Database.connectToDatabaseHomesF();
-        Database.connectToDatabaseSKits();
+        DatabaseMySQL.connectToDatabaseHub();
+        DatabaseMySQL.connectToDatabaseFactions();
+        DatabaseMySQL.connectToDatabaseReports();
+        DatabaseMySQL.connectToDatabaseHomesF();
+        DatabaseMySQL.connectToDatabaseSKits();
+        DatabaseMySQL.connectToDatabaseJobs();
     }
 
     private void registerAPI() {
@@ -207,7 +212,7 @@ public class Loader extends PluginBase {
         API.dropPartyAPI = new DropPartyAPI();
         API.combatAPI = new CombatAPI();
         ShopAPI.enchantUtils = new EnchantUtils();
-        API.database = new Database();
+        API.database = new DatabaseMySQL();
         API.voteSettingsAPI = new VoteSettings();
         API.reportAPI = new ReportAPI();
         API.homeAPI = new HomeAPI();
@@ -235,11 +240,12 @@ public class Loader extends PluginBase {
         this.getServer().getCommandMap().register("jobs", new JobCommand());
         this.getServer().getCommandMap().register("arena", new ArenaCommand());
         this.getServer().getCommandMap().register("reports", new ReportsCommand());
-        this.getServer().getCommandMap().register("coords", new CoordsCommand());// TODO: Save to Database
+        this.getServer().getCommandMap().register("coords", new CoordsCommand());// TODO: Save to DatabaseMySQL
         this.getServer().getCommandMap().register("settings", new SettingsCommand());
         this.getServer().getCommandMap().register("hub", new HubCommand());
         this.getServer().getCommandMap().register("staffchat", new StaffChatCommand());
         this.getServer().getCommandMap().register("helpop", new HelpOpCommand());
+        this.getServer().getCommandMap().register("work", new WorkCommand());
     }
 
     private void registerEvents() {
@@ -282,17 +288,17 @@ public class Loader extends PluginBase {
         PlaceholderAPI api = PlaceholderAPI.Companion.getInstance();
         for (int i = 1; i <= 10; i++) {
             final int value = i;
-            api.staticPlaceholder("top" + value + "killsname", () -> Database.scoreboardkillsName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "killscount", () -> String.valueOf(Database.scoreboardkillsValue.getOrDefault(value, 0)));
+            api.staticPlaceholder("top" + value + "killsname", () -> DatabaseMySQL.scoreboardkillsName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "killscount", () -> String.valueOf(DatabaseMySQL.scoreboardkillsValue.getOrDefault(value, 0)));
 
-            api.staticPlaceholder("top" + value + "deathsname", () -> Database.scoreboarddeathsName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "deathscount", () -> String.valueOf(Database.scoreboarddeathsValue.getOrDefault(value, 0)));
+            api.staticPlaceholder("top" + value + "deathsname", () -> DatabaseMySQL.scoreboarddeathsName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "deathscount", () -> String.valueOf(DatabaseMySQL.scoreboarddeathsValue.getOrDefault(value, 0)));
 
-            api.staticPlaceholder("top" + value + "coinsname", () -> Database.scoreboardcoinsName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "coinscount", () -> String.valueOf(round(Database.scoreboardcoinsValue.getOrDefault(value, 0.0), 2)));
+            api.staticPlaceholder("top" + value + "coinsname", () -> DatabaseMySQL.scoreboardcoinsName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "coinscount", () -> String.valueOf(round(DatabaseMySQL.scoreboardcoinsValue.getOrDefault(value, 0.0), 2)));
 
-            api.staticPlaceholder("top" + value + "timename", () -> Database.scoreboardtimeName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(value, 0L)));
+            api.staticPlaceholder("top" + value + "timename", () -> DatabaseMySQL.scoreboardtimeName.getOrDefault(value, " "));
+            api.staticPlaceholder("top" + value + "timecount", () -> time(DatabaseMySQL.scoreboardtimeValue.getOrDefault(value, 0L)));
         }
     }
 }

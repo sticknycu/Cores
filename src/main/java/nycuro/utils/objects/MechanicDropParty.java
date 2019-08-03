@@ -1,9 +1,9 @@
-package nycuro.utils.vote.objects;
+package nycuro.utils.objects;
 
 import lombok.Data;
 
 @Data
-public class Mechanic {
+public class MechanicDropParty {
     public int dropParty;
     public long timeDropParty;
 }

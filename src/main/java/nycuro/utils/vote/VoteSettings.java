@@ -3,8 +3,8 @@ package nycuro.utils.vote;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nycuro.utils.vote.objects.JsonObject;
-import nycuro.utils.vote.objects.Mechanic;
+import nycuro.utils.objects.JsonObject;
+import nycuro.utils.objects.MechanicDropParty;
 
 import java.io.*;
 
@@ -15,7 +15,7 @@ import java.io.*;
  */
 public class VoteSettings {
 
-    public Mechanic mechanic = new Mechanic();
+    public MechanicDropParty mechanic = new MechanicDropParty();
 
     public void init() {
         try {

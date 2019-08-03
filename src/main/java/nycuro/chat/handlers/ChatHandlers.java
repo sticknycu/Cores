@@ -9,7 +9,7 @@ import cn.nukkit.utils.TextFormat;
 import me.lucko.luckperms.api.LuckPermsApi;
 import nycuro.api.API;
 import nycuro.chat.ChatFormat;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileSkyblock;
 
 import java.util.Objects;
@@ -34,7 +34,7 @@ public class ChatHandlers implements Listener {
     @EventHandler
     public void onChat(PlayerChatEvent event) {
         Player player = event.getPlayer();
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         count++;
         String group = Objects.requireNonNull(api.getUser(player.getUniqueId())).getPrimaryGroup().toUpperCase();
         String s = ChatFormat.valueOf(group).toString();

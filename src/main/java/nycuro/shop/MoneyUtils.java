@@ -8,7 +8,7 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import nycuro.api.API;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileSkyblock;
 
 import java.util.Map;
@@ -392,7 +392,7 @@ public class MoneyUtils {
     }
 
     public void buyAction(Map<Integer, Object> response, Player player, String firstDropDownType) {
-        ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profile = DatabaseMySQL.profileSkyblock.get(player.getName());
         double moneyCount = profile.getDollars();
         if (response.get(1) == null) return;
         int itemId = id.getInt(firstDropDownType);
@@ -413,7 +413,7 @@ public class MoneyUtils {
     }
 
     public void sellAction(Map<Integer, Object> response, Player player, String firstDropDownType) {
-        ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profile = DatabaseMySQL.profileSkyblock.get(player.getName());
         if (response.get(1) == null) return;
         int itemId = id.getInt(firstDropDownType);
         int itemMeta = meta.getInt(firstDropDownType);
@@ -444,7 +444,7 @@ public class MoneyUtils {
     }
 
     public void enchantBuyAction(Map<Integer, Object> response, Player player, String firstDropDownType) {
-        ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profile = DatabaseMySQL.profileSkyblock.get(player.getName());
         if (response.get(1) == null) return;
         if (response.get(2) == null) return;
         double moneyCount = profile.getDollars();

@@ -5,7 +5,7 @@ import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import nycuro.api.API;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
 import nycuro.kits.type.*;
@@ -41,7 +41,7 @@ public class GuardianKit extends CommonKit {
     public Item getHelmet() {
         Item item = Item.get(Item.GOLD_HELMET);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(symbol + getKit().getName() + empty + TypeClothes.HELMET.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.HELMET.getType());
         return item;
     }
 
@@ -49,7 +49,7 @@ public class GuardianKit extends CommonKit {
     public Item getArmor() {
         Item item = Item.get(Item.GOLD_CHESTPLATE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(symbol + getKit().getName() + empty + TypeClothes.ARMOR.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.ARMOR.getType());
         return item;
     }
 
@@ -57,7 +57,7 @@ public class GuardianKit extends CommonKit {
     public Item getPants() {
         Item item = Item.get(Item.GOLD_LEGGINGS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(symbol + getKit().getName() + empty + TypeClothes.PANTS.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.PANTS.getType());
         return item;
     }
 
@@ -65,35 +65,35 @@ public class GuardianKit extends CommonKit {
     public Item getBoots() {
         Item item = Item.get(Item.GOLD_BOOTS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(symbol + getKit().getName() + empty + TypeClothes.BOOTS.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.BOOTS.getType());
         return item;
     }
 
     @Override
     public Item getSword() {
         Item item = Item.get(Item.IRON_SWORD);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.SWORD.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
         Item item = Item.get(Item.IRON_PICKAXE);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.PICKAXE.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
         Item item = Item.get(Item.IRON_AXE);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.AXE.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
         Item item = Item.get(Item.IRON_SWORD);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.SHOVEL.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
@@ -103,10 +103,10 @@ public class GuardianKit extends CommonKit {
         Item tnt = Item.get(Item.TNT, 0, 16);
         Item goldenApple = Item.get(Item.GOLDEN_APPLE, 0, 3);
         Item bread = Item.get(Item.BREAD, 0, 32);
-        bread.setCustomName(symbol + getKit().getName() + empty + "Bread");
-        tnt.setCustomName(symbol + getKit().getName() + empty + "TNT");
-        goldenApple.setCustomName(symbol + getKit().getName() + empty + "Golden Apple");
-        obsidian.setCustomName(symbol + getKit().getName() + empty + "Obsidian");
+        bread.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Bread");
+        tnt.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "TNT");
+        goldenApple.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Golden Apple");
+        obsidian.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Obsidian");
         return new Item[] {
                 obsidian,
                 tnt,
@@ -139,7 +139,7 @@ public class GuardianKit extends CommonKit {
 
     @Override
     public boolean hasEnoughDollars(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         double dollars = profileSkyblock.getDollars();
         return getPrice() < dollars;
     }
@@ -162,14 +162,14 @@ public class GuardianKit extends CommonKit {
 
     @Override
     public boolean passTimer(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         long time = profileSkyblock.getCooldown();
         return (getTimer() - (System.currentTimeMillis() - time)) <= 0;
     }
 
     @Override
     public void sendKit(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         if (passTimer(player)) {
             if (canAddKit(player)) {
                 if (hasEnoughDollars(player)) {

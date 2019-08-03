@@ -2,11 +2,11 @@ package nycuro.api;
 
 import nycuro.Loader;
 import nycuro.ai.AiAPI;
-import nycuro.api.data.*;
+import nycuro.api.data.MechanicAPI;
 import nycuro.chat.api.MessageAPI;
 import nycuro.combat.api.CombatAPI;
 import nycuro.crate.CrateAPI;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.dropparty.api.DropPartyAPI;
 import nycuro.home.api.HomeAPI;
 import nycuro.jobs.api.JobsAPI;
@@ -45,7 +45,7 @@ public class API {
 
     public static CombatAPI combatAPI;
 
-    public static Database database;
+    public static DatabaseMySQL database;
 
     public static VoteSettings voteSettingsAPI;
 
@@ -95,7 +95,7 @@ public class API {
 
     public static CombatAPI getCombatAPI() { return combatAPI; }
 
-    public static Database getDatabase() {
+    public static DatabaseMySQL getDatabase() {
         return database;
     }
 

@@ -3,7 +3,7 @@ package nycuro.tasks;
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
 import nycuro.api.API;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileSkyblock;
 
 /**
@@ -18,7 +18,7 @@ public class CheckLevelTask extends Task {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
             double experience = 0;
             double necesary = 250;
-            ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
+            ProfileSkyblock profile = DatabaseMySQL.profileSkyblock.get(player.getName());
             if (profile != null) {
                 experience = profile.getExperience();
                 necesary = profile.getNecesary();

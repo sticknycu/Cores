@@ -7,7 +7,7 @@ import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import nycuro.api.API;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.utils.WarpUtils;
@@ -30,14 +30,14 @@ public class UtilsAPI {
     }
 
     private void repairItemHand(Player player) {
-        ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profile = DatabaseMySQL.profileSkyblock.get(player.getName());
         double moneyPlayer = profile.getDollars();
         cost = 500;
         double insufficient = cost - moneyPlayer;
         PlayerInventory playerInventory = player.getInventory();
         Item item = playerInventory.getItemInHand();
         if (moneyPlayer >= cost) {
-            Database.profileSkyblock.get(player.getName()).setDollars(Database.profileSkyblock.get(player.getName()).getDollars() - cost);
+            DatabaseMySQL.profileSkyblock.get(player.getName()).setDollars(DatabaseMySQL.profileSkyblock.get(player.getName()).getDollars() - cost);
             playerInventory.remove(item);
             item.setDamage(0);
             playerInventory.addItem(item);

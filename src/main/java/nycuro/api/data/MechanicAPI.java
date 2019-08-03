@@ -17,9 +17,9 @@ import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nukkitcoders.mobplugin.entities.monster.flying.Wither;
-import nycuro.api.API;
 import nycuro.ai.entity.BossEntity;
-import nycuro.database.Database;
+import nycuro.api.API;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.mechanic.objects.SettingsObject;
@@ -56,6 +56,39 @@ public class MechanicAPI {
             }
         }
         return 0;
+    }
+
+    public String getOS(Player player) {
+        switch (player.getLoginChainData().getDeviceOS()) {
+            case 1:
+                return "Android";
+            case 2:
+                return "iOS";
+            case 3:
+                return "Mac";
+            case 4:
+                return "Fire";
+            case 5:
+                return "Gear VR";
+            case 6:
+                return "HoloLens";
+            case 7:
+                return "Windows 10";
+            case 8:
+                return "Windows";
+            case 9:
+                return "Dedicated";
+            case 10:
+                return "tvOS";
+            case 11:
+                return "PlayStation";
+            case 12:
+                return "NX";
+            case 13:
+                return "Xbox";
+            default:
+                return "Unknown";
+        }
     }
 
     public void spawnNPC(String boolTag, int id, int x, int y, int z) {
@@ -121,8 +154,8 @@ public class MechanicAPI {
         }
     }
 
-    public String helpopTag = TextFormat.GRAY + "[" + TextFormat.YELLOW + "HELPOP" + TextFormat.GRAY + "]" + " ";
-    public String staffchatTag = TextFormat.GRAY + "[" + TextFormat.RED + "STAFFCHAT" + TextFormat.GRAY + "]" + " ";
+    public String helpopTag = TextFormat.GRAY + "[" + TextFormat.YELLOW + "HELPOP" + TextFormat.GRAY + "]" + " " + TextFormat.BOLD;
+    public String staffchatTag = TextFormat.GRAY + "[" + TextFormat.RED + "STAFFCHAT" + TextFormat.GRAY + "]" + " " + TextFormat.RED;
 
     public void handleStaffChat(Player player, String message, int type) {
         switch (type) {
@@ -234,7 +267,7 @@ public class MechanicAPI {
                                 player.sendMessage(API.getMessageAPI().sendTooMuchWithers(player));
                                 return;
                             } else {
-                                ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                                ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
                                 double dolllars = profileSkyblock.getDollars();
                                 if (dolllars < 10000) {
                                     API.getMessageAPI().sendUnsuficientMoneyMessage(player, 10000 - profileSkyblock.getDollars());
@@ -292,7 +325,7 @@ public class MechanicAPI {
                 if (!response.isEmpty()) {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                            ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
                             int level = profileSkyblock.getLevel();
                             if (level < 10) {
                                 player.sendMessage(API.getMessageAPI().sendArenaException(player, 10));
@@ -317,7 +350,7 @@ public class MechanicAPI {
                 if (!response.isEmpty()) {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                            ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
                             int level = profileSkyblock.getLevel();
                             if (level < 5) {
                                 player.sendMessage(API.getMessageAPI().sendArenaException(player, 5));
@@ -338,7 +371,6 @@ public class MechanicAPI {
         infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageSettings(player)));
         infoMenu.addElement(new ElementToggle("Show BossBar", true));
         infoMenu.addElement(new ElementToggle("Show Scoreboard", true));
-        infoMenu.addElement(new ElementToggle("Show Popup", true));
         List<String> list = new ArrayList<>();
         list.add("2");
         list.add("3");
@@ -353,7 +385,6 @@ public class MechanicAPI {
                     if (settings != null) {
                         settings.setBossbarValue(Boolean.valueOf(String.valueOf(response.values().toArray()[1])));
                         settings.setScoreboardValue(Boolean.valueOf(String.valueOf(response.values().toArray()[2])));
-                        settings.setPopupValue(Boolean.valueOf(String.valueOf(response.values().toArray()[3])));
                         player.setViewDistance(Integer.valueOf(String.valueOf(response.values().toArray()[4])));
 
                         DummyBossBar bb = API.getMainAPI().bossbar.get(player.getUniqueId());

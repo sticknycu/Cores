@@ -1,177 +1,79 @@
 package nycuro.jobs.handlers;
 
 import cn.nukkit.Player;
-import cn.nukkit.block.Block;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
-import cn.nukkit.event.block.BlockBreakEvent;
 import cn.nukkit.event.entity.EntityDamageByChildEntityEvent;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
-import cn.nukkit.event.entity.EntityDeathEvent;
+import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
+import cn.nukkit.network.protocol.DataPacket;
+import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
+import cn.nukkit.scheduler.Task;
 import nycuro.api.API;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileSkyblock;
 
 /**
- * author: NycuRO
- * SkyblockCore Project
- * API 1.0.0
+ * Project: SkyblockCore
+ * Author: NycuRO
  */
 public class JobsHandlers implements Listener {
 
+    /* First Time Playrs get a little mission on Miner.
+        Added that because idk another way in database lmao (evitate 0 item in database)
+     */
     @EventHandler
-    public void onBreak(BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlock();
-        if (API.getMechanicAPI().isOnSpawn(player)) return;
-        //if (API.getMechanicAPI().isOnPvP(player)) return;
-        ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
-        int job = profile.getJob();
-        switch (job) {
-            case 1:
-                switch (block.getId()) {
-                    case Block.WOOD:
-                    case Block.WOOD2:
-                        profile.setDollars(profile.getDollars() + 1.0);
-                        profile.setExperience(profile.getExperience() + 1.0);
-                        break;
-                }
-                break;
-            case 2:
-                switch (block.getId()) {
-                    case Block.COBBLESTONE:
-                    case Block.STONE:
-                    case Block.COAL_ORE:
-                    case Block.IRON_ORE:
-                    case Block.GOLD_ORE:
-                    case Block.DIAMOND_ORE:
-                    case Block.LAPIS_ORE:
-                    case Block.REDSTONE_ORE:
-                        profile.setDollars(profile.getDollars() + 2.5);
-                        profile.setExperience(profile.getExperience() + 2.0);
-                        break;
-                }
-                break;
-            case 3:
-                switch (block.getId()) {
-                    case 59:
-                    case 104:
-                    case 105:
-                    case 244:
-                    case 141:
-                    case 142:
-                        switch (block.getDamage()) {
-                            case 7:
-                                profile.setDollars(profile.getDollars() + 0.5);
-                                profile.setExperience(profile.getExperience() + 1.0);
-                                break;
-                        }
-                    case Block.PUMPKIN:
-                    case Block.MELON_BLOCK:
-                    case Block.SUGARCANE_BLOCK:
-                    case Block.CACTUS:
-                    case 175:
-                    case Block.SAPLING:
-                    case Block.FLOWER:
-                        profile.setDollars(profile.getDollars() + 0.5);
-                        profile.setExperience(profile.getExperience() + 1.0);
-                        break;
-                    case 127:
-                        switch (block.getDamage()) {
-                            case 2:
-                                profile.setDollars(profile.getDollars() + 0.5);
-                                profile.setExperience(profile.getExperience() + 1.0);
-                                break;
-                        }
-                }
-                break;
+    public void onInitialized(DataPacketReceiveEvent event) {
+        DataPacket dataPacket = event.getPacket();
+        if (dataPacket instanceof SetLocalPlayerAsInitializedPacket) {
+            Player player = event.getPlayer();
+            if (!player.hasPlayedBefore()) {
+                API.getMainAPI().getServer().getScheduler().scheduleDelayedTask(new Task() {
+                    @Override
+                    public void onRun(int i) {
+
+                        API.getMessageAPI().sendNewMissionTitle(player);
+                        API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
+                    }
+                }, 20 * 3 * 4 + 20, true);
+            }
         }
     }
 
     @EventHandler
-    public void onHurt(EntityDamageEvent event) {
-        Entity eventEntity = event.getEntity();
-        if (eventEntity == null) return;
-        sendToRespawn(eventEntity, null, event);
+    public void onTouch(EntityDamageEvent event) {
+        Entity entity = event.getEntity();
+        if (entity == null) return;
+        Player damager = null;
         if (event instanceof EntityDamageByEntityEvent) {
             EntityDamageByEntityEvent ev = (EntityDamageByEntityEvent) event;
             if (ev instanceof EntityDamageByChildEntityEvent) {
                 EntityDamageByChildEntityEvent evc = (EntityDamageByChildEntityEvent) ev;
-                if (evc.getDamager() instanceof Player) {
-                    Player damager = (Player) evc.getDamager();
-                    API.getMessageAPI().sendHitBowMessage(eventEntity, damager);
-                    if (!API.getMechanicAPI().isOnSpawn(damager)) {
-                        ProfileSkyblock profile = Database.profileSkyblock.get(damager.getName());
-                        int job = profile.getJob();
-                        switch (job) {
-                            case 4:
-                                if (eventEntity instanceof Player) {
-                                    profile.setDollars(profile.getDollars() + 0.4);
-                                    profile.setExperience(profile.getExperience() + 2.0);
-                                }
-                                break;
-                            case 5:
-                                if (!(eventEntity instanceof Player)) {
-                                    profile.setDollars(profile.getDollars() + 0.4);
-                                    profile.setExperience(profile.getExperience() + 1.0);
-                                }
-                                break;
-                        }
-                    }
-                }
-            } else if (ev.getDamager() instanceof Player) {
-                Player damager = (Player) ev.getDamager();
-                API.getMessageAPI().sendHitBowMessage(eventEntity, damager);
-                if (!API.getMechanicAPI().isOnSpawn(damager)) {
-                    if (eventEntity instanceof Player) {
-                        sendToRespawn(eventEntity, damager, event);
-                    }
-                    ProfileSkyblock profile = Database.profileSkyblock.get(damager.getName());
-                    int job = profile.getJob();
-                    switch (job) {
-                        case 4:
-                            if (eventEntity instanceof Player) {
-                                profile.setDollars(profile.getDollars() + 0.4);
-                                profile.setExperience(profile.getExperience() + 2.0);
-                            }
-                            break;
-                        case 5:
-                            if (!(eventEntity instanceof Player)) {
-                                profile.setDollars(profile.getDollars() + 0.4);
-                                profile.setExperience(profile.getExperience() + 1.0);
-                            }
-                            break;
-                    }
-                }
+                if (evc.getDamager() instanceof Player) damager = (Player) evc.getDamager();
+            } else if (ev.getDamager() instanceof Player) damager = (Player) ev.getDamager();
+            if (damager == null) return;
+
+            ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(damager.getName());
+            if (entity.namedTag.getBoolean("minerNPC")) {
+                profileSkyblock.setJob(1);
+            } else if (entity.namedTag.getBoolean("butcherNPC")) {
+                profileSkyblock.setJob(2);
+            } else if (entity.namedTag.getBoolean("farmerNPC")) {
+                profileSkyblock.setJob(3);
+            } else if (entity.namedTag.getBoolean("fishermanNPC")) {
+                profileSkyblock.setJob(4);
+            } else if (entity.namedTag.getBoolean("mobfarmerNPC")) {
+                // TODO: Mob farm
             }
         }
     }
 
-    @EventHandler
-    public void onEntityDeath(EntityDeathEvent event) {
-        Entity eventEntity = event.getEntity();
-        if (eventEntity instanceof Player) return;
-        if ((eventEntity.getLastDamageCause() instanceof EntityDamageByEntityEvent)) {
-            if (((EntityDamageByEntityEvent) eventEntity.getLastDamageCause()).getDamager() instanceof Player) {
-                Player killer = (Player) ((EntityDamageByEntityEvent) eventEntity.getLastDamageCause()).getDamager();
-                ProfileSkyblock profile = Database.profileSkyblock.get(killer.getName());
-                int job = profile.getJob();
-                switch (job) {
-                    case 5:
-                        profile.setDollars(profile.getDollars() + 1.0);
-                        profile.setExperience(profile.getExperience() + 5.0);
-                        break;
-                }
-            }
-        }
-    }
-
-    /** Credits: @Nora. Thanks! */
-    /** FIX: When adding mobs */
+    /* Credits: @Nora. Thanks!
+       FIX: When adding mobs */
     private void sendToRespawn(Entity entity, Player damager, EntityDamageEvent event) {
         if (!(entity instanceof Player)) return;
         Player player = (Player) entity;
@@ -186,8 +88,8 @@ public class JobsHandlers implements Listener {
             player.removeAllEffects();
             player.getInventory().clearAll();
             API.getMessageAPI().sendDeadMessage(player, damager);
-            ProfileSkyblock profilePlayer = Database.profileSkyblock.get(player.getName());
-            ProfileSkyblock profileDamager = Database.profileSkyblock.get(damager.getName()); // Todo: Zombies, Monsters.
+            ProfileSkyblock profilePlayer = DatabaseMySQL.profileSkyblock.get(player.getName());
+            ProfileSkyblock profileDamager = DatabaseMySQL.profileSkyblock.get(damager.getName()); // Todo: Zombies, Monsters.
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
             profileDamager.setKills(profileDamager.getKills() + 1);
 
@@ -199,7 +101,7 @@ public class JobsHandlers implements Listener {
             player.teleport(player.getServer().getDefaultLevel().getSpawnLocation());
             player.removeAllEffects();
             player.getInventory().clearAll();
-            ProfileSkyblock profilePlayer = Database.profileSkyblock.get(player.getName());
+            ProfileSkyblock profilePlayer = DatabaseMySQL.profileSkyblock.get(player.getName());
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
         }
     }

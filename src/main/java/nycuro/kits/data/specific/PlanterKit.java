@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import nycuro.api.API;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
 import nycuro.kits.type.StatusKit;
@@ -44,28 +44,28 @@ public class PlanterKit extends CommonKit {
     @Override
     public Item getSword() {
         Item item = Item.get(Item.STONE_SWORD);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.SWORD.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
         Item item = Item.get(Item.STONE_PICKAXE);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.PICKAXE.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
         Item item = Item.get(Item.STONE_AXE);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.AXE.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
         Item item = Item.get(Item.STONE_SHOVEL);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.SHOVEL.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
@@ -74,17 +74,17 @@ public class PlanterKit extends CommonKit {
         ArrayList<Item> items = new ArrayList<>();
         for (int i = 0; i <= 5; i++) {
             Item item = Item.get(Item.SAPLING, i, 12);
-            item.setCustomName(symbol + getKit().getName() + empty + "Sapling Type " + i);
+            item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Sapling Type " + i);
             items.add(item);
         }
         Item grass = Item.get(Item.GRASS, 0, 32);
-        grass.setCustomName(symbol + getKit().getName() + empty + "Grass");
+        grass.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Grass");
         Item dirt = Item.get(Item.DIRT, 0, 32);
-        dirt.setCustomName(symbol + getKit().getName() + empty + "Dirt");
+        dirt.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Dirt");
         Item cobblestone = Item.get(Item.COBBLESTONE, 0, 64);
-        cobblestone.setCustomName(symbol + getKit().getName() + empty + "Cobblestone");
+        cobblestone.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Cobblestone");
         Item bonemeal = Item.get(Item.DYE, 15, 24);
-        bonemeal.setCustomName(symbol + getKit().getName() + empty + "Bone Meal");
+        bonemeal.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Bone Meal");
         Item[] item = new Item[10];
         for (int i = 0; i <= 5; i++) {
             item[i] = items.get(i);
@@ -109,7 +109,7 @@ public class PlanterKit extends CommonKit {
 
     @Override
     public boolean hasEnoughDollars(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         double dollars = profileSkyblock.getDollars();
         return getPrice() < dollars;
     }
@@ -132,14 +132,14 @@ public class PlanterKit extends CommonKit {
 
     @Override
     public boolean passTimer(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         long time = profileSkyblock.getCooldown();
         return (getTimer() - (System.currentTimeMillis() - time)) <= 0;
     }
 
     @Override
     public void sendKit(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         if (passTimer(player)) {
             if (canAddKit(player)) {
                 if (hasEnoughDollars(player)) {

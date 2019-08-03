@@ -15,16 +15,11 @@ public class SettingsObject {
 
     @Getter
     @Setter
-    public boolean popupValue;
-
-    @Getter
-    @Setter
     public int renderDistance;
 
     public SettingsObject(boolean bossbarValue, boolean scoreboardValue, boolean popupValue, int renderDistance) {
         this.bossbarValue = bossbarValue;
         this.scoreboardValue = scoreboardValue;
-        this.popupValue = popupValue;
         this.renderDistance = renderDistance;
     }
 }

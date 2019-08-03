@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import nycuro.api.API;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
 import nycuro.kits.type.StatusKit;
@@ -42,43 +42,43 @@ public class LackerKit extends CommonKit {
     @Override
     public Item getSword() {
         Item item = Item.get(Item.STONE_SWORD);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.SWORD.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
         Item item = Item.get(Item.STONE_PICKAXE);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.PICKAXE.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
         Item item = Item.get(Item.STONE_AXE);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.AXE.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
         Item item = Item.get(Item.STONE_SHOVEL);
-        item.setCustomName(symbol + getKit().getName() + empty + TypeItems.SHOVEL.getType());
+        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
     @Override
     public Item[] getOtherItems() {
         Item steak = Item.get(Item.STEAK, 0, 32);
-        steak.setCustomName(symbol + getKit().getName() + empty + "Steak");
+        steak.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Steak");
         Item ice = Item.get(Item.ICE, 0, 2);
-        ice.setCustomName(symbol + getKit().getName() + empty + "Ice");
+        ice.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Ice");
         Item lava_bucket1 = Item.get(Item.BUCKET, 10, 1);
-        lava_bucket1.setCustomName(symbol + getKit().getName() + empty + "Lava Bucket x1");
+        lava_bucket1.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Lava Bucket x1");
         Item lava_bucket2 = Item.get(Item.BUCKET, 10, 1);
-        lava_bucket2.setCustomName(symbol + getKit().getName() + empty + "Lava Bucket x2");
+        lava_bucket2.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Lava Bucket x2");
         Item empty_bucket = Item.get(Item.BUCKET, 10, 10);
-        empty_bucket.setCustomName(symbol + getKit().getName() + empty + "Empty Bucket");
+        empty_bucket.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "API.getMainAPI().empty Bucket");
         return new Item[] {
                 steak,
                 ice,
@@ -101,7 +101,7 @@ public class LackerKit extends CommonKit {
 
     @Override
     public boolean hasEnoughDollars(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         double dollars = profileSkyblock.getDollars();
         return getPrice() < dollars;
     }
@@ -124,14 +124,14 @@ public class LackerKit extends CommonKit {
 
     @Override
     public boolean passTimer(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         long time = profileSkyblock.getCooldown();
         return (getTimer() - (System.currentTimeMillis() - time)) <= 0;
     }
 
     @Override
     public void sendKit(Player player) {
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
         if (passTimer(player)) {
             if (canAddKit(player)) {
                 if (hasEnoughDollars(player)) {

@@ -6,10 +6,10 @@ import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import nycuro.Loader;
 import nycuro.api.API;
-import nycuro.database.Database;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
-import nycuro.jobs.api.JobsAPI;
+import nycuro.jobs.NameJob;
 
 import java.util.UUID;
 
@@ -35,8 +35,8 @@ public class ScoreboardTask extends Task {
 
         Objective scoreboardDisplay = scoreboard.objective.getObjective();
 
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-        ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+        ProfileProxy profileProxy = DatabaseMySQL.profileProxy.get(player.getName());
         Object2BooleanMap<UUID> coords = API.getMainAPI().coords;
 
         DisplayObjective dobj = new DisplayObjective(
@@ -54,7 +54,7 @@ public class ScoreboardTask extends Task {
             scoreboardDisplay.setScore(5, "§7| §fDollars: §6" +  Loader.round(profileSkyblock.getDollars(), 2), 5);
             scoreboardDisplay.setScore(6, "§7| §fGems: §6" + profileProxy.getGems() + "  ", 6);
             scoreboardDisplay.setScore(7, "§7| §fOnline Time: §6" + Loader.time(profileSkyblock.getTime()) + "  ", 7);
-            scoreboardDisplay.setScore(8, "§7| §fJob: §6" + JobsAPI.jobs.get(profileSkyblock.getJob()) + "   ", 8);
+            scoreboardDisplay.setScore(8, "§7| §fJob: §6" + NameJob.getType(profileSkyblock.getJob()) + "   ", 8);
             if (coords.getOrDefault(player.getUniqueId(), false)) {
                 scoreboardDisplay.setScore(9, "§7| §fX: §6" + (int) player.getX() + " §fY: §6" + (int) player.getY() + " §fZ: §6" + (int) player.getZ() + "   ", 9);
             }

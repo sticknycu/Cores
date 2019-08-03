@@ -22,9 +22,9 @@ import cn.nukkit.scheduler.Task;
 import io.pocketvote.event.VoteEvent;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-import nycuro.api.API;
 import nycuro.Loader;
-import nycuro.database.Database;
+import nycuro.api.API;
+import nycuro.database.DatabaseMySQL;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.mechanic.objects.SettingsObject;
 
@@ -88,17 +88,17 @@ public class MechanicHandlers implements Listener {
         API.getDatabase().playerExist(player.getName(), bool -> {
             if (!bool) {
                 API.getDatabase().addNewPlayer(player.getName());
-                Database.addDatesPlayerHub(player.getName());
+                DatabaseMySQL.addDatesPlayerHub(player.getName());
             } else {
-                Database.addDatesPlayerHub(player.getName());
-                Database.addDatesPlayerFactions(player.getName());
+                DatabaseMySQL.addDatesPlayerHub(player.getName());
+                DatabaseMySQL.addDatesPlayerFactions(player.getName());
             }
         });
         API.getDatabase().playerKitsExist(player.getName(), bool -> {
             if (!bool) {
                 API.getDatabase().addNewPlayerToKits(player.getName());
             } else {
-                Database.addDatesKitsPlayer(player.getName());
+                DatabaseMySQL.addDatesKitsPlayer(player.getName());
             }
         });
         if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
@@ -116,16 +116,16 @@ public class MechanicHandlers implements Listener {
         int low = 200;
         int high = 250;
         int result = r.nextInt(high-low) + low;
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(offlinePlayer.getName());
+        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(offlinePlayer.getName());
         profileSkyblock.setExperience(profileSkyblock.getExperience() + result);
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        Database.saveDatesPlayerFromHub(player.getName());
-        Database.saveDatesPlayerFromFactions(player.getName());
-        Database.saveDatesPlayerFromKits(player.getName());
+        DatabaseMySQL.saveDatesPlayerFromHub(player.getName());
+        DatabaseMySQL.saveDatesPlayerFromFactions(player.getName());
+        DatabaseMySQL.saveDatesPlayerFromKits(player.getName());
         Loader.startTime.removeLong(player.getUniqueId());
         API.getMainAPI().played.removeLong(player.getUniqueId());
         API.getMainAPI().isOnSpawn.removeBoolean(player.getUniqueId());
