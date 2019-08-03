@@ -2,15 +2,13 @@ package nycuro.jobs.jobs;
 
 import cn.nukkit.Player;
 import nycuro.api.API;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.jobs.CommonJob;
 import nycuro.jobs.NameJob;
 import nycuro.jobs.StatusJobs;
 import nycuro.jobs.TypeJob;
 import nycuro.utils.typo.FastRandom;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.function.Consumer;
 
 /**
@@ -41,7 +39,7 @@ public class ButcherJob extends CommonJob {
 
     @Override
     public boolean isLocked(Player player, TypeJob typeJob) {
-        int level = DatabaseMySQL.profileSkyblock.get(player.getName()).getLevel();
+        int level = Database.profileSkyblock.get(player.getName()).getLevel();
         return level >= getLevelNeeded(typeJob);
     }
 
@@ -77,22 +75,58 @@ public class ButcherJob extends CommonJob {
         if (getStatus(player, typeJob).equals(StatusJobs.LOCKED)) {
             player.sendMessage(API.getMessageAPI().sendLockedJobStatus(player));
         } else {
-            Collection<Integer> collection = new HashSet<>();
+            int[] collection = new int[5];
             if (typeJob.equals(TypeJob.EASY)) {
-                FastRandom.current().ints(4, 10, 15).findFirst().ifPresent((j) -> {
-                    collection.add(j);
+                FastRandom.current().ints(1, 10, 15).findFirst().ifPresent((j) -> {
+                    collection[0] = j;
+                });
+                FastRandom.current().ints(1, 10, 15).findFirst().ifPresent((j) -> {
+                    collection[1] = j;
+                });
+                FastRandom.current().ints(1, 10, 15).findFirst().ifPresent((j) -> {
+                    collection[2] = j;
+                });
+                FastRandom.current().ints(1, 10, 15).findFirst().ifPresent((j) -> {
+                    collection[3] = j;
                 });
             } else if (typeJob.equals(TypeJob.MEDIUM)) {
-                FastRandom.current().ints(4, 15, 25).findFirst().ifPresent((j) -> {
-                    collection.add(j);
+                FastRandom.current().ints(1, 15, 25).findFirst().ifPresent((j) -> {
+                    collection[0] = j;
+                });
+                FastRandom.current().ints(1, 15, 25).findFirst().ifPresent((j) -> {
+                    collection[1] = j;
+                });
+                FastRandom.current().ints(1, 15, 25).findFirst().ifPresent((j) -> {
+                    collection[2] = j;
+                });
+                FastRandom.current().ints(1, 15, 25).findFirst().ifPresent((j) -> {
+                    collection[3] = j;
                 });
             } else if (typeJob.equals(TypeJob.HARD)) {
-                FastRandom.current().ints(4, 35, 40).findFirst().ifPresent((j) -> {
-                    collection.add(j);
+                FastRandom.current().ints(1, 35, 40).findFirst().ifPresent((j) -> {
+                    collection[0] = j;
+                });
+                FastRandom.current().ints(1, 35, 40).findFirst().ifPresent((j) -> {
+                    collection[1] = j;
+                });
+                FastRandom.current().ints(1, 35, 40).findFirst().ifPresent((j) -> {
+                    collection[2] = j;
+                });
+                FastRandom.current().ints(1, 35, 40).findFirst().ifPresent((j) -> {
+                    collection[3] = j;
                 });
             } else {
                 FastRandom.current().ints(4, 45, 60).findFirst().ifPresent((j) -> {
-                    collection.add(j);
+                    collection[0] = j;
+                });
+                FastRandom.current().ints(4, 45, 60).findFirst().ifPresent((j) -> {
+                    collection[1] = j;
+                });
+                FastRandom.current().ints(4, 45, 60).findFirst().ifPresent((j) -> {
+                    collection[2] = j;
+                });
+                FastRandom.current().ints(4, 45, 60).findFirst().ifPresent((j) -> {
+                    collection[3] = j;
                 });
             }
             consumer.accept(collection);

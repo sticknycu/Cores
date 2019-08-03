@@ -1,6 +1,5 @@
 package nycuro.database;
 
-import cn.nukkit.item.Item;
 import cn.nukkit.scheduler.AsyncTask;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -19,7 +18,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class DatabaseMySQL {
+public class Database {
 
     public static Int2ObjectMap<String> scoreboardcoinsName = new Int2ObjectOpenHashMap<>();
     public static Int2DoubleMap scoreboardcoinsValue = new Int2DoubleOpenHashMap();
@@ -37,7 +36,6 @@ public class DatabaseMySQL {
     private static HikariDataSource DATASOURCE_REPORTS;
     private static HikariDataSource DATASOURCE_HOMESF;
     private static HikariDataSource DATASOURCE_SKITS;
-    private static HikariDataSource DATASOURCE_JOBS;
 
     public static void connectToDatabaseHomesF() {
         String address = "localhost";
@@ -86,33 +84,6 @@ public class DatabaseMySQL {
         String query = "create table if not exists kits (`name` varchar(20), `punu` BIT, `pdoi` BIT, `ptrei` BIT, `ppatru` BIT, `pcinci` BIT)";
 
         try (Connection connection = DATASOURCE_SKITS.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void connectToDatabaseJobs() {
-        String address = "localhost";
-        String name = "skyblockjobs";
-        String username = "root";
-        String password = "p0rt0c4l3911";
-
-        HikariConfig config = new HikariConfig();
-        config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
-        config.addDataSourceProperty("serverName", address);
-        config.addDataSourceProperty("port", "3306");
-        config.addDataSourceProperty("databaseName", name);
-        config.addDataSourceProperty("user", username);
-        config.addDataSourceProperty("password", password);
-        DATASOURCE_JOBS = new HikariDataSource(config);
-
-        DATASOURCE_JOBS.setMaximumPoolSize(10);
-
-        String query = "create table if not exists jobs (`name` varchar(20), `id` int, `meta` int, `count` int, `reward` FLOAT)";
-
-        try (Connection connection = DATASOURCE_JOBS.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -211,7 +182,7 @@ public class DatabaseMySQL {
     }
 
     public static void saveUnAsyncDatesPlayerFromKits(String name) {
-        KitsObject profileKits = DatabaseMySQL.kitsSkyblock.get(name);
+        KitsObject profileKits = Database.kitsSkyblock.get(name);
         try (Connection connection = DATASOURCE_SKITS.getConnection();
              PreparedStatement preparedStatement =
                      connection.prepareStatement("UPDATE `kits` SET `punu` = ?, `pdoi` = ?, `ptrei` = ?, `ppatru` = ?, `pcinci` = ? WHERE `name` = ?")) {
@@ -263,7 +234,7 @@ public class DatabaseMySQL {
     }
 
     public static void saveUnAsyncDatesPlayerFromHub(String name) {
-        ProfileProxy profileProxy = DatabaseMySQL.profileProxy.get(name);
+        ProfileProxy profileProxy = Database.profileProxy.get(name);
         try (Connection connection = DATASOURCE_PROXY.getConnection();
              PreparedStatement preparedStatement =
                      connection.prepareStatement("UPDATE `dates` SET `language` = ?, `gems` = ?, `time` = ?, `votes` = ? WHERE `name` = ?")) {
@@ -653,29 +624,6 @@ public class DatabaseMySQL {
         });
     }
 
-    public void addNewItemsJob(String name, Item[] items, double reward) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
-            @Override
-            public void onRun() {
-                for (Item item : items) {
-                    try (Connection connection = DATASOURCE_JOBS.getConnection();
-                         PreparedStatement preparedStatement =
-                                 connection.prepareStatement("INSERT INTO jobs (`name`, `id`, `meta`, `count`, `reward`) VALUES (?, ?, ?, ?, ?)")) {
-                        preparedStatement.setString(1, name);
-                        preparedStatement.setInt(2, item.getId());
-                        preparedStatement.setInt(3, item.getDamage());
-                        preparedStatement.setInt(4, item.getCount());
-                        preparedStatement.setDouble(5, reward);
-                        preparedStatement.executeUpdate();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-                //mission.putIfAbsent(name, new JobPlayer(name, job, items, reward));
-            }
-        });
-    }
-
     public void addNewPlayer(String name) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
@@ -770,24 +718,6 @@ public class DatabaseMySQL {
         });
     }
 
-    public void playerExistInJobs(String name, Consumer<Boolean> consumer) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
-            @Override
-            public void onRun() {
-                try (Connection connection = DATASOURCE_JOBS.getConnection();
-                     PreparedStatement preparedStatement =
-                             connection.prepareStatement("SELECT * from `jobs` WHERE `name` =?")) {
-                    preparedStatement.setString(1, name);
-                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                        consumer.accept(resultSet.next());
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
     public void playerKitsExist(String name, Consumer<Boolean> consumer) {
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
             @Override
@@ -826,7 +756,7 @@ public class DatabaseMySQL {
 
 
     public static void saveUnAsyncDatesPlayerFromFactions(String name) {
-        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(name);
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(name);
         try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
              PreparedStatement preparedStatement =
                      connection.prepareStatement("UPDATE `dates` SET `job` = ?, `kills` = ?, `deaths` = ?, `cooldown` = ?, `experience` = ?, `level` = ?, `necesary` = ?, `time` = ?, `dollars` = ? WHERE `name` = ?")) {
@@ -925,29 +855,6 @@ public class DatabaseMySQL {
             e.printStackTrace();
         }
         return strings;
-    }
-
-    public Collection<Item> getItemsFromJob(String name) {
-        Collection<Item> collection = new HashSet<>();
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
-            @Override
-            public void onRun() {
-                try (Connection connection = DATASOURCE_JOBS.getConnection();
-                     PreparedStatement preparedStatement =
-                             connection.prepareStatement("SELECT * from `jobs` WHERE `name` = ?")) {
-                    preparedStatement.setString(1, name);
-                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                        while (resultSet.next()) {
-                            Item item = Item.get(resultSet.getInt("id"), resultSet.getInt("meta"), resultSet.getInt("count"));
-                            collection.add(item);
-                        }
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        return collection;
     }
 
     public Collection<Long> getTimersPlayerReport(String name) {

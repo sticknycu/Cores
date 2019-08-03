@@ -6,7 +6,7 @@ import nycuro.api.data.MechanicAPI;
 import nycuro.chat.api.MessageAPI;
 import nycuro.combat.api.CombatAPI;
 import nycuro.crate.CrateAPI;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.dropparty.api.DropPartyAPI;
 import nycuro.home.api.HomeAPI;
 import nycuro.jobs.api.JobsAPI;
@@ -45,7 +45,7 @@ public class API {
 
     public static CombatAPI combatAPI;
 
-    public static DatabaseMySQL database;
+    public static Database database;
 
     public static VoteSettings voteSettingsAPI;
 
@@ -95,7 +95,7 @@ public class API {
 
     public static CombatAPI getCombatAPI() { return combatAPI; }
 
-    public static DatabaseMySQL getDatabase() {
+    public static Database getDatabase() {
         return database;
     }
 

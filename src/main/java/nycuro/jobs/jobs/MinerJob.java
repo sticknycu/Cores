@@ -3,15 +3,13 @@ package nycuro.jobs.jobs;
 import cn.nukkit.Player;
 import cn.nukkit.item.Item;
 import nycuro.api.API;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.jobs.CommonJob;
 import nycuro.jobs.NameJob;
 import nycuro.jobs.StatusJobs;
 import nycuro.jobs.TypeJob;
 import nycuro.utils.typo.FastRandom;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.function.Consumer;
 
 /**
@@ -42,7 +40,7 @@ public class MinerJob extends CommonJob {
 
     @Override
     public boolean isLocked(Player player, TypeJob typeJob) {
-        int level = DatabaseMySQL.profileSkyblock.get(player.getName()).getLevel();
+        int level = Database.profileSkyblock.get(player.getName()).getLevel();
         return level >= getLevelNeeded(typeJob);
     }
 
@@ -78,79 +76,79 @@ public class MinerJob extends CommonJob {
         if (getStatus(player, typeJob).equals(StatusJobs.LOCKED)) {
             player.sendMessage(API.getMessageAPI().sendLockedJobStatus(player));
         } else {
-            Collection<Item> itemsMap = new HashSet<>();
+            Item[] itemsMap = new Item[10];
             if (typeJob.equals(TypeJob.EASY)) {
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.COBBLESTONE, 0, j));
+                    itemsMap[0] = Item.get(Item.COBBLESTONE, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.STONE, 0, j));
+                    itemsMap[1] = Item.get(Item.STONE, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.IRON_ORE, 0, j));
+                    itemsMap[2] = Item.get(Item.IRON_ORE, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.COAL_ORE, 0, j));
+                    itemsMap[3] = Item.get(Item.COAL_ORE, 0, j);
                 });
             } else if (typeJob.equals(TypeJob.MEDIUM)) {
                 FastRandom.current().ints(1, 12, 36).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.STONE, 0, j));
+                    itemsMap[0] = Item.get(Item.STONE, 0, j);
                 });
                 FastRandom.current().ints(1, 12, 36).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.GOLD_ORE, 0, j));
+                    itemsMap[1] = Item.get(Item.GOLD_ORE, 0, j);
                 });
                 FastRandom.current().ints(1, 12, 36).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.IRON_ORE, 0, j));
+                    itemsMap[2] = Item.get(Item.IRON_ORE, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.COAL_ORE, 0, j));
+                    itemsMap[3] = Item.get(Item.COAL_ORE, 0, j);
                 });
             } else if (typeJob.equals(TypeJob.HARD)) {
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.STONE, 0, j));
+                    itemsMap[0] = Item.get(Item.STONE, 0, j);
                 });
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.GOLD_ORE, 0, j));
+                    itemsMap[1] = Item.get(Item.GOLD_ORE, 0, j);
                 });
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.IRON_ORE, 0, j));
+                    itemsMap[2] = Item.get(Item.IRON_ORE, 0, j);
                 });
                 FastRandom.current().ints(1, 5, 10).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.DIAMOND, 0, j));
+                    itemsMap[3] = Item.get(Item.DIAMOND, 0, j);
                 });
                 FastRandom.current().ints(1, 3, 5).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.EMERALD, 0, j));
+                    itemsMap[4] = Item.get(Item.EMERALD, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.COAL_ORE, 0, j));
+                    itemsMap[5] = Item.get(Item.COAL_ORE, 0, j);
                 });
             } else {
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.STONE, 0, j));
+                    itemsMap[0] = Item.get(Item.STONE, 0, j);
                 });
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.COBBLESTONE, 0, j));
+                    itemsMap[1] = Item.get(Item.COBBLESTONE, 0, j);
                 });
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.GOLD_INGOT, 0, j));
+                    itemsMap[2] = Item.get(Item.GOLD_INGOT, 0, j);
                 });
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.IRON_INGOT, 0, j));
+                    itemsMap[3] = Item.get(Item.IRON_INGOT, 0, j);
                 });
                 FastRandom.current().ints(1, 5, 10).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.DIAMOND, 0, j));
+                    itemsMap[4] = Item.get(Item.DIAMOND, 0, j);
                 });
                 FastRandom.current().ints(1, 3, 5).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.EMERALD, 0, j));
+                    itemsMap[5] = Item.get(Item.EMERALD, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.COAL_ORE, 0, j));
+                    itemsMap[6] = Item.get(Item.COAL_ORE, 0, j);
                 });
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.REDSTONE_DUST, 0, j));
+                    itemsMap[7] = Item.get(Item.REDSTONE_DUST, 0, j);
                 });
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
-                    itemsMap.add(Item.get(Item.REDSTONE, 0, j));
+                    itemsMap[8] = Item.get(Item.REDSTONE, 0, j);
                 });
             }
             consumer.accept(itemsMap);

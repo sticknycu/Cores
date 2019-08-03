@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.TextFormat;
 import nycuro.api.API;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
 
@@ -18,8 +18,8 @@ public class ScoreTagTask extends Task {
     @Override
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-            ProfileProxy profileProxy = DatabaseMySQL.profileProxy.get(player.getName());
-            ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+            ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
+            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
             String level = "";
             String hp = String.valueOf(player.getHealth());
             String maxhp = String.valueOf(player.getMaxHealth());

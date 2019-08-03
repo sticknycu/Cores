@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
 import nycuro.Loader;
 import nycuro.api.API;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 
 /**
@@ -17,7 +17,7 @@ public class BossBarTask extends Task {
     @Override
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-            ProfileSkyblock profile = DatabaseMySQL.profileSkyblock.get(player.getName());
+            ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
 
             if (API.getMainAPI().bossbar.get(player.getUniqueId()) != null) {
 

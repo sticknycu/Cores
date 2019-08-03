@@ -19,7 +19,7 @@ import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import nukkitcoders.mobplugin.entities.monster.flying.Wither;
 import nycuro.ai.entity.BossEntity;
 import nycuro.api.API;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.mechanic.objects.SettingsObject;
@@ -143,7 +143,7 @@ public class MechanicAPI {
     public void handleTransferHub(Player player, int i) {
         InetSocketAddress hub = new InetSocketAddress("mcpe.chzone.eu", 19132);
         switch (i) {
-            case 0: // transfer singur jucator in Hub
+            case 0:
                 player.transfer(hub);
                 break;
             case 1:
@@ -154,7 +154,7 @@ public class MechanicAPI {
         }
     }
 
-    public String helpopTag = TextFormat.GRAY + "[" + TextFormat.YELLOW + "HELPOP" + TextFormat.GRAY + "]" + " " + TextFormat.BOLD;
+    public String helpopTag = TextFormat.GRAY + "[" + TextFormat.YELLOW + "HELPOP" + TextFormat.GRAY + "]" + " " + TextFormat.GOLD;
     public String staffchatTag = TextFormat.GRAY + "[" + TextFormat.RED + "STAFFCHAT" + TextFormat.GRAY + "]" + " " + TextFormat.RED;
 
     public void handleStaffChat(Player player, String message, int type) {
@@ -267,7 +267,7 @@ public class MechanicAPI {
                                 player.sendMessage(API.getMessageAPI().sendTooMuchWithers(player));
                                 return;
                             } else {
-                                ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+                                ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                                 double dolllars = profileSkyblock.getDollars();
                                 if (dolllars < 10000) {
                                     API.getMessageAPI().sendUnsuficientMoneyMessage(player, 10000 - profileSkyblock.getDollars());
@@ -325,7 +325,7 @@ public class MechanicAPI {
                 if (!response.isEmpty()) {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+                            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                             int level = profileSkyblock.getLevel();
                             if (level < 10) {
                                 player.sendMessage(API.getMessageAPI().sendArenaException(player, 10));
@@ -350,7 +350,7 @@ public class MechanicAPI {
                 if (!response.isEmpty()) {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+                            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                             int level = profileSkyblock.getLevel();
                             if (level < 5) {
                                 player.sendMessage(API.getMessageAPI().sendArenaException(player, 5));

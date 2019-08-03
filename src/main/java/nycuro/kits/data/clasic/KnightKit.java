@@ -5,7 +5,7 @@ import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import nycuro.api.API;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
 import nycuro.kits.type.*;
@@ -136,7 +136,7 @@ public class KnightKit extends CommonKit {
 
     @Override
     public boolean hasEnoughDollars(Player player) {
-        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         double dollars = profileSkyblock.getDollars();
         return getPrice() < dollars;
     }
@@ -159,14 +159,14 @@ public class KnightKit extends CommonKit {
 
     @Override
     public boolean passTimer(Player player) {
-        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         long time = profileSkyblock.getCooldown();
         return (getTimer() - (System.currentTimeMillis() - time)) <= 0;
     }
 
     @Override
     public void sendKit(Player player) {
-        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         if (passTimer(player)) {
             if (canAddKit(player)) {
                 if (hasEnoughDollars(player)) {

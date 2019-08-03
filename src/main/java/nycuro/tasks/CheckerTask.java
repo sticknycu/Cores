@@ -6,7 +6,7 @@ import cn.nukkit.scheduler.Task;
 import nycuro.Loader;
 import nycuro.ai.entity.BossEntity;
 import nycuro.api.API;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
 
@@ -29,7 +29,7 @@ public class CheckerTask extends Task {
     @Override
     public void onRun(int i) {
         for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-            ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
             double[] d1 = new double[2];
             double[] d2 = new double[2];
             double[] d3 = new double[2];
@@ -119,7 +119,7 @@ public class CheckerTask extends Task {
                         int lowGem = 1;
                         int maxGem = 3;
                         int resultGem = r.nextInt(maxGem - lowGem) + lowGem;
-                        ProfileProxy profileProxy = DatabaseMySQL.profileProxy.get(player.getName());
+                        ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
                         if (!randomBool.get()) profileProxy.setGems(profileProxy.getGems() + resultGem);
                         int lowCoins = 100;
                         int maxCoins = 500;

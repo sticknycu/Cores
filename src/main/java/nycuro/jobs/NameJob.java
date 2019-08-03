@@ -28,17 +28,10 @@ public enum NameJob {
     }
 
     public static String getType(int id) {
-        switch (id) {
-            case 0:
-                return NameJob.NO_JOB.getName();
-            case 1:
-                return NameJob.MINER.getName();
-            case 2:
-                return NameJob.BUTCHER.getName();
-            case 3:
-                return NameJob.FARMER.getName();
-            case 4:
-                return NameJob.FISHERMAN.getName();
+        for (NameJob job : NameJob.values()) {
+            if (job.getId() == id) {
+                return job.getName();
+            }
         }
         return NameJob.NO_JOB.getName();
     }

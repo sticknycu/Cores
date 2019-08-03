@@ -7,14 +7,10 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.entity.EntityDamageByChildEntityEvent;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
-import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
-import cn.nukkit.network.protocol.DataPacket;
-import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
-import cn.nukkit.scheduler.Task;
 import nycuro.api.API;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 
 /**
@@ -22,27 +18,6 @@ import nycuro.database.objects.ProfileSkyblock;
  * Author: NycuRO
  */
 public class JobsHandlers implements Listener {
-
-    /* First Time Playrs get a little mission on Miner.
-        Added that because idk another way in database lmao (evitate 0 item in database)
-     */
-    @EventHandler
-    public void onInitialized(DataPacketReceiveEvent event) {
-        DataPacket dataPacket = event.getPacket();
-        if (dataPacket instanceof SetLocalPlayerAsInitializedPacket) {
-            Player player = event.getPlayer();
-            if (!player.hasPlayedBefore()) {
-                API.getMainAPI().getServer().getScheduler().scheduleDelayedTask(new Task() {
-                    @Override
-                    public void onRun(int i) {
-
-                        API.getMessageAPI().sendNewMissionTitle(player);
-                        API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
-                    }
-                }, 20 * 3 * 4 + 20, true);
-            }
-        }
-    }
 
     @EventHandler
     public void onTouch(EntityDamageEvent event) {
@@ -57,7 +32,7 @@ public class JobsHandlers implements Listener {
             } else if (ev.getDamager() instanceof Player) damager = (Player) ev.getDamager();
             if (damager == null) return;
 
-            ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(damager.getName());
+            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(damager.getName());
             if (entity.namedTag.getBoolean("minerNPC")) {
                 profileSkyblock.setJob(1);
             } else if (entity.namedTag.getBoolean("butcherNPC")) {
@@ -88,8 +63,8 @@ public class JobsHandlers implements Listener {
             player.removeAllEffects();
             player.getInventory().clearAll();
             API.getMessageAPI().sendDeadMessage(player, damager);
-            ProfileSkyblock profilePlayer = DatabaseMySQL.profileSkyblock.get(player.getName());
-            ProfileSkyblock profileDamager = DatabaseMySQL.profileSkyblock.get(damager.getName()); // Todo: Zombies, Monsters.
+            ProfileSkyblock profilePlayer = Database.profileSkyblock.get(player.getName());
+            ProfileSkyblock profileDamager = Database.profileSkyblock.get(damager.getName()); // Todo: Zombies, Monsters.
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
             profileDamager.setKills(profileDamager.getKills() + 1);
 
@@ -101,7 +76,7 @@ public class JobsHandlers implements Listener {
             player.teleport(player.getServer().getDefaultLevel().getSpawnLocation());
             player.removeAllEffects();
             player.getInventory().clearAll();
-            ProfileSkyblock profilePlayer = DatabaseMySQL.profileSkyblock.get(player.getName());
+            ProfileSkyblock profilePlayer = Database.profileSkyblock.get(player.getName());
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);
         }
     }

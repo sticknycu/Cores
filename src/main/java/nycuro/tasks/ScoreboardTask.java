@@ -6,7 +6,7 @@ import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import nycuro.Loader;
 import nycuro.api.API;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.jobs.NameJob;
@@ -35,8 +35,8 @@ public class ScoreboardTask extends Task {
 
         Objective scoreboardDisplay = scoreboard.objective.getObjective();
 
-        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
-        ProfileProxy profileProxy = DatabaseMySQL.profileProxy.get(player.getName());
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
         Object2BooleanMap<UUID> coords = API.getMainAPI().coords;
 
         DisplayObjective dobj = new DisplayObjective(

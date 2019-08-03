@@ -5,7 +5,7 @@ import cn.nukkit.command.CommandSender;
 import gt.creeperface.holograms.Holograms;
 import nycuro.api.API;
 import nycuro.commands.PrincipalCommand;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 
 /**
@@ -21,7 +21,7 @@ public class LangCommand extends PrincipalCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        ProfileProxy profile = DatabaseMySQL.profileProxy.get(commandSender.getName());
+        ProfileProxy profile = Database.profileProxy.get(commandSender.getName());
         if (strings.length == 1) {
             String message = strings[0];
             Holograms holograms = new Holograms();

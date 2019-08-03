@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.api.API;
 import nycuro.commands.PrincipalCommand;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 
 /**
  * author: NycuRO
@@ -28,12 +28,12 @@ public class SetCoinsCommand extends PrincipalCommand {
             API.getMessageAPI().addMoneyExceptionMessage((Player) commandSender);
         } else if (strings.length == 1) {
             double count = Double.valueOf(strings[0]);
-            DatabaseMySQL.profileSkyblock.get(commandSender.getName()).setDollars(count);
+            Database.profileSkyblock.get(commandSender.getName()).setDollars(count);
             API.getMessageAPI().setSelfMoneyMessage((Player) commandSender, count);
         } else if (strings.length == 2) {
             Player player = API.getMainAPI().getServer().getPlayerExact(strings[0]);
             double count = Double.valueOf(strings[1]);
-            DatabaseMySQL.profileSkyblock.get(player.getName()).setDollars(count);
+            Database.profileSkyblock.get(player.getName()).setDollars(count);
             API.getMessageAPI().setPlayerMoneyMessage(commandSender, player, count);
         } else {
             API.getMessageAPI().addMoneyExceptionMessage((Player) commandSender);

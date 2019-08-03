@@ -4,8 +4,10 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.api.API;
 import nycuro.commands.PrincipalCommand;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
+import nycuro.database.objects.ProfileSkyblock;
 import nycuro.jobs.NameJob;
+import nycuro.jobs.objects.JobsObject;
 
 /**
  * author: NycuRO
@@ -21,12 +23,15 @@ public class WorkCommand extends PrincipalCommand {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         Player player = (Player) commandSender;
-        API.getDatabase().playerExistInJobs(player.getName(), bool -> {
-            if (bool) {
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        if (profileSkyblock.getJob() == 0) {
+            API.getMessageAPI().sendNoJobMessage(player);
+        } else {
+            NameJob job = NameJob.valueOf(NameJob.getType(profileSkyblock.getJob()));
+            JobsObject jobsObject = API.getMainAPI().jobsObject.get(player.getUniqueId());
+            if (jobsObject != null) {
                 API.getJobsAPI().handleMission(player);
             } else {
-                int jb = DatabaseMySQL.profileSkyblock.get(player.getName()).getJob();
-                NameJob job = NameJob.valueOf(NameJob.getType(jb));
                 switch (job) {
                     case MINER:
                         API.getJobsAPI().processMissionOnMiner(player);
@@ -42,7 +47,7 @@ public class WorkCommand extends PrincipalCommand {
                         break;
                 }
             }
-        });
+        }
         return true;
     }
 }

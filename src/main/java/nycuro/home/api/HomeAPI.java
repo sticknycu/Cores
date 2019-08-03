@@ -10,7 +10,7 @@ import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.level.Location;
 import cn.nukkit.scheduler.AsyncTask;
 import nycuro.api.API;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.HomeObject;
 import nycuro.gui.list.ResponseFormWindow;
 
@@ -99,7 +99,7 @@ public class HomeAPI {
             FormWindowSimple jobsMenu = new FormWindowSimple("Home " + homename, "");
             jobsMenu.setContent(API.getMessageAPI().sendInfoMessageHome(player, homename));
             jobsMenu.addButton(new ElementButton("Teleport"));
-            int lang = DatabaseMySQL.profileProxy.get(player.getName()).getLanguage();
+            int lang = Database.profileProxy.get(player.getName()).getLanguage();
             switch (lang) {
                 case 0:
                     jobsMenu.addButton(new ElementButton("Delete Home"));

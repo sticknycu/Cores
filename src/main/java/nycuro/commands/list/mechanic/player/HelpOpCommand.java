@@ -7,7 +7,7 @@ import nycuro.api.API;
 import nycuro.chat.ChatFormat;
 import nycuro.chat.handlers.ChatHandlers;
 import nycuro.commands.PrincipalCommand;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 
 import java.util.Objects;
@@ -27,7 +27,7 @@ public class HelpOpCommand extends PrincipalCommand {
     public boolean execute(CommandSender commandSender, String see, String[] strings) {
         Player player = (Player) commandSender;
         //
-        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         String group = Objects.requireNonNull(ChatHandlers.api.getUser(player.getUniqueId())).getPrimaryGroup().toUpperCase();
         String s = ChatFormat.valueOf(group).toString();
         String message = String.join(" ", strings);

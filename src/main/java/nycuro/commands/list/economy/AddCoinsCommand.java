@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.api.API;
 import nycuro.commands.PrincipalCommand;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 
 /**
  * author: NycuRO
@@ -27,15 +27,15 @@ public class AddCoinsCommand extends PrincipalCommand {
         if (strings.length == 0) {
             API.getMessageAPI().addMoneyExceptionMessage((Player) commandSender);
         } else if (strings.length == 1) {
-            double money = DatabaseMySQL.profileSkyblock.get(commandSender.getName()).getDollars();
+            double money = Database.profileSkyblock.get(commandSender.getName()).getDollars();
             double count = Double.valueOf(strings[0]);
-            DatabaseMySQL.profileSkyblock.get(commandSender.getName()).setDollars(DatabaseMySQL.profileSkyblock.get(commandSender.getName()).getDollars() + count);
+            Database.profileSkyblock.get(commandSender.getName()).setDollars(Database.profileSkyblock.get(commandSender.getName()).getDollars() + count);
             API.getMessageAPI().addSelfMoneyMessage((Player) commandSender, money, count);
         } else if (strings.length == 2) {
             Player player = API.getMainAPI().getServer().getPlayerExact(strings[0]);
-            double money = DatabaseMySQL.profileSkyblock.get(commandSender.getName()).getDollars();
+            double money = Database.profileSkyblock.get(commandSender.getName()).getDollars();
             double count = Double.valueOf(strings[1]);
-            DatabaseMySQL.profileSkyblock.get(player.getName()).setDollars(DatabaseMySQL.profileSkyblock.get(commandSender.getName()).getDollars() + count);
+            Database.profileSkyblock.get(player.getName()).setDollars(Database.profileSkyblock.get(commandSender.getName()).getDollars() + count);
             API.getMessageAPI().addSelfMoneyMessage((Player) commandSender, money, count);
 
         } else {

@@ -11,7 +11,7 @@ import me.lucko.luckperms.api.manager.UserManager;
 import nycuro.Loader;
 import nycuro.api.API;
 import nycuro.chat.handlers.ChatHandlers;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.jobs.NameJob;
@@ -34,7 +34,7 @@ public class MessageAPI {
     private String STRING_BOSSBAR = "";
 
     public String getInfoScoreboard(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§7--- §e§lInfo Player: " + "  ";
@@ -47,7 +47,7 @@ public class MessageAPI {
     }
 
     public String getNextScoreboard(Player player, long time) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§7Next DropParty: §6" + Loader.time(time);
@@ -60,7 +60,7 @@ public class MessageAPI {
     }
 
     public String getNameScoreboard(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§7| §fName: §6" + player.getName() + "  ";
@@ -73,7 +73,7 @@ public class MessageAPI {
     }
 
     public String sendMobFarmMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§e» §6You have been teleported to MobFarm!";
@@ -86,7 +86,7 @@ public class MessageAPI {
     }
 
     public String sendArenaException(Player player, int level) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§e» §6You need have level " + level + "+ to teleport to Arena!";
@@ -99,7 +99,7 @@ public class MessageAPI {
     }
 
     public String sendTeleportArena(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§e» §6You need been teleported to Arena!";
@@ -112,7 +112,7 @@ public class MessageAPI {
     }
 
     public String sendLockedJobStatus(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§e» §6This job is LOCKED! Please unlock this kit using Premium Shop (/shop)!";
@@ -125,7 +125,7 @@ public class MessageAPI {
     }
 
     public String sendLockedKitStatus(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§e» §6This kit is LOCKED! Please unlock this kit using Premium Shop (/shop)!";
@@ -138,7 +138,7 @@ public class MessageAPI {
     }
 
     public String sendWitherSpawnMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§7(§e!§7) §4Error: §7You can't spawn Wither in spawn!";
@@ -151,7 +151,7 @@ public class MessageAPI {
     }
 
     public String sendRandomTPNotFirstTimeMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§7(§e!§7) §4Error: §7You played before! For teleport you need to have §c1000 dollars§7!";
@@ -164,7 +164,7 @@ public class MessageAPI {
     }
 
     public String getMessageCombatLogger(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§aYou are no longer in combat, you may now logout and run commands.";
@@ -177,7 +177,7 @@ public class MessageAPI {
     }
 
     public String getMessageDuringCombat(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§cYou cannot use this command during combat!";
@@ -190,7 +190,7 @@ public class MessageAPI {
     }
 
     public String sendMobDespawnMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§6§lTIP §r§e» §7Everyone, please pay attention! In §630 seconds §7all entities will be removed!";
@@ -203,7 +203,7 @@ public class MessageAPI {
     }
 
     public String sendMobDespawnFinishMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§6§lTIP §r§e» §7All entities has been removed! Next entities will be removed in §65 minutes§7!";
@@ -216,7 +216,7 @@ public class MessageAPI {
     }
 
     public String setCombatMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§eYou have entered combat, logging out now will cause your death. Please wait §613 §eseconds.";
@@ -229,7 +229,7 @@ public class MessageAPI {
     }
 
     public String getMethodPayMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "Method of Pay\n" +
@@ -246,7 +246,7 @@ public class MessageAPI {
     }
 
     public String getShopContestsMessages(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "                       Hello!\n" +
@@ -263,7 +263,7 @@ public class MessageAPI {
     }
 
     public String getBuyContestsMessages(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "                       Hello!\n" +
@@ -280,7 +280,7 @@ public class MessageAPI {
     }
 
     public String getSellContestsMessages(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "                       Hello!\n" +
@@ -297,7 +297,7 @@ public class MessageAPI {
     }
 
     public String getEnchantingContestsMessages(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "                       Hello!\n" +
@@ -314,7 +314,7 @@ public class MessageAPI {
     }
 
     public String getEnchantingArmorContestsMessages(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "                       Hello!\n" +
@@ -331,7 +331,7 @@ public class MessageAPI {
     }
 
     public String getEnchantingItemsContestsMessages(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "                       Hello!\n" +
@@ -348,7 +348,7 @@ public class MessageAPI {
     }
 
     public String getBuyGlassContestsMessages(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "                       Hello!\n" +
@@ -365,7 +365,7 @@ public class MessageAPI {
     }
 
     public String getSellGlassContestsMessages(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "                       Hello!\n" +
@@ -382,7 +382,7 @@ public class MessageAPI {
     }
 
     public String spawnWitherMessages(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "                      Hello!\n" +
@@ -417,7 +417,7 @@ public class MessageAPI {
     }
 
     public String teleportBossArenaMessages(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "                      Hello!\n" +
@@ -448,7 +448,7 @@ public class MessageAPI {
     }
 
     public String teleportPvPArenaMessages(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "                      Hello!\n" +
@@ -477,7 +477,7 @@ public class MessageAPI {
     }
 
     public String sendTooMuchWithers(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§7(§e!§7) §4Error: §7There are 10 withers spawned (§cMAXIMUM§7)! Try again later!";
@@ -534,9 +534,9 @@ public class MessageAPI {
     }
 
     public String getStatsCommand(CommandSender commandSender, IPlayer player) {
-        ProfileProxy profileProxy = DatabaseMySQL.profileProxy.get(commandSender.getName());
-        DatabaseMySQL.addUnAsyncDatesPlayerFactions(player.getName());
-        ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+        ProfileProxy profileProxy = Database.profileProxy.get(commandSender.getName());
+        Database.addUnAsyncDatesPlayerFactions(player.getName());
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         DateFormat simple = new SimpleDateFormat("dd MMM yyyy HH:mm:ss:SSS Z");
         Date firstPlay = new Date(player.getFirstPlayed());
         Date lastPlay = new Date(player.getLastPlayed());
@@ -584,7 +584,7 @@ public class MessageAPI {
     }
 
     public String getOnlineScoreboard(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING = "§7| §fOnline Players: §6" + API.getMainAPI().getServer().getOnlinePlayers().size() + "    ";
@@ -597,7 +597,7 @@ public class MessageAPI {
     }
 
     public void sendAbuseMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7(§e!§7) §4Error: §7You abuse! That's not good..");
@@ -609,7 +609,7 @@ public class MessageAPI {
     }
 
     public void sendNotWorkServiceMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7(§e!§7) §4Error: §7This function not work! Use §6/utils §7options.");
@@ -621,7 +621,7 @@ public class MessageAPI {
     }
 
     public void sendSmecherieMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7(§e!§7) §eWalk with tricks? That's not good for you..");
@@ -632,8 +632,44 @@ public class MessageAPI {
         }
     }
 
+    public void sendFinishedMissionMessage(Player player, double dollars) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        switch (lang) {
+            case 0:
+                player.sendMessage("§7(§e!§7) §aYou finished the mission succesfully! You got: §6" + Loader.round(dollars, 2) + " dollars");
+                break;
+            case 1:
+                player.sendMessage("§7(§e!§7) §aAi terminat misiunea cu succes! Ai primit: §6" + Loader.round(dollars, 2) + " dollars");
+                break;
+        }
+    }
+
+    public void sendNotEnoughMaterialsMessage(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        switch (lang) {
+            case 0:
+                player.sendMessage("§7(§e!§7) §cSorry but you don't have enough materials!");
+                break;
+            case 1:
+                player.sendMessage("§7(§e!§7) §cScuze dar nu ai destule materiale!");
+                break;
+        }
+    }
+
+    public void sendNotEnoughKillsMessage(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        switch (lang) {
+            case 0:
+                player.sendMessage("§7(§e!§7) §cSorry but you don't killed enough animals!");
+                break;
+            case 1:
+                player.sendMessage("§7(§e!§7) §cScuze dar nu ai omorat destule animale!");
+                break;
+        }
+    }
+
     public void sendBreakMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7(§e!§7) §4Error: §7You can't break blocks here!");
@@ -645,7 +681,7 @@ public class MessageAPI {
     }
 
     public void sendPlaceMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7(§e!§7) §4Error: §7You can't place blocks here!");
@@ -657,7 +693,7 @@ public class MessageAPI {
     }
 
     public void sendDeadMessage(Player victim, Entity killer) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(victim.getName(), new ProfileProxy(victim.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(victim.getName(), new ProfileProxy(victim.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 victim.sendMessage("§7(§e!§7) §rYou was killed by §6" + killer.getName() + "§r!");
@@ -669,7 +705,7 @@ public class MessageAPI {
     }
 
     public void sendPvPOffMessage(Player damager) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(damager.getName(), new ProfileProxy(damager.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(damager.getName(), new ProfileProxy(damager.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 damager.sendMessage("§7(§e!§7) §4Error: §7You can't PvP here!");
@@ -681,7 +717,7 @@ public class MessageAPI {
     }
 
     public void sendReceiveKitMessage(Player player, NameKit typeKit) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eWow! You got §6" + typeKit + " §e!");
@@ -693,7 +729,7 @@ public class MessageAPI {
     }
 
     public void sendFullInventoryMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7(§e!§7) §eInfo: §6Your inventory it's full or you have equiped an armor, so you can't do this!");
@@ -705,7 +741,7 @@ public class MessageAPI {
     }
 
     public void sendAbandonedStaffchatMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7(§e!§7) §eInfo: §6You abandonated StaffChat!");
@@ -717,7 +753,7 @@ public class MessageAPI {
     }
 
     public void sendCommandSpawnMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7(§e!§7) §eInfo: §6You have been teleported in Spawn!");
@@ -729,7 +765,7 @@ public class MessageAPI {
     }
 
     public void sendCommandCooldownSpawnMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eYou will be teleported in Spawn in §67 §eseconds..");
@@ -741,7 +777,7 @@ public class MessageAPI {
     }
 
     public void sendLangMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eYou selected english language!");
@@ -753,7 +789,7 @@ public class MessageAPI {
     }
 
     public void sendTeleportWarpMessage(Player player, String warp) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eSuccesfully teleported to Warp: §6" + warp + " §e!");
@@ -765,7 +801,7 @@ public class MessageAPI {
     }
 
     public void sendKitsMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eKits: §6EnchantedStarter, Sparrow, Knight, VIP, VIP+, MVP, MVP+, Paladin, Guardian.");
@@ -777,7 +813,7 @@ public class MessageAPI {
     }
 
     public void sendExceptionKitsMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eWrong arguments! Please use: §6/kits.");
@@ -789,7 +825,7 @@ public class MessageAPI {
     }
 
     public void sendExceptionServersMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eWrong arguments! Please use: §6/servers.");
@@ -801,7 +837,7 @@ public class MessageAPI {
     }
 
     public void sendExceptionEnchantMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eSorry! This enchant is not available on Server.");
@@ -813,7 +849,7 @@ public class MessageAPI {
     }
 
     public void sendExceptionEnchantItemHandMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §ePlease add to your hand what do you want to enchant.");
@@ -825,7 +861,7 @@ public class MessageAPI {
     }
 
     public void sendExceptionEnchantInvalidMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eSorry! You can't enchant this item with this enchantment.");
@@ -837,7 +873,7 @@ public class MessageAPI {
     }
 
     public void sendExceptionLevelEnchantMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eSorry! The level that you have selected is too high compared to the usual one.");
@@ -849,7 +885,7 @@ public class MessageAPI {
     }
 
     public void sendExceptionLevelEnchantTypeMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eSorry! To Buy Enchantments with Experience, you need to have at least level 15.");
@@ -861,8 +897,8 @@ public class MessageAPI {
     }
 
     public void sendUnsuficientMoneyMessage(Player player, double needed) {
-        double coins = DatabaseMySQL.profileProxy.get(player.getName()).getGems();
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        double coins = Database.profileProxy.get(player.getName()).getGems();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eOpsss!!! You don't have enough money! You have: §6$" + coins + " §ebut you need: §6$" + needed + "!");
@@ -874,7 +910,7 @@ public class MessageAPI {
     }
 
     public void sendSuccesSpawnWither(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §aYou spawned succesfuly wither!");
@@ -886,7 +922,7 @@ public class MessageAPI {
     }
 
     public void sendSuccesEnterStaffChat(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §aYou entered succesfuly on StaffChat!");
@@ -898,7 +934,7 @@ public class MessageAPI {
     }
 
     public void sendUnsuficientExperienceMessage(Player player, int needed) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eOpsss!!! You don't have enough experience! You have: §6$" + player.getExperienceLevel() + " §ebut you need: §6$" + needed + "!");
@@ -910,7 +946,7 @@ public class MessageAPI {
     }
 
     public void sendUnsuficientItemsMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eOpsss!!! You don't have this item!");
@@ -922,7 +958,7 @@ public class MessageAPI {
     }
 
     public void sendGamemodeSellExceptionMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eOpsss!!! You can sell items only in Survival Mode!");
@@ -934,7 +970,7 @@ public class MessageAPI {
     }
 
     public void sendNoStaffOnlineMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eOpsss!!! There's no Staff Online....");
@@ -946,7 +982,7 @@ public class MessageAPI {
     }
 
     public void sendBreakedItemMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eOpsss!!! This Item is broken!");
@@ -958,7 +994,7 @@ public class MessageAPI {
     }
 
     public void sendInsufficientCountMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eOpsss!!! You don't have enough quantity!");
@@ -970,7 +1006,7 @@ public class MessageAPI {
     }
 
     public void sendCustomPermissionMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7(§e!§7) §4Error: §7You don't have permission to do this!");
@@ -982,7 +1018,7 @@ public class MessageAPI {
     }
 
     public void sendCooldownMessage(Player player, long timeGone, long needed) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7(§e!§7) §4Error: §7It hasn't gone " + Loader.time(needed) + " to use this kit again! Has gone only §6" + Loader.time(timeGone) + " §7!");
@@ -994,7 +1030,7 @@ public class MessageAPI {
     }
 
     public void sendExceptionShopMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eWrong arguments! Please use: §6/shop.");
@@ -1006,7 +1042,7 @@ public class MessageAPI {
     }
 
     public void sendBuyItemMessage(Player player, Item item, double priceFinal) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eYou have successfully bought: §6" + item + "§e for §6" + priceFinal + "§e!");
@@ -1018,7 +1054,7 @@ public class MessageAPI {
     }
 
     public void sendEnchantItemMessage(Player player, Item item, double priceFinal) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7» §eYou have successfully enchanted: §6" + item + "§e for §6" + priceFinal + "§e!");
@@ -1030,7 +1066,7 @@ public class MessageAPI {
     }
 
     public void sendEnchantItemExperienceMessage(Player player, Item item, int experience) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou have successfully enchanted: §6" + item + "§e for §6" + experience + " §eexperience!");
@@ -1042,7 +1078,7 @@ public class MessageAPI {
     }
 
     public void sendSellItemMessage(Player player, Item item, double priceFinal) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou have successfully sold: §6" + item + "§e for §6" + priceFinal + "§e!");
@@ -1054,7 +1090,7 @@ public class MessageAPI {
     }
 
     public void sendRandomTPMessage(Player player, int x, int z) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou have successfully teleported to coordonates: §6" + "X: " + x + ", Z: " + z + "§e!");
@@ -1066,7 +1102,7 @@ public class MessageAPI {
     }
 
     public void sendRepairItemMessage(Player player, Item item) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou have successfully repaired: §6" + item + "§e!");
@@ -1078,7 +1114,7 @@ public class MessageAPI {
     }
 
     public void sendReceiveItemMessage(Player player, int experience) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendTitle("§e§k  §r§5Yoahh?! §f§k!", "§dYou got §e" + experience + " §dExperience!");
@@ -1090,7 +1126,7 @@ public class MessageAPI {
     }
 
     public void sendReceiveJobMessage(Player player, NameJob job) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou have successfully selected CommonJob: §6" + job.getName() + "§e!");
@@ -1102,7 +1138,7 @@ public class MessageAPI {
     }
 
     public void sendWithoutJobMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eFrom now, you don't have a CommonJob §e!");
@@ -1114,7 +1150,7 @@ public class MessageAPI {
     }
 
     public void sendNoJobMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou don't have a Job to acces that §e!");
@@ -1126,7 +1162,7 @@ public class MessageAPI {
     }
 
     public void sendCrateMessage(Player player, int number) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYour lucky number it's §6" + number + "§e!");
@@ -1140,7 +1176,7 @@ public class MessageAPI {
     }
 
     public void sendCrateCountMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §ePlease use only 1 key!");
@@ -1152,7 +1188,7 @@ public class MessageAPI {
     }
 
     public void sendHitBowMessage(Entity entity, Player damager) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(damager.getName(), new ProfileProxy(damager.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(damager.getName(), new ProfileProxy(damager.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 damager.sendMessage("§f» §6" + entity.getName() + " §eis now at §6" + entity.getHealth() + "§e/§6" + entity.getMaxHealth() + "§e!");
@@ -1165,7 +1201,7 @@ public class MessageAPI {
 
     public void getPlayerMoneyMessage(CommandSender commandSender, Player getter, double money) {
         if (commandSender instanceof Player) {
-            int lang = DatabaseMySQL.profileProxy.getOrDefault(commandSender.getName(), new ProfileProxy(commandSender.getName(), 0,0,0,0)).getLanguage();
+            int lang = Database.profileProxy.getOrDefault(commandSender.getName(), new ProfileProxy(commandSender.getName(), 0,0,0,0)).getLanguage();
             switch (lang) {
                 case 0:
                     commandSender.sendMessage("§f» §e" + getter.getName() + " §ehave now §6$" + money + "§e!");
@@ -1181,7 +1217,7 @@ public class MessageAPI {
 
     public void getPlayerTimeMessage(CommandSender commandSender, Player getter, long time, long totalTime) {
         if (commandSender instanceof Player) {
-            int lang = DatabaseMySQL.profileProxy.getOrDefault(commandSender.getName(), new ProfileProxy(commandSender.getName(), 0,0,0,0)).getLanguage();
+            int lang = Database.profileProxy.getOrDefault(commandSender.getName(), new ProfileProxy(commandSender.getName(), 0,0,0,0)).getLanguage();
             switch (lang) {
                 case 0:
                     commandSender.sendMessage("§f» §e" + getter.getName() + " §6was active on this session for §e" + Loader.time(time) + " §e!");
@@ -1199,7 +1235,7 @@ public class MessageAPI {
     }
 
     public String getMessageBossBar(Player player, int level, double necesarry, double count) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING_BOSSBAR = "      §6§l»§r--- Level §6§l" + level + "§r ---§6§l« §r\n\n   §rNecesarry XP: §6" + Loader.round(count, 2) + "§7/§6" + necesarry;
@@ -1212,7 +1248,7 @@ public class MessageAPI {
     }
 
     public String getMessageInArenaBossBar(Player player, double bosshp) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 STRING_BOSSBAR = "    §6§l»§r-- Boss §6§l§r --§6§l« §r\n\n      §rHP: §6" + bosshp + "§7/" + "§6100";
@@ -1225,7 +1261,7 @@ public class MessageAPI {
     }
 
     public void getSelfMoneyMessage(Player player, double money) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eNow you have §6$" + money + "§e!");
@@ -1237,7 +1273,7 @@ public class MessageAPI {
     }
 
     public void sendLangArrayException(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §ePlease use §6/lang §aen/ro §r§e!");
@@ -1250,7 +1286,7 @@ public class MessageAPI {
 
 
     public void getSelfTimeMessage(Player player, long time, long totalTime) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§7(§e!§7) §eYou was active on this session for §6" + Loader.time(time) + " §7!");
@@ -1266,8 +1302,8 @@ public class MessageAPI {
 
     public void addPlayerMoneyMessage(CommandSender commandSender, Player giver, double money, double count) {
         if (commandSender instanceof Player) {
-            int langSender = DatabaseMySQL.profileProxy.getOrDefault(commandSender.getName(), new ProfileProxy(commandSender.getName(), 0, 0, 0,0)).getLanguage();
-            int langGiver = DatabaseMySQL.profileProxy.getOrDefault(giver.getName(), new ProfileProxy(giver.getName(), 0, 0, 0,0)).getLanguage();
+            int langSender = Database.profileProxy.getOrDefault(commandSender.getName(), new ProfileProxy(commandSender.getName(), 0, 0, 0,0)).getLanguage();
+            int langGiver = Database.profileProxy.getOrDefault(giver.getName(), new ProfileProxy(giver.getName(), 0, 0, 0,0)).getLanguage();
             switch (langSender) {
                 case 0:
                     commandSender.sendMessage("§f» §eYou added §6$" + count + " §eto " + giver.getName() + "§e!");
@@ -1297,7 +1333,7 @@ public class MessageAPI {
         } else {
             commandSender.sendMessage("§f» §eAi adaugat §6$" + count + " §elui " + giver.getName() + "§e!");
             commandSender.sendMessage("§f» §e" + giver.getName() + " §eare acum §6$" + money + "§e!");
-            int language = DatabaseMySQL.profileProxy.get(giver.getName()).getLanguage();
+            int language = Database.profileProxy.get(giver.getName()).getLanguage();
             switch (language) {
                 case 0:
                     giver.sendMessage("§f» §eYou bought §6$" + count + " §efrom CONSOLE§e!");
@@ -1311,8 +1347,8 @@ public class MessageAPI {
 
     public void setPlayerMoneyMessage(CommandSender commandSender, Player giver, double count) {
         if (commandSender instanceof Player) {
-            int lang = DatabaseMySQL.profileProxy.getOrDefault(commandSender.getName(), new ProfileProxy(commandSender.getName(), 0, 0, 0,0)).getLanguage();
-            int language = DatabaseMySQL.profileProxy.getOrDefault(giver.getName(), new ProfileProxy(giver.getName(), 0, 0, 0,0)).getLanguage();
+            int lang = Database.profileProxy.getOrDefault(commandSender.getName(), new ProfileProxy(commandSender.getName(), 0, 0, 0,0)).getLanguage();
+            int language = Database.profileProxy.getOrDefault(giver.getName(), new ProfileProxy(giver.getName(), 0, 0, 0,0)).getLanguage();
             switch (lang) {
                 case 0:
                     commandSender.sendMessage("§f» §eYou setted §6$" + count + " §eto " + giver.getName() + "§e!");
@@ -1342,7 +1378,7 @@ public class MessageAPI {
         } else {
             commandSender.sendMessage("§f» §eAi setat §6$" + count + " banii §elui " + giver.getName() + "§e!");
             commandSender.sendMessage("§f» §6" + giver.getName() + " §eare acum §6$" + count + "§e!");
-            int language = DatabaseMySQL.profileProxy.get(giver.getName()).getLanguage();
+            int language = Database.profileProxy.get(giver.getName()).getLanguage();
             switch (language) {
                 case 0:
                     giver.sendMessage("§f» §eYour coins setted to §6$" + count + " §6by CONSOLE§e!");
@@ -1355,7 +1391,7 @@ public class MessageAPI {
     }
 
     public void addSelfMoneyMessage(Player player, double money, double count) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou got §6$" + count + " from yourself§e!");
@@ -1369,7 +1405,7 @@ public class MessageAPI {
     }
 
     public void setSelfMoneyMessage(Player player, double count) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYour coins setted to §6$" + count + " by yourself§e!");
@@ -1383,7 +1419,7 @@ public class MessageAPI {
     }
 
     public void addMoneyExceptionMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou use too much arguments! Use: §c/addcoins <player> <count>§e!");
@@ -1395,7 +1431,7 @@ public class MessageAPI {
     }
 
     public void getMoneyExceptionMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou use too much arguments! Use: §c/coins <player>§e!");
@@ -1407,7 +1443,7 @@ public class MessageAPI {
     }
 
     public void getTimeExceptionMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou use too much arguments! Use: §c/onlinetime <player> §e!");
@@ -1419,7 +1455,7 @@ public class MessageAPI {
     }
 
     public void topMoneyExceptionMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou use too much arguments! Use: §c/topcoins §e!");
@@ -1431,7 +1467,7 @@ public class MessageAPI {
     }
 
     public void topKillsExceptionMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou use too much arguments! Use: §c/topkills §e!");
@@ -1443,7 +1479,7 @@ public class MessageAPI {
     }
 
     public void topTimeExceptionMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou use too much arguments! Use: §c/toptime §e!");
@@ -1455,7 +1491,7 @@ public class MessageAPI {
     }
 
     public void topDeathsExceptionMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("f» §eYou use too much arguments! Use: §c/topdeaths §e!");
@@ -1467,7 +1503,7 @@ public class MessageAPI {
     }
 
     public String sendJobPrincipalModal(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1485,7 +1521,7 @@ public class MessageAPI {
     }
 
     public String sendReportPrincipalModal(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1503,7 +1539,7 @@ public class MessageAPI {
     }
 
     public String sendArenaPrincipalModal(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1521,7 +1557,7 @@ public class MessageAPI {
     }
 
     public String sendKitPrincipalClassicModal(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1539,7 +1575,7 @@ public class MessageAPI {
     }
 
     public String sendKitPrincipalModal(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1557,7 +1593,7 @@ public class MessageAPI {
     }
 
     public String sendKitPrincipalPremiumModal(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1575,7 +1611,7 @@ public class MessageAPI {
     }
 
     public String sendKitPrincipalSpecificModal(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1593,7 +1629,7 @@ public class MessageAPI {
     }
 
     public String sendHomesPrincipalModal(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1611,7 +1647,7 @@ public class MessageAPI {
     }
 
     public String sendReportList(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1627,7 +1663,7 @@ public class MessageAPI {
     }
 
     public String sendHomeList(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1643,7 +1679,7 @@ public class MessageAPI {
     }
 
     public String sendInfoMessageJobs(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1685,7 +1721,7 @@ public class MessageAPI {
     }
 
     public String sendProcessMission(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1703,7 +1739,7 @@ public class MessageAPI {
     }
 
     public String sendHandleMissions(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1719,7 +1755,7 @@ public class MessageAPI {
     }
 
     public String sendInfoMessageCategoryKits(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1755,7 +1791,7 @@ public class MessageAPI {
     }
 
     public String sendInfoMessageClassicKits(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1811,7 +1847,7 @@ public class MessageAPI {
     }
 
     public String sendInfoMessagePremiumKits(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1867,7 +1903,7 @@ public class MessageAPI {
     }
 
     public String sendInfoMessageSpecificKits(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1931,7 +1967,7 @@ public class MessageAPI {
     }
 
     public String sendInputNameReport(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1945,7 +1981,7 @@ public class MessageAPI {
     }
 
     public String sendInputNameHome(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1959,7 +1995,7 @@ public class MessageAPI {
     }
 
     public String succesfullyMissionCreated(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1975,7 +2011,7 @@ public class MessageAPI {
     }
 
     public String sendHomeExistsMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -1989,7 +2025,7 @@ public class MessageAPI {
     }
 
     public String sendInputReasonReport(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2003,7 +2039,7 @@ public class MessageAPI {
     }
 
     public String sendPlayerSuccesReport(Player player, String name) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2017,7 +2053,7 @@ public class MessageAPI {
     }
 
     public String sendCreatedHomeSuccesfully(Player player, int x, int y, int z) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2031,7 +2067,7 @@ public class MessageAPI {
     }
 
     public String sendTeleportedHomeSuccesfully(Player player, int x, int y, int z) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2045,7 +2081,7 @@ public class MessageAPI {
     }
 
     public String sendDeleteReportMessage(Player player, String name) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2059,7 +2095,7 @@ public class MessageAPI {
     }
 
     public String sendArenaWarningMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2073,7 +2109,7 @@ public class MessageAPI {
     }
 
     public String sendTooMuchHomesMessage(Player player, int count) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2087,7 +2123,7 @@ public class MessageAPI {
     }
 
     public String sendRemoveHomeSuccesfully(Player player, String homeName) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2101,7 +2137,7 @@ public class MessageAPI {
     }
 
     public String sendInputContactReport(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2115,7 +2151,7 @@ public class MessageAPI {
     }
 
     public String sendInfoMessageReport(Player player, String name, String reason, String contact) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2133,7 +2169,7 @@ public class MessageAPI {
     }
 
     public String sendInfoMessageHome(Player player, String home) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2153,7 +2189,7 @@ public class MessageAPI {
     }
 
     public String sendInfoMessageArena(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2177,7 +2213,7 @@ public class MessageAPI {
     }
 
     public String sendInfoMessageSettings(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2195,7 +2231,7 @@ public class MessageAPI {
     }
 
     public String sendInfoMessageReports(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2227,7 +2263,7 @@ public class MessageAPI {
     }
 
     public String sendInfoMessageHomes(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         String string = "";
         switch (lang) {
             case 0:
@@ -2255,7 +2291,7 @@ public class MessageAPI {
     }
 
     public void sendDropPartyEventMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n" +
@@ -2279,7 +2315,7 @@ public class MessageAPI {
     }
 
     public void sendDropPartySpawnedMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n" +
@@ -2303,7 +2339,7 @@ public class MessageAPI {
     }
 
     public void sendBossSpawnedMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n" +
@@ -2327,7 +2363,7 @@ public class MessageAPI {
     }
 
     public void sendShutDownSoonMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n" +
@@ -2351,7 +2387,7 @@ public class MessageAPI {
     }
 
     public void sendShutDownInTenSecondsMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§l§6»§r§r--------------- §8( §6§lCHPE §r§l» §eFactions §r§8) §r---------------§6§l«§r\n" +
@@ -2375,7 +2411,7 @@ public class MessageAPI {
     }
 
     public void sendDropPartyReceiveKeyMessage(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendMessage("§f» §eYou have now +1 DropParty Key!§r");
@@ -2387,7 +2423,7 @@ public class MessageAPI {
     }
 
     public void sendCoordsSwitchMessage(Player player, boolean bool) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 if (!bool) {
@@ -2406,20 +2442,8 @@ public class MessageAPI {
         }
     }
 
-    public void sendNewMissionTitle(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
-        switch (lang) {
-            case 0:
-                player.sendTitle("§l§f» §r§6New JobPlayer! §l§f«§r", "§r§fFind your missions at /work", 20, 20, 20);
-                break;
-            case 1:
-                player.sendTitle("§l§f» §r§65 O noua misiune! §l§f«§r", "§r§fGaseste misiunile la /work", 20, 20, 20);
-                break;
-        }
-    }
-
     public void sendFirstJoinTitle(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendTitle("§l§f» §r§6CHPE Factions §l§f«§r", "§r§fThe place where the adventure begin ", 20, 20, 20);
@@ -2431,7 +2455,7 @@ public class MessageAPI {
     }
 
     public void sendSecondJoinTitle(Player player) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendTitle("§l§f» §r§6CHPE Factions §l§f«§r", "§r§fVote for awesome rewards", 20, 20, 20);
@@ -2443,7 +2467,7 @@ public class MessageAPI {
     }
 
     public void sendReportsTitle(Player player, int count) {
-        int lang = DatabaseMySQL.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
                 player.sendTitle("§l§f» §r§6Reports MechanicDropParty §l§f«§r", "§r§fThere are §c" + count + "§f reports not solved!", 20, 20, 20);

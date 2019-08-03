@@ -10,7 +10,7 @@ import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import cn.nukkit.utils.TextFormat;
 import nycuro.api.API;
-import nycuro.database.DatabaseMySQL;
+import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.jobs.CommonJob;
@@ -20,8 +20,8 @@ import nycuro.jobs.jobs.ButcherJob;
 import nycuro.jobs.jobs.FarmerJob;
 import nycuro.jobs.jobs.FishermanJob;
 import nycuro.jobs.jobs.MinerJob;
+import nycuro.jobs.objects.JobsObject;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -59,7 +59,7 @@ public class JobsAPI {
             @Override
             public void accept(Map<Integer, Object> response) {
                 if (!response.isEmpty()) {
-                    ProfileSkyblock profileSkyblock = DatabaseMySQL.profileSkyblock.get(player.getName());
+                    ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
                             player.teleport(new Location(27, 169, 0, API.getMainAPI().getServer().getDefaultLevel()));
@@ -74,40 +74,26 @@ public class JobsAPI {
                             if (profileSkyblock.getJob() == 0) {
                                 API.getMessageAPI().sendNoJobMessage(player);
                             } else {
-                                API.getDatabase().playerExistInJobs(player.getName(), bool -> {
-                                    NameJob job = NameJob.valueOf(NameJob.getType(profileSkyblock.getJob()));
-                                    if (bool) {
-                                        switch (job) {
-                                            case MINER:
-                                                //succesfullyCreatedMissionMF(player, Database);
-                                                break;
-                                            case FARMER:
-                                                //succesfullyCreatedMissionMF(player, Database);
-                                                break;
-                                            case BUTCHER:
-                                                //succesfullyCreatedMissionB(player, Database);
-                                                break;
-                                            case FISHERMAN:
-                                                //succesfullyCreatedMissionF(player, Database);
-                                                break;
-                                        }
-                                    } else {
-                                        switch (job) {
-                                            case MINER:
-                                                API.getJobsAPI().processMissionOnMiner(player);
-                                                break;
-                                            case FARMER:
-                                                API.getJobsAPI().processMissionOnFarmer(player);
-                                                break;
-                                            case BUTCHER:
-                                                API.getJobsAPI().processMissionOnButcher(player);
-                                                break;
-                                            case FISHERMAN:
-                                                API.getJobsAPI().processMissionOnFisherman(player);
-                                                break;
-                                        }
+                                NameJob job = NameJob.valueOf(NameJob.getType(profileSkyblock.getJob()));
+                                JobsObject jobsObject = API.getMainAPI().jobsObject.get(player.getUniqueId());
+                                if (jobsObject != null) {
+                                    handleMission(player);
+                                } else {
+                                    switch (job) {
+                                        case MINER:
+                                            API.getJobsAPI().processMissionOnMiner(player);
+                                            break;
+                                        case FARMER:
+                                            API.getJobsAPI().processMissionOnFarmer(player);
+                                            break;
+                                        case BUTCHER:
+                                            API.getJobsAPI().processMissionOnButcher(player);
+                                            break;
+                                        case FISHERMAN:
+                                            API.getJobsAPI().processMissionOnFisherman(player);
+                                            break;
                                     }
-                                });
+                                }
                             }
                             break;
                     }
@@ -118,31 +104,64 @@ public class JobsAPI {
 
     public void handleMission(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Handle Mission");
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        int job = profileSkyblock.getJob();
         infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendHandleMissions(player)));
-        Collection<Item> items = API.getDatabase().getItemsFromJob(player.getName());
-        int i = 0;
-        for (Item item : items) {
-            for (Item content : player.getInventory().getContents().values()) {
-                if (content.getId() == item.getId()) {
-                    i++;
-                }
-            }
-            infoMenu.addElement(new ElementLabel("§6Item§e: §c" + item.getName() + "\n"));
-            infoMenu.addElement(new ElementLabel("§6Count§e: " + "§7[§6" + item.getCount() + "/" + i + "§7]\n\n"));
-        }
-        player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
-            @Override
-            public void accept(Map<Integer, Object> response) {
-                if (!response.isEmpty()) {
-                    if (checkItems(player, items)) {
-                        //DatabaseMySQL.mission.get(player.getName()).getReward();
+        JobsObject jobsObject = API.getMainAPI().jobsObject.get(player.getUniqueId());
+        if (job != 2) {
+            Item[] items = jobsObject.getItems();
+            int i = 0;
+            for (Item item : items) {
+                for (Item content : player.getInventory().getContents().values()) {
+                    if (content.getId() == item.getId()) {
+                        i++;
                     }
                 }
+                infoMenu.addElement(new ElementLabel("§6Item§e: §c" + item.getName() + "\n"));
+                infoMenu.addElement(new ElementLabel("§6Count§e: " + "§7[§6" + item.getCount() + "/" + i + "§7]\n\n"));
             }
-        }));
+            player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
+                @Override
+                public void accept(Map<Integer, Object> response) {
+                    if (!response.isEmpty()) {
+                        if (checkItems(player, items)) {
+                            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                            profileSkyblock.setDollars(profileSkyblock.getDollars() + jobsObject.getReward());
+                            player.getInventory().removeItem(items);
+                            API.getMessageAPI().sendFinishedMissionMessage(player, jobsObject.getReward());
+                        } else {
+                            API.getMessageAPI().sendNotEnoughMaterialsMessage(player);
+                        }
+                    }
+                }
+            }));
+        } else {
+            infoMenu.addElement(new ElementLabel(       "Cow: " + jobsObject.getCountAnimals()[0] + "\n" +
+                    "Pig: " + jobsObject.getCountAnimals()[1] + "\n" +
+                    "Sheep: " + jobsObject.getCountAnimals()[2] + "\n" +
+                    "Chicken: " + jobsObject.getCountAnimals()[3])
+            );
+            player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
+                @Override
+                public void accept(Map<Integer, Object> response) {
+                    if (!response.isEmpty()) {
+                        if (jobsObject.getCountAnimals()[0] <= 0 &&
+                                jobsObject.getCountAnimals()[1] <= 0 &&
+                                jobsObject.getCountAnimals()[2] <= 0 &&
+                                jobsObject.getCountAnimals()[3] <= 0) {
+                            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                            profileSkyblock.setDollars(profileSkyblock.getDollars() + jobsObject.getReward());
+                            API.getMessageAPI().sendFinishedMissionMessage(player, jobsObject.getReward());
+                        } else {
+                            API.getMessageAPI().sendNotEnoughKillsMessage(player);
+                        }
+                    }
+                }
+            }));
+        }
     }
 
-    private boolean checkItems(Player player, Collection<Item> items) {
+    private boolean checkItems(Player player, Item[] items) {
         for (Item item : items) {
             for (Item content : player.getInventory().getContents().values()) {
                 if (item.equals(content) && item.getCount() != content.getCount()) {
@@ -173,7 +192,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.MINER).getReward(TypeJob.EASY, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Item> items = (Collection<Item>) o;
+                                            Item[] items = (Item[]) o;
                                             succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
@@ -187,7 +206,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.MINER).getReward(TypeJob.MEDIUM, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Item> items = (Collection<Item>) o;
+                                            Item[] items = (Item[]) o;
                                             succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
@@ -201,7 +220,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.MINER).getReward(TypeJob.HARD, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Item> items = (Collection<Item>) o;
+                                            Item[] items = (Item[]) o;
                                             succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
@@ -215,7 +234,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.MINER).getReward(TypeJob.EXTREME, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Item> items = (Collection<Item>) o;
+                                            Item[] items = (Item[]) o;
                                             succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
@@ -248,7 +267,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.BUTCHER).getReward(TypeJob.EASY, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Integer> integers = (Collection<Integer>) o;
+                                            int[] integers = (int[]) o;
                                             succesfullyCreatedMissionB(player, integers, reward);
                                         }
                                     });
@@ -262,7 +281,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.FARMER).getReward(TypeJob.MEDIUM, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Integer> integers = (Collection<Integer>) o;
+                                            int[] integers = (int[]) o;
                                             succesfullyCreatedMissionB(player, integers, reward);
                                         }
                                     });
@@ -276,7 +295,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.FARMER).getReward(TypeJob.HARD, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Integer> integers = (Collection<Integer>) o;
+                                            int[] integers = (int[]) o;
                                             succesfullyCreatedMissionB(player, integers, reward);
                                         }
                                     });
@@ -290,7 +309,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.FARMER).getReward(TypeJob.EXTREME, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Integer> integers = (Collection<Integer>) o;
+                                            int[] integers = (int[]) o;
                                             succesfullyCreatedMissionB(player, integers, reward);
                                         }
                                     });
@@ -322,7 +341,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.FARMER).getReward(TypeJob.EASY, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Item> items = (Collection<Item>) o;
+                                            Item[] items = (Item[]) o;
                                             succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
@@ -336,7 +355,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.FARMER).getReward(TypeJob.MEDIUM, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Item> items = (Collection<Item>) o;
+                                            Item[] items = (Item[]) o;
                                             succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
@@ -350,7 +369,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.FARMER).getReward(TypeJob.HARD, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Item> items = (Collection<Item>) o;
+                                            Item[] items = (Item[]) o;
                                             succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
@@ -364,7 +383,7 @@ public class JobsAPI {
                                     jobs.get(NameJob.FARMER).getReward(TypeJob.EXTREME, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Item> items = (Collection<Item>) o;
+                                            Item[] items = (Item[]) o;
                                             succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
@@ -396,8 +415,8 @@ public class JobsAPI {
                                     jobs.get(NameJob.FISHERMAN).getReward(TypeJob.EASY, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Integer> integers = (Collection<Integer>) o;
-                                            succesfullyCreatedMissionF(player, integers, reward);
+                                            Item[] items = (Item[]) o;
+                                            succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
                                 }
@@ -410,8 +429,8 @@ public class JobsAPI {
                                     jobs.get(NameJob.FISHERMAN).getReward(TypeJob.MEDIUM, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Integer> integers = (Collection<Integer>) o;
-                                            succesfullyCreatedMissionF(player, integers, reward);
+                                            Item[] items = (Item[]) o;
+                                            succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
                                 }
@@ -424,8 +443,8 @@ public class JobsAPI {
                                     jobs.get(NameJob.FISHERMAN).getReward(TypeJob.HARD, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Integer> integers = (Collection<Integer>) o;
-                                            succesfullyCreatedMissionF(player, integers, reward);
+                                            Item[] items = (Item[]) o;
+                                            succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
                                 }
@@ -438,8 +457,8 @@ public class JobsAPI {
                                     jobs.get(NameJob.FISHERMAN).getReward(TypeJob.EXTREME, new Consumer<Double>() {
                                         @Override
                                         public void accept(Double reward) {
-                                            Collection<Integer> integers = (Collection<Integer>) o;
-                                            succesfullyCreatedMissionF(player, integers, reward);
+                                            Item[] items = (Item[]) o;
+                                            succesfullyCreatedMissionMF(player, items, reward);
                                         }
                                     });
                                 }
@@ -450,7 +469,11 @@ public class JobsAPI {
         }));
     }
 
-    private void succesfullyCreatedMissionB(Player player, Collection<Integer> integers, double reward) {
+    private void succesfullyCreatedMissionB(Player player, int[] integers, double reward) {
+        JobsObject jobsObject = API.getMainAPI().jobsObject.get(player.getUniqueId());
+        jobsObject.setUser(player.getUniqueId());
+        jobsObject.setCountAnimals(integers);
+        jobsObject.setReward(reward);
         FormWindowCustom infoMenu = new FormWindowCustom("JobPlayer About");
         infoMenu.addElement(new ElementLabel(API.getMessageAPI().succesfullyMissionCreated(player)));
         infoMenu.addElement(new ElementLabel("Kill:\n"));
@@ -464,21 +487,11 @@ public class JobsAPI {
         player.showFormWindow(infoMenu);
     }
 
-    private void succesfullyCreatedMissionF(Player player, Collection<Integer> integers, double reward) {
-        FormWindowCustom infoMenu = new FormWindowCustom("JobPlayer About");
-        infoMenu.addElement(new ElementLabel(API.getMessageAPI().succesfullyMissionCreated(player)));
-        infoMenu.addElement(new ElementLabel("Get:\n"));
-        int i = 0;
-        for (int integer : integers) {
-            infoMenu.addElement(new ElementLabel("Name: " + getFish(i)));
-            infoMenu.addElement(new ElementLabel("Count: " + integer));
-            i++;
-        }
-        infoMenu.addElement(new ElementLabel("Reward: " + reward));
-        player.showFormWindow(infoMenu);
-    }
-
-    private void succesfullyCreatedMissionMF(Player player, Collection<Item> items, double reward) {
+    private void succesfullyCreatedMissionMF(Player player, Item[] items, double reward) {
+        JobsObject jobsObject = API.getMainAPI().jobsObject.get(player.getUniqueId());
+        jobsObject.setUser(player.getUniqueId());
+        jobsObject.setItems(items);
+        jobsObject.setReward(reward);
         FormWindowCustom infoMenu = new FormWindowCustom("JobPlayer About");
         infoMenu.addElement(new ElementLabel(API.getMessageAPI().succesfullyMissionCreated(player)));
         infoMenu.addElement(new ElementLabel("Get:\n"));
@@ -500,25 +513,12 @@ public class JobsAPI {
                 animal = "Pig";
                 break;
             case 2:
-                animal = "Chicken";
+                animal = "Sheep";
                 break;
             case 3:
-                animal = "Sheep";
+                animal = "Chicken";
                 break;
         }
         return animal;
-    }
-
-    private String getFish(int i) {
-        String fish = "";
-        switch (i) {
-            case 0:
-                fish = "Raw Cod";
-                break;
-            case 1:
-                fish = "Raw Salmon";
-                break;
-        }
-        return fish;
     }
 }
