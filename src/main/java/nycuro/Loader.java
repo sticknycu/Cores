@@ -1,5 +1,6 @@
 package nycuro;
 
+import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.mob.EntityCreeper;
 import cn.nukkit.plugin.PluginBase;
@@ -153,9 +154,9 @@ public class Loader extends PluginBase {
 
     @Override
     public void onDisable() {
-        API.getMechanicAPI().handleTransferHub(this.getServer().getOnlinePlayers().values().iterator().next(), 1);
+        API.getMechanicAPI().handleTransferHub();
         saveToDatabase();
-        removeNPC();
+        removeEntities();
         removeAllFromMaps();
         saveConfigs();
     }
@@ -276,13 +277,9 @@ public class Loader extends PluginBase {
         this.getServer().getScheduler().scheduleRepeatingTask(new FixBugHealthTask(), 1, true); // Todo: Bullshit incompetent Nukkit Coders -- Using resources useless.
     }
 
-    private void removeNPC() {
+    private void removeEntities() {
         for (Entity entity : API.getMainAPI().getServer().getDefaultLevel().getEntities()) {
-            if (entity.namedTag.getBoolean("mobfarmerNPC")) entity.close();
-            if (entity.namedTag.getBoolean("minerNPC")) entity.close();
-            if (entity.namedTag.getBoolean("butcherNPC")) entity.close();
-            if (entity.namedTag.getBoolean("farmerNPC")) entity.close();
-            if (entity.namedTag.getBoolean("fishermanNPC")) entity.close();
+            if (!(entity instanceof Player)) entity.close();
         }
     }
 

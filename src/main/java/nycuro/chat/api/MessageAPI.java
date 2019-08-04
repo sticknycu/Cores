@@ -115,10 +115,23 @@ public class MessageAPI {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
-                STRING = "§e» §6This job is LOCKED! Please unlock this kit using Premium Shop (/shop)!";
+                STRING = "§e» §6This mission is LOCKED! Please unlock this mission using Premium Shop (/shop)!";
                 break;
             case 1:
-                STRING = "§e» §6Acest job este BLOCAT! Te rog deblocheaza acest kit folosind Premium Shop (/shop)!";
+                STRING = "§e» §6Aceasta misiune este BLOCATA! Te rog deblocheaza aceasta misiune folosind Premium Shop (/shop)!";
+                break;
+        }
+        return STRING;
+    }
+
+    public String sendFinishedMissionMessage(Player player) {
+        int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
+        switch (lang) {
+            case 0:
+                STRING = "§e» §aYou finished the mission. Type §e/work §ato get your reward!";
+                break;
+            case 1:
+                STRING = "§e» §aAi terminat misiunea. Foloseste §e/work §apentru a primi recompensa!";
                 break;
         }
         return STRING;
@@ -1129,10 +1142,10 @@ public class MessageAPI {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
-                player.sendMessage("§f» §eYou have successfully selected CommonJob: §6" + job.getName() + "§e!");
+                player.sendMessage("§f» §eYou have successfully selected CommonJob: §6" + job.getName() + "§e! Type §6/work §e to start work!");
                 break;
             case 1:
-                player.sendMessage("§f» §eAi selectat cu succes CommonJob-ul: §6" + job.getName() + "§e!");
+                player.sendMessage("§f» §eAi selectat cu succes CommonJob-ul: §6" + job.getName() + "§e! Foloseste §6/work §epentru a primi o misiune!");
                 break;
         }
     }

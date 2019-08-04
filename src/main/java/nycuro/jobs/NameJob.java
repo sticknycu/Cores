@@ -27,12 +27,12 @@ public enum NameJob {
         this.id = id;
     }
 
-    public static String getType(int id) {
+    public static NameJob getType(int id) {
         for (NameJob job : NameJob.values()) {
             if (job.getId() == id) {
-                return job.getName();
+                return job;
             }
         }
-        return NameJob.NO_JOB.getName();
+        return NameJob.NO_JOB;
     }
 }

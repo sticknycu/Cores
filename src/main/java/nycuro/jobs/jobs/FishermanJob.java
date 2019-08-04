@@ -41,7 +41,7 @@ public class FishermanJob extends CommonJob {
     @Override
     public boolean isLocked(Player player, TypeJob typeJob) {
         int level = Database.profileSkyblock.get(player.getName()).getLevel();
-        return level >= getLevelNeeded(typeJob);
+        return level < getLevelNeeded(typeJob);
     }
 
     @Override

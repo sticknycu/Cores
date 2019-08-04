@@ -19,7 +19,7 @@ public class HubCommand extends PrincipalCommand {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         Player player = (Player) commandSender;
-        API.getMechanicAPI().handleTransferHub(player, 0);
+        API.getMechanicAPI().handleTransferHub(player);
         return true;
     }
 }

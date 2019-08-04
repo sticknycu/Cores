@@ -145,18 +145,15 @@ public class MechanicAPI {
         ((Player) commandSender).showFormWindow(infoMenu);
     }
 
-    public void handleTransferHub(Player player, int i) {
+    public void handleTransferHub() {
         InetSocketAddress hub = new InetSocketAddress("mcpe.chzone.eu", 19132);
-        switch (i) {
-            case 0:
-                player.transfer(hub);
-                break;
-            case 1:
-                for (Player player1 : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-                    player1.transfer(hub);
-                }
-                break;
+        for (Player player1 : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+            player1.transfer(hub);
         }
+    }
+    public void handleTransferHub(Player player) {
+        InetSocketAddress hub = new InetSocketAddress("mcpe.chzone.eu", 19132);
+        player.transfer(hub);
     }
 
     public String helpopTag = TextFormat.GRAY + "[" + TextFormat.YELLOW + "HELPOP" + TextFormat.GRAY + "]" + " " + TextFormat.GOLD;
@@ -230,6 +227,38 @@ public class MechanicAPI {
         dropPartyKey.addEnchantment(enchantment);
         player.getInventory().addItem(dropPartyKey);
         API.getMessageAPI().sendDropPartyReceiveKeyMessage(player);
+    }
+
+    public boolean checkItems(Player player, Item[] items) {
+        for (Item item : items) {
+            for (Item content : player.getInventory().getContents().values()) {
+                try {
+                    if (player.getInventory().isEmpty()) {
+                        return false;
+                    }
+                    if (item.equals(content) && item.getCount() == content.getCount() && content.getNamedTag().exist("NPC")) {
+                        return true;
+                    }
+                } catch (NullPointerException e) { // idk why
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkItems(Player player, Item item) {
+        for (Item content : player.getInventory().getContents().values()) {
+            try {
+                if (player.getInventory().isEmpty()) {
+                    return false;
+                }
+                if (item.equals(content) && item.getCount() == content.getCount() && content.getNamedTag().exist("NPC")) {
+                    return true;
+                }
+            } catch (NullPointerException e) { // idk why
+            }
+        }
+        return false;
     }
 
     public void createBossBar(Player player) {
@@ -390,7 +419,7 @@ public class MechanicAPI {
                     if (settings != null) {
                         settings.setBossbarValue(Boolean.valueOf(String.valueOf(response.values().toArray()[1])));
                         settings.setScoreboardValue(Boolean.valueOf(String.valueOf(response.values().toArray()[2])));
-                        player.setViewDistance(Integer.valueOf(String.valueOf(response.values().toArray()[4])));
+                        player.setViewDistance(Integer.valueOf(String.valueOf(response.values().toArray()[3])));
 
                         DummyBossBar bb = API.getMainAPI().bossbar.get(player.getUniqueId());
                         if (bb != null) {

@@ -27,7 +27,7 @@ public class WorkCommand extends PrincipalCommand {
         if (profileSkyblock.getJob() == 0) {
             API.getMessageAPI().sendNoJobMessage(player);
         } else {
-            NameJob job = NameJob.valueOf(NameJob.getType(profileSkyblock.getJob()));
+            NameJob job = NameJob.getType(profileSkyblock.getJob());
             JobsObject jobsObject = API.getMainAPI().jobsObject.get(player.getUniqueId());
             if (jobsObject != null) {
                 API.getJobsAPI().handleMission(player);
