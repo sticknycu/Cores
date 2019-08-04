@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="236dbe0b-d39a-4bd2-88a6-053714ed28a0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/objects/MechanicObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/Loader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/Loader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/chat/api/MessageAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/chat/api/MessageAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/jobs/WorkCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/jobs/WorkCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/HubCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/HubCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/NameJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/NameJob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/api/JobsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/api/JobsAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/handlers/JobsHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/handlers/JobsHandlers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/ButcherJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/ButcherJob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/FarmerJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/FarmerJob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/FishermanJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/FishermanJob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/MinerJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/MinerJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/mechanic/handlers/MechanicHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/mechanic/handlers/MechanicHandlers.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

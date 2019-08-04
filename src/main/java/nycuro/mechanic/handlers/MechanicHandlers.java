@@ -7,10 +7,8 @@ import cn.nukkit.block.BlockTNT;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.block.LeavesDecayEvent;
-import cn.nukkit.event.player.PlayerChatEvent;
-import cn.nukkit.event.player.PlayerInteractEvent;
-import cn.nukkit.event.player.PlayerJoinEvent;
-import cn.nukkit.event.player.PlayerQuitEvent;
+import cn.nukkit.event.entity.EntityDamageByEntityEvent;
+import cn.nukkit.event.player.*;
 import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemFlintSteel;
@@ -27,9 +25,10 @@ import nycuro.Loader;
 import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
+import nycuro.jobs.objects.MechanicObject;
 import nycuro.mechanic.objects.SettingsObject;
 
-import java.util.Random;
+import java.util.*;
 
 /**
  * author: NycuRO
@@ -86,6 +85,7 @@ public class MechanicHandlers implements Listener {
         API.getMainAPI().isOnSpawn.put(player.getUniqueId(), true);
         API.getMainAPI().isOnArena.put(player.getUniqueId(), false);
         API.getMainAPI().isOnArea.put(player.getUniqueId(), false);
+        API.getMainAPI().mechanicObject.put(player.getUniqueId(), new MechanicObject(player.getUniqueId(), null, null));
         API.getMainAPI().played.put(player.getUniqueId(), System.currentTimeMillis());
         // Async?!
         API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
@@ -140,6 +140,76 @@ public class MechanicHandlers implements Listener {
         API.getMainAPI().isOnArena.removeBoolean(player.getUniqueId());
         API.getMainAPI().isOnArea.removeBoolean(player.getUniqueId());
         API.getMainAPI().settings.remove(player.getUniqueId());
+        API.getMainAPI().mechanicObject.remove(player.getUniqueId());
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        if (!(((EntityDamageByEntityEvent) player.getLastDamageCause()).getDamager() instanceof Player)) event.setCancelled();
+        Player damager = (Player) ((EntityDamageByEntityEvent) player.getLastDamageCause()).getDamager();
+        // Make this async to be sure we don't have lag on server.
+        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+            @Override
+            public void onRun() {
+                MechanicObject mechanicObject = API.getMainAPI().mechanicObject.get(damager.getUniqueId());
+                Map<UUID, Long> map = new HashMap<>();
+                Map<UUID, Integer> kills = new HashMap<>();
+
+                if (mechanicObject.getKills() == null) {
+                    kills.put(player.getUniqueId(), 1);
+                } else {
+                    for (Map.Entry<UUID, Integer> entry : mechanicObject.getKills().entrySet()) {
+                        if (entry.getKey().equals(player.getUniqueId())) {
+                            kills.put(entry.getKey(), entry.getValue() + 1);
+                        } else {
+                            kills.put(entry.getKey(), entry.getValue());
+                        }
+                    }
+                }
+
+                mechanicObject.setKills(kills);
+
+                int kp = 0;
+                for (Map.Entry<UUID, Integer> es : mechanicObject.getKills().entrySet()) {
+                    if (es.getKey().equals(player.getUniqueId())) {
+                        kp = es.getValue();
+                    }
+                }
+
+                long lp = 0L;
+                if (mechanicObject.getPlayers() != null) {
+                    for (Map.Entry<UUID, Long> es : mechanicObject.getPlayers().entrySet()) {
+                        if (es.getKey().equals(player.getUniqueId())) {
+                            lp = es.getValue();
+                        }
+                    }
+                }
+
+                if (kp >= 5) {
+                    if (mechanicObject.getPlayers() == null) {
+                        map.put(player.getUniqueId(), System.currentTimeMillis());
+                    } else {
+                        for (Map.Entry<UUID, Long> entry : mechanicObject.getPlayers().entrySet()) {
+                            map.put(entry.getKey(), entry.getValue());
+                        }
+                        map.put(player.getUniqueId(), System.currentTimeMillis());
+                    }
+
+                    if (System.currentTimeMillis() - lp >= 1000 * 60 * 10) {
+                        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(damager.getName());
+                        profileSkyblock.setDollars(profileSkyblock.getDollars() + 50d);
+                        profileSkyblock.setExperience(profileSkyblock.getExperience() + 50d);
+                    }
+                } else {
+                    ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(damager.getName());
+                    profileSkyblock.setDollars(profileSkyblock.getDollars() + 50d);
+                    profileSkyblock.setExperience(profileSkyblock.getExperience() + 50d);
+                }
+
+                mechanicObject.setPlayers(map);
+            }
+        });
     }
 
     @EventHandler

@@ -65,6 +65,7 @@ public class JobsHandlers implements Listener {
     public void onBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        // Get Money
         JobsObject jobsObject = API.getMainAPI().jobsObject.get(player.getUniqueId());
         if (jobsObject == null) return;
         if (API.getMechanicAPI().isOnPrincipalWorld(player)) {

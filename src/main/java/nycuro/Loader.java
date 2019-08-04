@@ -48,6 +48,7 @@ import nycuro.home.api.HomeAPI;
 import nycuro.jobs.api.JobsAPI;
 import nycuro.jobs.handlers.JobsHandlers;
 import nycuro.jobs.objects.JobsObject;
+import nycuro.jobs.objects.MechanicObject;
 import nycuro.kits.api.KitsAPI;
 import nycuro.kits.handlers.KitHandlers;
 import nycuro.level.handlers.LevelHandlers;
@@ -89,6 +90,7 @@ public class Loader extends PluginBase {
     public Map<UUID, SettingsObject> settings = new HashMap<>();
     public Collection<UUID> staffChat = new ArrayList<>();
     public Map<UUID, JobsObject> jobsObject = new HashMap<>();
+    public Map<UUID, MechanicObject> mechanicObject = new HashMap<>();
 
     public static long dropPartyTime;
     public static int dropPartyVotes;
