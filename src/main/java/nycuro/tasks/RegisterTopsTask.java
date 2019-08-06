@@ -2,8 +2,8 @@ package nycuro.tasks;
 
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.scheduler.Task;
-import nycuro.api.API;
 import nycuro.Loader;
+import nycuro.api.API;
 
 /**
  * author: NycuRO

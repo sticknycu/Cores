@@ -7,12 +7,12 @@ import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
 import nycuro.api.API;
-import nycuro.Loader;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.shop.BuyUtils;
 import nycuro.shop.EnchantUtils;
 import nycuro.shop.MoneyUtils;
 import nycuro.shop.SellUtils;
+import nycuro.shop.commands.ShopCommandManager;
 
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.function.Consumer;
  * SkyblockCore Project
  * API 1.0.0
  */
-public class ShopAPI {
+public class ShopAPI extends API {
 
     public static BuyUtils buyUtils;
 
@@ -48,6 +48,11 @@ public class ShopAPI {
 
     public static EnchantUtils getEnchantUtils() {
         return enchantUtils;
+    }
+
+    @Override
+    public void registerCommands() {
+        ShopCommandManager.registerAll(getMainAPI());
     }
 
     public void sendShopContents(Player player) {
@@ -321,7 +326,6 @@ public class ShopAPI {
                     Map.Entry pair = (Map.Entry) it.next();
                     it.remove();
                     String firstDropDownType = pair.getValue().toString();
-                    Loader.log(firstDropDownType);
                     ShopAPI.getMoneyUtilsAPI().buyAction(response, player, firstDropDownType);
                 }
             }

@@ -1,0 +1,46 @@
+{
+  "generic": {
+    "commands.generic.cooldown"               : "Please wait {%0} seconds for your cool down to end.",
+    "commands.generic.teleporation.cooldown"  : "You will be teleported in {%0} seconds...",
+    "commands.generic.teleporting"            : "Teleporting...",
+    "commands.generic.ingame"                 : "You can only perform this command as a player",
+    "commands.generic.player.notfound"        : "Cannot find player {%0}"
+  },
+  "teleportation": {
+    "commands.tpa.description" : "Send a teleport request to a player",
+    "commands.tpa.usage"       : "/tpa <player>",
+    "commands.tpa.self"        : "You cannot send a teleport request to yourself!",
+    "commands.tpa.invite"      : "{%0} wants to teleport to you, use /tpaccept to accept, /tpdeny to deny",
+    "commands.tpa.success"      : "Teleport request sent to {%0}",
+
+    "commands.tpaall.description" : "Send a teleport request to all the players to teleport them to you",
+    "commands.tpaall.usage"        : "/tpall <player>",
+    "commands.tpaall.success"         : "Teleport request sent to all the players",
+
+    "commands.tpahere.description" : "Send a teleport request to a player to teleport him to you",
+    "commands.tpahere.usage"       : "/tpahere <player>",
+    "commands.tpahere.invite"          : "{%0} wants to teleport you to him, use /tpaccept accept, /tpdeny to deny",
+
+    "commands.tpall.description" : "Teleport all the players to you or another player",
+    "commands.tpall.usage"       : "/tpall <player>",
+    "commands.tpall.other"       : "Teleporting to {%0}...",
+    "commands.tpall.success"      : "Teleporting all the players to you...",
+
+    "commands.tpaccept.description"   : "Accept a teleport request",
+    "commands.tpaccept.usage"         : "/tpaccept",
+    "commands.tpaccept.noRequest"     : "You don't have any request yet",
+    "commands.tpaccept.unavailable"    : "Request unavailable",
+    "commands.tpaccept.noRequestFrom" : "You don't have any requests from {%0}",
+    "commands.tpaccept.accepted"      : "{%0} accepted your teleport request! Teleporting...",
+
+    "commands.tpdeny.description"  : "Deny a teleport request",
+    "commands.tpdeny.usage"        : "/tpdeny",
+    "commands.tpdeny.denied"       : "{%0} denied your teleport request",
+    "commands.tpdeny.success"      : "Denied {%0}'s teleport request",
+
+    "commands.tphere.description"  : "Teleport a player to you",
+    "commands.tphere.other"        : "Teleporting to {%0}...",
+    "commands.tphere.success"      : "Teleporting {%0} to you...",
+    "commands.tphere.usage"        : "/tphere <player>"
+  }
+}

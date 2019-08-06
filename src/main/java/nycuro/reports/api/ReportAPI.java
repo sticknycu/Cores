@@ -10,6 +10,7 @@ import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.scheduler.AsyncTask;
 import nycuro.api.API;
 import nycuro.gui.list.ResponseFormWindow;
+import nycuro.reports.commands.ReportsCommandManager;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +22,12 @@ import java.util.function.Consumer;
  * SkyblockCore Project
  * API 1.0.0
  */
-public class ReportAPI {
+public class ReportAPI extends API {
+
+    @Override
+    public void registerCommands() {
+        ReportsCommandManager.registerAll(getMainAPI());
+    }
 
     public void createWindowReport(Player player) {
         FormWindowSimple jobsMenu = new FormWindowSimple("Reports", API.getMessageAPI().sendReportPrincipalModal(player));

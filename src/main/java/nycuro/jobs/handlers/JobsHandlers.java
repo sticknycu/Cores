@@ -11,6 +11,7 @@ import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.entity.EntityDeathEvent;
 import cn.nukkit.event.inventory.InventoryPickupItemEvent;
+import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
 import nycuro.api.API;
@@ -110,18 +111,22 @@ public class JobsHandlers implements Listener {
     // Job Fisherman
     @EventHandler
     public void onReceiveFish(InventoryPickupItemEvent event) {
-        Item item = event.getItem().getItem();
-        Player player = API.getMainAPI().getServer().getPlayer(event.getItem().getOwner());
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-        if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
-            if (profileSkyblock.getJob() == 4) {
-                event.getItem().kill();
-                if (API.getMechanicAPI().checkItems(player, event.getItem().getItem())) {
-                    player.sendMessage(API.getMessageAPI().sendFinishedMissionMessage(player));
-                    event.setCancelled();
-                };
+        if (event.getItem().getItem().getId() != Item.RAW_FISH) event.setCancelled();
+        if (event.getItem().getItem().getId() != Item.RAW_SALMON) event.setCancelled();
+        if (event.getInventory() instanceof PlayerInventory) event.setCancelled();
+        PlayerInventory playerInventory = (PlayerInventory) event.getInventory();
+        playerInventory.getViewers().forEach( (player) -> {
+            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+            if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
+                if (profileSkyblock.getJob() == 4) {
+                    event.getItem().kill();
+                    if (API.getMechanicAPI().checkItems(player, event.getItem().getItem())) {
+                        player.sendMessage(API.getMessageAPI().sendFinishedMissionMessage(player));
+                        event.setCancelled();
+                    }
+                }
             }
-        }
+        });
     }
 
 

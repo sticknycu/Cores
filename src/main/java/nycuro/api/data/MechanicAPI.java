@@ -127,11 +127,7 @@ public class MechanicAPI {
             return false;
         }
 
-        if (player.getLocation().getY() > d3[0] && player.getLocation().getY() < d3[1]) {
-            return false;
-        }
-
-        return true;
+        return !(player.getLocation().getY() > d3[0]) || !(player.getLocation().getY() < d3[1]);
     }
 
     public void sendToSpawn(Player player) {

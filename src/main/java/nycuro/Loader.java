@@ -13,38 +13,17 @@ import nycuro.abuse.handlers.AbuseHandlers;
 import nycuro.ai.AiAPI;
 import nycuro.api.API;
 import nycuro.api.data.MechanicAPI;
-import nycuro.chat.api.MessageAPI;
-import nycuro.chat.handlers.ChatHandlers;
 import nycuro.combat.api.CombatAPI;
-import nycuro.commands.list.boss.SpawnBossCommand;
-import nycuro.commands.list.economy.AddCoinsCommand;
-import nycuro.commands.list.economy.GetCoinsCommand;
-import nycuro.commands.list.economy.SetCoinsCommand;
-import nycuro.commands.list.homes.HomesCommand;
-import nycuro.commands.list.jobs.JobCommand;
-import nycuro.commands.list.jobs.WorkCommand;
-import nycuro.commands.list.kits.KitsCommand;
-import nycuro.commands.list.mechanic.DropPartyMessageCommand;
-import nycuro.commands.list.mechanic.player.*;
-import nycuro.commands.list.mechanic.tops.TopCoinsCommand;
-import nycuro.commands.list.mechanic.tops.TopDeathsCommand;
-import nycuro.commands.list.mechanic.tops.TopKillsCommand;
-import nycuro.commands.list.mechanic.tops.TopTimeCommand;
-import nycuro.commands.list.reports.ReportsCommand;
-import nycuro.commands.list.shop.ShopCommand;
-import nycuro.commands.list.spawning.ArenaCommand;
-import nycuro.commands.list.spawning.WitherCommand;
-import nycuro.commands.list.stats.StatsCommand;
-import nycuro.commands.list.time.GetTimeCommand;
-import nycuro.commands.list.utils.UtilsCommand;
-import nycuro.crate.CrateAPI;
-import nycuro.crate.handlers.CrateHandlers;
+import nycuro.crates.api.CrateAPI;
+import nycuro.crates.handlers.CrateHandlers;
 import nycuro.database.Database;
 import nycuro.database.objects.KitsObject;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.dropparty.api.DropPartyAPI;
+import nycuro.economy.api.EconomyAPI;
 import nycuro.gui.handlers.GUIHandlers;
-import nycuro.home.api.HomeAPI;
+import nycuro.helping.api.HelpingAPI;
+import nycuro.homes.api.HomeAPI;
 import nycuro.jobs.api.JobsAPI;
 import nycuro.jobs.handlers.JobsHandlers;
 import nycuro.jobs.objects.JobsObject;
@@ -54,6 +33,8 @@ import nycuro.kits.handlers.KitHandlers;
 import nycuro.level.handlers.LevelHandlers;
 import nycuro.mechanic.handlers.MechanicHandlers;
 import nycuro.mechanic.objects.SettingsObject;
+import nycuro.messages.api.MessageAPI;
+import nycuro.messages.handlers.ChatHandlers;
 import nycuro.messages.handlers.MessageHandlers;
 import nycuro.protection.handlers.ProtectionHandlers;
 import nycuro.reports.api.ReportAPI;
@@ -63,12 +44,12 @@ import nycuro.shop.MoneyUtils;
 import nycuro.shop.SellUtils;
 import nycuro.shop.api.ShopAPI;
 import nycuro.tasks.*;
+import nycuro.teleport.api.TeleportationAPI;
 import nycuro.utils.WarpUtils;
 import nycuro.utils.api.UtilsAPI;
 import nycuro.utils.vote.VoteSettings;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -98,10 +79,6 @@ public class Loader extends PluginBase {
     public String symbol = TextFormat.GOLD.toString();
     public String empty = " ";
 
-    public static void log(String s) {
-        API.getMainAPI().getServer().getLogger().info(TextFormat.colorize("&a" + s));
-    }
-
     public static void registerTops() {
         try {
             API.getMainAPI().saveToDatabase();
@@ -121,37 +98,22 @@ public class Loader extends PluginBase {
         API.getMechanicAPI().spawnNPC("fishermanNPC", EntityCreeper.NETWORK_ID, 42, 168, -12);
     }
 
-    public static String time(long time) {
-        int hours = (int) TimeUnit.MILLISECONDS.toHours(time);
-        int minutes = (int) (TimeUnit.MILLISECONDS.toMinutes(time) - hours * 60);
-        int MINS = (int) TimeUnit.MILLISECONDS.toMinutes(time);
-        int seconds = (int) (TimeUnit.MILLISECONDS.toSeconds(time) - MINS * 60);
-        return hours + ":" + minutes + ":" + seconds;
-    }
-
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
-    }
-
     @Override
     public void onLoad() {
         registerAPI();
-        registerCommands();
     }
 
     @Override
     public void onEnable() {
         createConfig();
+        registerCommands();
         initDatabase();
         registerEvents();
         registerTasks();
         addEntities();
         registerPlaceHolders();
+        API.getKitsAPI().addKits();
+        API.getJobsAPI().addJobs();
     }
 
     @Override
@@ -171,6 +133,8 @@ public class Loader extends PluginBase {
             dropPartyTime = API.getVoteSettingsAPI().mechanic.getTimeDropParty();
         }
         dropPartyVotes = API.getVoteSettingsAPI().mechanic.getDropParty();
+
+        API.getMessageAPI().init();
     }
 
     private void saveConfigs() {
@@ -192,7 +156,7 @@ public class Loader extends PluginBase {
     }
 
     private void initDatabase() {
-        log("Init MySQL Database...");
+        API.log("Init MySQL Database...");
         Database.connectToDatabaseHub();
         Database.connectToDatabaseFactions();
         Database.connectToDatabaseReports();
@@ -207,50 +171,38 @@ public class Loader extends PluginBase {
         UtilsAPI.warpUtils = new WarpUtils();
         API.kitsAPI = new KitsAPI();
         API.messageAPI = new MessageAPI();
-        API.shopAPI = new ShopAPI();
         API.jobsAPI = new JobsAPI();
-        ShopAPI.buyUtils = new BuyUtils();
-        ShopAPI.sellUtils = new SellUtils();
-        ShopAPI.moneyUtils = new MoneyUtils();
         API.aiAPI = new AiAPI();
         API.crateAPI = new CrateAPI();
         API.dropPartyAPI = new DropPartyAPI();
         API.combatAPI = new CombatAPI();
+        API.shopAPI = new ShopAPI();
+        ShopAPI.buyUtils = new BuyUtils();
+        ShopAPI.sellUtils = new SellUtils();
+        ShopAPI.moneyUtils = new MoneyUtils();
         ShopAPI.enchantUtils = new EnchantUtils();
         API.database = new Database();
         API.voteSettingsAPI = new VoteSettings();
         API.reportAPI = new ReportAPI();
         API.homeAPI = new HomeAPI();
+        API.teleportationAPI = new TeleportationAPI();
+        API.economyAPI = new EconomyAPI();
+        API.helpingAPI = new HelpingAPI();
     }
 
     private void registerCommands() {
-        this.getServer().getCommandMap().register("setcoins", new SetCoinsCommand());
-        this.getServer().getCommandMap().register("addcoins", new AddCoinsCommand());
-        this.getServer().getCommandMap().register("onlinetime", new GetTimeCommand());
-        this.getServer().getCommandMap().register("coins", new GetCoinsCommand());
-        this.getServer().getCommandMap().register("topcoins", new TopCoinsCommand());
-        this.getServer().getCommandMap().register("topkills", new TopKillsCommand());
-        this.getServer().getCommandMap().register("toptime", new TopTimeCommand());
-        this.getServer().getCommandMap().register("topdeaths", new TopDeathsCommand());
-        this.getServer().getCommandMap().register("wither", new WitherCommand());
-        this.getServer().getCommandMap().register("droppartymessage", new DropPartyMessageCommand());
-        this.getServer().getCommandMap().register("spawnboss", new SpawnBossCommand());
-        this.getServer().getCommandMap().register("kit", new KitsCommand());
-        this.getServer().getCommandMap().register("homes", new HomesCommand());
-        this.getServer().getCommandMap().register("shop", new ShopCommand());
-        this.getServer().getCommandMap().register("spawn", new SpawnCommand());
-        this.getServer().getCommandMap().register("utils", new UtilsCommand());
-        this.getServer().getCommandMap().register("lang", new LangCommand());
-        this.getServer().getCommandMap().register("stats", new StatsCommand());
-        this.getServer().getCommandMap().register("jobs", new JobCommand());
-        this.getServer().getCommandMap().register("arena", new ArenaCommand());
-        this.getServer().getCommandMap().register("reports", new ReportsCommand());
-        this.getServer().getCommandMap().register("coords", new CoordsCommand());// TODO: Save to Database
-        this.getServer().getCommandMap().register("settings", new SettingsCommand());
-        this.getServer().getCommandMap().register("hub", new HubCommand());
-        this.getServer().getCommandMap().register("staffchat", new StaffChatCommand());
-        this.getServer().getCommandMap().register("helpop", new HelpOpCommand());
-        this.getServer().getCommandMap().register("work", new WorkCommand());
+        API.getAiAPI().registerCommands();
+        API.getDropPartyAPI().registerCommands();
+        API.getHomeAPI().registerCommands();
+        API.getJobsAPI().registerCommands();
+        API.getKitsAPI().registerCommands();
+        API.getReportAPI().registerCommands();
+        API.getShopAPI().registerCommands();
+        API.getHelpingAPI().registerCommands();
+        API.getEconomyAPI().registerCommands();
+        API.getCrateAPI().registerCommands();
+        API.getUtilsAPI().registerCommands();
+        API.getTeleportationAPI().registerCommands();
     }
 
     private void registerEvents() {
@@ -264,6 +216,7 @@ public class Loader extends PluginBase {
         this.getServer().getPluginManager().registerEvents(new JobsHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new CrateHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new ChatHandlers(), this);
+        API.getTeleportationAPI().registerHandlers();
     }
 
     private void registerTasks() {
@@ -277,6 +230,7 @@ public class Loader extends PluginBase {
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckerTask(), 20, true);
         this.getServer().getScheduler().scheduleDelayedTask(new RestartTask(), 20 * 60 * 60 * 3);
         this.getServer().getScheduler().scheduleRepeatingTask(new FixBugHealthTask(), 1, true); // Todo: Bullshit incompetent Nukkit Coders -- Using resources useless.
+        API.getTeleportationAPI().registerTasks();
     }
 
     private void removeEntities() {
@@ -296,10 +250,10 @@ public class Loader extends PluginBase {
             api.staticPlaceholder("top" + value + "deathscount", () -> String.valueOf(Database.scoreboarddeathsValue.getOrDefault(value, 0)));
 
             api.staticPlaceholder("top" + value + "coinsname", () -> Database.scoreboardcoinsName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "coinscount", () -> String.valueOf(round(Database.scoreboardcoinsValue.getOrDefault(value, 0.0), 2)));
+            api.staticPlaceholder("top" + value + "coinscount", () -> String.valueOf(API.round(Database.scoreboardcoinsValue.getOrDefault(value, 0.0), 2)));
 
             api.staticPlaceholder("top" + value + "timename", () -> Database.scoreboardtimeName.getOrDefault(value, " "));
-            api.staticPlaceholder("top" + value + "timecount", () -> time(Database.scoreboardtimeValue.getOrDefault(value, 0L)));
+            api.staticPlaceholder("top" + value + "timecount", () -> API.time(Database.scoreboardtimeValue.getOrDefault(value, 0L)));
         }
     }
 }

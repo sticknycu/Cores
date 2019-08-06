@@ -9,7 +9,6 @@ import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import cn.nukkit.utils.TextFormat;
-import nycuro.Loader;
 import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
@@ -17,6 +16,7 @@ import nycuro.gui.list.ResponseFormWindow;
 import nycuro.jobs.CommonJob;
 import nycuro.jobs.NameJob;
 import nycuro.jobs.TypeJob;
+import nycuro.jobs.commands.JobsCommandManager;
 import nycuro.jobs.jobs.ButcherJob;
 import nycuro.jobs.jobs.FarmerJob;
 import nycuro.jobs.jobs.FishermanJob;
@@ -32,11 +32,16 @@ import java.util.function.Consumer;
  * FactionsCore Project
  * API 1.0.0
  */
-public class JobsAPI {
+public class JobsAPI extends API {
 
-    public static Map<NameJob, CommonJob> jobs = new HashMap<>();
+    public Map<NameJob, CommonJob> jobs = new HashMap<>();
 
-    static {
+    @Override
+    public void registerCommands() {
+        JobsCommandManager.registerAll(getMainAPI());
+    }
+
+    public void addJobs() {
         jobs.put(NameJob.MINER, new MinerJob());
         jobs.put(NameJob.BUTCHER, new ButcherJob());
         jobs.put(NameJob.FARMER, new FarmerJob());
@@ -125,7 +130,7 @@ public class JobsAPI {
                 } catch (NullPointerException e) {
                 }
             }
-            infoMenu.addElement(new ElementLabel("§aReward: §e" + Loader.round(jobsObject.getReward(), 2) + " Dollars"));
+            infoMenu.addElement(new ElementLabel("§aReward: §e" + API.round(jobsObject.getReward(), 2) + " Dollars"));
             player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
                 @Override
                 public void accept(Map<Integer, Object> response) {
@@ -149,7 +154,7 @@ public class JobsAPI {
                         "Sheep: " + jobsObject.getCountAnimals()[2] + "\n" +
                         "Chicken: " + jobsObject.getCountAnimals()[3])
                 );
-                infoMenu.addElement(new ElementLabel("§aReward: §e" + Loader.round(jobsObject.getReward(), 2) + " Dollars"));
+                infoMenu.addElement(new ElementLabel("§aReward: §e" + API.round(jobsObject.getReward(), 2) + " Dollars"));
             } catch (NullPointerException e) {
             }
             player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {

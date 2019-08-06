@@ -2,7 +2,6 @@ package nycuro.tasks;
 
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
-import nycuro.Loader;
 import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
@@ -36,7 +35,7 @@ public class BossBarTask extends Task {
                 float health = 100F;
                 if (API.getMechanicAPI().isOnArena(player) && API.getMechanicAPI().getBossHealth() != 0) {
                     health = API.getMechanicAPI().getBossHealth();
-                    message = API.getMessageAPI().getMessageInArenaBossBar(player, Loader.round((double) API.getMechanicAPI().getBossHealth(), 2));
+                    message = API.getMessageAPI().getMessageInArenaBossBar(player, API.round(API.getMechanicAPI().getBossHealth(), 2));
                 } else {
                     message = API.getMessageAPI().getMessageBossBar(player, level, necessary, count);
                 }

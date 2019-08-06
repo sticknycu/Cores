@@ -11,6 +11,7 @@ import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.utils.WarpUtils;
+import nycuro.utils.commands.UtilsCommandManager;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -20,13 +21,18 @@ import java.util.function.Consumer;
  * SkyblockCore Project
  * API 1.0.0
  */
-public class UtilsAPI {
+public class UtilsAPI extends API {
 
     public static WarpUtils warpUtils;
     private double cost = 0;
 
     public static WarpUtils getWarpUtilsAPI() {
         return warpUtils;
+    }
+
+    @Override
+    public void registerCommands() {
+        UtilsCommandManager.registerAll(getMainAPI());
     }
 
     private void repairItemHand(Player player) {

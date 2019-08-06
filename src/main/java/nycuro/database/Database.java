@@ -635,13 +635,12 @@ public class Database {
                     preparedStatement.setInt(2, 0);
                     preparedStatement.setInt(3, 0);
                     preparedStatement.setInt(4, 0);
-                    preparedStatement.setInt(5, 0);
-                    preparedStatement.setLong(6, 0);
-                    preparedStatement.setDouble(7, 0);
-                    preparedStatement.setInt(8, 0);
-                    preparedStatement.setDouble(9, 250);
-                    preparedStatement.setLong(10, 0);
-                    preparedStatement.setDouble(11, 0);
+                    preparedStatement.setLong(5, 0);
+                    preparedStatement.setDouble(6, 0);
+                    preparedStatement.setInt(7, 0);
+                    preparedStatement.setDouble(8, 250);
+                    preparedStatement.setLong(9, 0);
+                    preparedStatement.setDouble(10, 0);
                     profileSkyblock.put(name, new ProfileSkyblock(
                             name,
                             0,

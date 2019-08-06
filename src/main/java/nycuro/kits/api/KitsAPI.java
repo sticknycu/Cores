@@ -10,11 +10,12 @@ import cn.nukkit.utils.TextFormat;
 import nycuro.api.API;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.kits.CommonKit;
+import nycuro.kits.commands.KitsCommandManager;
 import nycuro.kits.data.clasic.*;
 import nycuro.kits.data.premium.*;
 import nycuro.kits.data.specific.*;
-import nycuro.kits.type.StatusKit;
 import nycuro.kits.type.NameKit;
+import nycuro.kits.type.StatusKit;
 import nycuro.kits.type.TypeKit;
 
 import java.util.HashMap;
@@ -26,11 +27,16 @@ import java.util.function.Consumer;
  * SkyblockCore Project
  * API 1.0.0
  */
-public class KitsAPI {
+public class KitsAPI extends API {
 
-    public static Map<NameKit, CommonKit> kits = new HashMap<>();
+    public Map<NameKit, CommonKit> kits = new HashMap<>();
 
-    static {
+    @Override
+    public void registerCommands() {
+        KitsCommandManager.registerAll(getMainAPI());
+    }
+
+    public void addKits() {
         // classic
         kits.put(NameKit.STARTER, new StarterKit()); // StartKit - Only for new people (Cannot be buyed or accesed)
         kits.put(NameKit.ENCHANTED_STARTER, new EnchantedStarterKit());

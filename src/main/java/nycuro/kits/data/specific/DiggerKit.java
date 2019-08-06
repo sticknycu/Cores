@@ -8,9 +8,9 @@ import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
+import nycuro.kits.type.NameKit;
 import nycuro.kits.type.StatusKit;
 import nycuro.kits.type.TypeItems;
-import nycuro.kits.type.NameKit;
 import nycuro.kits.type.TypeKit;
 
 /**
