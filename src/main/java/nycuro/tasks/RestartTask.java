@@ -2,7 +2,8 @@ package nycuro.tasks;
 
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.scheduler.Task;
-import nycuro.api.API;
+
+import static nycuro.api.API.mainAPI;
 
 /**
  * author: NycuRO
@@ -13,7 +14,7 @@ public class RestartTask extends Task {
 
     @Override
     public void onRun(int i) {
-        API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "stop");
+        mainAPI.getServer().dispatchCommand(new ConsoleCommandSender(), "stop");
     }
 }
 

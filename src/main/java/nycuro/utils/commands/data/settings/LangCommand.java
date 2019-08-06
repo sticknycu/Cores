@@ -3,10 +3,12 @@ package nycuro.utils.commands.data.settings;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import gt.creeperface.holograms.Holograms;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.utils.commands.CommandBaseUtils;
+
+import static nycuro.api.API.databaseAPI;
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -27,18 +29,18 @@ public class LangCommand extends CommandBaseUtils {
             Holograms holograms = new Holograms();
             if (message.equals("en")) {
                 profile.setLanguage(0);
-                API.getDatabase().setLanguage(commandSender.getName(), 0);
+                databaseAPI.setLanguage(commandSender.getName(), 0);
                 Holograms.setLanguageHandler( (p) -> 0);
                 holograms.onLanguageChanged((Player) commandSender);
             } else {
                 profile.setLanguage(1);
-                API.getDatabase().setLanguage(commandSender.getName(), 1);
+                databaseAPI.setLanguage(commandSender.getName(), 1);
                 Holograms.setLanguageHandler( (p) -> 1);
                 holograms.onLanguageChanged((Player) commandSender);
             }
-            API.getMessageAPI().sendLangMessage((Player) commandSender);
+            messageAPI.sendLangMessage((Player) commandSender);
         } else {
-            API.getMessageAPI().sendLangArrayException((Player) commandSender);
+            messageAPI.sendLangArrayException((Player) commandSender);
         }
         return true;
     }

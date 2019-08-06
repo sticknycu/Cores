@@ -3,10 +3,12 @@ package nycuro.utils.commands.data.settings;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.Loader;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.utils.commands.CommandBaseUtils;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -26,15 +28,15 @@ public class OnlineTimeCommand extends CommandBaseUtils {
             ProfileSkyblock senderProfile = Database.profileSkyblock.get(player.getName());
             long session = System.currentTimeMillis() - Loader.startTime.getLong(player.getUniqueId());
             long time = senderProfile.getTime();
-            API.getMessageAPI().getSelfTimeMessage(player, session, time);
+            messageAPI.getSelfTimeMessage(player, session, time);
         } else if (strings.length == 1) {
-            Player playerCommand = API.getMainAPI().getServer().getPlayerExact(strings[0]);
+            Player playerCommand = mainAPI.getServer().getPlayerExact(strings[0]);
             ProfileSkyblock profile = Database.profileSkyblock.get(playerCommand.getName());
             long sessionCommand = System.currentTimeMillis() - Loader.startTime.getLong(playerCommand.getUniqueId());
             long time = profile.getTime();
-            API.getMessageAPI().getPlayerTimeMessage(player, playerCommand, sessionCommand, time);
+            messageAPI.getPlayerTimeMessage(player, playerCommand, sessionCommand, time);
         } else {
-            API.getMessageAPI().getTimeExceptionMessage(player);
+            messageAPI.getTimeExceptionMessage(player);
             return true;
         }
         return true;

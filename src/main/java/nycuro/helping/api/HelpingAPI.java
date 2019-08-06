@@ -1,12 +1,12 @@
 package nycuro.helping.api;
 
-import nycuro.api.API;
 import nycuro.helping.commands.HelpingCommandManager;
 
-public class HelpingAPI extends API {
+import static nycuro.api.API.mainAPI;
 
-    @Override
+public class HelpingAPI {
+
     public void registerCommands() {
-        HelpingCommandManager.registerAll(getMainAPI());
+        HelpingCommandManager.registerAll(mainAPI);
     }
 }

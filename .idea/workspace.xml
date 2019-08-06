@@ -2,108 +2,119 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="236dbe0b-d39a-4bd2-88a6-053714ed28a0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/ai/commands/AiCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/ai/commands/CommandBaseAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/ai/commands/data/SpawnBossCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/commands/CommandBaseCrates.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/commands/CratesCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/CommandBaseDropParty.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/DropPartyCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/api/EconomyAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/CommandBaseEconomy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/EconomyCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/api/HelpingAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/CommandBaseHelping.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/HelpingCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/CommandBaseHomes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/HomesCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/CommandBaseJobs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/JobsCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/CommandBaseKits.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/KitsCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/objects/MessagesObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/CommandBaseReports.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/ReportsCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/CommandBaseShop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/ShopCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/api/TeleportationAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/CommandBaseTeleportation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/TeleportationCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAAllCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPACommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAHereCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAcceptCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAllCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPDenyCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPHereCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/handlers/TeleportationHandlers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/objects/TPCooldown.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/objects/TPRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/tasks/TeleportationExpireTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/tasks/TeleportationTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/CommandBaseUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/UtilsCommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/lang/lang_en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/Loader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/Loader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/abuse/handlers/AbuseHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/abuse/handlers/AbuseHandlers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/ai/AiAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/ai/AiAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/ai/commands/CommandBaseAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/ai/commands/CommandBaseAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/ai/commands/data/SpawnBossCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/ai/commands/data/SpawnBossCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/ai/entity/BossEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/ai/entity/BossEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/api/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/api/API.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/chat/ChatFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/ChatFormat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/chat/api/MessageAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/api/MessageAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/chat/handlers/ChatHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/ChatHandlers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/PrincipalCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/boss/SpawnBossCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/donate/ranks/RankCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/economy/AddCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/AddCoinsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/economy/GetCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/GetCoinsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/economy/SetCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/SetCoinsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/homes/HomesCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/data/HomeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/jobs/JobCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/JobCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/jobs/WorkCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/WorkCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/kits/KitsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/data/KitsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/DropPartyMessageCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/data/DropPartyMessageCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/SpawnFireworkCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/commands/data/SpawnFireworkCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/CoordsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/CoordsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/HelpOpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/HelpOpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/HubCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/HubCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/LangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/LangCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/SettingsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/SettingsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/SpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/SpawnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/player/StaffChatCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/StaffChatCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/tops/TopCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/tops/TopCoinsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/tops/TopDeathsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopDeathsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/tops/TopKillsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopKillsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/mechanic/tops/TopTimeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopTimeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/reports/ReportsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/data/ReportsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/shop/ShopCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/data/ShopCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/spawning/ArenaCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/ArenaCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/spawning/WitherCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/spawning/WitherCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/stats/StatsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/StatsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/time/GetTimeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/OnlineTimeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/commands/list/utils/UtilsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/utils/UtilsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crate/CrateAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/api/CrateAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crate/handlers/CrateHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/handlers/CrateHandlers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crate/item/EntityFirework.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/item/EntityFirework.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/combat/api/CombatAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/combat/api/CombatAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crates/api/CrateAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/api/CrateAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crates/commands/CommandBaseCrates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/commands/CommandBaseCrates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crates/commands/data/SpawnFireworkCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/commands/data/SpawnFireworkCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crates/handlers/CrateHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/handlers/CrateHandlers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/database/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/api/DropPartyAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/api/DropPartyAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/home/api/HomeAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/homes/api/HomeAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/CommandBaseDropParty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/CommandBaseDropParty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/data/DropPartyMessageCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/data/DropPartyMessageCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/api/EconomyAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/api/EconomyAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/CommandBaseEconomy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/CommandBaseEconomy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/AddCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/AddCoinsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/GetCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/GetCoinsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/SetCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/SetCoinsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/tops/TopCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/tops/TopCoinsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/helping/api/HelpingAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/api/HelpingAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/CommandBaseHelping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/CommandBaseHelping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/HelpOpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/HelpOpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/StaffChatCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/StaffChatCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/homes/api/HomeAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/homes/api/HomeAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/CommandBaseHomes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/CommandBaseHomes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/data/HomeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/data/HomeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/api/JobsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/api/JobsAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/CommandBaseJobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/CommandBaseJobs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/JobCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/JobCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/WorkCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/WorkCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/handlers/JobsHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/handlers/JobsHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/ButcherJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/ButcherJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/FarmerJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/FarmerJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/FishermanJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/FishermanJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/jobs/MinerJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/MinerJob.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/api/KitsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/api/KitsAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/CommandBaseKits.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/CommandBaseKits.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/data/KitsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/data/KitsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/EnchantedStarterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/EnchantedStarterKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/GuardianKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/GuardianKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/KnightKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/KnightKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/PaladinKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/PaladinKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/SparrowKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/SparrowKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/StarterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/StarterKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/DetonatorKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/DetonatorKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/KillerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/KillerKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/MasterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/MasterKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/TurretMonkeyKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/TurretMonkeyKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/ViperKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/ViperKit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/DiggerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/DiggerKit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/LackerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/LackerKit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PlanterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PlanterKit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PushUpKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PushUpKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/StonnerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/StonnerKit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/WoodieKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/WoodieKit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/handlers/KitHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/handlers/KitHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/level/handlers/LevelHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/level/handlers/LevelHandlers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/mechanic/handlers/MechanicHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/mechanic/handlers/MechanicHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/messages/api/MessageAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/api/MessageAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/ChatHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/ChatHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/MessageHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/MessageHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/protection/handlers/ProtectionHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/protection/handlers/ProtectionHandlers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/reports/api/ReportAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/reports/api/ReportAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/CommandBaseReports.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/CommandBaseReports.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/data/ReportsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/data/ReportsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/BuyUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/BuyUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/EnchantUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/EnchantUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/MoneyUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/MoneyUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/SellUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/SellUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/api/ShopAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/api/ShopAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/CommandBaseShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/CommandBaseShop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/data/ShopCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/data/ShopCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/BossBarTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/BossBarTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckLevelTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckLevelTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ClearLagTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ClearLagTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CombatLoggerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CombatLoggerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/FixBugHealthTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/FixBugHealthTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/RegisterTopsTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/RegisterTopsTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/RestartTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/RestartTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreTagTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreTagTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreboardTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreboardTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/api/TeleportationAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/api/TeleportationAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/CommandBaseTeleportation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/CommandBaseTeleportation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAAllCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAAllCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPACommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPACommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAHereCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAHereCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAcceptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAcceptCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAllCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAllCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPDenyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPDenyCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPHereCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPHereCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/tasks/TeleportationExpireTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/tasks/TeleportationExpireTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/WarpUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/WarpUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/api/UtilsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/api/UtilsAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/CommandBaseUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/CommandBaseUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/CoordsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/CoordsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/LangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/LangCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/OnlineTimeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/OnlineTimeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/SettingsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/SettingsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/StatsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/StatsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/spawning/WitherCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/spawning/WitherCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/ArenaCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/ArenaCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/HubCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/HubCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/SpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/SpawnCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopDeathsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopDeathsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopKillsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopKillsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopTimeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopTimeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/utils/UtilsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/utils/UtilsCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/vote/VoteSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/vote/VoteSettings.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

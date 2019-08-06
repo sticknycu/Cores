@@ -3,10 +3,11 @@ package nycuro.combat.api;
 import cn.nukkit.Player;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
-import nycuro.api.API;
 
 import java.util.Iterator;
 import java.util.UUID;
+
+import static nycuro.api.API.messageAPI;
 
 public class CombatAPI {
 
@@ -26,7 +27,7 @@ public class CombatAPI {
 
     public void setCombat(Player player) {
         if (!inCombat(player)) {
-            player.sendMessage(API.getMessageAPI().setCombatMessage(player));
+            player.sendMessage(messageAPI.setCombatMessage(player));
             inCombat.put(player.getUniqueId(), System.currentTimeMillis());
         }
     }

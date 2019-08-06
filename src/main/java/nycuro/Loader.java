@@ -7,6 +7,7 @@ import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
+import gt.creeperface.holograms.entity.HologramEntity;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
 import it.unimi.dsi.fastutil.objects.*;
 import nycuro.abuse.handlers.AbuseHandlers;
@@ -51,6 +52,8 @@ import nycuro.utils.vote.VoteSettings;
 
 import java.util.*;
 
+import static nycuro.api.API.*;
+
 
 /**
  * author: NycuRO
@@ -81,7 +84,7 @@ public class Loader extends PluginBase {
 
     public static void registerTops() {
         try {
-            API.getMainAPI().saveToDatabase();
+            mainAPI.saveToDatabase();
         } finally {
             Database.getTopDollars();
             Database.getTopKills();
@@ -91,11 +94,11 @@ public class Loader extends PluginBase {
     }
 
     private void addEntities() {
-        API.getMechanicAPI().spawnNPC("mobfarmerNPC", EntityCreeper.NETWORK_ID, 14, 172, -11);
-        API.getMechanicAPI().spawnNPC("minerNPC", EntityCreeper.NETWORK_ID, 51, 168, -10);
-        API.getMechanicAPI().spawnNPC("butcherNPC", EntityCreeper.NETWORK_ID, 51, 168, 10);
-        API.getMechanicAPI().spawnNPC("farmerNPC", EntityCreeper.NETWORK_ID, 42, 168, 15);
-        API.getMechanicAPI().spawnNPC("fishermanNPC", EntityCreeper.NETWORK_ID, 42, 168, -12);
+        mechanicAPI.spawnNPC("mobfarmerNPC", EntityCreeper.NETWORK_ID, 14, 172, -11);
+        mechanicAPI.spawnNPC("minerNPC", EntityCreeper.NETWORK_ID, 51, 168, -10);
+        mechanicAPI.spawnNPC("butcherNPC", EntityCreeper.NETWORK_ID, 51, 168, 10);
+        mechanicAPI.spawnNPC("farmerNPC", EntityCreeper.NETWORK_ID, 42, 168, 15);
+        mechanicAPI.spawnNPC("fishermanNPC", EntityCreeper.NETWORK_ID, 42, 168, -12);
     }
 
     @Override
@@ -112,13 +115,13 @@ public class Loader extends PluginBase {
         registerTasks();
         addEntities();
         registerPlaceHolders();
-        API.getKitsAPI().addKits();
-        API.getJobsAPI().addJobs();
+        kitsAPI.addKits();
+        jobsAPI.addJobs();
     }
 
     @Override
     public void onDisable() {
-        API.getMechanicAPI().handleTransferHub();
+        mechanicAPI.handleTransferHub();
         saveToDatabase();
         removeEntities();
         removeAllFromMaps();
@@ -126,19 +129,19 @@ public class Loader extends PluginBase {
     }
 
     private void createConfig() {
-        API.getVoteSettingsAPI().init();
-        if (API.getVoteSettingsAPI().mechanic.getTimeDropParty() == 0) {
+        voteSettingsAPI.init();
+        if (voteSettingsAPI.mechanic.getTimeDropParty() == 0) {
             dropPartyTime = System.currentTimeMillis();
         } else {
-            dropPartyTime = API.getVoteSettingsAPI().mechanic.getTimeDropParty();
+            dropPartyTime = voteSettingsAPI.mechanic.getTimeDropParty();
         }
-        dropPartyVotes = API.getVoteSettingsAPI().mechanic.getDropParty();
+        dropPartyVotes = voteSettingsAPI.mechanic.getDropParty();
 
-        API.getMessageAPI().init();
+        messageAPI.init();
     }
 
     private void saveConfigs() {
-        API.getVoteSettingsAPI().saveConfig(dropPartyVotes, dropPartyTime);
+        voteSettingsAPI.saveConfig(dropPartyVotes, dropPartyTime);
     }
 
     private void saveToDatabase() {
@@ -181,7 +184,7 @@ public class Loader extends PluginBase {
         ShopAPI.sellUtils = new SellUtils();
         ShopAPI.moneyUtils = new MoneyUtils();
         ShopAPI.enchantUtils = new EnchantUtils();
-        API.database = new Database();
+        API.databaseAPI = new Database();
         API.voteSettingsAPI = new VoteSettings();
         API.reportAPI = new ReportAPI();
         API.homeAPI = new HomeAPI();
@@ -191,18 +194,18 @@ public class Loader extends PluginBase {
     }
 
     private void registerCommands() {
-        API.getAiAPI().registerCommands();
-        API.getDropPartyAPI().registerCommands();
-        API.getHomeAPI().registerCommands();
-        API.getJobsAPI().registerCommands();
-        API.getKitsAPI().registerCommands();
-        API.getReportAPI().registerCommands();
-        API.getShopAPI().registerCommands();
-        API.getHelpingAPI().registerCommands();
-        API.getEconomyAPI().registerCommands();
-        API.getCrateAPI().registerCommands();
-        API.getUtilsAPI().registerCommands();
-        API.getTeleportationAPI().registerCommands();
+        aiAPI.registerCommands();
+        dropPartyAPI.registerCommands();
+        homeAPI.registerCommands();
+        jobsAPI.registerCommands();
+        kitsAPI.registerCommands();
+        reportAPI.registerCommands();
+        shopAPI.registerCommands();
+        helpingAPI.registerCommands();
+        economyAPI.registerCommands();
+        crateAPI.registerCommands();
+        utilsAPI.registerCommands();
+        teleportationAPI.registerCommands();
     }
 
     private void registerEvents() {
@@ -216,7 +219,7 @@ public class Loader extends PluginBase {
         this.getServer().getPluginManager().registerEvents(new JobsHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new CrateHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new ChatHandlers(), this);
-        API.getTeleportationAPI().registerHandlers();
+        teleportationAPI.registerHandlers();
     }
 
     private void registerTasks() {
@@ -230,12 +233,12 @@ public class Loader extends PluginBase {
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckerTask(), 20, true);
         this.getServer().getScheduler().scheduleDelayedTask(new RestartTask(), 20 * 60 * 60 * 3);
         this.getServer().getScheduler().scheduleRepeatingTask(new FixBugHealthTask(), 1, true); // Todo: Bullshit incompetent Nukkit Coders -- Using resources useless.
-        API.getTeleportationAPI().registerTasks();
+        teleportationAPI.registerTasks();
     }
 
     private void removeEntities() {
-        for (Entity entity : API.getMainAPI().getServer().getDefaultLevel().getEntities()) {
-            if (!(entity instanceof Player)) entity.close();
+        for (Entity entity : mainAPI.getServer().getDefaultLevel().getEntities()) {
+            if (!(entity instanceof Player) && !(entity instanceof HologramEntity)) entity.close();
         }
     }
 

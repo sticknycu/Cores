@@ -5,18 +5,18 @@ import cn.nukkit.nbt.tag.DoubleTag;
 import cn.nukkit.nbt.tag.FloatTag;
 import cn.nukkit.nbt.tag.ListTag;
 import nycuro.ai.commands.AiCommandManager;
-import nycuro.api.API;
+
+import static nycuro.api.API.mainAPI;
 
 /**
  * author: NycuRO
  * SkyblockCore Project
  * API 1.0.0
  */
-public class AiAPI extends API {
+public class AiAPI {
 
-    @Override
     public void registerCommands() {
-        AiCommandManager.registerAll(getMainAPI());
+        AiCommandManager.registerAll(mainAPI);
     }
 
     public CompoundTag getBossNBT() {

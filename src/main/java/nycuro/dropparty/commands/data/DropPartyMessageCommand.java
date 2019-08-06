@@ -2,8 +2,10 @@ package nycuro.dropparty.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.dropparty.commands.CommandBaseDropParty;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.mechanicAPI;
 
 /**
  * author: NycuRO
@@ -19,8 +21,8 @@ public class DropPartyMessageCommand extends CommandBaseDropParty {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         if (commandSender instanceof Player) return false;
-        for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-            API.getMechanicAPI().sendDropPartyMessageBroadcast(player);
+        for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
+            mechanicAPI.sendDropPartyMessageBroadcast(player);
             return true;
         }
         return false;

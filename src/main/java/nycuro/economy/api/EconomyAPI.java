@@ -1,12 +1,12 @@
 package nycuro.economy.api;
 
-import nycuro.api.API;
 import nycuro.economy.commands.EconomyCommandManager;
 
-public class EconomyAPI extends API {
+import static nycuro.api.API.mainAPI;
 
-    @Override
+public class EconomyAPI {
+
     public void registerCommands() {
-        EconomyCommandManager.registerAll(getMainAPI());
+        EconomyCommandManager.registerAll(mainAPI);
     }
 }

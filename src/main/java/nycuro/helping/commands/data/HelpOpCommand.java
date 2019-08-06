@@ -3,7 +3,6 @@ package nycuro.helping.commands.data;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.utils.TextFormat;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.helping.commands.CommandBaseHelping;
@@ -11,6 +10,8 @@ import nycuro.messages.ChatFormat;
 import nycuro.messages.handlers.ChatHandlers;
 
 import java.util.Objects;
+
+import static nycuro.api.API.mechanicAPI;
 
 /**
  * author: NycuRO
@@ -48,7 +49,7 @@ public class HelpOpCommand extends CommandBaseHelping {
         s = s.replace("%lvl", lvl);
         s = TextFormat.colorize(s);
         //
-        API.getMechanicAPI().handleHelpop(player, s, API.getMechanicAPI().helpopTag);
+        mechanicAPI.handleHelpop(player, s, mechanicAPI.helpopTag);
         return true;
     }
 }

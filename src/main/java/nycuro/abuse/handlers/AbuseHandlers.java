@@ -13,7 +13,8 @@ import cn.nukkit.event.player.PlayerItemHeldEvent;
 import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
-import nycuro.api.API;
+
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -30,7 +31,7 @@ public class AbuseHandlers implements Listener {
             case ENCHANT_TABLE:
             case ANVIL:
                 event.setCancelled(true);
-                API.getMessageAPI().sendNotWorkServiceMessage(player);
+                messageAPI.sendNotWorkServiceMessage(player);
                 break;
         }
         if (player.getGamemode() == Player.CREATIVE) {
@@ -48,7 +49,7 @@ public class AbuseHandlers implements Listener {
                 case DISPENSER:
                 case WORKBENCH:
                     event.setCancelled(true);
-                    API.getMessageAPI().sendAbuseMessage(player);
+                    messageAPI.sendAbuseMessage(player);
                     break;
             }
         }
@@ -61,14 +62,14 @@ public class AbuseHandlers implements Listener {
         switch (itemId) {
             case Item.ENCHANTING_TABLE:
                 event.setCancelled(true);
-                API.getMessageAPI().sendAbuseMessage(player);
+                messageAPI.sendAbuseMessage(player);
                 break;
         }
         if (event.getItem().isArmor()) {
             for (Enchantment enchantment : event.getItem().getEnchantments()) {
                 if (enchantment.getId() == Enchantment.ID_THORNS) {
                     event.setCancelled(true);
-                    API.getMessageAPI().sendAbuseMessage(player);
+                    messageAPI.sendAbuseMessage(player);
                     break;
                 }
             }
@@ -90,7 +91,7 @@ public class AbuseHandlers implements Listener {
                 case 57:
                 case 152:
                     event.setCancelled(true);
-                    API.getMessageAPI().sendAbuseMessage(player);
+                    messageAPI.sendAbuseMessage(player);
                     break;
             }
         }
@@ -104,7 +105,7 @@ public class AbuseHandlers implements Listener {
             case Item.ENCHANTING_TABLE:
             case 131:
                 event.setCancelled(true);
-                API.getMessageAPI().sendAbuseMessage(player);
+                messageAPI.sendAbuseMessage(player);
                 break;
         }
         if (player.getGamemode() == Player.CREATIVE) {
@@ -123,7 +124,7 @@ public class AbuseHandlers implements Listener {
                 case 57:
                 case 152:
                     event.setCancelled(true);
-                    API.getMessageAPI().sendAbuseMessage(player);
+                    messageAPI.sendAbuseMessage(player);
                     break;
             }
         }
@@ -144,7 +145,7 @@ public class AbuseHandlers implements Listener {
             if (damager == null) return;
             if (damager.getGamemode() == Player.CREATIVE) {
                 event.setCancelled(true);
-                API.getMessageAPI().sendAbuseMessage(damager);
+                messageAPI.sendAbuseMessage(damager);
             }
         }
     }
@@ -154,7 +155,7 @@ public class AbuseHandlers implements Listener {
         Player player = event.getPlayer();
         if (player.getGamemode() == Player.CREATIVE) {
             event.setCancelled(true);
-            API.getMessageAPI().sendAbuseMessage(player);
+            messageAPI.sendAbuseMessage(player);
         }
     }
 }

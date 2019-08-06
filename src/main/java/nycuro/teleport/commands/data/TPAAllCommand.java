@@ -4,8 +4,11 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
-import nycuro.api.API;
 import nycuro.teleport.commands.CommandBaseTeleportation;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.teleportationAPI;
 
 public class TPAAllCommand extends CommandBaseTeleportation {
 
@@ -22,7 +25,7 @@ public class TPAAllCommand extends CommandBaseTeleportation {
         if (!this.testPermission(sender)) {
             return false;
         }
-        if (API.getTeleportationAPI().hasCooldown(sender)) {
+        if (teleportationAPI.hasCooldown(sender)) {
             return true;
         }
         Player player;
@@ -32,22 +35,22 @@ public class TPAAllCommand extends CommandBaseTeleportation {
             }
             player = (Player) sender;
         } else if (args.length == 1) {
-            player = API.getMainAPI().getServer().getPlayer(args[0]);
+            player = mainAPI.getServer().getPlayer(args[0]);
             if (player == null) {
-                sender.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.generic.player.notfound", args[0]));
+                sender.sendMessage(messageAPI.messagesObject.translateMessage("commands.generic.player.notfound", args[0]));
                 return false;
             }
         } else {
             this.sendUsage(sender);
             return false;
         }
-        for (Player p : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+        for (Player p : mainAPI.getServer().getOnlinePlayers().values()) {
             if (p != player) {
-                API.getTeleportationAPI().requestTP(player, p, false);
-                p.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.tpahere.invite", player.getName()));
+                teleportationAPI.requestTP(player, p, false);
+                p.sendMessage(messageAPI.messagesObject.translateMessage("commands.tpahere.invite", player.getName()));
             }
         }
-        player.sendMessage(API.getMessageAPI().messagesObject.getMessages().get("commands.tpaall.success"));
+        player.sendMessage(messageAPI.messagesObject.getMessages().get("commands.tpaall.success"));
         return true;
     }
 }

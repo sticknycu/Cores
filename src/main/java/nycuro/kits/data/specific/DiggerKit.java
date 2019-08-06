@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
@@ -12,6 +11,9 @@ import nycuro.kits.type.NameKit;
 import nycuro.kits.type.StatusKit;
 import nycuro.kits.type.TypeItems;
 import nycuro.kits.type.TypeKit;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -44,20 +46,20 @@ public class DiggerKit extends CommonKit {
     public Item getPickaxe() {
         Item item = Item.get(Item.DIAMOND_PICKAXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.PICKAXE.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item[] getOtherItems() {
         Item grass = Item.get(Item.GRASS, 0, 8);
-        grass.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Grass");
+        grass.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Grass");
         Item dirt = Item.get(Item.DIRT, 0, 8);
-        dirt.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Dirt");
+        dirt.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Dirt");
         Item cobblestone = Item.get(Item.COBBLESTONE, 0, 8);
-        cobblestone.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Cobblestone");
+        cobblestone.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Cobblestone");
         Item stone = Item.get(Item.COBBLESTONE, 0, 8);
-        stone.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Stone");
+        stone.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Stone");
         return new Item[] {
                 grass,
                 dirt,
@@ -114,17 +116,17 @@ public class DiggerKit extends CommonKit {
                     player.getInventory().addItem(getOtherItems());
                     profileSkyblock.setCooldown(System.currentTimeMillis());
                     profileSkyblock.setDollars(profileSkyblock.getDollars() - getPrice());
-                    API.getMessageAPI().sendReceiveKitMessage(player, getKit());
+                    messageAPI.sendReceiveKitMessage(player, getKit());
                 } else {
                     double dollars = profileSkyblock.getDollars();
-                    API.getMessageAPI().sendUnsuficientMoneyMessage(player, getPrice() - dollars);
+                    messageAPI.sendUnsuficientMoneyMessage(player, getPrice() - dollars);
                 }
             } else {
-                API.getMessageAPI().sendFullInventoryMessage(player);
+                messageAPI.sendFullInventoryMessage(player);
             }
         } else {
             long time = profileSkyblock.getCooldown();
-            API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
+            messageAPI.sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
         }
     }
 }

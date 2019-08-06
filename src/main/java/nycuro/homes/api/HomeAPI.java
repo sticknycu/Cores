@@ -9,7 +9,6 @@ import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.level.Location;
 import cn.nukkit.scheduler.AsyncTask;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.HomeObject;
 import nycuro.gui.list.ResponseFormWindow;
@@ -19,15 +18,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public class HomeAPI extends API {
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.databaseAPI;
 
-    @Override
+public class HomeAPI {
+
     public void registerCommands() {
-        HomesCommandManager.registerAll(API.getMainAPI());
+        HomesCommandManager.registerAll(mainAPI);
     }
 
     public void createWindowHome(Player player) {
-        FormWindowSimple jobsMenu = new FormWindowSimple("Homes", API.getMessageAPI().sendHomesPrincipalModal(player));
+        FormWindowSimple jobsMenu = new FormWindowSimple("Homes", messageAPI.sendHomesPrincipalModal(player));
         jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         jobsMenu.addButton(new ElementButton("Create a Home", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
         jobsMenu.addButton(new ElementButton("Manage Homes", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
@@ -53,20 +55,20 @@ public class HomeAPI extends API {
 
     private void sendCreateHomeForm(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Create a Home");
-        infoMenu.addElement(new ElementInput(API.getMessageAPI().sendInputNameHome(player)));
+        infoMenu.addElement(new ElementInput(messageAPI.sendInputNameHome(player)));
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
             public void accept(Map<Integer, Object> response) {
-                int count = API.getDatabase().getCountPlayerHomes(player.getName());
+                int count = databaseAPI.getCountPlayerHomes(player.getName());
                 if (count > 1) {
-                    player.sendMessage(API.getMessageAPI().sendTooMuchHomesMessage(player, count));
+                    player.sendMessage(messageAPI.sendTooMuchHomesMessage(player, count));
                 } else {
-                    API.getDatabase().homeExist(response.values().toArray()[0].toString(), bool -> {
+                    databaseAPI.homeExist(response.values().toArray()[0].toString(), bool -> {
                         if (!bool) {
-                            API.getDatabase().addNewHome(player.getName(), (int) player.getX(), (int) player.getY(), (int) player.getZ(), player.getLevel().getFolderName(), response.values().toArray()[0].toString());
-                            player.sendMessage(API.getMessageAPI().sendCreatedHomeSuccesfully(player, (int) player.getX(), (int) player.getY(), (int) player.getZ()));
+                            databaseAPI.addNewHome(player.getName(), (int) player.getX(), (int) player.getY(), (int) player.getZ(), player.getLevel().getFolderName(), response.values().toArray()[0].toString());
+                            player.sendMessage(messageAPI.sendCreatedHomeSuccesfully(player, (int) player.getX(), (int) player.getY(), (int) player.getZ()));
                         } else {
-                            player.sendMessage(API.getMessageAPI().sendHomeExistsMessage(player));
+                            player.sendMessage(messageAPI.sendHomeExistsMessage(player));
                         }
                     });
                 }
@@ -75,12 +77,12 @@ public class HomeAPI extends API {
     }
 
     private void listHomesForm(Player player) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try {
-                    FormWindowSimple jobsMenu = new FormWindowSimple("Home List", API.getMessageAPI().sendHomeList(player));
-                    List<String> homes = API.getDatabase().getHomesPlayer(player.getName());
+                    FormWindowSimple jobsMenu = new FormWindowSimple("Home List", messageAPI.sendHomeList(player));
+                    List<String> homes = databaseAPI.getHomesPlayer(player.getName());
                     for (String name : homes) {
                         jobsMenu.addButton(new ElementButton(name));
                     }
@@ -103,7 +105,7 @@ public class HomeAPI extends API {
     private void getInfoHome(Player player, String homename) {
         try {
             FormWindowSimple jobsMenu = new FormWindowSimple("Home " + homename, "");
-            jobsMenu.setContent(API.getMessageAPI().sendInfoMessageHome(player, homename));
+            jobsMenu.setContent(messageAPI.sendInfoMessageHome(player, homename));
             jobsMenu.addButton(new ElementButton("Teleport"));
             int lang = Database.profileProxy.get(player.getName()).getLanguage();
             switch (lang) {
@@ -121,13 +123,13 @@ public class HomeAPI extends API {
                     if (!response.isEmpty()) {
                         switch (response.entrySet().iterator().next().getKey()) {
                             case 0:
-                                HomeObject homeObject = API.getDatabase().getDatesHomePlayer(player.getName());
-                                player.teleport(new Location(homeObject.getX(), homeObject.getY(), homeObject.getZ(), API.getMainAPI().getServer().getLevelByName(homeObject.getWorldName())));
-                                player.sendMessage(API.getMessageAPI().sendTeleportedHomeSuccesfully(player, homeObject.getX(), homeObject.getY(), homeObject.getZ()));
+                                HomeObject homeObject = databaseAPI.getDatesHomePlayer(player.getName());
+                                player.teleport(new Location(homeObject.getX(), homeObject.getY(), homeObject.getZ(), mainAPI.getServer().getLevelByName(homeObject.getWorldName())));
+                                player.sendMessage(messageAPI.sendTeleportedHomeSuccesfully(player, homeObject.getX(), homeObject.getY(), homeObject.getZ()));
                                 return;
                             case 1:
-                                API.getDatabase().deleteHome(homename);
-                                player.sendMessage(API.getMessageAPI().sendRemoveHomeSuccesfully(player, homename));
+                                databaseAPI.deleteHome(homename);
+                                player.sendMessage(messageAPI.sendRemoveHomeSuccesfully(player, homename));
                                 break;
                         }
                     }
@@ -140,7 +142,7 @@ public class HomeAPI extends API {
 
     private void sendInfoMessageHomes(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Home Info");
-        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageHomes(player)));
+        infoMenu.addElement(new ElementLabel(messageAPI.sendInfoMessageHomes(player)));
         player.showFormWindow(infoMenu);
     }
 

@@ -3,7 +3,8 @@ package nycuro.tasks;
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.scheduler.Task;
 import nycuro.Loader;
-import nycuro.api.API;
+
+import static nycuro.api.API.mainAPI;
 
 /**
  * author: NycuRO
@@ -15,6 +16,6 @@ public class RegisterTopsTask extends Task {
     @Override
     public void onRun(int i) {
         Loader.registerTops();
-        API.getMainAPI().getServer().dispatchCommand(new ConsoleCommandSender(), "gc");
+        mainAPI.getServer().dispatchCommand(new ConsoleCommandSender(), "gc");
     }
 }

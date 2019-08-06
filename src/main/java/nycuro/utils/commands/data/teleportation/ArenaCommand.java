@@ -2,8 +2,9 @@ package nycuro.utils.commands.data.teleportation;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.utils.commands.CommandBaseUtils;
+
+import static nycuro.api.API.mechanicAPI;
 
 /**
  * author: NycuRO
@@ -18,7 +19,7 @@ public class ArenaCommand extends CommandBaseUtils {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        API.getMechanicAPI().teleportArena((Player) commandSender);
+        mechanicAPI.teleportArena((Player) commandSender);
         return true;
     }
 }

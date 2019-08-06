@@ -7,7 +7,6 @@ import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.utils.TextFormat;
-import nycuro.api.API;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.kits.CommonKit;
 import nycuro.kits.commands.KitsCommandManager;
@@ -22,18 +21,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+
 /**
  * author: NycuRO
  * SkyblockCore Project
  * API 1.0.0
  */
-public class KitsAPI extends API {
+public class KitsAPI {
 
     public Map<NameKit, CommonKit> kits = new HashMap<>();
 
-    @Override
     public void registerCommands() {
-        KitsCommandManager.registerAll(getMainAPI());
+        KitsCommandManager.registerAll(mainAPI);
     }
 
     public void addKits() {
@@ -62,7 +63,7 @@ public class KitsAPI extends API {
     }
 
     public void sendKit(Player player) {
-        FormWindowSimple kitMenu = new FormWindowSimple("Kit Category", API.getMessageAPI().sendKitPrincipalModal(player));
+        FormWindowSimple kitMenu = new FormWindowSimple("Kit Category", messageAPI.sendKitPrincipalModal(player));
         kitMenu.addButton(new ElementButton("Info Categories", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         kitMenu.addButton(new ElementButton("Classic Kits", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
         kitMenu.addButton(new ElementButton("Premium Kits", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
@@ -91,14 +92,14 @@ public class KitsAPI extends API {
     }
 
     private void classicKits(Player player) {
-        FormWindowSimple kitMenu = new FormWindowSimple("Classic Kit Category", API.getMessageAPI().sendKitPrincipalClassicModal(player));
+        FormWindowSimple kitMenu = new FormWindowSimple("Classic Kit Category", messageAPI.sendKitPrincipalClassicModal(player));
         kitMenu.addButton(new ElementButton("Info Classic Kits", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         TextFormat color;
         for (NameKit kit : NameKit.values()) {
             if (!(kits.get(kit).getType().equals(TypeKit.CLASSIC)) || kit.equals(NameKit.STARTER)) continue;
             if (kits.get(kit).getStatus(player).equals(StatusKit.LOCKED)) color = TextFormat.RED;
             else color = TextFormat.GREEN;
-            kitMenu.addButton(new ElementButton(kit.getName() + API.getMainAPI().empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+            kitMenu.addButton(new ElementButton(kit.getName() + mainAPI.empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         }
         player.showFormWindow(new ResponseFormWindow(kitMenu, new Consumer<Map<Integer, Object>>() {
             @Override
@@ -130,14 +131,14 @@ public class KitsAPI extends API {
     }
 
     private void premiumKits(Player player) {
-        FormWindowSimple kitMenu = new FormWindowSimple("Premium Kit Category", API.getMessageAPI().sendKitPrincipalPremiumModal(player));
+        FormWindowSimple kitMenu = new FormWindowSimple("Premium Kit Category", messageAPI.sendKitPrincipalPremiumModal(player));
         kitMenu.addButton(new ElementButton("Info Premium Kits", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         TextFormat color;
         for (NameKit kit : NameKit.values()) {
             if (!(kits.get(kit).getType().equals(TypeKit.PREMIUM)) || kit.equals(NameKit.STARTER)) continue;
             if (kits.get(kit).getStatus(player).equals(StatusKit.LOCKED)) color = TextFormat.RED;
             else color = TextFormat.GREEN;
-            kitMenu.addButton(new ElementButton(kit.getName() + API.getMainAPI().empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+            kitMenu.addButton(new ElementButton(kit.getName() + mainAPI.empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         }
         player.showFormWindow(new ResponseFormWindow(kitMenu, new Consumer<Map<Integer, Object>>() {
             @Override
@@ -169,14 +170,14 @@ public class KitsAPI extends API {
     }
 
     private void specificKits(Player player) {
-        FormWindowSimple kitMenu = new FormWindowSimple("Specific Kit Category", API.getMessageAPI().sendKitPrincipalSpecificModal(player));
+        FormWindowSimple kitMenu = new FormWindowSimple("Specific Kit Category", messageAPI.sendKitPrincipalSpecificModal(player));
         kitMenu.addButton(new ElementButton("Info Specific Kits", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         TextFormat color;
         for (NameKit kit : NameKit.values()) {
             if (!(kits.get(kit).getType().equals(TypeKit.SPECIFIC)) || kit.equals(NameKit.STARTER)) continue;
             if (kits.get(kit).getStatus(player).equals(StatusKit.LOCKED)) color = TextFormat.RED;
             else color = TextFormat.GREEN;
-            kitMenu.addButton(new ElementButton(kit.getName() + API.getMainAPI().empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+            kitMenu.addButton(new ElementButton(kit.getName() + mainAPI.empty + TextFormat.GRAY + "[" + color + kits.get(kit).getStatus(player) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         }
         player.showFormWindow(new ResponseFormWindow(kitMenu, new Consumer<Map<Integer, Object>>() {
             @Override
@@ -212,25 +213,25 @@ public class KitsAPI extends API {
 
     private void sendInfoMessageKits(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Info Category Kits");
-        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageCategoryKits(player)));
+        infoMenu.addElement(new ElementLabel(messageAPI.sendInfoMessageCategoryKits(player)));
         player.showFormWindow(infoMenu);
     }
 
     private void sendInfoMessageClassicKits(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Info Classic Kits");
-        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageClassicKits(player)));
+        infoMenu.addElement(new ElementLabel(messageAPI.sendInfoMessageClassicKits(player)));
         player.showFormWindow(infoMenu);
     }
 
     private void sendInfoMessagePremiumKits(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Info Premium Kits");
-        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessagePremiumKits(player)));
+        infoMenu.addElement(new ElementLabel(messageAPI.sendInfoMessagePremiumKits(player)));
         player.showFormWindow(infoMenu);
     }
 
     private void sendInfoMessageSpecificKits(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Info Specific Kits");
-        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageSpecificKits(player)));
+        infoMenu.addElement(new ElementLabel(messageAPI.sendInfoMessageSpecificKits(player)));
         player.showFormWindow(infoMenu);
     }
 }

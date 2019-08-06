@@ -4,11 +4,13 @@ import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
 import nycuro.kits.type.*;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -41,7 +43,7 @@ public class EnchantedStarterKit extends CommonKit {
     public Item getHelmet() {
         Item item = Item.get(Item.CHAIN_HELMET);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.HELMET.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.HELMET.getType());
         return item;
     }
 
@@ -49,7 +51,7 @@ public class EnchantedStarterKit extends CommonKit {
     public Item getArmor() {
         Item item = Item.get(Item.CHAIN_CHESTPLATE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.ARMOR.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.ARMOR.getType());
         return item;
     }
 
@@ -57,7 +59,7 @@ public class EnchantedStarterKit extends CommonKit {
     public Item getPants() {
         Item item = Item.get(Item.CHAIN_LEGGINGS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.PANTS.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.PANTS.getType());
         return item;
     }
 
@@ -65,42 +67,42 @@ public class EnchantedStarterKit extends CommonKit {
     public Item getBoots() {
         Item item = Item.get(Item.CHAIN_BOOTS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.BOOTS.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.BOOTS.getType());
         return item;
     }
 
     @Override
     public Item getSword() {
         Item item = Item.get(Item.STONE_SWORD);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SWORD.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
         Item item = Item.get(Item.STONE_PICKAXE);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.PICKAXE.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
         Item item = Item.get(Item.STONE_AXE);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.AXE.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
         Item item = Item.get(Item.STONE_SHOVEL);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SHOVEL.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
     @Override
     public Item[] getOtherItems() {
         Item bread = Item.get(Item.BREAD, 0, 32);
-        bread.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Bread");
+        bread.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Bread");
         return new Item[] {
                 bread
         };
@@ -169,17 +171,17 @@ public class EnchantedStarterKit extends CommonKit {
                     player.getInventory().addItem(getOtherItems());
                     profileSkyblock.setCooldown(System.currentTimeMillis());
                     profileSkyblock.setDollars(profileSkyblock.getDollars() - getPrice());
-                    API.getMessageAPI().sendReceiveKitMessage(player, getKit());
+                    messageAPI.sendReceiveKitMessage(player, getKit());
                 } else {
                     double dollars = profileSkyblock.getDollars();
-                    API.getMessageAPI().sendUnsuficientMoneyMessage(player, getPrice() - dollars);
+                    messageAPI.sendUnsuficientMoneyMessage(player, getPrice() - dollars);
                 }
             } else {
-                API.getMessageAPI().sendFullInventoryMessage(player);
+                messageAPI.sendFullInventoryMessage(player);
             }
         } else {
             long time = profileSkyblock.getCooldown();
-            API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
+            messageAPI.sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
         }
     }
 }

@@ -3,7 +3,8 @@ package nycuro.tasks;
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.TextFormat;
-import nycuro.api.API;
+
+import static nycuro.api.API.mainAPI;
 
 /**
  * author: NycuRO
@@ -19,7 +20,7 @@ public class FixBugHealthTask extends Task {
     public void onRun(int i) {
         j++;
         if (j % 20 == 0) k++;
-        for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+        for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
             player.setHealth(player.getHealth());
             if (j % 20 == 0) {
                 String title = "&m&c&p&e&.&c&h&z&o&n&e&.&e&u";

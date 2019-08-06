@@ -9,7 +9,9 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
-import nycuro.api.API;
+
+import static nycuro.api.API.mechanicAPI;
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -23,27 +25,24 @@ public class MessageHandlers implements Listener {
         DataPacket dataPacket = event.getPacket();
         if (dataPacket instanceof SetLocalPlayerAsInitializedPacket) {
             Player player = event.getPlayer();
-            API.getMessageAPI().sendJoinMessages(player);
-            API.getMechanicAPI().createBossBar(player);
-            API.getMechanicAPI().createScoreboard(player);
+            messageAPI.sendJoinMessages(player);
+            mechanicAPI.createBossBar(player);
+            mechanicAPI.createScoreboard(player);
         }
     }
 
     @EventHandler
-    public void joinPlayerMessages(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
+    public void playerJoinMessages(PlayerJoinEvent event) {
         event.setJoinMessage("");
     }
 
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
         event.setQuitMessage("");
     }
 
     @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
+    public void onPlayerDeath(PlayerDeathEvent event) { ;
         event.setDeathMessage("");
     }
 }

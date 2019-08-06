@@ -1,8 +1,7 @@
-package nycuro.jobs.jobs;
+package nycuro.jobs.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.item.Item;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.jobs.CommonJob;
 import nycuro.jobs.NameJob;
@@ -11,6 +10,8 @@ import nycuro.jobs.TypeJob;
 import nycuro.utils.typo.FastRandom;
 
 import java.util.function.Consumer;
+
+import static nycuro.api.API.messageAPI;
 
 /**
  * Project: SkyblockCore
@@ -74,7 +75,7 @@ public class FarmerJob extends CommonJob {
     @Override
     public void processMission(Player player, TypeJob typeJob, Consumer<Object> consumer) {
         if (getStatus(player, typeJob).equals(StatusJobs.LOCKED)) {
-            player.sendMessage(API.getMessageAPI().sendLockedJobStatus(player));
+            player.sendMessage(messageAPI.sendLockedJobStatus(player));
         } else {
             Item[] itemsMap = new Item[10];
             if (typeJob.equals(TypeJob.EASY)) {

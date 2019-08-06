@@ -2,8 +2,9 @@ package nycuro.reports.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.reports.commands.CommandBaseReports;
+
+import static nycuro.api.API.reportAPI;
 
 /**
  * author: NycuRO
@@ -18,7 +19,7 @@ public class ReportsCommand extends CommandBaseReports {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        API.getReportAPI().createWindowReport((Player) commandSender);
+        reportAPI.createWindowReport((Player) commandSender);
         return true;
     }
 }

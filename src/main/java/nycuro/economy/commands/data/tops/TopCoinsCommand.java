@@ -2,9 +2,10 @@ package nycuro.economy.commands.data.tops;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.economy.commands.CommandBaseEconomy;
+
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -33,7 +34,7 @@ public class TopCoinsCommand extends CommandBaseEconomy {
             player.sendMessage("§c9) §a" + Database.scoreboardcoinsName.get(9) + " -> " + Database.scoreboardcoinsValue.get(9));
             player.sendMessage("§c10) §a" + Database.scoreboardcoinsName.get(10) + " -> " + Database.scoreboardcoinsValue.get(10));
         } else {
-            API.getMessageAPI().topMoneyExceptionMessage(player);
+            messageAPI.topMoneyExceptionMessage(player);
             return true;
         }
         return true;

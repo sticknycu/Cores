@@ -10,12 +10,14 @@ import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.player.PlayerCommandPreprocessEvent;
 import cn.nukkit.event.player.PlayerDeathEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
-import nycuro.api.API;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static nycuro.api.API.combatAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.mechanicAPI;
 
 /**
  * author: NycuRO
@@ -29,30 +31,30 @@ public class LevelHandlers implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        if (API.getCombatAPI().inCombat(player)) {
+        if (combatAPI.inCombat(player)) {
             player.kill();
         }
     }
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
-        API.getCombatAPI().removeCombat(event.getEntity());
+        combatAPI.removeCombat(event.getEntity());
     }
 
     @EventHandler
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         String command = event.getMessage().split(" ")[0].toLowerCase();
-        if (API.getCombatAPI().inCombat(player)) {
+        if (combatAPI.inCombat(player)) {
             if (blocked.contains(command) || command.equals("/spawn")) {
                 event.setCancelled();
-                player.sendMessage(API.getMessageAPI().getMessageDuringCombat(player));
+                player.sendMessage(messageAPI.getMessageDuringCombat(player));
             }
         }
-        if (API.getMechanicAPI().isOnArena(player)) {
+        if (mechanicAPI.isOnArena(player)) {
             if (blocked.contains(command)) {
                 event.setCancelled();
-                player.sendMessage(API.getMessageAPI().getMessageDuringCombat(player));
+                player.sendMessage(messageAPI.getMessageDuringCombat(player));
             }
         }
     }
@@ -72,8 +74,8 @@ public class LevelHandlers implements Listener {
 
             if (entity instanceof Player) {
                 for (Player pl : new Player[] { (Player) entity, damager }) {
-                    if (API.getMechanicAPI().isOnSpawn(pl)) break;
-                    API.getCombatAPI().setCombat(pl);
+                    if (mechanicAPI.isOnSpawn(pl)) break;
+                    combatAPI.setCombat(pl);
                 }
             }
         }
@@ -82,7 +84,7 @@ public class LevelHandlers implements Listener {
     /*@EventHandler
     public void onCreatureSpawn(EntitySpawnEvent event) {
         Entity entity = event.getEntity();
-        if (API.getMechanicAPI().isOnSpawn(entity) || API.getMechanicAPI().isOnPvP(entity)) {
+        if (mechanicAPI.isOnSpawn(entity) || mechanicAPI.isOnPvP(entity)) {
             event.setCancelled();
         }
     }*/

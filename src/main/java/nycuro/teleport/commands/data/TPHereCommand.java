@@ -4,8 +4,10 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
-import nycuro.api.API;
 import nycuro.teleport.commands.CommandBaseTeleportation;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
 
 public class TPHereCommand extends CommandBaseTeleportation {
 
@@ -31,14 +33,14 @@ public class TPHereCommand extends CommandBaseTeleportation {
             this.sendUsage(sender);
             return false;
         }
-        Player player = API.getMainAPI().getServer().getPlayer(args[0]);
+        Player player = mainAPI.getServer().getPlayer(args[0]);
         if (player == null) {
-            sender.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.generic.player.notfound", args[0]));
+            sender.sendMessage(messageAPI.messagesObject.translateMessage("commands.generic.player.notfound", args[0]));
             return false;
         }
         player.teleport((Player) sender);
-        player.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.tphere.other", sender.getName()));
-        sender.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.tphere.success", player.getName()));
+        player.sendMessage(messageAPI.messagesObject.translateMessage("commands.tphere.other", sender.getName()));
+        sender.sendMessage(messageAPI.messagesObject.translateMessage("commands.tphere.success", player.getName()));
         return true;
     }
 }

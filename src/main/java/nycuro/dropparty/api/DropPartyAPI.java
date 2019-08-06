@@ -8,14 +8,14 @@ import cn.nukkit.nbt.tag.DoubleTag;
 import cn.nukkit.nbt.tag.FloatTag;
 import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.utils.DyeColor;
-import nycuro.api.API;
 import nycuro.dropparty.commands.DropPartyCommandManager;
 
-public class DropPartyAPI extends API {
+import static nycuro.api.API.mainAPI;
 
-    @Override
+public class DropPartyAPI {
+
     public void registerCommands() {
-        DropPartyCommandManager.registerAll(getMainAPI());
+        DropPartyCommandManager.registerAll(mainAPI);
     }
 
     private ItemFirework initiateBallExplosion() {

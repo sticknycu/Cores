@@ -24,7 +24,6 @@ import io.pocketvote.event.VoteEvent;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import nycuro.Loader;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.jobs.objects.MechanicObject;
@@ -32,6 +31,10 @@ import nycuro.mechanic.objects.SettingsObject;
 
 import java.util.HashMap;
 import java.util.Random;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.databaseAPI;
 
 /**
  * author: NycuRO
@@ -45,30 +48,30 @@ public class MechanicHandlers implements Listener {
         DataPacket dataPacket = event.getPacket();
         if (dataPacket instanceof SetLocalPlayerAsInitializedPacket) {
             Player player = event.getPlayer();
-            API.getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
+            mainAPI.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
                 @Override
                 public void onRun(int i) {
-                    int playerTime = API.getMainAPI().timers.getOrDefault(player.getUniqueId(), 1);
+                    int playerTime = mainAPI.timers.getOrDefault(player.getUniqueId(), 1);
                     switch (playerTime) {
                         case 1:
-                            API.getMessageAPI().sendFirstJoinTitle(player);
+                            messageAPI.sendFirstJoinTitle(player);
                             break;
                         case 2:
-                            API.getMessageAPI().sendSecondJoinTitle(player);
+                            messageAPI.sendSecondJoinTitle(player);
                             break;
                         case 3:
-                            API.getMessageAPI().sendThreeJoinTitle(player);
+                            messageAPI.sendThreeJoinTitle(player);
                             break;
                         case 4:
                             if (player.hasPermission("core.reports")) {
-                                API.getMessageAPI().sendReportsTitle(player, API.getDatabase().getCountOfAllPlayersReport());
+                                messageAPI.sendReportsTitle(player, databaseAPI.getCountOfAllPlayersReport());
                             }
                             break;
                         default:
-                            API.getMainAPI().getServer().getScheduler().cancelTask(this.getTaskId());
-                            API.getMainAPI().timers.removeInt(player.getUniqueId());
+                            mainAPI.getServer().getScheduler().cancelTask(this.getTaskId());
+                            mainAPI.timers.removeInt(player.getUniqueId());
                     }
-                    API.getMainAPI().timers.put(player.getUniqueId(), playerTime + 1);
+                    mainAPI.timers.put(player.getUniqueId(), playerTime + 1);
                 }
             }, 20, 20 * 3, true);
         }
@@ -87,30 +90,30 @@ public class MechanicHandlers implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        API.getMainAPI().settings.put(player.getUniqueId(), new SettingsObject(true, true, 5));
+        mainAPI.settings.put(player.getUniqueId(), new SettingsObject(true, true, 5));
         // Nu merge PreLoginEvent si nici Async.
-        API.getMainAPI().coords.put(player.getUniqueId(), false);
-        API.getMainAPI().isOnSpawn.put(player.getUniqueId(), true);
-        API.getMainAPI().isOnArena.put(player.getUniqueId(), false);
-        API.getMainAPI().isOnArea.put(player.getUniqueId(), false);
-        API.getMainAPI().mechanicObject.put(player.getUniqueId(), new MechanicObject(player.getUniqueId(), new HashMap<>(), new HashMap<>()));
-        API.getMainAPI().played.put(player.getUniqueId(), System.currentTimeMillis());
+        mainAPI.coords.put(player.getUniqueId(), false);
+        mainAPI.isOnSpawn.put(player.getUniqueId(), true);
+        mainAPI.isOnArena.put(player.getUniqueId(), false);
+        mainAPI.isOnArea.put(player.getUniqueId(), false);
+        mainAPI.mechanicObject.put(player.getUniqueId(), new MechanicObject(player.getUniqueId(), new HashMap<>(), new HashMap<>()));
+        mainAPI.played.put(player.getUniqueId(), System.currentTimeMillis());
         // Async?!
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
-                API.getDatabase().playerExist(player.getName(), bool -> {
+                databaseAPI.playerExist(player.getName(), bool -> {
                     if (!bool) {
-                        API.getDatabase().addNewPlayer(player.getName());
+                        databaseAPI.addNewPlayer(player.getName());
                         Database.addDatesPlayerHub(player.getName());
                     } else {
                         Database.addDatesPlayerHub(player.getName());
                         Database.addDatesPlayerFactions(player.getName());
                     }
                 });
-                API.getDatabase().playerKitsExist(player.getName(), bool -> {
+                databaseAPI.playerKitsExist(player.getName(), bool -> {
                     if (!bool) {
-                        API.getDatabase().addNewPlayerToKits(player.getName());
+                        databaseAPI.addNewPlayerToKits(player.getName());
                     } else {
                         Database.addDatesKitsPlayer(player.getName());
                     }
@@ -127,7 +130,7 @@ public class MechanicHandlers implements Listener {
     @EventHandler
     public void onVoteReceive(VoteEvent event) {
         Loader.dropPartyVotes++;
-        IPlayer offlinePlayer = API.getMainAPI().getServer().getOfflinePlayer(event.getPlayer());
+        IPlayer offlinePlayer = mainAPI.getServer().getOfflinePlayer(event.getPlayer());
         Random r = new Random();
         int low = 200;
         int high = 250;
@@ -143,12 +146,12 @@ public class MechanicHandlers implements Listener {
         Database.saveDatesPlayerFromFactions(player.getName());
         Database.saveDatesPlayerFromKits(player.getName());
         Loader.startTime.removeLong(player.getUniqueId());
-        API.getMainAPI().played.removeLong(player.getUniqueId());
-        API.getMainAPI().isOnSpawn.removeBoolean(player.getUniqueId());
-        API.getMainAPI().isOnArena.removeBoolean(player.getUniqueId());
-        API.getMainAPI().isOnArea.removeBoolean(player.getUniqueId());
-        API.getMainAPI().settings.remove(player.getUniqueId());
-        API.getMainAPI().mechanicObject.remove(player.getUniqueId());
+        mainAPI.played.removeLong(player.getUniqueId());
+        mainAPI.isOnSpawn.removeBoolean(player.getUniqueId());
+        mainAPI.isOnArena.removeBoolean(player.getUniqueId());
+        mainAPI.isOnArea.removeBoolean(player.getUniqueId());
+        mainAPI.settings.remove(player.getUniqueId());
+        mainAPI.mechanicObject.remove(player.getUniqueId());
     }
 
     @EventHandler
@@ -166,7 +169,7 @@ public class MechanicHandlers implements Listener {
             if (damager == null) return;
 
             // Kills Checker
-            MechanicObject mechanicObject = API.getMainAPI().mechanicObject.get(damager.getUniqueId());
+            MechanicObject mechanicObject = mainAPI.mechanicObject.get(damager.getUniqueId());
 
             mechanicObject.getKills().put(player.getUniqueId(), mechanicObject.getKills().getOrDefault(player.getUniqueId(), 0) + 1);
 
@@ -196,7 +199,7 @@ public class MechanicHandlers implements Listener {
     public void onChat(PlayerChatEvent event) {
         String message = event.getMessage();
         if (message.equalsIgnoreCase("జ్ఞ\u200Cా")) {
-            API.getMessageAPI().sendAbuseMessage(event.getPlayer());
+            messageAPI.sendAbuseMessage(event.getPlayer());
             event.setCancelled(true);
         }
     }

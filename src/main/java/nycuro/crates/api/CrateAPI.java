@@ -12,20 +12,20 @@ import cn.nukkit.nbt.tag.DoubleTag;
 import cn.nukkit.nbt.tag.FloatTag;
 import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.utils.DyeColor;
-import nycuro.api.API;
 import nycuro.crates.commands.CratesCommandManager;
 import nycuro.crates.item.EntityFirework;
+
+import static nycuro.api.API.mainAPI;
 
 /**
  * author: NycuRO
  * SkyblockCore Project
  * API 1.0.0
  */
-public class CrateAPI extends API {
+public class CrateAPI {
 
-    @Override
     public void registerCommands() {
-        CratesCommandManager.registerAll(getMainAPI());
+        CratesCommandManager.registerAll(mainAPI);
     }
 
     public void getChange(Player player, PlayerInventory playerInventory, int number) {
@@ -126,7 +126,7 @@ public class CrateAPI extends API {
                         .add(new FloatTag("", 0))
                         .add(new FloatTag("", 0)))
                 .putCompound("FireworkItem", NBTIO.putItemHelper(itemFirework));
-        EntityFirework entityFirework = new EntityFirework(API.getMainAPI().getServer().getDefaultLevel().getChunk((int) block.x, (int) block.z), nbt);
+        EntityFirework entityFirework = new EntityFirework(mainAPI.getServer().getDefaultLevel().getChunk((int) block.x, (int) block.z), nbt);
         entityFirework.spawnToAll();
     }
 }

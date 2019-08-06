@@ -3,7 +3,6 @@ package nycuro.kits.data.specific;
 import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
@@ -11,6 +10,9 @@ import nycuro.kits.type.NameKit;
 import nycuro.kits.type.StatusKit;
 import nycuro.kits.type.TypeItems;
 import nycuro.kits.type.TypeKit;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -42,47 +44,47 @@ public class StonnerKit extends CommonKit {
     @Override
     public Item getSword() {
         Item item = Item.get(Item.STONE_SWORD);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SWORD.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
         Item item = Item.get(Item.STONE_PICKAXE);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.PICKAXE.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
         Item item = Item.get(Item.STONE_AXE);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.AXE.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
         Item item = Item.get(Item.STONE_SHOVEL);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SHOVEL.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
     @Override
     public Item[] getOtherItems() {
         Item steak = Item.get(Item.STEAK, 0, 12);
-        steak.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Steak");
+        steak.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Steak");
         Item grass = Item.get(Item.GRASS, 0, 32);
-        grass.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Grass");
+        grass.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Grass");
         Item dirt = Item.get(Item.DIRT, 0, 32);
-        dirt.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Dirt");
+        dirt.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Dirt");
         Item cobblestone1 = Item.get(Item.COBBLESTONE, 0, 64);
-        cobblestone1.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Cobblestone x1");
+        cobblestone1.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Cobblestone x1");
         Item cobblestone2 = Item.get(Item.COBBLESTONE, 0, 64);
-        cobblestone2.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Cobblestone x2");
+        cobblestone2.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Cobblestone x2");
         Item stone1 = Item.get(Item.COBBLESTONE, 0, 64);
-        stone1.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Stone x1");
+        stone1.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Stone x1");
         Item stone2 = Item.get(Item.COBBLESTONE, 0, 64);
-        stone2.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Stone x2");
+        stone2.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Stone x2");
         return new Item[] {
                 steak,
                 grass,
@@ -145,17 +147,17 @@ public class StonnerKit extends CommonKit {
                     player.getInventory().addItem(getOtherItems());
                     profileSkyblock.setCooldown(System.currentTimeMillis());
                     profileSkyblock.setDollars(profileSkyblock.getDollars() - getPrice());
-                    API.getMessageAPI().sendReceiveKitMessage(player, getKit());
+                    messageAPI.sendReceiveKitMessage(player, getKit());
                 } else {
                     double dollars = profileSkyblock.getDollars();
-                    API.getMessageAPI().sendUnsuficientMoneyMessage(player, getPrice() - dollars);
+                    messageAPI.sendUnsuficientMoneyMessage(player, getPrice() - dollars);
                 }
             } else {
-                API.getMessageAPI().sendFullInventoryMessage(player);
+                messageAPI.sendFullInventoryMessage(player);
             }
         } else {
             long time = profileSkyblock.getCooldown();
-            API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
+            messageAPI.sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
         }
     }
 }

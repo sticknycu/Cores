@@ -2,8 +2,9 @@ package nycuro.homes.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.homes.commands.CommandBaseHomes;
+
+import static nycuro.api.API.homeAPI;
 
 /**
  * author: NycuRO
@@ -19,7 +20,7 @@ public class HomeCommand extends CommandBaseHomes {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         Player player = (Player) commandSender;
-        API.getHomeAPI().createWindowHome(player);
+        homeAPI.createWindowHome(player);
         return true;
     }
 }

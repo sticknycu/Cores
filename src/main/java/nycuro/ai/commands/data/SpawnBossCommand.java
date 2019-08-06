@@ -18,6 +18,6 @@ public class SpawnBossCommand extends CommandBaseAI {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         return !(commandSender instanceof Player);
-        //API.getMechanicAPI().spawnBoss();
+        //mechanicAPI.spawnBoss();
     }
 }

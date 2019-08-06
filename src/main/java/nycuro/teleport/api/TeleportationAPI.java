@@ -5,11 +5,10 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.level.Location;
 import cn.nukkit.level.Position;
 import cn.nukkit.permission.PermissionAttachmentInfo;
-import nycuro.api.API;
-import nycuro.teleport.objects.TPCooldown;
-import nycuro.teleport.objects.TPRequest;
 import nycuro.teleport.commands.TeleportationCommandManager;
 import nycuro.teleport.handlers.TeleportationHandlers;
+import nycuro.teleport.objects.TPCooldown;
+import nycuro.teleport.objects.TPRequest;
 import nycuro.teleport.tasks.TeleportationExpireTask;
 import nycuro.teleport.tasks.TeleportationTask;
 
@@ -19,7 +18,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TeleportationAPI extends API {
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+
+public class TeleportationAPI {
 
     public static final long TP_EXPIRATION = TimeUnit.MINUTES.toMillis(1);
     private static final Pattern COOLDOWN_PATTERN = Pattern.compile("^nycuro\\.cooldown\\.([0-9]+)$");
@@ -31,20 +33,19 @@ public class TeleportationAPI extends API {
     private static int getHashCode(Player from, Player to, boolean isTo) {
         return from.hashCode() + to.hashCode() + Boolean.hashCode(isTo);
     }
-
-    @Override
+    
     public void registerCommands() {
-        TeleportationCommandManager.registerAll(getMainAPI());
+        TeleportationCommandManager.registerAll(mainAPI);
     }
 
     public void registerTasks() {
-        getMainAPI().getServer().getScheduler().scheduleRepeatingTask(new TeleportationTask(getTeleportationAPI()), 1, true);
-        getMainAPI().getServer().getScheduler().scheduleDelayedRepeatingTask(getMainAPI(), new TeleportationExpireTask(),
+        mainAPI.getServer().getScheduler().scheduleRepeatingTask(new TeleportationTask(this), 1, true);
+        mainAPI.getServer().getScheduler().scheduleDelayedRepeatingTask(mainAPI, new TeleportationExpireTask(),
                 20, 20, true);
     }
 
     public void registerHandlers() {
-        getMainAPI().getServer().getPluginManager().registerEvents(new TeleportationHandlers(this), getMainAPI());
+        mainAPI.getServer().getPluginManager().registerEvents(new TeleportationHandlers(this), mainAPI);
     }
 
     public boolean hasCooldown(CommandSender sender) {
@@ -67,7 +68,7 @@ public class TeleportationAPI extends API {
                 this.cooldown.put(sender, currentTime);
             } else {
                 long timeLeft = TimeUnit.MILLISECONDS.toSeconds(lastCooldown - currentTime);
-                sender.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.generic.cooldown", toString() + timeLeft));
+                sender.sendMessage(messageAPI.messagesObject.translateMessage("commands.generic.cooldown", toString() + timeLeft));
                 return true;
             }
         }
@@ -100,7 +101,7 @@ public class TeleportationAPI extends API {
         OptionalInt cooldown = hasTPCooldown(player);
 
         if (cooldown.isPresent()) {
-            player.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.generic.teleporation.cooldown", toString() + cooldown.getAsInt()));
+            player.sendMessage(messageAPI.messagesObject.translateMessage("commands.generic.teleporation.cooldown", toString() + cooldown.getAsInt()));
             tpCooldowns.add(new TPCooldown(player, location,
                     System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(cooldown.getAsInt()), message));
         } else {

@@ -4,8 +4,11 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
-import nycuro.api.API;
 import nycuro.teleport.commands.CommandBaseTeleportation;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.teleportationAPI;
 
 public class TPAHereCommand extends CommandBaseTeleportation {
 
@@ -30,21 +33,21 @@ public class TPAHereCommand extends CommandBaseTeleportation {
             this.sendUsage(sender);
             return false;
         }
-        if (API.getTeleportationAPI().hasCooldown(sender)) {
+        if (teleportationAPI.hasCooldown(sender)) {
             return true;
         }
-        Player player = API.getMainAPI().getServer().getPlayer(args[0]);
+        Player player = mainAPI.getServer().getPlayer(args[0]);
         if (player == null) {
-            sender.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.generic.player.notfound", args[0]));
+            sender.sendMessage(messageAPI.messagesObject.translateMessage("commands.generic.player.notfound", args[0]));
             return false;
         }
         if (sender == player) {
-            sender.sendMessage(API.getMessageAPI().messagesObject.getMessages().get("commands.tpa.self"));
+            sender.sendMessage(messageAPI.messagesObject.getMessages().get("commands.tpa.self"));
             return false;
         }
-        API.getTeleportationAPI().requestTP((Player) sender, player, false);
-        player.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.tpahere.invite", sender.getName()));
-        sender.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.tpa.success", player.getName()));
+        teleportationAPI.requestTP((Player) sender, player, false);
+        player.sendMessage(messageAPI.messagesObject.translateMessage("commands.tpahere.invite", sender.getName()));
+        sender.sendMessage(messageAPI.messagesObject.translateMessage("commands.tpa.success", player.getName()));
         return true;
     }
 }

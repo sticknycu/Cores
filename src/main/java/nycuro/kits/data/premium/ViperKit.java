@@ -4,12 +4,14 @@ import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.KitsObject;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
 import nycuro.kits.type.*;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -44,7 +46,7 @@ public class ViperKit extends CommonKit {
     public Item getHelmet() {
         Item item = Item.get(Item.IRON_HELMET);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.HELMET.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.HELMET.getType());
         return item;
     }
 
@@ -52,7 +54,7 @@ public class ViperKit extends CommonKit {
     public Item getArmor() {
         Item item = Item.get(Item.IRON_CHESTPLATE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.ARMOR.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.ARMOR.getType());
         return item;
     }
 
@@ -60,7 +62,7 @@ public class ViperKit extends CommonKit {
     public Item getPants() {
         Item item = Item.get(Item.IRON_LEGGINGS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.PANTS.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.PANTS.getType());
         return item;
     }
 
@@ -68,7 +70,7 @@ public class ViperKit extends CommonKit {
     public Item getBoots() {
         Item item = Item.get(Item.IRON_BOOTS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeClothes.BOOTS.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.BOOTS.getType());
         return item;
     }
 
@@ -77,7 +79,7 @@ public class ViperKit extends CommonKit {
         Item item = Item.get(Item.IRON_SWORD);
         item.addEnchantment(Enchantment.get(Enchantment.ID_KNOCKBACK).setLevel(1));
         item.addEnchantment(Enchantment.get(Enchantment.ID_DAMAGE_ALL).setLevel(1));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SWORD.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
         return item;
     }
 
@@ -86,7 +88,7 @@ public class ViperKit extends CommonKit {
         Item item = Item.get(Item.IRON_PICKAXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
         item.addEnchantment(Enchantment.get(Enchantment.ID_FORTUNE_DIGGING).setLevel(2));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.PICKAXE.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
@@ -94,7 +96,7 @@ public class ViperKit extends CommonKit {
     public Item getAxe() {
         Item item = Item.get(Item.IRON_AXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.AXE.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
     }
 
@@ -102,18 +104,18 @@ public class ViperKit extends CommonKit {
     public Item getShovel() {
         Item item = Item.get(Item.IRON_SHOVEL);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SHOVEL.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
     @Override
     public Item[] getOtherItems() {
         Item steak = Item.get(Item.STEAK, 0, 64);
-        steak.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Steak");
+        steak.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Steak");
         Item potion_reg2 = Item.get(Item.POTION, 30, 10);
-        potion_reg2.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Regeneration 2 Potion");
+        potion_reg2.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Regeneration 2 Potion");
         Item potion_strenght1 = Item.get(Item.POTION, 31, 10);
-        potion_strenght1.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Strenght 1 Potion");
+        potion_strenght1.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Strenght 1 Potion");
         return new Item[] {
                 steak,
                 potion_reg2,
@@ -177,7 +179,7 @@ public class ViperKit extends CommonKit {
     public void sendKit(Player player) {
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         if (getStatus(player).equals(StatusKit.LOCKED)) {
-            player.sendMessage(API.getMessageAPI().sendLockedKitStatus(player));
+            player.sendMessage(messageAPI.sendLockedKitStatus(player));
         } else {
             if (passTimer(player)) {
                 if (canAddKit(player)) {
@@ -187,17 +189,17 @@ public class ViperKit extends CommonKit {
                         player.getInventory().addItem(getOtherItems());
                         profileSkyblock.setCooldown(System.currentTimeMillis());
                         profileSkyblock.setDollars(profileSkyblock.getDollars() - getPrice());
-                        API.getMessageAPI().sendReceiveKitMessage(player, getKit());
+                        messageAPI.sendReceiveKitMessage(player, getKit());
                     } else {
                         double dollars = profileSkyblock.getDollars();
-                        API.getMessageAPI().sendUnsuficientMoneyMessage(player, getPrice() - dollars);
+                        messageAPI.sendUnsuficientMoneyMessage(player, getPrice() - dollars);
                     }
                 } else {
-                    API.getMessageAPI().sendFullInventoryMessage(player);
+                    messageAPI.sendFullInventoryMessage(player);
                 }
             } else {
                 long time = profileSkyblock.getCooldown();
-                API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
+                messageAPI.sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
             }
         }
     }

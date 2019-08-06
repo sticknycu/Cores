@@ -3,8 +3,10 @@ package nycuro.utils.commands.data.settings;
 import cn.nukkit.IPlayer;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.utils.commands.CommandBaseUtils;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.mechanicAPI;
 
 /**
  * author: NycuRO
@@ -20,10 +22,10 @@ public class StatsCommand extends CommandBaseUtils {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         if (strings.length == 0) {
-            API.getMechanicAPI().sendStats(commandSender, (Player) commandSender);
+            mechanicAPI.sendStats(commandSender, (Player) commandSender);
         } else {
-            IPlayer player = API.getMainAPI().getServer().getOfflinePlayer(strings[0]);
-            API.getMechanicAPI().sendStats(commandSender, player);
+            IPlayer player = mainAPI.getServer().getOfflinePlayer(strings[0]);
+            mechanicAPI.sendStats(commandSender, player);
         }
         return true;
     }

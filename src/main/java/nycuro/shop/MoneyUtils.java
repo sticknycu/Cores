@@ -7,11 +7,12 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 
 import java.util.Map;
+
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -405,9 +406,9 @@ public class MoneyUtils {
             if (moneyCount >= priceFinal) {
                 profile.setDollars(profile.getDollars() - priceFinal);
                 player.getInventory().addItem(item);
-                API.getMessageAPI().sendBuyItemMessage(player, item, priceFinal);
+                messageAPI.sendBuyItemMessage(player, item, priceFinal);
             } else if (moneyCount < priceFinal) {
-                API.getMessageAPI().sendUnsuficientMoneyMessage(player, needed);
+                messageAPI.sendUnsuficientMoneyMessage(player, needed);
             }
         }
     }
@@ -422,7 +423,7 @@ public class MoneyUtils {
         double priceFinal = cost.getDouble(firstDropDownType) * count;
         if (!response.isEmpty()) {
             if (player.getGamemode() != Player.SURVIVAL) {
-                API.getMessageAPI().sendGamemodeSellExceptionMessage(player);
+                messageAPI.sendGamemodeSellExceptionMessage(player);
                 return;
             }
             if (player.getInventory().contains(item)) {
@@ -430,15 +431,15 @@ public class MoneyUtils {
                     if (item.getCount() == count) {
                         profile.setDollars(profile.getDollars() + priceFinal);
                         player.getInventory().removeItem(item);
-                        API.getMessageAPI().sendSellItemMessage(player, item, priceFinal);
+                        messageAPI.sendSellItemMessage(player, item, priceFinal);
                     } else if (item.getCount() != count) {
-                        API.getMessageAPI().sendInsufficientCountMessage(player);
+                        messageAPI.sendInsufficientCountMessage(player);
                     }
                 } else if (item.getCount() != itemMeta) {
-                    API.getMessageAPI().sendBreakedItemMessage(player);
+                    messageAPI.sendBreakedItemMessage(player);
                 }
             } else if (!player.getInventory().contains(item)) {
-                API.getMessageAPI().sendUnsuficientItemsMessage(player);
+                messageAPI.sendUnsuficientItemsMessage(player);
             }
         }
     }
@@ -451,7 +452,7 @@ public class MoneyUtils {
         int experiencePlayer = player.getExperienceLevel();
         int enchantId = enchant.getInt(firstDropDownType);
         if (enchantId == -1) {
-            API.getMessageAPI().sendExceptionEnchantMessage(player);
+            messageAPI.sendExceptionEnchantMessage(player);
             return;
         }
         int enchantLevel = Integer.parseInt(response.get(1).toString());
@@ -459,12 +460,12 @@ public class MoneyUtils {
         Enchantment enchantment = Enchantment.get(enchantId);
         Item item = player.getInventory().getItemInHand();
         if (!enchantment.canEnchant(item)) {
-            API.getMessageAPI().sendExceptionEnchantInvalidMessage(player);
+            messageAPI.sendExceptionEnchantInvalidMessage(player);
             return;
         }
         int index = player.getInventory().getHeldItemIndex();
         if (item.getId() == 0) {
-            API.getMessageAPI().sendExceptionEnchantItemHandMessage(player);
+            messageAPI.sendExceptionEnchantItemHandMessage(player);
             return;
         }
         double priceMoney = cost.getDouble(firstDropDownType);
@@ -487,16 +488,16 @@ public class MoneyUtils {
                         item.addEnchantment(enchantment
                                 .setLevel(enchantLevel));
                         player.getInventory().setItem(index, item);
-                        API.getMessageAPI().sendEnchantItemMessage(player, item, priceFinalMoney);
+                        messageAPI.sendEnchantItemMessage(player, item, priceFinalMoney);
                     } else if (moneyCount < priceFinalMoney) {
-                        API.getMessageAPI().sendUnsuficientMoneyMessage(player, neededMoney);
+                        messageAPI.sendUnsuficientMoneyMessage(player, neededMoney);
                     }
                 } else if (enchantLevel > enchantment.getMaxLevel()) {
-                    API.getMessageAPI().sendExceptionLevelEnchantMessage(player);
+                    messageAPI.sendExceptionLevelEnchantMessage(player);
                 }
             } else if (typePay == 2) {
                 if (experiencePlayer < 40) {
-                    API.getMessageAPI().sendExceptionLevelEnchantTypeMessage(player);
+                    messageAPI.sendExceptionLevelEnchantTypeMessage(player);
                     return;
                 }
                 if (enchantLevel <= enchantment.getMaxLevel()) {
@@ -509,12 +510,12 @@ public class MoneyUtils {
                         item.addEnchantment(enchantment
                                 .setLevel(enchantLevel));
                         player.getInventory().setItem(index, item);
-                        API.getMessageAPI().sendEnchantItemExperienceMessage(player, item, priceFinalExperience);
+                        messageAPI.sendEnchantItemExperienceMessage(player, item, priceFinalExperience);
                     } else if (experiencePlayer < priceFinalExperience) {
-                        API.getMessageAPI().sendUnsuficientExperienceMessage(player, neededExperience);
+                        messageAPI.sendUnsuficientExperienceMessage(player, neededExperience);
                     }
                 } else if (enchantLevel > enchantment.getMaxLevel()) {
-                    API.getMessageAPI().sendExceptionLevelEnchantMessage(player);
+                    messageAPI.sendExceptionLevelEnchantMessage(player);
                 }
             }
         }

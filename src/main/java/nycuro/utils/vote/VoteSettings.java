@@ -11,6 +11,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static nycuro.api.API.mainAPI;
+
 /**
  * author: NycuRO
  * SkyblockCore Project
@@ -22,7 +24,7 @@ public class VoteSettings {
 
     public void init() {
         try {
-            File file = new File("/root/configs/config.json");
+            File file = new File(mainAPI.getDataFolder() + "/configs/config.json");
             if (!file.exists()) {
                 FileWriter fileWriter = new FileWriter(file);
                 fileWriter.write(serializeData(0, 0));

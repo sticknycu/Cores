@@ -2,9 +2,10 @@ package nycuro.utils.commands.data.tops;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.utils.commands.CommandBaseUtils;
+
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -33,7 +34,7 @@ public class TopTimeCommand extends CommandBaseUtils {
             player.sendMessage("§c9) §a" + Database.scoreboardtimeName.get(9) + " -> " + Database.scoreboardtimeValue.get(9));
             player.sendMessage("§c10) §a" + Database.scoreboardtimeName.get(10) + " -> " + Database.scoreboardtimeValue.get(10));
         } else {
-            API.getMessageAPI().topTimeExceptionMessage(player);
+            messageAPI.topTimeExceptionMessage(player);
             return true;
         }
         return true;

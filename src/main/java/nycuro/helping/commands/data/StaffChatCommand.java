@@ -2,8 +2,10 @@ package nycuro.helping.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.helping.commands.CommandBaseHelping;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -19,12 +21,12 @@ public class StaffChatCommand extends CommandBaseHelping {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         Player player = (Player) commandSender;
-        if (!API.getMainAPI().staffChat.contains(player.getUniqueId())) {
-            API.getMainAPI().staffChat.add(player.getUniqueId());
-            API.getMessageAPI().sendSuccesEnterStaffChat(player);
+        if (!mainAPI.staffChat.contains(player.getUniqueId())) {
+            mainAPI.staffChat.add(player.getUniqueId());
+            messageAPI.sendSuccesEnterStaffChat(player);
         } else {
-            API.getMainAPI().staffChat.remove(player.getUniqueId());
-            API.getMessageAPI().sendAbandonedStaffchatMessage(player);
+            mainAPI.staffChat.remove(player.getUniqueId());
+            messageAPI.sendAbandonedStaffchatMessage(player);
         }
         return true;
     }

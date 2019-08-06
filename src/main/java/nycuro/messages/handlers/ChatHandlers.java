@@ -7,12 +7,14 @@ import cn.nukkit.event.player.PlayerChatEvent;
 import cn.nukkit.plugin.service.RegisteredServiceProvider;
 import cn.nukkit.utils.TextFormat;
 import me.lucko.luckperms.api.LuckPermsApi;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.messages.ChatFormat;
 
 import java.util.Objects;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.mechanicAPI;
 
 /**
  * author: uselesswaifu
@@ -25,7 +27,7 @@ public class ChatHandlers implements Listener {
     public static int count = 0;
 
     public ChatHandlers() {
-        RegisteredServiceProvider<LuckPermsApi> provider = API.getMainAPI().getServer().getServiceManager().getProvider(LuckPermsApi.class);
+        RegisteredServiceProvider<LuckPermsApi> provider = mainAPI.getServer().getServiceManager().getProvider(LuckPermsApi.class);
         if (provider != null) {
             api = provider.getProvider();
         }
@@ -55,20 +57,20 @@ public class ChatHandlers implements Listener {
         s = s.replace("%lvl", lvl);
         s = TextFormat.colorize(s);
 
-        if (API.getMainAPI().staffChat.contains(player.getUniqueId())) {
-            event.setFormat(API.getMechanicAPI().staffchatTag + s);
+        if (mainAPI.staffChat.contains(player.getUniqueId())) {
+            event.setFormat(mechanicAPI.staffchatTag + s);
         }  else {
             event.setFormat(s);
         }
 
         // StaffChat
         if (player.hasPermission("core.staffchat") && message.indexOf("@") == 0) {
-            API.getMechanicAPI().handleStaffChat(player, s, 0);
+            mechanicAPI.handleStaffChat(player, s, 0);
             event.setCancelled();
         }
 
-        if (API.getMainAPI().staffChat.contains(player.getUniqueId())) {
-            API.getMechanicAPI().handleStaffChat(player, s, 1);
+        if (mainAPI.staffChat.contains(player.getUniqueId())) {
+            mechanicAPI.handleStaffChat(player, s, 1);
             event.setCancelled();
         }
     }

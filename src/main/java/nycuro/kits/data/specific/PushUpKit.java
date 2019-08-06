@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
@@ -14,6 +13,9 @@ import nycuro.kits.type.TypeItems;
 import nycuro.kits.type.TypeKit;
 
 import java.util.ArrayList;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -46,7 +48,7 @@ public class PushUpKit extends CommonKit {
     public Item getAxe() {
         Item item = Item.get(Item.DIAMOND_AXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.AXE.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
     }
 
@@ -55,13 +57,13 @@ public class PushUpKit extends CommonKit {
         ArrayList<Item> itemslog1 = new ArrayList<>();
         for (int i = 0; i <= 3; i++) {
             Item item = Item.get(Item.WOOD, i, 8);
-            item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Wood Type " + i);
+            item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Wood Type " + i);
             itemslog1.add(item);
         }
         ArrayList<Item> itemslog2 = new ArrayList<>();
         for (int i = 0; i <= 1; i++) {
             Item item = Item.get(Item.WOOD2, i, 8);
-            item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Wood2 Type " + i);
+            item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Wood2 Type " + i);
             itemslog2.add(item);
         }
         Item[] item = new Item[7];
@@ -127,17 +129,17 @@ public class PushUpKit extends CommonKit {
                     player.getInventory().addItem(getOtherItems());
                     profileSkyblock.setCooldown(System.currentTimeMillis());
                     profileSkyblock.setDollars(profileSkyblock.getDollars() - getPrice());
-                    API.getMessageAPI().sendReceiveKitMessage(player, getKit());
+                    messageAPI.sendReceiveKitMessage(player, getKit());
                 } else {
                     double dollars = profileSkyblock.getDollars();
-                    API.getMessageAPI().sendUnsuficientMoneyMessage(player, getPrice() - dollars);
+                    messageAPI.sendUnsuficientMoneyMessage(player, getPrice() - dollars);
                 }
             } else {
-                API.getMessageAPI().sendFullInventoryMessage(player);
+                messageAPI.sendFullInventoryMessage(player);
             }
         } else {
             long time = profileSkyblock.getCooldown();
-            API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
+            messageAPI.sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
         }
     }
 }

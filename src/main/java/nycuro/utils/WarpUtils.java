@@ -7,7 +7,6 @@ import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.level.Location;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import nycuro.api.API;
 import nycuro.gui.list.ResponseFormWindow;
 
 import java.util.Arrays;
@@ -15,6 +14,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -44,16 +46,16 @@ public class WarpUtils {
     }
 
     private void teleportToWarp(Player player, String firstDropDownType, int types) {
-        API.getMessageAPI().sendTeleportWarpMessage(player, firstDropDownType);
+        messageAPI.sendTeleportWarpMessage(player, firstDropDownType);
         switch (types) {
             case 1:
-                player.teleport(new Location(API.getMainAPI().getServer().getLevelByName("pvp").getSpawnLocation().getX(), API.getMainAPI().getServer().getLevelByName("pvp").getSpawnLocation().getY(), API.getMainAPI().getServer().getLevelByName("pvp").getSpawnLocation().getZ(), API.getMainAPI().getServer().getLevelByName("pvp")));
+                player.teleport(new Location(mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getX(), mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getY(), mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getZ(), mainAPI.getServer().getLevelByName("pvp")));
                 break;
             case 2:
-                player.teleport(new Location(121, 73, 56, API.getMainAPI().getServer().getDefaultLevel()));
+                player.teleport(new Location(121, 73, 56, mainAPI.getServer().getDefaultLevel()));
                 break;
             case 3:
-                player.teleport(new Location(105, 74, 56, API.getMainAPI().getServer().getDefaultLevel()));
+                player.teleport(new Location(105, 74, 56, mainAPI.getServer().getDefaultLevel()));
                 break;
         }
     }

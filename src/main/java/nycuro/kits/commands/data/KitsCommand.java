@@ -2,8 +2,9 @@ package nycuro.kits.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.kits.commands.CommandBaseKits;
+
+import static nycuro.api.API.kitsAPI;
 
 /**
  * author: NycuRO
@@ -19,7 +20,7 @@ public class KitsCommand extends CommandBaseKits {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         Player player = (Player) commandSender;
-        API.getKitsAPI().sendKit(player);
+        kitsAPI.sendKit(player);
         return true;
     }
 }

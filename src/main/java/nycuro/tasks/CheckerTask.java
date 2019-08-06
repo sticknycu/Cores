@@ -5,7 +5,6 @@ import cn.nukkit.level.Location;
 import cn.nukkit.scheduler.Task;
 import nycuro.Loader;
 import nycuro.ai.entity.BossEntity;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
@@ -16,6 +15,10 @@ import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.mechanicAPI;
 
 /**
  * author: NycuRO
@@ -28,7 +31,7 @@ public class CheckerTask extends Task {
 
     @Override
     public void onRun(int i) {
-        for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+        for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
             ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
             double[] d1 = new double[2];
             double[] d2 = new double[2];
@@ -37,7 +40,7 @@ public class CheckerTask extends Task {
             Location loc = player.getLocation();
 
             // PVP and Arena and Spawn only if is in default level, not skyblock
-            if (loc.getLevel().equals(API.getMainAPI().getServer().getDefaultLevel())) {
+            if (loc.getLevel().equals(mainAPI.getServer().getDefaultLevel())) {
                 // Vector3 from = new Vector3(1153, 31, 1187);
                 // Vector3 to = new Vector3(1059, 0, 1280);
                 // Arena Check
@@ -50,10 +53,10 @@ public class CheckerTask extends Task {
                 Arrays.sort(d1);
                 Arrays.sort(d2);
                 Arrays.sort(d3);
-                if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
-                    API.getMainAPI().isOnArena.replace(player.getUniqueId(), true);
+                if (mechanicAPI.isPlayerInsideOfArea(player, d1, d2, d3)) {
+                    mainAPI.isOnArena.replace(player.getUniqueId(), true);
                 } else {
-                    API.getMainAPI().isOnArena.replace(player.getUniqueId(), false);
+                    mainAPI.isOnArena.replace(player.getUniqueId(), false);
                 }
 
                 // Spawn Check
@@ -68,10 +71,10 @@ public class CheckerTask extends Task {
                 Arrays.sort(d1);
                 Arrays.sort(d2);
                 Arrays.sort(d3);
-                if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
-                    API.getMainAPI().isOnSpawn.replace(player.getUniqueId(), true);
+                if (mechanicAPI.isPlayerInsideOfArea(player, d1, d2, d3)) {
+                    mainAPI.isOnSpawn.replace(player.getUniqueId(), true);
                 } else {
-                    API.getMainAPI().isOnSpawn.replace(player.getUniqueId(), false);
+                    mainAPI.isOnSpawn.replace(player.getUniqueId(), false);
                 }
 
                 // Area Check
@@ -86,23 +89,23 @@ public class CheckerTask extends Task {
                 Arrays.sort(d1);
                 Arrays.sort(d2);
                 Arrays.sort(d3);
-                if (API.getMechanicAPI().isPlayerInsideOfArea(player, d1, d2, d3)) {
-                    API.getMainAPI().isOnArea.replace(player.getUniqueId(), true);
+                if (mechanicAPI.isPlayerInsideOfArea(player, d1, d2, d3)) {
+                    mainAPI.isOnArea.replace(player.getUniqueId(), true);
                 } else {
-                    API.getMainAPI().isOnArea.replace(player.getUniqueId(), false);
+                    mainAPI.isOnArea.replace(player.getUniqueId(), false);
                 }
             } else {
                 // Skyblock World
-                API.getMainAPI().isOnArena.replace(player.getUniqueId(), false);
-                API.getMainAPI().isOnSpawn.replace(player.getUniqueId(), false);
-                API.getMainAPI().isOnArea.replace(player.getUniqueId(), false);
+                mainAPI.isOnArena.replace(player.getUniqueId(), false);
+                mainAPI.isOnSpawn.replace(player.getUniqueId(), false);
+                mainAPI.isOnArea.replace(player.getUniqueId(), false);
             }
 
-            if (API.getMechanicAPI().isOnArena(player)) {
+            if (mechanicAPI.isOnArena(player)) {
                 if (profileSkyblock.getLevel() < 10) {
-                    player.sendMessage(API.getMessageAPI().sendArenaWarningMessage(player));
-                    player.teleport(API.getMainAPI().getServer().getDefaultLevel().getSpawnLocation());
-                    API.getMessageAPI().sendCommandSpawnMessage(player);
+                    player.sendMessage(messageAPI.sendArenaWarningMessage(player));
+                    player.teleport(mainAPI.getServer().getDefaultLevel().getSpawnLocation());
+                    messageAPI.sendCommandSpawnMessage(player);
                 }
             }
 
@@ -111,8 +114,8 @@ public class CheckerTask extends Task {
             ZoneId zoneId = ZoneId.of("Europe/Bucharest");
             ZonedDateTime timeZone = instant.atZone(zoneId);
             if (timeZone.getHour() == 21 && timeZone.getMinute() == 0 && timeZone.getSecond() == 0) {
-                if (API.getMechanicAPI().getBossHealth() == 0) {
-                    API.getMessageAPI().sendBossSpawnedMessage(player);
+                if (mechanicAPI.getBossHealth() == 0) {
+                    messageAPI.sendBossSpawnedMessage(player);
                     new BossEntity();
                 }
             }
@@ -123,13 +126,13 @@ public class CheckerTask extends Task {
                 Loader.dropPartyVotes = 0;
             }
             if (Loader.dropPartyVotes >= 50) {
-                API.getMechanicAPI().sendDropPartyMessageBroadcast(player);
+                mechanicAPI.sendDropPartyMessageBroadcast(player);
                 Loader.dropPartyTime = System.currentTimeMillis();
                 Loader.dropPartyVotes = 0;
-                API.getMainAPI().getServer().getScheduler().scheduleDelayedTask(new Task() {
+                mainAPI.getServer().getScheduler().scheduleDelayedTask(new Task() {
                     @Override
                     public void onRun(int i) {
-                        API.getMechanicAPI().spawnDropParty();
+                        mechanicAPI.spawnDropParty();
                         Random r = new Random();
                         int low = 200;
                         int high = 250;

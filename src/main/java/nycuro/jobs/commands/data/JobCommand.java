@@ -2,8 +2,9 @@ package nycuro.jobs.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.jobs.commands.CommandBaseJobs;
+
+import static nycuro.api.API.jobsAPI;
 
 /**
  * author: NycuRO
@@ -19,7 +20,7 @@ public class JobCommand extends CommandBaseJobs {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         Player player = (Player) commandSender;
-        API.getJobsAPI().getJob(player);
+        jobsAPI.getJob(player);
         return true;
     }
 }

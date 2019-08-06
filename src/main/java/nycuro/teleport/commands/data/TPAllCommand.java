@@ -4,8 +4,10 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
-import nycuro.api.API;
 import nycuro.teleport.commands.CommandBaseTeleportation;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
 
 public class TPAllCommand extends CommandBaseTeleportation {
 
@@ -30,22 +32,22 @@ public class TPAllCommand extends CommandBaseTeleportation {
             }
             player = (Player) sender;
         } else if (args.length == 1) {
-            player = API.getMainAPI().getServer().getPlayer(args[0]);
+            player = mainAPI.getServer().getPlayer(args[0]);
             if (player == null) {
-                sender.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.generic.player.notfound", args[0]));
+                sender.sendMessage(messageAPI.messagesObject.translateMessage("commands.generic.player.notfound", args[0]));
                 return false;
             }
         } else {
             this.sendUsage(sender);
             return false;
         }
-        for (Player p : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+        for (Player p : mainAPI.getServer().getOnlinePlayers().values()) {
             if (p != player) {
                 p.teleport(player);
-                p.sendMessage(API.getMessageAPI().messagesObject.translateMessage("commands.tpall.other", player.getName()));
+                p.sendMessage(messageAPI.messagesObject.translateMessage("commands.tpall.other", player.getName()));
             }
         }
-        player.sendMessage(API.getMessageAPI().messagesObject.getMessages().get("commands.tpall.success"));
+        player.sendMessage(messageAPI.messagesObject.getMessages().get("commands.tpall.success"));
         return true;
     }
 }

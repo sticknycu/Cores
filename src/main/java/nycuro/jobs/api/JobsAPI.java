@@ -17,28 +17,31 @@ import nycuro.jobs.CommonJob;
 import nycuro.jobs.NameJob;
 import nycuro.jobs.TypeJob;
 import nycuro.jobs.commands.JobsCommandManager;
-import nycuro.jobs.jobs.ButcherJob;
-import nycuro.jobs.jobs.FarmerJob;
-import nycuro.jobs.jobs.FishermanJob;
-import nycuro.jobs.jobs.MinerJob;
+import nycuro.jobs.data.ButcherJob;
+import nycuro.jobs.data.FarmerJob;
+import nycuro.jobs.data.FishermanJob;
+import nycuro.jobs.data.MinerJob;
 import nycuro.jobs.objects.JobsObject;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.mechanicAPI;
+
 /**
  * author: NycuRO
  * FactionsCore Project
  * API 1.0.0
  */
-public class JobsAPI extends API {
+public class JobsAPI {
 
     public Map<NameJob, CommonJob> jobs = new HashMap<>();
 
-    @Override
     public void registerCommands() {
-        JobsCommandManager.registerAll(getMainAPI());
+        JobsCommandManager.registerAll(mainAPI);
     }
 
     public void addJobs() {
@@ -50,12 +53,12 @@ public class JobsAPI extends API {
 
     private void sendInfoMessageJobs(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom("Info Jobs");
-        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendInfoMessageJobs(player)));
+        infoMenu.addElement(new ElementLabel(messageAPI.sendInfoMessageJobs(player)));
         player.showFormWindow(infoMenu);
     }
 
     public void getJob(Player player) {
-        FormWindowSimple jobsMenu = new FormWindowSimple("Jobs", API.getMessageAPI().sendJobPrincipalModal(player));
+        FormWindowSimple jobsMenu = new FormWindowSimple("Jobs", messageAPI.sendJobPrincipalModal(player));
         jobsMenu.addButton(new ElementButton("Teleport to Jobs", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/nujWKR3.png")));
         jobsMenu.addButton(new ElementButton("Without Job", new ElementButtonImageData("url", "https://i.imgur.com/YXBNPBc.png")));
@@ -68,35 +71,35 @@ public class JobsAPI extends API {
                     ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            player.teleport(new Location(27, 169, 0, API.getMainAPI().getServer().getDefaultLevel()));
+                            player.teleport(new Location(27, 169, 0, mainAPI.getServer().getDefaultLevel()));
                             return;
                         case 1:
                             sendInfoMessageJobs(player);
                             return;
                         case 2:
-                            API.getMessageAPI().sendWithoutJobMessage(player);
+                            messageAPI.sendWithoutJobMessage(player);
                             return;
                         case 3:
                             if (profileSkyblock.getJob() == 0) {
-                                API.getMessageAPI().sendNoJobMessage(player);
+                                messageAPI.sendNoJobMessage(player);
                             } else {
                                 NameJob job = NameJob.getType(profileSkyblock.getJob());
-                                JobsObject jobsObject = API.getMainAPI().jobsObject.get(player.getUniqueId());
+                                JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
                                 if (jobsObject != null) {
                                     handleMission(player);
                                 } else {
                                     switch (job) {
                                         case MINER:
-                                            API.getJobsAPI().processMissionOnMiner(player);
+                                            processMissionOnMiner(player);
                                             break;
                                         case FARMER:
-                                            API.getJobsAPI().processMissionOnFarmer(player);
+                                            processMissionOnFarmer(player);
                                             break;
                                         case BUTCHER:
-                                            API.getJobsAPI().processMissionOnButcher(player);
+                                            processMissionOnButcher(player);
                                             break;
                                         case FISHERMAN:
-                                            API.getJobsAPI().processMissionOnFisherman(player);
+                                            processMissionOnFisherman(player);
                                             break;
                                     }
                                 }
@@ -112,8 +115,8 @@ public class JobsAPI extends API {
         FormWindowCustom infoMenu = new FormWindowCustom("Handle Mission");
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         int job = profileSkyblock.getJob();
-        infoMenu.addElement(new ElementLabel(API.getMessageAPI().sendHandleMissions(player)));
-        JobsObject jobsObject = API.getMainAPI().jobsObject.get(player.getUniqueId());
+        infoMenu.addElement(new ElementLabel(messageAPI.sendHandleMissions(player)));
+        JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
         if (job != 2) {
             Item[] items = jobsObject.getItems();
             int i = 0;
@@ -135,14 +138,14 @@ public class JobsAPI extends API {
                 @Override
                 public void accept(Map<Integer, Object> response) {
                     if (!response.isEmpty()) {
-                        if (API.getMechanicAPI().checkItems(player, items)) {
+                        if (mechanicAPI.checkItems(player, items)) {
                             ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                             profileSkyblock.setDollars(profileSkyblock.getDollars() + jobsObject.getReward());
                             player.getInventory().removeItem(items);
-                            API.getMessageAPI().sendFinishedMissionMessage(player, jobsObject.getReward());
-                            API.getMainAPI().jobsObject.remove(player.getUniqueId());
+                            messageAPI.sendFinishedMissionMessage(player, jobsObject.getReward());
+                            mainAPI.jobsObject.remove(player.getUniqueId());
                         } else {
-                            API.getMessageAPI().sendNotEnoughMaterialsMessage(player);
+                            messageAPI.sendNotEnoughMaterialsMessage(player);
                         }
                     }
                 }
@@ -167,10 +170,10 @@ public class JobsAPI extends API {
                                 jobsObject.getCountAnimals()[3] == 0) {
                             ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                             profileSkyblock.setDollars(profileSkyblock.getDollars() + jobsObject.getReward());
-                            API.getMessageAPI().sendFinishedMissionMessage(player, jobsObject.getReward());
-                            API.getMainAPI().jobsObject.remove(player.getUniqueId());
+                            messageAPI.sendFinishedMissionMessage(player, jobsObject.getReward());
+                            mainAPI.jobsObject.remove(player.getUniqueId());
                         } else {
-                            API.getMessageAPI().sendNotEnoughKillsMessage(player);
+                            messageAPI.sendNotEnoughKillsMessage(player);
                         }
                     }
                 }
@@ -179,12 +182,12 @@ public class JobsAPI extends API {
     }
 
     public void processMissionOnMiner(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple("Process Miner JobPlayer", API.getMessageAPI().sendProcessMission(player));
+        FormWindowSimple infoMenu = new FormWindowSimple("Process Miner JobPlayer", messageAPI.sendProcessMission(player));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
             if (jobs.get(NameJob.MINER).isLocked(player, typeJob)) color = TextFormat.RED;
             else color = TextFormat.GREEN;
-            infoMenu.addButton(new ElementButton(typeJob.getName() + API.getMainAPI().empty + TextFormat.GRAY + "[" + color + jobs.get(NameJob.MINER).getStatus(player, typeJob) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+            infoMenu.addButton(new ElementButton(typeJob.getName() + mainAPI.empty + TextFormat.GRAY + "[" + color + jobs.get(NameJob.MINER).getStatus(player, typeJob) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         }
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
@@ -254,12 +257,12 @@ public class JobsAPI extends API {
     }
 
     public void processMissionOnButcher(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple("Process Butcher JobPlayer", API.getMessageAPI().sendProcessMission(player));
+        FormWindowSimple infoMenu = new FormWindowSimple("Process Butcher JobPlayer", messageAPI.sendProcessMission(player));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
             if (jobs.get(NameJob.BUTCHER).isLocked(player, typeJob)) color = TextFormat.RED;
             else color = TextFormat.GREEN;
-            infoMenu.addButton(new ElementButton(typeJob.getName() + API.getMainAPI().empty + TextFormat.GRAY + "[" + color + jobs.get(NameJob.BUTCHER).getStatus(player, typeJob) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+            infoMenu.addButton(new ElementButton(typeJob.getName() + mainAPI.empty + TextFormat.GRAY + "[" + color + jobs.get(NameJob.BUTCHER).getStatus(player, typeJob) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         }
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
@@ -328,12 +331,12 @@ public class JobsAPI extends API {
     }
 
     public void processMissionOnFarmer(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple("Process Farmer JobPlayer", API.getMessageAPI().sendProcessMission(player));
+        FormWindowSimple infoMenu = new FormWindowSimple("Process Farmer JobPlayer", messageAPI.sendProcessMission(player));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
             if (jobs.get(NameJob.FARMER).isLocked(player, typeJob)) color = TextFormat.RED;
             else color = TextFormat.GREEN;
-            infoMenu.addButton(new ElementButton(typeJob.getName() + API.getMainAPI().empty + TextFormat.GRAY + "[" + color + jobs.get(NameJob.FARMER).getStatus(player, typeJob) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+            infoMenu.addButton(new ElementButton(typeJob.getName() + mainAPI.empty + TextFormat.GRAY + "[" + color + jobs.get(NameJob.FARMER).getStatus(player, typeJob) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         }
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
@@ -402,12 +405,12 @@ public class JobsAPI extends API {
     }
 
     public void processMissionOnFisherman(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple("Process Fisherman JobPlayer", API.getMessageAPI().sendProcessMission(player));
+        FormWindowSimple infoMenu = new FormWindowSimple("Process Fisherman JobPlayer", messageAPI.sendProcessMission(player));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
             if (jobs.get(NameJob.FISHERMAN).isLocked(player, typeJob)) color = TextFormat.RED;
             else color = TextFormat.GREEN;
-            infoMenu.addButton(new ElementButton(typeJob.getName() + API.getMainAPI().empty + TextFormat.GRAY + "[" + color + jobs.get(NameJob.FISHERMAN).getStatus(player, typeJob) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
+            infoMenu.addButton(new ElementButton(typeJob.getName() + mainAPI.empty + TextFormat.GRAY + "[" + color + jobs.get(NameJob.FISHERMAN).getStatus(player, typeJob) + TextFormat.GRAY + "]", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         }
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
@@ -476,12 +479,12 @@ public class JobsAPI extends API {
     }
 
     private void succesfullyCreatedMissionB(Player player, int[] integers, double reward) {
-        API.getMainAPI().jobsObject.put(player.getUniqueId(), new JobsObject(player.getUniqueId(), 2, new Item[0], integers, reward));
+        mainAPI.jobsObject.put(player.getUniqueId(), new JobsObject(player.getUniqueId(), 2, new Item[0], integers, reward));
         handleMission(player);
     }
 
     private void succesfullyCreatedMissionMF(Player player, Item[] items, double reward) {
-        API.getMainAPI().jobsObject.put(player.getUniqueId(), new JobsObject(player.getUniqueId(), 2, items, new int[0], reward));
+        mainAPI.jobsObject.put(player.getUniqueId(), new JobsObject(player.getUniqueId(), 2, items, new int[0], reward));
         handleMission(player);
     }
 

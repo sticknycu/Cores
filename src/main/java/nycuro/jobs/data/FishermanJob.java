@@ -1,7 +1,7 @@
-package nycuro.jobs.jobs;
+package nycuro.jobs.data;
 
 import cn.nukkit.Player;
-import nycuro.api.API;
+import cn.nukkit.item.Item;
 import nycuro.database.Database;
 import nycuro.jobs.CommonJob;
 import nycuro.jobs.NameJob;
@@ -11,28 +11,30 @@ import nycuro.utils.typo.FastRandom;
 
 import java.util.function.Consumer;
 
+import static nycuro.api.API.messageAPI;
+
 /**
  * Project: SkyblockCore
  * Author: NycuRO
  */
-public class ButcherJob extends CommonJob {
+public class FishermanJob extends CommonJob {
 
     @Override
     public NameJob getName() {
-        return NameJob.BUTCHER;
+        return NameJob.FISHERMAN;
     }
 
     @Override
     public int getLevelNeeded(TypeJob typeJob) {
         switch (typeJob) {
             case EASY:
-                return 15;
+                return 5;
             case MEDIUM:
-                return 20;
+                return 30;
             case HARD:
-                return 40;
+                return 50;
             case EXTREME:
-                return 60;
+                return 70;
         }
         return 0;
     }
@@ -73,64 +75,39 @@ public class ButcherJob extends CommonJob {
     @Override
     public void processMission(Player player, TypeJob typeJob, Consumer<Object> consumer) {
         if (getStatus(player, typeJob).equals(StatusJobs.LOCKED)) {
-            player.sendMessage(API.getMessageAPI().sendLockedJobStatus(player));
+            player.sendMessage(messageAPI.sendLockedJobStatus(player));
         } else {
-            int[] collection = new int[5];
+            Item[] collection = new Item[3];
             if (typeJob.equals(TypeJob.EASY)) {
                 FastRandom.current().ints(1, 10, 15).findFirst().ifPresent((j) -> {
-                    collection[0] = j;
+                    collection[0] = Item.get(Item.RAW_FISH, 0, j);
                 });
                 FastRandom.current().ints(1, 10, 15).findFirst().ifPresent((j) -> {
-                    collection[1] = j;
-                });
-                FastRandom.current().ints(1, 10, 15).findFirst().ifPresent((j) -> {
-                    collection[2] = j;
-                });
-                FastRandom.current().ints(1, 10, 15).findFirst().ifPresent((j) -> {
-                    collection[3] = j;
+                    collection[1] = Item.get(Item.RAW_SALMON, 0, j);
                 });
             } else if (typeJob.equals(TypeJob.MEDIUM)) {
                 FastRandom.current().ints(1, 15, 25).findFirst().ifPresent((j) -> {
-                    collection[0] = j;
+                    collection[0] = Item.get(Item.RAW_FISH, 0, j);
                 });
                 FastRandom.current().ints(1, 15, 25).findFirst().ifPresent((j) -> {
-                    collection[1] = j;
-                });
-                FastRandom.current().ints(1, 15, 25).findFirst().ifPresent((j) -> {
-                    collection[2] = j;
-                });
-                FastRandom.current().ints(1, 15, 25).findFirst().ifPresent((j) -> {
-                    collection[3] = j;
+                    collection[1] = Item.get(Item.RAW_SALMON, 0, j);
                 });
             } else if (typeJob.equals(TypeJob.HARD)) {
-                FastRandom.current().ints(1, 35, 40).findFirst().ifPresent((j) -> {
-                    collection[0] = j;
+                FastRandom.current().ints(1, 25, 35).findFirst().ifPresent((j) -> {
+                    collection[0] = Item.get(Item.RAW_FISH, 0, j);
                 });
-                FastRandom.current().ints(1, 35, 40).findFirst().ifPresent((j) -> {
-                    collection[1] = j;
-                });
-                FastRandom.current().ints(1, 35, 40).findFirst().ifPresent((j) -> {
-                    collection[2] = j;
-                });
-                FastRandom.current().ints(1, 35, 40).findFirst().ifPresent((j) -> {
-                    collection[3] = j;
+                FastRandom.current().ints(1, 25, 35).findFirst().ifPresent((j) -> {
+                    collection[1] = Item.get(Item.RAW_SALMON, 0, j);
                 });
             } else {
                 FastRandom.current().ints(1, 45, 60).findFirst().ifPresent((j) -> {
-                    collection[0] = j;
+                    collection[0] = Item.get(Item.RAW_FISH, 0, j);
                 });
                 FastRandom.current().ints(1, 45, 60).findFirst().ifPresent((j) -> {
-                    collection[1] = j;
-                });
-                FastRandom.current().ints(1, 45, 60).findFirst().ifPresent((j) -> {
-                    collection[2] = j;
-                });
-                FastRandom.current().ints(1, 45, 60).findFirst().ifPresent((j) -> {
-                    collection[3] = j;
+                    collection[1] = Item.get(Item.RAW_SALMON, 0, j);
                 });
             }
             consumer.accept(collection);
         }
     }
 }
-

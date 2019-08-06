@@ -5,9 +5,13 @@ import cn.nukkit.potion.Effect;
 import cn.nukkit.scheduler.Task;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import nycuro.api.API;
 
 import java.util.UUID;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.mechanicAPI;
+import static nycuro.api.API.combatAPI;
 
 /**
  * author: NycuRO
@@ -20,8 +24,8 @@ public class CombatLoggerTask extends Task {
 
     @Override
     public void onRun(int i) {
-        for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-            if (API.getMechanicAPI().isOnSpawn(player)) {
+        for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
+            if (mechanicAPI.isOnSpawn(player)) {
                 Effect effect = Effect.getEffect(Effect.SPEED);
                 effect.setAmplifier(1);
                 effect.setDuration(20 * 3);
@@ -29,22 +33,22 @@ public class CombatLoggerTask extends Task {
                 player.addEffect(effect);
             }
         }
-        API.getCombatAPI().inCombat.forEach((uuid, time) -> {
+        combatAPI.inCombat.forEach((uuid, time) -> {
             if (k.getOrDefault(uuid, -1) == -1) k.put(uuid, 13);
             long count = k.getInt(uuid);
             float procent = (float) ((int) (count * 100 / 13));
-            if (API.getMainAPI().bossbar.get(uuid) != null) {
-                API.getMainAPI().bossbar.get(uuid).setText("      §7-§8=§7- §7CombatLogger: §6§l" + k.getInt(uuid) + " §7-§8=§7-");
-                if (k.getInt(uuid) <= 1) API.getMainAPI().bossbar.get(uuid).setLength(1F);
-                else API.getMainAPI().bossbar.get(uuid).setLength(procent);
+            if (mainAPI.bossbar.get(uuid) != null) {
+                mainAPI.bossbar.get(uuid).setText("      §7-§8=§7- §7CombatLogger: §6§l" + k.getInt(uuid) + " §7-§8=§7-");
+                if (k.getInt(uuid) <= 1) mainAPI.bossbar.get(uuid).setLength(1F);
+                else mainAPI.bossbar.get(uuid).setLength(procent);
             }
             if (k.getInt(uuid) == 0) {
-                API.getMainAPI().getServer().getPlayer(uuid).ifPresent( (player) -> {
-                    player.sendMessage(API.getMessageAPI().getMessageCombatLogger(player));
-                    API.getCombatAPI().removeCombat(player);
+                mainAPI.getServer().getPlayer(uuid).ifPresent( (player) -> {
+                    player.sendMessage(messageAPI.getMessageCombatLogger(player));
+                    combatAPI.removeCombat(player);
                     k.removeInt(player.getUniqueId());
-                    if (API.getMainAPI().bossbar.get(uuid) != null) {
-                        API.getMainAPI().bossbar.get(player.getUniqueId()).setLength(100F);
+                    if (mainAPI.bossbar.get(uuid) != null) {
+                        mainAPI.bossbar.get(player.getUniqueId()).setLength(100F);
                     }
                 });
             }

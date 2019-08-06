@@ -2,8 +2,9 @@ package nycuro.utils.commands.data.settings;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.utils.commands.CommandBaseUtils;
+
+import static nycuro.api.API.mechanicAPI;
 
 /**
  * author: NycuRO
@@ -19,7 +20,7 @@ public class SettingsCommand extends CommandBaseUtils {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         Player player = (Player) commandSender;
-        API.getMechanicAPI().sendSettingsForm(player);
+        mechanicAPI.sendSettingsForm(player);
         return true;
     }
 }

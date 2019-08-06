@@ -6,6 +6,11 @@ import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.mechanicAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.combatAPI;
+
 /**
  * author: GiantQuartz
  * SkyblockCore Project
@@ -15,12 +20,12 @@ public class BossBarTask extends Task {
 
     @Override
     public void onRun(int i) {
-        for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+        for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
             ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
 
-            if (API.getMainAPI().bossbar.get(player.getUniqueId()) != null) {
+            if (mainAPI.bossbar.get(player.getUniqueId()) != null) {
 
-                if (API.getCombatAPI().inCombat(player)) return;
+                if (combatAPI.inCombat(player)) return;
                 int level = 0;
                 double necessary = 0;
                 double count = 0;
@@ -33,14 +38,14 @@ public class BossBarTask extends Task {
 
                 String message = "";
                 float health = 100F;
-                if (API.getMechanicAPI().isOnArena(player) && API.getMechanicAPI().getBossHealth() != 0) {
-                    health = API.getMechanicAPI().getBossHealth();
-                    message = API.getMessageAPI().getMessageInArenaBossBar(player, API.round(API.getMechanicAPI().getBossHealth(), 2));
+                if (mechanicAPI.isOnArena(player) && mechanicAPI.getBossHealth() != 0) {
+                    health = mechanicAPI.getBossHealth();
+                    message = messageAPI.getMessageInArenaBossBar(player, API.round(mechanicAPI.getBossHealth(), 2));
                 } else {
-                    message = API.getMessageAPI().getMessageBossBar(player, level, necessary, count);
+                    message = messageAPI.getMessageBossBar(player, level, necessary, count);
                 }
-                API.getMainAPI().bossbar.get(player.getUniqueId()).setLength(health);
-                API.getMainAPI().bossbar.get(player.getUniqueId()).setText(message);
+                mainAPI.bossbar.get(player.getUniqueId()).setLength(health);
+                mainAPI.bossbar.get(player.getUniqueId()).setText(message);
             }
         }
     }

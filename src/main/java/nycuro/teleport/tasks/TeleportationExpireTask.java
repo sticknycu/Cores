@@ -1,16 +1,17 @@
 package nycuro.teleport.tasks;
 
-import nycuro.api.API;
-import nycuro.teleport.objects.TPRequest;
 import nycuro.teleport.api.TeleportationAPI;
+import nycuro.teleport.objects.TPRequest;
 
 import java.util.Iterator;
+
+import static nycuro.api.API.teleportationAPI;
 
 public class TeleportationExpireTask implements Runnable {
 
     @Override
     public void run() {
-        Iterator<TPRequest> requestIterator = API.getTeleportationAPI().tpRequests.values().iterator();
+        Iterator<TPRequest> requestIterator = teleportationAPI.tpRequests.values().iterator();
 
         long currentTime = System.currentTimeMillis();
 

@@ -2,8 +2,10 @@ package nycuro.shop.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.shop.commands.CommandBaseShop;
+
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.shopAPI;
 
 /**
  * author: NycuRO
@@ -21,10 +23,10 @@ public class ShopCommand extends CommandBaseShop {
         Player player = (Player) commandSender;
         switch (strings.length) {
             case 0:
-                API.getShopAPI().sendShopContents(player);
+                shopAPI.sendShopContents(player);
                 return true;
             default:
-                API.getMessageAPI().sendExceptionShopMessage(player);
+                messageAPI.sendExceptionShopMessage(player);
                 return true;
         }
     }

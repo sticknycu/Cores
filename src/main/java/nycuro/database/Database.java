@@ -5,7 +5,6 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import it.unimi.dsi.fastutil.ints.*;
 import nycuro.Loader;
-import nycuro.api.API;
 import nycuro.database.objects.HomeObject;
 import nycuro.database.objects.KitsObject;
 import nycuro.database.objects.ProfileProxy;
@@ -17,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.function.Consumer;
+
+import static nycuro.api.API.mainAPI;
 
 public class Database {
 
@@ -146,7 +147,7 @@ public class Database {
     }
 
     public static void addDatesKitsPlayer(String name) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_SKITS.getConnection();
@@ -173,7 +174,7 @@ public class Database {
     }
 
     public static void saveDatesPlayerFromKits(String name) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 saveUnAsyncDatesPlayerFromHub(name);
@@ -199,7 +200,7 @@ public class Database {
     }
 
     public static void addDatesPlayerHub(String name) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_PROXY.getConnection();
@@ -225,7 +226,7 @@ public class Database {
     }
 
     public static void saveDatesPlayerFromHub(String name) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 saveUnAsyncDatesPlayerFromHub(name);
@@ -305,7 +306,7 @@ public class Database {
     }
 
     public static void addDatesPlayerFactions(String name) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 addUnAsyncDatesPlayerFactions(name);
@@ -338,7 +339,7 @@ public class Database {
     public static void getTopDollars() {
         if (!scoreboardcoinsValue.isEmpty()) scoreboardcoinsValue.clear();
         if (!scoreboardcoinsName.isEmpty()) scoreboardcoinsName.clear();
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
@@ -400,7 +401,7 @@ public class Database {
     public static void getTopKills() {
         if (!scoreboardkillsValue.isEmpty()) scoreboardkillsValue.clear();
         if (!scoreboardkillsName.isEmpty()) scoreboardkillsName.clear();
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
@@ -462,7 +463,7 @@ public class Database {
     public static void getTopDeaths() {
         if (!scoreboarddeathsValue.isEmpty()) scoreboarddeathsValue.clear();
         if (!scoreboarddeathsName.isEmpty()) scoreboarddeathsName.clear();
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
@@ -524,7 +525,7 @@ public class Database {
     public static void getTopTime() {
         if (!scoreboardtimeValue.isEmpty()) scoreboardtimeValue.clear();
         if (!scoreboardtimeName.isEmpty()) scoreboardtimeName.clear();
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
@@ -584,7 +585,7 @@ public class Database {
     }
 
     public void addNewReport(String name, String reason, String contact, String reporter) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_REPORTS.getConnection();
@@ -604,7 +605,7 @@ public class Database {
     }
 
     public void addNewHome(String name, int x, int y, int z, String worldName, String homename) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_HOMESF.getConnection();
@@ -625,7 +626,7 @@ public class Database {
     }
 
     public void addNewPlayer(String name) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
@@ -662,7 +663,7 @@ public class Database {
     }
 
     public void addNewPlayerToKits(String name) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_SKITS.getConnection();
@@ -691,7 +692,7 @@ public class Database {
     }
 
     public static void saveDatesPlayerFromFactions(String name) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 saveUnAsyncDatesPlayerFromFactions(name);
@@ -700,7 +701,7 @@ public class Database {
     }
 
     public void playerExist(String name, Consumer<Boolean> consumer) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_SKYBLOCK.getConnection();
@@ -718,7 +719,7 @@ public class Database {
     }
 
     public void playerKitsExist(String name, Consumer<Boolean> consumer) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_SKITS.getConnection();
@@ -736,7 +737,7 @@ public class Database {
     }
 
     public void homeExist(String name, Consumer<Boolean> consumer) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_HOMESF.getConnection();
@@ -776,7 +777,7 @@ public class Database {
     }
 
     public void setLanguage(String name, int language) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_PROXY.getConnection();
@@ -925,7 +926,7 @@ public class Database {
     }
 
     public void deleteReport(String name) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_REPORTS.getConnection();
@@ -941,7 +942,7 @@ public class Database {
     }
 
     public void deleteHome(String homeName) {
-        API.getMainAPI().getServer().getScheduler().scheduleAsyncTask(API.getMainAPI(), new AsyncTask() {
+        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try (Connection connection = DATASOURCE_HOMESF.getConnection();

@@ -3,10 +3,12 @@ package nycuro.tasks;
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.TextFormat;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.mechanicAPI;
 
 /**
  * author: NycuRO
@@ -17,7 +19,7 @@ public class ScoreTagTask extends Task {
 
     @Override
     public void onRun(int i) {
-        for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
+        for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
             ProfileProxy profileProxy = Database.profileProxy.get(player.getName());
             ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
             String level = "";
@@ -43,7 +45,7 @@ public class ScoreTagTask extends Task {
             String finals = sb.toString();
             String scoretag = "&8[&c%type&8]";
             nametag = nametag.replace("%name", player.getName());
-            nametag = nametag.replace("%device", API.getMechanicAPI().getOS(player));
+            nametag = nametag.replace("%device", mechanicAPI.getOS(player));
             scoretag = scoretag.replace("%hp", hp);
             scoretag = scoretag.replace("maxhp", maxhp);
             scoretag = scoretag.replace("%type", finals);

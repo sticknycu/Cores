@@ -3,7 +3,6 @@ package nycuro.kits.data.specific;
 import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.kits.CommonKit;
@@ -13,6 +12,9 @@ import nycuro.kits.type.TypeItems;
 import nycuro.kits.type.TypeKit;
 
 import java.util.ArrayList;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -44,45 +46,45 @@ public class WoodieKit extends CommonKit {
     @Override
     public Item getSword() {
         Item item = Item.get(Item.STONE_SWORD);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SWORD.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
         Item item = Item.get(Item.STONE_PICKAXE);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.PICKAXE.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
         Item item = Item.get(Item.STONE_AXE);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.AXE.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
         Item item = Item.get(Item.STONE_SHOVEL);
-        item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + TypeItems.SHOVEL.getType());
+        item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
     @Override
     public Item[] getOtherItems() {
         Item steak = Item.get(Item.STEAK, 0, 32);
-        steak.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Steak");
+        steak.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Steak");
         ArrayList<Item> itemslog1 = new ArrayList<>();
         for (int i = 0; i <= 3; i++) {
             Item item = Item.get(Item.WOOD, i, 16);
-            item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Wood Type " + i);
+            item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Wood Type " + i);
             itemslog1.add(item);
         }
         ArrayList<Item> itemslog2 = new ArrayList<>();
         for (int i = 0; i <= 1; i++) {
             Item item = Item.get(Item.WOOD2, i, 16);
-            item.setCustomName(API.getMainAPI().symbol + getKit().getName() + API.getMainAPI().empty + "Wood2 Type " + i);
+            item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Wood2 Type " + i);
             itemslog2.add(item);
         }
         Item[] item = new Item[7];
@@ -146,17 +148,17 @@ public class WoodieKit extends CommonKit {
                     player.getInventory().addItem(getOtherItems());
                     profileSkyblock.setCooldown(System.currentTimeMillis());
                     profileSkyblock.setDollars(profileSkyblock.getDollars() - getPrice());
-                    API.getMessageAPI().sendReceiveKitMessage(player, getKit());
+                    messageAPI.sendReceiveKitMessage(player, getKit());
                 } else {
                     double dollars = profileSkyblock.getDollars();
-                    API.getMessageAPI().sendUnsuficientMoneyMessage(player, getPrice() - dollars);
+                    messageAPI.sendUnsuficientMoneyMessage(player, getPrice() - dollars);
                 }
             } else {
-                API.getMessageAPI().sendFullInventoryMessage(player);
+                messageAPI.sendFullInventoryMessage(player);
             }
         } else {
             long time = profileSkyblock.getCooldown();
-            API.getMessageAPI().sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
+            messageAPI.sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
         }
     }
 }

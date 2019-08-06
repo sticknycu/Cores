@@ -3,7 +3,9 @@ package nycuro.ai.entity;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import me.onebone.actaeon.entity.monster.Zombie;
-import nycuro.api.API;
+
+import static nycuro.api.API.aiAPI;
+import static nycuro.api.API.mainAPI;
 
 /**
  * author: NycuRO
@@ -13,7 +15,7 @@ import nycuro.api.API;
 public class BossEntity extends Zombie {
 
     public BossEntity() {
-        super(API.getMainAPI().getServer().getDefaultLevel().getChunk(1139 >> 4, 1133 >> 4), API.getAiAPI().getBossNBT());
+        super(mainAPI.getServer().getDefaultLevel().getChunk(1139 >> 4, 1133 >> 4), aiAPI.getBossNBT());
         this.setNameTag("§a» §cThe Boss §a«§r");
         this.setMaxHealth(100);
         this.setHealth(100F);

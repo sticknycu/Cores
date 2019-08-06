@@ -19,9 +19,13 @@ import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.nbt.tag.CompoundTag;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.mechanicAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.combatAPI;
 
 /**
  * author: NycuRO
@@ -34,7 +38,7 @@ public class ProtectionHandlers implements Listener {
     public void onBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-        if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
+        if (mechanicAPI.isOnPrincipalWorld(player)) {
             event.setCancelled(true);
             // Job Miner
             switch (event.getBlock().getId()) {
@@ -54,7 +58,7 @@ public class ProtectionHandlers implements Listener {
                             item.setNamedTag(tag);
                             PlayerInventory playerInventory = player.getInventory();
                             if (!playerInventory.canAddItem(item)) {
-                                API.getMessageAPI().sendFullInventoryMessage(player);
+                                messageAPI.sendFullInventoryMessage(player);
                             } else {
                                 playerInventory.addItem(item);
                             }
@@ -77,7 +81,7 @@ public class ProtectionHandlers implements Listener {
                             item.setNamedTag(tag);
                             PlayerInventory playerInventory = player.getInventory();
                             if (!playerInventory.canAddItem(item)) {
-                                API.getMessageAPI().sendFullInventoryMessage(player);
+                                messageAPI.sendFullInventoryMessage(player);
                             } else {
                                 playerInventory.addItem(item);
                             }
@@ -85,7 +89,7 @@ public class ProtectionHandlers implements Listener {
                     }
                     return;
             }
-            API.getMessageAPI().sendBreakMessage(player);
+            messageAPI.sendBreakMessage(player);
         }
     }
 
@@ -93,16 +97,16 @@ public class ProtectionHandlers implements Listener {
     @EventHandler
     public void onReceiveFish(InventoryPickupItemEvent event) {
         Item item = event.getItem().getItem();
-        Player player = API.getMainAPI().getServer().getPlayer(event.getItem().getOwner());
+        Player player = mainAPI.getServer().getPlayer(event.getItem().getOwner());
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-        if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
+        if (mechanicAPI.isOnPrincipalWorld(player)) {
             if (profileSkyblock.getJob() == 4) {
                 CompoundTag tag = item.getNamedTag();
                 tag.putBoolean("JOB", true);
                 item.setNamedTag(tag);
                 PlayerInventory playerInventory = player.getInventory();
                 if (!playerInventory.canAddItem(item)) {
-                    API.getMessageAPI().sendFullInventoryMessage(player);
+                    messageAPI.sendFullInventoryMessage(player);
                 } else {
                     playerInventory.addItem(item);
                 }
@@ -118,7 +122,7 @@ public class ProtectionHandlers implements Listener {
             event.setCancelled(true);
         }
         Player player = (Player) event.getEntity();
-        if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
+        if (mechanicAPI.isOnPrincipalWorld(player)) {
             event.setCancelled(true);
         }
     }
@@ -136,16 +140,16 @@ public class ProtectionHandlers implements Listener {
             } else if (ev.getDamager() instanceof Player) damager = (Player) ev.getDamager();
 
             if (damager == null) return;
-            if (API.getMechanicAPI().isOnSpawn(player)) {
+            if (mechanicAPI.isOnSpawn(player)) {
                 event.setCancelled(true);
-                API.getMessageAPI().sendPvPOffMessage(damager);
+                messageAPI.sendPvPOffMessage(damager);
             }
             for (Player pl : new Player[]{player, damager}) {
-                if (API.getMechanicAPI().isOnSpawn(pl)) break;
-                if (!API.getCombatAPI().inCombat(pl)) {
-                    if (API.getMainAPI().bossbar.get(pl.getUniqueId()) != null) {
-                        API.getMainAPI().bossbar.get(pl.getUniqueId()).setText("§7-§8=§7- §7CombatLogger: §6§l13 §7-§8=§7-");
-                        API.getMainAPI().bossbar.get(pl.getUniqueId()).setLength(100F);
+                if (mechanicAPI.isOnSpawn(pl)) break;
+                if (!combatAPI.inCombat(pl)) {
+                    if (mainAPI.bossbar.get(pl.getUniqueId()) != null) {
+                        mainAPI.bossbar.get(pl.getUniqueId()).setText("§7-§8=§7- §7CombatLogger: §6§l13 §7-§8=§7-");
+                        mainAPI.bossbar.get(pl.getUniqueId()).setLength(100F);
                     }
                 }
             }
@@ -161,10 +165,10 @@ public class ProtectionHandlers implements Listener {
         Player player = event.getPlayer();
         PlayerInventory inventory = player.getInventory();
         Item inHand = inventory.getItemInHand();
-        if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
+        if (mechanicAPI.isOnPrincipalWorld(player)) {
             event.setCancelled(true);
             inventory.removeItem(inHand);
-            API.getMessageAPI().sendSmecherieMessage(player);
+            messageAPI.sendSmecherieMessage(player);
         }
     }
 
@@ -173,10 +177,10 @@ public class ProtectionHandlers implements Listener {
         Player player = event.getPlayer();
         PlayerInventory inventory = player.getInventory();
         Item inHand = inventory.getItemInHand();
-        if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
+        if (mechanicAPI.isOnPrincipalWorld(player)) {
             event.setCancelled(true);
             inventory.removeItem(inHand);
-            API.getMessageAPI().sendSmecherieMessage(player);
+            messageAPI.sendSmecherieMessage(player);
         }
     }
 
@@ -199,8 +203,8 @@ public class ProtectionHandlers implements Listener {
                 case Item.STONE_HOE:
                 case Item.WOODEN_HOE:
                 case Item.FLINT_AND_STEEL:
-                    if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
-                        API.getMessageAPI().sendAbuseMessage(player);
+                    if (mechanicAPI.isOnPrincipalWorld(player)) {
+                        messageAPI.sendAbuseMessage(player);
                         event.setCancelled(true);
                         return;
                     }
@@ -219,9 +223,9 @@ public class ProtectionHandlers implements Listener {
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
-        if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
+        if (mechanicAPI.isOnPrincipalWorld(player)) {
             event.setCancelled(true);
-            API.getMessageAPI().sendPlaceMessage(player);
+            messageAPI.sendPlaceMessage(player);
         }
     }
 }

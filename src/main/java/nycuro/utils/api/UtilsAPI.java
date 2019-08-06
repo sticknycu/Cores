@@ -6,7 +6,6 @@ import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
@@ -16,12 +15,15 @@ import nycuro.utils.commands.UtilsCommandManager;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+
 /**
  * author: NycuRO
  * SkyblockCore Project
  * API 1.0.0
  */
-public class UtilsAPI extends API {
+public class UtilsAPI {
 
     public static WarpUtils warpUtils;
     private double cost = 0;
@@ -30,9 +32,8 @@ public class UtilsAPI extends API {
         return warpUtils;
     }
 
-    @Override
     public void registerCommands() {
-        UtilsCommandManager.registerAll(getMainAPI());
+        UtilsCommandManager.registerAll(mainAPI);
     }
 
     private void repairItemHand(Player player) {
@@ -47,9 +48,9 @@ public class UtilsAPI extends API {
             playerInventory.remove(item);
             item.setDamage(0);
             playerInventory.addItem(item);
-            API.getMessageAPI().sendRepairItemMessage(player, item);
+            messageAPI.sendRepairItemMessage(player, item);
         } else if (moneyPlayer < cost) {
-            API.getMessageAPI().sendUnsuficientMoneyMessage(player, insufficient);
+            messageAPI.sendUnsuficientMoneyMessage(player, insufficient);
         }
     }
 

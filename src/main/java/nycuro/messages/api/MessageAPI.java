@@ -27,22 +27,20 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
+import static nycuro.api.API.*;
+
 /**
  * author: NycuRO
  * SkyblockCore Project
  * API 1.0.0
  */
-public class MessageAPI extends API {
+public class MessageAPI {
 
     public MessagesObject messagesObject = new MessagesObject();
 
-    @Override
-    public void registerCommands() {
-    }
-
     public void init() {
         try {
-            File file = new File(getMainAPI().getDataFolder() + "/language/lang_en.json");
+            File file = new File(mainAPI.getDataFolder() + "/language/lang_en.json");
             API.log("Checking for existance of Language file... ");
             if (file.exists()) {
                 API.log("I've found an file [EN]... Let's get all information..");
@@ -564,8 +562,8 @@ public class MessageAPI extends API {
 
     private String getRank(IPlayer player) {
         String rank = "";
-        if (API.getMainAPI().getServer().lookupName(player.getName()).isPresent()) {
-            String group = giveMeADamnUser(API.getMainAPI().getServer().lookupName(player.getName()).get()).getPrimaryGroup().toUpperCase();
+        if (mainAPI.getServer().lookupName(player.getName()).isPresent()) {
+            String group = giveMeADamnUser(mainAPI.getServer().lookupName(player.getName()).get()).getPrimaryGroup().toUpperCase();
             String sGroup = group.toLowerCase();
             switch (sGroup) {
                 case "default":
@@ -615,7 +613,7 @@ public class MessageAPI extends API {
                         "§eExperience: §6" + profileSkyblock.getExperience() + "/" + profileSkyblock.getNecesary() + "\n" +
                         "§eFirst Join: §6" + simple.format(firstPlay) + "\n" +
                         "§eOnline: §6" + (player.isOnline() ? "§3YES§6" : simple.format(lastPlay))  + "\n" +
-                        (player.isOnline() ? ("§eOnline on this session: §6" + API.time(System.currentTimeMillis() - API.getMainAPI().played.getLong(player.getUniqueId()))) + "\n" : "") +
+                        (player.isOnline() ? ("§eOnline on this session: §6" + API.time(System.currentTimeMillis() - mainAPI.played.getLong(player.getUniqueId()))) + "\n" : "") +
                         "§eOnline Time: §6" + API.time(profileSkyblock.getTime()) + "\n" +
                         "§eDollars: §6" + profileSkyblock.getDollars() + "\n" +
                         "§eGems: §6" + profileProxy.getGems() + "\n" +
@@ -624,7 +622,7 @@ public class MessageAPI extends API {
                         "§eVotes: §6" + profileProxy.getVotes() + "\n" +
                         (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + player.getPlayer().getAddress()) : ("")) + "\n") : ("")) +
                         (player.isOnline() ? ((commandSender.isOp() ? ("§eDevice Model: §6" + player.getPlayer().getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
-                        (player.isOnline() ? ("§eOS: §6" + API.getMechanicAPI().getOS(player.getPlayer()) + "\n") : "");
+                        (player.isOnline() ? ("§eOS: §6" + mechanicAPI.getOS(player.getPlayer()) + "\n") : "");
                 break;
             case 1:
                 STRING = "         Profile Info:\n\n" +
@@ -634,7 +632,7 @@ public class MessageAPI extends API {
                         "§eExperienta: §6" + profileSkyblock.getExperience() + "/" + profileSkyblock.getNecesary() + "\n" +
                         "§ePrima data cand ai intrat pe Sectiune: §6" + simple.format(firstPlay) + "\n" +
                         "§eOnline: §6" + (player.isOnline() ? "§3DA§6" : simple.format(lastPlay))  + "\n" +
-                        (player.isOnline() ? ("§eOnline pe aceasta sesiune: §6" + API.time(System.currentTimeMillis() - API.getMainAPI().played.getLong(player.getUniqueId()))) + "\n" : "") +
+                        (player.isOnline() ? ("§eOnline pe aceasta sesiune: §6" + API.time(System.currentTimeMillis() - mainAPI.played.getLong(player.getUniqueId()))) + "\n" : "") +
                         "§eTimp Online: §6" + API.time(profileSkyblock.getTime()) + "\n" +
                         "§eDolari: §6" + profileSkyblock.getDollars() + "\n" +
                         "§eGems: §6" + profileProxy.getGems() + "\n" +
@@ -643,7 +641,7 @@ public class MessageAPI extends API {
                         "§eVoturi: §6" + profileProxy.getVotes() + "\n" +
                         (player.isOnline() ? ((commandSender.isOp() ? ("§eIP: §6" + player.getPlayer().getAddress()) : ("")) + "\n") : ("")) +
                         (player.isOnline() ? ((commandSender.isOp() ? ("§eDevice Model: §6" + player.getPlayer().getLoginChainData().getDeviceModel()) : ("")) + "\n") : "") +
-                        (player.isOnline() ? ("§eOS: §6" + API.getMechanicAPI().getOS(player.getPlayer()) + "\n") : "");
+                        (player.isOnline() ? ("§eOS: §6" + mechanicAPI.getOS(player.getPlayer()) + "\n") : "");
                 break;
         }
         return STRING;
@@ -653,10 +651,10 @@ public class MessageAPI extends API {
         int lang = Database.profileProxy.getOrDefault(player.getName(), new ProfileProxy(player.getName(), 0,0,0,0)).getLanguage();
         switch (lang) {
             case 0:
-                STRING = "§7| §fOnline Players: §6" + API.getMainAPI().getServer().getOnlinePlayers().size() + "    ";
+                STRING = "§7| §fOnline Players: §6" + mainAPI.getServer().getOnlinePlayers().size() + "    ";
                 break;
             case 1:
-                STRING = "§7| §fJucatori Online: §6" + API.getMainAPI().getServer().getOnlinePlayers().size() + "    ";
+                STRING = "§7| §fJucatori Online: §6" + mainAPI.getServer().getOnlinePlayers().size() + "    ";
                 break;
         }
         return STRING;

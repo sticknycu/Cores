@@ -14,11 +14,14 @@ import cn.nukkit.event.inventory.InventoryPickupItemEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.jobs.NameJob;
 import nycuro.jobs.objects.JobsObject;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.mechanicAPI;
 
 /**
  * Project: SkyblockCore
@@ -41,21 +44,21 @@ public class JobsHandlers implements Listener {
 
             ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(damager.getName());
             if (entity.namedTag.getBoolean("minerNPC")) {
-                if (API.getMainAPI().jobsObject.get(damager.getUniqueId()) != null) API.getMainAPI().jobsObject.remove(damager.getUniqueId());
+                if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(1);
-                API.getMessageAPI().sendReceiveJobMessage(damager, NameJob.MINER);
+                messageAPI.sendReceiveJobMessage(damager, NameJob.MINER);
             } else if (entity.namedTag.getBoolean("butcherNPC")) {
-                if (API.getMainAPI().jobsObject.get(damager.getUniqueId()) != null) API.getMainAPI().jobsObject.remove(damager.getUniqueId());
+                if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(2);
-                API.getMessageAPI().sendReceiveJobMessage(damager, NameJob.BUTCHER);
+                messageAPI.sendReceiveJobMessage(damager, NameJob.BUTCHER);
             } else if (entity.namedTag.getBoolean("farmerNPC")) {
-                if (API.getMainAPI().jobsObject.get(damager.getUniqueId()) != null) API.getMainAPI().jobsObject.remove(damager.getUniqueId());
+                if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(3);
-                API.getMessageAPI().sendReceiveJobMessage(damager, NameJob.FARMER);
+                messageAPI.sendReceiveJobMessage(damager, NameJob.FARMER);
             } else if (entity.namedTag.getBoolean("fishermanNPC")) {
-                if (API.getMainAPI().jobsObject.get(damager.getUniqueId()) != null) API.getMainAPI().jobsObject.remove(damager.getUniqueId());
+                if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(4);
-                API.getMessageAPI().sendReceiveJobMessage(damager, NameJob.FISHERMAN);
+                messageAPI.sendReceiveJobMessage(damager, NameJob.FISHERMAN);
             } else if (entity.namedTag.getBoolean("mobfarmerNPC")) {
                 // TODO: Mob farm
             }
@@ -67,9 +70,9 @@ public class JobsHandlers implements Listener {
         Player player = event.getPlayer();
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         // Get Money
-        JobsObject jobsObject = API.getMainAPI().jobsObject.get(player.getUniqueId());
+        JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
         if (jobsObject == null) return;
-        if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
+        if (mechanicAPI.isOnPrincipalWorld(player)) {
             event.setCancelled(true);
             // Job Miner
             switch (event.getBlock().getId()) {
@@ -82,8 +85,8 @@ public class JobsHandlers implements Listener {
                 case Block.REDSTONE_ORE:
                     if (profileSkyblock.getJob() == 1) {
                         event.setDrops(new Item[0]);
-                        if (API.getMechanicAPI().checkItems(player, event.getDrops())) {
-                            player.sendMessage(API.getMessageAPI().sendFinishedMissionMessage(player));
+                        if (mechanicAPI.checkItems(player, event.getDrops())) {
+                            player.sendMessage(messageAPI.sendFinishedMissionMessage(player));
                             event.setCancelled();
                         }
                     }
@@ -97,14 +100,14 @@ public class JobsHandlers implements Listener {
                 case Block.HAY_BALE:
                     if (profileSkyblock.getJob() == 3) {
                         event.setDrops(new Item[0]);
-                        if (API.getMechanicAPI().checkItems(player, event.getDrops())) {
-                            player.sendMessage(API.getMessageAPI().sendFinishedMissionMessage(player));
+                        if (mechanicAPI.checkItems(player, event.getDrops())) {
+                            player.sendMessage(messageAPI.sendFinishedMissionMessage(player));
                             event.setCancelled();
                         }
                     }
                     return;
             }
-            API.getMessageAPI().sendBreakMessage(player);
+            messageAPI.sendBreakMessage(player);
         }
     }
 
@@ -117,11 +120,11 @@ public class JobsHandlers implements Listener {
         PlayerInventory playerInventory = (PlayerInventory) event.getInventory();
         playerInventory.getViewers().forEach( (player) -> {
             ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-            if (API.getMechanicAPI().isOnPrincipalWorld(player)) {
+            if (mechanicAPI.isOnPrincipalWorld(player)) {
                 if (profileSkyblock.getJob() == 4) {
                     event.getItem().kill();
-                    if (API.getMechanicAPI().checkItems(player, event.getItem().getItem())) {
-                        player.sendMessage(API.getMessageAPI().sendFinishedMissionMessage(player));
+                    if (mechanicAPI.checkItems(player, event.getItem().getItem())) {
+                        player.sendMessage(messageAPI.sendFinishedMissionMessage(player));
                         event.setCancelled();
                     }
                 }
@@ -135,14 +138,14 @@ public class JobsHandlers implements Listener {
         Entity eventEntity = event.getEntity();
         if (!(((EntityDamageByEntityEvent) eventEntity.getLastDamageCause()).getDamager() instanceof Player)) event.setCancelled();
         Player killer = (Player) ((EntityDamageByEntityEvent) eventEntity.getLastDamageCause()).getDamager();
-        if (API.getMechanicAPI().isOnArea(killer)) event.setCancelled();
+        if (mechanicAPI.isOnArea(killer)) event.setCancelled();
         ProfileSkyblock profile = Database.profileSkyblock.get(killer.getName());
-        JobsObject jobsObject = API.getMainAPI().jobsObject.get(killer.getUniqueId());
+        JobsObject jobsObject = mainAPI.jobsObject.get(killer.getUniqueId());
         int job = profile.getJob();
         if (job == 2) {
             int[] integers = jobsObject.getCountAnimals();
             if (integers[0] == 0 && integers[1] == 0 && integers[2] == 0 && integers[3] == 0) {
-                killer.sendMessage(API.getMessageAPI().sendFinishedMissionMessage(killer));
+                killer.sendMessage(messageAPI.sendFinishedMissionMessage(killer));
                 event.setCancelled();
             }
             switch (eventEntity.getNetworkId()) {
@@ -187,7 +190,7 @@ public class JobsHandlers implements Listener {
             player.teleport(player.getServer().getDefaultLevel().getSpawnLocation());
             player.removeAllEffects();
             player.getInventory().clearAll();
-            API.getMessageAPI().sendDeadMessage(player, damager);
+            messageAPI.sendDeadMessage(player, damager);
             ProfileSkyblock profilePlayer = Database.profileSkyblock.get(player.getName());
             ProfileSkyblock profileDamager = Database.profileSkyblock.get(damager.getName()); // Todo: Zombies, Monsters.
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);

@@ -2,12 +2,15 @@ package nycuro.jobs.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.jobs.NameJob;
 import nycuro.jobs.commands.CommandBaseJobs;
 import nycuro.jobs.objects.JobsObject;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.jobsAPI;
 
 /**
  * author: NycuRO
@@ -25,25 +28,25 @@ public class WorkCommand extends CommandBaseJobs {
         Player player = (Player) commandSender;
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         if (profileSkyblock.getJob() == 0) {
-            API.getMessageAPI().sendNoJobMessage(player);
+            messageAPI.sendNoJobMessage(player);
         } else {
             NameJob job = NameJob.getType(profileSkyblock.getJob());
-            JobsObject jobsObject = API.getMainAPI().jobsObject.get(player.getUniqueId());
+            JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
             if (jobsObject != null) {
-                API.getJobsAPI().handleMission(player);
+                jobsAPI.handleMission(player);
             } else {
                 switch (job) {
                     case MINER:
-                        API.getJobsAPI().processMissionOnMiner(player);
+                        jobsAPI.processMissionOnMiner(player);
                         break;
                     case FARMER:
-                        API.getJobsAPI().processMissionOnFarmer(player);
+                        jobsAPI.processMissionOnFarmer(player);
                         break;
                     case BUTCHER:
-                        API.getJobsAPI().processMissionOnButcher(player);
+                        jobsAPI.processMissionOnButcher(player);
                         break;
                     case FISHERMAN:
-                        API.getJobsAPI().processMissionOnFisherman(player);
+                        jobsAPI.processMissionOnFisherman(player);
                         break;
                 }
             }

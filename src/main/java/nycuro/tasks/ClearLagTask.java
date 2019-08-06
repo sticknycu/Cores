@@ -5,10 +5,13 @@ import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.item.EntityItem;
 import cn.nukkit.level.Level;
 import cn.nukkit.scheduler.Task;
-import nycuro.api.API;
 
 import java.util.Collection;
 import java.util.List;
+
+import static nycuro.api.API.mainAPI;
+import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.databaseAPI;
 
 /**
  * author: NycuRO
@@ -21,13 +24,13 @@ public class ClearLagTask extends Task {
     public void onRun(int i) {
         String message = "";
         try {
-            for (Player player : API.getMainAPI().getServer().getOnlinePlayers().values()) {
-                message = API.getMessageAPI().sendMobDespawnMessage(player);
+            for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
+                message = messageAPI.sendMobDespawnMessage(player);
                 player.sendMessage(message);
                 try {
                     Thread.sleep(1000 * 30);
                 } finally {
-                    for (Level level : API.getMainAPI().getServer().getLevels().values()) {
+                    for (Level level : mainAPI.getServer().getLevels().values()) {
                         for (Entity entity : level.getEntities()) {
                             switch (entity.getNetworkId()) {
                                 case 10:
@@ -43,12 +46,12 @@ public class ClearLagTask extends Task {
                             if (entity instanceof EntityItem) entity.close();
                         }
                     }
-                    message = API.getMessageAPI().sendMobDespawnFinishMessage(player);
+                    message = messageAPI.sendMobDespawnFinishMessage(player);
                     player.sendMessage(message);
                 }
             }
             // Clear the damn weather shit
-            for (Level level : API.getMainAPI().getServer().getLevels().values()) {
+            for (Level level : mainAPI.getServer().getLevels().values()) {
                 if (level.isThundering()) {
                     level.setThundering(false);
                 }
@@ -57,12 +60,12 @@ public class ClearLagTask extends Task {
                 }
             }
             // Check for deletion old reports
-            List<String> names = API.getDatabase().getPlayerMap();
+            List<String> names = databaseAPI.getPlayerMap();
             for (String name : names) {
-                Collection<Long> timers = API.getDatabase().getTimersPlayerReport(name);
+                Collection<Long> timers = databaseAPI.getTimersPlayerReport(name);
                 for (long time : timers) {
                     if ((1000 * 60 * 60 * 48 - (System.currentTimeMillis() - time)) <= 0) {
-                        API.getDatabase().deleteReport(name);
+                        databaseAPI.deleteReport(name);
                     }
                 }
             }
