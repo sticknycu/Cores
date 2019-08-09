@@ -52,13 +52,18 @@ public class JobsAPI {
     }
 
     private void sendInfoMessageJobs(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Info Jobs");
-        infoMenu.addElement(new ElementLabel(messageAPI.sendInfoMessageJobs(player)));
+        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("jobs.form.first"));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.top")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.miner")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.butcher")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.farmer")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.fisherman")));
         player.showFormWindow(infoMenu);
     }
 
     public void getJob(Player player) {
-        FormWindowSimple jobsMenu = new FormWindowSimple("Jobs", messageAPI.sendJobPrincipalModal(player));
+        FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.get.first"),
+                messageAPI.messagesObject.translateMessage("jobs.form.get.top"));
         jobsMenu.addButton(new ElementButton("Teleport to Jobs", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/nujWKR3.png")));
         jobsMenu.addButton(new ElementButton("Without Job", new ElementButtonImageData("url", "https://i.imgur.com/YXBNPBc.png")));
@@ -115,7 +120,7 @@ public class JobsAPI {
         FormWindowCustom infoMenu = new FormWindowCustom("Handle Mission");
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         int job = profileSkyblock.getJob();
-        infoMenu.addElement(new ElementLabel(messageAPI.sendHandleMissions(player)));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.handle.first")));
         JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
         if (job != 2) {
             Item[] items = jobsObject.getItems();
@@ -128,12 +133,14 @@ public class JobsAPI {
                     }
                 }
                 try { // idk why
-                    infoMenu.addElement(new ElementLabel("§fItem§e: §6" + item.getName()));
-                    infoMenu.addElement(new ElementLabel("§fCount§e: " + "[§6" + i + "/" + item.getCount() + "§f]\n\n"));
+                    infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.handle.item", item.getName())));
+                    infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.handle.count",
+                            mainAPI.emptyNoSpace + i, mainAPI.emptyNoSpace + item.getCount())));
                 } catch (NullPointerException e) {
                 }
             }
-            infoMenu.addElement(new ElementLabel("§aReward: §e" + API.round(jobsObject.getReward(), 2) + " Dollars"));
+            infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.handle.reward",
+                    mainAPI.emptyNoSpace + API.round(jobsObject.getReward(), 2))));
             player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
                 @Override
                 public void accept(Map<Integer, Object> response) {
@@ -142,10 +149,11 @@ public class JobsAPI {
                             ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                             profileSkyblock.setDollars(profileSkyblock.getDollars() + jobsObject.getReward());
                             player.getInventory().removeItem(items);
-                            messageAPI.sendFinishedMissionMessage(player, jobsObject.getReward());
+                            player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.finished",
+                                    mainAPI.emptyNoSpace + jobsObject.getReward()));
                             mainAPI.jobsObject.remove(player.getUniqueId());
                         } else {
-                            messageAPI.sendNotEnoughMaterialsMessage(player);
+                            player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.enough.materials"));
                         }
                     }
                 }
@@ -170,10 +178,11 @@ public class JobsAPI {
                                 jobsObject.getCountAnimals()[3] == 0) {
                             ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                             profileSkyblock.setDollars(profileSkyblock.getDollars() + jobsObject.getReward());
-                            messageAPI.sendFinishedMissionMessage(player, jobsObject.getReward());
+                            player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.finished",
+                                    mainAPI.emptyNoSpace + jobsObject.getReward()));
                             mainAPI.jobsObject.remove(player.getUniqueId());
                         } else {
-                            messageAPI.sendNotEnoughKillsMessage(player);
+                            player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.enough.kills"));
                         }
                     }
                 }
@@ -182,7 +191,8 @@ public class JobsAPI {
     }
 
     public void processMissionOnMiner(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple("Process Miner JobPlayer", messageAPI.sendProcessMission(player));
+        FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Miner"),
+                messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process.form"));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
             if (jobs.get(NameJob.MINER).isLocked(player, typeJob)) color = TextFormat.RED;
@@ -257,7 +267,8 @@ public class JobsAPI {
     }
 
     public void processMissionOnButcher(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple("Process Butcher JobPlayer", messageAPI.sendProcessMission(player));
+        FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Butcher"),
+                messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process.form"));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
             if (jobs.get(NameJob.BUTCHER).isLocked(player, typeJob)) color = TextFormat.RED;
@@ -331,7 +342,8 @@ public class JobsAPI {
     }
 
     public void processMissionOnFarmer(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple("Process Farmer JobPlayer", messageAPI.sendProcessMission(player));
+        FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Farmer"),
+                messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process.form"));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
             if (jobs.get(NameJob.FARMER).isLocked(player, typeJob)) color = TextFormat.RED;
@@ -405,7 +417,8 @@ public class JobsAPI {
     }
 
     public void processMissionOnFisherman(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple("Process Fisherman JobPlayer", messageAPI.sendProcessMission(player));
+        FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Fisherman"),
+                messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process.form"));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
             if (jobs.get(NameJob.FISHERMAN).isLocked(player, typeJob)) color = TextFormat.RED;

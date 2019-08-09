@@ -27,18 +27,18 @@ public class SetCoinsCommand extends CommandBaseEconomy {
         }
 
         if (strings.length == 0) {
-            messageAPI.addMoneyExceptionMessage((Player) commandSender);
+            sendUsage(commandSender);
         } else if (strings.length == 1) {
             double count = Double.valueOf(strings[0]);
             Database.profileSkyblock.get(commandSender.getName()).setDollars(count);
-            messageAPI.setSelfMoneyMessage((Player) commandSender, count);
+            commandSender.sendMessage(messageAPI.messagesObject.translateMessage("commands.money.now", mainAPI.emptyNoSpace + count));
         } else if (strings.length == 2) {
             Player player = mainAPI.getServer().getPlayerExact(strings[0]);
             double count = Double.valueOf(strings[1]);
             Database.profileSkyblock.get(player.getName()).setDollars(count);
-            messageAPI.setPlayerMoneyMessage(commandSender, player, count);
+            commandSender.sendMessage(messageAPI.messagesObject.translateMessage("commands.money.now", mainAPI.emptyNoSpace + count));
         } else {
-            messageAPI.addMoneyExceptionMessage((Player) commandSender);
+            sendUsage(commandSender);
             return true;
         }
 

@@ -37,14 +37,14 @@ public class TPAcceptCommand extends CommandBaseTeleportation {
         }
         Player to = (Player) sender;
         if (teleportationAPI.getLatestTPRequestTo(to) == null) {
-            sender.sendMessage(messageAPI.messagesObject.getMessages().get("commands.tpaccept.noRequest"));
+            sender.sendMessage(messageAPI.messagesObject.messages.get("commands.tpaccept.noRequest"));
             return false;
         }
         TPRequest request;
         Player from;
         if (args.length == 0) {
             if ((request = teleportationAPI.getLatestTPRequestTo(to)) == null) {
-                sender.sendMessage(messageAPI.messagesObject.getMessages().get("commands.tpaccept.unavailable"));
+                sender.sendMessage(messageAPI.messagesObject.messages.get("commands.tpaccept.unavailable"));
                 return false;
             }
             from = request.getFrom();
@@ -60,15 +60,15 @@ public class TPAcceptCommand extends CommandBaseTeleportation {
             }
         }
         if (request == null) {
-            sender.sendMessage(messageAPI.messagesObject.getMessages().get("commands.tpaccept.noRequest"));
+            sender.sendMessage(messageAPI.messagesObject.messages.get("commands.tpaccept.noRequest"));
             return false;
         }
         from.sendMessage(messageAPI.messagesObject.translateMessage("commands.tpaccept.accepted", to.getName()));
-        sender.sendMessage(messageAPI.messagesObject.getMessages().get("commands.generic.teleporting"));
+        sender.sendMessage(messageAPI.messagesObject.messages.get("commands.generic.teleporting"));
         if (request.isTo()) {
-            teleportationAPI.onTP(from, request.getLocation(), messageAPI.messagesObject.getMessages().get("commands.generic.teleporting"));
+            teleportationAPI.onTP(from, request.getLocation(), messageAPI.messagesObject.messages.get("commands.generic.teleporting"));
         } else {
-            teleportationAPI.onTP(to, request.getLocation(), messageAPI.messagesObject.getMessages().get("commands.generic.teleporting"));
+            teleportationAPI.onTP(to, request.getLocation(), messageAPI.messagesObject.messages.get("commands.generic.teleporting"));
         }
         teleportationAPI.removeTPRequestBetween(from, to);
         return true;

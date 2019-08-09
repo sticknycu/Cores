@@ -21,24 +21,28 @@ public class AddCoinsCommand extends CommandBaseEconomy {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        if (strings.length == 0) {
-            messageAPI.addMoneyExceptionMessage((Player) commandSender);
-        } else if (strings.length == 1) {
-            double money = Database.profileSkyblock.get(commandSender.getName()).getDollars();
-            double count = Double.valueOf(strings[0]);
-            Database.profileSkyblock.get(commandSender.getName()).setDollars(Database.profileSkyblock.get(commandSender.getName()).getDollars() + count);
-            messageAPI.addSelfMoneyMessage((Player) commandSender, money, count);
-        } else if (strings.length == 2) {
-            Player player = mainAPI.getServer().getPlayerExact(strings[0]);
-            double money = Database.profileSkyblock.get(commandSender.getName()).getDollars();
-            double count = Double.valueOf(strings[1]);
-            Database.profileSkyblock.get(player.getName()).setDollars(Database.profileSkyblock.get(commandSender.getName()).getDollars() + count);
-            messageAPI.addSelfMoneyMessage((Player) commandSender, money, count);
-
-        } else {
-            messageAPI.addMoneyExceptionMessage((Player) commandSender);
+        if (!commandSender.hasPermission("core.addcoins")) {
+            commandSender.sendMessage(this.getPermissionMessage());
             return true;
         }
+        double money = 0;
+        double count = 0;
+        if (strings.length == 0) {
+            sendUsage(commandSender);
+        } else if (strings.length == 1) {
+            money = Database.profileSkyblock.get(commandSender.getName()).getDollars();
+            count = Double.valueOf(strings[0]);
+            Database.profileSkyblock.get(commandSender.getName()).setDollars(money + count);
+        } else if (strings.length == 2) {
+            Player player = mainAPI.getServer().getPlayerExact(strings[0]);
+            money = Database.profileSkyblock.get(commandSender.getName()).getDollars();
+            count = Double.valueOf(strings[1]);
+            Database.profileSkyblock.get(player.getName()).setDollars(money + count);
+        } else {
+            sendUsage(commandSender);
+            return true;
+        }
+        commandSender.sendMessage(messageAPI.messagesObject.translateMessage("commands.money.now", mainAPI.emptyNoSpace + (money + count)));
         return true;
     }
 }

@@ -74,7 +74,7 @@ public class ButcherJob extends CommonJob {
     @Override
     public void processMission(Player player, TypeJob typeJob, Consumer<Object> consumer) {
         if (getStatus(player, typeJob).equals(StatusJobs.LOCKED)) {
-            player.sendMessage(messageAPI.sendLockedJobStatus(player));
+            player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.locked"));
         } else {
             int[] collection = new int[5];
             if (typeJob.equals(TypeJob.EASY)) {

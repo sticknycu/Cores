@@ -42,7 +42,7 @@ public class TPAHereCommand extends CommandBaseTeleportation {
             return false;
         }
         if (sender == player) {
-            sender.sendMessage(messageAPI.messagesObject.getMessages().get("commands.tpa.self"));
+            sender.sendMessage(messageAPI.messagesObject.messages.get("commands.tpa.self"));
             return false;
         }
         teleportationAPI.requestTP((Player) sender, player, false);

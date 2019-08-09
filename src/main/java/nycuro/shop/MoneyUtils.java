@@ -12,6 +12,7 @@ import nycuro.database.objects.ProfileSkyblock;
 
 import java.util.Map;
 
+import static nycuro.api.API.mainAPI;
 import static nycuro.api.API.messageAPI;
 
 /**
@@ -408,7 +409,8 @@ public class MoneyUtils {
                 player.getInventory().addItem(item);
                 messageAPI.sendBuyItemMessage(player, item, priceFinal);
             } else if (moneyCount < priceFinal) {
-                messageAPI.sendUnsuficientMoneyMessage(player, needed);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("generic.money.enough",
+                        mainAPI.emptyNoSpace + moneyCount, mainAPI.emptyNoSpace + needed));
             }
         }
     }
@@ -490,7 +492,8 @@ public class MoneyUtils {
                         player.getInventory().setItem(index, item);
                         messageAPI.sendEnchantItemMessage(player, item, priceFinalMoney);
                     } else if (moneyCount < priceFinalMoney) {
-                        messageAPI.sendUnsuficientMoneyMessage(player, neededMoney);
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("generic.money.enough",
+                                mainAPI.emptyNoSpace + moneyCount, mainAPI.emptyNoSpace + neededMoney));
                     }
                 } else if (enchantLevel > enchantment.getMaxLevel()) {
                     messageAPI.sendExceptionLevelEnchantMessage(player);

@@ -1,0 +1,279 @@
+{
+  "messages_en": {
+    "commands.generic.cooldown"              : "Please wait {%0} seconds for your cool down to end.",
+    "commands.generic.teleporation.cooldown" : "You will be teleported in {%0} seconds...",
+    "commands.generic.teleporting"           : "Teleporting...",
+    "commands.generic.ingame"                : "You can only perform this command as a player",
+    "commands.generic.player.notfound"       : "Cannot find player {%0}",
+
+    "generic.cooldown"          : "You will be teleported in Spawn in 7 §eseconds..",
+
+    "generic.boss.spawn"        : "Is 21:00 at Romania. Boss Spawned in Arena!",
+
+    "generic.dropparty.spawn"      : "A dropparty will spawn in 1 minute. Because you are online, you get a special key",
+    "generic.dropparty.spawned"    : "DropParty has started! Everyone got DropParty Key. Boss has been showed in Arena and Fireworks is on spawn!",
+    "generic.dropparty.receivekey" : "You have now +1 DropParty Key!",
+
+    "generic.wither.form.first" : "Spawn Wither",
+    "generic.wither.spawn.error"   : "You can't spawn Wither in spawn!",
+    "generic.wither.spawn.count"   : "There are 10 withers spawned! Try again later!",
+    "generic.wither.spawn.success" : "You spawned succesfuly wither!",
+
+    "generic.arena.first"          : "Hello! Welcome to Arena Category. Select what you want to do first",
+    "generic.arena.form.category"  : "Arena Cateogry",
+
+    "generic.money.enough" : "Opsss!!! You don't have enough money! You have: {%0} but you need: {%1}!",
+
+    "generic.inventory.get.error" : "Your inventory it's full or you have equiped an armor, so you can't do this!",
+
+    "generic.timegone" : "It hasn't gone {%0} to use this kit again! Has gone only {%1}!",
+
+    "generic.popup.message.one" : "{%0} DOLLARS \n+{%1} EXP",
+    "generic.popup.message.two" : "{%0} GEMS \n+15 MINS",
+
+    "area.boss.warning" : "You need have level 10+ to enter here!",
+
+    "arena.form.first"    : "Arena Info",
+    "arena.form.top"      : "                      Hello!\n          Welcome to Arena MechanicDropParty!",
+    "arena.form.teleport" : "&c» &aHow to Teleport to Boss?\n&eFor teleporting to boss just tab on 'Boss Arena'.",
+    "arena.form.pvp"      : "&c» &aHow to Teleport to PvP?\n&eFor teleporting to PvP just tab on 'PvP Arena'",
+
+    "arena.form.boss.teleport"       : "Teleport Boss Arena",
+    "arena.form.boss.teleport.first" : "                      Hello!\n         Welcome to Teleport Arena!",
+    "arena.form.boss.teleport.how"   : "&c» §aWhat is 'Teleport Arena'?\n&eTeleport Arena is an option for teleporting to Arena where Boss is spawning.\n&eYou can do that only if you have level 10+\n&eYou will cannot use /tp and other commands for teleporting here. Just /spawn.\n&eBoss is spawning every day at 21:00, 9 PM, GT+2\n&eBe careful, PVP is on!\n&eIf you don't want to be teleported, tap on X!\n&eHave a nice day!",
+
+    "arena.form.pvp.teleport" : "Teleport PvP Arena",
+    "arena.form.pvp.first"    : "                      Hello!\n         Welcome to Teleport Arena!",
+    "arena.form.pvp.how"      : "&c» &aWhat is 'Teleport Arena'?\n&eTeleport Arena is an option for teleporting to PvP Arena.\n&eYou can do that only if you have level 5+\n&eYou will cannot use /tp and other commands for teleporting here. Just /spawn.\n&eBe careful, PVP is on!\n&eIf you don't want to be teleported, tap on X!\n&eHave a nice day!",
+
+    "settings.form.first"         : "Settings Player",
+    "settings.form.toggle.first"  : "Show BossBar",
+    "settings.form.toggle.second" : "Show Scoreboard",
+    "settings.form.toggle.third"  : "Toggle Render Distance",
+
+    "combat.set" : "You have entered combat, logging out now will cause your death. Please wait 13 §eseconds.",
+
+    "crate.title.receive.first"  : "&e&k  &r&5Yoahh?!&k!",
+    "crate.title.receive.second" : "&dYou got &e{%0} &dExperience!",
+
+    "crate.congrats" : "Your lucky number it's {%0}! Congratulations for reward!",
+
+    "commands.dp.description" : "Manage Drop Party!",
+    "commands.dp.usage"       : "/dp",
+
+    "commands.helpop.description" : "Get help from staff",
+    "commands.helpop.usage"       : "/helpop <message>",
+
+    "commands.staffchat.description" : "Go to staff chat",
+    "commands.staffchat.usage"       : "/staffchat or /staffchat <message> or @message on chat",
+
+    "commands.money.now"          : "You have now {%0}",
+    "commands.money.other"        : "{%0} have now {%1}",
+
+    "commands.coins.top.first"   : "Top Coins",
+    "commands.coins.top.message" : "{%0} is position {%1} and have {%2}",
+
+    "commands.addcoins.usage"       : "/addcoins <count> (for youself) or /addcoins <player> <count>",
+    "commands.addcoins.description" : "Add coins to player or yourself",
+
+    "commands.coins.usage"       : "/coins",
+    "commands.coins.description" : "Find how much coins do you have",
+
+    "commands.setcoins.usage"       : "/setcoins <count> (for youself) or /setcoins <player> <count>",
+    "commands.setcoins.description" : "Set coins to player or yourself",
+
+    "mechanic.notwork"       : "This function not work! Use /utils options.",
+    "mechanic.abuse"         : "You abuse! That's not good..",
+    "mechanic.nostaffonline" : "Opsss!!! There's no Staff Online....",
+
+    "homes.form.first" : "Homes",
+    "homes.form.top"   : "Hello! Welcome to Home Category! Select what you want to do",
+
+    "homes.form.create.first"   : "Create a Home",
+    "homes.form.create.input"   : "Please put here name of Home you want to create",
+    "homes.form.create.much"    : "You have too much homes! Count: {%0} Please open /shop and buy more from Premium Shop!",
+    "homes.form.create.exists"  : "This homes already exists!",
+    "homes.form.create.success" : "You succesfully created Home at: X: {%0} Y: {%1} Z: {%2}!",
+
+    "homes.form.list.first" : "Home List",
+    "homes.form.list.top"   : "Hello! Welcome to Home List!",
+
+    "homes.form.info.first"   : "Home {%0}",
+    "homes.form.info.top"     : "Hello! Welcome to Home Info",
+    "homes.form.info.message" : "To teleport to homes just use 'Teleport'.\nTo delete a homes just use 'Delete Home'.",
+
+    "homes.form.teleport.success" : "You succesfully teleported to: X: {%0} Y: {%1} Z: {%2}!",
+    "homes.form.deleted.success"  : "You have succesfully deleted home: {%0}",
+
+    "homes.form.mechanic.first"   : "Home Mechanic",
+    "homes.form.mechanic.top"     : "Hello! Welcome to Home Mechanic!",
+    "homes.form.mechanic.message" : "§c» §aHow to make a Home?\n§eTo make a Home just tab on 'Create a Home'.\n§cATENTION! \n§eYou can have only 2 Home. For more, you need use Premium Shop from /shop\n§c» §aHow to remove a Home? \n§eTo remove a Home just tab on 'Manage Homes', select Home and then tab on 'Delete Home'",
+
+    "commands.home.description" : "Manage Homes",
+    "commands.home.usage"       : "/home",
+
+    "jobs.form.first"     : "Info Jobs",
+    "jobs.form.top"       : "Hello! Welcome to Info Jobs",
+    "jobs.form.miner"     : "§c» §aMiner:\n§eWith that CommonJob you can get money with ores.\n§eGet needed materials and you can get up: §750$",
+    "jobs.form.butcher"   : "§c» §aButcher: \n§eYou can make money with food and obiects from animals\n§eGet needed materials and you can get up: §775$",
+    "jobs.form.farmer"    : "§c» §aFarmer: \n§eYou can make money with this job if you plant.\n§eYou can get money too from Plants or Cultivate Seeds, any kind of Seeds, Saplings and Flowers.\n§eGet needed materials and you can get up: §730$",
+    "jobs.form.fisherman" : "§c» §aFisherman:\n§eWith this CommonJob you can make money if you get fish!\n§eGet needed materials and you can get up: §745$",
+
+    "jobs.form.get.first" : "Jobs",
+    "jobs.form.get.top"   : "Hello! Welcome to CommonJob Category",
+
+    "jobs.form.handle.first"                      : "Hello! Welcome to Handle Mission",
+    "jobs.form.handle.item"                       : "Item: {%0}",
+    "jobs.form.handle.count"                      : "Count: {%0}/{%1}",
+    "jobs.form.handle.reward"                     : "Reward: {%0}",
+    "jobs.form.handle.mission.finished"           : "You finished the mission succesfully! You got: {%0}",
+    "jobs.form.handle.mission.enough.materials"   : "Sorry but you don't have enough materials!",
+    "jobs.form.handle.mission.enough.kills"       : "Sorry but you don't killed enough animals!",
+    "jobs.form.handle.mission.process"            : "Process {%0} Mission",
+    "jobs.form.handle.mission.process.form"       : "Hello! Welcome to Mission Process. Select what you want to do.",
+
+    "commands.job.description" : "Find informations about Jobs",
+    "commands.job.usage"       : "/job",
+
+    "commands.work.description" : "Find informations how you can work",
+    "commands.work.usage"       : "/work",
+
+    "jobs.selected" : "You have successfully selected CommonJob: {%0}! Type /work to start work!",
+    "jobs.locked" : "This mission is LOCKED! Please unlock this mission using Premium Shop (/shop)!",
+
+    "kits.form.category.first" : "Kit Category",
+    "kits.form.category.top"   : "Hello! Welcome to Kit Category. Select what you want to do",
+
+    "kits.form.category.classic.first" : "Classic Kit Category",
+    "kits.form.category.classic.top"   : "Hello! Welcome to Kits Classic Category. Select what you want to do",
+
+    "kits.form.category.premium.first" : "Premium Kit Category",
+    "kits.form.category.premium.top"   : "Hello! Welcome to Kits Premium Category. Select what you want to do",
+
+    "kits.form.category.specific.first" : "Specific Kit Category",
+    "kits.form.category.specific.top"   : "Hello! Welcome to Kits Specific Category. Select what you want to do",
+
+    "kits.form.category.info.first"    : "Info Category Kits",
+    "kits.form.category.info.top"      : "Hello! Welcome to Info Category Kits",
+    "kits.form.category.info.classic"  : "§c» §aClassic Kits:\n§eThere are Kits who are actually so basic and good to start with them in PVP.\n§eThese kits can be buyed by every player.",
+    "kits.form.category.info.premium"  : "§c» §aPremium Kits: \n§eThere are Kits can be unlocked using Premium Shop (/shop).\n§eWhen you unlocked the kit, then this can be buyed.",
+    "kits.form.category.info.specific" : "§c» §aSpecific Kits: \n§eThere are Kits who are specific server.\n§eBecause we are on Skyblock, you wil find a lot of kits for starting an adventure on island.\n§eThese kits can be buyed by every player.",
+
+    "kits.form.category.classic.info.first"      : "Info Classic Kits",
+    "kits.form.category.classic.info.top"        : "Hello! Welcome to Info Classic Kits! Select what you want to do",
+    "kits.form.category.classic.info.ench_start" : "§c» §aEnchanted Starter:\n§eCooldown: 24h.\n§eCost: §71500$\n§eItems: §7Full Lether Enchanted Armor, Stone Tools, 32 Breads",
+    "kits.form.category.classic.info.guardian"   : "§c» §aGuardian:\n§eCooldown: 24h.\n§eCost: §73500$\n§eItems: §7Full Gold Enchanted Armor, Iron Tools, 32 Breads, 16 TNT, 3 Golden Apple, 64 Obsidian",
+    "kits.form.category.classic.info.knight"     : "§c» §aKnight:\n§eCooldown: 24h.\n§eCost: §75000$\n§eItems: §7Full Diamond Armor, Stone Enchanted Tools, 32 Breads, 16 TNT, 32 Obsidian",
+    "kits.form.category.classic.info.paladin"    : "§c» §aPaladin:\n§eCooldown: 24h.\n§eCost: §78500$\n§eItems: §7Full Iron Armor, Diamond Enchanted Tools, 32 Breads, 12 TNT, 128 Obsidian",
+    "kits.form.category.classic.info.sparrow"    : "§c» §aSparrow:\n§eCooldown: 24h.\n§eCost: §71000$\n§eItems: §7Full Iron Enchanted Armor, Diamond Enchanted Tools, 32 Breads, 12 TNT, 64 Obsidian",
+
+    "kits.form.category.premium.info.first"       : "Info Premium Kits",
+    "kits.form.category.premium.info.top"         : "Hello! Welcome to Info Premium Kits! Select what you want to do",
+    "kits.form.category.premium.info.viper"       : "§c» §aViper:\n§eCooldown: 48h.\n§eCost: §75000$\n§eItems: §7Full Iron Enchanted Armor, Full Iron Enchanted Tools, 64 Steaks, 10 Potions Regeneration 2, 10 Potions Strenght 1",
+    "kits.form.category.premium.info.master"      : "§c» §aMaster:\n§eCooldown: 48h.\n§eCost: §76000$\n§eItems: §7Full Diamond Enchanted Armor, Full Iron Enchanted Tools, 64 Steaks, 10 Potions Instant Heal 1, 10 Potions Instant Damage 1",
+    "kits.form.category.premium.info.killer"      : "§c» §aKiller:\n§eCooldown: 48h.\n§eCost: §77500$\n§eItems: §7Full Iron Enchanted Armor, x1 Super Diamond Enchanted Sword, Full Iron Enchanted Tools, 64 Steaks, 4 Potions Instant Heal 1, 4 Potions Instant Damage 1",
+    "kits.form.category.premium.info.detonator"   : "§c» §aDetonator:\n§eCooldown: 48h.\n§eCost: §79000$\n§eItems: §7Full Chain Enchanted Armor, Full Diamond Enchanted Tools, 64 Steaks, 10 Potions Speed 2, 10 Splash Potions Poison 2",
+    "kits.form.category.premium.info.turr_monkey" : "§c» §aTurret Monkey:\n§eCooldown: 48h.\n§eCost: §712000$\n§eItems: §7Full Diamond Enchanted Armor, Diamond Enchanted Tools, 64 Steaks, 10 Potions Speed 2, 10 Splash Potions Speed 2, 24 Splash Potions Instant Kill, 24 Potions Fire Resistance",
+
+    "kits.form.category.specific.info.first"   : "Info Specific Kits",
+    "kits.form.category.specific.info.top"     : "Hello! Welcome to Info Specific Kits! Select what you want to do",
+    "kits.form.category.specific.info.planter" : "§c» §aPlanter:\n§eCooldown: 30m.\n§eCost: §71500$\n§eItems: §7Full Stone Tools, 12 Saplings from all Types, 32 Grass, 32 Dirt, 64 Cobblestone, 24 Bone Meal",
+    "kits.form.category.specific.info.stonner" : "§c» §aStonner:\n§eCooldown: 20m.\n§eCost: §7750$\n§eItems: §7Full Stone Tools, 12 Steak, 32 Grass, 32 Dirt, 128 Cobblestone, 128 Stone",
+    "kits.form.category.specific.info.lacker"  : "§c» §aLacker:\n§eCooldown: 10m.\n§eCost: §1250$\n§eItems: §7Full Stone Tools, 32 Steak, 2 Ice, 2 Lava Buckets, 10 Empty Buckets",
+    "kits.form.category.specific.info.woddie"  : "§c» §aWoodie:§eCooldown: 20m.\n§eCost: §71000$\n§eItems: §7Full Stone Tools, 32 Steak, 16 Wood from all Types",
+    "kits.form.category.specific.info.push_up" : "§c» §aPushUp:\n§eCooldown: 1h.\n§eCost: §7650$\n§eItems: §71 Diamond Axe with Efficiency 2, 8 Wood from all Types",
+    "kits.form.category.specific.info.digger"  : "§c» §aDigger:\n§eCooldown: 1h.\n§eCost: §7650$\n§eItems: §71 Diamond Pickaxe with Efficiency 2, 8 Stone, 8 Cobblestone, 8 Dirt, 8 Grass",
+
+    "commands.kits.usage"       : "/kits",
+    "commands.kits.description" : "Manage kits",
+
+    "kits.receive" : "Wow! You got {%0}",
+
+    "work.finished" : "You finished the mission. Type /work to get your reward!",
+
+    "kill.message" : "You was killed by {%0}",
+
+    "stats.form.first"       : "Stats {%0}",
+    "stats.form.top"         : "         Profile Info:\n\n",
+    "stats.form.name"        : "&c» &aName: &e{%0}",
+    "stats.form.rank"        : "&eRank: &6{%0}",
+    "stats.form.level"       : "&eLevel: &6{%0}",
+    "stats.form.experience"  : "&eExperience: &6{%0}/{%1}",
+    "stats.form.firstjoin"   : "&eFirst Join: &6{%0}",
+    "stats.form.online"      : "&eOnline: &6{%0}",
+    "stats.form.session"     : "&eOnline on this session: &6{%0}",
+    "stats.form.onlinetime"  : "&eOnline Time: &6{%0}",
+    "stats.form.dollars"     : "&eDollars: &6{%0}",
+    "stats.form.gems"        : "&eGems: &6{%0}",
+    "stats.form.kills"       : "&eKills: &6{%0}",
+    "stats.form.deaths"      : "&eDeaths: &6{%0}",
+    "stats.form.votes"       : "&eVotes: &6{%0}",
+    "stats.form.ip"          : "&eIP: &6{%0}",
+    "stats.form.devicemodel" : "&eDevice Model: &6{%0}",
+    "stats.form.os"          : "&eOS: &6{%0}",
+
+    "broadcast.mobclear.finished" : "All entities has been removed! Next entities will be removed in 5 minutes!",
+    "broadcast.mobclear.started"  : "Everyone, please pay attention! In 30 seconds all entities will be removed!",
+
+    "scoreboard.info"           : "&7--- &e&lInfo Player: ",
+    "scoreboard.name"           : "&7| &fName: &6{%0}",
+    "scoreboard.rank"           : "&7| &fRank: &6{%0}",
+    "scoreboard.dollars"        : "&7| &fDollars: &6{%0}",
+    "scoreboard.gems"           : "&7| &fGems: &6{%0}",
+    "scoreboard.onlinetime"     : "&7| &fOnline Time: &6{%0}",
+    "scoreboard.job"            : "&7| &fJob: &6{%0}",
+    "scoreboard.coords"         : "&7| &fX: &6{%0} &fY: &6{%1} Z: &6{%2}",
+    "scoreboard.empty"          : "&7     ",
+    "scoreboard.server"         : "&7--- &e&lServer:   ",
+    "scoreboard.online"         : "&7| &fOnline Players: &6{%0}",
+    "scoreboard.countvoteparty" : "&7| &fDropParty: &6{%0}&7/&650",
+    "scoreboard.voteparty"      : "&7Next DropParty: &6{%0}",
+
+    "bossbar.boss"    : "    &6&l»&r-- Boss &6&l&r --&6&l« &r\n\n      &rHP: &6{%0}&7/&6100",
+    "bossbar.default" : "      &6&l»&r--- Level &6&l{%0}&r ---&6&l« &r\n\n   &rNecesarry XP: &6{%1}&7/&6{%2}",
+
+    "score.nametag"  : "&7{%0} &7[&c{%1}&7]",
+    "score.scoretag" : "&8[{%0}&8]",
+
+    "combat.bossbar" : "      &7-&8=&7- &7CombatLogger: &6&l{%0}&7-&8=&7-",
+    "combat.exit"    : "You are no longer in combat, you may now logout and run commands.",
+
+    "commands.tpa.description" : "Send a teleport request to a player",
+    "commands.tpa.usage"       : "/tpa <player>",
+    "commands.tpa.self"        : "You cannot send a teleport request to yourself!",
+    "commands.tpa.invite"      : "{%0} wants to teleport to you, use /tpaccept to accept, /tpdeny to deny",
+    "commands.tpa.success"     : "Teleport request sent to {%0}",
+
+    "commands.tpaall.description" : "Send a teleport request to all the players to teleport them to you",
+    "commands.tpaall.usage"       : "/tpall <player>",
+    "commands.tpaall.success"     : "Teleport request sent to all the players",
+
+    "commands.tpahere.description" : "Send a teleport request to a player to teleport him to you",
+    "commands.tpahere.usage"       : "/tpahere <player>",
+    "commands.tpahere.invite"      : "{%0} wants to teleport you to him, use /tpaccept accept, /tpdeny to deny",
+
+    "commands.tpall.description" : "Teleport all the players to you or another player",
+    "commands.tpall.usage"       : "/tpall <player>",
+    "commands.tpall.other"       : "Teleporting to {%0}...",
+    "commands.tpall.success"     : "Teleporting all the players to you...",
+
+    "commands.tpaccept.description"   : "Accept a teleport request",
+    "commands.tpaccept.usage"         : "/tpaccept",
+    "commands.tpaccept.noRequest"     : "You don't have any request yet",
+    "commands.tpaccept.unavailable"   : "Request unavailable",
+    "commands.tpaccept.noRequestFrom" : "You don't have any requests from {%0}",
+    "commands.tpaccept.accepted"      : "{%0} accepted your teleport request! Teleporting...",
+
+    "commands.tpdeny.description"  : "Deny a teleport request",
+    "commands.tpdeny.usage"        : "/tpdeny",
+    "commands.tpdeny.denied"       : "{%0} denied your teleport request",
+    "commands.tpdeny.success"      : "Denied {%0}'s teleport request",
+
+    "commands.tphere.description"  : "Teleport a player to you",
+    "commands.tphere.other"        : "Teleporting to {%0}...",
+    "commands.tphere.success"      : "Teleporting {%0} to you...",
+    "commands.tphere.usage"        : "/tphere <player>",
+
+    "teleportation.spawn.teleported" : "You have been teleported to Spawn!"
+  }
+}

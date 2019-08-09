@@ -36,7 +36,7 @@ public class OnlineTimeCommand extends CommandBaseUtils {
             long time = profile.getTime();
             messageAPI.getPlayerTimeMessage(player, playerCommand, sessionCommand, time);
         } else {
-            messageAPI.getTimeExceptionMessage(player);
+            sendUsage(commandSender);
             return true;
         }
         return true;

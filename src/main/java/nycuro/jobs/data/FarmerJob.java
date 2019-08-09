@@ -75,7 +75,7 @@ public class FarmerJob extends CommonJob {
     @Override
     public void processMission(Player player, TypeJob typeJob, Consumer<Object> consumer) {
         if (getStatus(player, typeJob).equals(StatusJobs.LOCKED)) {
-            player.sendMessage(messageAPI.sendLockedJobStatus(player));
+            player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.locked"));
         } else {
             Item[] itemsMap = new Item[10];
             if (typeJob.equals(TypeJob.EASY)) {

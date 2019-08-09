@@ -38,13 +38,13 @@ public class CombatLoggerTask extends Task {
             long count = k.getInt(uuid);
             float procent = (float) ((int) (count * 100 / 13));
             if (mainAPI.bossbar.get(uuid) != null) {
-                mainAPI.bossbar.get(uuid).setText("      §7-§8=§7- §7CombatLogger: §6§l" + k.getInt(uuid) + " §7-§8=§7-");
+                mainAPI.bossbar.get(uuid).setText(messageAPI.messagesObject.translateMessage("combat.bossbar", mainAPI.emptyNoSpace + k.getInt(uuid)));
                 if (k.getInt(uuid) <= 1) mainAPI.bossbar.get(uuid).setLength(1F);
                 else mainAPI.bossbar.get(uuid).setLength(procent);
             }
             if (k.getInt(uuid) == 0) {
                 mainAPI.getServer().getPlayer(uuid).ifPresent( (player) -> {
-                    player.sendMessage(messageAPI.getMessageCombatLogger(player));
+                    player.sendMessage(messageAPI.messagesObject.translateMessage("combat.exit"));
                     combatAPI.removeCombat(player);
                     k.removeInt(player.getUniqueId());
                     if (mainAPI.bossbar.get(uuid) != null) {

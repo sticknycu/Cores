@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
+import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.KitsObject;
 import nycuro.database.objects.ProfileSkyblock;
@@ -195,17 +196,19 @@ public class TurretMonkeyKit extends CommonKit {
                         player.getInventory().addItem(getOtherItems());
                         profileSkyblock.setCooldown(System.currentTimeMillis());
                         profileSkyblock.setDollars(profileSkyblock.getDollars() - getPrice());
-                        messageAPI.sendReceiveKitMessage(player, getKit());
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("kits.receive", getKit().getName()));
                     } else {
                         double dollars = profileSkyblock.getDollars();
-                        messageAPI.sendUnsuficientMoneyMessage(player, getPrice() - dollars);
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("generic.money.enough", mainAPI.emptyNoSpace + dollars,
+                                mainAPI.emptyNoSpace + (getPrice() - dollars)));
                     }
                 } else {
-                    messageAPI.sendFullInventoryMessage(player);
+                    player.sendMessage(messageAPI.messagesObject.translateMessage("generic.inventory.get.error"));
                 }
             } else {
                 long time = profileSkyblock.getCooldown();
-                messageAPI.sendCooldownMessage(player, System.currentTimeMillis() - time, getTimer());
+                player.sendMessage(messageAPI.messagesObject.translateMessage("generic.timegone",
+                        API.time(System.currentTimeMillis() - time), mainAPI.emptyNoSpace + getTimer()));
             }
         }
     }

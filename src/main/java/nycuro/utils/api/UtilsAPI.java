@@ -50,7 +50,8 @@ public class UtilsAPI {
             playerInventory.addItem(item);
             messageAPI.sendRepairItemMessage(player, item);
         } else if (moneyPlayer < cost) {
-            messageAPI.sendUnsuficientMoneyMessage(player, insufficient);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("generic.money.enough",
+                    mainAPI.emptyNoSpace + moneyPlayer, mainAPI.emptyNoSpace + insufficient));
         }
     }
 

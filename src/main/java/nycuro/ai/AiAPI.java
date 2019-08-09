@@ -4,9 +4,6 @@ import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.DoubleTag;
 import cn.nukkit.nbt.tag.FloatTag;
 import cn.nukkit.nbt.tag.ListTag;
-import nycuro.ai.commands.AiCommandManager;
-
-import static nycuro.api.API.mainAPI;
 
 /**
  * author: NycuRO
@@ -14,10 +11,6 @@ import static nycuro.api.API.mainAPI;
  * API 1.0.0
  */
 public class AiAPI {
-
-    public void registerCommands() {
-        AiCommandManager.registerAll(mainAPI);
-    }
 
     public CompoundTag getBossNBT() {
         return new CompoundTag()

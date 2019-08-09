@@ -47,7 +47,7 @@ public class TPAllCommand extends CommandBaseTeleportation {
                 p.sendMessage(messageAPI.messagesObject.translateMessage("commands.tpall.other", player.getName()));
             }
         }
-        player.sendMessage(messageAPI.messagesObject.getMessages().get("commands.tpall.success"));
+        player.sendMessage(messageAPI.messagesObject.messages.get("commands.tpall.success"));
         return true;
     }
 }
