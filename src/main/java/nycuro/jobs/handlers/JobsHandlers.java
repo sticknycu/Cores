@@ -107,7 +107,6 @@ public class JobsHandlers implements Listener {
                     }
                     return;
             }
-            messageAPI.sendBreakMessage(player);
         }
     }
 

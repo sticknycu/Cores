@@ -32,7 +32,8 @@ public class ReportAPI {
     }
 
     public void createWindowReport(Player player) {
-        FormWindowSimple jobsMenu = new FormWindowSimple("Reports", messageAPI.sendReportPrincipalModal(player));
+        FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("reports.form.first"),
+                messageAPI.messagesObject.translateMessage("reports.form.top"));
         jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         jobsMenu.addButton(new ElementButton("Report a Player", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
         if (player.hasPermission("core.reports")) {
@@ -59,16 +60,18 @@ public class ReportAPI {
     }
 
     private void sendInfoMessageReports(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Reports Info");
-        infoMenu.addElement(new ElementLabel(messageAPI.sendInfoMessageReports(player)));
+        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("reports.form.info.first"));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("reports.form.info.top")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("reports.form.info.how")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("reports.form.info.how.discord")));
         player.showFormWindow(infoMenu);
     }
 
     private void sendReportForm(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Report Player");
-        infoMenu.addElement(new ElementInput(messageAPI.sendInputNameReport(player)));
-        infoMenu.addElement(new ElementInput(messageAPI.sendInputReasonReport(player)));
-        infoMenu.addElement(new ElementInput(messageAPI.sendInputContactReport(player)));
+        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("reports.form.mechanic.first"));
+        infoMenu.addElement(new ElementInput(messageAPI.messagesObject.translateMessage("reports.form.mechanic.name")));
+        infoMenu.addElement(new ElementInput(messageAPI.messagesObject.translateMessage("reports.form.mechanic.reason")));
+        infoMenu.addElement(new ElementInput(messageAPI.messagesObject.translateMessage("reports.form.mechanic.contact")));
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
             public void accept(Map<Integer, Object> response) {
@@ -77,7 +80,7 @@ public class ReportAPI {
                         response.values().toArray()[2].toString(),
                         player.getName()
                 );
-                player.sendMessage(messageAPI.sendPlayerSuccesReport(player, response.values().toArray()[0].toString()));
+                player.sendMessage(messageAPI.messagesObject.translateMessage("reports.success", response.values().toArray()[0].toString()));
             }
         }));
     }
@@ -87,11 +90,13 @@ public class ReportAPI {
             @Override
             public void onRun() {
                 try {
-                    FormWindowSimple jobsMenu = new FormWindowSimple("Report List", messageAPI.sendReportList(player));
+                    FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("reports.form.list.first"),
+                            messageAPI.messagesObject.translateMessage("reports.form.list.top"));
                     List<String> names = databaseAPI.getPlayerMap();
                     for (String name : names) {
                         int count = databaseAPI.getCountPlayerValueSetCount(name);
-                        jobsMenu.addButton(new ElementButton(name + " §7[§6" + count + "§7]"));
+                        jobsMenu.addButton(new ElementButton(messageAPI.messagesObject.translateMessage("reports.form.list.button", name,
+                                mainAPI.emptyNoSpace + count)));
                     }
                     player.showFormWindow(new ResponseFormWindow(jobsMenu, new Consumer<Map<Integer, Object>>() {
                         @Override
@@ -112,12 +117,15 @@ public class ReportAPI {
 
     private void getInfoReported(Player player, String name) {
         try {
-            FormWindowSimple jobsMenu = new FormWindowSimple("Report " + name, "");
+            FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("reports.form.info.reported.first", name),
+                    "");
             Collection<String> reasonsCollection = databaseAPI.getReasonsPlayerReport(name);
             Collection<String> contactCollection = databaseAPI.getContactPlayerReport(name);
             String reasons = String.join("\n\n", asStrings(reasonsCollection.toArray()));
             String contact = String.join("\n\n", asStrings(contactCollection.toArray()));
-            jobsMenu.setContent(messageAPI.sendInfoMessageReport(player, name, reasons, contact));
+            jobsMenu.setContent(messageAPI.messagesObject.translateMessage("reports.form.info.reported.name"));
+            jobsMenu.setContent(messageAPI.messagesObject.translateMessage("reports.form.info.reported.reason"));
+            jobsMenu.setContent(messageAPI.messagesObject.translateMessage("reports.form.info.reported.contact"));
             jobsMenu.addButton(new ElementButton("Remove Report"));
             jobsMenu.addButton(new ElementButton("Close"));
             player.showFormWindow(new ResponseFormWindow(jobsMenu, new Consumer<Map<Integer, Object>>() {
@@ -127,7 +135,7 @@ public class ReportAPI {
                         switch (response.entrySet().iterator().next().getKey()) {
                             case 0:
                                 databaseAPI.deleteReport(name);
-                                player.sendMessage(messageAPI.sendDeleteReportMessage(player, name));
+                                player.sendMessage(messageAPI.messagesObject.translateMessage("reports.deleted", name));
                                 return;
                             case 1:
                                 break;

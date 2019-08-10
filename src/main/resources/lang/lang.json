@@ -14,13 +14,20 @@
     "generic.dropparty.spawned"    : "DropParty has started! Everyone got DropParty Key. Boss has been showed in Arena and Fireworks is on spawn!",
     "generic.dropparty.receivekey" : "You have now +1 DropParty Key!",
 
-    "generic.wither.form.first" : "Spawn Wither",
+    "generic.wither.form.first"          : "Spawn Wither",
+    "generic.wither.form.top"            : "Hello! Welcome to Wither Spawn!",
+    "generic.wither.form.message.normal" : "§c» §aHow can i spawn a Wither?\n§eFor spawning a Wither is enough to press the button.\n§eYou can cancel that pushing X button from up, right side.§c» §aWhat can i do with Wither: \n§eWith Wither you can raid bases and get more experience.",
+    "generic.wither.form.message.cost"   : "§c» §aPrice: §610k$ \n§eA little information: Maximum of Withers on Server is 10, so if there exists 10 Withers spawned you need to wait to minimum 1 to be despawned!\n§eAnd about despawning of entities, entities are despawned every 5 minutes, so be careful!\n§eThank you for purchase!\n§eHave a nice day!",
+
     "generic.wither.spawn.error"   : "You can't spawn Wither in spawn!",
     "generic.wither.spawn.count"   : "There are 10 withers spawned! Try again later!",
     "generic.wither.spawn.success" : "You spawned succesfuly wither!",
 
     "generic.arena.first"          : "Hello! Welcome to Arena Category. Select what you want to do first",
     "generic.arena.form.category"  : "Arena Cateogry",
+
+    "arena.teleport.level" : "You need have level {%0} to teleport to Arena!",
+    "arena.telepored"      : "You have been teleported to Arena!",
 
     "generic.money.enough" : "Opsss!!! You don't have enough money! You have: {%0} but you need: {%1}!",
 
@@ -30,6 +37,8 @@
 
     "generic.popup.message.one" : "{%0} DOLLARS \n+{%1} EXP",
     "generic.popup.message.two" : "{%0} GEMS \n+15 MINS",
+
+    "warp.teleport" : "Succesfully teleported to Warp: {%0}",
 
     "area.boss.warning" : "You need have level 10+ to enter here!",
 
@@ -47,16 +56,71 @@
     "arena.form.pvp.how"      : "&c» &aWhat is 'Teleport Arena'?\n&eTeleport Arena is an option for teleporting to PvP Arena.\n&eYou can do that only if you have level 5+\n&eYou will cannot use /tp and other commands for teleporting here. Just /spawn.\n&eBe careful, PVP is on!\n&eIf you don't want to be teleported, tap on X!\n&eHave a nice day!",
 
     "settings.form.first"         : "Settings Player",
+    "settings.form.top"           : "Hello! Welcome to Player Settings! Select what you want to do",
     "settings.form.toggle.first"  : "Show BossBar",
     "settings.form.toggle.second" : "Show Scoreboard",
     "settings.form.toggle.third"  : "Toggle Render Distance",
 
-    "combat.set" : "You have entered combat, logging out now will cause your death. Please wait 13 §eseconds.",
+    "session.now.self"   : "You was active on this session for {%0} !",
+    "session.total.self" : "You was active on this section for {%0} !",
+
+    "session.now.player"   : "{%0} was active on this session for {%1} !",
+    "session.total.player" : "{%0} was active on this section for {%1} !",
+
+    "language.selected"  : "You selected english language!",
 
     "crate.title.receive.first"  : "&e&k  &r&5Yoahh?!&k!",
     "crate.title.receive.second" : "&dYou got &e{%0} &dExperience!",
 
     "crate.congrats" : "Your lucky number it's {%0}! Congratulations for reward!",
+
+    "combat.block" : "You cannot use this command during combat!",
+
+    "block.break" : "You can't break blocks here!",
+    "block.pvp"   : "You can't PvP here!",
+    "block.place" : "You can't place blocks here!",
+
+    "reports.form.first" : "Reports",
+    "reports.form.top"   : "Hello! Welcome to Reports! Select what you want to do.",
+
+    "reports.form.info.first"       : "Reports Info",
+    "reports.form.info.top"         : "Hello! Welcome to Reports Info! Select what you want to do.",
+    "reports.form.info.how"         : "§c» §aHow to reports a Player?\n§eTo reports a player just tab on 'Report'.\n§eYou need to complete all available fields.\n\n§cATENTION! \n§eIf you have a proof, we're waiting you on Discord\n§eYou can reports a player on game, but on Discord too!",
+    "reports.form.info.how.discord" : "§c» §aHow to reports on Discord? \n§eEnter on Discord and use #reports-en #reports",
+
+    "reports.form.info.reported.first"   : "Report {%0}",
+    "reports.form.info.reported.name"    : "§eName: §6{%0}",
+    "reports.form.info.reported.reason"  : "§eReason: §6{%0}",
+    "reports.form.info.reported.contact" : "§eContact: §6{%0}",
+
+    "reports.form.mechanic"         : "Report Player",
+    "reports.form.mechanic.name"    : "Please put here name of Player who want to reports",
+    "reports.form.mechanic.reason"  : "Please put here reason why you reports player with specifications what them do",
+    "reports.form.mechanic.contact" : "If we can contact you, give us a discord name with tag, or other",
+
+    "reports.success" : "You reports player {%0} succesfully!",
+    "reports.deleted" : "You succesfully deleted {%0} reports!",
+
+    "commands.reports.usage"       : "/reports",
+    "commands.reports.description" : "Manage Reports",
+
+    "commands.shop.usage"       : "/shop",
+    "commands.shop.description" : "Open Shop",
+
+    "title.join" : "§l§f» §r§6CHPE Factions §l§f«§r",
+
+    "coords.switch.show.true" : "You set to show coordonates!",
+    "coords.switch.show.false" : "You set to show coordonates!",
+
+    "subtitle.join.first"  : "§r§fThe place where the adventure begin",
+    "subtitle.join.second" : "§r§fVote for awesome rewards",
+    "subtitle.join.third"  : "§r§fmariusmrn.com/discord",
+
+    "reports.form.list.first"  : "Reports List",
+    "reports.form.list.top"    : "Hello! Welcome to Reports List! Select what you want to do.",
+    "reports.form.list.button" : "{%0} §7[§6{%1}§7]",
+
+    "staffchat.abandonated" : "You abandonated StaffChat!",
 
     "commands.dp.description" : "Manage Drop Party!",
     "commands.dp.usage"       : "/dp",
@@ -111,6 +175,11 @@
 
     "commands.home.description" : "Manage Homes",
     "commands.home.usage"       : "/home",
+
+    "jobs.empty"   : "You don't have a Job to acces that!",
+    "jobs.deleted" : "From now, you don't have a CommonJob!",
+
+    "repair.item" : "You have successfully repaired Item from Hand!",
 
     "jobs.form.first"     : "Info Jobs",
     "jobs.form.top"       : "Hello! Welcome to Info Jobs",
@@ -188,6 +257,7 @@
     "commands.kits.description" : "Manage kits",
 
     "kits.receive" : "Wow! You got {%0}",
+    "kits.locked"  : "This kit is LOCKED! Please unlock this kit using Premium Shop (/shop)!",
 
     "work.finished" : "You finished the mission. Type /work to get your reward!",
 
@@ -236,6 +306,7 @@
     "score.scoretag" : "&8[{%0}&8]",
 
     "combat.bossbar" : "      &7-&8=&7- &7CombatLogger: &6&l{%0}&7-&8=&7-",
+    "combat.set"     : "You have entered combat, logging out now will cause your death. Please wait 13 §eseconds.",
     "combat.exit"    : "You are no longer in combat, you may now logout and run commands.",
 
     "commands.tpa.description" : "Send a teleport request to a player",

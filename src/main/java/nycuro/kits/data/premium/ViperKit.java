@@ -180,7 +180,7 @@ public class ViperKit extends CommonKit {
     public void sendKit(Player player) {
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         if (getStatus(player).equals(StatusKit.LOCKED)) {
-            player.sendMessage(messageAPI.sendLockedKitStatus(player));
+            player.sendMessage(messageAPI.messagesObject.translateMessage("kits.locked"));
         } else {
             if (passTimer(player)) {
                 if (canAddKit(player)) {

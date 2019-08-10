@@ -48,7 +48,7 @@ public class UtilsAPI {
             playerInventory.remove(item);
             item.setDamage(0);
             playerInventory.addItem(item);
-            messageAPI.sendRepairItemMessage(player, item);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("repair.item"));
         } else if (moneyPlayer < cost) {
             player.sendMessage(messageAPI.messagesObject.translateMessage("generic.money.enough",
                     mainAPI.emptyNoSpace + moneyPlayer, mainAPI.emptyNoSpace + insufficient));

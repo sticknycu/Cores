@@ -18,7 +18,6 @@ import cn.nukkit.level.Level;
 import cn.nukkit.math.BlockFace;
 import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
-import cn.nukkit.scheduler.AsyncTask;
 import cn.nukkit.scheduler.Task;
 import io.pocketvote.event.VoteEvent;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
@@ -32,9 +31,7 @@ import nycuro.mechanic.objects.SettingsObject;
 import java.util.HashMap;
 import java.util.Random;
 
-import static nycuro.api.API.mainAPI;
-import static nycuro.api.API.messageAPI;
-import static nycuro.api.API.databaseAPI;
+import static nycuro.api.API.*;
 
 /**
  * author: NycuRO
@@ -54,18 +51,16 @@ public class MechanicHandlers implements Listener {
                     int playerTime = mainAPI.timers.getOrDefault(player.getUniqueId(), 1);
                     switch (playerTime) {
                         case 1:
-                            messageAPI.sendFirstJoinTitle(player);
+                            player.sendTitle(messageAPI.messagesObject.translateMessage("title.join"),
+                                    messageAPI.messagesObject.translateMessage("subtitle.join.first"), 20, 20, 20);
                             break;
                         case 2:
-                            messageAPI.sendSecondJoinTitle(player);
+                            player.sendTitle(messageAPI.messagesObject.translateMessage("title.join"),
+                                    messageAPI.messagesObject.translateMessage("subtitle.join.second"), 20, 20, 20);
                             break;
                         case 3:
-                            messageAPI.sendThreeJoinTitle(player);
-                            break;
-                        case 4:
-                            if (player.hasPermission("core.reports")) {
-                                messageAPI.sendReportsTitle(player, databaseAPI.getCountOfAllPlayersReport());
-                            }
+                            player.sendTitle(messageAPI.messagesObject.translateMessage("title.join"),
+                                    messageAPI.messagesObject.translateMessage("subtitle.join.third"), 20, 20, 20);
                             break;
                         default:
                             mainAPI.getServer().getScheduler().cancelTask(this.getTaskId());
@@ -98,26 +93,20 @@ public class MechanicHandlers implements Listener {
         mainAPI.isOnArea.put(player.getUniqueId(), false);
         mainAPI.mechanicObject.put(player.getUniqueId(), new MechanicObject(player.getUniqueId(), new HashMap<>(), new HashMap<>()));
         mainAPI.played.put(player.getUniqueId(), System.currentTimeMillis());
-        // Async?!
-        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
-            @Override
-            public void onRun() {
-                databaseAPI.playerExist(player.getName(), bool -> {
-                    if (!bool) {
-                        databaseAPI.addNewPlayer(player.getName());
-                        Database.addDatesPlayerHub(player.getName());
-                    } else {
-                        Database.addDatesPlayerHub(player.getName());
-                        Database.addDatesPlayerFactions(player.getName());
-                    }
-                });
-                databaseAPI.playerKitsExist(player.getName(), bool -> {
-                    if (!bool) {
-                        databaseAPI.addNewPlayerToKits(player.getName());
-                    } else {
-                        Database.addDatesKitsPlayer(player.getName());
-                    }
-                });
+        databaseAPI.playerExist(player.getName(), bool -> {
+            if (!bool) {
+                databaseAPI.addNewPlayer(player.getName());
+                Database.addDatesPlayerHub(player.getName());
+            } else {
+                Database.addDatesPlayerHub(player.getName());
+                Database.addDatesPlayerFactions(player.getName());
+            }
+        });
+        databaseAPI.playerKitsExist(player.getName(), bool -> {
+            if (!bool) {
+                databaseAPI.addNewPlayerToKits(player.getName());
+            } else {
+                Database.addDatesKitsPlayer(player.getName());
             }
         });
         if (Loader.startTime.getLong(player.getUniqueId()) > 0) {

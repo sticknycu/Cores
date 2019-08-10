@@ -89,7 +89,7 @@ public class ProtectionHandlers implements Listener {
                     }
                     return;
             }
-            messageAPI.sendBreakMessage(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("block.break"));
         }
     }
 
@@ -142,13 +142,13 @@ public class ProtectionHandlers implements Listener {
             if (damager == null) return;
             if (mechanicAPI.isOnSpawn(player)) {
                 event.setCancelled(true);
-                messageAPI.sendPvPOffMessage(damager);
+                damager.sendMessage(messageAPI.messagesObject.translateMessage("block.pvp"));
             }
             for (Player pl : new Player[]{player, damager}) {
                 if (mechanicAPI.isOnSpawn(pl)) break;
                 if (!combatAPI.inCombat(pl)) {
                     if (mainAPI.bossbar.get(pl.getUniqueId()) != null) {
-                        mainAPI.bossbar.get(pl.getUniqueId()).setText("§7-§8=§7- §7CombatLogger: §6§l13 §7-§8=§7-");
+                        mainAPI.bossbar.get(pl.getUniqueId()).setText(messageAPI.messagesObject.translateMessage("combat.bossbar", "13"));
                         mainAPI.bossbar.get(pl.getUniqueId()).setLength(100F);
                     }
                 }
@@ -163,24 +163,18 @@ public class ProtectionHandlers implements Listener {
     @EventHandler
     public void emptyBucket(PlayerBucketEmptyEvent event) {
         Player player = event.getPlayer();
-        PlayerInventory inventory = player.getInventory();
-        Item inHand = inventory.getItemInHand();
         if (mechanicAPI.isOnPrincipalWorld(player)) {
             event.setCancelled(true);
-            inventory.removeItem(inHand);
-            messageAPI.sendSmecherieMessage(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("block.place"));
         }
     }
 
     @EventHandler
     public void fillBucket(PlayerBucketFillEvent event) {
         Player player = event.getPlayer();
-        PlayerInventory inventory = player.getInventory();
-        Item inHand = inventory.getItemInHand();
         if (mechanicAPI.isOnPrincipalWorld(player)) {
             event.setCancelled(true);
-            inventory.removeItem(inHand);
-            messageAPI.sendSmecherieMessage(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("block.place"));
         }
     }
 
@@ -204,7 +198,7 @@ public class ProtectionHandlers implements Listener {
                 case Item.WOODEN_HOE:
                 case Item.FLINT_AND_STEEL:
                     if (mechanicAPI.isOnPrincipalWorld(player)) {
-                        messageAPI.sendBreakMessage(player);
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("block.place"));
                         event.setCancelled(true);
                         return;
                     }
@@ -225,7 +219,7 @@ public class ProtectionHandlers implements Listener {
         Player player = event.getPlayer();
         if (mechanicAPI.isOnPrincipalWorld(player)) {
             event.setCancelled(true);
-            messageAPI.sendPlaceMessage(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("block.place"));
         }
     }
 }

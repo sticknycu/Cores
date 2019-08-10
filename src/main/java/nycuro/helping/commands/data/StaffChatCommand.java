@@ -26,7 +26,7 @@ public class StaffChatCommand extends CommandBaseHelping {
             messageAPI.sendSuccesEnterStaffChat(player);
         } else {
             mainAPI.staffChat.remove(player.getUniqueId());
-            messageAPI.sendAbandonedStaffchatMessage(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("staffchat.abandonated"));
         }
         return true;
     }

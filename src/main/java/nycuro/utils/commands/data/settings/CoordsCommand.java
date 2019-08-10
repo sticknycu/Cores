@@ -24,10 +24,10 @@ public class CoordsCommand extends CommandBaseUtils {
         if ((mainAPI.coords.getOrDefault(player.getUniqueId(), null) == null) ||
                 (mainAPI.coords.getOrDefault(player.getUniqueId(), null).equals(false)))  {
             mainAPI.coords.put(player.getUniqueId(), true);
-            messageAPI.sendCoordsSwitchMessage(player, true);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("coords.switch.show.true"));
         } else if (mainAPI.coords.getOrDefault(player.getUniqueId(), null).equals(true)) {
             mainAPI.coords.put(player.getUniqueId(), false);
-            messageAPI.sendCoordsSwitchMessage(player, false);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("coords.switch.show.false"));
         }
         return true;
     }

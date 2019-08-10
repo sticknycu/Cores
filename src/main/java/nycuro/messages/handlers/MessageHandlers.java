@@ -11,7 +11,6 @@ import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
 
 import static nycuro.api.API.mechanicAPI;
-import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
@@ -25,7 +24,6 @@ public class MessageHandlers implements Listener {
         DataPacket dataPacket = event.getPacket();
         if (dataPacket instanceof SetLocalPlayerAsInitializedPacket) {
             Player player = event.getPlayer();
-            messageAPI.sendJoinMessages(player);
             mechanicAPI.createBossBar(player);
             mechanicAPI.createScoreboard(player);
         }

@@ -46,7 +46,7 @@ public class WarpUtils {
     }
 
     private void teleportToWarp(Player player, String firstDropDownType, int types) {
-        messageAPI.sendTeleportWarpMessage(player, firstDropDownType);
+        player.sendMessage(messageAPI.messagesObject.translateMessage("warp.teleport", firstDropDownType));
         switch (types) {
             case 1:
                 player.teleport(new Location(mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getX(), mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getY(), mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getZ(), mainAPI.getServer().getLevelByName("pvp")));
