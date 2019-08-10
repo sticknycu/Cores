@@ -6,7 +6,7 @@
     "commands.generic.ingame"                : "You can only perform this command as a player",
     "commands.generic.player.notfound"       : "Cannot find player {%0}",
 
-    "generic.cooldown"          : "You will be teleported in Spawn in 7 §eseconds..",
+    "generic.cooldown"          : "You will be teleported in Spawn in 7 &eseconds..",
 
     "generic.boss.spawn"        : "Is 21:00 at Romania. Boss Spawned in Arena!",
 
@@ -16,8 +16,8 @@
 
     "generic.wither.form.first"          : "Spawn Wither",
     "generic.wither.form.top"            : "Hello! Welcome to Wither Spawn!",
-    "generic.wither.form.message.normal" : "§c» §aHow can i spawn a Wither?\n§eFor spawning a Wither is enough to press the button.\n§eYou can cancel that pushing X button from up, right side.§c» §aWhat can i do with Wither: \n§eWith Wither you can raid bases and get more experience.",
-    "generic.wither.form.message.cost"   : "§c» §aPrice: §610k$ \n§eA little information: Maximum of Withers on Server is 10, so if there exists 10 Withers spawned you need to wait to minimum 1 to be despawned!\n§eAnd about despawning of entities, entities are despawned every 5 minutes, so be careful!\n§eThank you for purchase!\n§eHave a nice day!",
+    "generic.wither.form.message.normal" : "&c» &aHow can i spawn a Wither?\n&eFor spawning a Wither is enough to press the button.\n&eYou can cancel that pushing X button from up, right side.&c» &aWhat can i do with Wither: \n&eWith Wither you can raid bases and get more experience.",
+    "generic.wither.form.message.cost"   : "&c» &aPrice: &610k$ \n&eA little information: Maximum of Withers on Server is 10, so if there exists 10 Withers spawned you need to wait to minimum 1 to be despawned!\n&eAnd about despawning of entities, entities are despawned every 5 minutes, so be careful!\n&eThank you for purchase!\n&eHave a nice day!",
 
     "generic.wither.spawn.error"   : "You can't spawn Wither in spawn!",
     "generic.wither.spawn.count"   : "There are 10 withers spawned! Try again later!",
@@ -49,7 +49,7 @@
 
     "arena.form.boss.teleport"       : "Teleport Boss Arena",
     "arena.form.boss.teleport.first" : "                      Hello!\n         Welcome to Teleport Arena!",
-    "arena.form.boss.teleport.how"   : "&c» §aWhat is 'Teleport Arena'?\n&eTeleport Arena is an option for teleporting to Arena where Boss is spawning.\n&eYou can do that only if you have level 10+\n&eYou will cannot use /tp and other commands for teleporting here. Just /spawn.\n&eBoss is spawning every day at 21:00, 9 PM, GT+2\n&eBe careful, PVP is on!\n&eIf you don't want to be teleported, tap on X!\n&eHave a nice day!",
+    "arena.form.boss.teleport.how"   : "&c» &aWhat is 'Teleport Arena'?\n&eTeleport Arena is an option for teleporting to Arena where Boss is spawning.\n&eYou can do that only if you have level 10+\n&eYou will cannot use /tp and other commands for teleporting here. Just /spawn.\n&eBoss is spawning every day at 21:00, 9 PM, GT+2\n&eBe careful, PVP is on!\n&eIf you don't want to be teleported, tap on X!\n&eHave a nice day!",
 
     "arena.form.pvp.teleport" : "Teleport PvP Arena",
     "arena.form.pvp.first"    : "                      Hello!\n         Welcome to Teleport Arena!",
@@ -131,13 +131,13 @@
 
     "reports.form.info.first"       : "Reports Info",
     "reports.form.info.top"         : "Hello! Welcome to Reports Info! Select what you want to do.",
-    "reports.form.info.how"         : "§c» §aHow to reports a Player?\n§eTo reports a player just tab on 'Report'.\n§eYou need to complete all available fields.\n\n§cATENTION! \n§eIf you have a proof, we're waiting you on Discord\n§eYou can reports a player on game, but on Discord too!",
-    "reports.form.info.how.discord" : "§c» §aHow to reports on Discord? \n§eEnter on Discord and use #reports-en #reports",
+    "reports.form.info.how"         : "&c» &aHow to reports a Player?\n&eTo reports a player just tab on 'Report'.\n&eYou need to complete all available fields.\n\n&cATENTION! \n&eIf you have a proof, we're waiting you on Discord\n&eYou can reports a player on game, but on Discord too!",
+    "reports.form.info.how.discord" : "&c» &aHow to reports on Discord? \n&eEnter on Discord and use #reports-en #reports",
 
     "reports.form.info.reported.first"   : "Report {%0}",
-    "reports.form.info.reported.name"    : "§eName: §6{%0}",
-    "reports.form.info.reported.reason"  : "§eReason: §6{%0}",
-    "reports.form.info.reported.contact" : "§eContact: §6{%0}",
+    "reports.form.info.reported.name"    : "&eName: &6{%0}",
+    "reports.form.info.reported.reason"  : "&eReason: &6{%0}",
+    "reports.form.info.reported.contact" : "&eContact: &6{%0}",
 
     "reports.form.mechanic"         : "Report Player",
     "reports.form.mechanic.name"    : "Please put here name of Player who want to reports",
@@ -153,18 +153,18 @@
     "commands.shop.usage"       : "/shop",
     "commands.shop.description" : "Open Shop",
 
-    "title.join" : "§l§f» §r§6CHPE Factions §l§f«§r",
+    "title.join" : "&l&f» &r&6CHPE Factions &l&f«&r",
 
     "coords.switch.show.true" : "You set to show coordonates!",
     "coords.switch.show.false" : "You set to show coordonates!",
 
-    "subtitle.join.first"  : "§r§fThe place where the adventure begin",
-    "subtitle.join.second" : "§r§fVote for awesome rewards",
-    "subtitle.join.third"  : "§r§fmariusmrn.com/discord",
+    "subtitle.join.first"  : "&r&fThe place where the adventure begin",
+    "subtitle.join.second" : "&r&fVote for awesome rewards",
+    "subtitle.join.third"  : "&r&fmariusmrn.com/discord",
 
     "reports.form.list.first"  : "Reports List",
     "reports.form.list.top"    : "Hello! Welcome to Reports List! Select what you want to do.",
-    "reports.form.list.button" : "{%0} §7[§6{%1}§7]",
+    "reports.form.list.button" : "{%0} &7[&6{%1}&7]",
 
     "staffchat.enter.success" : "You entered succesfuly on StaffChat!",
     "staffchat.abandonated"   : "You abandonated StaffChat!",
@@ -218,7 +218,7 @@
 
     "homes.form.mechanic.first"   : "Home Mechanic",
     "homes.form.mechanic.top"     : "Hello! Welcome to Home Mechanic!",
-    "homes.form.mechanic.message" : "§c» §aHow to make a Home?\n§eTo make a Home just tab on 'Create a Home'.\n§cATENTION! \n§eYou can have only 2 Home. For more, you need use Premium Shop from /shop\n§c» §aHow to remove a Home? \n§eTo remove a Home just tab on 'Manage Homes', select Home and then tab on 'Delete Home'",
+    "homes.form.mechanic.message" : "&c» &aHow to make a Home?\n&eTo make a Home just tab on 'Create a Home'.\n&cATENTION! \n&eYou can have only 2 Home. For more, you need use Premium Shop from /shop\n&c» &aHow to remove a Home? \n&eTo remove a Home just tab on 'Manage Homes', select Home and then tab on 'Delete Home'",
 
     "commands.home.description" : "Manage Homes",
     "commands.home.usage"       : "/home",
@@ -230,10 +230,10 @@
 
     "jobs.form.first"     : "Info Jobs",
     "jobs.form.top"       : "Hello! Welcome to Info Jobs",
-    "jobs.form.miner"     : "§c» §aMiner:\n§eWith that CommonJob you can get money with ores.\n§eGet needed materials and you can get up: §750$",
-    "jobs.form.butcher"   : "§c» §aButcher: \n§eYou can make money with food and obiects from animals\n§eGet needed materials and you can get up: §775$",
-    "jobs.form.farmer"    : "§c» §aFarmer: \n§eYou can make money with this job if you plant.\n§eYou can get money too from Plants or Cultivate Seeds, any kind of Seeds, Saplings and Flowers.\n§eGet needed materials and you can get up: §730$",
-    "jobs.form.fisherman" : "§c» §aFisherman:\n§eWith this CommonJob you can make money if you get fish!\n§eGet needed materials and you can get up: §745$",
+    "jobs.form.miner"     : "&c» &aMiner:\n&eWith that CommonJob you can get money with ores.\n&eGet needed materials and you can get up: &750$",
+    "jobs.form.butcher"   : "&c» &aButcher: \n&eYou can make money with food and obiects from animals\n&eGet needed materials and you can get up: &775$",
+    "jobs.form.farmer"    : "&c» &aFarmer: \n&eYou can make money with this job if you plant.\n&eYou can get money too from Plants or Cultivate Seeds, any kind of Seeds, Saplings and Flowers.\n&eGet needed materials and you can get up: &730$",
+    "jobs.form.fisherman" : "&c» &aFisherman:\n&eWith this CommonJob you can make money if you get fish!\n&eGet needed materials and you can get up: &745$",
 
     "jobs.form.get.first" : "Jobs",
     "jobs.form.get.top"   : "Hello! Welcome to CommonJob Category",
@@ -271,34 +271,34 @@
 
     "kits.form.category.info.first"    : "Info Category Kits",
     "kits.form.category.info.top"      : "Hello! Welcome to Info Category Kits",
-    "kits.form.category.info.classic"  : "§c» §aClassic Kits:\n§eThere are Kits who are actually so basic and good to start with them in PVP.\n§eThese kits can be buyed by every player.",
-    "kits.form.category.info.premium"  : "§c» §aPremium Kits: \n§eThere are Kits can be unlocked using Premium Shop (/shop).\n§eWhen you unlocked the kit, then this can be buyed.",
-    "kits.form.category.info.specific" : "§c» §aSpecific Kits: \n§eThere are Kits who are specific server.\n§eBecause we are on Skyblock, you wil find a lot of kits for starting an adventure on island.\n§eThese kits can be buyed by every player.",
+    "kits.form.category.info.classic"  : "&c» &aClassic Kits:\n&eThere are Kits who are actually so basic and good to start with them in PVP.\n&eThese kits can be buyed by every player.",
+    "kits.form.category.info.premium"  : "&c» &aPremium Kits: \n&eThere are Kits can be unlocked using Premium Shop (/shop).\n&eWhen you unlocked the kit, then this can be buyed.",
+    "kits.form.category.info.specific" : "&c» &aSpecific Kits: \n&eThere are Kits who are specific server.\n&eBecause we are on Skyblock, you wil find a lot of kits for starting an adventure on island.\n&eThese kits can be buyed by every player.",
 
     "kits.form.category.classic.info.first"      : "Info Classic Kits",
     "kits.form.category.classic.info.top"        : "Hello! Welcome to Info Classic Kits! Select what you want to do",
-    "kits.form.category.classic.info.ench_start" : "§c» §aEnchanted Starter:\n§eCooldown: 24h.\n§eCost: §71500$\n§eItems: §7Full Lether Enchanted Armor, Stone Tools, 32 Breads",
-    "kits.form.category.classic.info.guardian"   : "§c» §aGuardian:\n§eCooldown: 24h.\n§eCost: §73500$\n§eItems: §7Full Gold Enchanted Armor, Iron Tools, 32 Breads, 16 TNT, 3 Golden Apple, 64 Obsidian",
-    "kits.form.category.classic.info.knight"     : "§c» §aKnight:\n§eCooldown: 24h.\n§eCost: §75000$\n§eItems: §7Full Diamond Armor, Stone Enchanted Tools, 32 Breads, 16 TNT, 32 Obsidian",
-    "kits.form.category.classic.info.paladin"    : "§c» §aPaladin:\n§eCooldown: 24h.\n§eCost: §78500$\n§eItems: §7Full Iron Armor, Diamond Enchanted Tools, 32 Breads, 12 TNT, 128 Obsidian",
-    "kits.form.category.classic.info.sparrow"    : "§c» §aSparrow:\n§eCooldown: 24h.\n§eCost: §71000$\n§eItems: §7Full Iron Enchanted Armor, Diamond Enchanted Tools, 32 Breads, 12 TNT, 64 Obsidian",
+    "kits.form.category.classic.info.ench_start" : "&c» &aEnchanted Starter:\n&eCooldown: 24h.\n&eCost: &71500$\n&eItems: &7Full Lether Enchanted Armor, Stone Tools, 32 Breads",
+    "kits.form.category.classic.info.guardian"   : "&c» &aGuardian:\n&eCooldown: 24h.\n&eCost: &73500$\n&eItems: &7Full Gold Enchanted Armor, Iron Tools, 32 Breads, 16 TNT, 3 Golden Apple, 64 Obsidian",
+    "kits.form.category.classic.info.knight"     : "&c» &aKnight:\n&eCooldown: 24h.\n&eCost: &75000$\n&eItems: &7Full Diamond Armor, Stone Enchanted Tools, 32 Breads, 16 TNT, 32 Obsidian",
+    "kits.form.category.classic.info.paladin"    : "&c» &aPaladin:\n&eCooldown: 24h.\n&eCost: &78500$\n&eItems: &7Full Iron Armor, Diamond Enchanted Tools, 32 Breads, 12 TNT, 128 Obsidian",
+    "kits.form.category.classic.info.sparrow"    : "&c» &aSparrow:\n&eCooldown: 24h.\n&eCost: &71000$\n&eItems: &7Full Iron Enchanted Armor, Diamond Enchanted Tools, 32 Breads, 12 TNT, 64 Obsidian",
 
     "kits.form.category.premium.info.first"       : "Info Premium Kits",
     "kits.form.category.premium.info.top"         : "Hello! Welcome to Info Premium Kits! Select what you want to do",
-    "kits.form.category.premium.info.viper"       : "§c» §aViper:\n§eCooldown: 48h.\n§eCost: §75000$\n§eItems: §7Full Iron Enchanted Armor, Full Iron Enchanted Tools, 64 Steaks, 10 Potions Regeneration 2, 10 Potions Strenght 1",
-    "kits.form.category.premium.info.master"      : "§c» §aMaster:\n§eCooldown: 48h.\n§eCost: §76000$\n§eItems: §7Full Diamond Enchanted Armor, Full Iron Enchanted Tools, 64 Steaks, 10 Potions Instant Heal 1, 10 Potions Instant Damage 1",
-    "kits.form.category.premium.info.killer"      : "§c» §aKiller:\n§eCooldown: 48h.\n§eCost: §77500$\n§eItems: §7Full Iron Enchanted Armor, x1 Super Diamond Enchanted Sword, Full Iron Enchanted Tools, 64 Steaks, 4 Potions Instant Heal 1, 4 Potions Instant Damage 1",
-    "kits.form.category.premium.info.detonator"   : "§c» §aDetonator:\n§eCooldown: 48h.\n§eCost: §79000$\n§eItems: §7Full Chain Enchanted Armor, Full Diamond Enchanted Tools, 64 Steaks, 10 Potions Speed 2, 10 Splash Potions Poison 2",
-    "kits.form.category.premium.info.turr_monkey" : "§c» §aTurret Monkey:\n§eCooldown: 48h.\n§eCost: §712000$\n§eItems: §7Full Diamond Enchanted Armor, Diamond Enchanted Tools, 64 Steaks, 10 Potions Speed 2, 10 Splash Potions Speed 2, 24 Splash Potions Instant Kill, 24 Potions Fire Resistance",
+    "kits.form.category.premium.info.viper"       : "&c» &aViper:\n&eCooldown: 48h.\n&eCost: &75000$\n&eItems: &7Full Iron Enchanted Armor, Full Iron Enchanted Tools, 64 Steaks, 10 Potions Regeneration 2, 10 Potions Strenght 1",
+    "kits.form.category.premium.info.master"      : "&c» &aMaster:\n&eCooldown: 48h.\n&eCost: &76000$\n&eItems: &7Full Diamond Enchanted Armor, Full Iron Enchanted Tools, 64 Steaks, 10 Potions Instant Heal 1, 10 Potions Instant Damage 1",
+    "kits.form.category.premium.info.killer"      : "&c» &aKiller:\n&eCooldown: 48h.\n&eCost: &77500$\n&eItems: &7Full Iron Enchanted Armor, x1 Super Diamond Enchanted Sword, Full Iron Enchanted Tools, 64 Steaks, 4 Potions Instant Heal 1, 4 Potions Instant Damage 1",
+    "kits.form.category.premium.info.detonator"   : "&c» &aDetonator:\n&eCooldown: 48h.\n&eCost: &79000$\n&eItems: &7Full Chain Enchanted Armor, Full Diamond Enchanted Tools, 64 Steaks, 10 Potions Speed 2, 10 Splash Potions Poison 2",
+    "kits.form.category.premium.info.turr_monkey" : "&c» &aTurret Monkey:\n&eCooldown: 48h.\n&eCost: &712000$\n&eItems: &7Full Diamond Enchanted Armor, Diamond Enchanted Tools, 64 Steaks, 10 Potions Speed 2, 10 Splash Potions Speed 2, 24 Splash Potions Instant Kill, 24 Potions Fire Resistance",
 
     "kits.form.category.specific.info.first"   : "Info Specific Kits",
     "kits.form.category.specific.info.top"     : "Hello! Welcome to Info Specific Kits! Select what you want to do",
-    "kits.form.category.specific.info.planter" : "§c» §aPlanter:\n§eCooldown: 30m.\n§eCost: §71500$\n§eItems: §7Full Stone Tools, 12 Saplings from all Types, 32 Grass, 32 Dirt, 64 Cobblestone, 24 Bone Meal",
-    "kits.form.category.specific.info.stonner" : "§c» §aStonner:\n§eCooldown: 20m.\n§eCost: §7750$\n§eItems: §7Full Stone Tools, 12 Steak, 32 Grass, 32 Dirt, 128 Cobblestone, 128 Stone",
-    "kits.form.category.specific.info.lacker"  : "§c» §aLacker:\n§eCooldown: 10m.\n§eCost: §1250$\n§eItems: §7Full Stone Tools, 32 Steak, 2 Ice, 2 Lava Buckets, 10 Empty Buckets",
-    "kits.form.category.specific.info.woddie"  : "§c» §aWoodie:§eCooldown: 20m.\n§eCost: §71000$\n§eItems: §7Full Stone Tools, 32 Steak, 16 Wood from all Types",
-    "kits.form.category.specific.info.push_up" : "§c» §aPushUp:\n§eCooldown: 1h.\n§eCost: §7650$\n§eItems: §71 Diamond Axe with Efficiency 2, 8 Wood from all Types",
-    "kits.form.category.specific.info.digger"  : "§c» §aDigger:\n§eCooldown: 1h.\n§eCost: §7650$\n§eItems: §71 Diamond Pickaxe with Efficiency 2, 8 Stone, 8 Cobblestone, 8 Dirt, 8 Grass",
+    "kits.form.category.specific.info.planter" : "&c» &aPlanter:\n&eCooldown: 30m.\n&eCost: &71500$\n&eItems: &7Full Stone Tools, 12 Saplings from all Types, 32 Grass, 32 Dirt, 64 Cobblestone, 24 Bone Meal",
+    "kits.form.category.specific.info.stonner" : "&c» &aStonner:\n&eCooldown: 20m.\n&eCost: &7750$\n&eItems: &7Full Stone Tools, 12 Steak, 32 Grass, 32 Dirt, 128 Cobblestone, 128 Stone",
+    "kits.form.category.specific.info.lacker"  : "&c» &aLacker:\n&eCooldown: 10m.\n&eCost: &1250$\n&eItems: &7Full Stone Tools, 32 Steak, 2 Ice, 2 Lava Buckets, 10 Empty Buckets",
+    "kits.form.category.specific.info.woddie"  : "&c» &aWoodie:&eCooldown: 20m.\n&eCost: &71000$\n&eItems: &7Full Stone Tools, 32 Steak, 16 Wood from all Types",
+    "kits.form.category.specific.info.push_up" : "&c» &aPushUp:\n&eCooldown: 1h.\n&eCost: &7650$\n&eItems: &71 Diamond Axe with Efficiency 2, 8 Wood from all Types",
+    "kits.form.category.specific.info.digger"  : "&c» &aDigger:\n&eCooldown: 1h.\n&eCost: &7650$\n&eItems: &71 Diamond Pickaxe with Efficiency 2, 8 Stone, 8 Cobblestone, 8 Dirt, 8 Grass",
 
     "commands.kits.usage"       : "/kits",
     "commands.kits.description" : "Manage kits",
@@ -353,7 +353,7 @@
     "score.scoretag" : "&8[{%0}&8]",
 
     "combat.bossbar" : "      &7-&8=&7- &7CombatLogger: &6&l{%0}&7-&8=&7-",
-    "combat.set"     : "You have entered combat, logging out now will cause your death. Please wait 13 §eseconds.",
+    "combat.set"     : "You have entered combat, logging out now will cause your death. Please wait 13 &eseconds.",
     "combat.exit"    : "You are no longer in combat, you may now logout and run commands.",
 
     "commands.tpa.description" : "Send a teleport request to a player",
