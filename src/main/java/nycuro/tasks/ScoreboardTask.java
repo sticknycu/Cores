@@ -13,8 +13,7 @@ import nycuro.jobs.NameJob;
 
 import java.util.UUID;
 
-import static nycuro.api.API.mainAPI;
-import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.*;
 
 /**
  * author: NycuRO
@@ -51,21 +50,21 @@ public class ScoreboardTask extends Task {
         scoreboardDisplay.setScore(0, "  " + "  ", 0);
         scoreboardDisplay.setScore(1, "  " + "  ", 1);
         try {
-            scoreboardDisplay.setScore(2, messageAPI.getInfoScoreboard(player), 2);
-            scoreboardDisplay.setScore(3, messageAPI.getNameScoreboard(player), 3);
-            scoreboardDisplay.setScore(4, messageAPI.getRankScoreboard(player), 4);
-            scoreboardDisplay.setScore(5, "§7| §fDollars: §6" +  API.round(profileSkyblock.getDollars(), 2), 5);
-            scoreboardDisplay.setScore(6, "§7| §fGems: §6" + profileProxy.getGems() + "  ", 6);
-            scoreboardDisplay.setScore(7, "§7| §fOnline Time: §6" + API.time(profileSkyblock.getTime()) + "  ", 7);
-            scoreboardDisplay.setScore(8, "§7| §fJob: §6" + NameJob.getType(profileSkyblock.getJob()) + "   ", 8);
+            scoreboardDisplay.setScore(2, messageAPI.messagesObject.translateMessage("scoreboard.info"), 2);
+            scoreboardDisplay.setScore(3, messageAPI.messagesObject.translateMessage("scoreboard.name", player.getName()), 3);
+            scoreboardDisplay.setScore(4, messageAPI.messagesObject.translateMessage("scoreboard.rank", mechanicAPI.getRank(player)), 4);
+            scoreboardDisplay.setScore(5, messageAPI.messagesObject.translateMessage("scoreboard.dollars", mainAPI.emptyNoSpace + API.round(profileSkyblock.getDollars(), 2)), 5);
+            scoreboardDisplay.setScore(6, messageAPI.messagesObject.translateMessage("scoreboard.gems", mainAPI.emptyNoSpace + profileProxy.getGems()), 6);
+            scoreboardDisplay.setScore(7, messageAPI.messagesObject.translateMessage("scoreboard.onlinetime", time(profileSkyblock.getTime())), 7);
+            scoreboardDisplay.setScore(8, messageAPI.messagesObject.translateMessage("scoreboard.job", NameJob.getType(profileSkyblock.getJob()).getName()), 8);
             if (coords.getOrDefault(player.getUniqueId(), false)) {
-                scoreboardDisplay.setScore(9, "§7| §fX: §6" + (int) player.getX() + " §fY: §6" + (int) player.getY() + " §fZ: §6" + (int) player.getZ() + "   ", 9);
+                scoreboardDisplay.setScore(9, messageAPI.messagesObject.translateMessage("scoreboard.coords", mainAPI.emptyNoSpace + player.getX(), mainAPI.emptyNoSpace + player.getY(), mainAPI.emptyNoSpace + player.getZ()), 9);
             }
-            scoreboardDisplay.setScore(10, "§7 " + "" + "    ", 10);
-            scoreboardDisplay.setScore(11, "§7--- §e§lServer: " + "  ", 11);
-            scoreboardDisplay.setScore(12, messageAPI.getOnlineScoreboard(player), 12);
-            scoreboardDisplay.setScore(13, "§7| §fDropParty: §6" + Loader.dropPartyVotes + "§7/§650", 13);
-            scoreboardDisplay.setScore(14, messageAPI.getNextScoreboard(player, (1000 * 60 * 60 * 24 - (System.currentTimeMillis() - Loader.dropPartyTime))), 14);
+            scoreboardDisplay.setScore(10, messageAPI.messagesObject.translateMessage("scoreboard.empty"), 10);
+            scoreboardDisplay.setScore(11, messageAPI.messagesObject.translateMessage("scoreboard.server"), 11);
+            scoreboardDisplay.setScore(12, messageAPI.messagesObject.translateMessage("scoreboard.online", mainAPI.emptyNoSpace + mainAPI.getServer().getOnlinePlayers().size()), 12);
+            scoreboardDisplay.setScore(13, messageAPI.messagesObject.translateMessage("scoreboard.countvoteparty", mainAPI.emptyNoSpace + Loader.dropPartyVotes), 13);
+            scoreboardDisplay.setScore(14, messageAPI.messagesObject.translateMessage("scoreboard.voteparty", time(1000 * 60 * 60 * 24 - (System.currentTimeMillis() - Loader.dropPartyTime))), 14);
         } catch (Exception e) {
             // ignore
         }

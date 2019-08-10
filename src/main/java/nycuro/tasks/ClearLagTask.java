@@ -25,7 +25,7 @@ public class ClearLagTask extends Task {
         String message = "";
         try {
             for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
-                message = messageAPI.sendMobDespawnMessage(player);
+                message = messageAPI.messagesObject.translateMessage("broadcast.mobclear.started");
                 player.sendMessage(message);
                 try {
                     Thread.sleep(1000 * 30);
@@ -46,7 +46,7 @@ public class ClearLagTask extends Task {
                             if (entity instanceof EntityItem) entity.close();
                         }
                     }
-                    message = messageAPI.sendMobDespawnFinishMessage(player);
+                    message = messageAPI.messagesObject.translateMessage("broadcast.mobclear.finished");
                     player.sendMessage(message);
                 }
             }

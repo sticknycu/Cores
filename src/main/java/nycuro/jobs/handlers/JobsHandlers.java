@@ -46,19 +46,19 @@ public class JobsHandlers implements Listener {
             if (entity.namedTag.getBoolean("minerNPC")) {
                 if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(1);
-                messageAPI.sendReceiveJobMessage(damager, NameJob.MINER);
+                damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.MINER.getName()));
             } else if (entity.namedTag.getBoolean("butcherNPC")) {
                 if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(2);
-                messageAPI.sendReceiveJobMessage(damager, NameJob.BUTCHER);
+                damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.BUTCHER.getName()));
             } else if (entity.namedTag.getBoolean("farmerNPC")) {
                 if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(3);
-                messageAPI.sendReceiveJobMessage(damager, NameJob.FARMER);
+                damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.FARMER.getName()));
             } else if (entity.namedTag.getBoolean("fishermanNPC")) {
                 if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(4);
-                messageAPI.sendReceiveJobMessage(damager, NameJob.FISHERMAN);
+                damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.FISHERMAN.getName()));
             } else if (entity.namedTag.getBoolean("mobfarmerNPC")) {
                 // TODO: Mob farm
             }
@@ -86,7 +86,7 @@ public class JobsHandlers implements Listener {
                     if (profileSkyblock.getJob() == 1) {
                         event.setDrops(new Item[0]);
                         if (mechanicAPI.checkItems(player, event.getDrops())) {
-                            player.sendMessage(messageAPI.sendFinishedMissionMessage(player));
+                            player.sendMessage(messageAPI.messagesObject.translateMessage("work.finished"));
                             event.setCancelled();
                         }
                     }
@@ -101,7 +101,7 @@ public class JobsHandlers implements Listener {
                     if (profileSkyblock.getJob() == 3) {
                         event.setDrops(new Item[0]);
                         if (mechanicAPI.checkItems(player, event.getDrops())) {
-                            player.sendMessage(messageAPI.sendFinishedMissionMessage(player));
+                            player.sendMessage(messageAPI.messagesObject.translateMessage("work.finished"));
                             event.setCancelled();
                         }
                     }
@@ -124,7 +124,7 @@ public class JobsHandlers implements Listener {
                 if (profileSkyblock.getJob() == 4) {
                     event.getItem().kill();
                     if (mechanicAPI.checkItems(player, event.getItem().getItem())) {
-                        player.sendMessage(messageAPI.sendFinishedMissionMessage(player));
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("work.finished"));
                         event.setCancelled();
                     }
                 }
@@ -145,7 +145,7 @@ public class JobsHandlers implements Listener {
         if (job == 2) {
             int[] integers = jobsObject.getCountAnimals();
             if (integers[0] == 0 && integers[1] == 0 && integers[2] == 0 && integers[3] == 0) {
-                killer.sendMessage(messageAPI.sendFinishedMissionMessage(killer));
+                killer.sendMessage(messageAPI.messagesObject.translateMessage("work.finished"));
                 event.setCancelled();
             }
             switch (eventEntity.getNetworkId()) {
@@ -190,7 +190,7 @@ public class JobsHandlers implements Listener {
             player.teleport(player.getServer().getDefaultLevel().getSpawnLocation());
             player.removeAllEffects();
             player.getInventory().clearAll();
-            messageAPI.sendDeadMessage(player, damager);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("kill.message"));
             ProfileSkyblock profilePlayer = Database.profileSkyblock.get(player.getName());
             ProfileSkyblock profileDamager = Database.profileSkyblock.get(damager.getName()); // Todo: Zombies, Monsters.
             profilePlayer.setDeaths(profilePlayer.getDeaths() + 1);

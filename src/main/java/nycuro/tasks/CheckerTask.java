@@ -103,9 +103,9 @@ public class CheckerTask extends Task {
 
             if (mechanicAPI.isOnArena(player)) {
                 if (profileSkyblock.getLevel() < 10) {
-                    player.sendMessage(messageAPI.sendArenaWarningMessage(player));
+                    player.sendMessage(messageAPI.messagesObject.translateMessage("area.boss.warning"));
                     player.teleport(mainAPI.getServer().getDefaultLevel().getSpawnLocation());
-                    messageAPI.sendCommandSpawnMessage(player);
+                    player.sendMessage(messageAPI.messagesObject.translateMessage("teleportation.spawn.teleported"));
                 }
             }
 
@@ -115,7 +115,7 @@ public class CheckerTask extends Task {
             ZonedDateTime timeZone = instant.atZone(zoneId);
             if (timeZone.getHour() == 21 && timeZone.getMinute() == 0 && timeZone.getSecond() == 0) {
                 if (mechanicAPI.getBossHealth() == 0) {
-                    messageAPI.sendBossSpawnedMessage(player);
+                    player.sendMessage(messageAPI.messagesObject.translateMessage("generic.boss.spawn"));
                     new BossEntity();
                 }
             }
@@ -126,7 +126,7 @@ public class CheckerTask extends Task {
                 Loader.dropPartyVotes = 0;
             }
             if (Loader.dropPartyVotes >= 50) {
-                mechanicAPI.sendDropPartyMessageBroadcast(player);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("generic.dropparty.spawn"));
                 Loader.dropPartyTime = System.currentTimeMillis();
                 Loader.dropPartyVotes = 0;
                 mainAPI.getServer().getScheduler().scheduleDelayedTask(new Task() {
@@ -149,11 +149,11 @@ public class CheckerTask extends Task {
                         if (randomBool.get()) profileSkyblock.setDollars(profileSkyblock.getDollars() + resultCoins);
                         if (!randomBool.get()) profileProxy.setTime(profileProxy.getTime() + 1000 * 60 * 15);
                         if (randomBool.get()) {
-                            player.sendPopup("§3+" + resultCoins + " DOLLARS" + "\n" +
-                                    "+" + result + " EXP");
+                            player.sendPopup(messageAPI.messagesObject.translateMessage("generic.popup.message.one",
+                                    mainAPI.emptyNoSpace + resultCoins, mainAPI.emptyNoSpace + result));
                         } else {
-                            player.sendPopup("§3+" + resultGem + " GEMS" + "\n" +
-                                    "+15min");
+                            player.sendPopup(messageAPI.messagesObject.translateMessage("generic.popup.message.two",
+                                    mainAPI.emptyNoSpace + resultGem));
                         }
                         if (randomBool.get()) {
                             randomBool.set(false);

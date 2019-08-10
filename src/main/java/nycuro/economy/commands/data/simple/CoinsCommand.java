@@ -13,23 +13,23 @@ import static nycuro.api.API.messageAPI;
  * SkyblockCore Project
  * API 1.0.0
  */
-public class GetCoinsCommand extends CommandBaseEconomy {
+public class CoinsCommand extends CommandBaseEconomy {
 
-    public GetCoinsCommand() {
-        super("getcoins");
+    public CoinsCommand() {
+        super("coins");
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         if (strings.length == 0) {
             double money = Database.profileSkyblock.get(commandSender.getName()).getDollars();
-            messageAPI.getSelfMoneyMessage((Player) commandSender, money);
+            commandSender.sendMessage(messageAPI.messagesObject.translateMessage("commands.money.now", mainAPI.emptyNoSpace + money));
         } else if (strings.length == 1) {
             Player player = mainAPI.getServer().getPlayerExact(strings[0]);
             double money = Database.profileSkyblock.get(player.getName()).getDollars();
-            messageAPI.getPlayerMoneyMessage(commandSender, player, money);
+            commandSender.sendMessage(messageAPI.messagesObject.translateMessage("commands.money.now", player.getName(), mainAPI.emptyNoSpace + money));
         } else {
-            messageAPI.getMoneyExceptionMessage((Player) commandSender);
+            sendUsage(commandSender);
             return true;
         }
         return true;

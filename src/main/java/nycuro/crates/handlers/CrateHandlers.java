@@ -7,12 +7,9 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import nycuro.utils.typo.FastRandom;
 
-import java.util.Random;
-
-import static nycuro.api.API.mechanicAPI;
-import static nycuro.api.API.crateAPI;
-import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.*;
 
 /**
  * author: NycuRO
@@ -33,21 +30,18 @@ public class CrateHandlers implements Listener {
                 return;
             }
             event.setCancelled(true);
-            if (itemHand.getCount() > 1) {
-                messageAPI.sendCrateCountMessage(player);
-            } else {
-                switch (itemHand.getId()) {
-                    case Item.TRIPWIRE_HOOK:
-                        Random random = new Random();
-                        int number = random.nextInt(100) + 1;
-                        crateAPI.getChange(player, playerInventory, number);
-                        crateAPI.addExplosion(block);
-                        player.addExperience(10);
-                        messageAPI.sendReceiveItemMessage(player, 10);
-                        messageAPI.sendCrateMessage(player, number);
-                        playerInventory.removeItem(itemHand);
-                        break;
-                }
+            if (itemHand.getId() == Item.TRIPWIRE_HOOK) {
+                FastRandom.current().ints(1, 1, 100).findFirst().ifPresent(
+                        (j) -> {
+                            crateAPI.getChange(player, playerInventory, j);
+                            crateAPI.addExplosion(block);
+                            player.addExperience(10);
+                            player.sendTitle(messageAPI.messagesObject.translateMessage("crate.title.receive.first",
+                                    messageAPI.messagesObject.translateMessage("crate.title.receive.second", mainAPI.emptyNoSpace + 10)));
+                            player.sendMessage(messageAPI.messagesObject.translateMessage("crate.congrats", mainAPI.emptyNoSpace + j));
+                            itemHand.setCount(itemHand.getCount() - 1);
+                        }
+                );
             }
         }
     }

@@ -27,7 +27,7 @@ public class CombatAPI {
 
     public void setCombat(Player player) {
         if (!inCombat(player)) {
-            player.sendMessage(messageAPI.setCombatMessage(player));
+            player.sendMessage(messageAPI.messagesObject.translateMessage("combat.set"));
             inCombat.put(player.getUniqueId(), System.currentTimeMillis());
         }
     }

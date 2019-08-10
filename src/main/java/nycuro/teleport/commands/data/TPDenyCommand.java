@@ -37,7 +37,7 @@ public class TPDenyCommand extends CommandBaseTeleportation {
         }
         Player to = (Player) sender;
         if (teleportationAPI.getLatestTPRequestTo(to) == null) {
-            sender.sendMessage(messageAPI.messagesObject.getMessages().get("commands.tpaccept.noRequest"));
+            sender.sendMessage(messageAPI.messagesObject.messages.get("commands.tpaccept.noRequest"));
             return false;
         }
         TPRequest request;
@@ -45,7 +45,7 @@ public class TPDenyCommand extends CommandBaseTeleportation {
         switch (args.length) {
             case 0:
                 if ((request = teleportationAPI.getLatestTPRequestTo(to)) == null) {
-                    sender.sendMessage(messageAPI.messagesObject.getMessages().get("commands.tpaccept.unavailable"));
+                    sender.sendMessage(messageAPI.messagesObject.messages.get("commands.tpaccept.unavailable"));
                     return false;
                 }
                 from = request.getFrom();

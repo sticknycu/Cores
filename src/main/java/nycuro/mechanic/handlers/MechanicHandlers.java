@@ -198,8 +198,9 @@ public class MechanicHandlers implements Listener {
     @EventHandler
     public void onChat(PlayerChatEvent event) {
         String message = event.getMessage();
+        Player player = event.getPlayer();
         if (message.equalsIgnoreCase("జ్ఞ\u200Cా")) {
-            messageAPI.sendAbuseMessage(event.getPlayer());
+            player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
             event.setCancelled(true);
         }
     }

@@ -83,6 +83,7 @@ public class Loader extends PluginBase {
 
     public String symbol = TextFormat.GOLD.toString();
     public String empty = " ";
+    public String emptyNoSpace = "";
 
     public static void registerTops() {
         try {
@@ -198,7 +199,6 @@ public class Loader extends PluginBase {
     }
 
     private void registerCommands() {
-        aiAPI.registerCommands();
         dropPartyAPI.registerCommands();
         homeAPI.registerCommands();
         jobsAPI.registerCommands();
@@ -207,7 +207,6 @@ public class Loader extends PluginBase {
         shopAPI.registerCommands();
         helpingAPI.registerCommands();
         economyAPI.registerCommands();
-        crateAPI.registerCommands();
         utilsAPI.registerCommands();
         //teleportationAPI.registerCommands();
     }

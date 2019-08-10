@@ -5,8 +5,6 @@ import cn.nukkit.command.CommandSender;
 import nycuro.database.Database;
 import nycuro.utils.commands.CommandBaseUtils;
 
-import static nycuro.api.API.messageAPI;
-
 /**
  * author: NycuRO
  * FactionsCore Project
@@ -34,7 +32,7 @@ public class TopDeathsCommand extends CommandBaseUtils {
             player.sendMessage("§c9) §a" + Database.scoreboarddeathsName.get(9) + " -> " + Database.scoreboarddeathsValue.get(9));
             player.sendMessage("§c10) §a" + Database.scoreboarddeathsName.get(10) + " -> " + Database.scoreboarddeathsValue.get(10));
         } else {
-            messageAPI.topDeathsExceptionMessage(player);
+            sendUsage(commandSender);
             return true;
         }
         return true;

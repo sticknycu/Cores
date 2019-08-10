@@ -22,12 +22,12 @@ public class SpawnCommand extends CommandBaseUtils {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         Player player = (Player) commandSender;
-        messageAPI.sendCommandCooldownSpawnMessage(player);
+        messageAPI.messagesObject.translateMessage("generic.cooldown");
         player.getServer().getScheduler().scheduleDelayedTask(new Task() {
             @Override
             public void onRun(int i) {
                 mechanicAPI.sendToSpawn(player);
-                messageAPI.sendCommandSpawnMessage(player);
+                messageAPI.messagesObject.translateMessage("teleportation.spawn.teleported");
             }
         }, 7 * 20);
         return true;

@@ -50,7 +50,7 @@ public class TPAAllCommand extends CommandBaseTeleportation {
                 p.sendMessage(messageAPI.messagesObject.translateMessage("commands.tpahere.invite", player.getName()));
             }
         }
-        player.sendMessage(messageAPI.messagesObject.getMessages().get("commands.tpaall.success"));
+        player.sendMessage(messageAPI.messagesObject.messages.get("commands.tpaall.success"));
         return true;
     }
 }

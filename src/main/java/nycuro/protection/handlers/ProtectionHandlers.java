@@ -58,7 +58,7 @@ public class ProtectionHandlers implements Listener {
                             item.setNamedTag(tag);
                             PlayerInventory playerInventory = player.getInventory();
                             if (!playerInventory.canAddItem(item)) {
-                                messageAPI.sendFullInventoryMessage(player);
+                                player.sendMessage(messageAPI.messagesObject.translateMessage("generic.inventory.get.error"));
                             } else {
                                 playerInventory.addItem(item);
                             }
@@ -81,7 +81,7 @@ public class ProtectionHandlers implements Listener {
                             item.setNamedTag(tag);
                             PlayerInventory playerInventory = player.getInventory();
                             if (!playerInventory.canAddItem(item)) {
-                                messageAPI.sendFullInventoryMessage(player);
+                                player.sendMessage(messageAPI.messagesObject.translateMessage("generic.inventory.get.error"));
                             } else {
                                 playerInventory.addItem(item);
                             }
@@ -106,7 +106,7 @@ public class ProtectionHandlers implements Listener {
                 item.setNamedTag(tag);
                 PlayerInventory playerInventory = player.getInventory();
                 if (!playerInventory.canAddItem(item)) {
-                    messageAPI.sendFullInventoryMessage(player);
+                    player.sendMessage(messageAPI.messagesObject.translateMessage("generic.inventory.get.error"));
                 } else {
                     playerInventory.addItem(item);
                 }
@@ -204,7 +204,7 @@ public class ProtectionHandlers implements Listener {
                 case Item.WOODEN_HOE:
                 case Item.FLINT_AND_STEEL:
                     if (mechanicAPI.isOnPrincipalWorld(player)) {
-                        messageAPI.sendAbuseMessage(player);
+                        messageAPI.sendBreakMessage(player);
                         event.setCancelled(true);
                         return;
                     }

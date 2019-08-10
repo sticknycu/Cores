@@ -4,8 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.dropparty.commands.CommandBaseDropParty;
 
-import static nycuro.api.API.mainAPI;
-import static nycuro.api.API.mechanicAPI;
+import static nycuro.api.API.*;
 
 /**
  * author: NycuRO
@@ -22,7 +21,7 @@ public class DropPartyMessageCommand extends CommandBaseDropParty {
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         if (commandSender instanceof Player) return false;
         for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
-            mechanicAPI.sendDropPartyMessageBroadcast(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("generic.dropparty.spawn"));
             return true;
         }
         return false;

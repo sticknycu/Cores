@@ -16,21 +16,26 @@ import cn.nukkit.nbt.tag.*;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
+import me.lucko.luckperms.api.User;
+import me.lucko.luckperms.api.manager.UserManager;
 import nukkitcoders.mobplugin.entities.monster.flying.Wither;
 import nycuro.ai.entity.BossEntity;
+import nycuro.api.API;
 import nycuro.database.Database;
+import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.mechanic.objects.SettingsObject;
+import nycuro.messages.handlers.ChatHandlers;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-import static nycuro.api.API.mainAPI;
-import static nycuro.api.API.messageAPI;
+import static nycuro.api.API.*;
 
 /**
  * author: NycuRO
@@ -53,6 +58,45 @@ public class MechanicAPI {
 
     public boolean isOnArea(Player player) {
         return mainAPI.isOnArea.getBoolean(player.getUniqueId());
+    }
+
+    private User giveMeADamnUser(UUID uuid) {
+        UserManager userManager = ChatHandlers.api.getUserManager();
+        CompletableFuture<User> userFuture = userManager.loadUser(uuid);
+
+        return userFuture.join(); // ouch!
+    }
+
+    public String getRank(IPlayer player) {
+        String rank = "";
+        if (mainAPI.getServer().lookupName(player.getName()).isPresent()) {
+            String group = giveMeADamnUser(mainAPI.getServer().lookupName(player.getName()).get()).getPrimaryGroup().toUpperCase();
+            String sGroup = group.toLowerCase();
+            switch (sGroup) {
+                case "default":
+                    rank = "&l&o&6PLAYER&r";
+                    break;
+                case "premium":
+                    rank = "&l&o&ePREMIUM&r";
+                    break;
+                case "vip":
+                    rank = "&l&o&3VIP&r";
+                    break;
+                case "helper":
+                    rank = "&l&o&aHELPER&r";
+                    break;
+                case "moderator":
+                    rank = "&l&o&bMODERATOR&r";
+                    break;
+                case "yt":
+                    rank = "&l&o&fYT&r";
+                    break;
+                case "admin":
+                    rank = "&l&o&4ADMIN&r";
+                    break;
+            }
+        }
+        return TextFormat.colorize(rank);
     }
 
 
@@ -138,8 +182,36 @@ public class MechanicAPI {
     }
 
     public void sendStats(CommandSender commandSender, IPlayer player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Stats");
-        infoMenu.addElement(new ElementLabel(messageAPI.getStatsCommand(commandSender, player)));
+        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("stats.form.first", player.getName()));
+        ProfileProxy profileProxy = Database.profileProxy.get(commandSender.getName());
+        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+        DateFormat simple = new SimpleDateFormat("dd MMM yyyy HH:mm:ss:SSS Z");
+        Date firstPlay = new Date(player.getFirstPlayed());
+        Date lastPlay = new Date(player.getLastPlayed());
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.top")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.name", player.getName())));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.rank", mechanicAPI.getRank(player))));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.level", mainAPI.emptyNoSpace + profileSkyblock.getLevel())));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.experience", mainAPI.emptyNoSpace + profileSkyblock.getExperience(),
+                mainAPI.emptyNoSpace + profileSkyblock.getNecesary())));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.firstjoin", simple.format(firstPlay))));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.online", (player.isOnline() ? "§3YES§6" : simple.format(lastPlay)))));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.onlinetime", API.time(profileSkyblock.getTime()))));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.dollars", mainAPI.emptyNoSpace + profileSkyblock.getDollars())));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.gems", mainAPI.emptyNoSpace + profileProxy.getGems())));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.kills", mainAPI.emptyNoSpace + profileSkyblock.getKills())));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.deaths", mainAPI.emptyNoSpace + profileSkyblock.getDeaths())));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("stats.form.votes", mainAPI.emptyNoSpace + profileProxy.getVotes())));
+        infoMenu.addElement(new ElementLabel((player.isOnline() ? ((commandSender.isOp() ? (
+                messageAPI.messagesObject.translateMessage("stats.form.ip", player.getPlayer().getAddress())
+                ) : (""))) : (""))));
+        infoMenu.addElement(new ElementLabel((player.isOnline() ? ((commandSender.isOp() ? (
+                messageAPI.messagesObject.translateMessage("stats.form.devicemodel", player.getPlayer().getLoginChainData().getDeviceModel())
+        ) : (""))) : (""))));
+        infoMenu.addElement(new ElementLabel((player.isOnline() ?
+                (messageAPI.messagesObject.translateMessage("stats.form.os", mechanicAPI.getOS(player.getPlayer()))
+                ) : "")
+        ));
         ((Player) commandSender).showFormWindow(infoMenu);
     }
 
@@ -181,7 +253,7 @@ public class MechanicAPI {
                 }
             }
             if (i == 0) {
-                messageAPI.sendNoStaffOnlineMessage(pp);
+                pp.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.nostaffonline"));
             } else {
                 if (!pp.hasPermission("core.staffchat")) {
                     pp.sendMessage(tag + message);
@@ -201,20 +273,12 @@ public class MechanicAPI {
         }
     }
 
-    /*public void spawnFireworks() {
-        entities.forEach(Entity::spawnToAll);
-    }*/
-
     public void spawnDropParty() {
         for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
             addDropPartyKey(player);
             new BossEntity();
-            messageAPI.sendDropPartySpawnedMessage(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("generic.dropparty.spawned"));
         }
-    }
-
-    public void sendDropPartyMessageBroadcast(Player player) {
-        messageAPI.sendDropPartyEventMessage(player);
     }
 
     private void addDropPartyKey(Player player) {
@@ -224,7 +288,7 @@ public class MechanicAPI {
         dropPartyKey.setCustomName("DropParty Key");
         dropPartyKey.addEnchantment(enchantment);
         player.getInventory().addItem(dropPartyKey);
-        messageAPI.sendDropPartyReceiveKeyMessage(player);
+        player.sendMessage(messageAPI.messagesObject.translateMessage("generic.dropparty.receivekey"));
     }
 
     public boolean checkItems(Player player, Item[] items) {
@@ -283,7 +347,7 @@ public class MechanicAPI {
     }
 
     public void spawnWither(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Spawn Wither");
+        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("generic.wither.form.first"));
         infoMenu.addElement(new ElementLabel(messageAPI.spawnWitherMessages(player)));
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
@@ -292,22 +356,22 @@ public class MechanicAPI {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
                             if (isOnSpawn(player)) {
-                                player.sendMessage(messageAPI.sendWitherSpawnMessage(player));
+                                player.sendMessage(messageAPI.messagesObject.translateMessage("generic.wither.spawn.error"));
                                 return;
                             }
                             if (Wither.count > 10) {
-                                player.sendMessage(messageAPI.sendTooMuchWithers(player));
+                                player.sendMessage(messageAPI.messagesObject.translateMessage("generic.wither.spawn.count"));
                                 return;
                             } else {
                                 ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                                 double dolllars = profileSkyblock.getDollars();
                                 if (dolllars < 10000) {
-                                    messageAPI.sendUnsuficientMoneyMessage(player, 10000 - profileSkyblock.getDollars());
+                                    player.sendMessage(messageAPI.messagesObject.translateMessage("generic.money.enough", mainAPI.emptyNoSpace + (10000 - profileSkyblock.getDollars())));
                                     return;
                                 } else {
                                     mainAPI.getServer().dispatchCommand(new ConsoleCommandSender(), "mob spawn 52 " + player.getName());
                                     profileSkyblock.setDollars(profileSkyblock.getDollars() - 10000);
-                                    messageAPI.sendSuccesSpawnWither(player);
+                                    player.sendMessage(messageAPI.messagesObject.translateMessage("generic.wither.spawn.success"));
                                     return;
                                 }
                             }
@@ -318,7 +382,8 @@ public class MechanicAPI {
     }
 
     public void teleportArena(Player player) {
-        FormWindowSimple jobsMenu = new FormWindowSimple("Arena Category", messageAPI.sendArenaPrincipalModal(player));
+        FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("generic.arena.form.category"),
+                messageAPI.messagesObject.translateMessage("generic.arena.first"));
         jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         jobsMenu.addButton(new ElementButton("Boss Arena", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
         jobsMenu.addButton(new ElementButton("PvP Arena", new ElementButtonImageData("url", "https://i.imgur.com/otMDlEU.png")));
@@ -343,30 +408,30 @@ public class MechanicAPI {
     }
 
     private void sendInfoMessageArena(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Arena Info");
-        infoMenu.addElement(new ElementLabel(messageAPI.sendInfoMessageArena(player)));
+        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("arena.form.first"));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.top")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.teleport")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.pvp")));
         player.showFormWindow(infoMenu);
     }
 
     private void teleportArenaBoss(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Teleport Boss Arena");
-        infoMenu.addElement(new ElementLabel(messageAPI.teleportBossArenaMessages(player)));
+        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("arena.form.boss.teleport"));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.boss.teleport.first")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.boss.teleport.how")));
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
             public void accept(Map<Integer, Object> response) {
                 if (!response.isEmpty()) {
-                    switch (response.entrySet().iterator().next().getKey()) {
-                        case 0:
-                            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-                            int level = profileSkyblock.getLevel();
-                            if (level < 10) {
-                                player.sendMessage(messageAPI.sendArenaException(player, 10));
-                                return;
-                            } else {
-                                player.teleport(new Location(1092, 70, 1324, mainAPI.getServer().getDefaultLevel()));
-                                player.sendMessage(messageAPI.sendTeleportArena(player));
-                                return;
-                            }
+                    ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                    int level = profileSkyblock.getLevel();
+                    if (level < 10) {
+                        player.sendMessage(messageAPI.sendArenaException(player, 10));
+                        return;
+                    } else {
+                        player.teleport(new Location(1092, 70, 1324, mainAPI.getServer().getDefaultLevel()));
+                        player.sendMessage(messageAPI.sendTeleportArena(player));
+                        return;
                     }
                 }
             }
@@ -374,24 +439,22 @@ public class MechanicAPI {
     }
 
     private void teleportArenaPvP(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Teleport PvP Arena");
-        infoMenu.addElement(new ElementLabel(messageAPI.teleportPvPArenaMessages(player)));
+        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("arena.form.pvp.teleport"));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.pvp.first")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.pvp.how")));
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
             public void accept(Map<Integer, Object> response) {
                 if (!response.isEmpty()) {
-                    switch (response.entrySet().iterator().next().getKey()) {
-                        case 0:
-                            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-                            int level = profileSkyblock.getLevel();
-                            if (level < 5) {
-                                player.sendMessage(messageAPI.sendArenaException(player, 5));
-                                return;
-                            } else {
-                                player.teleport(new Location(1106, 70, 1311, mainAPI.getServer().getDefaultLevel()));
-                                player.sendMessage(messageAPI.sendTeleportArena(player));
-                                return;
-                            }
+                    ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                    int level = profileSkyblock.getLevel();
+                    if (level < 5) {
+                        player.sendMessage(messageAPI.sendArenaException(player, 5));
+                        return;
+                    } else {
+                        player.teleport(new Location(1106, 70, 1311, mainAPI.getServer().getDefaultLevel()));
+                        player.sendMessage(messageAPI.sendTeleportArena(player));
+                        return;
                     }
                 }
             }
@@ -399,16 +462,16 @@ public class MechanicAPI {
     }
 
     public void sendSettingsForm(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Settings Player");
+        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("settings.form.first"));
         infoMenu.addElement(new ElementLabel(messageAPI.sendInfoMessageSettings(player)));
-        infoMenu.addElement(new ElementToggle("Show BossBar", true));
-        infoMenu.addElement(new ElementToggle("Show Scoreboard", true));
+        infoMenu.addElement(new ElementToggle(messageAPI.messagesObject.translateMessage("settings.form.toggle.first"), true));
+        infoMenu.addElement(new ElementToggle(messageAPI.messagesObject.translateMessage("settings.form.toggle.second"), true));
         List<String> list = new ArrayList<>();
         list.add("2");
         list.add("3");
         list.add("4");
         list.add("5");
-        infoMenu.addElement(new ElementStepSlider("Toggle Render Distance", list));
+        infoMenu.addElement(new ElementStepSlider(messageAPI.messagesObject.translateMessage("settings.form.toggle.third"), list));
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
             public void accept(Map<Integer, Object> response) {

@@ -40,9 +40,9 @@ public class BossBarTask extends Task {
                 float health = 100F;
                 if (mechanicAPI.isOnArena(player) && mechanicAPI.getBossHealth() != 0) {
                     health = mechanicAPI.getBossHealth();
-                    message = messageAPI.getMessageInArenaBossBar(player, API.round(mechanicAPI.getBossHealth(), 2));
+                    message = messageAPI.messagesObject.translateMessage("bossbar.boss", mainAPI.emptyNoSpace + API.round(mechanicAPI.getBossHealth(), 2));
                 } else {
-                    message = messageAPI.getMessageBossBar(player, level, necessary, count);
+                    message = messageAPI.messagesObject.translateMessage("bossbar.default", mainAPI.emptyNoSpace + level, mainAPI.emptyNoSpace + API.round(count, 2), mainAPI.emptyNoSpace + necessary);
                 }
                 mainAPI.bossbar.get(player.getUniqueId()).setLength(health);
                 mainAPI.bossbar.get(player.getUniqueId()).setText(message);

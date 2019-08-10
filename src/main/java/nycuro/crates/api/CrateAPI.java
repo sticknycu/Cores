@@ -12,7 +12,6 @@ import cn.nukkit.nbt.tag.DoubleTag;
 import cn.nukkit.nbt.tag.FloatTag;
 import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.utils.DyeColor;
-import nycuro.crates.commands.CratesCommandManager;
 import nycuro.crates.item.EntityFirework;
 
 import static nycuro.api.API.mainAPI;
@@ -23,10 +22,6 @@ import static nycuro.api.API.mainAPI;
  * API 1.0.0
  */
 public class CrateAPI {
-
-    public void registerCommands() {
-        CratesCommandManager.registerAll(mainAPI);
-    }
 
     public void getChange(Player player, PlayerInventory playerInventory, int number) {
         Enchantment damage = Enchantment.getEnchantment(Enchantment.ID_DAMAGE_ALL)
