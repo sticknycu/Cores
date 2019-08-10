@@ -57,7 +57,8 @@ public class ShopAPI {
     }
 
     public void sendShopContents(Player player) {
-        FormWindowSimple shopMenu = new FormWindowSimple("Shop", messageAPI.getShopContestsMessages(player));
+        FormWindowSimple shopMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("shop.form.first"),
+                messageAPI.messagesObject.translateMessage("shop.form.top"));
         shopMenu.addButton(new ElementButton("Buy", new ElementButtonImageData("url", "https://i.imgur.com/wHiyJED.png")));
         shopMenu.addButton(new ElementButton("Sell", new ElementButtonImageData("url", "https://i.imgur.com/dHku96H.png")));
         //shopMenu.addButton(new ElementButton("Enchanting", new ElementButtonImageData("url", "https://i.imgur.com/iArKQQb.png")));
@@ -96,7 +97,8 @@ public class ShopAPI {
     }
 
     private void sendBuyContents(Player player) {
-        FormWindowSimple buyMenu = new FormWindowSimple("Buy", messageAPI.getBuyContestsMessages(player));
+        FormWindowSimple buyMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("buy.form.first"),
+                messageAPI.messagesObject.translateMessage("buy.form.top"));
         buyMenu.addButton(new ElementButton("Water & Lava", new ElementButtonImageData("url", "https://i.imgur.com/PMCvP7P.png")));
         buyMenu.addButton(new ElementButton("Nether Objects", new ElementButtonImageData("url", "https://i.imgur.com/CS2NgWw.png")));
         buyMenu.addButton(new ElementButton("Wood", new ElementButtonImageData("url", "https://i.imgur.com/2b2pc4h.png")));
@@ -149,7 +151,8 @@ public class ShopAPI {
 
 
     private void sendSellContents(Player player) {
-        FormWindowSimple buyMenu = new FormWindowSimple("Sell", messageAPI.getSellContestsMessages(player));
+        FormWindowSimple buyMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("sell.form.first"),
+                messageAPI.messagesObject.translateMessage("sell.form.top"));
         buyMenu.addButton(new ElementButton("Nether Objects", new ElementButtonImageData("url", "https://i.imgur.com/CS2NgWw.png")));
         buyMenu.addButton(new ElementButton("Wood", new ElementButtonImageData("url", "https://i.imgur.com/2b2pc4h.png")));
         buyMenu.addButton(new ElementButton("Food & Grow", new ElementButtonImageData("url", "https://i.imgur.com/RxCVU8B.png")));
@@ -189,7 +192,8 @@ public class ShopAPI {
     }
 
     private void sendEnchantingContents(Player player) {
-        FormWindowSimple buyMenu = new FormWindowSimple("Enchanting", messageAPI.getEnchantingContestsMessages(player));
+        FormWindowSimple buyMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("enchanting.form.first"),
+                messageAPI.messagesObject.translateMessage("enchanting.form.top"));
         buyMenu.addButton(new ElementButton("Armor", new ElementButtonImageData("url", "https://i.imgur.com/SuyfcCz.png")));
         buyMenu.addButton(new ElementButton("Items", new ElementButtonImageData("url", "https://i.imgur.com/xqLpmCa.png")));
         buyMenu.addButton(new ElementButton("Close"));
@@ -213,7 +217,8 @@ public class ShopAPI {
     }
 
     private void sendEnchantingItemsArmorContents(Player player) {
-        FormWindowSimple buyMenu = new FormWindowSimple("Enchanting", messageAPI.getEnchantingArmorContestsMessages(player));
+        FormWindowSimple buyMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("enchanting.armor.form.first"),
+                messageAPI.messagesObject.translateMessage("enchanting.armor.form.top"));
         buyMenu.addButton(new ElementButton("Helmet", new ElementButtonImageData("url", "https://i.imgur.com/p9yJkzX.png")));
         buyMenu.addButton(new ElementButton("Chestplate", new ElementButtonImageData("url", "https://i.imgur.com/8ktHiL8.png")));
         buyMenu.addButton(new ElementButton("Leggings", new ElementButtonImageData("url", "https://i.imgur.com/f35xLVR.png")));
@@ -245,7 +250,8 @@ public class ShopAPI {
     }
 
     private void sendEnchantingItemsItemsContents(Player player) {
-        FormWindowSimple buyMenu = new FormWindowSimple("Enchanting", messageAPI.getEnchantingItemsContestsMessages(player));
+        FormWindowSimple buyMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("enchanting.items.form.first"),
+                messageAPI.messagesObject.translateMessage("enchanting.items.form.top"));
         buyMenu.addButton(new ElementButton("Sword", new ElementButtonImageData("url", "https://i.imgur.com/IpYDgEw.png")));
         buyMenu.addButton(new ElementButton("Pickaxe", new ElementButtonImageData("url", "https://i.imgur.com/hHlCEJC.png")));
         buyMenu.addButton(new ElementButton("Axe", new ElementButtonImageData("url", "https://i.imgur.com/bBSdOUl.png")));
@@ -314,7 +320,7 @@ public class ShopAPI {
         FormWindowCustom enchantMenu = new FormWindowCustom("Buy Enchant");
         enchantMenu.addElement(new ElementDropdown("Available Enchants", list, 0));
         enchantMenu.addElement(new ElementDropdown("Enchant Level", countList, 0));
-        enchantMenu.addElement(new ElementDropdown(messageAPI.getMethodPayMessage(player), type, 0));
+        enchantMenu.addElement(new ElementDropdown(messageAPI.messagesObject.translateMessage("shop.method.pay"), type, 0));
         sendFormWindowEnchantBuy(player, enchantMenu);
     }
 
@@ -364,7 +370,8 @@ public class ShopAPI {
     }
 
     private void sendBuyGlassContents(Player player) {
-        FormWindowSimple buyMenu = new FormWindowSimple("Shop", messageAPI.getBuyGlassContestsMessages(player));
+        FormWindowSimple buyMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("buy.form.glass.first"),
+                messageAPI.messagesObject.translateMessage("buy.form.glass.top"));
         buyMenu.addButton(new ElementButton("Normal Colored Glass", new ElementButtonImageData("url", "https://i.imgur.com/mcxNRI9.png")));
         buyMenu.addButton(new ElementButton("Colored Glass Pane", new ElementButtonImageData("url", "https://i.imgur.com/OZXmJxw.png")));
         buyMenu.addButton(new ElementButton("Close"));
@@ -388,7 +395,8 @@ public class ShopAPI {
     }
 
     private void sendSellGlassContents(Player player) {
-        FormWindowSimple buyMenu = new FormWindowSimple("Sell", messageAPI.getSellGlassContestsMessages(player));
+        FormWindowSimple buyMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("sell.form.glass.first"),
+                messageAPI.messagesObject.translateMessage("sell.form.glass.top"));
         buyMenu.addButton(new ElementButton("Normal Colored Glass", new ElementButtonImageData("url", "https://i.imgur.com/mcxNRI9.png")));
         buyMenu.addButton(new ElementButton("Colored Glass Pane", new ElementButtonImageData("url", "https://i.imgur.com/OZXmJxw.png")));
         buyMenu.addButton(new ElementButton("Close"));

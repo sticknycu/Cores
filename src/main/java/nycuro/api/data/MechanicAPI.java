@@ -348,7 +348,8 @@ public class MechanicAPI {
 
     public void spawnWither(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("generic.wither.form.first"));
-        infoMenu.addElement(new ElementLabel(messageAPI.spawnWitherMessages(player)));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("generic.wither.form.message.normal")));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("generic.wither.form.message.cost")));
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
             public void accept(Map<Integer, Object> response) {
@@ -426,11 +427,11 @@ public class MechanicAPI {
                     ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                     int level = profileSkyblock.getLevel();
                     if (level < 10) {
-                        player.sendMessage(messageAPI.sendArenaException(player, 10));
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleport.level", "10"));
                         return;
                     } else {
                         player.teleport(new Location(1092, 70, 1324, mainAPI.getServer().getDefaultLevel()));
-                        player.sendMessage(messageAPI.sendTeleportArena(player));
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleported"));
                         return;
                     }
                 }
@@ -449,11 +450,11 @@ public class MechanicAPI {
                     ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                     int level = profileSkyblock.getLevel();
                     if (level < 5) {
-                        player.sendMessage(messageAPI.sendArenaException(player, 5));
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleport.level", "5"));
                         return;
                     } else {
                         player.teleport(new Location(1106, 70, 1311, mainAPI.getServer().getDefaultLevel()));
-                        player.sendMessage(messageAPI.sendTeleportArena(player));
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleported"));
                         return;
                     }
                 }
@@ -463,7 +464,7 @@ public class MechanicAPI {
 
     public void sendSettingsForm(Player player) {
         FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("settings.form.first"));
-        infoMenu.addElement(new ElementLabel(messageAPI.sendInfoMessageSettings(player)));
+        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("settings.form.top")));
         infoMenu.addElement(new ElementToggle(messageAPI.messagesObject.translateMessage("settings.form.toggle.first"), true));
         infoMenu.addElement(new ElementToggle(messageAPI.messagesObject.translateMessage("settings.form.toggle.second"), true));
         List<String> list = new ArrayList<>();

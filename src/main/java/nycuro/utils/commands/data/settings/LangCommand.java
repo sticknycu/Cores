@@ -32,15 +32,17 @@ public class LangCommand extends CommandBaseUtils {
                 databaseAPI.setLanguage(commandSender.getName(), 0);
                 Holograms.setLanguageHandler( (p) -> 0);
                 holograms.onLanguageChanged((Player) commandSender);
-            } else {
+            } else if (message.equals("ro")) {
                 profile.setLanguage(1);
                 databaseAPI.setLanguage(commandSender.getName(), 1);
                 Holograms.setLanguageHandler( (p) -> 1);
                 holograms.onLanguageChanged((Player) commandSender);
+            } else {
+                sendUsage(commandSender);
             }
-            messageAPI.sendLangMessage((Player) commandSender);
+            commandSender.sendMessage(messageAPI.messagesObject.translateMessage("language.selected"));
         } else {
-            messageAPI.sendLangArrayException((Player) commandSender);
+            sendUsage(commandSender);
         }
         return true;
     }

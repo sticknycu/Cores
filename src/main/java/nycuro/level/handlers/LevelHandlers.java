@@ -48,13 +48,13 @@ public class LevelHandlers implements Listener {
         if (combatAPI.inCombat(player)) {
             if (blocked.contains(command) || command.equals("/spawn")) {
                 event.setCancelled();
-                player.sendMessage(messageAPI.getMessageDuringCombat(player));
+                player.sendMessage(messageAPI.messagesObject.translateMessage("combat.block"));
             }
         }
         if (mechanicAPI.isOnArena(player)) {
             if (blocked.contains(command)) {
                 event.setCancelled();
-                player.sendMessage(messageAPI.getMessageDuringCombat(player));
+                player.sendMessage(messageAPI.messagesObject.translateMessage("combat.block"));
             }
         }
     }
@@ -80,12 +80,4 @@ public class LevelHandlers implements Listener {
             }
         }
     }
-
-    /*@EventHandler
-    public void onCreatureSpawn(EntitySpawnEvent event) {
-        Entity entity = event.getEntity();
-        if (mechanicAPI.isOnSpawn(entity) || mechanicAPI.isOnPvP(entity)) {
-            event.setCancelled();
-        }
-    }*/
 }

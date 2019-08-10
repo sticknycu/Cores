@@ -28,7 +28,7 @@ public class WorkCommand extends CommandBaseJobs {
         Player player = (Player) commandSender;
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         if (profileSkyblock.getJob() == 0) {
-            messageAPI.sendNoJobMessage(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.empty"));
         } else {
             NameJob job = NameJob.getType(profileSkyblock.getJob());
             JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());

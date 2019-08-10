@@ -82,11 +82,11 @@ public class JobsAPI {
                             sendInfoMessageJobs(player);
                             return;
                         case 2:
-                            messageAPI.sendWithoutJobMessage(player);
+                            player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.deleted"));
                             return;
                         case 3:
                             if (profileSkyblock.getJob() == 0) {
-                                messageAPI.sendNoJobMessage(player);
+                                player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.empty"));
                             } else {
                                 NameJob job = NameJob.getType(profileSkyblock.getJob());
                                 JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());

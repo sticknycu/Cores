@@ -24,7 +24,7 @@ public class VoteSettings {
 
     public void init() {
         try {
-            File file = new File(mainAPI.getDataFolder() + "/configs/config.json");
+            File file = new File(mainAPI.getDataFolder() + "/config.json");
             if (!file.exists()) {
                 FileWriter fileWriter = new FileWriter(file);
                 fileWriter.write(serializeData(0, 0));
@@ -44,7 +44,7 @@ public class VoteSettings {
 
     public void saveConfig(int dropParty, long timeDropParty) {
         try {
-            File file = new File("/root/configs/config.json");
+            File file = new File(mainAPI.getDataFolder() + "/config.json");
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(serializeData(dropParty, timeDropParty));
             fileWriter.close();

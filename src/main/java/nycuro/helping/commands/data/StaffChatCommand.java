@@ -23,10 +23,10 @@ public class StaffChatCommand extends CommandBaseHelping {
         Player player = (Player) commandSender;
         if (!mainAPI.staffChat.contains(player.getUniqueId())) {
             mainAPI.staffChat.add(player.getUniqueId());
-            messageAPI.sendSuccesEnterStaffChat(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("staffchat.enter.success"));
         } else {
             mainAPI.staffChat.remove(player.getUniqueId());
-            messageAPI.sendAbandonedStaffchatMessage(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("staffchat.abandonated"));
         }
         return true;
     }
