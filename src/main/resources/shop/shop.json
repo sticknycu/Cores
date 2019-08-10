@@ -1,14 +1,314 @@
 [
   {
-    "name": "Stone",
-    "id": 1,
-    "meta": 1,
-    "cost": 5
+    "name": "Water Bucket",
+    "id": 325,
+    "meta": 8,
+    "cost": 175
   },
   {
-    "name": "Wood",
-    "id": 2,
+    "name": "Lava Bucket",
+    "id": 325,
+    "meta": 10,
+    "cost": 175
+  },
+  {
+    "name": "Blaze rod",
+    "id": 369,
+    "meta": 0,
+    "cost": 15.625
+  },
+  {
+    "name": "Nether Wart",
+    "id": 372,
+    "meta": 0,
+    "cost": 3.90625
+  },
+  {
+    "name": "Nether Star",
+    "id": 399,
+    "meta": 0,
+    "cost": 1000
+  },
+  {
+    "name": "Block of Quartz",
+    "id": 155,
+    "meta": 0,
+    "cost": 15.625
+  },
+  {
+    "name": "Nether Quartz",
+    "id": 406,
+    "meta": 0,
+    "cost": 3.90625
+  },
+  {
+    "name": "Nether Brick Block",
+    "id": 112,
+    "meta": 0,
+    "cost": 15.625
+  },
+  {
+    "name": "Nether Wart Block",
+    "id": 214,
+    "meta": 0,
+    "cost": 15.625
+  },
+  {
+    "name": "Red Nether Brick",
+    "id": 215,
+    "meta": 0,
+    "cost": 15.625
+  },
+  {
+    "name": "Oak Wood",
+    "id": 17,
+    "meta": 0,
+    "cost": 7.8125
+  },
+  {
+    "name": "Spruce Wood",
+    "id": 17,
     "meta": 1,
+    "cost": 7.8125
+  },
+  {
+    "name": "Birch Wood",
+    "id": 17,
+    "meta": 2,
+    "cost": 7.8125
+  },
+  {
+    "name": "Jungle Wood",
+    "id": 17,
+    "meta": 3,
+    "cost": 7.8125
+  },
+  {
+    "name": "Acacia Wood",
+    "id": 162,
+    "meta": 0,
+    "cost": 7.8125
+  },
+  {
+    "name": "Dark Oak Wood",
+    "id": 162,
+    "meta": 1,
+    "cost": 7.8125
+  },
+  {
+    "name": "Oak Wood Planks",
+    "id": 5,
+    "meta": 0,
+    "cost": 1.95
+  },
+  {
+    "name": "Spruce Wood Planks",
+    "id": 5,
+    "meta": 1,
+    "cost": 1.95
+  },
+  {
+    "name": "Birch Wood Planks",
+    "id": 5,
+    "meta": 2,
+    "cost": 1.95
+  },
+  {
+    "name": "Jungle Wood Planks",
+    "id": 5,
+    "meta": 3,
+    "cost": 1.95
+  },
+  {
+    "name": "Acacia Wood Planks",
+    "id": 5,
+    "meta": 4,
+    "cost": 1.95
+  },
+  {
+    "name": "Dark Oak Wood Planks",
+    "id": 5,
+    "meta": 5,
+    "cost": 1.95
+  },
+  {
+    "name": "Potato",
+    "id": 392,
+    "meta": 0,
+    "cost": 12.5
+  },
+  {
+    "name": "Carrot",
+    "id": 391,
+    "meta": 0,
+    "cost": 12.5
+  },
+  {
+    "name": "Wheat",
+    "id": 296,
+    "meta": 0,
+    "cost": 12.5
+  },
+  {
+    "name": "Cactus",
+    "id": 81,
+    "meta": 0,
+    "cost": 12.5
+  },
+  {
+    "name": "Melon",
+    "id": 360,
+    "meta": 0,
+    "cost": 12.5
+  },
+  {
+    "name": "Pumpkin",
+    "id": 86,
+    "meta": 0,
+    "cost": 50
+  },
+  {
+    "name": "Seeds",
+    "id": 295,
+    "meta": 0,
+    "cost": 12.5
+  },
+  {
+    "name": "Apple",
+    "id": 260,
+    "meta": 0,
+    "cost": 12.5
+  },
+  {
+    "name": "Sugar Cane",
+    "id": 338,
+    "meta": 0,
+    "cost": 12.5
+  },
+  {
+    "name": "Cobblestone",
+    "id": 4,
+    "meta": 0,
+    "cost": 7.8
+  },
+  {
+    "name": "Stone",
+    "id": 1,
+    "meta": 0,
+    "cost": 7.8
+  },
+  {
+    "name": "Grass",
+    "id": 2,
+    "meta": 0,
+    "cost": 7.8
+  },
+  {
+    "name": "Dirt",
+    "id": 3,
+    "meta": 0,
+    "cost": 1.95
+  },
+  {
+    "name": "Redstone",
+    "id": 331,
+    "meta": 0,
+    "cost": 6.25
+  },
+  {
+    "name": "Coal",
+    "id": 263,
+    "meta": 0,
+    "cost": 6.25
+  },
+  {
+    "name": "Iron Ingot",
+    "id": 265,
+    "meta": 0,
+    "cost": 50
+  },
+  {
+    "name": "Gold Ingot",
+    "id": 266,
+    "meta": 0,
+    "cost": 75
+  },
+  {
+    "name": "Diamond",
+    "id": 264,
+    "meta": 0,
+    "cost": 350
+  },
+  {
+    "name": "Lapis Lazuli",
+    "id": 351,
+    "meta": 0,
+    "cost": 37
+  },
+  {
+    "name": "Emerald",
+    "id": 388,
+    "meta": 0,
+    "cost": 175
+  },
+  {
+    "name": "Zombie Spawn Egg",
+    "id": 383,
+    "meta": 32,
+    "cost": 25000
+  },
+  {
+    "name": "Skeleton Spawn Egg",
+    "id": 383,
+    "meta": 34,
+    "cost": 25000
+  },
+  {
+    "name": "Creeper Spawn Egg",
+    "id": 383,
+    "meta": 33,
+    "cost": 25000
+  },
+  {
+    "name": "Pig Spawn Egg",
+    "id": 383,
+    "meta": 12,
+    "cost": 50000
+  },
+  {
+    "name": "Chicken Spawn Egg",
+    "id": 383,
+    "meta": 10,
+    "cost": 50000
+  },
+  {
+    "name": "Cow Spawn Egg",
+    "id": 383,
+    "meta": 11,
+    "cost": 50000
+  },
+  {
+    "name": "Spawner",
+    "id": 52,
+    "meta": 0,
+    "cost": 50000
+  },
+  {
+    "name": "Enchanted Golden Apple",
+    "id": 322,
+    "meta": 0,
+    "cost": 500
+  },
+  {
+    "name": "TNT",
+    "id": 46,
+    "meta": 0,
     "cost": 100
+  },
+  {
+    "name": "Obsidian",
+    "id": 52,
+    "meta": 0,
+    "cost": 49
   }
 ]
