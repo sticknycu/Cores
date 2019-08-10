@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import nycuro.shop.commands.CommandBaseShop;
 
-import static nycuro.api.API.messageAPI;
 import static nycuro.api.API.shopAPI;
 
 /**
@@ -26,7 +25,7 @@ public class ShopCommand extends CommandBaseShop {
                 shopAPI.sendShopContents(player);
                 return true;
             default:
-                messageAPI.sendExceptionShopMessage(player);
+                sendUsage(commandSender);
                 return true;
         }
     }

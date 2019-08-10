@@ -407,7 +407,8 @@ public class MoneyUtils {
             if (moneyCount >= priceFinal) {
                 profile.setDollars(profile.getDollars() - priceFinal);
                 player.getInventory().addItem(item);
-                messageAPI.sendBuyItemMessage(player, item, priceFinal);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("buy.message", mainAPI.emptyNoSpace + item,
+                        mainAPI.emptyNoSpace + priceFinal));
             } else if (moneyCount < priceFinal) {
                 player.sendMessage(messageAPI.messagesObject.translateMessage("generic.money.enough",
                         mainAPI.emptyNoSpace + moneyCount, mainAPI.emptyNoSpace + needed));
@@ -425,7 +426,7 @@ public class MoneyUtils {
         double priceFinal = cost.getDouble(firstDropDownType) * count;
         if (!response.isEmpty()) {
             if (player.getGamemode() != Player.SURVIVAL) {
-                messageAPI.sendGamemodeSellExceptionMessage(player);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("sell.exception.gamemode"));
                 return;
             }
             if (player.getInventory().contains(item)) {
@@ -433,15 +434,16 @@ public class MoneyUtils {
                     if (item.getCount() == count) {
                         profile.setDollars(profile.getDollars() + priceFinal);
                         player.getInventory().removeItem(item);
-                        messageAPI.sendSellItemMessage(player, item, priceFinal);
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("sell.succes", mainAPI.emptyNoSpace + item,
+                                mainAPI.emptyNoSpace + priceFinal));
                     } else if (item.getCount() != count) {
-                        messageAPI.sendInsufficientCountMessage(player);
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("sell.exception.count"));
                     }
                 } else if (item.getCount() != itemMeta) {
-                    messageAPI.sendBreakedItemMessage(player);
+                    player.sendMessage(messageAPI.messagesObject.translateMessage("sell.exception.broken"));
                 }
             } else if (!player.getInventory().contains(item)) {
-                messageAPI.sendUnsuficientItemsMessage(player);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("sell.exception.enough"));
             }
         }
     }
@@ -454,7 +456,7 @@ public class MoneyUtils {
         int experiencePlayer = player.getExperienceLevel();
         int enchantId = enchant.getInt(firstDropDownType);
         if (enchantId == -1) {
-            messageAPI.sendExceptionEnchantMessage(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("enchanting.form.exception"));
             return;
         }
         int enchantLevel = Integer.parseInt(response.get(1).toString());
@@ -462,12 +464,12 @@ public class MoneyUtils {
         Enchantment enchantment = Enchantment.get(enchantId);
         Item item = player.getInventory().getItemInHand();
         if (!enchantment.canEnchant(item)) {
-            messageAPI.sendExceptionEnchantInvalidMessage(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("enchanting.form.exception.invalid"));
             return;
         }
         int index = player.getInventory().getHeldItemIndex();
         if (item.getId() == 0) {
-            messageAPI.sendExceptionEnchantItemHandMessage(player);
+            player.sendMessage(messageAPI.messagesObject.translateMessage("enchanting.form.exception.itemhand"));
             return;
         }
         double priceMoney = cost.getDouble(firstDropDownType);
@@ -490,17 +492,18 @@ public class MoneyUtils {
                         item.addEnchantment(enchantment
                                 .setLevel(enchantLevel));
                         player.getInventory().setItem(index, item);
-                        messageAPI.sendEnchantItemMessage(player, item, priceFinalMoney);
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("enchanting.succes.money", mainAPI.emptyNoSpace + item,
+                                mainAPI.emptyNoSpace + priceFinalMoney));
                     } else if (moneyCount < priceFinalMoney) {
                         player.sendMessage(messageAPI.messagesObject.translateMessage("generic.money.enough",
                                 mainAPI.emptyNoSpace + moneyCount, mainAPI.emptyNoSpace + neededMoney));
                     }
                 } else if (enchantLevel > enchantment.getMaxLevel()) {
-                    messageAPI.sendExceptionLevelEnchantMessage(player);
+                    player.sendMessage(messageAPI.messagesObject.translateMessage("enchanting.form.exception.level"));
                 }
             } else if (typePay == 2) {
                 if (experiencePlayer < 40) {
-                    messageAPI.sendExceptionLevelEnchantTypeMessage(player);
+                    player.sendMessage(messageAPI.messagesObject.translateMessage("enchanting.form.exception.buy"));
                     return;
                 }
                 if (enchantLevel <= enchantment.getMaxLevel()) {
@@ -513,12 +516,14 @@ public class MoneyUtils {
                         item.addEnchantment(enchantment
                                 .setLevel(enchantLevel));
                         player.getInventory().setItem(index, item);
-                        messageAPI.sendEnchantItemExperienceMessage(player, item, priceFinalExperience);
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("enchanting.succes.experience",
+                                mainAPI.emptyNoSpace + item, mainAPI.emptyNoSpace + priceFinalMoney));
                     } else if (experiencePlayer < priceFinalExperience) {
-                        messageAPI.sendUnsuficientExperienceMessage(player, neededExperience);
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("enchanting.form.exception.experience",
+                                mainAPI.emptyNoSpace + neededExperience));
                     }
                 } else if (enchantLevel > enchantment.getMaxLevel()) {
-                    messageAPI.sendExceptionLevelEnchantMessage(player);
+                    player.sendMessage(messageAPI.messagesObject.translateMessage("enchanting.form.exception.level"));
                 }
             }
         }

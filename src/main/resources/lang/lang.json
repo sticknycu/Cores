@@ -80,6 +80,52 @@
     "block.pvp"   : "You can't PvP here!",
     "block.place" : "You can't place blocks here!",
 
+    "shop.method.pay" : "Method of Pay\n1 - Money\n2 - Experience Level",
+
+    "shop.form.first" : "Normal Shop",
+    "shop.form.top"   : "Hello! Welcome to Normal Shop! Select what you want to do.",
+
+    "buy.form.first" : "Category Buy",
+    "buy.form.top"   : "Hello! Welcome to Category Buy! Select what you want to do.",
+
+    "buy.form.glass.first" : "Category Buy Glass",
+    "buy.form.glass.top"   : "Hello! Welcome to Category Buy Glass! Select what you want to do.",
+
+
+    "buy.message" : "You have successfully bought: {%0} for {%1}!",
+
+    "sell.message" : "You have successfully sold: {%0} for {%1} !",
+
+    "sell.form.glass.first" : "Category Sell Glass",
+    "sell.form.glass.top"   : "Hello! Welcome to Category Sell Glass! Select what you want to do.",
+
+    "sell.form.first" : "Category Sell",
+    "sell.form.top"   : "Hello! Welcome to Category Sell! Select what you want to do.",
+
+    "sell.exception.enough"   : "Opsss!!! You don't have this item!",
+    "sell.exception.gamemode" : "Opsss!!! You can sell items only in Survival Mode!",
+    "sell.exception.broken"   : "Opsss!!! This Item is broken!",
+    "sell.exception.count"    : "Opsss!!! You don't have enough quantity!",
+
+    "enchanting.form.first" : "Category Enchanting",
+    "enchanting.form.top"   : "Hello! Welcome to Category Enchanting! Select what you want to do.",
+
+    "enchanting.succes.money"      : "You have successfully enchanted: {%0} for {%1}",
+    "enchanting.succes.experience" : "You have successfully enchanted: {%0} for {%1} levels!",
+
+    "enchanting.form.exception"            : "Sorry! This enchant is not available on Server.",
+    "enchanting.form.exception.invalid"    : "Sorry! You can't enchant this item with this enchantment.",
+    "enchanting.form.exception.level"      : "Sorry! The level that you have selected is too high compared to the usual one.",
+    "enchanting.form.exception.buy"        : "Sorry! To Buy Enchantments with Experience, you need to have at least level 15.",
+    "enchanting.form.exception.itemhand"   : "Please add to your item what do you want to enchant in your hand.",
+    "enchanting.form.exception.experience" : "Opsss!!! You don't have enough experience! You have: {%0} but you need: {%1}!",
+
+    "enchanting.armor.form.first" : "Category Enchanting Armor",
+    "enchanting.armor.form.top"   : "Hello! Welcome to Category Enchanting Armor! Select what you want to do.",
+
+    "enchanting.items.form.first" : "Category Enchanting Items",
+    "enchanting.items.form.top"   : "Hello! Welcome to Category Enchanting Items! Select what you want to do.",
+
     "reports.form.first" : "Reports",
     "reports.form.top"   : "Hello! Welcome to Reports! Select what you want to do.",
 
@@ -120,7 +166,8 @@
     "reports.form.list.top"    : "Hello! Welcome to Reports List! Select what you want to do.",
     "reports.form.list.button" : "{%0} §7[§6{%1}§7]",
 
-    "staffchat.abandonated" : "You abandonated StaffChat!",
+    "staffchat.enter.success" : "You entered succesfuly on StaffChat!",
+    "staffchat.abandonated"   : "You abandonated StaffChat!",
 
     "commands.dp.description" : "Manage Drop Party!",
     "commands.dp.usage"       : "/dp",
