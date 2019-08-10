@@ -27,6 +27,7 @@ import static nycuro.api.API.messageAPI;
  * author: NycuRO
  * SkyblockCore Project
  * API 1.0.0
+ * modific ceva ca sa dea update gitu handicapat
  */
 public class MoneyUtils {
 
@@ -125,86 +126,5 @@ public class MoneyUtils {
             }
         }
     }
-
-    //TODO: finish enchantAction
-/* enchantAction not finished
-    public void enchantBuyAction(Map<Integer, Object> response, Player player, String firstDropDownType) {
-        ProfileSkyblock profile = Database.profileSkyblock.get(player.getName());
-        if (response.get(1) == null) return;
-        if (response.get(2) == null) return;
-        double moneyCount = profile.getDollars();
-        int experiencePlayer = player.getExperienceLevel();
-        int enchantId = enchant.getInt(firstDropDownType);
-        if (enchantId == -1) {
-            messageAPI.sendExceptionEnchantMessage(player);
-            return;
-        }
-        int enchantLevel = Integer.parseInt(response.get(1).toString());
-        int typePay = Integer.parseInt(response.get(2).toString());
-        Enchantment enchantment = Enchantment.get(enchantId);
-        Item item = player.getInventory().getItemInHand();
-        if (!enchantment.canEnchant(item)) {
-            messageAPI.sendExceptionEnchantInvalidMessage(player);
-            return;
-        }
-        int index = player.getInventory().getHeldItemIndex();
-        if (item.getId() == 0) {
-            messageAPI.sendExceptionEnchantItemHandMessage(player);
-            return;
-        }
-        double priceMoney = cost.getDouble(firstDropDownType);
-        if (priceMoney == -1) return;
-        double priceFinalMoney = priceMoney * enchantLevel;
-        double neededMoney = priceFinalMoney - moneyCount;
-        int priceLevel = exp.getInt(firstDropDownType);
-        if (priceLevel == -1) return;
-        int priceFinalExperience = priceLevel * enchantLevel;
-        int neededExperience = priceFinalExperience - experiencePlayer;
-        if (!response.isEmpty()) {
-            if (typePay == 1) {
-                if (enchantLevel <= enchantment.getMaxLevel()) {
-                    if (moneyCount >= priceFinalMoney) {
-                        profile.setDollars(profile.getDollars() - priceFinalMoney);
-                        if (item.hasEnchantments()) {
-                            Enchantment[] enchantments = item.getEnchantments();
-                            item.addEnchantment(enchantments);
-                        }
-                        item.addEnchantment(enchantment
-                                .setLevel(enchantLevel));
-                        player.getInventory().setItem(index, item);
-                        messageAPI.sendEnchantItemMessage(player, item, priceFinalMoney);
-                    } else if (moneyCount < priceFinalMoney) {
-                        messageAPI.sendUnsuficientMoneyMessage(player, neededMoney);
-                    }
-                } else if (enchantLevel > enchantment.getMaxLevel()) {
-                    messageAPI.sendExceptionLevelEnchantMessage(player);
-                }
-            } else if (typePay == 2) {
-                if (experiencePlayer < 40) {
-                    messageAPI.sendExceptionLevelEnchantTypeMessage(player);
-                    return;
-                }
-                if (enchantLevel <= enchantment.getMaxLevel()) {
-                    if (experiencePlayer >= priceFinalExperience) {
-                        player.setExperience(0, experiencePlayer - priceFinalExperience);
-                        if (item.hasEnchantments()) {
-                            Enchantment[] enchantments = item.getEnchantments();
-                            item.addEnchantment(enchantments);
-                        }
-                        item.addEnchantment(enchantment
-                                .setLevel(enchantLevel));
-                        player.getInventory().setItem(index, item);
-                        messageAPI.sendEnchantItemExperienceMessage(player, item, priceFinalExperience);
-                    } else if (experiencePlayer < priceFinalExperience) {
-                        messageAPI.sendUnsuficientExperienceMessage(player, neededExperience);
-                    }
-                } else if (enchantLevel > enchantment.getMaxLevel()) {
-                    messageAPI.sendExceptionLevelEnchantMessage(player);
-                }
-            }
-        }
-    }
-*/
-
 
 }
