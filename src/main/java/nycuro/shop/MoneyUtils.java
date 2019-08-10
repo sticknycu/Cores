@@ -86,7 +86,8 @@ public class MoneyUtils {
                 player.getInventory().addItem(gameItem);
                 messageAPI.sendBuyItemMessage(player, gameItem, finalPrice);
             } else if (playerMoney < finalPrice) {
-                messageAPI.sendUnsuficientMoneyMessage(player, finalPrice - playerMoney);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("generic.money.enough", mainAPI.emptyNoSpace + playerMoney,
+                        mainAPI.emptyNoSpace + finalPrice));
             }
         }
     }
