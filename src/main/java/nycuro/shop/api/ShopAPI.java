@@ -60,7 +60,7 @@ public class ShopAPI {
         FormWindowSimple shopMenu = new FormWindowSimple("Shop", messageAPI.getShopContestsMessages(player));
         shopMenu.addButton(new ElementButton("Buy", new ElementButtonImageData("url", "https://i.imgur.com/wHiyJED.png")));
         shopMenu.addButton(new ElementButton("Sell", new ElementButtonImageData("url", "https://i.imgur.com/dHku96H.png")));
-        shopMenu.addButton(new ElementButton("Enchanting", new ElementButtonImageData("url", "https://i.imgur.com/iArKQQb.png")));
+        //shopMenu.addButton(new ElementButton("Enchanting", new ElementButtonImageData("url", "https://i.imgur.com/iArKQQb.png")));
         shopMenu.addButton(new ElementButton("Close"));
         //shopMenu.addButton(new ElementButton("Trade", new ElementButtonImageData("url", "https://i.imgur.com/UeUTcJB.png")));
         //shopMenu.addButton(new ElementButton("Kits", new ElementButtonImageData("url", "https://i.imgur.com/1taD1Mk.png")));
@@ -77,7 +77,7 @@ public class ShopAPI {
                             sendSellContents(player);
                             return;
                         case 2:
-                            sendEnchantingContents(player);
+                            //sendEnchantingContents(player);
                             return;
                         case 3:
                             break;
@@ -357,7 +357,7 @@ public class ShopAPI {
                     Map.Entry pair = (Map.Entry) it.next();
                     it.remove();
                     String firstDropDownType = pair.getValue().toString();
-                    ShopAPI.getMoneyUtilsAPI().enchantBuyAction(response, player, firstDropDownType);
+                    //ShopAPI.getMoneyUtilsAPI().enchantBuyAction(response, player, firstDropDownType);
                 }
             }
         }));

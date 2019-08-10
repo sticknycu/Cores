@@ -19,15 +19,14 @@ public class ShopCommand extends CommandBaseShop {
     }
 
     @Override
-    public boolean execute(CommandSender commandSender, String s, String[] strings) {
+    public boolean execute(CommandSender commandSender, String s, String[] args) {
         Player player = (Player) commandSender;
-        switch (strings.length) {
-            case 0:
-                shopAPI.sendShopContents(player);
-                return true;
-            default:
-                messageAPI.sendExceptionShopMessage(player);
-                return true;
+        if (args.length > 0) {
+            messageAPI.sendExceptionShopMessage(player);
+            return true;
         }
+        shopAPI.sendShopContents(player);
+
+        return true;
     }
 }

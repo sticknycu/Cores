@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Stone",
+    "id": 1,
+    "meta": 1,
+    "cost": 5
+  },
+  {
+    "name": "Wood",
+    "id": 2,
+    "meta": 1,
+    "cost": 100
+  }
+]

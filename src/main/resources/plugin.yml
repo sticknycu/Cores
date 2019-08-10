@@ -38,6 +38,10 @@ commands:
     description: Show Servers
     usage: "/servers"
     permission: core.servers
+  test1:
+    description: sal
+    usage: "/test1"
+    permission: core.test
 
 permissions:
   core.spawn:
@@ -63,4 +67,7 @@ permissions:
     default: op
   core.servers:
     description: "Show Servers"
+    default: true
+  core.test:
+    description: "sal"
     default: true

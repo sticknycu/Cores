@@ -76,6 +76,8 @@ public class Loader extends PluginBase {
     public Map<UUID, JobsObject> jobsObject = new HashMap<>();
     public Map<UUID, MechanicObject> mechanicObject = new HashMap<>();
 
+    public MoneyUtils moneyAPI = new MoneyUtils();
+
     public static long dropPartyTime;
     public static int dropPartyVotes;
 
@@ -117,6 +119,8 @@ public class Loader extends PluginBase {
         registerPlaceHolders();
         kitsAPI.addKits();
         jobsAPI.addJobs();
+
+        moneyAPI.init();
     }
 
     @Override
@@ -205,7 +209,7 @@ public class Loader extends PluginBase {
         economyAPI.registerCommands();
         crateAPI.registerCommands();
         utilsAPI.registerCommands();
-        teleportationAPI.registerCommands();
+        //teleportationAPI.registerCommands();
     }
 
     private void registerEvents() {
