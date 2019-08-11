@@ -208,7 +208,6 @@ public class Loader extends PluginBase {
         helpingAPI.registerCommands();
         economyAPI.registerCommands();
         utilsAPI.registerCommands();
-        //teleportationAPI.registerCommands();
     }
 
     private void registerEvents() {

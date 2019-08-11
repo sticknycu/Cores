@@ -85,7 +85,7 @@ public class MoneyUtils {
                 profile.setDollars(playerMoney - finalPrice);
                 Item gameItem = Item.get(wantedItem.getId(), wantedItem.getMeta(), itemCount);
                 player.getInventory().addItem(gameItem);
-                messageAPI.sendBuyItemMessage(player, gameItem, finalPrice);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("buy.message", mainAPI.emptyNoSpace + gameItem));
             } else if (playerMoney < finalPrice) {
                 player.sendMessage(messageAPI.messagesObject.translateMessage("generic.money.enough", mainAPI.emptyNoSpace + playerMoney,
                         mainAPI.emptyNoSpace + finalPrice));
@@ -107,22 +107,23 @@ public class MoneyUtils {
 
         if (!response.isEmpty()) {
             if (player.getGamemode() != Player.SURVIVAL) {
-                messageAPI.sendGamemodeSellExceptionMessage(player);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("sell.exception.gamemode"));
                 return;
             }
             if (!player.getInventory().contains(gameItem)) {
-                messageAPI.sendUnsuficientItemsMessage(player);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("sell.exception.enough"));
                 return;
             }
 
             if (gameItem.getDamage() == sellingItem.getMeta() && gameItem.getCount() == itemCount) {
                 profile.setDollars(playerMoney + finalPrice);
                 player.getInventory().remove(gameItem);
-                messageAPI.sendSellItemMessage(player, gameItem, finalPrice);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("sell.succes", mainAPI.emptyNoSpace + gameItem,
+                        mainAPI.emptyNoSpace + finalPrice));
             } else if (gameItem.getCount() != itemCount) {
-                messageAPI.sendUnsuficientItemsMessage(player);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("sell.exception.count"));
             } else if (gameItem.getDamage() != sellingItem.getMeta()) {
-                messageAPI.sendBreakedItemMessage(player);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("sell.exception.broken"));
             }
         }
     }
