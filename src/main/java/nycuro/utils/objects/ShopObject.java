@@ -9,9 +9,9 @@ public class ShopObject {
     private String name;
     @Getter
     @Setter
-    private int id, meta, cost;
+    private double id, meta, cost;
 
-    public ShopObject(String name, int id, int meta, int cost) {
+    public ShopObject(String name, double id, double meta, double cost) {
         this.name = name;
         this.id = id;
         this.meta = meta;
