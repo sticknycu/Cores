@@ -97,11 +97,11 @@ public class Loader extends PluginBase {
     }
 
     private void addEntities() {
-        mechanicAPI.spawnNPC("mobfarmerNPC", EntityCreeper.NETWORK_ID, 14, 172, -11);
-        mechanicAPI.spawnNPC("minerNPC", EntityCreeper.NETWORK_ID, 51, 168, -10);
-        mechanicAPI.spawnNPC("butcherNPC", EntityCreeper.NETWORK_ID, 51, 168, 10);
-        mechanicAPI.spawnNPC("farmerNPC", EntityCreeper.NETWORK_ID, 42, 168, 15);
-        mechanicAPI.spawnNPC("fishermanNPC", EntityCreeper.NETWORK_ID, 42, 168, -12);
+        mechanicAPI.spawnNPC("minerNPC", EntityCreeper.NETWORK_ID, -25, 164, -144);
+        mechanicAPI.spawnNPC("butcherNPC", EntityCreeper.NETWORK_ID,  6, 162, -185);
+        mechanicAPI.spawnNPC("farmerNPC", EntityCreeper.NETWORK_ID, 37, 162, -175);
+        mechanicAPI.spawnNPC("fishermanNPC", EntityCreeper.NETWORK_ID, 7, 162, -133);
+        mechanicAPI.spawnNPC("mechanicNPC", EntityCreeper.NETWORK_ID, -19, 162, -122);
     }
 
     @Override

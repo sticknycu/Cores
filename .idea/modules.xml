@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Cores.iml" filepath="$PROJECT_DIR$/.idea/Cores.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nycuro.iml" filepath="$PROJECT_DIR$/nycuro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nycuro (1).iml" filepath="$PROJECT_DIR$/nycuro (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/nycuro (2).iml" filepath="$PROJECT_DIR$/nycuro (2).iml" />
     </modules>
   </component>
 </project>

@@ -3,7 +3,6 @@ package nycuro.api.data;
 import cn.nukkit.IPlayer;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.form.element.*;
 import cn.nukkit.form.window.FormWindowCustom;
@@ -18,7 +17,6 @@ import cn.nukkit.utils.TextFormat;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import me.lucko.luckperms.api.User;
 import me.lucko.luckperms.api.manager.UserManager;
-import nukkitcoders.mobplugin.entities.monster.flying.Wither;
 import nycuro.ai.entity.BossEntity;
 import nycuro.api.API;
 import nycuro.database.Database;
@@ -344,42 +342,6 @@ public class MechanicAPI {
         fakeScoreboard.objective = newObject;
         fakeScoreboard.addPlayer(player);
         mainAPI.scoreboard.put(player.getUniqueId(), fakeScoreboard);
-    }
-
-    public void spawnWither(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("generic.wither.form.first"));
-        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("generic.wither.form.message.normal")));
-        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("generic.wither.form.message.cost")));
-        player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
-            @Override
-            public void accept(Map<Integer, Object> response) {
-                if (!response.isEmpty()) {
-                    switch (response.entrySet().iterator().next().getKey()) {
-                        case 0:
-                            if (isOnSpawn(player)) {
-                                player.sendMessage(messageAPI.messagesObject.translateMessage("generic.wither.spawn.error"));
-                                return;
-                            }
-                            if (Wither.count > 10) {
-                                player.sendMessage(messageAPI.messagesObject.translateMessage("generic.wither.spawn.count"));
-                                return;
-                            } else {
-                                ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-                                double dolllars = profileSkyblock.getDollars();
-                                if (dolllars < 10000) {
-                                    player.sendMessage(messageAPI.messagesObject.translateMessage("generic.money.enough", mainAPI.emptyNoSpace + (10000 - profileSkyblock.getDollars())));
-                                    return;
-                                } else {
-                                    mainAPI.getServer().dispatchCommand(new ConsoleCommandSender(), "mob spawn 52 " + player.getName());
-                                    profileSkyblock.setDollars(profileSkyblock.getDollars() - 10000);
-                                    player.sendMessage(messageAPI.messagesObject.translateMessage("generic.wither.spawn.success"));
-                                    return;
-                                }
-                            }
-                    }
-                }
-            }
-        }));
     }
 
     public void teleportArena(Player player) {

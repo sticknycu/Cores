@@ -14,14 +14,8 @@
     "generic.dropparty.spawned"    : "DropParty has started! Everyone got DropParty Key. Boss has been showed in Arena and Fireworks is on spawn!",
     "generic.dropparty.receivekey" : "You have now +1 DropParty Key!",
 
-    "generic.wither.form.first"          : "Spawn Wither",
-    "generic.wither.form.top"            : "Hello! Welcome to Wither Spawn!",
-    "generic.wither.form.message.normal" : "&c» &aHow can i spawn a Wither?\n&eFor spawning a Wither is enough to press the button.\n&eYou can cancel that pushing X button from up, right side.&c» &aWhat can i do with Wither: \n&eWith Wither you can raid bases and get more experience.",
-    "generic.wither.form.message.cost"   : "&c» &aPrice: &610k$ \n&eA little information: Maximum of Withers on Server is 10, so if there exists 10 Withers spawned you need to wait to minimum 1 to be despawned!\n&eAnd about despawning of entities, entities are despawned every 5 minutes, so be careful!\n&eThank you for purchase!\n&eHave a nice day!",
-
-    "generic.wither.spawn.error"   : "You can't spawn Wither in spawn!",
-    "generic.wither.spawn.count"   : "There are 10 withers spawned! Try again later!",
-    "generic.wither.spawn.success" : "You spawned succesfuly wither!",
+    "commands.setlevel.usage"       : "/setlevel <name> <level>",
+    "commands.setlevel.description" : "Set level to player",
 
     "generic.arena.first"          : "Hello! Welcome to Arena Category. Select what you want to do first",
     "generic.arena.form.category"  : "Arena Cateogry",

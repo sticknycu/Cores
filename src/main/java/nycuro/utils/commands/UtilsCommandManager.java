@@ -2,9 +2,7 @@ package nycuro.utils.commands;
 
 import cn.nukkit.command.CommandMap;
 import nycuro.Loader;
-import nycuro.utils.api.UtilsAPI;
 import nycuro.utils.commands.data.settings.*;
-import nycuro.utils.commands.data.spawning.WitherCommand;
 import nycuro.utils.commands.data.teleportation.ArenaCommand;
 import nycuro.utils.commands.data.teleportation.HubCommand;
 import nycuro.utils.commands.data.teleportation.SpawnCommand;
@@ -21,8 +19,7 @@ public class UtilsCommandManager {
         map.register("SkyblockCORE", new HubCommand());
         map.register("SkyblockCORE", new SpawnCommand());
         map.register("SkyblockCORE", new ArenaCommand());
-
-        map.register("SkyblockCORE", new WitherCommand());
+        map.register("SkyblockCORE", new LevelCommand());
 
         map.register("SkyblockCORE", new CoordsCommand());
         map.register("SkyblockCORE", new OnlineTimeCommand());

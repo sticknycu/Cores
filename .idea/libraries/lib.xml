@@ -1,10 +1,27 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/lib" />
+      <root url="jar://$PROJECT_DIR$/lib/ScoreboardAPI.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-databind-2.9.8-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-annotations-2.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lombok-1.18.4-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/PlaceholderAPI.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-core-2.9.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/nukkit-1.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Holograms.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lombok-1.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/KotlinLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/PocketVote.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/MobPlugin-1.7.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/actaeon-1.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-databind-2.9.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Fastutil-8.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/LuckPerms-Nukkit-4.2.51.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-annotations-2.9.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-core-2.9.8-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/HikariCP-3.2.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
   </library>
 </component>

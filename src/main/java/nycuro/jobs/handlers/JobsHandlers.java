@@ -59,8 +59,8 @@ public class JobsHandlers implements Listener {
                 if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(4);
                 damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.FISHERMAN.getName()));
-            } else if (entity.namedTag.getBoolean("mobfarmerNPC")) {
-                // TODO: Mob farm
+            } else if (entity.namedTag.getBoolean("mechanicNPC")) {
+                mainAPI.getServer().dispatchCommand(damager, "job");
             }
         }
     }
@@ -113,9 +113,9 @@ public class JobsHandlers implements Listener {
     // Job Fisherman
     @EventHandler
     public void onReceiveFish(InventoryPickupItemEvent event) {
-        if (event.getItem().getItem().getId() != Item.RAW_FISH) event.setCancelled();
-        if (event.getItem().getItem().getId() != Item.RAW_SALMON) event.setCancelled();
-        if (event.getInventory() instanceof PlayerInventory) event.setCancelled();
+        if (event.getItem().getItem().getId() != Item.RAW_FISH) return;
+        if (event.getItem().getItem().getId() != Item.RAW_SALMON) return;
+        if (event.getInventory() instanceof PlayerInventory) return;
         PlayerInventory playerInventory = (PlayerInventory) event.getInventory();
         playerInventory.getViewers().forEach( (player) -> {
             ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());

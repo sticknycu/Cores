@@ -7,11 +7,16 @@ public class ShopObject {
     @Getter
     @Setter
     private String name;
+
     @Getter
     @Setter
-    private double id, meta, cost;
+    private int id, meta;
 
-    public ShopObject(String name, double id, double meta, double cost) {
+    @Getter
+    @Setter
+    private double cost;
+
+    public ShopObject(String name, int id, int meta, double cost) {
         this.name = name;
         this.id = id;
         this.meta = meta;

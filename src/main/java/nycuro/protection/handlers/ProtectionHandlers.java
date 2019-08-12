@@ -97,20 +97,21 @@ public class ProtectionHandlers implements Listener {
     @EventHandler
     public void onReceiveFish(InventoryPickupItemEvent event) {
         Item item = event.getItem().getItem();
-        Player player = mainAPI.getServer().getPlayer(event.getItem().getOwner());
-        ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-        if (mechanicAPI.isOnPrincipalWorld(player)) {
-            if (profileSkyblock.getJob() == 4) {
-                CompoundTag tag = item.getNamedTag();
-                tag.putBoolean("JOB", true);
-                item.setNamedTag(tag);
-                PlayerInventory playerInventory = player.getInventory();
-                if (!playerInventory.canAddItem(item)) {
-                    player.sendMessage(messageAPI.messagesObject.translateMessage("generic.inventory.get.error"));
-                } else {
-                    playerInventory.addItem(item);
+        for (Player player : event.getViewers()) {
+            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+            if (mechanicAPI.isOnPrincipalWorld(player)) {
+                if (profileSkyblock.getJob() == 4) {
+                    CompoundTag tag = item.getNamedTag();
+                    tag.putBoolean("JOB", true);
+                    item.setNamedTag(tag);
+                    PlayerInventory playerInventory = player.getInventory();
+                    if (!playerInventory.canAddItem(item)) {
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("generic.inventory.get.error"));
+                    } else {
+                        playerInventory.addItem(item);
+                    }
+                    event.getItem().kill();
                 }
-                event.getItem().kill();
             }
         }
     }
