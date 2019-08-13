@@ -40,6 +40,8 @@ public class JobsAPI {
 
     public Map<NameJob, CommonJob> jobs = new HashMap<>();
 
+    private Location jobsLocation = new Location(4, 162, -116, mainAPI.getServer().getDefaultLevel());
+
     public void registerCommands() {
         JobsCommandManager.registerAll(mainAPI);
     }
@@ -76,7 +78,7 @@ public class JobsAPI {
                     ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            player.teleport(new Location(27, 169, 0, mainAPI.getServer().getDefaultLevel()));
+                            player.teleport(jobsLocation);
                             return;
                         case 1:
                             sendInfoMessageJobs(player);
@@ -205,60 +207,16 @@ public class JobsAPI {
                 if (!response.isEmpty()) {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            jobs.get(NameJob.MINER).processMission(player, TypeJob.EASY, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.MINER).getReward(TypeJob.EASY, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.MINER, player, TypeJob.EASY);
                             break;
                         case 1:
-                            jobs.get(NameJob.MINER).processMission(player, TypeJob.MEDIUM, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.MINER).getReward(TypeJob.MEDIUM, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.MINER, player, TypeJob.MEDIUM);
                             break;
                         case 2:
-                            jobs.get(NameJob.MINER).processMission(player, TypeJob.HARD, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.MINER).getReward(TypeJob.HARD, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.MINER, player, TypeJob.HARD);
                             break;
                         case 3:
-                            jobs.get(NameJob.MINER).processMission(player, TypeJob.EXTREME, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.MINER).getReward(TypeJob.EXTREME, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.MINER, player, TypeJob.EXTREME);
                             break;
                     }
                 }
@@ -281,60 +239,17 @@ public class JobsAPI {
                 if (!response.isEmpty()) {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            jobs.get(NameJob.BUTCHER).processMission(player, TypeJob.EASY, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.BUTCHER).getReward(TypeJob.EASY, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            int[] integers = (int[]) o;
-                                            succesfullyCreatedMissionB(player, integers, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.BUTCHER, player, TypeJob.EASY);
                             break;
                         case 1:
-                            jobs.get(NameJob.BUTCHER).processMission(player, TypeJob.MEDIUM, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.BUTCHER).getReward(TypeJob.MEDIUM, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            int[] integers = (int[]) o;
-                                            succesfullyCreatedMissionB(player, integers, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.BUTCHER, player, TypeJob.MEDIUM);
                             break;
                         case 2:
-                            jobs.get(NameJob.BUTCHER).processMission(player, TypeJob.HARD, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.BUTCHER).getReward(TypeJob.HARD, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            int[] integers = (int[]) o;
-                                            succesfullyCreatedMissionB(player, integers, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.BUTCHER, player, TypeJob.HARD);
                             break;
                         case 3:
-                            jobs.get(NameJob.BUTCHER).processMission(player, TypeJob.EXTREME, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.BUTCHER).getReward(TypeJob.EXTREME, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            int[] integers = (int[]) o;
-                                            succesfullyCreatedMissionB(player, integers, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.BUTCHER, player, TypeJob.EXTREME);
+                            break;
                     }
                 }
             }
@@ -356,60 +271,17 @@ public class JobsAPI {
                 if (!response.isEmpty()) {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            jobs.get(NameJob.FARMER).processMission(player, TypeJob.EASY, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.FARMER).getReward(TypeJob.EASY, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.FARMER, player, TypeJob.EASY);
                             break;
                         case 1:
-                            jobs.get(NameJob.FARMER).processMission(player, TypeJob.MEDIUM, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.FARMER).getReward(TypeJob.MEDIUM, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.FARMER, player, TypeJob.MEDIUM);
                             break;
                         case 2:
-                            jobs.get(NameJob.FARMER).processMission(player, TypeJob.HARD, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.FARMER).getReward(TypeJob.HARD, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.FARMER, player, TypeJob.HARD);
                             break;
                         case 3:
-                            jobs.get(NameJob.FARMER).processMission(player, TypeJob.EXTREME, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.FARMER).getReward(TypeJob.EXTREME, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.FARMER, player, TypeJob.EXTREME);
+                            break;
                     }
                 }
             }
@@ -431,64 +303,41 @@ public class JobsAPI {
                 if (!response.isEmpty()) {
                     switch (response.entrySet().iterator().next().getKey()) {
                         case 0:
-                            jobs.get(NameJob.FISHERMAN).processMission(player, TypeJob.EASY, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.FISHERMAN).getReward(TypeJob.EASY, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.FISHERMAN, player, TypeJob.EASY);
                             break;
                         case 1:
-                            jobs.get(NameJob.FISHERMAN).processMission(player, TypeJob.MEDIUM, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.FISHERMAN).getReward(TypeJob.MEDIUM, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.FISHERMAN, player, TypeJob.MEDIUM);
                             break;
                         case 2:
-                            jobs.get(NameJob.FISHERMAN).processMission(player, TypeJob.HARD, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.FISHERMAN).getReward(TypeJob.HARD, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.FISHERMAN, player, TypeJob.HARD);
                             break;
                         case 3:
-                            jobs.get(NameJob.FISHERMAN).processMission(player, TypeJob.EXTREME, new Consumer<Object>() {
-                                @Override
-                                public void accept(Object o) {
-                                    jobs.get(NameJob.FISHERMAN).getReward(TypeJob.EXTREME, new Consumer<Double>() {
-                                        @Override
-                                        public void accept(Double reward) {
-                                            Item[] items = (Item[]) o;
-                                            succesfullyCreatedMissionMF(player, items, reward);
-                                        }
-                                    });
-                                }
-                            });
+                            handleMission(NameJob.FISHERMAN, player, TypeJob.EXTREME);
+                            break;
                     }
                 }
             }
         }));
+    }
+
+    private void handleMission(NameJob nameJob, Player player, TypeJob typeJob) {
+        jobs.get(nameJob).processMission(player, typeJob, new Consumer<Object>() {
+            @Override
+            public void accept(Object o) {
+                jobs.get(nameJob).getReward(typeJob, new Consumer<Double>() {
+                    @Override
+                    public void accept(Double reward) {
+                        if (nameJob.getId() != 2) {
+                            Item[] items = (Item[]) o;
+                            succesfullyCreatedMissionMF(player, items, reward);
+                        } else {
+                            int[] integers = (int[]) o;
+                            succesfullyCreatedMissionB(player, integers, reward);
+                        }
+                    }
+                });
+            }
+        });
     }
 
     private void succesfullyCreatedMissionB(Player player, int[] integers, double reward) {
@@ -499,24 +348,5 @@ public class JobsAPI {
     private void succesfullyCreatedMissionMF(Player player, Item[] items, double reward) {
         mainAPI.jobsObject.put(player.getUniqueId(), new JobsObject(player.getUniqueId(), 2, items, new int[0], reward));
         handleMission(player);
-    }
-
-    private String getAnimal(int i) {
-        String animal = "";
-        switch (i) {
-            case 0:
-                animal = "Cow";
-                break;
-            case 1:
-                animal = "Pig";
-                break;
-            case 2:
-                animal = "Sheep";
-                break;
-            case 3:
-                animal = "Chicken";
-                break;
-        }
-        return animal;
     }
 }
