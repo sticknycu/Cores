@@ -77,7 +77,7 @@ public class FishermanJob extends CommonJob {
         if (getStatus(player, typeJob).equals(StatusJobs.LOCKED)) {
             player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.locked"));
         } else {
-            Item[] collection = new Item[3];
+            Item[] collection = new Item[2];
             if (typeJob.equals(TypeJob.EASY)) {
                 FastRandom.current().ints(1, 10, 15).findFirst().ifPresent((j) -> {
                     collection[0] = Item.get(Item.RAW_FISH, 0, j);

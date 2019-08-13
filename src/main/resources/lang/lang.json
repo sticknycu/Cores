@@ -300,7 +300,10 @@
     "kits.receive" : "Wow! You got {%0}",
     "kits.locked"  : "This kit is LOCKED! Please unlock this kit using Premium Shop (/shop)!",
 
-    "work.finished" : "You finished the mission. Type /work to get your reward!",
+    "work.finished"        : "You finished the mission. Type /work to get your reward!",
+    "work.finished.item"   : "Your count for this item is maximum. Please go to get other items",
+    "work.unstarted.break" : "You have to start work for breaking blocks here!",
+    "work.unstarted.pvp"   : "You have to star work for killing animals here!",
 
     "kill.message" : "You was killed by {%0}",
 

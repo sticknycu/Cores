@@ -50,6 +50,10 @@ public class MechanicAPI {
         return player.getLevel().equals(mainAPI.getServer().getDefaultLevel()) && !player.isOp();
     }
 
+    public boolean isOnPrincipalWorld(Entity entity) {
+        return entity.getLevel().equals(mainAPI.getServer().getDefaultLevel());
+    }
+
     public boolean isOnArena(Player player) {
         return mainAPI.isOnArena.getBoolean(player.getUniqueId());
     }
@@ -164,14 +168,19 @@ public class MechanicAPI {
     }
 
     public boolean isPlayerInsideOfArea(Player player, double[] d1, double[] d2, double[] d3) {
-        if (player.getLocation().getX() > d1[0] && player.getLocation().getX() < d1[1]) {
-            return false;
-        }
-        if (player.getLocation().getZ() > d2[0] && player.getLocation().getZ() < d2[1]) {
+        if (player.getLocation().getX() > d1[1] || player.getLocation().getX() < d1[0]) {
             return false;
         }
 
-        return !(player.getLocation().getY() > d3[0]) || !(player.getLocation().getY() < d3[1]);
+        if (player.getLocation().getY() > d2[1] || player.getLocation().getY() < d2[0]) {
+            return false;
+        }
+
+        if (player.getLocation().getZ() > d3[1] || player.getLocation().getZ() < d3[0]) {
+            return false;
+        }
+
+        return true;
     }
 
     public void sendToSpawn(Player player) {
@@ -290,32 +299,24 @@ public class MechanicAPI {
     }
 
     public boolean checkItems(Player player, Item[] items) {
+        int i = 0;
         for (Item item : items) {
             for (Item content : player.getInventory().getContents().values()) {
-                try {
-                    if (player.getInventory().isEmpty()) {
-                        return false;
-                    }
-                    if (item.equals(content) && item.getCount() == content.getCount() && content.getNamedTag().exist("NPC")) {
-                        return true;
-                    }
-                } catch (NullPointerException e) { // idk why
+                if (item.getId() == content.getId() && content.getCount() >= item.getCount() && content.getName().equals("JOB")) {
+                    i++;
                 }
             }
         }
-        return false;
+        return i == items.length;
     }
 
-    public boolean checkItems(Player player, Item item) {
+    public boolean checkItem(Player player, Item item) {
         for (Item content : player.getInventory().getContents().values()) {
-            try {
-                if (player.getInventory().isEmpty()) {
-                    return false;
-                }
-                if (item.equals(content) && item.getCount() == content.getCount() && content.getNamedTag().exist("NPC")) {
-                    return true;
-                }
-            } catch (NullPointerException e) { // idk why
+            if (player.getInventory().isEmpty()) {
+                return false;
+            }
+            if (item.getId() == content.getId() && content.getCount() >= item.getCount() && content.getName().equals("JOB")) {
+                return true;
             }
         }
         return false;

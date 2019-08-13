@@ -27,7 +27,7 @@ public class SpawnCommand extends CommandBaseUtils {
             @Override
             public void onRun(int i) {
                 mechanicAPI.sendToSpawn(player);
-                messageAPI.messagesObject.translateMessage("teleportation.spawn.teleported");
+                player.sendMessage(messageAPI.messagesObject.translateMessage("teleportation.spawn.teleported"));
             }
         }, 7 * 20);
         return true;

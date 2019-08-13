@@ -77,8 +77,8 @@ public class FarmerJob extends CommonJob {
         if (getStatus(player, typeJob).equals(StatusJobs.LOCKED)) {
             player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.locked"));
         } else {
-            Item[] itemsMap = new Item[10];
             if (typeJob.equals(TypeJob.EASY)) {
+                Item[] itemsMap = new Item[4];
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
                     itemsMap[0] = Item.get(Item.SEEDS, 0, j);
                 });
@@ -91,7 +91,9 @@ public class FarmerJob extends CommonJob {
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
                     itemsMap[3] = Item.get(Item.HAY_BALE, 0, j);
                 });
+                consumer.accept(itemsMap);
             } else if (typeJob.equals(TypeJob.MEDIUM)) {
+                Item[] itemsMap = new Item[4];
                 FastRandom.current().ints(1, 12, 36).findFirst().ifPresent((j) -> {
                     itemsMap[0] = Item.get(Item.SEEDS, 0, j);
                 });
@@ -104,7 +106,9 @@ public class FarmerJob extends CommonJob {
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
                     itemsMap[3] = Item.get(Item.HAY_BALE, 0, j);
                 });
+                consumer.accept(itemsMap);
             } else if (typeJob.equals(TypeJob.HARD)) {
+                Item[] itemsMap = new Item[6];
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
                     itemsMap[0] = Item.get(Item.SEEDS, 0, j);
                 });
@@ -123,7 +127,9 @@ public class FarmerJob extends CommonJob {
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
                     itemsMap[5] = Item.get(Item.DOUBLE_PLANT, 0, j);
                 });
+                consumer.accept(itemsMap);
             } else {
+                Item[] itemsMap = new Item[9];
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
                     itemsMap[0] = Item.get(Item.SEEDS, 0, j);
                 });
@@ -151,8 +157,8 @@ public class FarmerJob extends CommonJob {
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
                     itemsMap[8] = Item.get(Item.DOUBLE_PLANT, 1, j);
                 });
+                consumer.accept(itemsMap);
             }
-            consumer.accept(itemsMap);
         }
     }
 }

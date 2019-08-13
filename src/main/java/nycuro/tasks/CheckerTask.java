@@ -44,12 +44,12 @@ public class CheckerTask extends Task {
                 // Vector3 from = new Vector3(1153, 31, 1187);
                 // Vector3 to = new Vector3(1059, 0, 1280);
                 // Arena Check
-                d1[0] = 89; // x from
-                d1[1] = -75; // x to
-                d2[0] = 81; // y from
-                d2[1] = 256; // y to
-                d3[0] = 76; // z from
-                d3[1] = -77; // z to
+                d1[0] = 91; // x from
+                d1[1] = 202; // x to
+                d2[0] = 211; // y from
+                d2[1] = 130; // y to
+                d3[0] = 92; // z from
+                d3[1] = -49; // z to
                 Arrays.sort(d1);
                 Arrays.sort(d2);
                 Arrays.sort(d3);
@@ -62,12 +62,12 @@ public class CheckerTask extends Task {
                 // Spawn Check
                 //Vector3 vectorRA = new Vector3(1057, 5, 1175);
                 //Vector3 vectorLA = new Vector3(1154, 29, 1120);
-                d1[0] = 107; // x from
-                d1[1] = 198; // x to
-                d2[0] = 86; // y from
-                d2[1] = 183; // y to
-                d3[0] = 47; // z from
-                d3[1] = -44; // z to
+                d1[0] = -96; // x from
+                d1[1] = 91; // x to
+                d2[0] = 107; // y from
+                d2[1] = 211; // y to
+                d3[0] = -74; // z from
+                d3[1] = 92; // z to
                 Arrays.sort(d1);
                 Arrays.sort(d2);
                 Arrays.sort(d3);
@@ -80,12 +80,12 @@ public class CheckerTask extends Task {
                 // Area Check
                 //Vector3 vectorRA = new Vector3(1057, 5, 1175);
                 //Vector3 vectorLA = new Vector3(1154, 29, 1120);
-                d1[0] = 48; // x from
-                d1[1] = -52; // x to
-                d2[0] = 115; // y from
+                d1[0] = 52; // x from
+                d1[1] = -59; // x to
+                d2[0] = 139; // y from
                 d2[1] = 196; // y to
-                d3[0] = -114; // z from
-                d3[1] = -203; // z to
+                d3[0] = -101; // z from
+                d3[1] = -213; // z to
                 Arrays.sort(d1);
                 Arrays.sort(d2);
                 Arrays.sort(d3);

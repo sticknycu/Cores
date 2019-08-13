@@ -7,9 +7,9 @@ import nycuro.utils.objects.JsonObject;
 import nycuro.utils.objects.MechanicDropParty;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import static nycuro.api.API.mainAPI;
 
@@ -30,9 +30,10 @@ public class VoteSettings {
                 fileWriter.write(serializeData(0, 0));
                 fileWriter.close();
             } else {
-                ObjectMapper mapper = new ObjectMapper();
-                JsonNode settings = mapper.reader().readTree(new FileReader(file));
-                JsonNode jsonNodeMechanic = settings.get("mechanic");
+                byte[] jsonData = Files.readAllBytes(file.toPath());
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode rootNode = objectMapper.readTree(jsonData);
+                JsonNode jsonNodeMechanic = rootNode.path("mechanic");
 
                 mechanic.setDropParty(Integer.valueOf(jsonNodeMechanic.get("dropParty").toString()));
                 mechanic.setTimeDropParty(Long.valueOf(jsonNodeMechanic.get("timeDropParty").toString()));
@@ -60,7 +61,7 @@ public class VoteSettings {
         mechanic.setDropParty(dropParty);
         mechanic.setTimeDropParty(timeDropParty);
 
-        json.setMechanic(mechanic);
+        json.mechanic = mechanic;
 
         return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
     }

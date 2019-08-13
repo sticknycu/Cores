@@ -125,51 +125,57 @@ public class JobsAPI {
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.handle.first")));
         JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
         if (job != 2) {
-            Item[] items = jobsObject.getItems();
-            int i = 0;
-            for (Item item : items) {
-                for (Item content : player.getInventory().getContents().values()) {
-                    if (!content.getNamedTag().exist("NPC")) continue;
-                    if (content.getId() == item.getId()) {
-                        i++;
-                    }
+                Item[] items = jobsObject.getItems();
+                for (Item item : jobsObject.items) {
+                    mainAPI.getServer().broadcastMessage(item.getName() + ":" + item.getCount());
                 }
-                try { // idk why
-                    infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.handle.item", item.getName())));
-                    infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.handle.count",
-                            mainAPI.emptyNoSpace + i, mainAPI.emptyNoSpace + item.getCount())));
-                } catch (NullPointerException e) {
-                }
-            }
-            infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.handle.reward",
-                    mainAPI.emptyNoSpace + API.round(jobsObject.getReward(), 2))));
-            player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
-                @Override
-                public void accept(Map<Integer, Object> response) {
-                    if (!response.isEmpty()) {
-                        if (mechanicAPI.checkItems(player, items)) {
-                            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-                            profileSkyblock.setDollars(profileSkyblock.getDollars() + jobsObject.getReward());
-                            player.getInventory().removeItem(items);
-                            player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.finished",
-                                    mainAPI.emptyNoSpace + jobsObject.getReward()));
-                            mainAPI.jobsObject.remove(player.getUniqueId());
-                        } else {
-                            player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.enough.materials"));
+                int i = 0;
+                for (Item item : items) {
+                    for (Item content : player.getInventory().getContents().values()) {
+                        if (!content.getName().equals("JOB")) continue;
+                        if (content.getId() == item.getId()) {
+                            i = content.getCount();
                         }
                     }
+                    infoMenu.addElement(new ElementLabel(
+                            messageAPI.messagesObject.translateMessage("jobs.form.handle.item", item.getName()) + "\n" +
+                                    messageAPI.messagesObject.translateMessage("jobs.form.handle.count",
+                                            mainAPI.emptyNoSpace + i, mainAPI.emptyNoSpace + item.getCount())
+                    ));
+                    i = 0;
                 }
-            }));
-        } else {
-            try { // idk why
-                infoMenu.addElement(new ElementLabel("Cow: " + jobsObject.getCountAnimals()[0] + "\n" +
-                        "Pig: " + jobsObject.getCountAnimals()[1] + "\n" +
-                        "Sheep: " + jobsObject.getCountAnimals()[2] + "\n" +
-                        "Chicken: " + jobsObject.getCountAnimals()[3])
-                );
-                infoMenu.addElement(new ElementLabel("§aReward: §e" + API.round(jobsObject.getReward(), 2) + " Dollars"));
-            } catch (NullPointerException e) {
-            }
+                infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.handle.reward",
+                        mainAPI.emptyNoSpace + API.round(jobsObject.getReward(), 2))));
+                player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
+                    @Override
+                    public void accept(Map<Integer, Object> response) {
+                        if (!response.isEmpty()) {
+                            if (!mechanicAPI.checkItems(player, items)) {
+                                player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.enough.materials"));
+                            } else {
+                                ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                                profileSkyblock.setDollars(profileSkyblock.getDollars() + jobsObject.getReward());
+                                for (Item item : player.getInventory().getContents().values()) {
+                                    for (Item i : items) {
+                                        if (i.getId() == item.getId()) {
+                                            player.getInventory().remove(item);
+                                        }
+                                    }
+                                }
+                                player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.finished",
+                                        mainAPI.emptyNoSpace + jobsObject.getReward()));
+                                mainAPI.jobsObject.remove(player.getUniqueId());
+                            }
+                        }
+                    }
+                }));
+            } else {
+            infoMenu.addElement(new ElementLabel("Cow: " + jobsObject.getCountAnimals()[0] + "\n" +
+                    "Pig: " + jobsObject.getCountAnimals()[1] + "\n" +
+                    "Sheep: " + jobsObject.getCountAnimals()[2] + "\n" +
+                    "Chicken: " + jobsObject.getCountAnimals()[3])
+            );
+            infoMenu.addElement(new ElementLabel("§aReward: §e" + API.round(jobsObject.getReward(), 2) + " Dollars"));
             player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
                 @Override
                 public void accept(Map<Integer, Object> response) {

@@ -76,8 +76,8 @@ public class ButcherJob extends CommonJob {
         if (getStatus(player, typeJob).equals(StatusJobs.LOCKED)) {
             player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.locked"));
         } else {
-            int[] collection = new int[5];
             if (typeJob.equals(TypeJob.EASY)) {
+                int[] collection = new int[4];
                 FastRandom.current().ints(1, 10, 15).findFirst().ifPresent((j) -> {
                     collection[0] = j;
                 });
@@ -90,7 +90,9 @@ public class ButcherJob extends CommonJob {
                 FastRandom.current().ints(1, 10, 15).findFirst().ifPresent((j) -> {
                     collection[3] = j;
                 });
+                consumer.accept(collection);
             } else if (typeJob.equals(TypeJob.MEDIUM)) {
+                int[] collection = new int[4];
                 FastRandom.current().ints(1, 15, 25).findFirst().ifPresent((j) -> {
                     collection[0] = j;
                 });
@@ -103,7 +105,9 @@ public class ButcherJob extends CommonJob {
                 FastRandom.current().ints(1, 15, 25).findFirst().ifPresent((j) -> {
                     collection[3] = j;
                 });
+                consumer.accept(collection);
             } else if (typeJob.equals(TypeJob.HARD)) {
+                int[] collection = new int[4];
                 FastRandom.current().ints(1, 35, 40).findFirst().ifPresent((j) -> {
                     collection[0] = j;
                 });
@@ -116,7 +120,9 @@ public class ButcherJob extends CommonJob {
                 FastRandom.current().ints(1, 35, 40).findFirst().ifPresent((j) -> {
                     collection[3] = j;
                 });
+                consumer.accept(collection);
             } else {
+                int[] collection = new int[4];
                 FastRandom.current().ints(1, 45, 60).findFirst().ifPresent((j) -> {
                     collection[0] = j;
                 });
@@ -129,8 +135,8 @@ public class ButcherJob extends CommonJob {
                 FastRandom.current().ints(1, 45, 60).findFirst().ifPresent((j) -> {
                     collection[3] = j;
                 });
+                consumer.accept(collection);
             }
-            consumer.accept(collection);
         }
     }
 }

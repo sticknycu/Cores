@@ -26,9 +26,9 @@ public class AbuseHandlers implements Listener {
     @EventHandler
     public void onInteract(InventoryOpenEvent event) {
         Player player = event.getPlayer();
+        if (player.isOp()) return;
         InventoryType inventoryType = event.getInventory().getType();
         switch (inventoryType) {
-            case ENCHANT_TABLE:
             case ANVIL:
                 event.setCancelled(true);
                 player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.notwork"));
@@ -58,13 +58,8 @@ public class AbuseHandlers implements Listener {
     @EventHandler
     public void onInteract(PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
+        if (player.isOp()) return;
         int itemId = event.getItem().getId();
-        switch (itemId) {
-            case Item.ENCHANTING_TABLE:
-                event.setCancelled(true);
-                player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
-                break;
-        }
         if (event.getItem().isArmor()) {
             for (Enchantment enchantment : event.getItem().getEnchantments()) {
                 if (enchantment.getId() == Enchantment.ID_THORNS) {
@@ -74,7 +69,7 @@ public class AbuseHandlers implements Listener {
                 }
             }
         }
-        if (player.getGamemode() == Player.CREATIVE) {
+        if (player.getGamemode() == Player.CREATIVE || event.getItem().getName().equals("NPC")) {
             switch (itemId) {
                 case 384:
                 case 15:
@@ -90,6 +85,7 @@ public class AbuseHandlers implements Listener {
                 case 42:
                 case 57:
                 case 152:
+                case 14:
                     event.setCancelled(true);
                     player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
                     break;
@@ -100,15 +96,15 @@ public class AbuseHandlers implements Listener {
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
+        if (player.isOp()) return;
         int blockId = event.getBlock().getId();
         switch (blockId) {
-            case Item.ENCHANTING_TABLE:
             case 131:
                 event.setCancelled(true);
                 player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
                 break;
         }
-        if (player.getGamemode() == Player.CREATIVE) {
+        if (player.getGamemode() == Player.CREATIVE || event.getBlock().getName().equals("NPC")) {
             switch (blockId) {
                 case 15:
                 case 16:
@@ -123,6 +119,7 @@ public class AbuseHandlers implements Listener {
                 case 42:
                 case 57:
                 case 152:
+                case 14:
                     event.setCancelled(true);
                     player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
                     break;
@@ -143,6 +140,7 @@ public class AbuseHandlers implements Listener {
             } else if (ev.getDamager() instanceof Player) damager = (Player) ev.getDamager();
 
             if (damager == null) return;
+            if (damager.isOp()) return;
             if (damager.getGamemode() == Player.CREATIVE) {
                 event.setCancelled(true);
                 player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
@@ -153,7 +151,8 @@ public class AbuseHandlers implements Listener {
     @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
-        if (player.getGamemode() == Player.CREATIVE) {
+        if (player.isOp()) return;
+        if (player.getGamemode() == Player.CREATIVE || event.getItem().getName().equals("NPC")) {
             event.setCancelled(true);
             player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
         }
