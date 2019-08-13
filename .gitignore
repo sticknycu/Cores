@@ -11,6 +11,7 @@ idea/
 *.zip
 *.tar.gz
 *.rar
+.idea/workspace.xml
 hs_err_pid*
 target/
 pom.xml.tag
