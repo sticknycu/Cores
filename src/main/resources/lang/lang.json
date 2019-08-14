@@ -300,6 +300,7 @@
     "kits.receive" : "Wow! You got {%0}",
     "kits.locked"  : "This kit is LOCKED! Please unlock this kit using Premium Shop (/shop)!",
 
+    "work.inventory.block" : "Please finish your work! After you can open other inventories!",
     "work.finished"        : "You finished the mission. Type /work to get your reward!",
     "work.finished.item"   : "Your count for this item is maximum. Please go to get other items",
     "work.finished.kill"   : "Your count on this animal is to 0. Please go to other animal",

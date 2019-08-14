@@ -83,19 +83,19 @@ public class MinerJob extends CommonJob {
                     itemsMap[0] = Item.get(Item.COBBLESTONE, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[1] = Item.get(Item.STONE, 0, j);
+                    itemsMap[1] = Item.get(Item.DIRT, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
                     itemsMap[2] = Item.get(Item.IRON_ORE, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[3] = Item.get(Item.COAL_ORE, 0, j);
+                    itemsMap[3] = Item.get(Item.COAL, 0, j);
                 });
                 consumer.accept(itemsMap);
             } else if (typeJob.equals(TypeJob.MEDIUM)) {
                 Item[] itemsMap = new Item[4];
                 FastRandom.current().ints(1, 12, 36).findFirst().ifPresent((j) -> {
-                    itemsMap[0] = Item.get(Item.STONE, 0, j);
+                    itemsMap[0] = Item.get(Item.DIRT, 0, j);
                 });
                 FastRandom.current().ints(1, 12, 36).findFirst().ifPresent((j) -> {
                     itemsMap[1] = Item.get(Item.GOLD_ORE, 0, j);
@@ -104,13 +104,13 @@ public class MinerJob extends CommonJob {
                     itemsMap[2] = Item.get(Item.IRON_ORE, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[3] = Item.get(Item.COAL_ORE, 0, j);
+                    itemsMap[3] = Item.get(Item.COAL, 0, j);
                 });
                 consumer.accept(itemsMap);
             } else if (typeJob.equals(TypeJob.HARD)) {
                 Item[] itemsMap = new Item[6];
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
-                    itemsMap[0] = Item.get(Item.STONE, 0, j);
+                    itemsMap[0] = Item.get(Item.DIRT, 0, j);
                 });
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
                     itemsMap[1] = Item.get(Item.GOLD_ORE, 0, j);
@@ -125,13 +125,13 @@ public class MinerJob extends CommonJob {
                     itemsMap[4] = Item.get(Item.EMERALD, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[5] = Item.get(Item.COAL_ORE, 0, j);
+                    itemsMap[5] = Item.get(Item.COAL, 0, j);
                 });
                 consumer.accept(itemsMap);
             } else {
                 Item[] itemsMap = new Item[9];
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
-                    itemsMap[0] = Item.get(Item.STONE, 0, j);
+                    itemsMap[0] = Item.get(Item.DIRT, 0, j);
                 });
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
                     itemsMap[1] = Item.get(Item.COBBLESTONE, 0, j);
@@ -149,10 +149,10 @@ public class MinerJob extends CommonJob {
                     itemsMap[5] = Item.get(Item.EMERALD, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[6] = Item.get(Item.COAL_ORE, 0, j);
+                    itemsMap[6] = Item.get(Item.COAL, 0, j);
                 });
-                FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
-                    itemsMap[7] = Item.get(Item.REDSTONE_DUST, 0, j);
+                FastRandom.current().ints(1, 5, 8).findFirst().ifPresent((j) -> {
+                    itemsMap[7] = Item.get(Item.REDSTONE_BLOCK, 0, j);
                 });
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
                     itemsMap[8] = Item.get(Item.REDSTONE, 0, j);

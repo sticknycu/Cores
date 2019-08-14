@@ -24,8 +24,8 @@ import static nycuro.api.API.messageAPI;
 public class TeleportationAPI {
 
     public static final long TP_EXPIRATION = TimeUnit.MINUTES.toMillis(1);
-    private static final Pattern COOLDOWN_PATTERN = Pattern.compile("^nycuro\\.cooldown\\.([0-9]+)$");
-    private static final Pattern TP_COOLDOWN_PATTERN = Pattern.compile("^nycuro\\.tp\\.cooldown\\.([0-9]+)$");
+    private static final Pattern COOLDOWN_PATTERN = Pattern.compile("^nycuro\\.teleport\\.cooldown\\.([0-9]+)$");
+    private static final Pattern TP_COOLDOWN_PATTERN = Pattern.compile("^nycuro\\.teleport\\.tp\\.cooldown\\.([0-9]+)$");
     private final List<TPCooldown> tpCooldowns = new ArrayList<>();
     private final Map<CommandSender, Long> cooldown = new HashMap<>();
     public Map<Integer, TPRequest> tpRequests = new ConcurrentHashMap<>();

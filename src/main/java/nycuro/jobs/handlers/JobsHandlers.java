@@ -11,9 +11,14 @@ import cn.nukkit.event.entity.EntityDamageByChildEntityEvent;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.entity.EntityDeathEvent;
+import cn.nukkit.event.inventory.InventoryOpenEvent;
 import cn.nukkit.event.inventory.InventoryPickupItemEvent;
+import cn.nukkit.event.player.PlayerDeathEvent;
 import cn.nukkit.event.player.PlayerItemConsumeEvent;
+import cn.nukkit.inventory.Inventory;
+import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.inventory.PlayerInventory;
+import cn.nukkit.inventory.transaction.InventoryTransaction;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
 import nycuro.api.API;
@@ -134,6 +139,8 @@ public class JobsHandlers implements Listener {
                 case Block.RED_FLOWER:
                 case Block.DOUBLE_PLANT:
                 case Block.HAY_BALE:
+                case Block.DIRT:
+                case Block.REDSTONE_BLOCK:
                     if (profileSkyblock.getJob() == 3) {
                         Item[] items = event.getDrops();
                         event.setDrops(new Item[0]);
@@ -167,8 +174,11 @@ public class JobsHandlers implements Listener {
                     }
                     break;
                 default:
-                    player.sendMessage(messageAPI.messagesObject.translateMessage("block.break"));
-                    event.setCancelled();
+                    if (!player.isOp()) {
+                        player.sendMessage(messageAPI.messagesObject.translateMessage("block.break"));
+                        event.setCancelled();
+                    }
+                    break;
             }
         }
     }
@@ -300,6 +310,30 @@ public class JobsHandlers implements Listener {
         if (item.hasCustomName() && item.getName().equals("JOB")) {
             event.setCancelled();
             player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
+        }
+    }
+
+    @EventHandler
+    public void onOpenInventory(InventoryOpenEvent event) {
+        Player player = event.getPlayer();
+        Inventory inventory = event.getInventory();
+        if (inventory.getType() == InventoryType.PLAYER) return;
+        for (Item item : player.getInventory().getContents().values()) {
+            if (item.hasCustomName() && item.getName().equals("JOB")) {
+                player.sendMessage(messageAPI.messagesObject.translateMessage("work.inventory.block"));
+                event.setCancelled();
+            }
+        }
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        PlayerInventory playerInventory = player.getInventory();
+        for (Item item : playerInventory.getContents().values()) {
+            if (item.hasCustomName() && item.getName().equals("JOB")) {
+                playerInventory.remove(item);
+            }
         }
     }
 

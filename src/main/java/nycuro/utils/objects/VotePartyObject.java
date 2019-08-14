@@ -1,5 +1,5 @@
 package nycuro.utils.objects;
 
-public class JsonObject {
+public class VotePartyObject {
     public MechanicDropParty mechanic;
 }

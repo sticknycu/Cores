@@ -3,7 +3,7 @@ package nycuro.utils.vote;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nycuro.utils.objects.JsonObject;
+import nycuro.utils.objects.VotePartyObject;
 import nycuro.utils.objects.MechanicDropParty;
 
 import java.io.File;
@@ -57,7 +57,7 @@ public class VoteSettings {
     private String serializeData(int dropParty, long timeDropParty) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
 
-        JsonObject json = new JsonObject();
+        VotePartyObject json = new VotePartyObject();
         mechanic.setDropParty(dropParty);
         mechanic.setTimeDropParty(timeDropParty);
 
