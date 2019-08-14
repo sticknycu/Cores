@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.block.Block;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
+import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.block.BlockBreakEvent;
 import cn.nukkit.event.entity.EntityDamageByChildEntityEvent;
@@ -11,6 +12,7 @@ import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.entity.EntityDeathEvent;
 import cn.nukkit.event.inventory.InventoryPickupItemEvent;
+import cn.nukkit.event.player.PlayerItemConsumeEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
@@ -93,11 +95,9 @@ public class JobsHandlers implements Listener {
                         event.setDrops(new Item[0]);
                         boolean bool = false;
                         for (Item i : jobsObject.getItems()) {
-                            for (Item id : items) {
-                                if (i.getId() == id.getId()) {
-                                    if (mechanicAPI.checkItem(player, i)) {
-                                        bool = true;
-                                    }
+                            if (i.getId() == event.getItem().getId()) {
+                                if (mechanicAPI.checkItem(player, i)) {
+                                    bool = true;
                                 }
                             }
                         }
@@ -132,11 +132,9 @@ public class JobsHandlers implements Listener {
                         event.setDrops(new Item[0]);
                         boolean bool = false;
                         for (Item i : jobsObject.getItems()) {
-                            for (Item id : items) {
-                                if (i.getId() == id.getId()) {
-                                    if (mechanicAPI.checkItem(player, i)) {
-                                        bool = true;
-                                    }
+                            if (i.getId() == event.getItem().getId()) {
+                                if (mechanicAPI.checkItem(player, i)) {
+                                    bool = true;
                                 }
                             }
                         }
@@ -169,64 +167,61 @@ public class JobsHandlers implements Listener {
     // Job Fisherman
     @EventHandler
     public void onReceiveFish(InventoryPickupItemEvent event) {
-        if (event.getItem().getItem().getId() != Item.RAW_FISH) return;
-        if (event.getItem().getItem().getId() != Item.RAW_SALMON) return;
-        if (event.getInventory() instanceof PlayerInventory) return;
-        PlayerInventory playerInventory = (PlayerInventory) event.getInventory();
-        Item item = event.getItem().getItem();
-        playerInventory.getViewers().forEach( (player) -> {
-            ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-            JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
-            if (jobsObject == null || jobsObject.getItems() == null) {
-                player.sendMessage(messageAPI.messagesObject.translateMessage("work.unstarted.break"));
-                event.setCancelled();
-                return;
-            }
-            if (mechanicAPI.isOnArea(player)) {
-                if (profileSkyblock.getJob() == 4) {
-                    boolean bool = false;
-                    for (Item i : jobsObject.getItems()) {
-                        if (i.getId() == item.getId()) {
-                            if (mechanicAPI.checkItem(player, i)) {
-                                bool = true;
+        if (event.getItem().getItem().getId() == Item.RAW_FISH ||
+                event.getItem().getItem().getId() == Item.RAW_SALMON ||
+                event.getItem().getItem().getId() == Item.PUFFERFISH
+                ) {
+            if (!(event.getInventory() instanceof PlayerInventory)) return;
+            PlayerInventory playerInventory = (PlayerInventory) event.getInventory();
+            Item item = event.getItem().getItem();
+            for (Player player : event.getViewers()) {
+                ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
+                JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
+                if (jobsObject == null || jobsObject.getItems() == null) {
+                    player.sendMessage(messageAPI.messagesObject.translateMessage("work.unstarted.break"));
+                    event.setCancelled();
+                    return;
+                }
+                if (mechanicAPI.isOnArea(player)) {
+                    if (profileSkyblock.getJob() == 4) {
+                        boolean bool = false;
+                        for (Item i : jobsObject.getItems()) {
+                            if (i.getId() == event.getItem().getItem().getId()) {
+                                if (mechanicAPI.checkItem(player, i)) {
+                                    bool = true;
+                                }
                             }
                         }
-                    }
-                    if (bool) {
-                        player.sendMessage(messageAPI.messagesObject.translateMessage("work.finished.item"));
-                        event.setCancelled();
-                    } else {
-                        item.setCustomName("JOB");
-                        if (!playerInventory.canAddItem(item)) {
-                            player.sendMessage(messageAPI.messagesObject.translateMessage("generic.inventory.get.error"));
+                        if (bool) {
+                            player.sendMessage(messageAPI.messagesObject.translateMessage("work.finished.item"));
+                            event.setCancelled();
                         } else {
-                            playerInventory.addItem(item);
+                            item.setCustomName("JOB");
+                            if (!playerInventory.canAddItem(item)) {
+                                player.sendMessage(messageAPI.messagesObject.translateMessage("generic.inventory.get.error"));
+                            } else {
+                                event.getItem().close();
+                                playerInventory.addItem(item);
+                            }
+                            event.setCancelled();
                         }
-                        event.setCancelled();
                     }
                 }
             }
-        });
+        }
     }
-
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
         Entity eventEntity = event.getEntity();
         if (eventEntity == null) return;
         Player killer = null;
-        API.log("ED 1");
         if (eventEntity.getLastDamageCause() instanceof EntityDamageByEntityEvent) {
-            API.log("ED 2");
             EntityDamageByEntityEvent ev = (EntityDamageByEntityEvent) eventEntity.getLastDamageCause();
             if (ev instanceof EntityDamageByChildEntityEvent) {
-                API.log("ED 3");
                 EntityDamageByChildEntityEvent evc = (EntityDamageByChildEntityEvent) ev;
                 if (evc.getDamager() instanceof Player) killer = (Player) evc.getDamager();
-                API.log("ED 4");
             } else if (ev.getDamager() instanceof Player) killer = (Player) ev.getDamager();
-
-            API.log("ED 5");
 
             if (killer == null) return;
 
@@ -236,6 +231,12 @@ public class JobsHandlers implements Listener {
             int job = profile.getJob();
             if (job == 2) {
                 int[] integers = jobsObject.getCountAnimals();
+                for (int i : integers) {
+                    if (integers[i] == 0) {
+                        killer.sendMessage(messageAPI.messagesObject.translateMessage("work.finished.kill"));
+                        event.setCancelled();
+                    }
+                }
                 if (integers[0] == 0 && integers[1] == 0 && integers[2] == 0 && integers[3] == 0) {
                     killer.sendMessage(messageAPI.messagesObject.translateMessage("work.finished"));
                     event.setCancelled();
@@ -263,11 +264,31 @@ public class JobsHandlers implements Listener {
                         break;
 
                 }
+                for (Item item : event.getDrops()) {
+                    item.setCustomName("JOB");
+                    if (!killer.getInventory().canAddItem(item)) {
+                        killer.sendMessage(messageAPI.messagesObject.translateMessage("generic.inventory.get.error"));
+                    } else {
+                        killer.getInventory().addItem(item);
+                    }
+                }
+                event.setDrops(new Item[0]);
                 jobsObject.setCountAnimals(integers);
+                event.setCancelled();
             } else {
                 killer.sendMessage(messageAPI.messagesObject.translateMessage("work.unstarted.pvp"));
                 event.setCancelled();
             }
+        }
+    }
+
+    @EventHandler
+    public void onDigest(PlayerItemConsumeEvent event) {
+        Item item = event.getItem();
+        Player player = event.getPlayer();
+        if (item.hasCustomName() && item.getName().equals("JOB")) {
+            event.setCancelled();
+            player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
         }
     }
 

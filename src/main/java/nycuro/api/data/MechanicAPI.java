@@ -302,7 +302,7 @@ public class MechanicAPI {
         int i = 0;
         for (Item item : items) {
             for (Item content : player.getInventory().getContents().values()) {
-                if (item.getId() == content.getId() && content.getCount() >= item.getCount() && content.getName().equals("JOB")) {
+                if (content.getId() == item.getId() && content.getCount() >= item.getCount() && content.getName().equals("JOB")) {
                     i++;
                 }
             }
@@ -315,7 +315,7 @@ public class MechanicAPI {
             if (player.getInventory().isEmpty()) {
                 return false;
             }
-            if (item.getId() == content.getId() && content.getCount() >= item.getCount() && content.getName().equals("JOB")) {
+            if (content.getId() == item.getId() && content.getCount() >= item.getCount() && content.getName().equals("JOB")) {
                 return true;
             }
         }
