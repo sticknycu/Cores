@@ -50,20 +50,25 @@ public class JobsHandlers implements Listener {
                 if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(1);
                 damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.MINER.getName()));
+                event.setCancelled();
             } else if (entity.namedTag.getBoolean("butcherNPC")) {
                 if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(2);
                 damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.BUTCHER.getName()));
+                event.setCancelled();
             } else if (entity.namedTag.getBoolean("farmerNPC")) {
                 if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(3);
                 damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.FARMER.getName()));
+                event.setCancelled();
             } else if (entity.namedTag.getBoolean("fishermanNPC")) {
                 if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
                 profileSkyblock.setJob(4);
                 damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.FISHERMAN.getName()));
+                event.setCancelled();
             } else if (entity.namedTag.getBoolean("mechanicNPC")) {
                 mainAPI.getServer().dispatchCommand(damager, "job");
+                event.setCancelled();
             }
         }
     }
@@ -95,9 +100,11 @@ public class JobsHandlers implements Listener {
                         event.setDrops(new Item[0]);
                         boolean bool = false;
                         for (Item i : jobsObject.getItems()) {
-                            if (i.getId() == event.getItem().getId()) {
-                                if (mechanicAPI.checkItem(player, i)) {
-                                    bool = true;
+                            for (Item id : items) {
+                                if (i.getId() == id.getId()) {
+                                    if (mechanicAPI.checkItem(player, i)) {
+                                        bool = true;
+                                    }
                                 }
                             }
                         }
@@ -132,9 +139,11 @@ public class JobsHandlers implements Listener {
                         event.setDrops(new Item[0]);
                         boolean bool = false;
                         for (Item i : jobsObject.getItems()) {
-                            if (i.getId() == event.getItem().getId()) {
-                                if (mechanicAPI.checkItem(player, i)) {
-                                    bool = true;
+                            for (Item id : items) {
+                                if (i.getId() == id.getId()) {
+                                    if (mechanicAPI.checkItem(player, i)) {
+                                        bool = true;
+                                    }
                                 }
                             }
                         }
@@ -262,6 +271,8 @@ public class JobsHandlers implements Listener {
                             integers[2] = integers[2] - 1;
                         }
                         break;
+                    default:
+                        return;
 
                 }
                 for (Item item : event.getDrops()) {
