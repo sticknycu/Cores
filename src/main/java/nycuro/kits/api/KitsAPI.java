@@ -6,6 +6,7 @@ import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
+import cn.nukkit.player.Player;
 import cn.nukkit.utils.TextFormat;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.kits.CommonKit;

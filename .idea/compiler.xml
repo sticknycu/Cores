@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="nycuro" />
         <module name="nycuro (1)" />
-        <module name="nycuro (2)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

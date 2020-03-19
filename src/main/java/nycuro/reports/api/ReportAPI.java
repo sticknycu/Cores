@@ -7,6 +7,7 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
+import cn.nukkit.player.Player;
 import cn.nukkit.scheduler.AsyncTask;
 import nycuro.gui.list.ResponseFormWindow;
 import nycuro.reports.commands.ReportsCommandManager;

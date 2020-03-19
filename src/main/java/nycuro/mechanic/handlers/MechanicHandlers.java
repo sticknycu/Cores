@@ -18,7 +18,10 @@ import cn.nukkit.level.Level;
 import cn.nukkit.math.BlockFace;
 import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
+import cn.nukkit.player.IPlayer;
+import cn.nukkit.player.Player;
 import cn.nukkit.scheduler.Task;
+import com.nukkitx.protocol.bedrock.packet.SetLocalPlayerAsInitializedPacket;
 import io.pocketvote.event.VoteEvent;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
@@ -42,8 +45,7 @@ public class MechanicHandlers implements Listener {
 
     @EventHandler
     public void onInitialized(DataPacketReceiveEvent event) {
-        DataPacket dataPacket = event.getPacket();
-        if (dataPacket instanceof SetLocalPlayerAsInitializedPacket) {
+        if (event.getPacket() instanceof SetLocalPlayerAsInitializedPacket) {
             Player player = event.getPlayer();
             mainAPI.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
                 @Override

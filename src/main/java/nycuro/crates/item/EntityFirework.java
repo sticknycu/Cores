@@ -18,6 +18,11 @@ import cn.nukkit.network.protocol.AddEntityPacket;
 import cn.nukkit.network.protocol.EntityEventPacket;
 import cn.nukkit.network.protocol.LevelSoundEventPacket;
 import cn.nukkit.network.protocol.PlaySoundPacket;
+import cn.nukkit.player.Player;
+import com.nukkitx.protocol.bedrock.packet.AddEntityPacket;
+import com.nukkitx.protocol.bedrock.packet.EntityEventPacket;
+import com.nukkitx.protocol.bedrock.packet.LevelSoundEventPacket;
+import com.nukkitx.protocol.bedrock.packet.PlaySoundPacket;
 
 import java.util.Random;
 

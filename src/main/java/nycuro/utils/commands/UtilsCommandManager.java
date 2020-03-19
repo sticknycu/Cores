@@ -16,21 +16,21 @@ public class UtilsCommandManager {
     public static void registerAll(Loader mainAPI) {
         CommandMap map = mainAPI.getServer().getCommandMap();
 
-        map.register("SkyblockCORE", new HubCommand());
-        map.register("SkyblockCORE", new SpawnCommand());
-        map.register("SkyblockCORE", new ArenaCommand());
-        map.register("SkyblockCORE", new LevelCommand());
+        map.register(mainAPI, new HubCommand());
+        map.register(mainAPI, new SpawnCommand());
+        map.register(mainAPI, new ArenaCommand());
+        map.register(mainAPI, new LevelCommand());
 
-        map.register("SkyblockCORE", new CoordsCommand());
-        map.register("SkyblockCORE", new OnlineTimeCommand());
-        map.register("SkyblockCORE", new LangCommand());
-        map.register("SkyblockCORE", new SettingsCommand());
-        map.register("SkyblockCORE", new StatsCommand());
+        map.register(mainAPI, new CoordsCommand());
+        map.register(mainAPI, new OnlineTimeCommand());
+        map.register(mainAPI, new LangCommand());
+        map.register(mainAPI, new SettingsCommand());
+        map.register(mainAPI, new StatsCommand());
 
-        map.register("SkyblockCORE", new TopKillsCommand());
-        map.register("SkyblockCORE", new TopDeathsCommand());
-        map.register("SkyblockCORE", new TopTimeCommand());
+        map.register(mainAPI, new TopKillsCommand());
+        map.register(mainAPI, new TopDeathsCommand());
+        map.register(mainAPI, new TopTimeCommand());
 
-        map.register("SkyblockCORE", new UtilsCommand());
+        map.register(mainAPI, new UtilsCommand());
     }
 }

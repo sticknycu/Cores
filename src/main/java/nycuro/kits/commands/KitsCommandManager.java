@@ -8,6 +8,6 @@ public class KitsCommandManager {
 
     public static void registerAll(Loader mainAPI) {
         CommandMap map = mainAPI.getServer().getCommandMap();
-        map.register("SkyblockCORE", new KitsCommand());
+        map.register(mainAPI, new KitsCommand());
     }
 }

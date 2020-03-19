@@ -11,9 +11,9 @@ public class EconomyCommandManager {
 
     public static void registerAll(Loader mainAPI) {
         CommandMap map = mainAPI.getServer().getCommandMap();
-        map.register("SkyblockCORE", new AddCoinsCommand());
-        map.register("SkyblockCORE", new CoinsCommand());
-        map.register("SkyblockCORE", new SetCoinsCommand());
-        map.register("SkyblockCORE", new TopCoinsCommand());
+        map.register(mainAPI, new AddCoinsCommand());
+        map.register(mainAPI, new CoinsCommand());
+        map.register(mainAPI, new SetCoinsCommand());
+        map.register(mainAPI, new TopCoinsCommand());
     }
 }

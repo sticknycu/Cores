@@ -8,7 +8,7 @@ public class DropPartyCommandManager {
 
     public static void registerAll(Loader mainAPI) {
         CommandMap map = mainAPI.getServer().getCommandMap();
-        map.register("SkyblockCORE", new DropPartyMessageCommand());
+        map.register(mainAPI, new DropPartyMessageCommand());
     }
 }
 

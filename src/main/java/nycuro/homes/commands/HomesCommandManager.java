@@ -8,6 +8,6 @@ public class HomesCommandManager {
 
     public static void registerAll(Loader mainAPI) {
         CommandMap map = mainAPI.getServer().getCommandMap();
-        map.register("SkyblockCORE", new HomeCommand());
+        map.register(mainAPI, new HomeCommand());
     }
 }

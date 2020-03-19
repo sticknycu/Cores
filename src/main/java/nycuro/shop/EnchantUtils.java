@@ -1,6 +1,7 @@
 package nycuro.shop;
 
 import cn.nukkit.Player;
+import cn.nukkit.player.Player;
 
 import java.util.Arrays;
 import java.util.List;

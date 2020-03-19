@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
+import cn.nukkit.player.Player;
 import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.KitsObject;

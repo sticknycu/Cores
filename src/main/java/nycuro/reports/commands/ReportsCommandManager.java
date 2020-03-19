@@ -8,6 +8,6 @@ public class ReportsCommandManager {
 
     public static void registerAll(Loader mainAPI) {
         CommandMap map = mainAPI.getServer().getCommandMap();
-        map.register("SkyblockCORE", new ReportsCommand());
+        map.register(mainAPI, new ReportsCommand());
     }
 }

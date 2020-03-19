@@ -2,6 +2,7 @@ package nycuro.utils.commands.data.settings;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.player.Player;
 import gt.creeperface.holograms.Holograms;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;

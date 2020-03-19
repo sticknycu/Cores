@@ -10,7 +10,7 @@ public class HelpingCommandManager {
 
     public static void registerAll(Loader mainAPI) {
         CommandMap map = mainAPI.getServer().getCommandMap();
-        map.register("SkyblockCORE", new HelpOpCommand());
-        map.register("SkyblockCORE", new StaffChatCommand());
+        map.register(mainAPI, new HelpOpCommand());
+        map.register(mainAPI, new StaffChatCommand());
     }
 }

@@ -2,6 +2,7 @@ package nycuro.dropparty.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.player.Player;
 import nycuro.dropparty.commands.CommandBaseDropParty;
 
 import static nycuro.api.API.*;

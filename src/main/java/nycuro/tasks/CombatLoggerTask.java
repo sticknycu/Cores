@@ -1,6 +1,7 @@
 package nycuro.tasks;
 
 import cn.nukkit.Player;
+import cn.nukkit.player.Player;
 import cn.nukkit.potion.Effect;
 import cn.nukkit.scheduler.Task;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;

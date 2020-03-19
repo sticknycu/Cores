@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
+import cn.nukkit.player.Player;
 import nycuro.teleport.commands.CommandBaseTeleportation;
 import nycuro.teleport.objects.TPRequest;
 

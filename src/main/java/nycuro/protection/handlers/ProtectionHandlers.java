@@ -23,6 +23,7 @@ import cn.nukkit.event.vehicle.VehicleDestroyEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.nbt.tag.CompoundTag;
+import cn.nukkit.player.Player;
 import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;

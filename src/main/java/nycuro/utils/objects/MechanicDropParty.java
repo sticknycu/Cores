@@ -1,8 +1,10 @@
 package nycuro.utils.objects;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class MechanicDropParty {
     public int dropParty;
     public long timeDropParty;

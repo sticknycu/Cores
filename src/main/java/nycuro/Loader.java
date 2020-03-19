@@ -1,8 +1,9 @@
 package nycuro;
 
-import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
+import cn.nukkit.entity.impl.hostile.EntityCreeper;
 import cn.nukkit.entity.mob.EntityCreeper;
+import cn.nukkit.player.Player;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;

@@ -8,12 +8,12 @@ public class TeleportationCommandManager {
 
     public static void registerAll(Loader mainAPI) {
         CommandMap map = mainAPI.getServer().getCommandMap();
-        map.register("SkyblockCORE", new TPACommand());
-        map.register("SkyblockCORE", new TPAAllCommand());
-        map.register("SkyblockCORE", new TPAcceptCommand());
-        map.register("SkyblockCORE", new TPAHereCommand());
-        map.register("SkyblockCORE", new TPAllCommand());
-        map.register("SkyblockCORE", new TPDenyCommand());
-        map.register("SkyblockCORE", new TPHereCommand());
+        map.register(mainAPI, new TPACommand());
+        map.register(mainAPI, new TPAAllCommand());
+        map.register(mainAPI, new TPAcceptCommand());
+        map.register(mainAPI, new TPAHereCommand());
+        map.register(mainAPI, new TPAllCommand());
+        map.register(mainAPI, new TPDenyCommand());
+        map.register(mainAPI, new TPHereCommand());
     }
 }

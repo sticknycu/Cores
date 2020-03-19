@@ -2,6 +2,7 @@ package nycuro.jobs.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.player.Player;
 import nycuro.jobs.commands.CommandBaseJobs;
 
 import static nycuro.api.API.jobsAPI;

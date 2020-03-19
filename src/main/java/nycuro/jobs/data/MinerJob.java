@@ -2,6 +2,7 @@ package nycuro.jobs.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.item.Item;
+import cn.nukkit.player.Player;
 import nycuro.database.Database;
 import nycuro.jobs.CommonJob;
 import nycuro.jobs.NameJob;

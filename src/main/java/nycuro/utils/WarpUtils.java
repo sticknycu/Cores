@@ -1,10 +1,10 @@
 package nycuro.utils;
 
-import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.level.Location;
+import cn.nukkit.player.Player;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import nycuro.gui.list.ResponseFormWindow;

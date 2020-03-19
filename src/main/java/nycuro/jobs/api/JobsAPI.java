@@ -8,6 +8,7 @@ import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
+import cn.nukkit.player.Player;
 import cn.nukkit.utils.TextFormat;
 import nycuro.api.API;
 import nycuro.database.Database;

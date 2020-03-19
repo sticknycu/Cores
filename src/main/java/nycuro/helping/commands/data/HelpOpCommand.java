@@ -2,6 +2,7 @@ package nycuro.helping.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.player.Player;
 import cn.nukkit.utils.TextFormat;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;

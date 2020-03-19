@@ -2,6 +2,7 @@ package nycuro.economy.commands.data.simple;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.player.Player;
 import nycuro.database.Database;
 import nycuro.economy.commands.CommandBaseEconomy;
 

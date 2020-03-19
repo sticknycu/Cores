@@ -6,6 +6,7 @@ import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.player.Player;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.gui.list.ResponseFormWindow;
@@ -46,7 +47,7 @@ public class UtilsAPI {
         if (moneyPlayer >= cost) {
             Database.profileSkyblock.get(player.getName()).setDollars(Database.profileSkyblock.get(player.getName()).getDollars() - cost);
             playerInventory.remove(item);
-            item.setDamage(0);
+            item.setMeta(0);
             playerInventory.addItem(item);
             player.sendMessage(messageAPI.messagesObject.translateMessage("repair.item"));
         } else if (moneyPlayer < cost) {

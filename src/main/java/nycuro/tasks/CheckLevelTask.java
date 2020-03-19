@@ -1,6 +1,7 @@
 package nycuro.tasks;
 
 import cn.nukkit.Player;
+import cn.nukkit.player.Player;
 import cn.nukkit.scheduler.Task;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;

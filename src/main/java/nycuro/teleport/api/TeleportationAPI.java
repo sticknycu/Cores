@@ -5,6 +5,7 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.level.Location;
 import cn.nukkit.level.Position;
 import cn.nukkit.permission.PermissionAttachmentInfo;
+import cn.nukkit.player.Player;
 import nycuro.teleport.commands.TeleportationCommandManager;
 import nycuro.teleport.handlers.TeleportationHandlers;
 import nycuro.teleport.objects.TPCooldown;

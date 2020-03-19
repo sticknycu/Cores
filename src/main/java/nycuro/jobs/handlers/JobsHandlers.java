@@ -21,6 +21,7 @@ import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.inventory.transaction.InventoryTransaction;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
+import cn.nukkit.player.Player;
 import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;

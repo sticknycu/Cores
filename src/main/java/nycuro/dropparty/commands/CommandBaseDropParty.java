@@ -4,6 +4,8 @@ import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.lang.TranslationContainer;
+import cn.nukkit.locale.TranslationContainer;
+import cn.nukkit.player.Player;
 import cn.nukkit.utils.TextFormat;
 
 import static nycuro.api.API.messageAPI;

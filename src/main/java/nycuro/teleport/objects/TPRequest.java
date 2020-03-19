@@ -2,6 +2,7 @@ package nycuro.teleport.objects;
 
 import cn.nukkit.Player;
 import cn.nukkit.level.Location;
+import cn.nukkit.player.Player;
 import lombok.Getter;
 
 public class TPRequest {

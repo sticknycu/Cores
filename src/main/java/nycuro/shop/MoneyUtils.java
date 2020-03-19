@@ -2,6 +2,7 @@ package nycuro.shop;
 
 import cn.nukkit.Player;
 import cn.nukkit.item.Item;
+import cn.nukkit.player.Player;
 import lombok.Getter;
 import nycuro.api.API;
 import nycuro.database.Database;
@@ -115,14 +116,14 @@ public class MoneyUtils {
                 return;
             }
 
-            if (gameItem.getDamage() == sellingItem.getMeta() && gameItem.getCount() == itemCount) {
+            if (gameItem.getMeta() == sellingItem.getMeta() && gameItem.getCount() == itemCount) {
                 profile.setDollars(playerMoney + finalPrice);
                 player.getInventory().remove(gameItem);
                 player.sendMessage(messageAPI.messagesObject.translateMessage("sell.succes", mainAPI.emptyNoSpace + gameItem,
                         mainAPI.emptyNoSpace + finalPrice));
             } else if (gameItem.getCount() != itemCount) {
                 player.sendMessage(messageAPI.messagesObject.translateMessage("sell.exception.count"));
-            } else if (gameItem.getDamage() != sellingItem.getMeta()) {
+            } else if (gameItem.getMeta() != sellingItem.getMeta()) {
                 player.sendMessage(messageAPI.messagesObject.translateMessage("sell.exception.broken"));
             }
         }

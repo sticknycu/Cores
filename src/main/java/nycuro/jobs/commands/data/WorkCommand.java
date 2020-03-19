@@ -2,6 +2,7 @@ package nycuro.jobs.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.player.Player;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.jobs.NameJob;

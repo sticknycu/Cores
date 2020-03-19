@@ -2,6 +2,7 @@ package nycuro.tasks;
 
 import cn.nukkit.Player;
 import cn.nukkit.level.Location;
+import cn.nukkit.player.Player;
 import cn.nukkit.scheduler.Task;
 import nycuro.Loader;
 import nycuro.ai.entity.BossEntity;

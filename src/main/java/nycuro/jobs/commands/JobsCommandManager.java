@@ -10,7 +10,7 @@ public class JobsCommandManager {
 
     public static void registerAll(Loader mainAPI) {
         CommandMap map = mainAPI.getServer().getCommandMap();
-        map.register("SkyblockCORE", new JobCommand());
-        map.register("SkyblockCORE", new WorkCommand());
+        map.register(mainAPI, new JobCommand());
+        map.register(mainAPI, new WorkCommand());
     }
 }

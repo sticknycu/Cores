@@ -2,6 +2,7 @@ package nycuro.reports.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.player.Player;
 import nycuro.reports.commands.CommandBaseReports;
 
 import static nycuro.api.API.reportAPI;

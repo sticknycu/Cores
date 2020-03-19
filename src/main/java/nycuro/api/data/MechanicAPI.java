@@ -12,6 +12,8 @@ import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
 import cn.nukkit.nbt.tag.*;
+import cn.nukkit.player.IPlayer;
+import cn.nukkit.player.Player;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;

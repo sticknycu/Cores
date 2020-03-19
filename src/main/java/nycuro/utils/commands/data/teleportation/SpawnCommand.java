@@ -2,6 +2,7 @@ package nycuro.utils.commands.data.teleportation;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.player.Player;
 import cn.nukkit.scheduler.Task;
 import nycuro.utils.commands.CommandBaseUtils;
 

@@ -2,6 +2,7 @@ package nycuro.kits.data.clasic;
 
 import cn.nukkit.Player;
 import cn.nukkit.item.Item;
+import cn.nukkit.player.Player;
 import nycuro.kits.CommonKit;
 import nycuro.kits.type.*;
 

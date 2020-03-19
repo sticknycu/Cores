@@ -1,6 +1,7 @@
 package nycuro.jobs;
 
 import cn.nukkit.Player;
+import cn.nukkit.player.Player;
 
 import java.util.function.Consumer;
 

@@ -9,6 +9,8 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
+import cn.nukkit.player.Player;
+import com.nukkitx.protocol.bedrock.packet.SetLocalPlayerAsInitializedPacket;
 
 import static nycuro.api.API.mechanicAPI;
 
@@ -21,8 +23,7 @@ public class MessageHandlers implements Listener {
 
     @EventHandler
     public void onInitialized(DataPacketReceiveEvent event) {
-        DataPacket dataPacket = event.getPacket();
-        if (dataPacket instanceof SetLocalPlayerAsInitializedPacket) {
+        if (event.getPacket() instanceof SetLocalPlayerAsInitializedPacket) {
             Player player = event.getPlayer();
             mechanicAPI.createBossBar(player);
             mechanicAPI.createScoreboard(player);

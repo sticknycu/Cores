@@ -10,6 +10,7 @@ import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.player.PlayerCommandPreprocessEvent;
 import cn.nukkit.event.player.PlayerDeathEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
+import cn.nukkit.player.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;

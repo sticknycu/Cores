@@ -1,6 +1,7 @@
 package nycuro.combat.api;
 
 import cn.nukkit.Player;
+import cn.nukkit.player.Player;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 

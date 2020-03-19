@@ -2,6 +2,7 @@ package nycuro.utils.commands.data.settings;
 
 import cn.nukkit.IPlayer;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.player.IPlayer;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.utils.commands.CommandBaseUtils;

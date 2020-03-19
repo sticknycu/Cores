@@ -2,6 +2,7 @@ package nycuro.homes.commands.data;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.player.Player;
 import nycuro.homes.commands.CommandBaseHomes;
 
 import static nycuro.api.API.homeAPI;
