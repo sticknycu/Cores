@@ -1,7 +1,10 @@
 package nycuro.jobs.data;
 
-import cn.nukkit.Player;
+
+import cn.nukkit.block.Block;
+import cn.nukkit.block.BlockIds;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.player.Player;
 import nycuro.database.Database;
 import nycuro.jobs.CommonJob;
@@ -81,82 +84,82 @@ public class FarmerJob extends CommonJob {
             if (typeJob.equals(TypeJob.EASY)) {
                 Item[] itemsMap = new Item[4];
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[0] = Item.get(Item.SEEDS, 0, j);
+                    itemsMap[0] = Item.get(ItemIds.WHEAT_SEEDS, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[1] = Item.get(Item.CARROT, 0, j);
+                    itemsMap[1] = Item.get(ItemIds.CARROT, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[2] = Item.get(Item.POTATO, 0, j);
+                    itemsMap[2] = Item.get(ItemIds.POTATO, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[3] = Item.get(Item.HAY_BALE, 0, j);
+                    itemsMap[3] = Item.get(BlockIds.WHEAT, 0, j);
                 });
                 consumer.accept(itemsMap);
             } else if (typeJob.equals(TypeJob.MEDIUM)) {
                 Item[] itemsMap = new Item[4];
                 FastRandom.current().ints(1, 12, 36).findFirst().ifPresent((j) -> {
-                    itemsMap[0] = Item.get(Item.SEEDS, 0, j);
+                    itemsMap[0] = Item.get(ItemIds.WHEAT_SEEDS, 0, j);
                 });
                 FastRandom.current().ints(1, 12, 36).findFirst().ifPresent((j) -> {
-                    itemsMap[1] = Item.get(Item.CARROT, 0, j);
+                    itemsMap[1] = Item.get(ItemIds.CARROT, 0, j);
                 });
                 FastRandom.current().ints(1, 12, 36).findFirst().ifPresent((j) -> {
-                    itemsMap[2] = Item.get(Item.POTATO, 0, j);
+                    itemsMap[2] = Item.get(ItemIds.POTATO, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[3] = Item.get(Item.HAY_BALE, 0, j);
+                    itemsMap[3] = Item.get(BlockIds.WHEAT, 0, j);
                 });
                 consumer.accept(itemsMap);
             } else if (typeJob.equals(TypeJob.HARD)) {
                 Item[] itemsMap = new Item[6];
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
-                    itemsMap[0] = Item.get(Item.SEEDS, 0, j);
+                    itemsMap[0] = Item.get(ItemIds.WHEAT_SEEDS, 0, j);
                 });
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
-                    itemsMap[1] = Item.get(Item.CARROT, 0, j);
+                    itemsMap[1] = Item.get(ItemIds.CARROT, 0, j);
                 });
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
-                    itemsMap[2] = Item.get(Item.POTATO, 0, j);
+                    itemsMap[2] = Item.get(ItemIds.POTATO, 0, j);
                 });
                 FastRandom.current().ints(1, 5, 10).findFirst().ifPresent((j) -> {
-                    itemsMap[3] = Item.get(Item.HAY_BALE, 0, j);
+                    itemsMap[3] = Item.get(BlockIds.WHEAT, 0, j);
                 });
                 FastRandom.current().ints(1, 3, 5).findFirst().ifPresent((j) -> {
-                    itemsMap[4] = Item.get(Item.RED_FLOWER, 0, j);
+                    itemsMap[4] = Item.get(BlockIds.RED_FLOWER, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[5] = Item.get(Item.DOUBLE_PLANT, 0, j);
+                    itemsMap[5] = Item.get(BlockIds.DOUBLE_PLANT, 0, j);
                 });
                 consumer.accept(itemsMap);
             } else {
                 Item[] itemsMap = new Item[9];
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
-                    itemsMap[0] = Item.get(Item.SEEDS, 0, j);
+                    itemsMap[0] = Item.get(ItemIds.WHEAT_SEEDS, 0, j);
                 });
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
-                    itemsMap[1] = Item.get(Item.CARROT, 0, j);
+                    itemsMap[1] = Item.get(ItemIds.CARROT, 0, j);
                 });
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
-                    itemsMap[2] = Item.get(Item.POTATO, 0, j);
+                    itemsMap[2] = Item.get(ItemIds.POTATO, 0, j);
                 });
                 FastRandom.current().ints(1, 24, 36).findFirst().ifPresent((j) -> {
-                    itemsMap[3] = Item.get(Item.HAY_BALE, 0, j);
+                    itemsMap[3] = Item.get(BlockIds.WHEAT, 0, j);
                 });
                 FastRandom.current().ints(1, 5, 10).findFirst().ifPresent((j) -> {
-                    itemsMap[4] = Item.get(Item.RED_FLOWER, 0, j);
+                    itemsMap[4] = Item.get(BlockIds.RED_FLOWER, 0, j);
                 });
                 FastRandom.current().ints(1, 3, 5).findFirst().ifPresent((j) -> {
-                    itemsMap[5] = Item.get(Item.DOUBLE_PLANT, 0, j);
+                    itemsMap[5] = Item.get(BlockIds.DOUBLE_PLANT, 0, j);
                 });
                 FastRandom.current().ints(1, 8, 24).findFirst().ifPresent((j) -> {
-                    itemsMap[6] = Item.get(Item.RED_FLOWER, 1, j);
+                    itemsMap[6] = Item.get(BlockIds.RED_FLOWER, 1, j);
                 });
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
-                    itemsMap[7] = Item.get(Item.RED_FLOWER, 3, j);
+                    itemsMap[7] = Item.get(BlockIds.RED_FLOWER, 3, j);
                 });
                 FastRandom.current().ints(1, 36, 64).findFirst().ifPresent((j) -> {
-                    itemsMap[8] = Item.get(Item.DOUBLE_PLANT, 1, j);
+                    itemsMap[8] = Item.get(BlockIds.DOUBLE_PLANT, 1, j);
                 });
                 consumer.accept(itemsMap);
             }

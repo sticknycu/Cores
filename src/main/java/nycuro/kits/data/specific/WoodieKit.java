@@ -1,8 +1,10 @@
 package nycuro.kits.data.specific;
 
-import cn.nukkit.Player;
+
+import cn.nukkit.block.BlockIds;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.player.Player;
 import nycuro.api.API;
 import nycuro.database.Database;
@@ -47,45 +49,45 @@ public class WoodieKit extends CommonKit {
 
     @Override
     public Item getSword() {
-        Item item = Item.get(Item.STONE_SWORD);
+        Item item = Item.get(ItemIds.STONE_SWORD);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
-        Item item = Item.get(Item.STONE_PICKAXE);
+        Item item = Item.get(ItemIds.STONE_PICKAXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
-        Item item = Item.get(Item.STONE_AXE);
+        Item item = Item.get(ItemIds.STONE_AXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
-        Item item = Item.get(Item.STONE_SHOVEL);
+        Item item = Item.get(ItemIds.STONE_SHOVEL);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
     @Override
     public Item[] getOtherItems() {
-        Item steak = Item.get(Item.STEAK, 0, 32);
+        Item steak = Item.get(ItemIds.COOKED_BEEF, 0, 32);
         steak.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Steak");
         ArrayList<Item> itemslog1 = new ArrayList<>();
         for (int i = 0; i <= 3; i++) {
-            Item item = Item.get(Item.WOOD, i, 16);
+            Item item = Item.get(BlockIds.LOG, i, 16);
             item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Wood Type " + i);
             itemslog1.add(item);
         }
         ArrayList<Item> itemslog2 = new ArrayList<>();
         for (int i = 0; i <= 1; i++) {
-            Item item = Item.get(Item.WOOD2, i, 16);
+            Item item = Item.get(BlockIds.LOG2, i, 16);
             item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Wood2 Type " + i);
             itemslog2.add(item);
         }
@@ -120,11 +122,6 @@ public class WoodieKit extends CommonKit {
     @Override
     public boolean canAddKit(Player player) {
         PlayerInventory playerInventory = player.getInventory();
-        for (Item item : playerInventory.getArmorContents()) {
-            if (item.getId() != 0) {
-                return false;
-            }
-        }
         return (getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size();
     }
 

@@ -1,8 +1,9 @@
 package nycuro.kits.data.premium;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.player.Player;
 import nycuro.api.API;
@@ -46,7 +47,7 @@ public class TurretMonkeyKit extends CommonKit {
 
     @Override
     public Item getHelmet() {
-        Item item = Item.get(Item.DIAMOND_HELMET);
+        Item item = Item.get(ItemIds.DIAMOND_HELMET);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.HELMET.getType());
         return item;
@@ -54,7 +55,7 @@ public class TurretMonkeyKit extends CommonKit {
 
     @Override
     public Item getArmor() {
-        Item item = Item.get(Item.DIAMOND_CHESTPLATE);
+        Item item = Item.get(ItemIds.DIAMOND_CHESTPLATE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.ARMOR.getType());
         return item;
@@ -62,7 +63,7 @@ public class TurretMonkeyKit extends CommonKit {
 
     @Override
     public Item getPants() {
-        Item item = Item.get(Item.DIAMOND_LEGGINGS);
+        Item item = Item.get(ItemIds.DIAMOND_LEGGINGS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.PANTS.getType());
         return item;
@@ -70,7 +71,7 @@ public class TurretMonkeyKit extends CommonKit {
 
     @Override
     public Item getBoots() {
-        Item item = Item.get(Item.DIAMOND_BOOTS);
+        Item item = Item.get(ItemIds.DIAMOND_BOOTS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.BOOTS.getType());
         return item;
@@ -78,7 +79,7 @@ public class TurretMonkeyKit extends CommonKit {
 
     @Override
     public Item getSword() {
-        Item item = Item.get(Item.DIAMOND_SWORD);
+        Item item = Item.get(ItemIds.DIAMOND_SWORD);
         item.addEnchantment(Enchantment.get(Enchantment.ID_KNOCKBACK).setLevel(1));
         item.addEnchantment(Enchantment.get(Enchantment.ID_LOOTING).setLevel(1));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
@@ -87,7 +88,7 @@ public class TurretMonkeyKit extends CommonKit {
 
     @Override
     public Item getPickaxe() {
-        Item item = Item.get(Item.DIAMOND_PICKAXE);
+        Item item = Item.get(ItemIds.DIAMOND_PICKAXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
         item.addEnchantment(Enchantment.get(Enchantment.ID_FORTUNE_DIGGING).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
@@ -96,7 +97,7 @@ public class TurretMonkeyKit extends CommonKit {
 
     @Override
     public Item getAxe() {
-        Item item = Item.get(Item.DIAMOND_AXE);
+        Item item = Item.get(ItemIds.DIAMOND_AXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
@@ -104,7 +105,7 @@ public class TurretMonkeyKit extends CommonKit {
 
     @Override
     public Item getShovel() {
-        Item item = Item.get(Item.DIAMOND_SHOVEL);
+        Item item = Item.get(ItemIds.DIAMOND_SHOVEL);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
@@ -112,15 +113,15 @@ public class TurretMonkeyKit extends CommonKit {
 
     @Override
     public Item[] getOtherItems() {
-        Item steak = Item.get(Item.STEAK, 0, 64);
+        Item steak = Item.get(ItemIds.COOKED_BEEF, 0, 64);
         steak.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Steak");
-        Item potion_speed2 = Item.get(Item.POTION, 16, 10);
+        Item potion_speed2 = Item.get(ItemIds.POTION, 16, 10);
         potion_speed2.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Speed 2 Potion");
-        Item splashpotion_poison2 = Item.get(Item.SPLASH_POTION, 27, 10);
+        Item splashpotion_poison2 = Item.get(ItemIds.SPLASH_POTION, 27, 10);
         splashpotion_poison2.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Poison 2 Splash Potion");
-        Item splashpotion_instantkill = Item.get(Item.SPLASH_POTION, 23, 24);
+        Item splashpotion_instantkill = Item.get(ItemIds.SPLASH_POTION, 23, 24);
         splashpotion_instantkill.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Instant Kill Splash Potion");
-        Item splashpotion_fireresistance = Item.get(Item.POTION, 12, 24);
+        Item splashpotion_fireresistance = Item.get(ItemIds.POTION, 12, 24);
         splashpotion_instantkill.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Fire Resistance Potion");
         return new Item[] {
                 steak,
@@ -163,11 +164,6 @@ public class TurretMonkeyKit extends CommonKit {
     @Override
     public boolean canAddKit(Player player) {
         PlayerInventory playerInventory = player.getInventory();
-        for (Item item : playerInventory.getArmorContents()) {
-            if (item.getId() != 0) {
-                return false;
-            }
-        }
         return (getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size();
     }
 

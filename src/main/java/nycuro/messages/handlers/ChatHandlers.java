@@ -1,6 +1,6 @@
 package nycuro.messages.handlers;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerChatEvent;
@@ -39,7 +39,7 @@ public class ChatHandlers implements Listener {
         Player player = event.getPlayer();
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         count++;
-        String group = Objects.requireNonNull(api.getUser(player.getUniqueId())).getPrimaryGroup().toUpperCase();
+        String group = Objects.requireNonNull(api.getUser(player.getServerId())).getPrimaryGroup().toUpperCase();
         String s = ChatFormat.valueOf(group).toString();
         String message = event.getMessage();
         if (!player.hasPermission("core.colorchat")) {
@@ -58,7 +58,7 @@ public class ChatHandlers implements Listener {
         s = s.replace("%lvl", lvl);
         s = TextFormat.colorize(s);
 
-        if (mainAPI.staffChat.contains(player.getUniqueId())) {
+        if (mainAPI.staffChat.contains(player.getServerId())) {
             event.setFormat(mechanicAPI.staffchatTag + s);
         }  else {
             event.setFormat(s);
@@ -70,7 +70,7 @@ public class ChatHandlers implements Listener {
             event.setCancelled();
         }
 
-        if (mainAPI.staffChat.contains(player.getUniqueId())) {
+        if (mainAPI.staffChat.contains(player.getServerId())) {
             mechanicAPI.handleStaffChat(player, s, 1);
             event.setCancelled();
         }

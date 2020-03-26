@@ -1,9 +1,10 @@
 package nycuro.teleport.commands.data;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
+import cn.nukkit.level.Location;
 import cn.nukkit.player.Player;
 import nycuro.teleport.commands.CommandBaseTeleportation;
 
@@ -15,11 +16,11 @@ public class TPAllCommand extends CommandBaseTeleportation {
     public TPAllCommand() {
         super("tpall");
 
-        // command parameters
+        /*command parameters
         commandParameters.clear();
         this.commandParameters.put("default", new CommandParameter[]{
                 new CommandParameter("player", CommandParamType.TARGET, true)
-        });
+        });*/
     }
 
     public boolean execute(CommandSender sender, String label, String[] args) {
@@ -44,7 +45,7 @@ public class TPAllCommand extends CommandBaseTeleportation {
         }
         for (Player p : mainAPI.getServer().getOnlinePlayers().values()) {
             if (p != player) {
-                p.teleport(player);
+                p.teleport(Location.from(player.getX(), player.getY(), player.getZ(), player.getLevel()));
                 p.sendMessage(messageAPI.messagesObject.translateMessage("commands.tpall.other", player.getName()));
             }
         }

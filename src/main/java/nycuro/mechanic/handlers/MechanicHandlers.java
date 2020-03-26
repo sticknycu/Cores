@@ -1,7 +1,5 @@
 package nycuro.mechanic.handlers;
 
-import cn.nukkit.IPlayer;
-import cn.nukkit.Player;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockTNT;
 import cn.nukkit.event.EventHandler;
@@ -16,8 +14,6 @@ import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemFlintSteel;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.BlockFace;
-import cn.nukkit.network.protocol.DataPacket;
-import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket;
 import cn.nukkit.player.IPlayer;
 import cn.nukkit.player.Player;
 import cn.nukkit.scheduler.Task;
@@ -50,7 +46,7 @@ public class MechanicHandlers implements Listener {
             mainAPI.getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
                 @Override
                 public void onRun(int i) {
-                    int playerTime = mainAPI.timers.getOrDefault(player.getUniqueId(), 1);
+                    int playerTime = mainAPI.timers.getOrDefault(player.getServerId(), 1);
                     switch (playerTime) {
                         case 1:
                             player.sendTitle(messageAPI.messagesObject.translateMessage("title.join"),
@@ -66,9 +62,9 @@ public class MechanicHandlers implements Listener {
                             break;
                         default:
                             mainAPI.getServer().getScheduler().cancelTask(this.getTaskId());
-                            mainAPI.timers.removeInt(player.getUniqueId());
+                            mainAPI.timers.removeInt(player.getServerId());
                     }
-                    mainAPI.timers.put(player.getUniqueId(), playerTime + 1);
+                    mainAPI.timers.put(player.getServerId(), playerTime + 1);
                 }
             }, 20, 20 * 3, true);
         }
@@ -87,14 +83,14 @@ public class MechanicHandlers implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        mainAPI.settings.put(player.getUniqueId(), new SettingsObject(true, true, 5));
+        mainAPI.settings.put(player.getServerId(), new SettingsObject(true, true, 5));
         // Nu merge PreLoginEvent si nici Async.
-        mainAPI.coords.put(player.getUniqueId(), false);
-        mainAPI.isOnSpawn.put(player.getUniqueId(), true);
-        mainAPI.isOnArena.put(player.getUniqueId(), false);
-        mainAPI.isOnArea.put(player.getUniqueId(), false);
-        mainAPI.mechanicObject.put(player.getUniqueId(), new MechanicObject(player.getUniqueId(), new HashMap<>(), new HashMap<>()));
-        mainAPI.played.put(player.getUniqueId(), System.currentTimeMillis());
+        mainAPI.coords.put(player.getServerId(), false);
+        mainAPI.isOnSpawn.put(player.getServerId(), true);
+        mainAPI.isOnArena.put(player.getServerId(), false);
+        mainAPI.isOnArea.put(player.getServerId(), false);
+        mainAPI.mechanicObject.put(player.getServerId(), new MechanicObject(player.getServerId(), new HashMap<>(), new HashMap<>()));
+        mainAPI.played.put(player.getServerId(), System.currentTimeMillis());
         databaseAPI.playerExist(player.getName(), bool -> {
             if (!bool) {
                 databaseAPI.addNewPlayer(player.getName());
@@ -111,10 +107,10 @@ public class MechanicHandlers implements Listener {
                 Database.addDatesKitsPlayer(player.getName());
             }
         });
-        if (Loader.startTime.getLong(player.getUniqueId()) > 0) {
-            Loader.startTime.replace(player.getUniqueId(), System.currentTimeMillis());
+        if (Loader.startTime.getLong(player.getServerId()) > 0) {
+            Loader.startTime.replace(player.getServerId(), System.currentTimeMillis());
         } else {
-            Loader.startTime.put(player.getUniqueId(), System.currentTimeMillis());
+            Loader.startTime.put(player.getServerId(), System.currentTimeMillis());
         }
     }
 
@@ -136,13 +132,13 @@ public class MechanicHandlers implements Listener {
         Database.saveDatesPlayerFromHub(player.getName());
         Database.saveDatesPlayerFromFactions(player.getName());
         Database.saveDatesPlayerFromKits(player.getName());
-        Loader.startTime.removeLong(player.getUniqueId());
-        mainAPI.played.removeLong(player.getUniqueId());
-        mainAPI.isOnSpawn.removeBoolean(player.getUniqueId());
-        mainAPI.isOnArena.removeBoolean(player.getUniqueId());
-        mainAPI.isOnArea.removeBoolean(player.getUniqueId());
-        mainAPI.settings.remove(player.getUniqueId());
-        mainAPI.mechanicObject.remove(player.getUniqueId());
+        Loader.startTime.removeLong(player.getServerId());
+        mainAPI.played.removeLong(player.getServerId());
+        mainAPI.isOnSpawn.removeBoolean(player.getServerId());
+        mainAPI.isOnArena.removeBoolean(player.getServerId());
+        mainAPI.isOnArea.removeBoolean(player.getServerId());
+        mainAPI.settings.remove(player.getServerId());
+        mainAPI.mechanicObject.remove(player.getServerId());
     }
 
     @EventHandler
@@ -160,16 +156,16 @@ public class MechanicHandlers implements Listener {
             if (damager == null) return;
 
             // Kills Checker
-            MechanicObject mechanicObject = mainAPI.mechanicObject.get(damager.getUniqueId());
+            MechanicObject mechanicObject = mainAPI.mechanicObject.get(damager.getServerId());
 
-            mechanicObject.getKills().put(player.getUniqueId(), mechanicObject.getKills().getOrDefault(player.getUniqueId(), 0) + 1);
+            mechanicObject.getKills().put(player.getServerId(), mechanicObject.getKills().getOrDefault(player.getServerId(), 0) + 1);
 
-            int kp = mechanicObject.getKills().getOrDefault(player.getUniqueId(), 0);
+            int kp = mechanicObject.getKills().getOrDefault(player.getServerId(), 0);
 
-            long lp = mechanicObject.getPlayers().getOrDefault(player.getUniqueId(), 0L);
+            long lp = mechanicObject.getPlayers().getOrDefault(player.getServerId(), 0L);
 
             if (kp == 5) {
-                mechanicObject.getPlayers().put(player.getUniqueId(), System.currentTimeMillis());
+                mechanicObject.getPlayers().put(player.getServerId(), System.currentTimeMillis());
             }
 
             if (kp >= 5) {
@@ -193,38 +189,6 @@ public class MechanicHandlers implements Listener {
         if (message.equalsIgnoreCase("జ్ఞ\u200Cా")) {
             player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
             event.setCancelled(true);
-        }
-    }
-
-    private static int i = 80;
-    /* optimise tnt */
-    @EventHandler
-    public void onInteract(PlayerInteractEvent event) {
-        Block block = event.getBlock();
-        Item item = event.getItem();
-        if (block instanceof BlockTNT && event.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK && item instanceof ItemFlintSteel) {
-            long key = Level.blockHash((int) block.getX(), (int) block.getY(), (int) block.getZ());
-            Long2ObjectMap<Block> map = new Long2ObjectOpenHashMap<>();
-            map.put(key, block);
-            searchForTNT(map, (BlockTNT) block);
-            for (Long2ObjectMap.Entry<Block> it : map.long2ObjectEntrySet()) {
-                ((BlockTNT) it.getValue()).prime(i);
-                i = i + 5;
-            }
-            event.setCancelled();
-        }
-    }
-
-    private void searchForTNT(Long2ObjectMap<Block> tnt, BlockTNT current) {
-        for (BlockFace blockFace : BlockFace.values()) {
-            Block side = current.getSide(blockFace);
-            long hash = Level.blockHash((int) side.getX(), (int) side.getY(), (int) side.getZ());
-            if (side instanceof BlockTNT && !tnt.containsKey(hash)) {
-                tnt.put(hash, side);
-                searchForTNT(tnt, (BlockTNT) side);
-            } else {
-                i = 80;
-            }
         }
     }
 }

@@ -1,6 +1,6 @@
 package nycuro.jobs.commands.data;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.player.Player;
 import nycuro.database.Database;
@@ -32,7 +32,7 @@ public class WorkCommand extends CommandBaseJobs {
             player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.empty"));
         } else {
             NameJob job = NameJob.getType(profileSkyblock.getJob());
-            JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
+            JobsObject jobsObject = mainAPI.jobsObject.get(player.getServerId());
             if (jobsObject != null) {
                 jobsAPI.handleMission(player);
             } else {

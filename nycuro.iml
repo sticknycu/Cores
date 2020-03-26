@@ -1,45 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="MavenCustomPomFilePath">
-    <option name="mavenPomFileUrl" value="file://$MODULE_DIR$/dependency-reduced-pom.xml" />
-  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
-    <content url="file://$MODULE_DIR$/src/main/java">
+    <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/src/main/resources">
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="Maven: cn.nukkit:nukkit:2.0.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.39" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.4" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: me.onebone:actaeon:1.0">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/actaeon-1.0-SNAPSHOT.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.8" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.8" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: nukkitcoders.mobplugin:MobPlugin:1.7.6">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/MobPlugin-1.7.6.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library">
       <library name="Maven: io.pocketvote:PocketVote:2.0.1">
         <CLASSES>
@@ -49,16 +25,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Maven: gt.creeperface.nukkit.scoreboardapi:ScoreboardAPI:1.0">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/ScoreboardAPI.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.2.2" level="project" />
+    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.3.1" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.6" level="project" />
     <orderEntry type="module-library">
       <library name="Maven: ru.nukkit.multipass:Multipass:1.0-SNAPSHOT">
         <CLASSES>
@@ -69,27 +37,9 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: gt.creeperface.holograms:Holograms:1.0">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/Holograms.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
       <library name="Maven: gt.creeperface.kotlinlib.KotlinLib:KotlinLib:1.0">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/KotlinLib.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Maven: com.creeperface.nukkit.placeholderapi.PlaceholderPlugin:PlaceholderAPI:1.0">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/PlaceholderAPI.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -1,3 +1,4 @@
+
 package nycuro.utils;
 
 import com.google.gson.Gson;
@@ -20,5 +21,3 @@ public class JSONParser<T> {
         return jsonObject;
     }
 }
-
-

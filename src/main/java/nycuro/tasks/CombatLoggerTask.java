@@ -1,6 +1,6 @@
 package nycuro.tasks;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.player.Player;
 import cn.nukkit.potion.Effect;
 import cn.nukkit.scheduler.Task;
@@ -47,9 +47,9 @@ public class CombatLoggerTask extends Task {
                 mainAPI.getServer().getPlayer(uuid).ifPresent( (player) -> {
                     player.sendMessage(messageAPI.messagesObject.translateMessage("combat.exit"));
                     combatAPI.removeCombat(player);
-                    k.removeInt(player.getUniqueId());
+                    k.removeInt(player.getServerId());
                     if (mainAPI.bossbar.get(uuid) != null) {
-                        mainAPI.bossbar.get(player.getUniqueId()).setLength(100F);
+                        mainAPI.bossbar.get(player.getServerId()).setLength(100F);
                     }
                 });
             }

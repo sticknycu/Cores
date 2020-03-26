@@ -1,11 +1,10 @@
 package nycuro.tasks;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.level.Location;
 import cn.nukkit.player.Player;
 import cn.nukkit.scheduler.Task;
 import nycuro.Loader;
-import nycuro.ai.entity.BossEntity;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
@@ -55,9 +54,9 @@ public class CheckerTask extends Task {
                 Arrays.sort(d2);
                 Arrays.sort(d3);
                 if (mechanicAPI.isPlayerInsideOfArea(player, d1, d2, d3)) {
-                    mainAPI.isOnArena.replace(player.getUniqueId(), true);
+                    mainAPI.isOnArena.replace(player.getServerId(), true);
                 } else {
-                    mainAPI.isOnArena.replace(player.getUniqueId(), false);
+                    mainAPI.isOnArena.replace(player.getServerId(), false);
                 }
 
                 // Spawn Check
@@ -73,9 +72,9 @@ public class CheckerTask extends Task {
                 Arrays.sort(d2);
                 Arrays.sort(d3);
                 if (mechanicAPI.isPlayerInsideOfArea(player, d1, d2, d3)) {
-                    mainAPI.isOnSpawn.replace(player.getUniqueId(), true);
+                    mainAPI.isOnSpawn.replace(player.getServerId(), true);
                 } else {
-                    mainAPI.isOnSpawn.replace(player.getUniqueId(), false);
+                    mainAPI.isOnSpawn.replace(player.getServerId(), false);
                 }
 
                 // Area Check
@@ -91,15 +90,15 @@ public class CheckerTask extends Task {
                 Arrays.sort(d2);
                 Arrays.sort(d3);
                 if (mechanicAPI.isPlayerInsideOfArea(player, d1, d2, d3)) {
-                    mainAPI.isOnArea.replace(player.getUniqueId(), true);
+                    mainAPI.isOnArea.replace(player.getServerId(), true);
                 } else {
-                    mainAPI.isOnArea.replace(player.getUniqueId(), false);
+                    mainAPI.isOnArea.replace(player.getServerId(), false);
                 }
             } else {
                 // Skyblock World
-                mainAPI.isOnArena.replace(player.getUniqueId(), false);
-                mainAPI.isOnSpawn.replace(player.getUniqueId(), false);
-                mainAPI.isOnArea.replace(player.getUniqueId(), false);
+                mainAPI.isOnArena.replace(player.getServerId(), false);
+                mainAPI.isOnSpawn.replace(player.getServerId(), false);
+                mainAPI.isOnArea.replace(player.getServerId(), false);
             }
 
             if (mechanicAPI.isOnArena(player)) {
@@ -117,7 +116,7 @@ public class CheckerTask extends Task {
             if (timeZone.getHour() == 21 && timeZone.getMinute() == 0 && timeZone.getSecond() == 0) {
                 if (mechanicAPI.getBossHealth() == 0) {
                     player.sendMessage(messageAPI.messagesObject.translateMessage("generic.boss.spawn"));
-                    new BossEntity();
+                    //new BossEntity();
                 }
             }
 

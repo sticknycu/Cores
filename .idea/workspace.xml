@@ -2,1125 +2,189 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be8130a8-928b-49f1-b5f7-e85929fb75b8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/abuse/settings/AbuseAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nycuro/abuse/settings/data/AbuseSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__it_unimi_dsi_fastutil_8_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_39.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Fastutil-8.2.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/nukkit-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nycuro.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nycuro.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/Loader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/Loader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/abuse/handlers/AbuseHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/abuse/handlers/AbuseHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/ai/AiAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/ai/AiAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/ai/entity/BossEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/api/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/api/API.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/combat/api/CombatAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/combat/api/CombatAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crates/api/CrateAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/api/CrateAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crates/handlers/CrateHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/handlers/CrateHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crates/item/EntityFirework.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/item/EntityFirework.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileSkyblock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileSkyblock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/api/DropPartyAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/api/DropPartyAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/CommandBaseDropParty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/CommandBaseDropParty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/data/DropPartyMessageCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/data/DropPartyMessageCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/CommandBaseEconomy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/CommandBaseEconomy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/AddCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/AddCoinsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/CoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/CoinsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/SetCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/SetCoinsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/CommandBaseHelping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/CommandBaseHelping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/HelpOpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/HelpOpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/StaffChatCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/StaffChatCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/homes/api/HomeAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/homes/api/HomeAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/CommandBaseHomes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/CommandBaseHomes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/data/HomeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/data/HomeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/CommonJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/CommonJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/api/JobsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/api/JobsAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/CommandBaseJobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/CommandBaseJobs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/JobCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/JobCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/WorkCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/WorkCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/ButcherJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/ButcherJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/FarmerJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/FarmerJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/FishermanJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/FishermanJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/MinerJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/MinerJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/handlers/JobsHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/handlers/JobsHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/CommonKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/CommonKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/api/KitsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/api/KitsAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/CommandBaseKits.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/CommandBaseKits.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/data/KitsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/data/KitsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/EnchantedStarterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/EnchantedStarterKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/GuardianKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/GuardianKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/KnightKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/KnightKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/PaladinKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/PaladinKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/SparrowKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/SparrowKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/StarterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/StarterKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/DetonatorKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/DetonatorKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/KillerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/KillerKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/MasterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/MasterKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/TurretMonkeyKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/TurretMonkeyKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/ViperKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/ViperKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/DiggerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/DiggerKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/LackerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/LackerKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PlanterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PlanterKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PushUpKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PushUpKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/StonnerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/StonnerKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/WoodieKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/WoodieKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/handlers/KitHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/handlers/KitHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/level/handlers/LevelHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/level/handlers/LevelHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/mechanic/handlers/MechanicHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/mechanic/handlers/MechanicHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/mechanic/objects/SettingsObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/mechanic/objects/SettingsObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/ChatHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/ChatHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/MessageHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/MessageHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/protection/handlers/ProtectionHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/protection/handlers/ProtectionHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/reports/api/ReportAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/reports/api/ReportAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/CommandBaseReports.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/CommandBaseReports.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/data/ReportsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/data/ReportsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/BuyUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/BuyUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/EnchantUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/EnchantUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/MoneyUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/MoneyUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/SellUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/SellUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/api/ShopAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/api/ShopAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/CommandBaseShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/CommandBaseShop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/data/ShopCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/data/ShopCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/BossBarTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/BossBarTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckLevelTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckLevelTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ClearLagTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ClearLagTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CombatLoggerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CombatLoggerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/FixBugHealthTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/FixBugHealthTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreTagTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreTagTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreboardTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreboardTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/api/TeleportationAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/api/TeleportationAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/CommandBaseTeleportation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/CommandBaseTeleportation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAAllCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAAllCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPACommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPACommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAHereCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAHereCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAcceptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAcceptCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAllCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAllCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPDenyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPDenyCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPHereCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPHereCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/objects/TPCooldown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/objects/TPCooldown.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/objects/TPRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/teleport/objects/TPRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/JSONParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/JSONParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/WarpUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/WarpUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/api/UtilsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/api/UtilsAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/CommandBaseUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/CommandBaseUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/CoordsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/CoordsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/LangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/LangCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/LevelCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/LevelCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/OnlineTimeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/OnlineTimeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/SettingsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/SettingsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/StatsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/StatsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/ArenaCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/ArenaCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/HubCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/HubCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/SpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/SpawnCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopDeathsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopDeathsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopKillsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopKillsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopTimeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/tops/TopTimeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/utils/UtilsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/utils/UtilsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/objects/ShopObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/objects/ShopObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shop/old.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shop/old.txt" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/target/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="MechanicAPI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="73" column="33" lean-forward="false" selection-start-line="73" selection-start-column="33" selection-end-line="73" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AiAPI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/ai/AiAPI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BossEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/ai/entity/BossEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbuseHandlers.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/abuse/handlers/AbuseHandlers.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2072">
-              <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EntityFirework.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/crates/item/EntityFirework.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="44" column="47" lean-forward="false" selection-start-line="44" selection-start-column="47" selection-end-line="44" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CrateHandlers.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/crates/handlers/CrateHandlers.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="23" column="14" lean-forward="false" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CrateAPI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/crates/api/CrateAPI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1439">
-              <caret line="26" column="32" lean-forward="false" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CombatAPI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/combat/api/CombatAPI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="16" column="34" lean-forward="false" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="API.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/api/API.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-137">
-              <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>&quot;SkyblockCORE&quot;</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>mainAPI</replace>
-    </replaceStrings>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/handlers/KitHandlers.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/DiggerKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/LackerKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PlanterKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PushUpKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/StonnerKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/WoodieKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/ViperKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/TurretMonkeyKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/MasterKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/KillerKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/DetonatorKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/StarterKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/SparrowKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/PaladinKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/KnightKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/GuardianKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/EnchantedStarterKit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/CommandBaseKits.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/commands/data/KitsCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/kits/api/KitsAPI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/jobs/CommonJob.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/jobs/handlers/JobsHandlers.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/MinerJob.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/FishermanJob.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/FarmerJob.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/jobs/data/ButcherJob.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/CommandBaseJobs.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/WorkCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/JobCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/jobs/api/JobsAPI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/CommandBaseHomes.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/homes/commands/data/HomeCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/homes/api/HomeAPI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/CommandBaseHelping.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/StaffChatCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/HelpOpCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/CommandBaseEconomy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/SetCoinsCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/CoinsCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/AddCoinsCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/CommandBaseDropParty.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/data/DropPartyMessageCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/dropparty/api/DropPartyAPI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/crates/item/EntityFirework.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/crates/handlers/CrateHandlers.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/crates/api/CrateAPI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/combat/api/CombatAPI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nycuro/abuse/handlers/AbuseHandlers.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-      </list>
-    </option>
-  </component>
   <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="importAutomatically" value="true" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="SkyblockCore" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="SkyblockCore" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-      </expand>
-      <select />
-    </treeState>
+  <component name="MavenRunner">
+    <option name="delegateBuildToMaven" value="true" />
+    <option name="jreName" value="14" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="20" />
-    <option name="width" value="1400" />
-    <option name="height" value="990" />
-  </component>
+  <component name="ProjectId" id="1ZSDPzPiu0C0R6DZYbnkBmMWeCp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="ai" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="ai" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="crates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="crates" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="crates" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="crates" type="462c0819:PsiDirectoryNode" />
-              <item name="item" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="dropparty" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="dropparty" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="dropparty" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="dropparty" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="economy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="economy" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="economy" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
-              <item name="list" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="helping" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="helping" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="helping" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="helping" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="homes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="homes" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="homes" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="homes" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="jobs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="jobs" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="jobs" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="jobs" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="jobs" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="jobs" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="jobs" type="462c0819:PsiDirectoryNode" />
-              <item name="objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="kits" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="kits" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="kits" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="kits" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="kits" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="kits" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="clasic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="kits" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="premium" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="kits" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="specific" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="kits" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="kits" type="462c0819:PsiDirectoryNode" />
-              <item name="type" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="mechanic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="mechanic" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="mechanic" type="462c0819:PsiDirectoryNode" />
-              <item name="objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="messages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="messages" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="messages" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="messages" type="462c0819:PsiDirectoryNode" />
-              <item name="objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="reports" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="reports" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="reports" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="reports" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="shop" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="shop" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="shop" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="shop" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="teleport" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="teleport" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="teleport" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="teleport" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="teleport" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="teleport" type="462c0819:PsiDirectoryNode" />
-              <item name="objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="teleport" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="settings" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="teleportation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="tops" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="typo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Cores" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="nycuro" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="vote" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn verify" />
+      <command value="mvn " />
     </option>
   </component>
   <component name="RunManager">
@@ -1132,97 +196,39 @@
       <module />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="nycuro (1)" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
+    <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
       <properties />
       <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>$USER_HOME$/.subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -1234,542 +240,98 @@
     </task>
     <servers />
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1953125" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18232045" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-    </layout>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="WindowStateProjectService">
+    <state x="551" y="215" width="802" height="707" key="#Plugins" timestamp="1584905757866">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="551" y="215" width="802" height="707" key="#Plugins/0.25.1920.1055@0.25.1920.1055" timestamp="1584905757866" />
+    <state x="414" y="229" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584901171279">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="414" y="229" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1584901171279" />
+    <state x="688" y="200" width="527" height="695" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1585258467262">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="688" y="200" width="527" height="695" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1585258467262" />
+    <state x="810" y="445" width="292" height="211" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1585171567558">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="810" y="445" width="292" height="211" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1585171567558" />
+    <state x="539" y="209" width="826" height="679" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor" timestamp="1585171566136">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="539" y="209" width="826" height="679" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1585171566136" />
+    <state x="317" y="25" width="1261" height="1050" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585231419478">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="317" y="25" width="1261" height="1050" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1585231419478" />
+    <state x="693" y="302" width="526" height="496" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585258349671">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="693" y="302" width="526" height="496" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1585258349671" />
+    <state x="663" y="370" width="612" height="507" key="FileChooserDialogImpl" timestamp="1585261932091">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="663" y="370" width="612" height="507" key="FileChooserDialogImpl/0.25.1920.1055@0.25.1920.1055" timestamp="1585261932091" />
+    <state width="1864" height="186" key="GridCell.Tab.0.bottom" timestamp="1585263369862">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state width="1864" height="186" key="GridCell.Tab.0.bottom/0.25.1920.1055@0.25.1920.1055" timestamp="1585263369862" />
+    <state width="1864" height="186" key="GridCell.Tab.0.center" timestamp="1585263369861">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state width="1864" height="186" key="GridCell.Tab.0.center/0.25.1920.1055@0.25.1920.1055" timestamp="1585263369861" />
+    <state width="1864" height="186" key="GridCell.Tab.0.left" timestamp="1585263369861">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state width="1864" height="186" key="GridCell.Tab.0.left/0.25.1920.1055@0.25.1920.1055" timestamp="1585263369861" />
+    <state width="1864" height="186" key="GridCell.Tab.0.right" timestamp="1585263369862">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state width="1864" height="186" key="GridCell.Tab.0.right/0.25.1920.1055@0.25.1920.1055" timestamp="1585263369862" />
+    <state x="460" y="206" width="1026" height="840" key="SettingsEditor" timestamp="1585262132119">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="460" y="206" width="1026" height="840" key="SettingsEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1585262132119" />
+    <state x="649" y="398" key="com.intellij.ide.util.TipDialog" timestamp="1585257484120">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="649" y="398" key="com.intellij.ide.util.TipDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1585257484120" />
+    <state x="653" y="387" width="585" height="230" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1585234739441">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="653" y="387" width="585" height="230" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.25.1920.1055@0.25.1920.1055" timestamp="1585234739441" />
+    <state x="528" y="207" width="847" height="681" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1585263196646">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="528" y="207" width="847" height="681" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.25.1920.1055@0.25.1920.1055" timestamp="1585263196646" />
+    <state x="431" y="231" width="787" height="600" key="find.popup" timestamp="1585241601679">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="431" y="231" width="787" height="600" key="find.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1585241601679" />
+    <state x="619" y="264" width="672" height="677" key="run.anything.popup" timestamp="1585262097542">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="619" y="264" width="672" height="677" key="run.anything.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1585262097542" />
+    <state x="619" y="256" width="672" height="678" key="search.everywhere.popup" timestamp="1585235171526">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="619" y="256" width="672" height="678" key="search.everywhere.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1585235171526" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
-    <watches-manager />
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint enabled="true" type="java-exception" />
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/objects/MechanicObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/objects/JobsObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/handlers/JobsHandlers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="263" column="50" lean-forward="false" selection-start-line="263" selection-start-column="50" selection-end-line="263" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/data/MinerJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-273">
-          <caret line="43" column="34" lean-forward="false" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/data/FishermanJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="43" column="34" lean-forward="false" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/data/FarmerJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="43" column="34" lean-forward="false" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/data/ButcherJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="42" column="34" lean-forward="false" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/CommandBaseJobs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="27" column="38" lean-forward="false" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/JobsCommandManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/WorkCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="28" column="31" lean-forward="false" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/JobCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="22" column="14" lean-forward="false" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/jobs/api/JobsAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="56" column="43" lean-forward="false" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/homes/commands/CommandBaseHomes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="27" column="38" lean-forward="false" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/homes/commands/HomesCommandManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/homes/commands/data/HomeCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="22" column="14" lean-forward="false" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/homes/api/HomeAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="69" column="150" lean-forward="false" selection-start-line="69" selection-start-column="150" selection-end-line="69" selection-end-column="150" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/helping/commands/CommandBaseHelping.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="27" column="38" lean-forward="false" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/helping/commands/HelpingCommandManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/StaffChatCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="23" column="14" lean-forward="false" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/HelpOpCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="29" column="14" lean-forward="false" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/helping/api/HelpingAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/gui/list/DelegateFormWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/gui/list/ResponseFormWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/gui/handlers/GUIHandlers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/economy/commands/EconomyCommandManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/economy/commands/CommandBaseEconomy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="27" column="38" lean-forward="false" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/tops/TopCoinsCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/SetCoinsCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="36" column="18" lean-forward="false" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/CoinsCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="28" column="18" lean-forward="false" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/AddCoinsCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/economy/api/EconomyAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/CommandBaseDropParty.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="27" column="38" lean-forward="false" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/DropPartyCommandManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/dropparty/commands/data/DropPartyMessageCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/dropparty/api/DropPartyAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="127" column="50" lean-forward="false" selection-start-line="127" selection-start-column="50" selection-end-line="127" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileSkyblock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileReports.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/objects/ProfileProxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/objects/KitsObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/database/objects/HomeObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/crates/item/EntityFirework.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="44" column="47" lean-forward="false" selection-start-line="44" selection-start-column="47" selection-end-line="44" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/crates/handlers/CrateHandlers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="23" column="14" lean-forward="false" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/crates/api/CrateAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1439">
-          <caret line="26" column="32" lean-forward="false" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/combat/api/CombatAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="16" column="34" lean-forward="false" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/api/API.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-137">
-          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="73" column="33" lean-forward="false" selection-start-line="73" selection-start-column="33" selection-end-line="73" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/ai/AiAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/ai/entity/BossEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nycuro/abuse/handlers/AbuseHandlers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2072">
-          <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>14</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>nycuro</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>14</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>Maven: cn.nukkit:nukkit:2.0.0-SNAPSHOT</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand>
+      <path>
+        <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
+        <item name="nycuro" type="47feb1d3:ProjectViewModuleNode" />
+      </path>
+    </expand>
+    <select />
   </component>
 </project>

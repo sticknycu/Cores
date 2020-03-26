@@ -1,8 +1,10 @@
 package nycuro.kits.data.specific;
 
-import cn.nukkit.Player;
+
+import cn.nukkit.block.BlockIds;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.player.Player;
 import nycuro.api.API;
 import nycuro.database.Database;
@@ -45,43 +47,43 @@ public class LackerKit extends CommonKit {
 
     @Override
     public Item getSword() {
-        Item item = Item.get(Item.STONE_SWORD);
+        Item item = Item.get(ItemIds.STONE_SWORD);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
-        Item item = Item.get(Item.STONE_PICKAXE);
+        Item item = Item.get(ItemIds.STONE_PICKAXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
-        Item item = Item.get(Item.STONE_AXE);
+        Item item = Item.get(ItemIds.STONE_AXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
-        Item item = Item.get(Item.STONE_SHOVEL);
+        Item item = Item.get(ItemIds.STONE_SHOVEL);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
     @Override
     public Item[] getOtherItems() {
-        Item steak = Item.get(Item.STEAK, 0, 32);
+        Item steak = Item.get(ItemIds.COOKED_BEEF, 0, 32);
         steak.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Steak");
-        Item ice = Item.get(Item.ICE, 0, 2);
+        Item ice = Item.get(BlockIds.ICE, 0, 2);
         ice.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Ice");
-        Item lava_bucket1 = Item.get(Item.BUCKET, 10, 1);
+        Item lava_bucket1 = Item.get(ItemIds.BUCKET, 10, 1);
         lava_bucket1.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Lava Bucket x1");
-        Item lava_bucket2 = Item.get(Item.BUCKET, 10, 1);
+        Item lava_bucket2 = Item.get(ItemIds.BUCKET, 10, 1);
         lava_bucket2.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Lava Bucket x2");
-        Item empty_bucket = Item.get(Item.BUCKET, 10, 10);
+        Item empty_bucket = Item.get(ItemIds.BUCKET, 10, 10);
         empty_bucket.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "mainAPI.empty Bucket");
         return new Item[] {
                 steak,
@@ -113,11 +115,6 @@ public class LackerKit extends CommonKit {
     @Override
     public boolean canAddKit(Player player) {
         PlayerInventory playerInventory = player.getInventory();
-        for (Item item : playerInventory.getArmorContents()) {
-            if (item.getId() != 0) {
-                return false;
-            }
-        }
         return (getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size();
     }
 

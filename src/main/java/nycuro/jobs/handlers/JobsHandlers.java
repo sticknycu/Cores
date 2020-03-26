@@ -1,10 +1,9 @@
 package nycuro.jobs.handlers;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.block.Block;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.block.BlockBreakEvent;
 import cn.nukkit.event.entity.EntityDamageByChildEntityEvent;
@@ -18,11 +17,11 @@ import cn.nukkit.event.player.PlayerItemConsumeEvent;
 import cn.nukkit.inventory.Inventory;
 import cn.nukkit.inventory.InventoryType;
 import cn.nukkit.inventory.PlayerInventory;
-import cn.nukkit.inventory.transaction.InventoryTransaction;
 import cn.nukkit.item.Item;
-import cn.nukkit.math.Vector3;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.player.Player;
-import nycuro.api.API;
+import com.nukkitx.math.vector.Vector3i;
+import com.nukkitx.protocol.bedrock.data.EntityData;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.jobs.NameJob;
@@ -52,27 +51,27 @@ public class JobsHandlers implements Listener {
             if (damager == null) return;
 
             ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(damager.getName());
-            if (entity.namedTag.getBoolean("minerNPC")) {
-                if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
+            if (entity.getData().getBoolean(EntityData.valueOf("minerNPC"))) {
+                if (mainAPI.jobsObject.get(damager.getServerId()) != null) mainAPI.jobsObject.remove(damager.getServerId());
                 profileSkyblock.setJob(1);
                 damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.MINER.getName()));
                 event.setCancelled();
-            } else if (entity.namedTag.getBoolean("butcherNPC")) {
-                if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
+            } else if (entity.getData().getBoolean(EntityData.valueOf("butcherNPC"))) {
+                if (mainAPI.jobsObject.get(damager.getServerId()) != null) mainAPI.jobsObject.remove(damager.getServerId());
                 profileSkyblock.setJob(2);
                 damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.BUTCHER.getName()));
                 event.setCancelled();
-            } else if (entity.namedTag.getBoolean("farmerNPC")) {
-                if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
+            } else if (entity.getData().getBoolean(EntityData.valueOf("farmerNPC"))) {
+                if (mainAPI.jobsObject.get(damager.getServerId()) != null) mainAPI.jobsObject.remove(damager.getServerId());
                 profileSkyblock.setJob(3);
                 damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.FARMER.getName()));
                 event.setCancelled();
-            } else if (entity.namedTag.getBoolean("fishermanNPC")) {
-                if (mainAPI.jobsObject.get(damager.getUniqueId()) != null) mainAPI.jobsObject.remove(damager.getUniqueId());
+            } else if (entity.getData().getBoolean(EntityData.valueOf("fishermanNPC"))) {
+                if (mainAPI.jobsObject.get(damager.getServerId()) != null) mainAPI.jobsObject.remove(damager.getServerId());
                 profileSkyblock.setJob(4);
                 damager.sendMessage(messageAPI.messagesObject.translateMessage("jobs.selected", NameJob.FISHERMAN.getName()));
                 event.setCancelled();
-            } else if (entity.namedTag.getBoolean("mechanicNPC")) {
+            } else if (entity.getData().getBoolean(EntityData.valueOf("mechanicNPC"))) {
                 mainAPI.getServer().dispatchCommand(damager, "job");
                 event.setCancelled();
             }
@@ -84,7 +83,7 @@ public class JobsHandlers implements Listener {
         Player player = event.getPlayer();
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         // Get Money
-        JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
+        JobsObject jobsObject = mainAPI.jobsObject.get(player.getServerId());
         if (jobsObject == null || jobsObject.getItems() == null) {
             player.sendMessage(messageAPI.messagesObject.translateMessage("work.unstarted.break"));
             event.setCancelled();
@@ -93,7 +92,7 @@ public class JobsHandlers implements Listener {
         if (mechanicAPI.isOnArea(player)) {
             // Job Miner
             PlayerInventory playerInventory = player.getInventory();
-            switch (event.getBlock().getId()) {
+            /*switch (event.getBlock().getId()) {
                 case Block.COBBLESTONE:
                 case Block.IRON_ORE:
                 case Block.GOLD_ORE:
@@ -180,23 +179,23 @@ public class JobsHandlers implements Listener {
                         event.setCancelled();
                     }
                     break;
-            }
+            }*/
         }
     }
 
     // Job Fisherman
     @EventHandler
     public void onReceiveFish(InventoryPickupItemEvent event) {
-        if (event.getItem().getItem().getId() == Item.RAW_FISH ||
-                event.getItem().getItem().getId() == Item.RAW_SALMON ||
-                event.getItem().getItem().getId() == Item.PUFFERFISH
+        if (event.getItem().getItem().getId() == ItemIds.FISH ||
+                event.getItem().getItem().getId() == ItemIds.SALMON ||
+                event.getItem().getItem().getId() == ItemIds.PUFFERFISH
                 ) {
             if (!(event.getInventory() instanceof PlayerInventory)) return;
             PlayerInventory playerInventory = (PlayerInventory) event.getInventory();
             Item item = event.getItem().getItem();
             for (Player player : event.getViewers()) {
                 ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-                JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
+                JobsObject jobsObject = mainAPI.jobsObject.get(player.getServerId());
                 if (jobsObject == null || jobsObject.getItems() == null) {
                     player.sendMessage(messageAPI.messagesObject.translateMessage("work.unstarted.break"));
                     event.setCancelled();
@@ -247,7 +246,7 @@ public class JobsHandlers implements Listener {
 
             if (!mechanicAPI.isOnArea(killer)) return;
             ProfileSkyblock profile = Database.profileSkyblock.get(killer.getName());
-            JobsObject jobsObject = mainAPI.jobsObject.get(killer.getUniqueId());
+            JobsObject jobsObject = mainAPI.jobsObject.get(killer.getServerId());
             int job = profile.getJob();
             if (job == 2) {
                 int[] integers = jobsObject.getCountAnimals();
@@ -261,7 +260,7 @@ public class JobsHandlers implements Listener {
                     killer.sendMessage(messageAPI.messagesObject.translateMessage("work.finished"));
                     event.setCancelled();
                 }
-                switch (eventEntity.getNetworkId()) {
+                /*switch (eventEntity.getId()) {
                     case 10: // chicken
                         if (integers[3] != 0) {
                             integers[3] = integers[3] - 1;
@@ -296,7 +295,7 @@ public class JobsHandlers implements Listener {
                 }
                 event.setDrops(new Item[0]);
                 jobsObject.setCountAnimals(integers);
-                event.setCancelled();
+                event.setCancelled();*/
             } else {
                 killer.sendMessage(messageAPI.messagesObject.translateMessage("work.unstarted.pvp"));
                 event.setCancelled();
@@ -345,7 +344,7 @@ public class JobsHandlers implements Listener {
         Player player = (Player) entity;
         if (event.getDamage() > player.getHealth() && (damager != null)) {
             for (Item item : player.getInventory().getContents().values()) {
-                player.getLevel().dropItem(new Vector3(player.getX(), player.getY() + 1, player.getZ()), item);
+                player.getLevel().dropItem(Vector3i.from(player.getX(), player.getY() + 1, player.getZ()), item);
             }
             event.setCancelled();
             player.setHealth(20);

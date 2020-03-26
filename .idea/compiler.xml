@@ -8,13 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="nycuro" />
-        <module name="nycuro (1)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="nycuro" target="1.8" />
       <module name="nycuro (1)" target="1.8" />
-      <module name="nycuro (2)" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

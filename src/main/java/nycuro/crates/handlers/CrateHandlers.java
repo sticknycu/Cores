@@ -1,12 +1,13 @@
 package nycuro.crates.handlers;
 
-import cn.nukkit.Player;
 import cn.nukkit.block.Block;
+import cn.nukkit.block.BlockIds;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.player.Player;
 import nycuro.utils.typo.FastRandom;
 
@@ -27,11 +28,11 @@ public class CrateHandlers implements Listener {
         Block block = event.getBlock();
         if (!mechanicAPI.isOnSpawn(player)) return;
         if (event.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
-            if (block.getId() != Block.CHEST) {
+            if (block.getId() != BlockIds.CHEST) {
                 return;
             }
             event.setCancelled(true);
-            if (itemHand.getId() == Item.TRIPWIRE_HOOK) {
+            if (itemHand.getId() == ItemIds.BOOK) {
                 FastRandom.current().ints(1, 1, 100).findFirst().ifPresent(
                         (j) -> {
                             crateAPI.getChange(player, playerInventory, j);

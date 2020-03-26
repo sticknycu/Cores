@@ -1,6 +1,5 @@
 package nycuro.homes.api;
 
-import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.element.ElementInput;
@@ -67,7 +66,7 @@ public class HomeAPI {
                 } else {
                     databaseAPI.homeExist(response.values().toArray()[0].toString(), bool -> {
                         if (!bool) {
-                            databaseAPI.addNewHome(player.getName(), (int) player.getX(), (int) player.getY(), (int) player.getZ(), player.getLevel().getFolderName(), response.values().toArray()[0].toString());
+                            databaseAPI.addNewHome(player.getName(), (int) player.getX(), (int) player.getY(), (int) player.getZ(), player.getLevel().getName(), response.values().toArray()[0].toString());
                             player.sendMessage(messageAPI.messagesObject.translateMessage("homes.form.create.succes",
                                     mainAPI.emptyNoSpace + (int) player.getX(), mainAPI.emptyNoSpace + (int) player.getY(),
                                     mainAPI.emptyNoSpace + (int) player.getZ()));
@@ -130,7 +129,7 @@ public class HomeAPI {
                         switch (response.entrySet().iterator().next().getKey()) {
                             case 0:
                                 HomeObject homeObject = databaseAPI.getDatesHomePlayer(player.getName());
-                                player.teleport(new Location(homeObject.getX(), homeObject.getY(), homeObject.getZ(), mainAPI.getServer().getLevelByName(homeObject.getWorldName())));
+                                player.teleport(Location.from(homeObject.getX(), homeObject.getY(), homeObject.getZ(), mainAPI.getServer().getLevelByName(homeObject.getWorldName())));
                                 player.sendMessage(messageAPI.messagesObject.translateMessage("homes.form.teleport.success",
                                         mainAPI.emptyNoSpace + homeObject.getX(),
                                         mainAPI.emptyNoSpace + homeObject.getY(),

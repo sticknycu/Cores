@@ -1,25 +1,27 @@
 package nycuro.api.data;
 
-import cn.nukkit.IPlayer;
-import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.entity.Entity;
+import cn.nukkit.entity.EntityType;
 import cn.nukkit.form.element.*;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
-import cn.nukkit.nbt.tag.*;
 import cn.nukkit.player.IPlayer;
 import cn.nukkit.player.Player;
+import cn.nukkit.registry.EntityRegistry;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
-import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
+import com.nukkitx.math.vector.Vector3i;
+import com.nukkitx.nbt.CompoundTagBuilder;
+import com.nukkitx.nbt.tag.CompoundTag;
+//import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import me.lucko.luckperms.api.User;
 import me.lucko.luckperms.api.manager.UserManager;
-import nycuro.ai.entity.BossEntity;
 import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
@@ -45,7 +47,7 @@ import static nycuro.api.API.*;
 public class MechanicAPI {
 
     public boolean isOnSpawn(Player player) {
-        return mainAPI.isOnSpawn.getBoolean(player.getUniqueId());
+        return mainAPI.isOnSpawn.getBoolean(player.getServerId());
     }
 
     public boolean isOnPrincipalWorld(Player player) {
@@ -57,11 +59,11 @@ public class MechanicAPI {
     }
 
     public boolean isOnArena(Player player) {
-        return mainAPI.isOnArena.getBoolean(player.getUniqueId());
+        return mainAPI.isOnArena.getBoolean(player.getServerId());
     }
 
     public boolean isOnArea(Player player) {
-        return mainAPI.isOnArea.getBoolean(player.getUniqueId());
+        return mainAPI.isOnArea.getBoolean(player.getServerId());
     }
 
     private User giveMeADamnUser(UUID uuid) {
@@ -106,7 +108,7 @@ public class MechanicAPI {
 
     public float getBossHealth() {
         for (Entity entity : mainAPI.getServer().getDefaultLevel().getEntities()) {
-            if (entity.namedTag.getBoolean("coreBOSS")) {
+            if (entity.getTag().contains("coreBOSS")) {
                 return entity.getHealth();
             }
         }
@@ -146,26 +148,12 @@ public class MechanicAPI {
         }
     }
 
-    public void spawnNPC(String boolTag, int id, int x, int y, int z) {
-        CompoundTag tag = new CompoundTag()
-                .putList(new ListTag<>("Pos")
-                        .add(new DoubleTag("", x + 0.5))
-                        .add(new DoubleTag("", y))
-                        .add(new DoubleTag("", z + 0.5)))
-                .putList(new ListTag<DoubleTag>("Motion")
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0))
-                        .add(new DoubleTag("", 0)))
-                .putList(new ListTag<FloatTag>("Rotation")
-                        .add(new FloatTag("", (float) 0))
-                        .add(new FloatTag("", (float) 0)))
-                .putBoolean("Invulnerable", true)
-                .putString("NameTag", "coreNBT")
-                .putList(new ListTag<StringTag>("Commands"))
-                .putList(new ListTag<StringTag>("PlayerCommands"))
-                .putBoolean(boolTag, true)
-                .putFloat("scale", 1);
-        Entity entity = Entity.createEntity(id, mainAPI.getServer().getDefaultLevel().getChunk(x >> 4, z >> 4), tag);
+    public void spawnNPC(String strtag, EntityType entityType, int x, int y, int z, Level level) {
+        Entity entity = EntityRegistry.get().newEntity(entityType, Location.from(Vector3i.from(x, y, z), level));
+        CompoundTagBuilder tag = CompoundTag.builder();
+        entity.saveAdditionalData(tag);
+        tag.booleanTag(strtag, true);
+        entity.loadAdditionalData(tag.buildRootTag());
         entity.spawnToAll();
     }
 
@@ -285,13 +273,13 @@ public class MechanicAPI {
     public void spawnDropParty() {
         for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
             addDropPartyKey(player);
-            new BossEntity();
+            //new BossEntity();
             player.sendMessage(messageAPI.messagesObject.translateMessage("generic.dropparty.spawned"));
         }
     }
 
     private void addDropPartyKey(Player player) {
-        Item dropPartyKey = Item.get(Item.TRIPWIRE_HOOK, 1, 1);
+        Item dropPartyKey = Item.get(ItemIds.BOOK, 1, 1);
         Enchantment enchantment = Enchantment.get(Enchantment.ID_PROTECTION_ALL);
         enchantment.setLevel(1);
         dropPartyKey.setCustomName("DropParty Key");
@@ -329,12 +317,12 @@ public class MechanicAPI {
                 .text("bossbar")
                 .length(100F)
                 .build();
-        mainAPI.bossbar.put(player.getUniqueId(), bossbar);
+        mainAPI.bossbar.put(player.getServerId(), bossbar);
         player.createBossBar(bossbar);
     }
 
     public void createScoreboard(Player player) {
-        FakeScoreboard fakeScoreboard = new FakeScoreboard();
+        /*FakeScoreboard fakeScoreboard = new FakeScoreboard();
         Objective object = new Objective("§f§l•§e•§6• SKYBLOCK §6•§e•§f•", new ObjectiveCriteria("dummy", true));
         DisplayObjective newObject = new DisplayObjective(
                 object,
@@ -344,7 +332,7 @@ public class MechanicAPI {
 
         fakeScoreboard.objective = newObject;
         fakeScoreboard.addPlayer(player);
-        mainAPI.scoreboard.put(player.getUniqueId(), fakeScoreboard);
+        mainAPI.scoreboard.put(player.getServerId(), fakeScoreboard);*/
     }
 
     public void teleportArena(Player player) {
@@ -393,11 +381,9 @@ public class MechanicAPI {
                     int level = profileSkyblock.getLevel();
                     if (level < 10) {
                         player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleport.level", "10"));
-                        return;
                     } else {
-                        player.teleport(new Location(1092, 70, 1324, mainAPI.getServer().getDefaultLevel()));
+                        player.teleport(Location.from(Vector3i.from(1092, 70, 1324), mainAPI.getServer().getDefaultLevel()));
                         player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleported"));
-                        return;
                     }
                 }
             }
@@ -416,11 +402,9 @@ public class MechanicAPI {
                     int level = profileSkyblock.getLevel();
                     if (level < 5) {
                         player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleport.level", "5"));
-                        return;
                     } else {
-                        player.teleport(new Location(1106, 70, 1311, mainAPI.getServer().getDefaultLevel()));
+                        player.teleport(Location.from(Vector3i.from(1106, 70, 1311), mainAPI.getServer().getDefaultLevel()));
                         player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleported"));
-                        return;
                     }
                 }
             }
@@ -442,31 +426,31 @@ public class MechanicAPI {
             @Override
             public void accept(Map<Integer, Object> response) {
                 if (!response.isEmpty()) {
-                    SettingsObject settings = mainAPI.settings.get(player.getUniqueId());
+                    SettingsObject settings = mainAPI.settings.get(player.getServerId());
                     if (settings != null) {
-                        settings.setBossbarValue(Boolean.valueOf(String.valueOf(response.values().toArray()[1])));
+                        /*settings.setBossbarValue(Boolean.valueOf(String.valueOf(response.values().toArray()[1])));
                         settings.setScoreboardValue(Boolean.valueOf(String.valueOf(response.values().toArray()[2])));
-                        player.setViewDistance(Integer.valueOf(String.valueOf(response.values().toArray()[3])));
+                        //player.setViewerDistance(Integer.valueOf(String.valueOf(response.values().toArray()[3])));
 
-                        DummyBossBar bb = mainAPI.bossbar.get(player.getUniqueId());
+                        DummyBossBar bb = mainAPI.bossbar.get(player.getServerId());
                         if (bb != null) {
                             bb.destroy();
                         }
                         if (Boolean.valueOf(String.valueOf(response.values().toArray()[1]))) {
                             createBossBar(player);
                         } else {
-                            mainAPI.bossbar.remove(player.getUniqueId());
+                            mainAPI.bossbar.remove(player.getServerId());
                         }
 
-                        FakeScoreboard fsc = mainAPI.scoreboard.get(player.getUniqueId());
+                        /*FakeScoreboard fsc = mainAPI.scoreboard.get(player.getServerId());
                         if (fsc != null) {
                             fsc.removePlayer(player);
                         }
                         if (Boolean.valueOf(String.valueOf(response.values().toArray()[2]))) {
                             createScoreboard(player);
                         } else {
-                            mainAPI.scoreboard.remove(player.getUniqueId());
-                        }
+                            mainAPI.scoreboard.remove(player.getServerId());
+                        }*/
                     }
                 }
             }

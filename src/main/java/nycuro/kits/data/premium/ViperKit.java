@@ -1,8 +1,9 @@
 package nycuro.kits.data.premium;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.player.Player;
 import nycuro.api.API;
@@ -46,7 +47,7 @@ public class ViperKit extends CommonKit {
 
     @Override
     public Item getHelmet() {
-        Item item = Item.get(Item.IRON_HELMET);
+        Item item = Item.get(ItemIds.IRON_HELMET);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.HELMET.getType());
         return item;
@@ -54,7 +55,7 @@ public class ViperKit extends CommonKit {
 
     @Override
     public Item getArmor() {
-        Item item = Item.get(Item.IRON_CHESTPLATE);
+        Item item = Item.get(ItemIds.IRON_CHESTPLATE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.ARMOR.getType());
         return item;
@@ -62,7 +63,7 @@ public class ViperKit extends CommonKit {
 
     @Override
     public Item getPants() {
-        Item item = Item.get(Item.IRON_LEGGINGS);
+        Item item = Item.get(ItemIds.IRON_LEGGINGS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.PANTS.getType());
         return item;
@@ -70,7 +71,7 @@ public class ViperKit extends CommonKit {
 
     @Override
     public Item getBoots() {
-        Item item = Item.get(Item.IRON_BOOTS);
+        Item item = Item.get(ItemIds.IRON_BOOTS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.BOOTS.getType());
         return item;
@@ -78,7 +79,7 @@ public class ViperKit extends CommonKit {
 
     @Override
     public Item getSword() {
-        Item item = Item.get(Item.IRON_SWORD);
+        Item item = Item.get(ItemIds.IRON_SWORD);
         item.addEnchantment(Enchantment.get(Enchantment.ID_KNOCKBACK).setLevel(1));
         item.addEnchantment(Enchantment.get(Enchantment.ID_DAMAGE_ALL).setLevel(1));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
@@ -87,7 +88,7 @@ public class ViperKit extends CommonKit {
 
     @Override
     public Item getPickaxe() {
-        Item item = Item.get(Item.IRON_PICKAXE);
+        Item item = Item.get(ItemIds.IRON_PICKAXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
         item.addEnchantment(Enchantment.get(Enchantment.ID_FORTUNE_DIGGING).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
@@ -96,7 +97,7 @@ public class ViperKit extends CommonKit {
 
     @Override
     public Item getAxe() {
-        Item item = Item.get(Item.IRON_AXE);
+        Item item = Item.get(ItemIds.IRON_AXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
@@ -104,7 +105,7 @@ public class ViperKit extends CommonKit {
 
     @Override
     public Item getShovel() {
-        Item item = Item.get(Item.IRON_SHOVEL);
+        Item item = Item.get(ItemIds.IRON_SHOVEL);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
@@ -112,11 +113,11 @@ public class ViperKit extends CommonKit {
 
     @Override
     public Item[] getOtherItems() {
-        Item steak = Item.get(Item.STEAK, 0, 64);
+        Item steak = Item.get(ItemIds.COOKED_BEEF, 0, 64);
         steak.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Steak");
-        Item potion_reg2 = Item.get(Item.POTION, 30, 10);
+        Item potion_reg2 = Item.get(ItemIds.POTION, 30, 10);
         potion_reg2.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Regeneration 2 Potion");
-        Item potion_strenght1 = Item.get(Item.POTION, 31, 10);
+        Item potion_strenght1 = Item.get(ItemIds.POTION, 31, 10);
         potion_strenght1.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Strenght 1 Potion");
         return new Item[] {
                 steak,
@@ -157,11 +158,6 @@ public class ViperKit extends CommonKit {
     @Override
     public boolean canAddKit(Player player) {
         PlayerInventory playerInventory = player.getInventory();
-        for (Item item : playerInventory.getArmorContents()) {
-            if (item.getId() != 0) {
-                return false;
-            }
-        }
         return (getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size();
     }
 

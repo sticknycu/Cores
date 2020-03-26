@@ -3,18 +3,13 @@ package nycuro.mechanic.objects;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class SettingsObject {
-
-    @Getter
-    @Setter
     public boolean bossbarValue;
 
-    @Getter
-    @Setter
     public boolean scoreboardValue;
 
-    @Getter
-    @Setter
     public int renderDistance;
 
     public SettingsObject(boolean bossbarValue, boolean scoreboardValue, int renderDistance) {

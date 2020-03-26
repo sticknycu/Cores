@@ -1,7 +1,5 @@
 package nycuro.utils.commands.data.settings;
 
-import cn.nukkit.IPlayer;
-import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.player.IPlayer;
 import cn.nukkit.player.Player;

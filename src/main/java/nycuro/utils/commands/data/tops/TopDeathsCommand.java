@@ -1,6 +1,6 @@
 package nycuro.utils.commands.data.tops;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.player.Player;
 import nycuro.database.Database;

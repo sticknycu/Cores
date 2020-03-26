@@ -1,9 +1,7 @@
 package nycuro.teleport.api;
 
-import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.level.Location;
-import cn.nukkit.level.Position;
 import cn.nukkit.permission.PermissionAttachmentInfo;
 import cn.nukkit.player.Player;
 import nycuro.teleport.commands.TeleportationCommandManager;
@@ -92,10 +90,6 @@ public class TeleportationAPI {
             return OptionalInt.of(cooldown);
         }
         return OptionalInt.empty();
-    }
-
-    public void onTP(Player player, Position position, String message) {
-        this.onTP(player, position.getLocation(), message);
     }
 
     public void onTP(Player player, Location location, String message) {

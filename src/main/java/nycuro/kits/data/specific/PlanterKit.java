@@ -1,8 +1,10 @@
 package nycuro.kits.data.specific;
 
-import cn.nukkit.Player;
+
+import cn.nukkit.block.BlockIds;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.player.Player;
 import nycuro.api.API;
 import nycuro.database.Database;
@@ -47,28 +49,28 @@ public class PlanterKit extends CommonKit {
 
     @Override
     public Item getSword() {
-        Item item = Item.get(Item.STONE_SWORD);
+        Item item = Item.get(ItemIds.STONE_SWORD);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
-        Item item = Item.get(Item.STONE_PICKAXE);
+        Item item = Item.get(ItemIds.STONE_PICKAXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
-        Item item = Item.get(Item.STONE_AXE);
+        Item item = Item.get(ItemIds.STONE_AXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
-        Item item = Item.get(Item.STONE_SHOVEL);
+        Item item = Item.get(ItemIds.STONE_SHOVEL);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
     }
@@ -77,17 +79,17 @@ public class PlanterKit extends CommonKit {
     public Item[] getOtherItems() {
         ArrayList<Item> items = new ArrayList<>();
         for (int i = 0; i <= 5; i++) {
-            Item item = Item.get(Item.SAPLING, i, 12);
+            Item item = Item.get(BlockIds.SAPLING, i, 12);
             item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Sapling Type " + i);
             items.add(item);
         }
-        Item grass = Item.get(Item.GRASS, 0, 32);
+        Item grass = Item.get(BlockIds.GRASS, 0, 32);
         grass.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Grass");
-        Item dirt = Item.get(Item.DIRT, 0, 32);
+        Item dirt = Item.get(BlockIds.DIRT, 0, 32);
         dirt.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Dirt");
-        Item cobblestone = Item.get(Item.COBBLESTONE, 0, 64);
+        Item cobblestone = Item.get(BlockIds.COBBLESTONE, 0, 64);
         cobblestone.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Cobblestone");
-        Item bonemeal = Item.get(Item.DYE, 15, 24);
+        Item bonemeal = Item.get(ItemIds.DYE, 15, 24);
         bonemeal.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Bone Meal");
         Item[] item = new Item[10];
         for (int i = 0; i <= 5; i++) {
@@ -121,11 +123,6 @@ public class PlanterKit extends CommonKit {
     @Override
     public boolean canAddKit(Player player) {
         PlayerInventory playerInventory = player.getInventory();
-        for (Item item : playerInventory.getArmorContents()) {
-            if (item.getId() != 0) {
-                return false;
-            }
-        }
         return (getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size();
     }
 

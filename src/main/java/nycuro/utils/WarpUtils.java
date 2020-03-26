@@ -5,6 +5,7 @@ import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.level.Location;
 import cn.nukkit.player.Player;
+import com.nukkitx.math.vector.Vector3i;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import nycuro.gui.list.ResponseFormWindow;
@@ -49,13 +50,16 @@ public class WarpUtils {
         player.sendMessage(messageAPI.messagesObject.translateMessage("warp.teleport", firstDropDownType));
         switch (types) {
             case 1:
-                player.teleport(new Location(mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getX(), mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getY(), mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getZ(), mainAPI.getServer().getLevelByName("pvp")));
+                player.teleport(Location.from(Vector3i.from(mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getX(),
+                        mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getY(),
+                        mainAPI.getServer().getLevelByName("pvp").getSpawnLocation().getZ()),
+                        mainAPI.getServer().getLevelByName("pvp")));
                 break;
             case 2:
-                player.teleport(new Location(121, 73, 56, mainAPI.getServer().getDefaultLevel()));
+                player.teleport(Location.from(Vector3i.from(121, 73, 56), mainAPI.getServer().getDefaultLevel()));
                 break;
             case 3:
-                player.teleport(new Location(105, 74, 56, mainAPI.getServer().getDefaultLevel()));
+                player.teleport(Location.from(Vector3i.from(105, 74, 56), mainAPI.getServer().getDefaultLevel()));
                 break;
         }
     }

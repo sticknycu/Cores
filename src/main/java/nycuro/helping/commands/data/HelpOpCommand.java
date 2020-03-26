@@ -1,6 +1,6 @@
 package nycuro.helping.commands.data;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.player.Player;
 import cn.nukkit.utils.TextFormat;
@@ -30,7 +30,7 @@ public class HelpOpCommand extends CommandBaseHelping {
         Player player = (Player) commandSender;
         //
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-        String group = Objects.requireNonNull(ChatHandlers.api.getUser(player.getUniqueId())).getPrimaryGroup().toUpperCase();
+        String group = Objects.requireNonNull(ChatHandlers.api.getUser(player.getServerId())).getPrimaryGroup().toUpperCase();
         String s = ChatFormat.valueOf(group).toString();
         String message = String.join(" ", strings);
         if (!player.hasPermission("core.colorchat")) {

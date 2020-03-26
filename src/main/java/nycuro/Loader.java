@@ -1,17 +1,17 @@
 package nycuro;
 
 import cn.nukkit.entity.Entity;
-import cn.nukkit.entity.impl.hostile.EntityCreeper;
-import cn.nukkit.entity.mob.EntityCreeper;
+import cn.nukkit.entity.EntityTypes;
 import cn.nukkit.player.Player;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.DummyBossBar;
 import cn.nukkit.utils.TextFormat;
-import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
-import gt.creeperface.holograms.entity.HologramEntity;
-import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
+//import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
+//import gt.creeperface.holograms.entity.HologramEntity;
+//import gt.creeperface.nukkit.scoreboardapi.scoreboard.FakeScoreboard;
 import it.unimi.dsi.fastutil.objects.*;
 import nycuro.abuse.handlers.AbuseHandlers;
+import nycuro.abuse.settings.AbuseAPI;
 import nycuro.ai.AiAPI;
 import nycuro.api.API;
 import nycuro.api.data.MechanicAPI;
@@ -64,8 +64,10 @@ import static nycuro.api.API.*;
 public class Loader extends PluginBase {
 
     public static Object2LongMap<UUID> startTime = new Object2LongOpenHashMap<>();
+    public static long dropPartyTime;
+    public static int dropPartyVotes;
     public Object2ObjectMap<UUID, DummyBossBar> bossbar = new Object2ObjectOpenHashMap<>();
-    public Object2ObjectMap<UUID, FakeScoreboard> scoreboard = new Object2ObjectOpenHashMap<>();
+    //public Object2ObjectMap<UUID, FakeScoreboard> scoreboard = new Object2ObjectOpenHashMap<>();
     public Object2IntMap<UUID> timers = new Object2IntOpenHashMap<>();
     public Object2BooleanMap<UUID> coords = new Object2BooleanOpenHashMap<>();
     public Object2LongMap<UUID> played = new Object2LongOpenHashMap<>();
@@ -76,12 +78,7 @@ public class Loader extends PluginBase {
     public Collection<UUID> staffChat = new ArrayList<>();
     public Map<UUID, JobsObject> jobsObject = new HashMap<>();
     public Map<UUID, MechanicObject> mechanicObject = new HashMap<>();
-
     public MoneyUtils moneyAPI = new MoneyUtils();
-
-    public static long dropPartyTime;
-    public static int dropPartyVotes;
-
     public String symbol = TextFormat.GOLD.toString();
     public String empty = " ";
     public String emptyNoSpace = "";
@@ -98,11 +95,11 @@ public class Loader extends PluginBase {
     }
 
     private void addEntities() {
-        mechanicAPI.spawnNPC("minerNPC", EntityCreeper.NETWORK_ID, -25, 164, -144);
-        mechanicAPI.spawnNPC("butcherNPC", EntityCreeper.NETWORK_ID,  6, 162, -185);
-        mechanicAPI.spawnNPC("farmerNPC", EntityCreeper.NETWORK_ID, 37, 162, -175);
-        mechanicAPI.spawnNPC("fishermanNPC", EntityCreeper.NETWORK_ID, 7, 162, -133);
-        mechanicAPI.spawnNPC("mechanicNPC", EntityCreeper.NETWORK_ID, -19, 162, -122);
+        mechanicAPI.spawnNPC("minerNPC", EntityTypes.CREEPER, -25, 164, -144, mainAPI.getServer().getDefaultLevel());
+        mechanicAPI.spawnNPC("butcherNPC", EntityTypes.CREEPER, 6, 162, -185, mainAPI.getServer().getDefaultLevel());
+        mechanicAPI.spawnNPC("farmerNPC", EntityTypes.CREEPER, 37, 162, -175, mainAPI.getServer().getDefaultLevel());
+        mechanicAPI.spawnNPC("fishermanNPC", EntityTypes.CREEPER, 7, 162, -133, mainAPI.getServer().getDefaultLevel());
+        mechanicAPI.spawnNPC("mechanicNPC", EntityTypes.CREEPER, -19, 162, -122, mainAPI.getServer().getDefaultLevel());
     }
 
     @Override
@@ -118,7 +115,7 @@ public class Loader extends PluginBase {
         registerEvents();
         registerTasks();
         addEntities();
-        registerPlaceHolders();
+        //registerPlaceHolders();
         kitsAPI.addKits();
         jobsAPI.addJobs();
 
@@ -175,6 +172,7 @@ public class Loader extends PluginBase {
 
     private void registerAPI() {
         API.mainAPI = this;
+        API.abuseAPI = new AbuseAPI();
         API.mechanicAPI = new MechanicAPI();
         API.utilsAPI = new UtilsAPI();
         UtilsAPI.warpUtils = new WarpUtils();
@@ -241,11 +239,11 @@ public class Loader extends PluginBase {
 
     private void removeEntities() {
         for (Entity entity : mainAPI.getServer().getDefaultLevel().getEntities()) {
-            if (!(entity instanceof Player) && !(entity instanceof HologramEntity)) entity.close();
+            if (!(entity instanceof Player) /*&& !(entity instanceof HologramEntity)*/) entity.close();
         }
     }
 
-    private void registerPlaceHolders() {
+    /*private void registerPlaceHolders() {
         PlaceholderAPI api = PlaceholderAPI.Companion.getInstance();
         for (int i = 1; i <= 10; i++) {
             final int value = i;
@@ -261,5 +259,5 @@ public class Loader extends PluginBase {
             api.staticPlaceholder("top" + value + "timename", () -> Database.scoreboardtimeName.getOrDefault(value, " "));
             api.staticPlaceholder("top" + value + "timecount", () -> API.time(Database.scoreboardtimeValue.getOrDefault(value, 0L)));
         }
-    }
+    }*/
 }

@@ -1,8 +1,10 @@
 package nycuro.kits.data.specific;
 
-import cn.nukkit.Player;
+
+import cn.nukkit.block.BlockIds;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.player.Player;
 import nycuro.api.API;
@@ -48,7 +50,7 @@ public class PushUpKit extends CommonKit {
 
     @Override
     public Item getAxe() {
-        Item item = Item.get(Item.DIAMOND_AXE);
+        Item item = Item.get(ItemIds.DIAMOND_AXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
@@ -58,13 +60,13 @@ public class PushUpKit extends CommonKit {
     public Item[] getOtherItems() {
         ArrayList<Item> itemslog1 = new ArrayList<>();
         for (int i = 0; i <= 3; i++) {
-            Item item = Item.get(Item.WOOD, i, 8);
+            Item item = Item.get(BlockIds.LOG, i, 8);
             item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Wood Type " + i);
             itemslog1.add(item);
         }
         ArrayList<Item> itemslog2 = new ArrayList<>();
         for (int i = 0; i <= 1; i++) {
-            Item item = Item.get(Item.WOOD2, i, 8);
+            Item item = Item.get(BlockIds.LOG2, i, 8);
             item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Wood2 Type " + i);
             itemslog2.add(item);
         }
@@ -101,11 +103,6 @@ public class PushUpKit extends CommonKit {
     @Override
     public boolean canAddKit(Player player) {
         PlayerInventory playerInventory = player.getInventory();
-        for (Item item : playerInventory.getArmorContents()) {
-            if (item.getId() != 0) {
-                return false;
-            }
-        }
         return (getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size();
     }
 

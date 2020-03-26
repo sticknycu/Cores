@@ -1,8 +1,11 @@
 package nycuro.kits.data.clasic;
 
-import cn.nukkit.Player;
+
+import cn.nukkit.block.BlockIds;
+import cn.nukkit.event.block.ItemFrameDropItemEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.player.Player;
 import nycuro.api.API;
@@ -43,35 +46,35 @@ public class KnightKit extends CommonKit {
 
     @Override
     public Item getHelmet() {
-        Item item = Item.get(Item.DIAMOND_HELMET);
+        Item item = Item.get(ItemIds.DIAMOND_HELMET);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.HELMET.getType());
         return item;
     }
 
     @Override
     public Item getArmor() {
-        Item item = Item.get(Item.DIAMOND_CHESTPLATE);
+        Item item = Item.get(ItemIds.DIAMOND_CHESTPLATE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.ARMOR.getType());
         return item;
     }
 
     @Override
     public Item getPants() {
-        Item item = Item.get(Item.DIAMOND_LEGGINGS);
+        Item item = Item.get(ItemIds.DIAMOND_LEGGINGS);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.PANTS.getType());
         return item;
     }
 
     @Override
     public Item getBoots() {
-        Item item = Item.get(Item.DIAMOND_BOOTS);
+        Item item = Item.get(ItemIds.DIAMOND_BOOTS);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.BOOTS.getType());
         return item;
     }
 
     @Override
     public Item getSword() {
-        Item item = Item.get(Item.STONE_SWORD);
+        Item item = Item.get(ItemIds.STONE_SWORD);
         item.addEnchantment(Enchantment.get(Enchantment.ID_DAMAGE_ALL).setLevel(1));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
         return item;
@@ -79,7 +82,7 @@ public class KnightKit extends CommonKit {
 
     @Override
     public Item getPickaxe() {
-        Item item = Item.get(Item.STONE_PICKAXE);
+        Item item = Item.get(ItemIds.STONE_PICKAXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_FORTUNE_DIGGING).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
@@ -87,7 +90,7 @@ public class KnightKit extends CommonKit {
 
     @Override
     public Item getAxe() {
-        Item item = Item.get(Item.STONE_AXE);
+        Item item = Item.get(ItemIds.STONE_AXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_FORTUNE_DIGGING).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
@@ -95,7 +98,7 @@ public class KnightKit extends CommonKit {
 
     @Override
     public Item getShovel() {
-        Item item = Item.get(Item.STONE_SHOVEL);
+        Item item = Item.get(ItemIds.STONE_SHOVEL);
         item.addEnchantment(Enchantment.get(Enchantment.ID_FORTUNE_DIGGING).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
@@ -103,9 +106,9 @@ public class KnightKit extends CommonKit {
 
     @Override
     public Item[] getOtherItems() {
-        Item obsidian = Item.get(Item.OBSIDIAN, 0, 32);
-        Item tnt = Item.get(Item.TNT, 0, 16);
-        Item bread = Item.get(Item.BREAD, 0, 32);
+        Item obsidian = Item.get(BlockIds.OBSIDIAN, 0, 32);
+        Item tnt = Item.get(BlockIds.TNT, 0, 16);
+        Item bread = Item.get(ItemIds.BREAD, 0, 32);
         bread.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Bread");
         tnt.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "TNT");
         obsidian.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Obsidian");
@@ -148,11 +151,6 @@ public class KnightKit extends CommonKit {
     @Override
     public boolean canAddKit(Player player) {
         PlayerInventory playerInventory = player.getInventory();
-        for (Item item : playerInventory.getArmorContents()) {
-            if (item.getId() != 0) {
-                return false;
-            }
-        }
         return (getArmorContents().length + getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size();
     }
 

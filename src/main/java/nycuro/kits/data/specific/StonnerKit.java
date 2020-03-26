@@ -1,8 +1,10 @@
 package nycuro.kits.data.specific;
 
-import cn.nukkit.Player;
+
+import cn.nukkit.block.BlockIds;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.player.Player;
 import nycuro.api.API;
 import nycuro.database.Database;
@@ -45,47 +47,47 @@ public class StonnerKit extends CommonKit {
 
     @Override
     public Item getSword() {
-        Item item = Item.get(Item.STONE_SWORD);
+        Item item = Item.get(ItemIds.STONE_SWORD);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
-        Item item = Item.get(Item.STONE_PICKAXE);
+        Item item = Item.get(ItemIds.STONE_PICKAXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
-        Item item = Item.get(Item.STONE_AXE);
+        Item item = Item.get(ItemIds.STONE_AXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
-        Item item = Item.get(Item.STONE_SHOVEL);
+        Item item = Item.get(ItemIds.STONE_SHOVEL);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
     @Override
     public Item[] getOtherItems() {
-        Item steak = Item.get(Item.STEAK, 0, 12);
+        Item steak = Item.get(ItemIds.COOKED_BEEF, 0, 12); // Bread
         steak.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Steak");
-        Item grass = Item.get(Item.GRASS, 0, 32);
+        Item grass = Item.get(BlockIds.GRASS, 0, 32);
         grass.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Grass");
-        Item dirt = Item.get(Item.DIRT, 0, 32);
+        Item dirt = Item.get(BlockIds.DIRT, 0, 32);
         dirt.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Dirt");
-        Item cobblestone1 = Item.get(Item.COBBLESTONE, 0, 64);
+        Item cobblestone1 = Item.get(BlockIds.COBBLESTONE, 0, 64);
         cobblestone1.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Cobblestone x1");
-        Item cobblestone2 = Item.get(Item.COBBLESTONE, 0, 64);
+        Item cobblestone2 = Item.get(BlockIds.COBBLESTONE, 0, 64);
         cobblestone2.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Cobblestone x2");
-        Item stone1 = Item.get(Item.COBBLESTONE, 0, 64);
+        Item stone1 = Item.get(BlockIds.COBBLESTONE, 0, 64);
         stone1.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Stone x1");
-        Item stone2 = Item.get(Item.COBBLESTONE, 0, 64);
+        Item stone2 = Item.get(BlockIds.COBBLESTONE, 0, 64);
         stone2.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Stone x2");
         return new Item[] {
                 steak,
@@ -119,11 +121,6 @@ public class StonnerKit extends CommonKit {
     @Override
     public boolean canAddKit(Player player) {
         PlayerInventory playerInventory = player.getInventory();
-        for (Item item : playerInventory.getArmorContents()) {
-            if (item.getId() != 0) {
-                return false;
-            }
-        }
         return (getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size();
     }
 

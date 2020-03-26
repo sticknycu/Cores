@@ -1,8 +1,10 @@
 package nycuro.kits.data.clasic;
 
-import cn.nukkit.Player;
+
+import cn.nukkit.block.BlockIds;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.player.Player;
 import nycuro.api.API;
@@ -43,7 +45,7 @@ public class GuardianKit extends CommonKit {
 
     @Override
     public Item getHelmet() {
-        Item item = Item.get(Item.GOLD_HELMET);
+        Item item = Item.get(ItemIds.GOLDEN_HELMET);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.HELMET.getType());
         return item;
@@ -51,7 +53,7 @@ public class GuardianKit extends CommonKit {
 
     @Override
     public Item getArmor() {
-        Item item = Item.get(Item.GOLD_CHESTPLATE);
+        Item item = Item.get(ItemIds.GOLDEN_CHESTPLATE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.ARMOR.getType());
         return item;
@@ -59,7 +61,7 @@ public class GuardianKit extends CommonKit {
 
     @Override
     public Item getPants() {
-        Item item = Item.get(Item.GOLD_LEGGINGS);
+        Item item = Item.get(ItemIds.GOLDEN_LEGGINGS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.PANTS.getType());
         return item;
@@ -67,7 +69,7 @@ public class GuardianKit extends CommonKit {
 
     @Override
     public Item getBoots() {
-        Item item = Item.get(Item.GOLD_BOOTS);
+        Item item = Item.get(ItemIds.GOLDEN_BOOTS);
         item.addEnchantment(Enchantment.get(Enchantment.ID_PROTECTION_ALL));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.BOOTS.getType());
         return item;
@@ -75,38 +77,38 @@ public class GuardianKit extends CommonKit {
 
     @Override
     public Item getSword() {
-        Item item = Item.get(Item.IRON_SWORD);
+        Item item = Item.get(ItemIds.IRON_SWORD);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
-        Item item = Item.get(Item.IRON_PICKAXE);
+        Item item = Item.get(ItemIds.IRON_PICKAXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
-        Item item = Item.get(Item.IRON_AXE);
+        Item item = Item.get(ItemIds.IRON_AXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
-        Item item = Item.get(Item.IRON_SWORD);
+        Item item = Item.get(ItemIds.IRON_SWORD);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
     @Override
     public Item[] getOtherItems() {
-        Item obsidian = Item.get(Item.OBSIDIAN, 0, 64);
-        Item tnt = Item.get(Item.TNT, 0, 16);
-        Item goldenApple = Item.get(Item.GOLDEN_APPLE, 0, 3);
-        Item bread = Item.get(Item.BREAD, 0, 32);
+        Item obsidian = Item.get(BlockIds.OBSIDIAN, 0, 64);
+        Item tnt = Item.get(BlockIds.TNT, 0, 16);
+        Item goldenApple = Item.get(ItemIds.GOLDEN_APPLE, 0, 3);
+        Item bread = Item.get(ItemIds.BREAD, 0, 32);
         bread.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Bread");
         tnt.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "TNT");
         goldenApple.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Golden Apple");
@@ -151,11 +153,6 @@ public class GuardianKit extends CommonKit {
     @Override
     public boolean canAddKit(Player player) {
         PlayerInventory playerInventory = player.getInventory();
-        for (Item item : playerInventory.getArmorContents()) {
-            if (item.getId() != 0) {
-                return false;
-            }
-        }
         return (getArmorContents().length + getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size();
     }
 

@@ -1,6 +1,5 @@
 package nycuro.jobs.api;
 
-import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.element.ElementLabel;
@@ -41,7 +40,7 @@ public class JobsAPI {
 
     public Map<NameJob, CommonJob> jobs = new HashMap<>();
 
-    private Location jobsLocation = new Location(4, 162, -116, mainAPI.getServer().getDefaultLevel());
+    private Location jobsLocation = Location.from(4, 162, -116, mainAPI.getServer().getDefaultLevel());
 
     public void registerCommands() {
         JobsCommandManager.registerAll(mainAPI);
@@ -92,7 +91,7 @@ public class JobsAPI {
                                 player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.empty"));
                             } else {
                                 NameJob job = NameJob.getType(profileSkyblock.getJob());
-                                JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
+                                JobsObject jobsObject = mainAPI.jobsObject.get(player.getServerId());
                                 if (jobsObject != null) {
                                     handleMission(player);
                                 } else {
@@ -124,7 +123,7 @@ public class JobsAPI {
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         int job = profileSkyblock.getJob();
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.handle.first")));
-        JobsObject jobsObject = mainAPI.jobsObject.get(player.getUniqueId());
+        JobsObject jobsObject = mainAPI.jobsObject.get(player.getServerId());
         if (job != 2) {
                 Item[] items = jobsObject.getItems();
                 for (Item item : jobsObject.items) {
@@ -165,7 +164,7 @@ public class JobsAPI {
                                 }
                                 player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.finished",
                                         mainAPI.emptyNoSpace + jobsObject.getReward()));
-                                mainAPI.jobsObject.remove(player.getUniqueId());
+                                mainAPI.jobsObject.remove(player.getServerId());
                             }
                         }
                     }
@@ -189,7 +188,7 @@ public class JobsAPI {
                             profileSkyblock.setDollars(profileSkyblock.getDollars() + jobsObject.getReward());
                             player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.finished",
                                     mainAPI.emptyNoSpace + jobsObject.getReward()));
-                            mainAPI.jobsObject.remove(player.getUniqueId());
+                            mainAPI.jobsObject.remove(player.getServerId());
                         } else {
                             player.sendMessage(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.enough.kills"));
                         }
@@ -348,12 +347,12 @@ public class JobsAPI {
     }
 
     private void succesfullyCreatedMissionB(Player player, int[] integers, double reward) {
-        mainAPI.jobsObject.put(player.getUniqueId(), new JobsObject(player.getUniqueId(), 2, new Item[0], integers, reward));
+        mainAPI.jobsObject.put(player.getServerId(), new JobsObject(player.getServerId(), 2, new Item[0], integers, reward));
         handleMission(player);
     }
 
     private void succesfullyCreatedMissionMF(Player player, Item[] items, double reward) {
-        mainAPI.jobsObject.put(player.getUniqueId(), new JobsObject(player.getUniqueId(), 2, items, new int[0], reward));
+        mainAPI.jobsObject.put(player.getServerId(), new JobsObject(player.getServerId(), 2, items, new int[0], reward));
         handleMission(player);
     }
 }

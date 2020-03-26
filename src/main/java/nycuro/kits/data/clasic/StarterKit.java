@@ -1,7 +1,8 @@
 package nycuro.kits.data.clasic;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.player.Player;
 import nycuro.kits.CommonKit;
 import nycuro.kits.type.*;
@@ -32,63 +33,63 @@ public class StarterKit extends CommonKit {
 
     @Override
     public Item getHelmet() {
-        Item item = Item.get(Item.LEATHER_CAP);
+        Item item = Item.get(ItemIds.LEATHER_HELMET);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.HELMET.getType());
         return item;
     }
 
     @Override
     public Item getArmor() {
-        Item item = Item.get(Item.LEATHER_TUNIC);
+        Item item = Item.get(ItemIds.LEATHER_CHESTPLATE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.ARMOR.getType());
         return item;
     }
 
     @Override
     public Item getPants() {
-        Item item = Item.get(Item.LEATHER_PANTS);
+        Item item = Item.get(ItemIds.LEATHER_LEGGINGS);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.PANTS.getType());
         return item;
     }
 
     @Override
     public Item getBoots() {
-        Item item = Item.get(Item.LEATHER_BOOTS);
+        Item item = Item.get(ItemIds.LEATHER_BOOTS);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeClothes.BOOTS.getType());
         return item;
     }
 
     @Override
     public Item getSword() {
-        Item item = Item.get(Item.STONE_SWORD);
+        Item item = Item.get(ItemIds.STONE_SWORD);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SWORD.getType());
         return item;
     }
 
     @Override
     public Item getPickaxe() {
-        Item item = Item.get(Item.STONE_PICKAXE);
+        Item item = Item.get(ItemIds.STONE_PICKAXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
     }
 
     @Override
     public Item getAxe() {
-        Item item = Item.get(Item.STONE_AXE);
+        Item item = Item.get(ItemIds.STONE_AXE);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.AXE.getType());
         return item;
     }
 
     @Override
     public Item getShovel() {
-        Item item = Item.get(Item.STONE_SHOVEL);
+        Item item = Item.get(ItemIds.STONE_SHOVEL);
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.SHOVEL.getType());
         return item;
     }
 
     @Override
     public Item[] getOtherItems() {
-        Item bread = Item.get(Item.BREAD, 0, 32);
+        Item bread = Item.get(ItemIds.BREAD, 0, 32);
         bread.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Bread");
         return new Item[] {
                 bread

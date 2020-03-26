@@ -2,6 +2,7 @@ package nycuro.api;
 
 import cn.nukkit.utils.TextFormat;
 import nycuro.Loader;
+import nycuro.abuse.settings.AbuseAPI;
 import nycuro.ai.AiAPI;
 import nycuro.api.data.MechanicAPI;
 import nycuro.combat.api.CombatAPI;
@@ -31,6 +32,7 @@ public class API {
 
     public static ShopAPI shopAPI;
     public static Loader mainAPI;
+    public static AbuseAPI abuseAPI;
     public static MechanicAPI mechanicAPI;
     public static UtilsAPI utilsAPI;
     public static KitsAPI kitsAPI;
@@ -49,7 +51,7 @@ public class API {
     public static HelpingAPI helpingAPI;
 
     public static void log(String s) {
-        mainAPI.getServer().getLogger().info(TextFormat.colorize("&a" + s));
+        mainAPI.getLogger().info(TextFormat.colorize("&a" + s));
     }
 
     public static String time(long time) {

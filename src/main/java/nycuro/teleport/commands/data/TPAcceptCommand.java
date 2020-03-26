@@ -1,6 +1,6 @@
 package nycuro.teleport.commands.data;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
@@ -18,11 +18,11 @@ public class TPAcceptCommand extends CommandBaseTeleportation {
         super("tpaccept");
         this.setAliases(new String[]{"tpyes"});
 
-        // command parameters
+        /* command parameters
         commandParameters.clear();
         this.commandParameters.put("default", new CommandParameter[]{
                 new CommandParameter("player", CommandParamType.TARGET, true)
-        });
+        });*/
     }
 
     public boolean execute(CommandSender sender, String label, String[] args) {

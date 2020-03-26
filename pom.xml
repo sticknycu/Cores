@@ -7,7 +7,6 @@
     <artifactId>nycuro</artifactId>
     <version>1.0</version>
     <name>SkyblockCore</name>
-    <description>SkyblockCore</description>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -49,44 +48,23 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>me.onebone</groupId>
-            <artifactId>actaeon</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/actaeon-1.0-SNAPSHOT.jar</systemPath>
-        </dependency>
-        <!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.8</version>
-        </dependency>
-        <dependency>
-            <groupId>nukkitcoders.mobplugin</groupId>
-            <artifactId>MobPlugin</artifactId>
-            <version>1.7.6</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/MobPlugin-1.7.6.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>io.pocketvote</groupId>
             <artifactId>PocketVote</artifactId>
             <version>2.0.1</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/PocketVote.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>gt.creeperface.nukkit.scoreboardapi</groupId>
-            <artifactId>ScoreboardAPI</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/ScoreboardAPI.jar</systemPath>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/it.unimi.dsi/fastutil -->
         <dependency>
             <groupId>it.unimi.dsi</groupId>
             <artifactId>fastutil</artifactId>
-            <version>8.2.2</version>
+            <version>8.3.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
         </dependency>
         <dependency>
             <groupId>ru.nukkit.multipass</groupId>
@@ -96,25 +74,11 @@
             <systemPath>${basedir}/lib/LuckPerms-Nukkit-4.2.51.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>gt.creeperface.holograms</groupId>
-            <artifactId>Holograms</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/Holograms.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>gt.creeperface.kotlinlib.KotlinLib</groupId>
             <artifactId>KotlinLib</artifactId>
             <version>1.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/KotlinLib.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.creeperface.nukkit.placeholderapi.PlaceholderPlugin</groupId>
-            <artifactId>PlaceholderAPI</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/PlaceholderAPI.jar</systemPath>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
         <dependency>
@@ -125,6 +89,17 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources/</directory>
+                <targetPath>.</targetPath>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.json</include>
+                    <include>**/*.yml</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

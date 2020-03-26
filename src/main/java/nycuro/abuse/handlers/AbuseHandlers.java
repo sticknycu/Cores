@@ -1,6 +1,6 @@
 package nycuro.abuse.handlers;
 
-import cn.nukkit.Player;
+import cn.nukkit.block.BlockIds;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.block.BlockPlaceEvent;
@@ -11,11 +11,16 @@ import cn.nukkit.event.inventory.InventoryOpenEvent;
 import cn.nukkit.event.player.PlayerDropItemEvent;
 import cn.nukkit.event.player.PlayerItemHeldEvent;
 import cn.nukkit.inventory.InventoryType;
-import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.player.Player;
+import cn.nukkit.utils.Identifier;
+import nycuro.abuse.settings.data.AbuseSettings;
 
-import static nycuro.api.API.messageAPI;
+import java.util.List;
+import java.util.Set;
+
+import static nycuro.api.API.*;
 
 /**
  * author: NycuRO
@@ -29,29 +34,11 @@ public class AbuseHandlers implements Listener {
         Player player = event.getPlayer();
         if (player.isOp()) return;
         InventoryType inventoryType = event.getInventory().getType();
-        switch (inventoryType) {
-            case ANVIL:
-                event.setCancelled(true);
-                player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.notwork"));
-                break;
-        }
         if (player.getGamemode() == Player.CREATIVE) {
-            switch (inventoryType) {
-                case CHEST:
-                case DOUBLE_CHEST:
-                case CRAFTING:
-                case FURNACE:
-                case ENDER_CHEST:
-                case HOPPER:
-                case DROPPER:
-                case BREWING_STAND:
-                case ENCHANT_TABLE:
-                case ANVIL:
-                case DISPENSER:
-                case WORKBENCH:
-                    event.setCancelled(true);
-                    player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
-                    break;
+            Set<InventoryType> inventoryAbuse = abuseAPI.abuseSettings.getInventoryAbuse();
+            if (inventoryAbuse.contains(inventoryType)) {
+                event.setCancelled(true);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
             }
         }
     }
@@ -60,36 +47,21 @@ public class AbuseHandlers implements Listener {
     public void onInteract(PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
         if (player.isOp()) return;
-        int itemId = event.getItem().getId();
+        Identifier itemId = event.getItem().getId();
         if (event.getItem().isArmor()) {
             for (Enchantment enchantment : event.getItem().getEnchantments()) {
                 if (enchantment.getId() == Enchantment.ID_THORNS) {
                     event.setCancelled(true);
                     player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
-                    break;
                 }
             }
         }
         if (player.getGamemode() == Player.CREATIVE || event.getItem().getName().equals("NPC")) {
-            switch (itemId) {
-                case 384:
-                case 15:
-                case 16:
-                case 21:
-                case 46:
-                case 56:
-                case 73:
-                case 129:
-                case 153:
-                case 22:
-                case 41:
-                case 42:
-                case 57:
-                case 152:
-                case 14:
-                    event.setCancelled(true);
-                    player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
-                    break;
+            List<Identifier> abuseBlocks = abuseAPI.abuseSettings.getBlockAbuse();
+            List<Identifier> abuseItems = abuseAPI.abuseSettings.getItemsAbuse();
+            if (abuseBlocks.contains(itemId) || abuseItems.contains(itemId)) {
+                event.setCancelled(true);
+                player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
             }
         }
     }
@@ -98,32 +70,18 @@ public class AbuseHandlers implements Listener {
     public void onPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         if (player.isOp()) return;
-        int blockId = event.getBlock().getId();
-        switch (blockId) {
-            case 131:
+        Identifier blockId = event.getBlock().getId();
+        /*switch (blockId) {
+            case 131: // tripware hook
                 event.setCancelled(true);
                 player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
                 break;
-        }
-        if (player.getGamemode() == Player.CREATIVE || event.getBlock().getName().equals("NPC")) {
-            switch (blockId) {
-                case 15:
-                case 16:
-                case 21:
-                case 46:
-                case 56:
-                case 73:
-                case 129:
-                case 153:
-                case 22:
-                case 41:
-                case 42:
-                case 57:
-                case 152:
-                case 14:
+        }*/
+        List<Identifier> blockAbuse = abuseAPI.abuseSettings.getBlockAbuse();
+        if (player.getGamemode() == Player.CREATIVE /*|| event.getBlock().getName().equals("NPC")*/) {
+            if (blockAbuse.contains(blockId)) {
                     event.setCancelled(true);
                     player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
-                    break;
             }
         }
     }

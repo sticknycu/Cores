@@ -2,11 +2,6 @@ package nycuro.dropparty.api;
 
 
 import cn.nukkit.item.ItemFirework;
-import cn.nukkit.nbt.NBTIO;
-import cn.nukkit.nbt.tag.CompoundTag;
-import cn.nukkit.nbt.tag.DoubleTag;
-import cn.nukkit.nbt.tag.FloatTag;
-import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.utils.DyeColor;
 import nycuro.dropparty.commands.DropPartyCommandManager;
 
@@ -18,7 +13,7 @@ public class DropPartyAPI {
         DropPartyCommandManager.registerAll(mainAPI);
     }
 
-    private ItemFirework initiateBallExplosion() {
+    /*private ItemFirework initiateBallExplosion() {
         ItemFirework itemFirework = new ItemFirework();
         ItemFirework.FireworkExplosion fireworkExplosion = new ItemFirework.FireworkExplosion();
         fireworkExplosion.setFlicker(false);
@@ -34,7 +29,7 @@ public class DropPartyAPI {
     }
 
     private ItemFirework initiateCreeperHeadExplosion() {
-        ItemFirework itemFirework = new ItemFirework();
+        /*ItemFirework itemFirework = new ItemFirework();
         ItemFirework.FireworkExplosion fireworkExplosion = new ItemFirework.FireworkExplosion();
         fireworkExplosion.type(ItemFirework.FireworkExplosion.ExplosionType.CREEPER_SHAPED);
         fireworkExplosion.setFlicker(false);
@@ -48,7 +43,7 @@ public class DropPartyAPI {
         return itemFirework;
     }
 
-    public CompoundTag getFirstNBT() {
+    /*public CompoundTag getFirstNBT() {
         return new CompoundTag()
                 .putList(new ListTag<>("Pos")
                         .add(new DoubleTag("", 113))
@@ -126,5 +121,5 @@ public class DropPartyAPI {
                         .add(new FloatTag("", 0))
                         .add(new FloatTag("", 0)))
                 .putCompound("FireworkItem", NBTIO.putItemHelper(initiateCreeperHeadExplosion()));
-    }
+    }*/
 }

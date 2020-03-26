@@ -1,8 +1,10 @@
 package nycuro.kits.data.specific;
 
-import cn.nukkit.Player;
+
+import cn.nukkit.block.BlockIds;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.player.Player;
 import nycuro.api.API;
@@ -46,7 +48,7 @@ public class DiggerKit extends CommonKit {
 
     @Override
     public Item getPickaxe() {
-        Item item = Item.get(Item.DIAMOND_PICKAXE);
+        Item item = Item.get(ItemIds.DIAMOND_PICKAXE);
         item.addEnchantment(Enchantment.get(Enchantment.ID_EFFICIENCY).setLevel(2));
         item.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + TypeItems.PICKAXE.getType());
         return item;
@@ -54,13 +56,13 @@ public class DiggerKit extends CommonKit {
 
     @Override
     public Item[] getOtherItems() {
-        Item grass = Item.get(Item.GRASS, 0, 8);
+        Item grass = Item.get(BlockIds.GRASS, 0, 8);
         grass.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Grass");
-        Item dirt = Item.get(Item.DIRT, 0, 8);
+        Item dirt = Item.get(BlockIds.DIRT, 0, 8);
         dirt.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Dirt");
-        Item cobblestone = Item.get(Item.COBBLESTONE, 0, 8);
+        Item cobblestone = Item.get(BlockIds.COBBLESTONE, 0, 8);
         cobblestone.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Cobblestone");
-        Item stone = Item.get(Item.COBBLESTONE, 0, 8);
+        Item stone = Item.get(BlockIds.COBBLESTONE, 0, 8);
         stone.setCustomName(mainAPI.symbol + getKit().getName() + mainAPI.empty + "Stone");
         return new Item[] {
                 grass,
@@ -88,11 +90,6 @@ public class DiggerKit extends CommonKit {
     @Override
     public boolean canAddKit(Player player) {
         PlayerInventory playerInventory = player.getInventory();
-        for (Item item : playerInventory.getArmorContents()) {
-            if (item.getId() != 0) {
-                return false;
-            }
-        }
         return (getInventoryContents().length + getOtherItems().length) < 36 - playerInventory.getContents().size();
     }
 

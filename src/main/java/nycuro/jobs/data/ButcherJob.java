@@ -1,6 +1,6 @@
 package nycuro.jobs.data;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.player.Player;
 import nycuro.database.Database;
 import nycuro.jobs.CommonJob;

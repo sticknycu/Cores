@@ -1,9 +1,8 @@
 package nycuro.tasks;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.player.Player;
 import cn.nukkit.scheduler.Task;
-import gt.creeperface.nukkit.scoreboardapi.scoreboard.*;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import nycuro.Loader;
 import nycuro.api.API;
@@ -25,16 +24,16 @@ public class ScoreboardTask extends Task {
 
     @Override
     public void onRun(int i) {
-        for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
-            if (mainAPI.scoreboard.get(player.getUniqueId()) != null) {
-                mainAPI.scoreboard.get(player.getUniqueId()).despawnFrom(player);
+        /*for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
+            if (mainAPI.scoreboard.get(player.getServerId()) != null) {
+                mainAPI.scoreboard.get(player.getServerId()).despawnFrom(player);
                 addToScoreboard(player);
             }
-        }
+        }*/
     }
 
-    private void addToScoreboard(Player player) {
-        FakeScoreboard scoreboard = mainAPI.scoreboard.get(player.getUniqueId());
+    /*private void addToScoreboard(Player player) {
+        FakeScoreboard scoreboard = mainAPI.scoreboard.get(player.getServerId());
 
         Objective scoreboardDisplay = scoreboard.objective.getObjective();
 
@@ -58,7 +57,7 @@ public class ScoreboardTask extends Task {
             scoreboardDisplay.setScore(6, messageAPI.messagesObject.translateMessage("scoreboard.gems", mainAPI.emptyNoSpace + profileProxy.getGems()), 6);
             scoreboardDisplay.setScore(7, messageAPI.messagesObject.translateMessage("scoreboard.onlinetime", time(profileSkyblock.getTime())), 7);
             scoreboardDisplay.setScore(8, messageAPI.messagesObject.translateMessage("scoreboard.job", NameJob.getType(profileSkyblock.getJob()).getName()), 8);
-            if (coords.getOrDefault(player.getUniqueId(), false)) {
+            if (coords.getOrDefault(player.getServerId(), false)) {
                 scoreboardDisplay.setScore(9, messageAPI.messagesObject.translateMessage("scoreboard.coords", mainAPI.emptyNoSpace + player.getX(), mainAPI.emptyNoSpace + player.getY(), mainAPI.emptyNoSpace + player.getZ()), 9);
             }
             scoreboardDisplay.setScore(10, messageAPI.messagesObject.translateMessage("scoreboard.empty"), 10);
@@ -75,5 +74,5 @@ public class ScoreboardTask extends Task {
         //scoreboard.removePlayer(player);
         scoreboard.update();
         scoreboard.addPlayer(player);
-    }
+    }*/
 }

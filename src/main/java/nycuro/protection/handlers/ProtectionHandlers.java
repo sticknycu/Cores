@@ -1,7 +1,6 @@
 package nycuro.protection.handlers;
 
-import cn.nukkit.Player;
-import cn.nukkit.block.Block;
+
 import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
@@ -12,26 +11,18 @@ import cn.nukkit.event.entity.EntityDamageByChildEntityEvent;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.entity.ExplosionPrimeEvent;
-import cn.nukkit.event.inventory.InventoryPickupItemEvent;
 import cn.nukkit.event.player.PlayerBucketEmptyEvent;
 import cn.nukkit.event.player.PlayerBucketFillEvent;
 import cn.nukkit.event.player.PlayerGameModeChangeEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
-import cn.nukkit.event.vehicle.VehicleCreateEvent;
 import cn.nukkit.event.vehicle.VehicleDamageEvent;
-import cn.nukkit.event.vehicle.VehicleDestroyEvent;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
-import cn.nukkit.nbt.tag.CompoundTag;
+import cn.nukkit.item.ItemIds;
 import cn.nukkit.player.Player;
 import nycuro.api.API;
-import nycuro.database.Database;
-import nycuro.database.objects.ProfileSkyblock;
 
-import static nycuro.api.API.mainAPI;
-import static nycuro.api.API.mechanicAPI;
-import static nycuro.api.API.messageAPI;
-import static nycuro.api.API.combatAPI;
+import static nycuro.api.API.*;
 
 /**
  * author: NycuRO
@@ -82,9 +73,9 @@ public class ProtectionHandlers implements Listener {
             for (Player pl : new Player[]{player, damager}) {
                 if (mechanicAPI.isOnSpawn(pl) || mechanicAPI.isOnArea(pl)) break;
                 if (!combatAPI.inCombat(pl)) {
-                    if (mainAPI.bossbar.get(pl.getUniqueId()) != null) {
-                        mainAPI.bossbar.get(pl.getUniqueId()).setText(messageAPI.messagesObject.translateMessage("combat.bossbar", "13"));
-                        mainAPI.bossbar.get(pl.getUniqueId()).setLength(100F);
+                    if (mainAPI.bossbar.get(pl.getServerId()) != null) {
+                        mainAPI.bossbar.get(pl.getServerId()).setText(messageAPI.messagesObject.translateMessage("combat.bossbar", "13"));
+                        mainAPI.bossbar.get(pl.getServerId()).setLength(100F);
                     }
                 }
             }
@@ -138,20 +129,20 @@ public class ProtectionHandlers implements Listener {
             }
             Item itemHand = inventory.getItemInHand();
             if (event.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_AIR || event.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
-                switch (itemHand.getId()) {
-                    case Item.DIAMOND_HOE:
-                    case Item.GOLD_HOE:
-                    case Item.IRON_HOE:
-                    case Item.STONE_HOE:
-                    case Item.WOODEN_HOE:
-                    case Item.FLINT_AND_STEEL:
+                /*switch (itemHand.getId()) {
+                    case ItemIds.DIAMOND_HOE:
+                    case ItemIds.GOLDEN_HOE:
+                    case ItemIds.IRON_HOE:
+                    case ItemIds.STONE_HOE:
+                    case ItemIds.WOODEN_HOE:
+                    case ItemIds.FLINT_AND_STEEL:
                         player.sendMessage(messageAPI.messagesObject.translateMessage("block.place"));
                         event.setCancelled(true);
                         return;
                     default:
                         event.setCancelled(false);
                         break;
-                }
+                }*/
             }
         }
     }

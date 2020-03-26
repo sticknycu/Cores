@@ -1,23 +1,13 @@
-package nycuro.crates.item;
+/*package nycuro.crates.item;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.Server;
 import cn.nukkit.entity.Entity;
-import cn.nukkit.entity.data.ByteEntityData;
-import cn.nukkit.entity.data.IntEntityData;
-import cn.nukkit.entity.data.NBTEntityData;
 import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.event.entity.EntityDamageEvent.DamageCause;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemFirework;
 import cn.nukkit.level.Sound;
-import cn.nukkit.level.format.FullChunk;
-import cn.nukkit.nbt.NBTIO;
-import cn.nukkit.nbt.tag.CompoundTag;
-import cn.nukkit.network.protocol.AddEntityPacket;
-import cn.nukkit.network.protocol.EntityEventPacket;
-import cn.nukkit.network.protocol.LevelSoundEventPacket;
-import cn.nukkit.network.protocol.PlaySoundPacket;
 import cn.nukkit.player.Player;
 import com.nukkitx.protocol.bedrock.packet.AddEntityPacket;
 import com.nukkitx.protocol.bedrock.packet.EntityEventPacket;
@@ -30,7 +20,7 @@ import java.util.Random;
  * author: NycuRO
  * SkyblockCore Project
  * API 1.0.0
- */
+ *
 public class EntityFirework extends Entity {
 
     public static final int NETWORK_ID = 72;
@@ -157,3 +147,4 @@ public class EntityFirework extends Entity {
         return 0.25F;
     }
 }
+*/

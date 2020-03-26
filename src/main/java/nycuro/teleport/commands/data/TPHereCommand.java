@@ -1,9 +1,8 @@
 package nycuro.teleport.commands.data;
 
-import cn.nukkit.Player;
+
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
-import cn.nukkit.command.data.CommandParameter;
+import cn.nukkit.level.Location;
 import cn.nukkit.player.Player;
 import nycuro.teleport.commands.CommandBaseTeleportation;
 
@@ -16,11 +15,11 @@ public class TPHereCommand extends CommandBaseTeleportation {
         super("tphere");
         this.setAliases(new String[]{"s"});
 
-        // command parameters
+        /* command parameters
         commandParameters.clear();
         this.commandParameters.put("default", new CommandParameter[]{
                 new CommandParameter("player", CommandParamType.TARGET, false)
-        });
+        });*/
     }
 
     public boolean execute(CommandSender sender, String label, String[] args) {
@@ -39,7 +38,7 @@ public class TPHereCommand extends CommandBaseTeleportation {
             sender.sendMessage(messageAPI.messagesObject.translateMessage("commands.generic.player.notfound", args[0]));
             return false;
         }
-        player.teleport((Player) sender);
+        player.teleport(Location.from(((Player)sender).getX(), ((Player)sender).getY(), ((Player)sender).getZ(), ((Player)sender).getLevel()));
         player.sendMessage(messageAPI.messagesObject.translateMessage("commands.tphere.other", sender.getName()));
         sender.sendMessage(messageAPI.messagesObject.translateMessage("commands.tphere.success", player.getName()));
         return true;

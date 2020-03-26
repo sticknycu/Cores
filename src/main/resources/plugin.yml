@@ -1,6 +1,6 @@
 name: SkyblockCore
 main: nycuro.Loader
 version: "1.0"
-api: ["1.0.0"]
+api: ["2.0.0"]
 author: NycuRO
 description: SkyblockCore

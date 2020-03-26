@@ -1,8 +1,5 @@
 package nycuro.tasks;
 
-import cn.nukkit.Player;
-import cn.nukkit.entity.Entity;
-import cn.nukkit.entity.item.EntityItem;
 import cn.nukkit.level.Level;
 import cn.nukkit.player.Player;
 import cn.nukkit.scheduler.Task;
@@ -31,9 +28,9 @@ public class ClearLagTask extends Task {
                 try {
                     Thread.sleep(1000 * 30);
                 } finally {
-                    for (Level level : mainAPI.getServer().getLevels().values()) {
-                        for (Entity entity : level.getEntities()) {
-                            switch (entity.getNetworkId()) {
+                    for (Level level : mainAPI.getServer().getLevels()) {
+                        /*for (Entity entity : level.getEntities()) {
+                            switch (entity.getServerId()) {
                                 case 10:
                                 case 11:
                                 case 12:
@@ -45,14 +42,14 @@ public class ClearLagTask extends Task {
                                     break;
                             }
                             if (entity instanceof EntityItem) entity.close();
-                        }
+                        }*/
                     }
                     message = messageAPI.messagesObject.translateMessage("broadcast.mobclear.finished");
                     player.sendMessage(message);
                 }
             }
             // Clear the damn weather shit
-            for (Level level : mainAPI.getServer().getLevels().values()) {
+            for (Level level : mainAPI.getServer().getLevels()) {
                 if (level.isThundering()) {
                     level.setThundering(false);
                 }
