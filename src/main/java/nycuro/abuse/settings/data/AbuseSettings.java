@@ -14,13 +14,13 @@ import java.util.Set;
 public class AbuseSettings {
     protected List<Identifier> itemsAbuse;
 
-    protected List<Identifier> blockAbuse;
+    protected List<Identifier> blocksAbuse;
 
     protected Set<InventoryType> inventoryAbuse;
 
-    public AbuseSettings(List<Identifier> itemsAbuse, List<Identifier> blockAbuse, Set<InventoryType> inventoryType) {
+    public AbuseSettings(List<Identifier> itemsAbuse, List<Identifier> blocksAbuse, Set<InventoryType> inventoryType) {
         this.itemsAbuse = new ArrayList<>(itemsAbuse);
-        this.blockAbuse = new ArrayList<>(blockAbuse);
+        this.blocksAbuse = new ArrayList<>(blocksAbuse);
         this.inventoryAbuse = inventoryType;
     }
 }

@@ -57,7 +57,7 @@ public class AbuseHandlers implements Listener {
             }
         }
         if (player.getGamemode() == Player.CREATIVE || event.getItem().getName().equals("NPC")) {
-            List<Identifier> abuseBlocks = abuseAPI.abuseSettings.getBlockAbuse();
+            List<Identifier> abuseBlocks = abuseAPI.abuseSettings.getBlocksAbuse();
             List<Identifier> abuseItems = abuseAPI.abuseSettings.getItemsAbuse();
             if (abuseBlocks.contains(itemId) || abuseItems.contains(itemId)) {
                 event.setCancelled(true);
@@ -77,7 +77,7 @@ public class AbuseHandlers implements Listener {
                 player.sendMessage(messageAPI.messagesObject.translateMessage("mechanic.abuse"));
                 break;
         }*/
-        List<Identifier> blockAbuse = abuseAPI.abuseSettings.getBlockAbuse();
+        List<Identifier> blockAbuse = abuseAPI.abuseSettings.getBlocksAbuse();
         if (player.getGamemode() == Player.CREATIVE /*|| event.getBlock().getName().equals("NPC")*/) {
             if (blockAbuse.contains(blockId)) {
                     event.setCancelled(true);
