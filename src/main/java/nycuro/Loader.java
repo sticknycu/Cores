@@ -2,6 +2,7 @@ package nycuro;
 
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.EntityTypes;
+import cn.nukkit.level.EnumLevel;
 import cn.nukkit.player.Player;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.DummyBossBar;
@@ -103,23 +104,19 @@ public class Loader extends PluginBase {
     }
 
     @Override
-    public void onLoad() {
-        registerAPI();
-    }
-
-    @Override
     public void onEnable() {
+        registerAPI();
+        abuseAPI.init();
         createConfig();
         registerCommands();
         initDatabase();
         registerEvents();
         registerTasks();
         addEntities();
-        //registerPlaceHolders();
         kitsAPI.addKits();
         jobsAPI.addJobs();
-
         moneyAPI.init();
+        //registerPlaceHolders();
     }
 
     @Override
@@ -139,7 +136,6 @@ public class Loader extends PluginBase {
             dropPartyTime = voteSettingsAPI.mechanic.getTimeDropParty();
         }
         dropPartyVotes = voteSettingsAPI.mechanic.getDropParty();
-
         messageAPI.init();
     }
 

@@ -9,6 +9,7 @@ import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import cn.nukkit.player.Player;
 import cn.nukkit.utils.TextFormat;
+import com.nukkitx.math.vector.Vector3i;
 import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
@@ -40,7 +41,7 @@ public class JobsAPI {
 
     public Map<NameJob, CommonJob> jobs = new HashMap<>();
 
-    private Location jobsLocation = Location.from(4, 162, -116, mainAPI.getServer().getDefaultLevel());
+    private Location jobsLocation = Location.from(Vector3i.from(4, 162, -116), mainAPI.getServer().getDefaultLevel());
 
     public void registerCommands() {
         JobsCommandManager.registerAll(mainAPI);
