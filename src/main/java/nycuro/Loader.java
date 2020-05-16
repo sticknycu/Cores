@@ -2,7 +2,6 @@ package nycuro;
 
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.EntityTypes;
-import cn.nukkit.level.EnumLevel;
 import cn.nukkit.player.Player;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.DummyBossBar;
@@ -24,7 +23,6 @@ import nycuro.database.objects.KitsObject;
 import nycuro.database.objects.ProfileSkyblock;
 import nycuro.dropparty.api.DropPartyAPI;
 import nycuro.economy.api.EconomyAPI;
-import nycuro.gui.handlers.GUIHandlers;
 import nycuro.helping.api.HelpingAPI;
 import nycuro.homes.api.HomeAPI;
 import nycuro.jobs.api.JobsAPI;
@@ -41,14 +39,7 @@ import nycuro.messages.handlers.ChatHandlers;
 import nycuro.messages.handlers.MessageHandlers;
 import nycuro.protection.handlers.ProtectionHandlers;
 import nycuro.reports.api.ReportAPI;
-import nycuro.shop.BuyUtils;
-import nycuro.shop.EnchantUtils;
-import nycuro.shop.MoneyUtils;
-import nycuro.shop.SellUtils;
-import nycuro.shop.api.ShopAPI;
 import nycuro.tasks.*;
-import nycuro.teleport.api.TeleportationAPI;
-import nycuro.utils.WarpUtils;
 import nycuro.utils.api.UtilsAPI;
 import nycuro.utils.vote.VoteSettings;
 
@@ -59,7 +50,7 @@ import static nycuro.api.API.*;
 
 /**
  * author: NycuRO
- * SkyblockCore Project
+ * RoleplayCore Project
  * API 1.0.0
  */
 public class Loader extends PluginBase {
@@ -79,20 +70,19 @@ public class Loader extends PluginBase {
     public Collection<UUID> staffChat = new ArrayList<>();
     public Map<UUID, JobsObject> jobsObject = new HashMap<>();
     public Map<UUID, MechanicObject> mechanicObject = new HashMap<>();
-    public MoneyUtils moneyAPI = new MoneyUtils();
     public String symbol = TextFormat.GOLD.toString();
     public String empty = " ";
     public String emptyNoSpace = "";
 
     public static void registerTops() {
-        try {
+        /*try {
             mainAPI.saveToDatabase();
         } finally {
             Database.getTopDollars();
             Database.getTopKills();
             Database.getTopDeaths();
             Database.getTopTime();
-        }
+        }*/
     }
 
     private void addEntities() {
@@ -109,20 +99,19 @@ public class Loader extends PluginBase {
         abuseAPI.init();
         createConfig();
         registerCommands();
-        initDatabase();
+        //initDatabase();
         registerEvents();
         registerTasks();
         addEntities();
         kitsAPI.addKits();
         jobsAPI.addJobs();
-        moneyAPI.init();
         //registerPlaceHolders();
     }
 
     @Override
     public void onDisable() {
         mechanicAPI.handleTransferHub();
-        saveToDatabase();
+        //saveToDatabase();
         removeEntities();
         removeAllFromMaps();
         saveConfigs();
@@ -159,11 +148,11 @@ public class Loader extends PluginBase {
 
     private void initDatabase() {
         API.log("Init MySQL Database...");
-        Database.connectToDatabaseHub();
+        /*Database.connectToDatabaseHub();
         Database.connectToDatabaseFactions();
         Database.connectToDatabaseReports();
         Database.connectToDatabaseHomesF();
-        Database.connectToDatabaseSKits();
+        Database.connectToDatabaseSKits();*/
     }
 
     private void registerAPI() {
@@ -171,7 +160,6 @@ public class Loader extends PluginBase {
         API.abuseAPI = new AbuseAPI();
         API.mechanicAPI = new MechanicAPI();
         API.utilsAPI = new UtilsAPI();
-        UtilsAPI.warpUtils = new WarpUtils();
         API.kitsAPI = new KitsAPI();
         API.messageAPI = new MessageAPI();
         API.jobsAPI = new JobsAPI();
@@ -179,16 +167,10 @@ public class Loader extends PluginBase {
         API.crateAPI = new CrateAPI();
         API.dropPartyAPI = new DropPartyAPI();
         API.combatAPI = new CombatAPI();
-        API.shopAPI = new ShopAPI();
-        ShopAPI.buyUtils = new BuyUtils();
-        ShopAPI.sellUtils = new SellUtils();
-        ShopAPI.moneyUtils = new MoneyUtils();
-        ShopAPI.enchantUtils = new EnchantUtils();
         API.databaseAPI = new Database();
         API.voteSettingsAPI = new VoteSettings();
         API.reportAPI = new ReportAPI();
         API.homeAPI = new HomeAPI();
-        API.teleportationAPI = new TeleportationAPI();
         API.economyAPI = new EconomyAPI();
         API.helpingAPI = new HelpingAPI();
     }
@@ -199,7 +181,6 @@ public class Loader extends PluginBase {
         jobsAPI.registerCommands();
         kitsAPI.registerCommands();
         reportAPI.registerCommands();
-        shopAPI.registerCommands();
         helpingAPI.registerCommands();
         economyAPI.registerCommands();
         utilsAPI.registerCommands();
@@ -207,7 +188,6 @@ public class Loader extends PluginBase {
 
     private void registerEvents() {
         this.getServer().getPluginManager().registerEvents(new AbuseHandlers(), this);
-        this.getServer().getPluginManager().registerEvents(new GUIHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new MessageHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new KitHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new LevelHandlers(), this);
@@ -216,7 +196,6 @@ public class Loader extends PluginBase {
         this.getServer().getPluginManager().registerEvents(new JobsHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new CrateHandlers(), this);
         this.getServer().getPluginManager().registerEvents(new ChatHandlers(), this);
-        teleportationAPI.registerHandlers();
     }
 
     private void registerTasks() {
@@ -230,7 +209,6 @@ public class Loader extends PluginBase {
         this.getServer().getScheduler().scheduleRepeatingTask(new CheckerTask(), 20, true);
         this.getServer().getScheduler().scheduleDelayedTask(new RestartTask(), 20 * 60 * 60 * 3);
         this.getServer().getScheduler().scheduleRepeatingTask(new FixBugHealthTask(), 1, true); // Todo: Bullshit incompetent Nukkit Coders -- Using resources useless.
-        teleportationAPI.registerTasks();
     }
 
     private void removeEntities() {

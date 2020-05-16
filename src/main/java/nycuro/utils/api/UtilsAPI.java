@@ -1,15 +1,10 @@
 package nycuro.utils.api;
 
-import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.element.ElementButtonImageData;
-import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.player.Player;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileSkyblock;
-import nycuro.gui.list.ResponseFormWindow;
-import nycuro.utils.WarpUtils;
 import nycuro.utils.commands.UtilsCommandManager;
 
 import java.util.Map;
@@ -20,17 +15,12 @@ import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
- * SkyblockCore Project
+ * RoleplayCore Project
  * API 1.0.0
  */
 public class UtilsAPI {
 
-    public static WarpUtils warpUtils;
     private double cost = 0;
-
-    public static WarpUtils getWarpUtilsAPI() {
-        return warpUtils;
-    }
 
     public void registerCommands() {
         UtilsCommandManager.registerAll(mainAPI);
@@ -56,7 +46,7 @@ public class UtilsAPI {
     }
 
     public void sendUtilsContents(Player player) {
-        FormWindowSimple utilsMenu = new FormWindowSimple("Utils", "                       Hello!\n" +
+        /*FormWindowSimple utilsMenu = new FormWindowSimple("Utils", "                       Hello!\n" +
                 "               Welcome to Utilities!\n" +
                 "   Select what you want to do from now.");
         utilsMenu.addButton(new ElementButton("Warps System", new ElementButtonImageData("url", "https://i.imgur.com/GuxFWI6.png")));
@@ -80,6 +70,6 @@ public class UtilsAPI {
                     }
                 }
             }
-        }));
+        }));*/
     }
 }

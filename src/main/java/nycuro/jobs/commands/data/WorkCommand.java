@@ -15,7 +15,7 @@ import static nycuro.api.API.jobsAPI;
 
 /**
  * author: NycuRO
- * SkyblockCore Project
+ * RoleplayCore Project
  * API 1.0.0
  */
 public class WorkCommand extends CommandBaseJobs {

@@ -16,8 +16,6 @@ import nycuro.jobs.api.JobsAPI;
 import nycuro.kits.api.KitsAPI;
 import nycuro.messages.api.MessageAPI;
 import nycuro.reports.api.ReportAPI;
-import nycuro.shop.api.ShopAPI;
-import nycuro.teleport.api.TeleportationAPI;
 import nycuro.utils.api.UtilsAPI;
 import nycuro.utils.vote.VoteSettings;
 
@@ -25,12 +23,11 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * author: NycuRO
- * SkyblockCore Project
+ * RoleplayCore Project
  * API 1.0.0
  */
 public class API {
 
-    public static ShopAPI shopAPI;
     public static Loader mainAPI;
     public static AbuseAPI abuseAPI;
     public static MechanicAPI mechanicAPI;
@@ -42,7 +39,6 @@ public class API {
     public static CrateAPI crateAPI;
     public static DropPartyAPI dropPartyAPI;
     public static CombatAPI combatAPI;
-    public static TeleportationAPI teleportationAPI;
     public static Database databaseAPI;
     public static VoteSettings voteSettingsAPI;
     public static ReportAPI reportAPI;

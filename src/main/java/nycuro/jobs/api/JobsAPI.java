@@ -1,19 +1,9 @@
 package nycuro.jobs.api;
 
-import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.element.ElementButtonImageData;
-import cn.nukkit.form.element.ElementLabel;
-import cn.nukkit.form.window.FormWindowCustom;
-import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import cn.nukkit.player.Player;
-import cn.nukkit.utils.TextFormat;
 import com.nukkitx.math.vector.Vector3i;
-import nycuro.api.API;
-import nycuro.database.Database;
-import nycuro.database.objects.ProfileSkyblock;
-import nycuro.gui.list.ResponseFormWindow;
 import nycuro.jobs.CommonJob;
 import nycuro.jobs.NameJob;
 import nycuro.jobs.TypeJob;
@@ -55,17 +45,17 @@ public class JobsAPI {
     }
 
     private void sendInfoMessageJobs(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("jobs.form.first"));
+        /*FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("jobs.form.first"));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.top")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.miner")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.butcher")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.farmer")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.fisherman")));
-        player.showFormWindow(infoMenu);
+        player.showFormWindow(infoMenu);*/
     }
 
     public void getJob(Player player) {
-        FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.get.first"),
+        /*FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.get.first"),
                 messageAPI.messagesObject.translateMessage("jobs.form.get.top"));
         jobsMenu.addButton(new ElementButton("Teleport to Jobs", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/nujWKR3.png")));
@@ -116,11 +106,11 @@ public class JobsAPI {
                     }
                 }
             }
-        }));
+        }));*/
     }
 
     public void handleMission(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom("Handle Mission");
+        /*FormWindowCustom infoMenu = new FormWindowCustom("Handle Mission");
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
         int job = profileSkyblock.getJob();
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("jobs.form.handle.first")));
@@ -196,11 +186,11 @@ public class JobsAPI {
                     }
                 }
             }));
-        }
+        }*/
     }
 
     public void processMissionOnMiner(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Miner"),
+        /*FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Miner"),
                 messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process.form"));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
@@ -228,11 +218,11 @@ public class JobsAPI {
                     }
                 }
             }
-        }));
+        }));*/
     }
 
     public void processMissionOnButcher(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Butcher"),
+        /*FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Butcher"),
                 messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process.form"));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
@@ -260,11 +250,11 @@ public class JobsAPI {
                     }
                 }
             }
-        }));
+        }));*/
     }
 
     public void processMissionOnFarmer(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Farmer"),
+       /*FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Farmer"),
                 messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process.form"));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
@@ -292,11 +282,11 @@ public class JobsAPI {
                     }
                 }
             }
-        }));
+        }));*/
     }
 
     public void processMissionOnFisherman(Player player) {
-        FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Fisherman"),
+        /*FormWindowSimple infoMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process", "Fisherman"),
                 messageAPI.messagesObject.translateMessage("jobs.form.handle.mission.process.form"));
         TextFormat color;
         for (TypeJob typeJob : TypeJob.values()) {
@@ -324,7 +314,7 @@ public class JobsAPI {
                     }
                 }
             }
-        }));
+        }));*/
     }
 
     private void handleMission(NameJob nameJob, Player player, TypeJob typeJob) {

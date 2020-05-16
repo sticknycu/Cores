@@ -1,26 +1,9 @@
 package nycuro.homes.api;
 
-import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.element.ElementButtonImageData;
-import cn.nukkit.form.element.ElementInput;
-import cn.nukkit.form.element.ElementLabel;
-import cn.nukkit.form.window.FormWindowCustom;
-import cn.nukkit.form.window.FormWindowSimple;
-import cn.nukkit.level.Location;
 import cn.nukkit.player.Player;
-import cn.nukkit.scheduler.AsyncTask;
-import nycuro.database.Database;
-import nycuro.database.objects.HomeObject;
-import nycuro.gui.list.ResponseFormWindow;
 import nycuro.homes.commands.HomesCommandManager;
 
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
-
 import static nycuro.api.API.mainAPI;
-import static nycuro.api.API.messageAPI;
-import static nycuro.api.API.databaseAPI;
 
 public class HomeAPI {
 
@@ -29,7 +12,7 @@ public class HomeAPI {
     }
 
     public void createWindowHome(Player player) {
-        FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("homes.form.first"),
+        /*FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("homes.form.first"),
                 messageAPI.messagesObject.translateMessage("homes.form.top"));
         jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         jobsMenu.addButton(new ElementButton("Create a Home", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
@@ -52,10 +35,11 @@ public class HomeAPI {
                 }
             }
         }));
+         */
     }
 
     private void sendCreateHomeForm(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("homes.form.create.first"));
+        /*FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("homes.form.create.first"));
         infoMenu.addElement(new ElementInput(messageAPI.messagesObject.translateMessage("homes.form.create.input")));
         player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
             @Override
@@ -76,11 +60,11 @@ public class HomeAPI {
                     });
                 }
             }
-        }));
+        }));*/
     }
 
     private void listHomesForm(Player player) {
-        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
+        /*mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try {
@@ -103,11 +87,11 @@ public class HomeAPI {
                     throw new RuntimeException(e);
                 }
             }
-        });
+        });*/
     }
 
     private void getInfoHome(Player player, String homename) {
-        try {
+        /*try {
             FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("homes.form.info.first", homename),
                     messageAPI.messagesObject.translateMessage("homes.form.info.top"));
             jobsMenu.setContent(messageAPI.messagesObject.translateMessage("homes.form.info.message"));
@@ -145,13 +129,13 @@ public class HomeAPI {
             }));
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     private void sendInfoMessageHomes(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("homes.form.mechanic.first"));
+        /*FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("homes.form.mechanic.first"));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("homes.form.mechanic.message")));
-        player.showFormWindow(infoMenu);
+        player.showFormWindow(infoMenu);*/
     }
 
 }

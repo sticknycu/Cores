@@ -1,38 +1,23 @@
 package nycuro.reports.api;
 
-import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.element.ElementButtonImageData;
-import cn.nukkit.form.element.ElementInput;
-import cn.nukkit.form.element.ElementLabel;
-import cn.nukkit.form.window.FormWindowCustom;
-import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.player.Player;
-import cn.nukkit.scheduler.AsyncTask;
-import nycuro.gui.list.ResponseFormWindow;
 import nycuro.reports.commands.ReportsCommandManager;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
-
 import static nycuro.api.API.mainAPI;
-import static nycuro.api.API.messageAPI;
-import static nycuro.api.API.databaseAPI;
 
 /**
  * author: NycuRO
- * SkyblockCore Project
+ * RoleplayCore Project
  * API 1.0.0
  */
 public class ReportAPI {
-    
+
     public void registerCommands() {
         ReportsCommandManager.registerAll(mainAPI);
     }
 
     public void createWindowReport(Player player) {
-        FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("reports.form.first"),
+        /*FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("reports.form.first"),
                 messageAPI.messagesObject.translateMessage("reports.form.top"));
         jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         jobsMenu.addButton(new ElementButton("Report a Player", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
@@ -56,19 +41,19 @@ public class ReportAPI {
                     }
                 }
             }
-        }));
+        }));*/
     }
 
     private void sendInfoMessageReports(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("reports.form.info.first"));
+        /*FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("reports.form.info.first"));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("reports.form.info.top")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("reports.form.info.how")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("reports.form.info.how.discord")));
-        player.showFormWindow(infoMenu);
+        player.showFormWindow(infoMenu);*/
     }
 
     private void sendReportForm(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("reports.form.mechanic.first"));
+        /*FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("reports.form.mechanic.first"));
         infoMenu.addElement(new ElementInput(messageAPI.messagesObject.translateMessage("reports.form.mechanic.name")));
         infoMenu.addElement(new ElementInput(messageAPI.messagesObject.translateMessage("reports.form.mechanic.reason")));
         infoMenu.addElement(new ElementInput(messageAPI.messagesObject.translateMessage("reports.form.mechanic.contact")));
@@ -82,11 +67,11 @@ public class ReportAPI {
                 );
                 player.sendMessage(messageAPI.messagesObject.translateMessage("reports.success", response.values().toArray()[0].toString()));
             }
-        }));
+        }));*/
     }
 
     private void listReportsForm(Player player) {
-        mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
+        /*mainAPI.getServer().getScheduler().scheduleAsyncTask(mainAPI, new AsyncTask() {
             @Override
             public void onRun() {
                 try {
@@ -112,11 +97,11 @@ public class ReportAPI {
                     throw new RuntimeException(e);
                 }
             }
-        });
+        });*/
     }
 
     private void getInfoReported(Player player, String name) {
-        try {
+        /*try {
             FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("reports.form.info.reported.first", name),
                     "");
             Collection<String> reasonsCollection = databaseAPI.getReasonsPlayerReport(name);
@@ -145,7 +130,7 @@ public class ReportAPI {
             }));
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     private String[] asStrings(Object... objArray) {

@@ -4,8 +4,6 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.EntityType;
 import cn.nukkit.form.element.*;
-import cn.nukkit.form.window.FormWindowCustom;
-import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemIds;
 import cn.nukkit.item.enchantment.Enchantment;
@@ -26,7 +24,6 @@ import nycuro.api.API;
 import nycuro.database.Database;
 import nycuro.database.objects.ProfileProxy;
 import nycuro.database.objects.ProfileSkyblock;
-import nycuro.gui.list.ResponseFormWindow;
 import nycuro.mechanic.objects.SettingsObject;
 import nycuro.messages.handlers.ChatHandlers;
 
@@ -41,7 +38,7 @@ import static nycuro.api.API.*;
 
 /**
  * author: NycuRO
- * SkyblockCore Project
+ * RoleplayCore Project
  * API 1.0.0
  */
 public class MechanicAPI {
@@ -178,7 +175,7 @@ public class MechanicAPI {
         player.teleport(level.getSpawnLocation());
     }
 
-    public void sendStats(CommandSender commandSender, IPlayer player) {
+    /*public void sendStats(CommandSender commandSender, IPlayer player) {
         FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("stats.form.first", player.getName()));
         ProfileProxy profileProxy = Database.profileProxy.get(commandSender.getName());
         ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
@@ -210,7 +207,7 @@ public class MechanicAPI {
                 ) : "")
         ));
         ((Player) commandSender).showFormWindow(infoMenu);
-    }
+    }*/
 
     public void handleTransferHub() {
         InetSocketAddress hub = new InetSocketAddress("mcpe.chzone.eu", 19132);
@@ -335,84 +332,8 @@ public class MechanicAPI {
         mainAPI.scoreboard.put(player.getServerId(), fakeScoreboard);*/
     }
 
-    public void teleportArena(Player player) {
-        FormWindowSimple jobsMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("generic.arena.form.category"),
-                messageAPI.messagesObject.translateMessage("generic.arena.first"));
-        jobsMenu.addButton(new ElementButton("Info", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
-        jobsMenu.addButton(new ElementButton("Boss Arena", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
-        jobsMenu.addButton(new ElementButton("PvP Arena", new ElementButtonImageData("url", "https://i.imgur.com/otMDlEU.png")));
-        player.showFormWindow(new ResponseFormWindow(jobsMenu, new Consumer<Map<Integer, Object>>() {
-            @Override
-            public void accept(Map<Integer, Object> response) {
-                if (!response.isEmpty()) {
-                    switch (response.entrySet().iterator().next().getKey()) {
-                        case 0:
-                            sendInfoMessageArena(player);
-                            return;
-                        case 1:
-                            teleportArenaBoss(player);
-                            return;
-                        case 2:
-                            teleportArenaPvP(player);
-                            break;
-                    }
-                }
-            }
-        }));
-    }
-
-    private void sendInfoMessageArena(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("arena.form.first"));
-        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.top")));
-        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.teleport")));
-        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.pvp")));
-        player.showFormWindow(infoMenu);
-    }
-
-    private void teleportArenaBoss(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("arena.form.boss.teleport"));
-        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.boss.teleport.first")));
-        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.boss.teleport.how")));
-        player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
-            @Override
-            public void accept(Map<Integer, Object> response) {
-                if (!response.isEmpty()) {
-                    ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-                    int level = profileSkyblock.getLevel();
-                    if (level < 10) {
-                        player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleport.level", "10"));
-                    } else {
-                        player.teleport(Location.from(Vector3i.from(1092, 70, 1324), mainAPI.getServer().getDefaultLevel()));
-                        player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleported"));
-                    }
-                }
-            }
-        }));
-    }
-
-    private void teleportArenaPvP(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("arena.form.pvp.teleport"));
-        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.pvp.first")));
-        infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("arena.form.pvp.how")));
-        player.showFormWindow(new ResponseFormWindow(infoMenu, new Consumer<Map<Integer, Object>>() {
-            @Override
-            public void accept(Map<Integer, Object> response) {
-                if (!response.isEmpty()) {
-                    ProfileSkyblock profileSkyblock = Database.profileSkyblock.get(player.getName());
-                    int level = profileSkyblock.getLevel();
-                    if (level < 5) {
-                        player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleport.level", "5"));
-                    } else {
-                        player.teleport(Location.from(Vector3i.from(1106, 70, 1311), mainAPI.getServer().getDefaultLevel()));
-                        player.sendMessage(messageAPI.messagesObject.translateMessage("arena.teleported"));
-                    }
-                }
-            }
-        }));
-    }
-
     public void sendSettingsForm(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("settings.form.first"));
+        /*FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("settings.form.first"));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("settings.form.top")));
         infoMenu.addElement(new ElementToggle(messageAPI.messagesObject.translateMessage("settings.form.toggle.first"), true));
         infoMenu.addElement(new ElementToggle(messageAPI.messagesObject.translateMessage("settings.form.toggle.second"), true));
@@ -428,7 +349,7 @@ public class MechanicAPI {
                 if (!response.isEmpty()) {
                     SettingsObject settings = mainAPI.settings.get(player.getServerId());
                     if (settings != null) {
-                        /*settings.setBossbarValue(Boolean.valueOf(String.valueOf(response.values().toArray()[1])));
+                        settings.setBossbarValue(Boolean.valueOf(String.valueOf(response.values().toArray()[1])));
                         settings.setScoreboardValue(Boolean.valueOf(String.valueOf(response.values().toArray()[2])));
                         //player.setViewerDistance(Integer.valueOf(String.valueOf(response.values().toArray()[3])));
 
@@ -450,10 +371,10 @@ public class MechanicAPI {
                             createScoreboard(player);
                         } else {
                             mainAPI.scoreboard.remove(player.getServerId());
-                        }*/
+                        }
                     }
                 }
             }
-        }));
+        }));*/
     }
 }

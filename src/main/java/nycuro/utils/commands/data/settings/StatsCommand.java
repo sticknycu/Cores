@@ -22,10 +22,10 @@ public class StatsCommand extends CommandBaseUtils {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         if (strings.length == 0) {
-            mechanicAPI.sendStats(commandSender, (Player) commandSender);
+            //mechanicAPI.sendStats(commandSender, (Player) commandSender);
         } else {
             IPlayer player = mainAPI.getServer().getOfflinePlayer(strings[0]);
-            mechanicAPI.sendStats(commandSender, player);
+            //mechanicAPI.sendStats(commandSender, player);
         }
         return true;
     }

@@ -1,7 +1,7 @@
-name: SkyblockCore
+name: RoleplayCore
 main: nycuro.Loader
-version: "1.0"
+version: "0.1-DEV"
 api: ["2.0.0"]
 load: POSTWORLD
 author: NycuRO
-description: SkyblockCore
+description: RoleplayCore

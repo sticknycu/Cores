@@ -14,7 +14,7 @@ import static nycuro.api.API.combatAPI;
 
 /**
  * author: GiantQuartz
- * SkyblockCore Project
+ * RoleplayCore Project
  * API 1.0.0
  */
 public class BossBarTask extends Task {

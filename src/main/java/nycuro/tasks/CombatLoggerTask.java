@@ -6,6 +6,7 @@ import cn.nukkit.potion.Effect;
 import cn.nukkit.scheduler.Task;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import org.graalvm.compiler.virtual.phases.ea.EffectList;
 
 import java.util.UUID;
 
@@ -25,15 +26,6 @@ public class CombatLoggerTask extends Task {
 
     @Override
     public void onRun(int i) {
-        for (Player player : mainAPI.getServer().getOnlinePlayers().values()) {
-            if (mechanicAPI.isOnSpawn(player)) {
-                Effect effect = Effect.getEffect(Effect.SPEED);
-                effect.setAmplifier(1);
-                effect.setDuration(20 * 3);
-                effect.setVisible(false);
-                player.addEffect(effect);
-            }
-        }
         combatAPI.inCombat.forEach((uuid, time) -> {
             if (k.getOrDefault(uuid, -1) == -1) k.put(uuid, 13);
             long count = k.getInt(uuid);

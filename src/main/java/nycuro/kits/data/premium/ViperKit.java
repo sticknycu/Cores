@@ -18,7 +18,7 @@ import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
- * SkyblockCore Project
+ * RoleplayCore Project
  * API 1.0.0
  */
 public class ViperKit extends CommonKit {

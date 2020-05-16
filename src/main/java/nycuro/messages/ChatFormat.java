@@ -2,7 +2,7 @@ package nycuro.messages;
 
 /**
  * author: uselesswaifu
- * SkyblockCore Project
+ * RoleplayCore Project
  * API 1.0.0
  */
 public enum ChatFormat {

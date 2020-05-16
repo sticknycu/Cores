@@ -16,7 +16,7 @@ import static nycuro.api.API.mechanicAPI;
 
 /**
  * author: NycuRO
- * SkyblockCore Project
+ * RoleplayCore Project
  * API 1.0.0
  */
 public class HelpOpCommand extends CommandBaseHelping {

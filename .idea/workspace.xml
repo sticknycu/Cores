@@ -1,249 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="be8130a8-928b-49f1-b5f7-e85929fb75b8" name="Default" comment="">
+    <list default="true" id="d41edae0-413f-4927-bc30-c791b7f285d6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/Loader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/Loader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/abuse/handlers/AbuseHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/abuse/handlers/AbuseHandlers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/abuse/settings/AbuseAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/abuse/settings/AbuseAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/abuse/settings/data/AbuseSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/abuse/settings/data/AbuseSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/ai/AiAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/ai/AiAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/api/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/api/API.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/api/data/MechanicAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crates/api/CrateAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/api/CrateAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crates/handlers/CrateHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/handlers/CrateHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/crates/item/EntityFirework.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/crates/item/EntityFirework.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/AddCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/AddCoinsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/CoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/CoinsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/SetCoinsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/economy/commands/data/simple/SetCoinsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/gui/handlers/GUIHandlers.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/gui/list/DelegateFormWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/gui/list/ResponseFormWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/HelpOpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/HelpOpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/StaffChatCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/helping/commands/data/StaffChatCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/homes/api/HomeAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/homes/api/HomeAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/api/JobsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/api/JobsAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/WorkCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/jobs/commands/data/WorkCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/api/KitsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/api/KitsAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/EnchantedStarterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/EnchantedStarterKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/GuardianKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/GuardianKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/KnightKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/KnightKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/PaladinKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/PaladinKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/SparrowKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/SparrowKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/StarterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/clasic/StarterKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/DetonatorKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/DetonatorKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/KillerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/KillerKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/MasterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/MasterKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/TurretMonkeyKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/TurretMonkeyKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/ViperKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/premium/ViperKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/DiggerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/DiggerKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/LackerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/LackerKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PlanterKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PlanterKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PushUpKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/PushUpKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/StonnerKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/StonnerKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/WoodieKit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/data/specific/WoodieKit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/kits/handlers/KitHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/kits/handlers/KitHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/level/handlers/LevelHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/level/handlers/LevelHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/mechanic/handlers/MechanicHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/mechanic/handlers/MechanicHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/messages/ChatFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/ChatFormat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/messages/api/MessageAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/api/MessageAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/ChatHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/ChatHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/MessageHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/messages/handlers/MessageHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/protection/handlers/ProtectionHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/protection/handlers/ProtectionHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/reports/api/ReportAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/reports/api/ReportAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/data/ReportsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/reports/commands/data/ReportsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/BuyUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/EnchantUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/MoneyUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/SellUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/api/ShopAPI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/CommandBaseShop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/ShopCommandManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/shop/commands/data/ShopCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/BossBarTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/BossBarTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckLevelTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckLevelTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CheckerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CombatLoggerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/CombatLoggerTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/FixBugHealthTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/FixBugHealthTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/RegisterTopsTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/RegisterTopsTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/RestartTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/RestartTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreTagTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreTagTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreboardTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/tasks/ScoreboardTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/api/TeleportationAPI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/CommandBaseTeleportation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/TeleportationCommandManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAAllCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPACommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAHereCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAcceptCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPAllCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPDenyCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/commands/data/TPHereCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/handlers/TeleportationHandlers.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/objects/TPCooldown.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/objects/TPRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/tasks/TeleportationExpireTask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/teleport/tasks/TeleportationTask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/WarpUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/api/UtilsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/api/UtilsAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/SettingsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/SettingsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/StatsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/settings/StatsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/ArenaCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/ArenaCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/HubCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/commands/data/teleportation/HubCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nycuro/utils/vote/VoteSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nycuro/utils/vote/VoteSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shop/old.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shop/old.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CoverageViewManager">
-    <option name="myElementSize" value="123" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
-      </MavenGeneralSettings>
-    </option>
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-        <option name="vmOptionsForImporter" value="-Xmx768m" />
-      </MavenImportingSettings>
-    </option>
+  <component name="ProjectId" id="1aldvCQ9muAeBg2MbuWPjhpyFoX" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="MavenRunner">
-    <option name="delegateBuildToMaven" value="true" />
-    <option name="jreName" value="14" />
-  </component>
-  <component name="ProjectId" id="1ZSDPzPiu0C0R6DZYbnkBmMWeCp" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="true" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Server/plugins" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MaxSum" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
-  </component>
-  <component name="RunAnythingCache">
-    <option name="myCommands">
-      <command value="mvn verify" />
-      <command value="mvn " />
-      <command value="mvn clean install" />
-    </option>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Server" type="JarApplication">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/../Server/Nukkit.jar" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../Server" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="14" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file enabled="true" id="idea.log" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="SvnConfiguration">
-    <configuration>$USER_HOME$/.subversion</configuration>
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="be8130a8-928b-49f1-b5f7-e85929fb75b8" name="Default" comment="" />
-      <created>1584576015250</created>
+      <changelist id="d41edae0-413f-4927-bc30-c791b7f285d6" name="Default Changelist" comment="" />
+      <created>1587314362544</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1584576015250</updated>
+      <updated>1587314362544</updated>
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="551" y="215" width="802" height="707" key="#Plugins" timestamp="1584905757866">
-      <screen x="0" y="25" width="1920" height="1055" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587770098070">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="551" y="215" width="802" height="707" key="#Plugins/0.25.1920.1055@0.25.1920.1055" timestamp="1584905757866" />
-    <state x="414" y="229" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585265935335">
-      <screen x="0" y="25" width="1920" height="1055" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587770098070" />
+    <state x="707" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1587770591764">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="229" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1585265935335" />
-    <state x="688" y="200" width="527" height="695" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1585258467262">
-      <screen x="0" y="25" width="1920" height="1055" />
+    <state x="707" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1587770591764" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1589116221255">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="688" y="200" width="527" height="695" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1585258467262" />
-    <state x="810" y="445" width="292" height="211" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1585171567558">
-      <screen x="0" y="25" width="1920" height="1055" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1589116221255" />
+    <state width="1877" height="165" key="GridCell.Tab.0.bottom" timestamp="1587771616138">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="810" y="445" width="292" height="211" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1585171567558" />
-    <state x="539" y="209" width="826" height="679" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor" timestamp="1585171566136">
-      <screen x="0" y="25" width="1920" height="1055" />
+    <state width="1877" height="165" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587771616138" />
+    <state width="1877" height="165" key="GridCell.Tab.0.center" timestamp="1587771616138">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="539" y="209" width="826" height="679" key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1585171566136" />
-    <state x="317" y="25" width="1261" height="1050" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585231419478">
-      <screen x="0" y="25" width="1920" height="1055" />
+    <state width="1877" height="165" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587771616138" />
+    <state width="1877" height="165" key="GridCell.Tab.0.left" timestamp="1587771616138">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="317" y="25" width="1261" height="1050" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1585231419478" />
-    <state x="693" y="302" width="526" height="496" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585258349671">
-      <screen x="0" y="25" width="1920" height="1055" />
+    <state width="1877" height="165" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587771616138" />
+    <state width="1877" height="165" key="GridCell.Tab.0.right" timestamp="1587771616138">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="693" y="302" width="526" height="496" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1585258349671" />
-    <state x="663" y="370" width="612" height="507" key="FileChooserDialogImpl" timestamp="1585331500126">
-      <screen x="0" y="25" width="1920" height="1055" />
+    <state width="1877" height="165" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587771616138" />
+    <state x="363" y="175" width="1040" height="842" key="SettingsEditor" timestamp="1587757011748">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="663" y="370" width="612" height="507" key="FileChooserDialogImpl/0.25.1920.1055@0.25.1920.1055" timestamp="1585331500126" />
-    <state width="1864" height="228" key="GridCell.Tab.0.bottom" timestamp="1585335378277">
-      <screen x="0" y="25" width="1920" height="1055" />
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587394142035" />
+    <state x="363" y="175" width="1040" height="842" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587757011748" />
+    <state x="667" y="229" width="585" height="582" key="find.popup" timestamp="1587769954701">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1864" height="228" key="GridCell.Tab.0.bottom/0.25.1920.1055@0.25.1920.1055" timestamp="1585335378277" />
-    <state width="1864" height="228" key="GridCell.Tab.0.center" timestamp="1585335378276">
-      <screen x="0" y="25" width="1920" height="1055" />
+    <state x="667" y="229" width="585" height="582" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1587769954701" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1587771156147">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1864" height="228" key="GridCell.Tab.0.center/0.25.1920.1055@0.25.1920.1055" timestamp="1585335378276" />
-    <state width="1864" height="228" key="GridCell.Tab.0.left" timestamp="1585335378276">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="1864" height="228" key="GridCell.Tab.0.left/0.25.1920.1055@0.25.1920.1055" timestamp="1585335378276" />
-    <state width="1864" height="228" key="GridCell.Tab.0.right" timestamp="1585335378276">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="1864" height="228" key="GridCell.Tab.0.right/0.25.1920.1055@0.25.1920.1055" timestamp="1585335378276" />
-    <state width="1864" height="461" key="GridCell.Tab.1.bottom" timestamp="1585267943016">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="1864" height="461" key="GridCell.Tab.1.bottom/0.25.1920.1055@0.25.1920.1055" timestamp="1585267943016" />
-    <state width="1864" height="461" key="GridCell.Tab.1.center" timestamp="1585267943016">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="1864" height="461" key="GridCell.Tab.1.center/0.25.1920.1055@0.25.1920.1055" timestamp="1585267943016" />
-    <state width="1864" height="461" key="GridCell.Tab.1.left" timestamp="1585267943015">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="1864" height="461" key="GridCell.Tab.1.left/0.25.1920.1055@0.25.1920.1055" timestamp="1585267943015" />
-    <state width="1864" height="461" key="GridCell.Tab.1.right" timestamp="1585267943016">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="1864" height="461" key="GridCell.Tab.1.right/0.25.1920.1055@0.25.1920.1055" timestamp="1585267943016" />
-    <state x="460" y="206" width="1026" height="840" key="SettingsEditor" timestamp="1585333148428">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state x="460" y="206" width="1026" height="840" key="SettingsEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1585333148428" />
-    <state x="649" y="398" key="com.intellij.ide.util.TipDialog" timestamp="1585329506156">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state x="649" y="398" key="com.intellij.ide.util.TipDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1585329506155" />
-    <state x="653" y="387" width="585" height="230" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1585234739441">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state x="653" y="387" width="585" height="230" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.25.1920.1055@0.25.1920.1055" timestamp="1585234739441" />
-    <state x="528" y="207" width="847" height="681" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1585263196646">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state x="528" y="207" width="847" height="681" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.25.1920.1055@0.25.1920.1055" timestamp="1585263196646" />
-    <state x="431" y="231" width="787" height="600" key="find.popup" timestamp="1585264104237">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state x="431" y="231" width="787" height="600" key="find.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1585264104237" />
-    <state x="331" y="126" width="1241" height="842" key="new project wizard" timestamp="1585263819697">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state x="331" y="126" width="1241" height="842" key="new project wizard/0.25.1920.1055@0.25.1920.1055" timestamp="1585263819697" />
-    <state x="619" y="264" width="672" height="677" key="run.anything.popup" timestamp="1585264304399">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state x="619" y="264" width="672" height="677" key="run.anything.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1585264304399" />
-    <state x="619" y="256" width="672" height="678" key="search.everywhere.popup" timestamp="1585330217417">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state x="619" y="256" width="672" height="678" key="search.everywhere.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1585330217417" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <default-breakpoints>
-        <breakpoint enabled="true" type="java-exception" />
-      </default-breakpoints>
-    </breakpoint-manager>
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand>
-      <path>
-        <item name="Cores" type="b2602c69:ProjectViewProjectNode" />
-        <item name="nycuro" type="47feb1d3:ProjectViewModuleNode" />
-      </path>
-    </expand>
-    <select />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Cores$.ic" NAME=" Coverage Results" MODIFIED="1585264107971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1587771156147" />
   </component>
 </project>

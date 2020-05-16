@@ -20,7 +20,7 @@ public class ArenaCommand extends CommandBaseUtils {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        mechanicAPI.teleportArena((Player) commandSender);
+        //mechanicAPI.teleportArena((Player) commandSender);
         return true;
     }
 }

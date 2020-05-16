@@ -1,32 +1,21 @@
 package nycuro.kits.api;
 
-import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.element.ElementButtonImageData;
-import cn.nukkit.form.element.ElementLabel;
-import cn.nukkit.form.window.FormWindowCustom;
-import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.player.Player;
-import cn.nukkit.utils.TextFormat;
-import nycuro.gui.list.ResponseFormWindow;
 import nycuro.kits.CommonKit;
 import nycuro.kits.commands.KitsCommandManager;
 import nycuro.kits.data.clasic.*;
 import nycuro.kits.data.premium.*;
 import nycuro.kits.data.specific.*;
 import nycuro.kits.type.NameKit;
-import nycuro.kits.type.StatusKit;
-import nycuro.kits.type.TypeKit;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import static nycuro.api.API.mainAPI;
-import static nycuro.api.API.messageAPI;
 
 /**
  * author: NycuRO
- * SkyblockCore Project
+ * RoleplayCore Project
  * API 1.0.0
  */
 public class KitsAPI {
@@ -63,7 +52,7 @@ public class KitsAPI {
     }
 
     public void sendKit(Player player) {
-        FormWindowSimple kitMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("kits.form.category.first"),
+        /*FormWindowSimple kitMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("kits.form.category.first"),
                 messageAPI.messagesObject.translateMessage("kits.form.category.top"));
         kitMenu.addButton(new ElementButton("Info Categories", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         kitMenu.addButton(new ElementButton("Classic Kits", new ElementButtonImageData("url", "https://i.imgur.com/XFCYdCz.png")));
@@ -89,11 +78,11 @@ public class KitsAPI {
                     }
                 }
             }
-        }));
+        }));*/
     }
 
     private void classicKits(Player player) {
-        FormWindowSimple kitMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("kits.form.category.classic.first"),
+        /*FormWindowSimple kitMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("kits.form.category.classic.first"),
                 messageAPI.messagesObject.translateMessage("kits.form.category.classic.top"));
         kitMenu.addButton(new ElementButton("Info Classic Kits", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         TextFormat color;
@@ -129,11 +118,11 @@ public class KitsAPI {
                     }
                 }
             }
-        }));
+        }));*/
     }
 
     private void premiumKits(Player player) {
-        FormWindowSimple kitMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("kits.form.category.premium.first"),
+        /*FormWindowSimple kitMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("kits.form.category.premium.first"),
                 messageAPI.messagesObject.translateMessage("kits.form.category.premium.top"));
         kitMenu.addButton(new ElementButton("Info Premium Kits", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         TextFormat color;
@@ -169,11 +158,11 @@ public class KitsAPI {
                     }
                 }
             }
-        }));
+        }));*/
     }
 
     private void specificKits(Player player) {
-        FormWindowSimple kitMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("kits.form.category.specific.first"),
+        /*FormWindowSimple kitMenu = new FormWindowSimple(messageAPI.messagesObject.translateMessage("kits.form.category.specific.first"),
             messageAPI.messagesObject.translateMessage("kits.form.category.specific.top"));
         kitMenu.addButton(new ElementButton("Info Specific Kits", new ElementButtonImageData("url", "https://i.imgur.com/uWmtrax.png")));
         TextFormat color;
@@ -212,42 +201,42 @@ public class KitsAPI {
                     }
                 }
             }
-        }));
+        }));*/
     }
 
     private void sendInfoMessageKits(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("kits.form.category.info.first"));
+        /*FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("kits.form.category.info.first"));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.info.top")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.info.classic")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.info.premium")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.info.specific")));
-        player.showFormWindow(infoMenu);
+        player.showFormWindow(infoMenu);*/
     }
 
     private void sendInfoMessageClassicKits(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("kits.form.category.classic.info.first"));
+        /*FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("kits.form.category.classic.info.first"));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.classic.info.top")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.classic.info.ench_starter")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.classic.info.guardian")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.classic.info.knight")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.classic.info.paladin")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.classic.info.sparrow")));
-        player.showFormWindow(infoMenu);
+        player.showFormWindow(infoMenu);*/
     }
 
     private void sendInfoMessagePremiumKits(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("kits.form.category.premium.info.first"));
+        /*FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("kits.form.category.premium.info.first"));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.premium.info.top")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.premium.info.viper")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.premium.info.master")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.premium.info.killer")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.premium.info.detonator")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.premium.info.turr_monkey")));
-        player.showFormWindow(infoMenu);
+        player.showFormWindow(infoMenu);*/
     }
 
     private void sendInfoMessageSpecificKits(Player player) {
-        FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("kits.form.category.specific.info.first"));
+        /*FormWindowCustom infoMenu = new FormWindowCustom(messageAPI.messagesObject.translateMessage("kits.form.category.specific.info.first"));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.specific.info.top")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.specific.info.planter")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.specific.info.stonner")));
@@ -255,6 +244,6 @@ public class KitsAPI {
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.specific.info.woodie")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.specific.info.push_up")));
         infoMenu.addElement(new ElementLabel(messageAPI.messagesObject.translateMessage("kits.form.category.specific.info.digger")));
-        player.showFormWindow(infoMenu);
+        player.showFormWindow(infoMenu);*/
     }
 }
